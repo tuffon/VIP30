@@ -1,0 +1,27 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+
+# Environment variable definitions
+.env
+.env.*
+
+# macOS metadata
+.DS_Store
+
+# API key files
+embeddings/openai_api_key
+embeddings/qdrant_api_key
+
+# IDE / editor settings
+.vscode/
+.idea/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/ 
