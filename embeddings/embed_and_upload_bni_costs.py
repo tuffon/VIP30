@@ -22,7 +22,7 @@ if not all([OPENAI_API_KEY, QDRANT_API_KEY]):
     )
 
 COLLECTION_NAME = "costbook_data"
-VECTOR_SIZE = 1536  # for text-embedding-3-small
+VECTOR_SIZE = 1536  # for text-embedding-3-small 
 
 # === Qdrant Client ===
 qdrant_client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY, timeout=60)

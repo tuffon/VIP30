@@ -7,3 +7,4 @@ python-dotenv>=1.0.0
 fastapi>=0.110.0
 uvicorn[standard]>=0.29.0
 gunicorn>=21.2.0 
+networkx>=3.2.0  # DAG execution for orchestrator 
