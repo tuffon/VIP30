@@ -501,7 +501,7 @@
       }
     },
     {
-      "section_name": "5' 6' 9\" Kitchen",
+      "section_name": "Kitchen",
       "metadata": {
         "height": 8.416666666666666,
         "areas": {
@@ -566,7 +566,7 @@
       }
     },
     {
-      "section_name": "Missing Wall - Goes to Floor 2' 11\" X 6' 8\" Opens into KITCHEN",
+      "section_name": "Opens into KITCHEN",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -761,7 +761,7 @@
       }
     },
     {
-      "section_name": "16' 8\" Dining Room",
+      "section_name": "Dining Room",
       "metadata": {
         "height": 9.416666666666666,
         "areas": {
@@ -833,7 +833,7 @@
       }
     },
     {
-      "section_name": "20' 2\" Living Room",
+      "section_name": "Living Room",
       "metadata": {
         "height": 15.333333333333334,
         "areas": {
@@ -1045,7 +1045,7 @@
       }
     },
     {
-      "section_name": "6' 2\" Guest Bath",
+      "section_name": "Guest Bath",
       "metadata": {
         "height": 9.0,
         "areas": {
@@ -1185,7 +1185,7 @@
       }
     },
     {
-      "section_name": "6' 1\" Bed1 Bathroom",
+      "section_name": "Bathroom",
       "metadata": {
         "height": 9.0,
         "areas": {
@@ -1293,7 +1293,7 @@
       }
     },
     {
-      "section_name": "8\" 7' 4\" Laundry Room",
+      "section_name": "Laundry Room",
       "metadata": {
         "height": 9.0,
         "areas": {
@@ -1884,7 +1884,7 @@
       }
     },
     {
-      "section_name": "2' 6\"2' Master Bathroom",
+      "section_name": "Master Bathroom",
       "metadata": {
         "height": "Peaked",
         "areas": {
@@ -2129,7 +2129,7 @@
       }
     },
     {
-      "section_name": "Bed 3 Bathroom",
+      "section_name": "Bathroom",
       "metadata": {
         "height": 9.0,
         "areas": {
@@ -2178,7 +2178,7 @@
       }
     },
     {
-      "section_name": "14' 4\" Bedroom 2",
+      "section_name": "Bedroom 2",
       "metadata": {
         "height": "Peaked",
         "areas": {

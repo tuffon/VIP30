@@ -70,6 +70,24 @@ def detect_page_header_pattern(pdf_path: str) -> list:
     return header_lines
 
 
+def is_diagram_artifact(line: str) -> bool:
+    """Check if line is a diagram label or artifact that should be skipped."""
+    if re.search(r'([A-Z])\1{2,}', line):
+        return True
+    
+    if line in ['Door', 'Window', 'Wall']:
+        return True
+    
+    if len(line) < 15 and re.search(r'[\"\']{2,}', line):
+        return True
+    
+    special_char_count = sum(1 for c in line if c in '\"\'.-_|/\\')
+    if len(line) > 0 and special_char_count / len(line) > 0.4:
+        return True
+    
+    return False
+
+
 def is_page_header(line: str, header_patterns: list) -> bool:
     """Check if line matches detected header patterns."""
     if re.match(r'^\d{1,3}$', line):
@@ -248,11 +266,22 @@ def parse_document(pdf_path: str) -> tuple:
         line = lines[i]
         
         if state == ParseState.LOOKING_FOR_SECTION:
+            if is_diagram_artifact(line):
+                i += 1
+                continue
+            
             if 'Height:' in line and 'Subroom:' not in line:
                 match = re.match(r'^(.+?)\s+Height:\s*(.+)', line)
                 if match:
-                    section_name = match.group(1).strip()
+                    raw_section_name = match.group(1).strip()
                     height = match.group(2).strip()
+                    
+                    section_name_match = re.search(r'([A-Z][A-Za-z\s\.\(\)/]+(?:\s+\d+)?)\s*$', raw_section_name)
+                    if section_name_match:
+                        section_name = section_name_match.group(1).strip()
+                    else:
+                        section_name = raw_section_name
+                    
                     current_section = {
                         'section_name': section_name,
                         'metadata': {'height': parse_height(height)},
@@ -266,8 +295,14 @@ def parse_document(pdf_path: str) -> tuple:
             
             if i + 1 < len(lines) and is_table_header(lines[i + 1]):
                 if not is_page_header(line, header_patterns):
+                    section_name = line.strip()
+                    
+                    name_match = re.search(r'([A-Z][A-Za-z\s\-/]+)\s*$', section_name)
+                    if name_match:
+                        section_name = name_match.group(1).strip()
+                    
                     current_section = {
-                        'section_name': line.strip(),
+                        'section_name': section_name,
                         'metadata': {},
                         'subrooms': [],
                         'line_items': [],

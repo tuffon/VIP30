@@ -490,7 +490,7 @@
       }
     },
     {
-      "section_name": "3' 7\" 4' 2' 7\" Bedroom 2",
+      "section_name": "Bedroom 2",
       "metadata": {
         "height": 8.0,
         "areas": {
@@ -713,7 +713,7 @@
       }
     },
     {
-      "section_name": "1' 4\" 3' 7\" 1' 5\" Master Bath",
+      "section_name": "Master Bath",
       "metadata": {
         "height": 8.0,
         "areas": {
@@ -1000,7 +1000,7 @@
       }
     },
     {
-      "section_name": "6' 1\" Living Room",
+      "section_name": "Living Room",
       "metadata": {
         "height": 8.0,
         "areas": {
@@ -1455,7 +1455,7 @@
       }
     },
     {
-      "section_name": "2' 7\" HVAC",
+      "section_name": "HVAC",
       "metadata": {
         "height": 8.0,
         "areas": {
