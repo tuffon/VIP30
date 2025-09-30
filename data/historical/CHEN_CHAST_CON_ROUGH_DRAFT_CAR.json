@@ -1,0 +1,2430 @@
+{
+  "case_metadata": {
+    "claim_number": "Policy",
+    "policy_number": "Type",
+    "insured_name": "Kenneth Chen",
+    "property_address": "1618 Chastain Pkwy",
+    "loss_type": "Coverage Deductible Policy Limit",
+    "price_list": "CALA8X_APR25",
+    "date_of_loss": "1/8/2025 12:00 AM Date Received:",
+    "date_inspected": "Date Entered: 4/12/2025 5:14 PM",
+    "date_entered": "4/12/2025 5:14 PM",
+    "region": "California"
+  },
+  "sections": [
+    {
+      "section_name": "Pack-Out",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 1,
+          "cat": "CPS",
+          "sel": "LAB",
+          "description": "Inventory, Packing, Boxing, and Moving charge - per hour",
+          "calc": "6*6*8",
+          "qty": 288.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 66.5,
+          "tax": 0.0,
+          "total": 19152.0
+        },
+        {
+          "line_number": 2,
+          "cat": "CPS",
+          "sel": "LABS",
+          "description": "Contents Evaluation and/or Supervisor/Admin - per hour",
+          "calc": "8*8+5*8",
+          "qty": 104.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 85.0,
+          "tax": 0.0,
+          "total": 8840.0
+        },
+        {
+          "line_number": 3,
+          "cat": "WTR",
+          "sel": "PPEM",
+          "description": "Personal protective mask (N-95)",
+          "calc": "9*8",
+          "qty": 72.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 1.57,
+          "tax": 8.2,
+          "total": 121.24
+        },
+        {
+          "line_number": 4,
+          "cat": "WTR",
+          "sel": "PPEG6",
+          "description": "Personal protective gloves - Disposable (per pair)",
+          "calc": "2*8*9",
+          "qty": 144.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 0.41,
+          "tax": 4.28,
+          "total": 63.32
+        },
+        {
+          "line_number": 5,
+          "cat": "DMO",
+          "sel": "PU",
+          "description": "Haul debris - per pickup truck load - including dump fees",
+          "calc": ".25",
+          "qty": 0.25,
+          "unit": "EA",
+          "remove": 211.75,
+          "replace": 0.0,
+          "tax": 0.0,
+          "total": 52.94
+        },
+        {
+          "line_number": 6,
+          "cat": "CPS",
+          "sel": "TR>",
+          "description": "Moving van (21'-27') and equipment (per day)",
+          "calc": "6*2+4*2",
+          "qty": 20.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 210.45,
+          "tax": 0.0,
+          "total": 4209.0
+        }
+      ],
+      "section_totals": {
+        "tax": 12.48,
+        "total": 32438.5,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Cleaning",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 8,
+          "cat": "CPS",
+          "sel": "LAB",
+          "description": "Inventory, Packing, Boxing, and Moving charge - per hour",
+          "calc": "6*6*8",
+          "qty": 288.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 66.5,
+          "tax": 0.0,
+          "total": 19152.0
+        },
+        {
+          "line_number": 9,
+          "cat": "CPS",
+          "sel": "LAB",
+          "description": "Inventory, Packing, Boxing, and Moving charge - per hour",
+          "calc": "4*2*5",
+          "qty": 40.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 66.5,
+          "tax": 0.0,
+          "total": 2660.0
+        },
+        {
+          "line_number": 10,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": "14.5",
+          "qty": 14.5,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 31.36,
+          "total": 463.9
+        },
+        {
+          "line_number": 11,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "2846",
+          "qty": 2846.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 45.39,
+          "total": 671.51
+        },
+        {
+          "line_number": 12,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "166",
+          "qty": 166.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 46.58,
+          "total": 689.0
+        },
+        {
+          "line_number": 13,
+          "cat": "CPS",
+          "sel": "BX<",
+          "description": "Provide box, packing paper & tape - small size",
+          "calc": "12",
+          "qty": 12.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 2.93,
+          "tax": 2.55,
+          "total": 37.71
+        },
+        {
+          "line_number": 14,
+          "cat": "CPS",
+          "sel": "BX>",
+          "description": "Provide box, packing paper & tape - large size",
+          "calc": "21",
+          "qty": 21.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 5.23,
+          "tax": 7.96,
+          "total": 117.79
+        },
+        {
+          "line_number": 15,
+          "cat": "CPS",
+          "sel": "BXLMP",
+          "description": "Provide lamp box set, packing paper & tape",
+          "calc": "8",
+          "qty": 8.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 8.81,
+          "tax": 5.11,
+          "total": 75.59
+        },
+        {
+          "line_number": 16,
+          "cat": "CPS",
+          "sel": "BXTV",
+          "description": "Provide TV box, packing paper & tape",
+          "calc": "6",
+          "qty": 6.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 28.21,
+          "tax": 12.27,
+          "total": 181.53
+        },
+        {
+          "line_number": 17,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "93",
+          "qty": 93.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 61.15,
+          "total": 904.66
+        },
+        {
+          "line_number": 18,
+          "cat": "CPS",
+          "sel": "BXWDR",
+          "description": "Provide wardrobe box & tape - medium size",
+          "calc": "48",
+          "qty": 48.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 18.26,
+          "tax": 63.54,
+          "total": 940.02
+        },
+        {
+          "line_number": 19,
+          "cat": "CPS",
+          "sel": "BXWDR>",
+          "description": "Provide wardrobe box & tape - large size",
+          "calc": "15",
+          "qty": 15.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 27.57,
+          "tax": 29.98,
+          "total": 443.53
+        }
+      ],
+      "section_totals": {
+        "tax": 305.89,
+        "total": 30523.89,
+        "validation_delta": 4186.65
+      }
+    },
+    {
+      "section_name": "Storage Area/Room",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 21,
+          "cat": "CPS",
+          "sel": "LAB",
+          "description": "Inventory, Packing, Boxing, and Moving charge - per hour",
+          "calc": "6*2*6*2",
+          "qty": 144.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 66.5,
+          "tax": 0.0,
+          "total": 9576.0
+        },
+        {
+          "line_number": 22,
+          "cat": "DMO",
+          "sel": "PU",
+          "description": "Haul debris - per pickup truck load - including dump fees",
+          "calc": ".25",
+          "qty": 0.25,
+          "unit": "EA",
+          "remove": 211.75,
+          "replace": 0.0,
+          "tax": 0.0,
+          "total": 52.94
+        },
+        {
+          "line_number": 24,
+          "cat": "CPS",
+          "sel": "LAB",
+          "description": "Inventory, Packing, Boxing, and Moving charge - per hour",
+          "calc": "6*4*2*2",
+          "qty": 96.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 66.5,
+          "tax": 0.0,
+          "total": 6384.0
+        }
+      ],
+      "section_totals": {
+        "tax": 0.0,
+        "total": 32012.94,
+        "validation_delta": 16000.0
+      }
+    },
+    {
+      "section_name": "Pack-Back",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 25,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "2000",
+          "qty": 2000.0,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 10.15,
+          "total": 910.15
+        },
+        {
+          "line_number": 26,
+          "cat": "CPS",
+          "sel": "LAB",
+          "description": "Inventory, Packing, Boxing, and Moving charge - per hour",
+          "calc": "6*8*4",
+          "qty": 192.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 66.5,
+          "tax": 0.0,
+          "total": 12768.0
+        },
+        {
+          "line_number": 27,
+          "cat": "CPS",
+          "sel": "LABS",
+          "description": "Contents Evaluation and/or Supervisor/Admin - per hour",
+          "calc": "4*8",
+          "qty": 32.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 85.0,
+          "tax": 0.0,
+          "total": 2720.0
+        },
+        {
+          "line_number": 28,
+          "cat": "WTR",
+          "sel": "PPEG6",
+          "description": "Personal protective gloves - Disposable (per pair)",
+          "calc": "7*2*5",
+          "qty": 70.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 0.41,
+          "tax": 2.08,
+          "total": 30.78
+        },
+        {
+          "line_number": 29,
+          "cat": "DMO",
+          "sel": "PU",
+          "description": "Haul debris - per pickup truck load - including dump fees",
+          "calc": ".25",
+          "qty": 0.25,
+          "unit": "EA",
+          "remove": 211.75,
+          "replace": 0.0,
+          "tax": 0.0,
+          "total": 52.94
+        }
+      ],
+      "section_totals": {
+        "tax": 12.23,
+        "total": 16481.87,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Family Room",
+      "metadata": {
+        "height": 9.416666666666666,
+        "areas": {
+          "sf_walls": 756.72,
+          "sf_ceiling": 448.89,
+          "sf_walls_and_ceiling": 1205.61,
+          "sf_floor": 437.22,
+          "sy_flooring": 48.58,
+          "lf_floor_perimeter": 72.24,
+          "lf_ceil_perimeter": 85.99
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 30,
+          "cat": "CPS",
+          "sel": "BXTV",
+          "description": "Provide TV box, packing paper & tape",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 28.21,
+          "tax": 2.05,
+          "total": 30.26
+        },
+        {
+          "line_number": 31,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "10",
+          "qty": 10.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 2.81,
+          "total": 41.51
+        },
+        {
+          "line_number": 32,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "100",
+          "qty": 100.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 1.6,
+          "total": 23.6
+        },
+        {
+          "line_number": 33,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": ".5",
+          "qty": 0.5,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 1.08,
+          "total": 16.0
+        },
+        {
+          "line_number": 34,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 1.32,
+          "total": 19.46
+        }
+      ],
+      "section_totals": {
+        "tax": 8.86,
+        "total": 130.83,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "5' 6' 9\" Kitchen",
+      "metadata": {
+        "height": 8.416666666666666,
+        "areas": {
+          "sf_walls": 671.04,
+          "sf_ceiling": 357.64,
+          "sf_walls_and_ceiling": 1028.68,
+          "sf_floor": 357.64,
+          "sy_flooring": 39.74,
+          "lf_floor_perimeter": 79.12,
+          "lf_ceil_perimeter": 82.04
+        }
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Pantry (1)",
+          "metadata": {
+            "height": 8.0,
+            "areas": {
+              "sf_walls": 168.15,
+              "sf_ceiling": 22.9,
+              "sf_walls_and_ceiling": 191.05,
+              "sf_floor": 22.9,
+              "sy_flooring": 2.54,
+              "lf_floor_perimeter": 21.02,
+              "lf_ceil_perimeter": 21.02
+            }
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 35,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "25",
+          "qty": 25.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 7.01,
+          "total": 103.76
+        },
+        {
+          "line_number": 36,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "350",
+          "qty": 350.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 5.58,
+          "total": 82.58
+        }
+      ],
+      "section_totals": {
+        "tax": 12.59,
+        "total": 186.34,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Missing Wall - Goes to Floor 2' 11\" X 6' 8\" Opens into KITCHEN",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 37,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "15",
+          "qty": 15.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 4.21,
+          "total": 62.26
+        },
+        {
+          "line_number": 38,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "200",
+          "qty": 200.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 3.19,
+          "total": 47.19
+        }
+      ],
+      "section_totals": {
+        "tax": 7.4,
+        "total": 109.45,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Entry/Foyer",
+      "metadata": {
+        "height": 23.666666666666668,
+        "areas": {
+          "sf_walls": 1064.37,
+          "sf_ceiling": 185.89,
+          "sf_walls_and_ceiling": 1250.26,
+          "sf_floor": 185.89,
+          "sy_flooring": 20.65,
+          "lf_floor_perimeter": 33.18,
+          "lf_ceil_perimeter": 54.54
+        },
+        "missing_walls": [
+          {
+            "dimensions": "4' 5 3/8\" X 23' 8\"",
+            "opens_into": "STAIRS_AREA"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Front Room Hall (2)",
+          "metadata": {
+            "height": 8.416666666666666,
+            "areas": {
+              "sf_walls": 124.27,
+              "sf_ceiling": 50.63,
+              "sf_walls_and_ceiling": 174.9,
+              "sf_floor": 50.63,
+              "lf_floor_perimeter": 13.73
+            },
+            "missing_walls": [
+              {
+                "dimensions": "7' 7 5/16\" X 8' 5\"",
+                "opens_into": "FRONT_ROOM"
+              },
+              {
+                "dimensions": "4' 7 3/8\" X 8' 5\"",
+                "opens_into": "STAIRS_AREA"
+              },
+              {
+                "dimensions": "3' 10\" X 8' 5\"",
+                "opens_into": "HALL_1"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Coat Closet (3)",
+          "metadata": {
+            "height": 9.0,
+            "areas": {
+              "sf_walls": 113.69,
+              "sf_ceiling": 8.59,
+              "sf_walls_and_ceiling": 122.28,
+              "sf_floor": 8.59,
+              "sy_flooring": 0.95,
+              "lf_floor_perimeter": 12.63,
+              "lf_ceil_perimeter": 12.63
+            }
+          }
+        },
+        {
+          "subroom_name": "Front room (1)",
+          "metadata": {
+            "height": 8.416666666666666,
+            "areas": {
+              "sy_flooring": 24.95,
+              "lf_floor_perimeter": 40.07,
+              "lf_ceil_perimeter": 40.07
+            },
+            "missing_walls": [
+              {
+                "dimensions": "5' 5 3/8\" X 8' 5\"",
+                "opens_into": "DINING_ROOM2"
+              },
+              {
+                "dimensions": "1' 8 9/16\" X 8' 5\"",
+                "opens_into": "DINING_ROOM2"
+              },
+              {
+                "dimensions": "7' 7 1/16\" X 8' 5\"",
+                "opens_into": "FRONT_ROOM_H"
+              },
+              {
+                "dimensions": "7' 7 3/16\" X 8' 5\"",
+                "opens_into": "STAIRS_AREA"
+              },
+              {
+                "dimensions": "10' 11\" X 8' 5\"",
+                "opens_into": "ENTRY_FOYER"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 39,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "7",
+          "qty": 7.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 4.6,
+          "total": 68.09
+        },
+        {
+          "line_number": 40,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 4.33,
+          "total": 63.99
+        },
+        {
+          "line_number": 41,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "150",
+          "qty": 150.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 2.39,
+          "total": 35.39
+        },
+        {
+          "line_number": 42,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 0.56,
+          "total": 8.3
+        }
+      ],
+      "section_totals": {
+        "tax": 11.88,
+        "total": 175.77,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "16' 8\" Dining Room",
+      "metadata": {
+        "height": 9.416666666666666,
+        "areas": {
+          "sf_walls": 449.09,
+          "sf_ceiling": 199.32,
+          "sf_walls_and_ceiling": 648.41,
+          "sf_floor": 199.32,
+          "sy_flooring": 22.15,
+          "lf_floor_perimeter": 45.15,
+          "lf_ceil_perimeter": 58.4
+        },
+        "missing_walls": [
+          {
+            "dimensions": "1' 8 9/16\" X 9' 5\"",
+            "opens_into": "FRONT_ROOM"
+          },
+          {
+            "dimensions": "5' 5 3/8\" X 9' 5\"",
+            "opens_into": "FRONT_ROOM"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 43,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "15",
+          "qty": 15.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 9.86,
+          "total": 145.91
+        },
+        {
+          "line_number": 44,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 4.33,
+          "total": 63.99
+        },
+        {
+          "line_number": 45,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "200",
+          "qty": 200.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 3.19,
+          "total": 47.19
+        }
+      ],
+      "section_totals": {
+        "tax": 17.38,
+        "total": 257.09,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "20' 2\" Living Room",
+      "metadata": {
+        "height": 15.333333333333334,
+        "areas": {
+          "sf_walls": 905.95,
+          "sf_ceiling": 309.07,
+          "sf_walls_and_ceiling": 1215.02,
+          "sf_floor": 309.07,
+          "sy_flooring": 34.34,
+          "lf_floor_perimeter": 49.25,
+          "lf_ceil_perimeter": 70.83
+        }
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Wet bar/ Living room (1)",
+          "metadata": {
+            "height": 8.416666666666666,
+            "areas": {
+              "sf_walls": 290.79,
+              "sf_ceiling": 174.3,
+              "sf_walls_and_ceiling": 465.09,
+              "sf_floor": 174.3,
+              "sy_flooring": 19.37,
+              "lf_floor_perimeter": 35.66,
+              "lf_ceil_perimeter": 41.74
+            },
+            "missing_walls": [
+              {
+                "dimensions": "15' 7\" X 8' 5\"",
+                "opens_into": "LIVING_ROOM"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 46,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "7",
+          "qty": 7.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 4.6,
+          "total": 68.09
+        },
+        {
+          "line_number": 47,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "800",
+          "qty": 800.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 12.76,
+          "total": 188.76
+        },
+        {
+          "line_number": 48,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": "3",
+          "qty": 3.0,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 6.49,
+          "total": 95.98
+        },
+        {
+          "line_number": 49,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "40",
+          "qty": 40.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 11.22,
+          "total": 166.02
+        },
+        {
+          "line_number": 50,
+          "cat": "CPS",
+          "sel": "BX>",
+          "description": "Provide box, packing paper & tape - large size",
+          "calc": "20",
+          "qty": 20.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 5.23,
+          "tax": 7.58,
+          "total": 112.18
+        },
+        {
+          "line_number": 51,
+          "cat": "CPS",
+          "sel": "BXTV",
+          "description": "Provide TV box, packing paper & tape",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 28.21,
+          "tax": 2.05,
+          "total": 30.26
+        },
+        {
+          "line_number": 52,
+          "cat": "CPS",
+          "sel": "BX<",
+          "description": "Provide box, packing paper & tape - small size",
+          "calc": "10",
+          "qty": 10.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 2.93,
+          "tax": 2.12,
+          "total": 31.42
+        }
+      ],
+      "section_totals": {
+        "tax": 46.82,
+        "total": 692.71,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Stairs Area",
+      "metadata": {
+        "height": 19.25,
+        "areas": {
+          "sf_walls": 286.15,
+          "sf_ceiling": 34.12,
+          "sf_walls_and_ceiling": 320.27,
+          "sf_floor": 34.12,
+          "sy_flooring": 3.79,
+          "lf_floor_perimeter": 8.08,
+          "lf_ceil_perimeter": 20.13
+        },
+        "missing_walls": [
+          {
+            "dimensions": "4' 5 3/8\" X 19' 3\"",
+            "opens_into": "FRONT_ROOM_H"
+          },
+          {
+            "dimensions": "4' 5 3/8\" X 19' 3\"",
+            "opens_into": "ENTRY_FOYER"
+          },
+          {
+            "dimensions": "7' 7 3/16\" X 19' 3\"",
+            "opens_into": "FRONT_ROOM"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 53,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "6",
+          "qty": 6.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 3.95,
+          "total": 58.37
+        },
+        {
+          "line_number": 54,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": ".5",
+          "qty": 0.5,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 1.08,
+          "total": 16.0
+        },
+        {
+          "line_number": 55,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "5",
+          "qty": 5.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 1.4,
+          "total": 20.75
+        }
+      ],
+      "section_totals": {
+        "tax": 6.43,
+        "total": 95.12,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "6' 2\" Guest Bath",
+      "metadata": {
+        "height": 9.0,
+        "areas": {
+          "sf_walls": 231.97,
+          "sf_ceiling": 40.57,
+          "sf_walls_and_ceiling": 272.55,
+          "sf_floor": 40.57,
+          "sy_flooring": 4.51,
+          "lf_floor_perimeter": 25.77,
+          "lf_ceil_perimeter": 25.77
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 56,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 1.12,
+          "total": 16.6
+        },
+        {
+          "line_number": 57,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "50",
+          "qty": 50.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 0.8,
+          "total": 11.8
+        }
+      ],
+      "section_totals": {
+        "tax": 1.92,
+        "total": 28.4,
+        "validation_delta": -0.0
+      }
+    },
+    {
+      "section_name": "Bedroom 1",
+      "metadata": {
+        "height": 9.0,
+        "areas": {
+          "sf_walls": 490.5,
+          "sf_ceiling": 183.75,
+          "sf_walls_and_ceiling": 674.25,
+          "sf_floor": 183.75,
+          "sy_flooring": 20.42,
+          "lf_floor_perimeter": 54.5,
+          "lf_ceil_perimeter": 54.5
+        }
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Bed 1 Closet (1)",
+          "metadata": {
+            "height": 9.0,
+            "areas": {
+              "sf_walls": 256.81,
+              "sf_ceiling": 43.05,
+              "sf_walls_and_ceiling": 299.86,
+              "sf_floor": 43.05,
+              "sy_flooring": 4.78,
+              "lf_floor_perimeter": 28.53,
+              "lf_ceil_perimeter": 28.53
+            }
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 58,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "6",
+          "qty": 6.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 1.68,
+          "total": 24.9
+        },
+        {
+          "line_number": 59,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "9",
+          "qty": 9.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 5.92,
+          "total": 87.55
+        },
+        {
+          "line_number": 60,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 2.16,
+          "total": 31.99
+        },
+        {
+          "line_number": 61,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "100",
+          "qty": 100.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 1.6,
+          "total": 23.6
+        }
+      ],
+      "section_totals": {
+        "tax": 11.36,
+        "total": 168.04,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "6' 1\" Bed1 Bathroom",
+      "metadata": {
+        "height": 9.0,
+        "areas": {
+          "sf_walls": 265.53,
+          "sf_ceiling": 52.73,
+          "sf_walls_and_ceiling": 318.27,
+          "sf_floor": 52.73,
+          "sy_flooring": 5.86,
+          "lf_floor_perimeter": 29.5,
+          "lf_ceil_perimeter": 29.5
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 62,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 0.56,
+          "total": 8.3
+        },
+        {
+          "line_number": 63,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "20",
+          "qty": 20.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 0.32,
+          "total": 4.72
+        }
+      ],
+      "section_totals": {
+        "tax": 0.88,
+        "total": 13.02,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Garage Hall",
+      "metadata": {
+        "height": 9.0,
+        "areas": {
+          "sf_walls": 247.5,
+          "sf_ceiling": 38.01,
+          "sf_walls_and_ceiling": 285.51,
+          "sf_floor": 38.01,
+          "sy_flooring": 4.22,
+          "lf_floor_perimeter": 27.5,
+          "lf_ceil_perimeter": 27.5
+        }
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Hall 1 (1)",
+          "metadata": {
+            "height": 9.5,
+            "areas": {
+              "sf_walls": 152.99,
+              "sf_ceiling": 22.68,
+              "sf_walls_and_ceiling": 175.67,
+              "sf_floor": 22.68,
+              "sy_flooring": 2.52,
+              "lf_floor_perimeter": 15.67,
+              "lf_ceil_perimeter": 19.5
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 10\" X 9' 6\"",
+                "opens_into": "FRONT_ROOM_H"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "HVAC room (2)",
+          "metadata": {
+            "height": 9.0,
+            "areas": {
+              "sf_walls": 167.97,
+              "sf_ceiling": 19.76,
+              "sf_walls_and_ceiling": 187.73,
+              "sf_floor": 19.76,
+              "sy_flooring": 2.2,
+              "lf_floor_perimeter": 18.66,
+              "lf_ceil_perimeter": 18.66
+            }
+          }
+        }
+      ],
+      "line_items": [],
+      "section_totals": {
+        "tax": 0.0,
+        "total": 0.0,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "8\" 7' 4\" Laundry Room",
+      "metadata": {
+        "height": 9.0,
+        "areas": {
+          "sf_walls": 274.5,
+          "sf_ceiling": 58.1,
+          "sf_walls_and_ceiling": 332.6,
+          "sf_floor": 58.1,
+          "sy_flooring": 6.46,
+          "lf_floor_perimeter": 30.5,
+          "lf_ceil_perimeter": 30.5
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 64,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "7",
+          "qty": 7.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 1.96,
+          "total": 29.05
+        },
+        {
+          "line_number": 65,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": ".25",
+          "qty": 0.25,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 0.54,
+          "total": 8.0
+        }
+      ],
+      "section_totals": {
+        "tax": 2.5,
+        "total": 37.05,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Garage Room",
+      "metadata": {
+        "height": 9.833333333333334,
+        "areas": {
+          "sf_walls": 584.96,
+          "sf_ceiling": 209.35,
+          "sf_walls_and_ceiling": 794.31,
+          "sf_floor": 209.35,
+          "sy_flooring": 23.26,
+          "lf_floor_perimeter": 59.49,
+          "lf_ceil_perimeter": 59.49
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 66,
+          "cat": "CPS",
+          "sel": "BXLMP",
+          "description": "Provide lamp box set, packing paper & tape",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 8.81,
+          "tax": 1.28,
+          "total": 18.9
+        },
+        {
+          "line_number": 67,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "50",
+          "qty": 50.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 0.8,
+          "total": 11.8
+        },
+        {
+          "line_number": 68,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 0.56,
+          "total": 8.3
+        }
+      ],
+      "section_totals": {
+        "tax": 2.64,
+        "total": 39.0,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Garage",
+      "metadata": {
+        "height": 9.833333333333334,
+        "areas": {
+          "sf_walls": 764.84,
+          "sf_ceiling": 350.35,
+          "sf_walls_and_ceiling": 1115.2,
+          "sf_floor": 350.35,
+          "sy_flooring": 38.93,
+          "lf_floor_perimeter": 77.78,
+          "lf_ceil_perimeter": 77.78
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 69,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 0.56,
+          "total": 8.3
+        },
+        {
+          "line_number": 70,
+          "cat": "CPS",
+          "sel": "BXLMP",
+          "description": "Provide lamp box set, packing paper & tape",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 8.81,
+          "tax": 1.28,
+          "total": 18.9
+        },
+        {
+          "line_number": 71,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 0.02,
+          "total": 0.24
+        }
+      ],
+      "section_totals": {
+        "tax": 1.86,
+        "total": 27.44,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Main Stairs",
+      "metadata": {
+        "height": 17.0,
+        "areas": {
+          "sf_walls": 45.82,
+          "sf_ceiling": 32.69,
+          "sf_walls_and_ceiling": 78.51,
+          "sf_floor": 32.69,
+          "sy_flooring": 3.63,
+          "lf_floor_perimeter": 14.27,
+          "lf_ceil_perimeter": 11.51
+        },
+        "missing_walls": [
+          {
+            "dimensions": "3' 10 3/8\" X 17'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "4' 11 3/8\" X 17'",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Stairs (1)",
+          "metadata": {
+            "height": 17.0,
+            "areas": {
+              "sf_walls": 93.03,
+              "sf_ceiling": 32.69,
+              "sf_walls_and_ceiling": 125.71,
+              "sf_floor": 32.69,
+              "sy_flooring": 3.63
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 10 3/8\" X 17'",
+                "opens_into": "MAIN_STAIRS2"
+              },
+              {
+                "dimensions": "4' 11 3/8\" X 17'",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 10 3/8\" X 17'",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [],
+      "section_totals": {
+        "tax": 0.0,
+        "total": 0.0,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Master bedroom",
+      "metadata": {
+        "height": 8.75,
+        "areas": {
+          "sf_walls_and_ceiling": 815.69,
+          "sf_walls": 457.02,
+          "sf_ceiling": 358.66,
+          "sf_floor": 356.0,
+          "sy_flooring": 39.56,
+          "lf_floor_perimeter": 38.25,
+          "lf_ceil_perimeter": 77.47
+        },
+        "missing_walls": [
+          {
+            "dimensions": "9' 9\" X 8' 9\"",
+            "opens_into": "MASTER_LIVIN"
+          },
+          {
+            "dimensions": "16' X 9' 10\"",
+            "opens_into": "MASTER_BEDRO"
+          },
+          {
+            "dimensions": "22' 3\" X 9' 10\"",
+            "opens_into": "MASTER_BEDRO"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 72,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 0.56,
+          "total": 8.3
+        },
+        {
+          "line_number": 73,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "50",
+          "qty": 50.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 0.8,
+          "total": 11.8
+        },
+        {
+          "line_number": 74,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "8",
+          "qty": 8.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 5.26,
+          "total": 77.82
+        },
+        {
+          "line_number": 75,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 2.16,
+          "total": 31.99
+        }
+      ],
+      "section_totals": {
+        "tax": 8.78,
+        "total": 129.91,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Master Closet 1",
+      "metadata": {
+        "height": 9.833333333333334,
+        "areas": {
+          "sf_walls_and_ceiling": 390.13,
+          "sf_walls": 329.57,
+          "sf_ceiling": 60.57,
+          "sf_floor": 60.57,
+          "sy_flooring": 6.73,
+          "lf_floor_perimeter": 33.52,
+          "lf_ceil_perimeter": 33.52
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 76,
+          "cat": "CPS",
+          "sel": "BXWDR>",
+          "description": "Provide wardrobe box & tape - large size",
+          "calc": "5",
+          "qty": 5.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 27.57,
+          "tax": 9.99,
+          "total": 147.84
+        },
+        {
+          "line_number": 77,
+          "cat": "CPS",
+          "sel": "BXWDR",
+          "description": "Provide wardrobe box & tape - medium size",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 18.26,
+          "tax": 2.65,
+          "total": 39.17
+        },
+        {
+          "line_number": 78,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "10",
+          "qty": 10.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 2.81,
+          "total": 41.51
+        },
+        {
+          "line_number": 79,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": ".5",
+          "qty": 0.5,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 1.08,
+          "total": 16.0
+        },
+        {
+          "line_number": 80,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "100",
+          "qty": 100.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 1.6,
+          "total": 23.6
+        }
+      ],
+      "section_totals": {
+        "tax": 18.13,
+        "total": 268.12,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Master Closet 2",
+      "metadata": {
+        "height": 9.833333333333334,
+        "areas": {
+          "sf_walls": 361.52,
+          "sf_ceiling": 84.35,
+          "sf_walls_and_ceiling": 445.86,
+          "sf_floor": 84.35,
+          "sy_flooring": 9.37,
+          "lf_floor_perimeter": 36.76,
+          "lf_ceil_perimeter": 36.76
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 81,
+          "cat": "CPS",
+          "sel": "BXWDR>",
+          "description": "Provide wardrobe box & tape - large size",
+          "calc": "10",
+          "qty": 10.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 27.57,
+          "tax": 19.99,
+          "total": 295.69
+        },
+        {
+          "line_number": 82,
+          "cat": "CPS",
+          "sel": "BXWDR",
+          "description": "Provide wardrobe box & tape - medium size",
+          "calc": "43",
+          "qty": 43.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 18.26,
+          "tax": 56.93,
+          "total": 842.11
+        },
+        {
+          "line_number": 83,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 0.56,
+          "total": 8.3
+        }
+      ],
+      "section_totals": {
+        "tax": 77.48,
+        "total": 1146.1,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Loft",
+      "metadata": {
+        "height": 13.0,
+        "areas": {
+          "sf_walls": 344.78,
+          "sf_ceiling": 127.55,
+          "sf_walls_and_ceiling": 472.33,
+          "sf_floor": 127.55,
+          "sy_flooring": 14.17,
+          "lf_floor_perimeter": 19.45,
+          "lf_ceil_perimeter": 30.4
+        },
+        "missing_walls": [
+          {
+            "dimensions": "4' 7 1/8\" X 13'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "10' 7 13/16\" X 13'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "4' 10 1/16\" X 9'",
+            "opens_into": "LOFT"
+          },
+          {
+            "dimensions": "6 7/16\" X 9'",
+            "opens_into": "LOFT"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 84,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "3",
+          "qty": 3.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 1.97,
+          "total": 29.18
+        },
+        {
+          "line_number": 85,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 1.12,
+          "total": 16.6
+        },
+        {
+          "line_number": 86,
+          "cat": "CPS",
+          "sel": "BX>",
+          "description": "Provide box, packing paper & tape - large size",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 5.23,
+          "tax": 0.38,
+          "total": 5.61
+        },
+        {
+          "line_number": 87,
+          "cat": "CPS",
+          "sel": "BXLMP",
+          "description": "Provide lamp box set, packing paper & tape",
+          "calc": "3",
+          "qty": 3.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 8.81,
+          "tax": 1.92,
+          "total": 28.35
+        },
+        {
+          "line_number": 88,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": ".5",
+          "qty": 0.5,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 1.08,
+          "total": 16.0
+        },
+        {
+          "line_number": 89,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "75",
+          "qty": 75.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 1.2,
+          "total": 17.7
+        }
+      ],
+      "section_totals": {
+        "tax": 7.67,
+        "total": 113.44,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "2' 6\"2' Master Bathroom",
+      "metadata": {
+        "height": "Peaked",
+        "areas": {
+          "sf_walls": 716.13,
+          "sf_ceiling": 252.3,
+          "sf_walls_and_ceiling": 968.43,
+          "sf_floor": 252.92,
+          "sy_flooring": 28.1,
+          "lf_floor_perimeter": 57.27,
+          "lf_ceil_perimeter": 70.33
+        }
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Master toilet 1 (4)",
+          "metadata": {
+            "height": 9.833333333333334,
+            "areas": {
+              "sf_walls": 229.44,
+              "sf_ceiling": 30.97,
+              "sf_walls_and_ceiling": 260.41,
+              "sf_floor": 30.97,
+              "sy_flooring": 3.44,
+              "lf_floor_perimeter": 23.33,
+              "lf_ceil_perimeter": 23.33
+            }
+          }
+        },
+        {
+          "subroom_name": "Master Toilet 2 (3)",
+          "metadata": {
+            "height": 9.833333333333334,
+            "areas": {
+              "sf_walls": 232.0,
+              "sf_ceiling": 34.77,
+              "sf_walls_and_ceiling": 266.77,
+              "sf_floor": 34.77,
+              "sy_flooring": 3.86,
+              "lf_floor_perimeter": 23.59,
+              "lf_ceil_perimeter": 23.59
+            }
+          }
+        },
+        {
+          "subroom_name": "Master Shower (2)",
+          "metadata": {
+            "height": 9.166666666666666,
+            "areas": {
+              "sf_walls": 142.48,
+              "sf_ceiling": 20.97,
+              "sf_walls_and_ceiling": 163.45,
+              "sf_floor": 20.97,
+              "sy_flooring": 2.33,
+              "lf_floor_perimeter": 15.54,
+              "lf_ceil_perimeter": 15.54
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 6 1/2\" X 9' 2\"",
+                "opens_into": "MASTER_BATH1"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Master Bathroom Hall (1)",
+          "metadata": {
+            "height": 9.833333333333334,
+            "areas": {
+              "sf_walls": 384.8,
+              "sf_ceiling": 82.53,
+              "lf_ceil_perimeter": 39.13
+            },
+            "missing_walls": [
+              {
+                "dimensions": "9' 2 11/16\" X 9' 10\"",
+                "opens_into": "MASTER_BATH1"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 90,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "8",
+          "qty": 8.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 2.24,
+          "total": 33.2
+        },
+        {
+          "line_number": 91,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "100",
+          "qty": 100.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 1.6,
+          "total": 23.6
+        },
+        {
+          "line_number": 92,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 0.66,
+          "total": 9.73
+        },
+        {
+          "line_number": 93,
+          "cat": "CPS",
+          "sel": "BXLMP",
+          "description": "Provide lamp box set, packing paper & tape",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 8.81,
+          "tax": 0.64,
+          "total": 9.45
+        },
+        {
+          "line_number": 94,
+          "cat": "CPS",
+          "sel": "BX<",
+          "description": "Provide box, packing paper & tape - small size",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 2.93,
+          "tax": 0.42,
+          "total": 6.28
+        }
+      ],
+      "section_totals": {
+        "tax": 5.56,
+        "total": 82.26,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Bedroom 3",
+      "metadata": {
+        "height": 10.0,
+        "areas": {
+          "sf_walls": 218.98,
+          "sf_ceiling": 44.04,
+          "sf_walls_and_ceiling": 263.02,
+          "sf_floor": 44.04,
+          "sy_flooring": 4.89,
+          "lf_floor_perimeter": 27.37,
+          "lf_ceil_perimeter": 27.37
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 95,
+          "cat": "CPS",
+          "sel": "BXTV",
+          "description": "Provide TV box, packing paper & tape",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 28.21,
+          "tax": 2.05,
+          "total": 30.26
+        },
+        {
+          "line_number": 96,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "14",
+          "qty": 14.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 9.21,
+          "total": 136.19
+        },
+        {
+          "line_number": 97,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "8",
+          "qty": 8.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 2.24,
+          "total": 33.2
+        },
+        {
+          "line_number": 98,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": "1.5",
+          "qty": 1.5,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 3.24,
+          "total": 47.99
+        },
+        {
+          "line_number": 99,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "150",
+          "qty": 150.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 2.39,
+          "total": 35.39
+        }
+      ],
+      "section_totals": {
+        "tax": 19.13,
+        "total": 283.03,
+        "validation_delta": -0.0
+      }
+    },
+    {
+      "section_name": "Bed 3 Bathroom",
+      "metadata": {
+        "height": 9.0,
+        "areas": {
+          "sf_walls": 279.51,
+          "sf_ceiling": 57.55,
+          "sf_walls_and_ceiling": 337.07,
+          "sf_floor": 57.55,
+          "sy_flooring": 6.39,
+          "lf_floor_perimeter": 31.06,
+          "lf_ceil_perimeter": 31.06
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 100,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "3",
+          "qty": 3.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 0.84,
+          "total": 12.45
+        },
+        {
+          "line_number": 101,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "50",
+          "qty": 50.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 0.8,
+          "total": 11.8
+        }
+      ],
+      "section_totals": {
+        "tax": 1.64,
+        "total": 24.25,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "14' 4\" Bedroom 2",
+      "metadata": {
+        "height": "Peaked",
+        "areas": {
+          "sf_walls": 596.09,
+          "sf_ceiling": 188.83,
+          "sf_walls_and_ceiling": 784.92,
+          "sf_floor": 185.32,
+          "sy_flooring": 20.59,
+          "lf_floor_perimeter": 54.58,
+          "lf_ceil_perimeter": 55.14
+        }
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Bed 2 Closet (1)",
+          "metadata": {
+            "height": 9.833333333333334,
+            "areas": {
+              "sf_walls": 224.74,
+              "sf_ceiling": 18.06,
+              "sf_walls_and_ceiling": 242.79,
+              "sf_floor": 18.06,
+              "sy_flooring": 2.01,
+              "lf_floor_perimeter": 22.85,
+              "lf_ceil_perimeter": 22.85
+            }
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 102,
+          "cat": "CPS",
+          "sel": "BXTV",
+          "description": "Provide TV box, packing paper & tape",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 28.21,
+          "tax": 2.05,
+          "total": 30.26
+        },
+        {
+          "line_number": 103,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "16",
+          "qty": 16.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 10.52,
+          "total": 155.64
+        },
+        {
+          "line_number": 104,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "8",
+          "qty": 8.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 2.24,
+          "total": 33.2
+        },
+        {
+          "line_number": 105,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": "1.5",
+          "qty": 1.5,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 3.24,
+          "total": 47.99
+        },
+        {
+          "line_number": 106,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "150",
+          "qty": 150.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 2.39,
+          "total": 35.39
+        },
+        {
+          "line_number": 107,
+          "cat": "CPS",
+          "sel": "BXWDR",
+          "description": "Provide wardrobe box & tape - medium size",
+          "calc": "3",
+          "qty": 3.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 18.26,
+          "tax": 3.97,
+          "total": 58.75
+        }
+      ],
+      "section_totals": {
+        "tax": 24.41,
+        "total": 361.23,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Bathroom 1",
+      "metadata": {
+        "height": 8.0,
+        "areas": {
+          "sf_walls": 245.38,
+          "sf_ceiling": 58.42,
+          "sf_walls_and_ceiling": 303.8,
+          "sf_floor": 58.42,
+          "sy_flooring": 6.49,
+          "lf_floor_perimeter": 30.67,
+          "lf_ceil_perimeter": 30.67
+        }
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Bathroom 1 shower (1)",
+          "metadata": {
+            "height": 8.0,
+            "areas": {
+              "sf_walls": 300.42,
+              "sf_ceiling": 52.36,
+              "sf_walls_and_ceiling": 352.79,
+              "sf_floor": 52.36,
+              "sy_flooring": 5.82,
+              "lf_floor_perimeter": 37.55,
+              "lf_ceil_perimeter": 37.55
+            }
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 108,
+          "cat": "CPS",
+          "sel": "BX",
+          "description": "Provide box, packing paper & tape - medium size",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 3.87,
+          "tax": 0.28,
+          "total": 4.15
+        },
+        {
+          "line_number": 109,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "100",
+          "qty": 100.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 1.6,
+          "total": 23.6
+        }
+      ],
+      "section_totals": {
+        "tax": 1.88,
+        "total": 27.75,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Master Living Room",
+      "metadata": {
+        "height": 9.833333333333334,
+        "areas": {
+          "sf_walls": 563.69,
+          "sf_ceiling": 251.96,
+          "sf_walls_and_ceiling": 815.65,
+          "sf_floor": 251.96,
+          "sy_flooring": 28.0,
+          "lf_floor_perimeter": 56.25,
+          "lf_ceil_perimeter": 66.0
+        },
+        "missing_walls": [
+          {
+            "dimensions": "9' 9\" X 9' 10\"",
+            "opens_into": "MASTER_BEDRO"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 110,
+          "cat": "CPS",
+          "sel": "PAD",
+          "description": "Provide furniture lightweight blanket/pad",
+          "calc": "5",
+          "qty": 5.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 9.07,
+          "tax": 3.29,
+          "total": 48.64
+        },
+        {
+          "line_number": 111,
+          "cat": "CPS",
+          "sel": "BXTV",
+          "description": "Provide TV box, packing paper & tape",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 28.21,
+          "tax": 4.09,
+          "total": 60.51
+        },
+        {
+          "line_number": 112,
+          "cat": "CPS",
+          "sel": "WRAP",
+          "description": "Provide stretch film/wrap - 20\" x 1000' roll",
+          "calc": ".25",
+          "qty": 0.25,
+          "unit": "RL",
+          "remove": 0.0,
+          "replace": 29.83,
+          "tax": 0.54,
+          "total": 8.0
+        },
+        {
+          "line_number": 113,
+          "cat": "CPS",
+          "sel": "BWRAP",
+          "description": "Bubble wrap - 24\" wide - Add-on cost for fragile items",
+          "calc": "50",
+          "qty": 50.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.22,
+          "tax": 0.8,
+          "total": 11.8
+        }
+      ],
+      "section_totals": {
+        "tax": 8.72,
+        "total": 128.95,
+        "validation_delta": 0.0
+      }
+    }
+  ]
+}

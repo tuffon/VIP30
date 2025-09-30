@@ -1,0 +1,6023 @@
+[
+  {
+    "region_code": "AK - ANCHORAGE",
+    "city": "ANCHORAGE",
+    "state": "AK",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AK - FAIRBANKS",
+    "city": "FAIRBANKS",
+    "state": "AK",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AK - JUNEAU",
+    "city": "JUNEAU",
+    "state": "AK",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AK - KETCHIKAN",
+    "city": "KETCHIKAN",
+    "state": "AK",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AK - KODIAK",
+    "city": "KODIAK",
+    "state": "AK",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AK - NOME",
+    "city": "NOME",
+    "state": "AK",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AK - OTHER",
+    "city": "OTHER",
+    "state": "AK",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AK - SITKA",
+    "city": "SITKA",
+    "state": "AK",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - ANNISTON",
+    "city": "ANNISTON",
+    "state": "AL",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - AUBURN",
+    "city": "AUBURN",
+    "state": "AL",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - BIRMINGHAM",
+    "city": "BIRMINGHAM",
+    "state": "AL",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - DECATUR",
+    "city": "DECATUR",
+    "state": "AL",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - DOTHAN",
+    "city": "DOTHAN",
+    "state": "AL",
+    "multiplier": 0.81,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - FLORENCE",
+    "city": "FLORENCE",
+    "state": "AL",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - GADSDEN",
+    "city": "GADSDEN",
+    "state": "AL",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - HUNTSVILLE",
+    "city": "HUNTSVILLE",
+    "state": "AL",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - MOBILE",
+    "city": "MOBILE",
+    "state": "AL",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - MONTGOMERY",
+    "city": "MONTGOMERY",
+    "state": "AL",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - OPELIKA",
+    "city": "OPELIKA",
+    "state": "AL",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - OTHER",
+    "city": "OTHER",
+    "state": "AL",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - PRATTVILLE",
+    "city": "PRATTVILLE",
+    "state": "AL",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - SELMA",
+    "city": "SELMA",
+    "state": "AL",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AL - TUSCALOOSA",
+    "city": "TUSCALOOSA",
+    "state": "AL",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - BATESVILLE",
+    "city": "BATESVILLE",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - CONWAY",
+    "city": "CONWAY",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - EL DORADO",
+    "city": "EL DORADO",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - FAYETTEVILLE",
+    "city": "FAYETTEVILLE",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - FORT SMITH",
+    "city": "FORT SMITH",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - HOT SPRINGS",
+    "city": "HOT SPRINGS",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - JONESBORO",
+    "city": "JONESBORO",
+    "state": "AR",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - LITTLE ROCK",
+    "city": "LITTLE ROCK",
+    "state": "AR",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - OTHER",
+    "city": "OTHER",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - PINE BLUFF",
+    "city": "PINE BLUFF",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - ROGERS",
+    "city": "ROGERS",
+    "state": "AR",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - SPRINGDALE",
+    "city": "SPRINGDALE",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AR - TEXARKANA",
+    "city": "TEXARKANA",
+    "state": "AR",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - CASA GRANDE",
+    "city": "CASA GRANDE",
+    "state": "AZ",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - CLIFTON",
+    "city": "CLIFTON",
+    "state": "AZ",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - FLAGSTAFF",
+    "city": "FLAGSTAFF",
+    "state": "AZ",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - LAKE HAVASU CITY",
+    "city": "LAKE HAVASU CITY",
+    "state": "AZ",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - MESA",
+    "city": "MESA",
+    "state": "AZ",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - OTHER",
+    "city": "OTHER",
+    "state": "AZ",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - PHOENIX",
+    "city": "PHOENIX",
+    "state": "AZ",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - SIERRA VISTA",
+    "city": "SIERRA VISTA",
+    "state": "AZ",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - TUCSON",
+    "city": "TUCSON",
+    "state": "AZ",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "AZ - YUMA",
+    "city": "YUMA",
+    "state": "AZ",
+    "multiplier": 0.81,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - ANAHEIM",
+    "city": "ANAHEIM",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - BAKERSFIELD",
+    "city": "BAKERSFIELD",
+    "state": "CA",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - CHICO",
+    "city": "CHICO",
+    "state": "CA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - EUREKA",
+    "city": "EUREKA",
+    "state": "CA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - FRESNO",
+    "city": "FRESNO",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - LOS ANGELES",
+    "city": "LOS ANGELES",
+    "state": "CA",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - MODESTO",
+    "city": "MODESTO",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - OAKLAND",
+    "city": "OAKLAND",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - OTHER",
+    "city": "OTHER",
+    "state": "CA",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - REDDING",
+    "city": "REDDING",
+    "state": "CA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - RIVERSIDE",
+    "city": "RIVERSIDE",
+    "state": "CA",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SACRAMENTO",
+    "city": "SACRAMENTO",
+    "state": "CA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SALINAS",
+    "city": "SALINAS",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SAN BERNARDINO",
+    "city": "SAN BERNARDINO",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SAN DIEGO",
+    "city": "SAN DIEGO",
+    "state": "CA",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SAN FRANCISCO",
+    "city": "SAN FRANCISCO",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SAN JOSE",
+    "city": "SAN JOSE",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SAN LUIS OBISPO",
+    "city": "SAN LUIS OBISPO",
+    "state": "CA",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SANTA BARBARA",
+    "city": "SANTA BARBARA",
+    "state": "CA",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SANTA CRUZ",
+    "city": "SANTA CRUZ",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - SANTA ROSA",
+    "city": "SANTA ROSA",
+    "state": "CA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - STOCKTON",
+    "city": "STOCKTON",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - TULARE",
+    "city": "TULARE",
+    "state": "CA",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - VALLEJO-FAIRFIELD-NAPA",
+    "city": "VALLEJO-FAIRFIELD-NAPA",
+    "state": "CA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - VENTURA",
+    "city": "VENTURA",
+    "state": "CA",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - VISALIA",
+    "city": "VISALIA",
+    "state": "CA",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - WATSONVILLE",
+    "city": "WATSONVILLE",
+    "state": "CA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - YOLO",
+    "city": "YOLO",
+    "state": "CA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CA - YUBA CITY",
+    "city": "YUBA CITY",
+    "state": "CA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CAN - MANITOBA",
+    "city": "MANITOBA",
+    "state": "CAN",
+    "multiplier": 0.98,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - BOULDER",
+    "city": "BOULDER",
+    "state": "CO",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - COLORADO SPRINGS",
+    "city": "COLORADO SPRINGS",
+    "state": "CO",
+    "multiplier": 0.9,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - DENVER",
+    "city": "DENVER",
+    "state": "CO",
+    "multiplier": 0.9,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - DURANGO",
+    "city": "DURANGO",
+    "state": "CO",
+    "multiplier": 0.9,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - FORT COLLINS",
+    "city": "FORT COLLINS",
+    "state": "CO",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - GRAND JUNCTION",
+    "city": "GRAND JUNCTION",
+    "state": "CO",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - GREELEY",
+    "city": "GREELEY",
+    "state": "CO",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - LONGMONT",
+    "city": "LONGMONT",
+    "state": "CO",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - LOVELAND",
+    "city": "LOVELAND",
+    "state": "CO",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - OTHER",
+    "city": "OTHER",
+    "state": "CO",
+    "multiplier": 0.9,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - PUEBLO",
+    "city": "PUEBLO",
+    "state": "CO",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CO - STERLING",
+    "city": "STERLING",
+    "state": "CO",
+    "multiplier": 0.9,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - BRIDGEPORT",
+    "city": "BRIDGEPORT",
+    "state": "CT",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - DANBURY",
+    "city": "DANBURY",
+    "state": "CT",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - HARTFORD",
+    "city": "HARTFORD",
+    "state": "CT",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - MANCHESTER",
+    "city": "MANCHESTER",
+    "state": "CT",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - MERIDEN",
+    "city": "MERIDEN",
+    "state": "CT",
+    "multiplier": 1.1,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - MIDDLETOWN",
+    "city": "MIDDLETOWN",
+    "state": "CT",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - NEW HAVEN",
+    "city": "NEW HAVEN",
+    "state": "CT",
+    "multiplier": 1.1,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - NEW LONDON",
+    "city": "NEW LONDON",
+    "state": "CT",
+    "multiplier": 1.1,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - NORWALK",
+    "city": "NORWALK",
+    "state": "CT",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - NORWICH",
+    "city": "NORWICH",
+    "state": "CT",
+    "multiplier": 1.1,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - OTHER",
+    "city": "OTHER",
+    "state": "CT",
+    "multiplier": 1.1,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - STAMFORD",
+    "city": "STAMFORD",
+    "state": "CT",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - TORRINGTON",
+    "city": "TORRINGTON",
+    "state": "CT",
+    "multiplier": 1.1,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "CT - WATERBURY",
+    "city": "WATERBURY",
+    "state": "CT",
+    "multiplier": 1.1,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "DC - WASHINGTON DC",
+    "city": "WASHINGTON DC",
+    "state": "DC",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "DE - DOVER",
+    "city": "DOVER",
+    "state": "DE",
+    "multiplier": 1.08,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "DE - NEWARK",
+    "city": "NEWARK",
+    "state": "DE",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "DE - OTHER",
+    "city": "OTHER",
+    "state": "DE",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "DE - WILMINGTON",
+    "city": "WILMINGTON",
+    "state": "DE",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - BOCA RATON",
+    "city": "BOCA RATON",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - BRADENTON",
+    "city": "BRADENTON",
+    "state": "FL",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - CAPE CORAL",
+    "city": "CAPE CORAL",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - CLEARWATER",
+    "city": "CLEARWATER",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - DAYTONA BEACH",
+    "city": "DAYTONA BEACH",
+    "state": "FL",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - FORT LAUDERDALE",
+    "city": "FORT LAUDERDALE",
+    "state": "FL",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - FORT MYERS",
+    "city": "FORT MYERS",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - FORT PIERCE",
+    "city": "FORT PIERCE",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - FORT WALTON BEACH",
+    "city": "FORT WALTON BEACH",
+    "state": "FL",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - GAINESVILLE",
+    "city": "GAINESVILLE",
+    "state": "FL",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - JACKSONVILLE",
+    "city": "JACKSONVILLE",
+    "state": "FL",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - LAKELAND",
+    "city": "LAKELAND",
+    "state": "FL",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - MELBOURNE",
+    "city": "MELBOURNE",
+    "state": "FL",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - MIAMI",
+    "city": "MIAMI",
+    "state": "FL",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - NAPLES",
+    "city": "NAPLES",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - OCALA",
+    "city": "OCALA",
+    "state": "FL",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - ORLANDO",
+    "city": "ORLANDO",
+    "state": "FL",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - OTHER",
+    "city": "OTHER",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - PALM BAY",
+    "city": "PALM BAY",
+    "state": "FL",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - PANAMA CITY",
+    "city": "PANAMA CITY",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - PENSACOLA",
+    "city": "PENSACOLA",
+    "state": "FL",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - PORT ST. LUCIE",
+    "city": "PORT ST. LUCIE",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - PUNTA GORDA",
+    "city": "PUNTA GORDA",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - SARASOTA",
+    "city": "SARASOTA",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - ST PETERSBURG",
+    "city": "ST PETERSBURG",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - TALLAHASSEE",
+    "city": "TALLAHASSEE",
+    "state": "FL",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - TAMPA",
+    "city": "TAMPA",
+    "state": "FL",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - TITUSVILLE",
+    "city": "TITUSVILLE",
+    "state": "FL",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - WEST PALM BEACH",
+    "city": "WEST PALM BEACH",
+    "state": "FL",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "FL - WINTER HAVEN",
+    "city": "WINTER HAVEN",
+    "state": "FL",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - ALBANY",
+    "city": "ALBANY",
+    "state": "GA",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - ATHENS",
+    "city": "ATHENS",
+    "state": "GA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - ATLANTA",
+    "city": "ATLANTA",
+    "state": "GA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - AUGUSTA",
+    "city": "AUGUSTA",
+    "state": "GA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - COLUMBUS",
+    "city": "COLUMBUS",
+    "state": "GA",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - MACON",
+    "city": "MACON",
+    "state": "GA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - MARIETTA",
+    "city": "MARIETTA",
+    "state": "GA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - OTHER",
+    "city": "OTHER",
+    "state": "GA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - ROME",
+    "city": "ROME",
+    "state": "GA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - SAVANNAH",
+    "city": "SAVANNAH",
+    "state": "GA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "GA - VALDOSTA",
+    "city": "VALDOSTA",
+    "state": "GA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "HI - OTHER",
+    "city": "OTHER",
+    "state": "HI",
+    "multiplier": 1.16,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "HI - HILO",
+    "city": "HILO",
+    "state": "HI",
+    "multiplier": 1.16,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "HI - HONOLULU",
+    "city": "HONOLULU",
+    "state": "HI",
+    "multiplier": 1.16,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "HI - MAUI",
+    "city": "MAUI",
+    "state": "HI",
+    "multiplier": 1.16,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - BURLINGTON",
+    "city": "BURLINGTON",
+    "state": "IA",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - CEDAR FALLS",
+    "city": "CEDAR FALLS",
+    "state": "IA",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - CEDAR RAPIDS",
+    "city": "CEDAR RAPIDS",
+    "state": "IA",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - COUNCIL BLUFFS",
+    "city": "COUNCIL BLUFFS",
+    "state": "IA",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - DAVENPORT",
+    "city": "DAVENPORT",
+    "state": "IA",
+    "multiplier": 0.96,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - DES MOINES",
+    "city": "DES MOINES",
+    "state": "IA",
+    "multiplier": 0.96,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - DUBUQUE",
+    "city": "DUBUQUE",
+    "state": "IA",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - FT. DODGE",
+    "city": "FT. DODGE",
+    "state": "IA",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - IOWA CITY",
+    "city": "IOWA CITY",
+    "state": "IA",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - MARSHALLTOWN",
+    "city": "MARSHALLTOWN",
+    "state": "IA",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - MASON CITY",
+    "city": "MASON CITY",
+    "state": "IA",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - OTHER",
+    "city": "OTHER",
+    "state": "IA",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - OTTUMWA",
+    "city": "OTTUMWA",
+    "state": "IA",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - SIOUX CITY",
+    "city": "SIOUX CITY",
+    "state": "IA",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IA - WATERLOO",
+    "city": "WATERLOO",
+    "state": "IA",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ID - BOISE",
+    "city": "BOISE",
+    "state": "ID",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ID - LEWISTON",
+    "city": "LEWISTON",
+    "state": "ID",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ID - OTHER",
+    "city": "OTHER",
+    "state": "ID",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ID - POCATELLO",
+    "city": "POCATELLO",
+    "state": "ID",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ID - SALMON",
+    "city": "SALMON",
+    "state": "ID",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ID - ST. ANTHONY",
+    "city": "ST. ANTHONY",
+    "state": "ID",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ID - ST. MARIES",
+    "city": "ST. MARIES",
+    "state": "ID",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ID - TWIN FALLS",
+    "city": "TWIN FALLS",
+    "state": "ID",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - ALTON",
+    "city": "ALTON",
+    "state": "IL",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - BLOOMINGTON",
+    "city": "BLOOMINGTON",
+    "state": "IL",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - CHAMPAIGN",
+    "city": "CHAMPAIGN",
+    "state": "IL",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - CHICAGO",
+    "city": "CHICAGO",
+    "state": "IL",
+    "multiplier": 1.19,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - DE KALB",
+    "city": "DE KALB",
+    "state": "IL",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - DECATUR",
+    "city": "DECATUR",
+    "state": "IL",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - EAST ST. LOUIS",
+    "city": "EAST ST. LOUIS",
+    "state": "IL",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - FREEPORT",
+    "city": "FREEPORT",
+    "state": "IL",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - HARRISBURG",
+    "city": "HARRISBURG",
+    "state": "IL",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - KANKAKEE",
+    "city": "KANKAKEE",
+    "state": "IL",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - MOLINE",
+    "city": "MOLINE",
+    "state": "IL",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - NORMAL",
+    "city": "NORMAL",
+    "state": "IL",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - OTHER",
+    "city": "OTHER",
+    "state": "IL",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - PEKIN",
+    "city": "PEKIN",
+    "state": "IL",
+    "multiplier": 1.01,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - PEORIA",
+    "city": "PEORIA",
+    "state": "IL",
+    "multiplier": 1.01,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - ROCKFORD",
+    "city": "ROCKFORD",
+    "state": "IL",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - SPRINGFIELD",
+    "city": "SPRINGFIELD",
+    "state": "IL",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IL - URBANA",
+    "city": "URBANA",
+    "state": "IL",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - BLOOMINGTON",
+    "city": "BLOOMINGTON",
+    "state": "IN",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - COLUMBUS",
+    "city": "COLUMBUS",
+    "state": "IN",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - ELKHART",
+    "city": "ELKHART",
+    "state": "IN",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - EVANSVILLE",
+    "city": "EVANSVILLE",
+    "state": "IN",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - FORT WAYNE",
+    "city": "FORT WAYNE",
+    "state": "IN",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - GARY",
+    "city": "GARY",
+    "state": "IN",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - GOSHEN",
+    "city": "GOSHEN",
+    "state": "IN",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - INDIANAPOLIS",
+    "city": "INDIANAPOLIS",
+    "state": "IN",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - KOKOMO",
+    "city": "KOKOMO",
+    "state": "IN",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - LAFAYETTE",
+    "city": "LAFAYETTE",
+    "state": "IN",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - MUNCIE",
+    "city": "MUNCIE",
+    "state": "IN",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - NEW ALBANY",
+    "city": "NEW ALBANY",
+    "state": "IN",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - OTHER",
+    "city": "OTHER",
+    "state": "IN",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - SOUTH BEND",
+    "city": "SOUTH BEND",
+    "state": "IN",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "IN - TERRE HAUTE",
+    "city": "TERRE HAUTE",
+    "state": "IN",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - DODGE CITY",
+    "city": "DODGE CITY",
+    "state": "KS",
+    "multiplier": 1.01,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - HUTCHINSON",
+    "city": "HUTCHINSON",
+    "state": "KS",
+    "multiplier": 1.01,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - KANSAS CITY",
+    "city": "KANSAS CITY",
+    "state": "KS",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - LAWRENCE",
+    "city": "LAWRENCE",
+    "state": "KS",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - MANHATTAN",
+    "city": "MANHATTAN",
+    "state": "KS",
+    "multiplier": 1.01,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - OLATHE",
+    "city": "OLATHE",
+    "state": "KS",
+    "multiplier": 1.01,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - OTHER",
+    "city": "OTHER",
+    "state": "KS",
+    "multiplier": 1.01,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - SALINA",
+    "city": "SALINA",
+    "state": "KS",
+    "multiplier": 1.01,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - TOPEKA",
+    "city": "TOPEKA",
+    "state": "KS",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KS - WICHITA",
+    "city": "WICHITA",
+    "state": "KS",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KY - BOWLING GREEN",
+    "city": "BOWLING GREEN",
+    "state": "KY",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KY - HOPKINSVILLE",
+    "city": "HOPKINSVILLE",
+    "state": "KY",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KY - LEXINGTON",
+    "city": "LEXINGTON",
+    "state": "KY",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KY - LOUISVILLE",
+    "city": "LOUISVILLE",
+    "state": "KY",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KY - MAYFIELD",
+    "city": "MAYFIELD",
+    "state": "KY",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KY - MAYSVILLE",
+    "city": "MAYSVILLE",
+    "state": "KY",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KY - OTHER",
+    "city": "OTHER",
+    "state": "KY",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KY - OWENSBORO",
+    "city": "OWENSBORO",
+    "state": "KY",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "KY - PADUCAH",
+    "city": "PADUCAH",
+    "state": "KY",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - ALEXANDRIA",
+    "city": "ALEXANDRIA",
+    "state": "LA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - BATON ROUGE",
+    "city": "BATON ROUGE",
+    "state": "LA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - BOSSIER CITY",
+    "city": "BOSSIER CITY",
+    "state": "LA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - HOUMA",
+    "city": "HOUMA",
+    "state": "LA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - LAFAYETTE",
+    "city": "LAFAYETTE",
+    "state": "LA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - LAKE CHARLES",
+    "city": "LAKE CHARLES",
+    "state": "LA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - MONROE",
+    "city": "MONROE",
+    "state": "LA",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - NEW IBERIA",
+    "city": "NEW IBERIA",
+    "state": "LA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - NEW ORLEANS",
+    "city": "NEW ORLEANS",
+    "state": "LA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - OTHER",
+    "city": "OTHER",
+    "state": "LA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "LA - SHREVEPORT",
+    "city": "SHREVEPORT",
+    "state": "LA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - ATTLEBORO",
+    "city": "ATTLEBORO",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - BARNSTABLE",
+    "city": "BARNSTABLE",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - BOSTON",
+    "city": "BOSTON",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - BROCKTON",
+    "city": "BROCKTON",
+    "state": "MA",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - FALL RIVER",
+    "city": "FALL RIVER",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - FITCHBURG",
+    "city": "FITCHBURG",
+    "state": "MA",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - FRAMINGHAM",
+    "city": "FRAMINGHAM",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - HAVERHILL",
+    "city": "HAVERHILL",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - LAWRENCE",
+    "city": "LAWRENCE",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - LEOMINSTER",
+    "city": "LEOMINSTER",
+    "state": "MA",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - LOWELL",
+    "city": "LOWELL",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - NEW BEDFORD",
+    "city": "NEW BEDFORD",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - NORTHAMPTON",
+    "city": "NORTHAMPTON",
+    "state": "MA",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - OTHER",
+    "city": "OTHER",
+    "state": "MA",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - PITTSFIELD",
+    "city": "PITTSFIELD",
+    "state": "MA",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - SPRINGFIELD",
+    "city": "SPRINGFIELD",
+    "state": "MA",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - WORCESTER",
+    "city": "WORCESTER",
+    "state": "MA",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MA - YARMOUTH",
+    "city": "YARMOUTH",
+    "state": "MA",
+    "multiplier": 1.17,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - ABERDEEN",
+    "city": "ABERDEEN",
+    "state": "MD",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - ANNAPOLIS",
+    "city": "ANNAPOLIS",
+    "state": "MD",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ME - AUGUSTA",
+    "city": "AUGUSTA",
+    "state": "ME",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - BALTIMORE",
+    "city": "BALTIMORE",
+    "state": "MD",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - CUMBERLAND",
+    "city": "CUMBERLAND",
+    "state": "MD",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - FREDERICK",
+    "city": "FREDERICK",
+    "state": "MD",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - HAGERSTOWN",
+    "city": "HAGERSTOWN",
+    "state": "MD",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - LEXINGTON PARK",
+    "city": "LEXINGTON PARK",
+    "state": "MD",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - OTHER",
+    "city": "OTHER",
+    "state": "MD",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - ROCKVILLE",
+    "city": "ROCKVILLE",
+    "state": "MD",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MD - SALISBURY",
+    "city": "SALISBURY",
+    "state": "MD",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ME - AUBURN",
+    "city": "AUBURN",
+    "state": "ME",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ME - BANGOR",
+    "city": "BANGOR",
+    "state": "ME",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ME - BIDDEFORD",
+    "city": "BIDDEFORD",
+    "state": "ME",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ME - FARMINGTON",
+    "city": "FARMINGTON",
+    "state": "ME",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ME - LEWISTON",
+    "city": "LEWISTON",
+    "state": "ME",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ME - OTHER",
+    "city": "OTHER",
+    "state": "ME",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ME - PORTLAND",
+    "city": "PORTLAND",
+    "state": "ME",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ME - SANFORD",
+    "city": "SANFORD",
+    "state": "ME",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - ANN ARBOR",
+    "city": "ANN ARBOR",
+    "state": "MI",
+    "multiplier": 1.03,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - BATTLE CREEK",
+    "city": "BATTLE CREEK",
+    "state": "MI",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - BAY CITY",
+    "city": "BAY CITY",
+    "state": "MI",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - BENTON HARBOR",
+    "city": "BENTON HARBOR",
+    "state": "MI",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - CHEBOYGAN",
+    "city": "CHEBOYGAN",
+    "state": "MI",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - DETROIT",
+    "city": "DETROIT",
+    "state": "MI",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - EAST LANSING",
+    "city": "EAST LANSING",
+    "state": "MI",
+    "multiplier": 0.96,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - FLINT",
+    "city": "FLINT",
+    "state": "MI",
+    "multiplier": 0.98,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - GRAND RAPIDS",
+    "city": "GRAND RAPIDS",
+    "state": "MI",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - HOLLAND",
+    "city": "HOLLAND",
+    "state": "MI",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - JACKSON",
+    "city": "JACKSON",
+    "state": "MI",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - KALAMAZOO",
+    "city": "KALAMAZOO",
+    "state": "MI",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - LANSING",
+    "city": "LANSING",
+    "state": "MI",
+    "multiplier": 0.96,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - MARQUETTE",
+    "city": "MARQUETTE",
+    "state": "MI",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - MIDLAND",
+    "city": "MIDLAND",
+    "state": "MI",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - MUSKEGON",
+    "city": "MUSKEGON",
+    "state": "MI",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - OTHER",
+    "city": "OTHER",
+    "state": "MI",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MI - SAGINAW",
+    "city": "SAGINAW",
+    "state": "MI",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - AUSTIN",
+    "city": "AUSTIN",
+    "state": "MN",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - DULUTH",
+    "city": "DULUTH",
+    "state": "MN",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - GRAND FORKS",
+    "city": "GRAND FORKS",
+    "state": "MN",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - GRAND RAPIDS",
+    "city": "GRAND RAPIDS",
+    "state": "MN",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - MANKATO",
+    "city": "MANKATO",
+    "state": "MN",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - MINNEAPOLIS",
+    "city": "MINNEAPOLIS",
+    "state": "MN",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - MOORHEAD",
+    "city": "MOORHEAD",
+    "state": "MN",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - OTHER",
+    "city": "OTHER",
+    "state": "MN",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - ROCHESTER",
+    "city": "ROCHESTER",
+    "state": "MN",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - SAINT CLOUD",
+    "city": "SAINT CLOUD",
+    "state": "MN",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MN - SAINT PAUL",
+    "city": "SAINT PAUL",
+    "state": "MN",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - COLUMBIA",
+    "city": "COLUMBIA",
+    "state": "MO",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - FARMINGTON",
+    "city": "FARMINGTON",
+    "state": "MO",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - JEFFERSON CITY",
+    "city": "JEFFERSON CITY",
+    "state": "MO",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - JOPLIN",
+    "city": "JOPLIN",
+    "state": "MO",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - KANSAS CITY",
+    "city": "KANSAS CITY",
+    "state": "MO",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - OTHER",
+    "city": "OTHER",
+    "state": "MO",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - POPLAR BLUFF",
+    "city": "POPLAR BLUFF",
+    "state": "MO",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - SAINT JOSEPH",
+    "city": "SAINT JOSEPH",
+    "state": "MO",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - SAINT LOUIS",
+    "city": "SAINT LOUIS",
+    "state": "MO",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MO - SPRINGFIELD",
+    "city": "SPRINGFIELD",
+    "state": "MO",
+    "multiplier": 0.9,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - BILOXI",
+    "city": "BILOXI",
+    "state": "MS",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - COLUMBUS",
+    "city": "COLUMBUS",
+    "state": "MS",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - GREENVILLE",
+    "city": "GREENVILLE",
+    "state": "MS",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - GULFPORT",
+    "city": "GULFPORT",
+    "state": "MS",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - HATTIESBURG",
+    "city": "HATTIESBURG",
+    "state": "MS",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - HELENA",
+    "city": "HELENA",
+    "state": "MS",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - JACKSON",
+    "city": "JACKSON",
+    "state": "MS",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - MERIDIAN",
+    "city": "MERIDIAN",
+    "state": "MS",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - OTHER",
+    "city": "OTHER",
+    "state": "MS",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - PASCAGOULA",
+    "city": "PASCAGOULA",
+    "state": "MS",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MS - VICKSBURG",
+    "city": "VICKSBURG",
+    "state": "MS",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - BILLINGS",
+    "city": "BILLINGS",
+    "state": "MT",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - BUTTE",
+    "city": "BUTTE",
+    "state": "MT",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - GLASGOW",
+    "city": "GLASGOW",
+    "state": "MT",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - GREAT FALLS",
+    "city": "GREAT FALLS",
+    "state": "MT",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - HARVE",
+    "city": "HARVE",
+    "state": "MT",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - HELENA",
+    "city": "HELENA",
+    "state": "MT",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - KALISPELL",
+    "city": "KALISPELL",
+    "state": "MT",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - MILES CITY",
+    "city": "MILES CITY",
+    "state": "MT",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - MISSOULA",
+    "city": "MISSOULA",
+    "state": "MT",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "MT - OTHER",
+    "city": "OTHER",
+    "state": "MT",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - ASHEVILLE",
+    "city": "ASHEVILLE",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - CHAPEL HILL",
+    "city": "CHAPEL HILL",
+    "state": "NC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - CHARLOTTE",
+    "city": "CHARLOTTE",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - DURHAM",
+    "city": "DURHAM",
+    "state": "NC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - FAYETTEVILLE",
+    "city": "FAYETTEVILLE",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - GASTONIA",
+    "city": "GASTONIA",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - GOLDSBORO",
+    "city": "GOLDSBORO",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - GREENSBORO",
+    "city": "GREENSBORO",
+    "state": "NC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - GREENVILLE",
+    "city": "GREENVILLE",
+    "state": "NC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - HICKORY",
+    "city": "HICKORY",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - HIGH POINT",
+    "city": "HIGH POINT",
+    "state": "NC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - JACKSONVILLE",
+    "city": "JACKSONVILLE",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - KANNAPOLIS",
+    "city": "KANNAPOLIS",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - LENOIR",
+    "city": "LENOIR",
+    "state": "NC",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - MORGANTON",
+    "city": "MORGANTON",
+    "state": "NC",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - OTHER",
+    "city": "OTHER",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - RALEIGH",
+    "city": "RALEIGH",
+    "state": "NC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - ROCKY MOUNT",
+    "city": "ROCKY MOUNT",
+    "state": "NC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - WILMINGTON",
+    "city": "WILMINGTON",
+    "state": "NC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NC - WINSTON-SALEM",
+    "city": "WINSTON-SALEM",
+    "state": "NC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ND - BISMARCK",
+    "city": "BISMARCK",
+    "state": "ND",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ND - DICKINSON",
+    "city": "DICKINSON",
+    "state": "ND",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ND - FARGO",
+    "city": "FARGO",
+    "state": "ND",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ND - GRAND FORKS",
+    "city": "GRAND FORKS",
+    "state": "ND",
+    "multiplier": 0.9,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ND - JAMESTOWN",
+    "city": "JAMESTOWN",
+    "state": "ND",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ND - MINOT",
+    "city": "MINOT",
+    "state": "ND",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ND - OTHER",
+    "city": "OTHER",
+    "state": "ND",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "ND - WILLISTON",
+    "city": "WILLISTON",
+    "state": "ND",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - BEATRICE",
+    "city": "BEATRICE",
+    "state": "NE",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - CHADRON",
+    "city": "CHADRON",
+    "state": "NE",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - COLUMBUS",
+    "city": "COLUMBUS",
+    "state": "NE",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - GRAND ISLAND",
+    "city": "GRAND ISLAND",
+    "state": "NE",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - LINCOLN",
+    "city": "LINCOLN",
+    "state": "NE",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - NORFOLK",
+    "city": "NORFOLK",
+    "state": "NE",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - NORTH PLATTE",
+    "city": "NORTH PLATTE",
+    "state": "NE",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - OMAHA",
+    "city": "OMAHA",
+    "state": "NE",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - OTHER",
+    "city": "OTHER",
+    "state": "NE",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - SCOTTSBLUFF",
+    "city": "SCOTTSBLUFF",
+    "state": "NE",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NE - VALENTINE",
+    "city": "VALENTINE",
+    "state": "NE",
+    "multiplier": 0.91,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - BERLIN",
+    "city": "BERLIN",
+    "state": "NH",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - CLAREMONT",
+    "city": "CLAREMONT",
+    "state": "NH",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - CONCORD",
+    "city": "CONCORD",
+    "state": "NH",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - KEENE",
+    "city": "KEENE",
+    "state": "NH",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - LACONIA",
+    "city": "LACONIA",
+    "state": "NH",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - MANCHESTER",
+    "city": "MANCHESTER",
+    "state": "NH",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - NASHUA",
+    "city": "NASHUA",
+    "state": "NH",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - OTHER",
+    "city": "OTHER",
+    "state": "NH",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - PORTSMOUTH",
+    "city": "PORTSMOUTH",
+    "state": "NH",
+    "multiplier": 0.9,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NH - ROCHESTER",
+    "city": "ROCHESTER",
+    "state": "NH",
+    "multiplier": 0.89,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - ATLANTIC",
+    "city": "ATLANTIC",
+    "state": "NJ",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - BERGEN",
+    "city": "BERGEN",
+    "state": "NJ",
+    "multiplier": 1.24,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - BRIDGETON",
+    "city": "BRIDGETON",
+    "state": "NJ",
+    "multiplier": 1.19,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - CAMDEN",
+    "city": "CAMDEN",
+    "state": "NJ",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - CAPE MAY",
+    "city": "CAPE MAY",
+    "state": "NJ",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - FLANDERS",
+    "city": "FLANDERS",
+    "state": "NJ",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - HAMMONTON",
+    "city": "HAMMONTON",
+    "state": "NJ",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - HUNTERDON",
+    "city": "HUNTERDON",
+    "state": "NJ",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - JERSEY CITY",
+    "city": "JERSEY CITY",
+    "state": "NJ",
+    "multiplier": 1.23,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - LAKEWOOD",
+    "city": "LAKEWOOD",
+    "state": "NJ",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - MIDDLESEX",
+    "city": "MIDDLESEX",
+    "state": "NJ",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - MILLVILLE",
+    "city": "MILLVILLE",
+    "state": "NJ",
+    "multiplier": 1.19,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - MONMOUTH",
+    "city": "MONMOUTH",
+    "state": "NJ",
+    "multiplier": 1.19,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - NEW BRUNSWICK",
+    "city": "NEW BRUNSWICK",
+    "state": "NJ",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - NEWARK",
+    "city": "NEWARK",
+    "state": "NJ",
+    "multiplier": 1.22,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - OCEAN",
+    "city": "OCEAN",
+    "state": "NJ",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - OTHER",
+    "city": "OTHER",
+    "state": "NJ",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - PASSAIC",
+    "city": "PASSAIC",
+    "state": "NJ",
+    "multiplier": 1.23,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - PATERSON",
+    "city": "PATERSON",
+    "state": "NJ",
+    "multiplier": 1.23,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - SOMERSET",
+    "city": "SOMERSET",
+    "state": "NJ",
+    "multiplier": 1.22,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - TRENTON",
+    "city": "TRENTON",
+    "state": "NJ",
+    "multiplier": 1.2,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - VINELAND",
+    "city": "VINELAND",
+    "state": "NJ",
+    "multiplier": 1.19,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - WASHINGTON",
+    "city": "WASHINGTON",
+    "state": "NJ",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NJ - WILLINGBORO",
+    "city": "WILLINGBORO",
+    "state": "NJ",
+    "multiplier": 1.21,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NM - ALAMOGORDO",
+    "city": "ALAMOGORDO",
+    "state": "NM",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NM - ALBUQUERQUE",
+    "city": "ALBUQUERQUE",
+    "state": "NM",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NM - CARLSBAD",
+    "city": "CARLSBAD",
+    "state": "NM",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NM - FARMINGTON",
+    "city": "FARMINGTON",
+    "state": "NM",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NM - GALLUP",
+    "city": "GALLUP",
+    "state": "NM",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NM - LAS CRUCES",
+    "city": "LAS CRUCES",
+    "state": "NM",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NM - LAS VEGAS",
+    "city": "LAS VEGAS",
+    "state": "NM",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NM - OTHER",
+    "city": "OTHER",
+    "state": "NM",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NM - SANTA FE",
+    "city": "SANTA FE",
+    "state": "NM",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NV - CARSON CITY",
+    "city": "CARSON CITY",
+    "state": "NV",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NV - ELY",
+    "city": "ELY",
+    "state": "NV",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NV - HAWTHORNE",
+    "city": "HAWTHORNE",
+    "state": "NV",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NV - HENDERSON",
+    "city": "HENDERSON",
+    "state": "NV",
+    "multiplier": 1.15,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NV - LAS VEGAS",
+    "city": "LAS VEGAS",
+    "state": "NV",
+    "multiplier": 1.15,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NV - OTHER",
+    "city": "OTHER",
+    "state": "NV",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NV - RENO",
+    "city": "RENO",
+    "state": "NV",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NV - SPARKS",
+    "city": "SPARKS",
+    "state": "NV",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NV - WINNEMUCCA",
+    "city": "WINNEMUCCA",
+    "state": "NV",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - ALBANY",
+    "city": "ALBANY",
+    "state": "NY",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - AMSTERDAM",
+    "city": "AMSTERDAM",
+    "state": "NY",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - BINGHAMTON",
+    "city": "BINGHAMTON",
+    "state": "NY",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - BUFFALO",
+    "city": "BUFFALO",
+    "state": "NY",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - DUTCHESS COUNTY",
+    "city": "DUTCHESS COUNTY",
+    "state": "NY",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - ELMIRA",
+    "city": "ELMIRA",
+    "state": "NY",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - GLENS FALLS",
+    "city": "GLENS FALLS",
+    "state": "NY",
+    "multiplier": 1.08,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - ITHACA",
+    "city": "ITHACA",
+    "state": "NY",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - JAMESTOWN",
+    "city": "JAMESTOWN",
+    "state": "NY",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - KINGSTON",
+    "city": "KINGSTON",
+    "state": "NY",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - LOCKPORT",
+    "city": "LOCKPORT",
+    "state": "NY",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - LONG ISLAND",
+    "city": "LONG ISLAND",
+    "state": "NY",
+    "multiplier": 1.27,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - MALONE",
+    "city": "MALONE",
+    "state": "NY",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - NASSAU",
+    "city": "NASSAU",
+    "state": "NY",
+    "multiplier": 1.27,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - NEW YORK CITY",
+    "city": "NEW YORK CITY",
+    "state": "NY",
+    "multiplier": 1.38,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - NEWBURGH",
+    "city": "NEWBURGH",
+    "state": "NY",
+    "multiplier": 1.18,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - NIAGARA FALLS",
+    "city": "NIAGARA FALLS",
+    "state": "NY",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - OTHER",
+    "city": "OTHER",
+    "state": "NY",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - ROCHESTER",
+    "city": "ROCHESTER",
+    "state": "NY",
+    "multiplier": 1.04,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - ROME",
+    "city": "ROME",
+    "state": "NY",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - SCHENECTADY",
+    "city": "SCHENECTADY",
+    "state": "NY",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - SUFFOLK",
+    "city": "SUFFOLK",
+    "state": "NY",
+    "multiplier": 1.27,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - SYRACUSE",
+    "city": "SYRACUSE",
+    "state": "NY",
+    "multiplier": 0.96,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - TROY",
+    "city": "TROY",
+    "state": "NY",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - UTICA",
+    "city": "UTICA",
+    "state": "NY",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - WATERTOWN",
+    "city": "WATERTOWN",
+    "state": "NY",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "NY - WHITE PLAINS",
+    "city": "WHITE PLAINS",
+    "state": "NY",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - AKRON",
+    "city": "AKRON",
+    "state": "OH",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - CANTON",
+    "city": "CANTON",
+    "state": "OH",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - CINCINNATI",
+    "city": "CINCINNATI",
+    "state": "OH",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - CLEVELAND",
+    "city": "CLEVELAND",
+    "state": "OH",
+    "multiplier": 0.99,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - COLUMBUS",
+    "city": "COLUMBUS",
+    "state": "OH",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - DAYTON",
+    "city": "DAYTON",
+    "state": "OH",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - ELYRIA",
+    "city": "ELYRIA",
+    "state": "OH",
+    "multiplier": 0.99,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - FINDLAY",
+    "city": "FINDLAY",
+    "state": "OH",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - HAMILTON",
+    "city": "HAMILTON",
+    "state": "OH",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - LIMA",
+    "city": "LIMA",
+    "state": "OH",
+    "multiplier": 0.93,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - LORAIN",
+    "city": "LORAIN",
+    "state": "OH",
+    "multiplier": 0.99,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - MANSFIELD",
+    "city": "MANSFIELD",
+    "state": "OH",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - MARION",
+    "city": "MARION",
+    "state": "OH",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - MASSILLON",
+    "city": "MASSILLON",
+    "state": "OH",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - MIDDLETOWN",
+    "city": "MIDDLETOWN",
+    "state": "OH",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - OTHER",
+    "city": "OTHER",
+    "state": "OH",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - PORTSMOUTH",
+    "city": "PORTSMOUTH",
+    "state": "OH",
+    "multiplier": 0.95,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - SPRINGFIELD",
+    "city": "SPRINGFIELD",
+    "state": "OH",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - STEUBENVILLE",
+    "city": "STEUBENVILLE",
+    "state": "OH",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - TOLEDO",
+    "city": "TOLEDO",
+    "state": "OH",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - WARREN",
+    "city": "WARREN",
+    "state": "OH",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OH - YOUNGSTOWN",
+    "city": "YOUNGSTOWN",
+    "state": "OH",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OK - BARTLESVILLE",
+    "city": "BARTLESVILLE",
+    "state": "OK",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OK - ENID",
+    "city": "ENID",
+    "state": "OK",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OK - LAWTON",
+    "city": "LAWTON",
+    "state": "OK",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OK - MUSKOGEE",
+    "city": "MUSKOGEE",
+    "state": "OK",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OK - NORMAN",
+    "city": "NORMAN",
+    "state": "OK",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OK - OKLAHOMA CITY",
+    "city": "OKLAHOMA CITY",
+    "state": "OK",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OK - OTHER",
+    "city": "OTHER",
+    "state": "OK",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OK - PONCA CITY",
+    "city": "PONCA CITY",
+    "state": "OK",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OK - TULSA",
+    "city": "TULSA",
+    "state": "OK",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - ASHLAND",
+    "city": "ASHLAND",
+    "state": "OR",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - BEND",
+    "city": "BEND",
+    "state": "OR",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - CORVALLIS",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - EUGENE",
+    "city": "EUGENE",
+    "state": "OR",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - MEDFORD",
+    "city": "MEDFORD",
+    "state": "OR",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - OTHER",
+    "city": "OTHER",
+    "state": "OR",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - PENDLETON",
+    "city": "PENDLETON",
+    "state": "OR",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - PORTLAND",
+    "city": "PORTLAND",
+    "state": "OR",
+    "multiplier": 1.08,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - SALEM",
+    "city": "SALEM",
+    "state": "OR",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - SPRINGFIELD",
+    "city": "SPRINGFIELD",
+    "state": "OR",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "OR - THE DALLES",
+    "city": "THE DALLES",
+    "state": "OR",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - ALLENTOWN",
+    "city": "ALLENTOWN",
+    "state": "PA",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - ALTOONA",
+    "city": "ALTOONA",
+    "state": "PA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - BETHLEHEM",
+    "city": "BETHLEHEM",
+    "state": "PA",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - CARLISLE",
+    "city": "CARLISLE",
+    "state": "PA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - EASTON",
+    "city": "EASTON",
+    "state": "PA",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - ERIE",
+    "city": "ERIE",
+    "state": "PA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - HARRISBURG",
+    "city": "HARRISBURG",
+    "state": "PA",
+    "multiplier": 0.98,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - HAZLETON",
+    "city": "HAZLETON",
+    "state": "PA",
+    "multiplier": 0.99,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - JOHNSTOWN",
+    "city": "JOHNSTOWN",
+    "state": "PA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - LANCASTER",
+    "city": "LANCASTER",
+    "state": "PA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - LEBANON",
+    "city": "LEBANON",
+    "state": "PA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - NEW CASTLE",
+    "city": "NEW CASTLE",
+    "state": "PA",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - OTHER",
+    "city": "OTHER",
+    "state": "PA",
+    "multiplier": 1.0,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - PHILADELPHIA",
+    "city": "PHILADELPHIA",
+    "state": "PA",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - PITTSBURGH",
+    "city": "PITTSBURGH",
+    "state": "PA",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - READING",
+    "city": "READING",
+    "state": "PA",
+    "multiplier": 1.02,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - SCRANTON",
+    "city": "SCRANTON",
+    "state": "PA",
+    "multiplier": 0.99,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - SHARON",
+    "city": "SHARON",
+    "state": "PA",
+    "multiplier": 0.99,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - STATE COLLEGE",
+    "city": "STATE COLLEGE",
+    "state": "PA",
+    "multiplier": 0.98,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - WILKES-BARRE",
+    "city": "WILKES-BARRE",
+    "state": "PA",
+    "multiplier": 0.99,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - WILLIAMSPORT",
+    "city": "WILLIAMSPORT",
+    "state": "PA",
+    "multiplier": 0.99,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PA - YORK",
+    "city": "YORK",
+    "state": "PA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PR - MAYAGUEZ",
+    "city": "MAYAGUEZ",
+    "state": "PR",
+    "multiplier": 0.73,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PR - OTHER",
+    "city": "OTHER",
+    "state": "PR",
+    "multiplier": 0.73,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PR - PONCE",
+    "city": "PONCE",
+    "state": "PR",
+    "multiplier": 0.73,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "PR - SAN JUAN",
+    "city": "SAN JUAN",
+    "state": "PR",
+    "multiplier": 0.73,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "RI - NEWPORT",
+    "city": "NEWPORT",
+    "state": "RI",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "RI - OTHER",
+    "city": "OTHER",
+    "state": "RI",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "RI - PAWTUCKET",
+    "city": "PAWTUCKET",
+    "state": "RI",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "RI - PROVIDENCE",
+    "city": "PROVIDENCE",
+    "state": "RI",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "RI - WARWICK",
+    "city": "WARWICK",
+    "state": "RI",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "RI - WESTERLY",
+    "city": "WESTERLY",
+    "state": "RI",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "RI - WOONSOCKET",
+    "city": "WOONSOCKET",
+    "state": "RI",
+    "multiplier": 1.07,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - AIKEN",
+    "city": "AIKEN",
+    "state": "SC",
+    "multiplier": 0.9,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - ANDERSON",
+    "city": "ANDERSON",
+    "state": "SC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - CHARLESTON",
+    "city": "CHARLESTON",
+    "state": "SC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - COLUMBIA",
+    "city": "COLUMBIA",
+    "state": "SC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - FLORENCE",
+    "city": "FLORENCE",
+    "state": "SC",
+    "multiplier": 0.8,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - GREENVILLE",
+    "city": "GREENVILLE",
+    "state": "SC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - MYRTLE BEACH",
+    "city": "MYRTLE BEACH",
+    "state": "SC",
+    "multiplier": 0.77,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - NORTH CHARLESTON",
+    "city": "NORTH CHARLESTON",
+    "state": "SC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - OTHER",
+    "city": "OTHER",
+    "state": "SC",
+    "multiplier": 0.81,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - ROCK HILL",
+    "city": "ROCK HILL",
+    "state": "SC",
+    "multiplier": 0.81,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - SPARTANBURG",
+    "city": "SPARTANBURG",
+    "state": "SC",
+    "multiplier": 0.79,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SC - SUMTER",
+    "city": "SUMTER",
+    "state": "SC",
+    "multiplier": 0.78,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SD - ABERDEEN",
+    "city": "ABERDEEN",
+    "state": "SD",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SD - BROOKINGS",
+    "city": "BROOKINGS",
+    "state": "SD",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SD - MITCHELL",
+    "city": "MITCHELL",
+    "state": "SD",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SD - OTHER",
+    "city": "OTHER",
+    "state": "SD",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SD - PIERRE",
+    "city": "PIERRE",
+    "state": "SD",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SD - RAPID CITY",
+    "city": "RAPID CITY",
+    "state": "SD",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SD - SIOUX FALLS",
+    "city": "SIOUX FALLS",
+    "state": "SD",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "SD - WATERTOWN",
+    "city": "WATERTOWN",
+    "state": "SD",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TN - CHATTANOOGA",
+    "city": "CHATTANOOGA",
+    "state": "TN",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TN - CLARKSVILLE",
+    "city": "CLARKSVILLE",
+    "state": "TN",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TN - JACKSON",
+    "city": "JACKSON",
+    "state": "TN",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TN - JOHNSON CITY",
+    "city": "JOHNSON CITY",
+    "state": "TN",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TN - KNOXVILLE",
+    "city": "KNOXVILLE",
+    "state": "TN",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TN - MEMPHIS",
+    "city": "MEMPHIS",
+    "state": "TN",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TN - NASHVILLE",
+    "city": "NASHVILLE",
+    "state": "TN",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TN - OTHER",
+    "city": "OTHER",
+    "state": "TN",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - ABILENE",
+    "city": "ABILENE",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - AMARILLO",
+    "city": "AMARILLO",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - ARLINGTON",
+    "city": "ARLINGTON",
+    "state": "TX",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - AUSTIN",
+    "city": "AUSTIN",
+    "state": "TX",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - BEAUMONT",
+    "city": "BEAUMONT",
+    "state": "TX",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - BRAZORIA",
+    "city": "BRAZORIA",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - BROWNSVILLE",
+    "city": "BROWNSVILLE",
+    "state": "TX",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - BRYAN",
+    "city": "BRYAN",
+    "state": "TX",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - COLLEGE STATION",
+    "city": "COLLEGE STATION",
+    "state": "TX",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - CORPUS CHRISTI",
+    "city": "CORPUS CHRISTI",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - DALLAS",
+    "city": "DALLAS",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - DENISON",
+    "city": "DENISON",
+    "state": "TX",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - EDINBURG",
+    "city": "EDINBURG",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - EL PASO",
+    "city": "EL PASO",
+    "state": "TX",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - FORT WORTH",
+    "city": "FORT WORTH",
+    "state": "TX",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - GALVESTON",
+    "city": "GALVESTON",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - HARLINGEN",
+    "city": "HARLINGEN",
+    "state": "TX",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - HOUSTON",
+    "city": "HOUSTON",
+    "state": "TX",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - KILLEEN",
+    "city": "KILLEEN",
+    "state": "TX",
+    "multiplier": 0.81,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - LAREDO",
+    "city": "LAREDO",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - LONGVIEW",
+    "city": "LONGVIEW",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - LUBBOCK",
+    "city": "LUBBOCK",
+    "state": "TX",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - MARSHALL",
+    "city": "MARSHALL",
+    "state": "TX",
+    "multiplier": 0.81,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - MCALLEN",
+    "city": "MCALLEN",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - MIDLAND",
+    "city": "MIDLAND",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - MISSION",
+    "city": "MISSION",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - ODESSA",
+    "city": "ODESSA",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - OTHER",
+    "city": "OTHER",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - PORT ARTHUR",
+    "city": "PORT ARTHUR",
+    "state": "TX",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - SAN ANGELO",
+    "city": "SAN ANGELO",
+    "state": "TX",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - SAN ANTONIO",
+    "city": "SAN ANTONIO",
+    "state": "TX",
+    "multiplier": 0.88,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - SAN BENITO",
+    "city": "SAN BENITO",
+    "state": "TX",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - SAN MARCOS",
+    "city": "SAN MARCOS",
+    "state": "TX",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - SHERMAN",
+    "city": "SHERMAN",
+    "state": "TX",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - TEMPLE",
+    "city": "TEMPLE",
+    "state": "TX",
+    "multiplier": 0.81,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - TEXARKANA",
+    "city": "TEXARKANA",
+    "state": "TX",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - TEXAS CITY",
+    "city": "TEXAS CITY",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - TYLER",
+    "city": "TYLER",
+    "state": "TX",
+    "multiplier": 0.82,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - VICTORIA",
+    "city": "VICTORIA",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - WACO",
+    "city": "WACO",
+    "state": "TX",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "TX - WICHITA FALLS",
+    "city": "WICHITA FALLS",
+    "state": "TX",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "UT - LOGAN",
+    "city": "LOGAN",
+    "state": "UT",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "UT - OGDEN",
+    "city": "OGDEN",
+    "state": "UT",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "UT - OREM",
+    "city": "OREM",
+    "state": "UT",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "UT - OTHER",
+    "city": "OTHER",
+    "state": "UT",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "UT - PROVO",
+    "city": "PROVO",
+    "state": "UT",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "UT - SALT LAKE CITY",
+    "city": "SALT LAKE CITY",
+    "state": "UT",
+    "multiplier": 0.87,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - Alexandria",
+    "city": "Alexandria",
+    "state": "VA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - Arlington",
+    "city": "Arlington",
+    "state": "VA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - CHARLOTTESVILLE",
+    "city": "CHARLOTTESVILLE",
+    "state": "VA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - LYNCHBURG",
+    "city": "LYNCHBURG",
+    "state": "VA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - NEWPORT NEWS",
+    "city": "NEWPORT NEWS",
+    "state": "VA",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - NORFOLK",
+    "city": "NORFOLK",
+    "state": "VA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - Other",
+    "city": "Other",
+    "state": "VA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - PETERSBURG",
+    "city": "PETERSBURG",
+    "state": "VA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - RICHMOND",
+    "city": "RICHMOND",
+    "state": "VA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - ROANOKE",
+    "city": "ROANOKE",
+    "state": "VA",
+    "multiplier": 0.84,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VA - VIRGINIA BEACH",
+    "city": "VIRGINIA BEACH",
+    "state": "VA",
+    "multiplier": 0.85,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VT - Barre",
+    "city": "Barre",
+    "state": "VT",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VT - Brattleboro",
+    "city": "Brattleboro",
+    "state": "VT",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VT - BURLINGTON",
+    "city": "BURLINGTON",
+    "state": "VT",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VT - Newport",
+    "city": "Newport",
+    "state": "VT",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VT - Other",
+    "city": "Other",
+    "state": "VT",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VT - Rutland",
+    "city": "Rutland",
+    "state": "VT",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VT - Springfield",
+    "city": "Springfield",
+    "state": "VT",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VT - St. Albans",
+    "city": "St. Albans",
+    "state": "VT",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "VT - St. Johnsbury",
+    "city": "St. Johnsbury",
+    "state": "VT",
+    "multiplier": 0.83,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - BELLEVUE",
+    "city": "BELLEVUE",
+    "state": "WA",
+    "multiplier": 1.15,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - BELLINGHAM",
+    "city": "BELLINGHAM",
+    "state": "WA",
+    "multiplier": 1.09,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - BREMERTON",
+    "city": "BREMERTON",
+    "state": "WA",
+    "multiplier": 1.11,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - EVERETT",
+    "city": "EVERETT",
+    "state": "WA",
+    "multiplier": 1.13,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - KENNEWICK",
+    "city": "KENNEWICK",
+    "state": "WA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - OLYMPIA",
+    "city": "OLYMPIA",
+    "state": "WA",
+    "multiplier": 1.12,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - Other",
+    "city": "Other",
+    "state": "WA",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - PASCO",
+    "city": "PASCO",
+    "state": "WA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - RICHLAND",
+    "city": "RICHLAND",
+    "state": "WA",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - SEATTLE",
+    "city": "SEATTLE",
+    "state": "WA",
+    "multiplier": 1.15,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - SPOKANE",
+    "city": "SPOKANE",
+    "state": "WA",
+    "multiplier": 0.92,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - TACOMA",
+    "city": "TACOMA",
+    "state": "WA",
+    "multiplier": 1.14,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - Vancouver",
+    "city": "Vancouver",
+    "state": "WA",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WA - YAKIMA",
+    "city": "YAKIMA",
+    "state": "WA",
+    "multiplier": 0.98,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - APPLETON",
+    "city": "APPLETON",
+    "state": "WI",
+    "multiplier": 1.03,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - BELOIT",
+    "city": "BELOIT",
+    "state": "WI",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - EAU CLAIRE",
+    "city": "EAU CLAIRE",
+    "state": "WI",
+    "multiplier": 1.03,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - Fond du Lac",
+    "city": "Fond du Lac",
+    "state": "WI",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - GREEN BAY",
+    "city": "GREEN BAY",
+    "state": "WI",
+    "multiplier": 1.03,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - JANESVILLE",
+    "city": "JANESVILLE",
+    "state": "WI",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - KENOSHA",
+    "city": "KENOSHA",
+    "state": "WI",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - LA CROSSE",
+    "city": "LA CROSSE",
+    "state": "WI",
+    "multiplier": 1.03,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - MADISON",
+    "city": "MADISON",
+    "state": "WI",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - MILWAUKEE",
+    "city": "MILWAUKEE",
+    "state": "WI",
+    "multiplier": 1.08,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - NEENAH",
+    "city": "NEENAH",
+    "state": "WI",
+    "multiplier": 1.03,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - OSHKOSH",
+    "city": "OSHKOSH",
+    "state": "WI",
+    "multiplier": 1.03,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - Other",
+    "city": "Other",
+    "state": "WI",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - RACINE",
+    "city": "RACINE",
+    "state": "WI",
+    "multiplier": 1.06,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - SHEBOYGAN",
+    "city": "SHEBOYGAN",
+    "state": "WI",
+    "multiplier": 1.03,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - Superior",
+    "city": "Superior",
+    "state": "WI",
+    "multiplier": 1.05,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - WAUKESHA",
+    "city": "WAUKESHA",
+    "state": "WI",
+    "multiplier": 1.08,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WI - WAUSAU",
+    "city": "WAUSAU",
+    "state": "WI",
+    "multiplier": 1.03,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WV - Beckley",
+    "city": "Beckley",
+    "state": "WV",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WV - CHARLESTON",
+    "city": "CHARLESTON",
+    "state": "WV",
+    "multiplier": 0.98,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WV - Clarksburg",
+    "city": "Clarksburg",
+    "state": "WV",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WV - HUNTINGTON",
+    "city": "HUNTINGTON",
+    "state": "WV",
+    "multiplier": 0.99,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WV - Morgantown",
+    "city": "Morgantown",
+    "state": "WV",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WV - Other",
+    "city": "Other",
+    "state": "WV",
+    "multiplier": 0.97,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WV - PARKERSBURG",
+    "city": "PARKERSBURG",
+    "state": "WV",
+    "multiplier": 0.98,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WV - WHEELING",
+    "city": "WHEELING",
+    "state": "WV",
+    "multiplier": 0.94,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WY - CASPER",
+    "city": "CASPER",
+    "state": "WY",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WY - CHEYENNE",
+    "city": "CHEYENNE",
+    "state": "WY",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WY - Laramie",
+    "city": "Laramie",
+    "state": "WY",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WY - Other",
+    "city": "Other",
+    "state": "WY",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WY - Rock Springs",
+    "city": "Rock Springs",
+    "state": "WY",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  },
+  {
+    "region_code": "WY - Sheridan",
+    "city": "Sheridan",
+    "state": "WY",
+    "multiplier": 0.86,
+    "sheet_name": "LOCATIONS",
+    "source_type": "bni_locations",
+    "version": "2025"
+  }
+]
