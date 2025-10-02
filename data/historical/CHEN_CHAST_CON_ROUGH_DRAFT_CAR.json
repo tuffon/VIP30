@@ -1,15 +1,29 @@
 {
   "case_metadata": {
-    "claim_number": "Policy",
-    "policy_number": "Type",
-    "insured_name": "Kenneth Chen",
-    "property_address": "1618 Chastain Pkwy",
-    "loss_type": "Coverage Deductible Policy Limit",
+    "claim_number": null,
+    "policy_number": null,
+    "loss_type": null,
+    "coverage": [
+      {
+        "coverage_type": "Contents",
+        "deductible": 0.0,
+        "policy_limit": 0.0
+      }
+    ],
+    "property_address": "1618 Chastain Pkwy Pacific Palisades, CA 90272",
+    "date_of_loss": "2025-01-08T00:00:00",
+    "date_received": null,
+    "date_inspected": null,
+    "date_entered": "2025-04-12T17:14:00",
     "price_list": "CALA8X_APR25",
-    "date_of_loss": "1/8/2025 12:00 AM Date Received:",
-    "date_inspected": "Date Entered: 4/12/2025 5:14 PM",
-    "date_entered": "4/12/2025 5:14 PM",
-    "region": "California"
+    "depreciate_material": true,
+    "depreciate_op": false,
+    "depreciate_non_material": true,
+    "depreciate_taxes": true,
+    "estimate_name": "CHEN_CHAST_CON",
+    "depreciate_removal": false,
+    "region": "California",
+    "building_type": null
   },
   "sections": [
     {
@@ -743,7 +757,7 @@
       "section_totals": {
         "tax": 11.88,
         "total": 175.77,
-        "validation_delta": 0.0
+        "validation_delta": -0.0
       }
     },
     {
@@ -815,7 +829,7 @@
       "section_totals": {
         "tax": 17.38,
         "total": 257.09,
-        "validation_delta": 0.0
+        "validation_delta": -0.0
       }
     },
     {
@@ -1866,7 +1880,7 @@
       "section_totals": {
         "tax": 7.67,
         "total": 113.44,
-        "validation_delta": 0.0
+        "validation_delta": -0.0
       }
     },
     {
@@ -2111,7 +2125,7 @@
       "section_totals": {
         "tax": 19.13,
         "total": 283.03,
-        "validation_delta": -0.0
+        "validation_delta": 0.0
       }
     },
     {
@@ -2423,7 +2437,7 @@
       "section_totals": {
         "tax": 8.72,
         "total": 128.95,
-        "validation_delta": 0.0
+        "validation_delta": -0.0
       }
     }
   ]

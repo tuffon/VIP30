@@ -9,6 +9,7 @@ import json
 import re
 import pdfplumber
 from enum import Enum
+from datetime import datetime
 
 
 class ParseState(Enum):
@@ -17,6 +18,23 @@ class ParseState(Enum):
     IN_SUBROOM_METADATA = 3
     IN_LINE_ITEMS = 4
 
+def parse_datetime_string(date_str: str) -> str:
+    """Parse date string to ISO format."""
+    if not date_str:
+        return None
+    
+    try:
+        # Try parsing "M/D/YYYY H:MM AM/PM" format
+        dt = datetime.strptime(date_str, '%m/%d/%Y %I:%M %p')
+        return dt.isoformat()
+    except ValueError:
+        try:
+            # Try parsing "M/D/YYYY" format (no time)
+            dt = datetime.strptime(date_str, '%m/%d/%Y')
+            return dt.isoformat()
+        except ValueError:
+            # Return original string if parsing fails
+            return date_str
 
 def detect_page_header_pattern(pdf_path: str) -> list:
     """Detect repeating header lines from the first two pages."""
@@ -352,27 +370,139 @@ def parse_document(pdf_path: str) -> tuple:
 def parse_case_metadata(lines: list) -> dict:
     """Extract case metadata from the first ~30 lines."""
     metadata = {}
-    first_lines = '\n'.join(lines[:30])
+    text = '\n'.join(lines[:30])
     
-    patterns = {
-        'claim_number': r'Claim\s+Number:\s*([^\s]+)',
-        'policy_number': r'Policy\s+Number:\s*([^\s]+)',
-        'insured_name': r'Insured:\s*([^\n]+)',
-        'property_address': r'Property:\s*([^\n]+)',
-        'loss_type': r'Type\s+of\s+Loss:\s*([^\n]+)',
-        'price_list': r'Price\s+List:\s*([^\s]+)',
-        'date_of_loss': r'Date\s+of\s+Loss:\s*([^\n]+)',
-        'date_inspected': r'Date\s+Inspected:\s*([^\n]+)',
-        'date_entered': r'Date\s+Entered:\s*([^\n]+)'
-    }
+    # Line 1: Claim Number: Policy Number: Type of Loss: <value>
+    # Loss type must be on the same line, capture everything up to newline
+    line1_match = re.search(
+        r'Claim\s+Number:\s*(\S*)\s+Policy\s+Number:\s*(\S*)\s+Type\s+of\s+Loss:\s*([^\n]*)',
+        text,
+        re.IGNORECASE
+    )
+    if line1_match:
+        claim = line1_match.group(1).strip()
+        policy = line1_match.group(2).strip()
+        loss_type = line1_match.group(3).strip()
+        
+        metadata['claim_number'] = claim if claim else None
+        metadata['policy_number'] = policy if policy else None
+        # If loss_type is empty or starts with "Coverage", set to None
+        metadata['loss_type'] = loss_type if (loss_type and not loss_type.startswith('Coverage')) else None
+    else:
+        metadata['claim_number'] = None
+        metadata['policy_number'] = None
+        metadata['loss_type'] = None
     
-    for key, pattern in patterns.items():
-        match = re.search(pattern, first_lines, re.IGNORECASE)
-        if match:
-            metadata[key] = match.group(1).strip()
+    # Coverage table parsing
+    # Table format: Coverage Deductible Policy Limit
+    #               <type>    $X.XX      $Y.YY
+    coverage_table = []
+    coverage_section = re.search(
+        r'Coverage\s+Deductible\s+Policy\s+Limit\s*\n((?:.*?\$[\d,]+\.[\d]{2}.*?\n?)+)',
+        text,
+        re.IGNORECASE
+    )
+    if coverage_section:
+        table_rows = coverage_section.group(1).strip().split('\n')
+        for row in table_rows:
+            # Match: <coverage_type> $deductible $policy_limit
+            row_match = re.match(r'^\s*([A-Za-z\s]+?)\s+\$?([\d,]+\.[\d]{2})\s+\$?([\d,]+\.[\d]{2})', row)
+            if row_match:
+                coverage_table.append({
+                    'coverage_type': row_match.group(1).strip(),
+                    'deductible': float(row_match.group(2).replace(',', '')),
+                    'policy_limit': float(row_match.group(3).replace(',', ''))
+                })
     
-    if metadata.get('price_list', '').upper().startswith('CALA'):
+    metadata['coverage'] = coverage_table if coverage_table else None
+    
+    # Property address (multi-line)
+    property_match = re.search(r'Property:\s*(.+?)(?=\n[A-Za-z\s]+:|\Z)', text, re.DOTALL)
+    if property_match:
+        address_text = property_match.group(1).strip()
+        metadata['property_address'] = ' '.join(address_text.split()) if address_text else None
+    else:
+        metadata['property_address'] = None
+    
+    # Date line 1: Date of Loss: <value> Date Received: <value>
+    date_line1 = re.search(
+        r'Date\s+of\s+Loss:\s*([^\n]*?)\s*Date\s+Received:\s*([^\n]*?)(?=\n|$)',
+        text,
+        re.IGNORECASE
+    )
+    if date_line1:
+        dol = date_line1.group(1).strip()
+        dr = date_line1.group(2).strip()
+        metadata['date_of_loss'] = parse_datetime_string(dol) if (dol and re.match(r'\d+/\d+/\d+', dol)) else None
+        metadata['date_received'] = parse_datetime_string(dr) if (dr and re.match(r'\d+/\d+/\d+', dr)) else None
+    else:
+        metadata['date_of_loss'] = None
+        metadata['date_received'] = None
+    
+    # Date line 2: Date Inspected: <value> Date Entered: <value>
+    date_line2 = re.search(
+        r'Date\s+Inspected:\s*([^\n]*?)\s*Date\s+Entered:\s*([^\n]+?)(?=\n|$)',
+        text,
+        re.IGNORECASE
+    )
+    if date_line2:
+        di = date_line2.group(1).strip()
+        de = date_line2.group(2).strip()
+        metadata['date_inspected'] = parse_datetime_string(di) if (di and re.match(r'\d+/\d+/\d+', di)) else None
+        metadata['date_entered'] = parse_datetime_string(de) if (de and re.match(r'\d+/\d+/\d+', de)) else None
+    else:
+        metadata['date_inspected'] = None
+        metadata['date_entered'] = None
+    
+    # Price List line with depreciation fields
+    price_line = re.search(
+        r'Price\s+List:\s*([^\s]+)\s+Depreciate\s+Material:\s*(Yes|No)\s+Depreciate\s+O&P:\s*(Yes|No)',
+        text,
+        re.IGNORECASE
+    )
+    if price_line:
+        metadata['price_list'] = price_line.group(1).strip()
+        metadata['depreciate_material'] = (price_line.group(2).strip().upper() == 'YES')
+        metadata['depreciate_op'] = (price_line.group(3).strip().upper() == 'YES')
+    else:
+        metadata['price_list'] = None
+        metadata['depreciate_material'] = None
+        metadata['depreciate_op'] = None
+    
+    # Second depreciation line
+    deprec_line2 = re.search(
+        r'Depreciate\s+Non-material:\s*(Yes|No)\s+Depreciate\s+Taxes:\s*(Yes|No)',
+        text,
+        re.IGNORECASE
+    )
+    if deprec_line2:
+        metadata['depreciate_non_material'] = (deprec_line2.group(1).strip().upper() == 'YES')
+        metadata['depreciate_taxes'] = (deprec_line2.group(2).strip().upper() == 'YES')
+    else:
+        metadata['depreciate_non_material'] = None
+        metadata['depreciate_taxes'] = None
+    
+    # Estimate and Depreciate Removal line
+    estimate_line = re.search(
+        r'Estimate:\s*([^\s]+)\s+Depreciate\s+Removal:\s*(Yes|No)',
+        text,
+        re.IGNORECASE
+    )
+    if estimate_line:
+        metadata['estimate_name'] = estimate_line.group(1).strip()
+        metadata['depreciate_removal'] = (estimate_line.group(2).strip().upper() == 'YES')
+    else:
+        metadata['estimate_name'] = None
+        metadata['depreciate_removal'] = None
+    
+    # Derive region from price list
+    if metadata.get('price_list') and metadata['price_list'].upper().startswith('CALA'):
         metadata['region'] = 'California'
+    else:
+        metadata['region'] = None
+    
+    # Building type (to be enriched later)
+    metadata['building_type'] = None
     
     return metadata
 
