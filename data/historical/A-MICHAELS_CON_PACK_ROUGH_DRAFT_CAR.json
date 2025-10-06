@@ -602,7 +602,7 @@
       "section_totals": {
         "tax": 9.22,
         "total": 106.27,
-        "validation_delta": -0.0
+        "validation_delta": 0.0
       }
     },
     {
@@ -816,7 +816,7 @@
       "section_totals": {
         "tax": 9.86,
         "total": 113.55,
-        "validation_delta": -0.0
+        "validation_delta": 0.0
       }
     },
     {

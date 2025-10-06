@@ -757,7 +757,7 @@
       "section_totals": {
         "tax": 11.88,
         "total": 175.77,
-        "validation_delta": -0.0
+        "validation_delta": 0.0
       }
     },
     {
@@ -829,7 +829,7 @@
       "section_totals": {
         "tax": 17.38,
         "total": 257.09,
-        "validation_delta": -0.0
+        "validation_delta": 0.0
       }
     },
     {
@@ -1880,7 +1880,7 @@
       "section_totals": {
         "tax": 7.67,
         "total": 113.44,
-        "validation_delta": -0.0
+        "validation_delta": 0.0
       }
     },
     {
@@ -2125,7 +2125,7 @@
       "section_totals": {
         "tax": 19.13,
         "total": 283.03,
-        "validation_delta": 0.0
+        "validation_delta": -0.0
       }
     },
     {
@@ -2437,7 +2437,7 @@
       "section_totals": {
         "tax": 8.72,
         "total": 128.95,
-        "validation_delta": -0.0
+        "validation_delta": 0.0
       }
     }
   ]

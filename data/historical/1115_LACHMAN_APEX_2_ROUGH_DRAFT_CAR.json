@@ -1,0 +1,4045 @@
+{
+  "case_metadata": {
+    "claim_number": "75-79J8-65X",
+    "policy_number": "75-C9-A181-5",
+    "loss_type": "Fire",
+    "coverage": [
+      {
+        "coverage_type": "Dwelling",
+        "deductible": 0.0,
+        "policy_limit": 1273500.0
+      },
+      {
+        "coverage_type": "Contents",
+        "deductible": 0.0,
+        "policy_limit": 955125.0
+      },
+      {
+        "coverage_type": "Other Structures",
+        "deductible": 3000.0,
+        "policy_limit": 127350.0
+      }
+    ],
+    "property_address": "1115 Lachman Ln Pacific Palisades, CA 90272 Claim Rep.: Nick Cavalluzzi Business: (818) 388-1070",
+    "date_of_loss": "2025-01-07T00:00:00",
+    "date_received": null,
+    "date_inspected": null,
+    "date_entered": "2025-03-29T09:24:00",
+    "price_list": null,
+    "depreciate_material": null,
+    "depreciate_op": null,
+    "depreciate_non_material": null,
+    "depreciate_taxes": null,
+    "estimate_name": null,
+    "depreciate_removal": null,
+    "region": null,
+    "building_type": null
+  },
+  "sections": [
+    {
+      "section_name": "Abatement",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [],
+      "section_totals": {
+        "tax": 0.0,
+        "total": 0.0,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "Contents",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [],
+      "section_totals": {
+        "tax": 0.0,
+        "total": 0.0,
+        "validation_delta": 0.0
+      }
+    },
+    {
+      "section_name": "General",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 6,
+          "cat": "TMP",
+          "sel": "TLT",
+          "description": "Temporary toilet (per month)",
+          "calc": "5",
+          "qty": 5.0,
+          "unit": "MO",
+          "remove": 0.0,
+          "replace": 225.0,
+          "tax": 0.0,
+          "total": 225.0
+        },
+        {
+          "line_number": 7,
+          "cat": "TMP",
+          "sel": "HWS",
+          "description": "Temporary hand washing station (per month)",
+          "calc": "5",
+          "qty": 5.0,
+          "unit": "MO",
+          "remove": 0.0,
+          "replace": 247.0,
+          "tax": 0.0,
+          "total": 247.0
+        },
+        {
+          "line_number": 8,
+          "cat": "DMO",
+          "sel": "DUMP>",
+          "description": "Dumpster load - Approx. 30 yards, 5-7 tons of debris",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 1168.94,
+          "replace": 0.0,
+          "tax": 0.0,
+          "total": 935.16
+        },
+        {
+          "line_number": 9,
+          "cat": "LAB",
+          "sel": "DMO",
+          "description": "Daily Job Site Clean Up Laborer & Runner - per hour",
+          "calc": "2.5*4*5",
+          "qty": 50.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 65.19,
+          "tax": 0.0,
+          "total": 651.9
+        },
+        {
+          "line_number": 10,
+          "cat": "LAB",
+          "sel": "SUPERR",
+          "description": "Residential Supervision / Project Management - per hour",
+          "calc": "15*4*5",
+          "qty": 300.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 86.09,
+          "tax": 0.0,
+          "total": 5165.4
+        }
+      ],
+      "section_totals": {
+        "tax": 7224.46,
+        "total": 49746.72,
+        "validation_delta": 42522.26
+      }
+    },
+    {
+      "section_name": "Electrical",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 21,
+          "cat": "ELS",
+          "sel": "BIDITM",
+          "description": "Electrical - Special Systems Solar system repair per X3 Build - Estimate # 1038",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 80.71,
+          "replace": 1891.46,
+          "tax": 143.29,
+          "total": 423.1
+        }
+      ],
+      "section_totals": {
+        "tax": 423.1,
+        "total": 75198.56,
+        "validation_delta": 74775.46
+      }
+    },
+    {
+      "section_name": "Plumbing",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 26,
+          "cat": "PLM",
+          "sel": "PT",
+          "description": "Plumbing/gas line air pressure test",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 214.36,
+          "tax": 0.0,
+          "total": 42.88
+        },
+        {
+          "line_number": 27,
+          "cat": "PLM",
+          "sel": "PTD",
+          "description": "Plumbing/drain line water pressure test",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 509.1,
+          "tax": 0.0,
+          "total": 101.82
+        },
+        {
+          "line_number": 28,
+          "cat": "FPS",
+          "sel": "DS",
+          "description": "Drain and re-charge wet fire suppression system",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 313.29,
+          "tax": 0.0,
+          "total": 62.66
+        }
+      ],
+      "section_totals": {
+        "tax": 207.36,
+        "total": 8104.11,
+        "validation_delta": 7896.75
+      }
+    },
+    {
+      "section_name": "HVAC",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 29,
+          "cat": "PLM",
+          "sel": "MISC",
+          "description": "& R&R X3 Estimate #1038 - Navien tankless water heater",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 367.07,
+          "replace": 5598.95,
+          "tax": 694.7,
+          "total": 2525.34
+        },
+        {
+          "line_number": 31,
+          "cat": "HVC",
+          "sel": "FRHZH35",
+          "description": "& R&R Furnace - horizontal - forced air - high effic.135,000 BTU",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 103.45,
+          "replace": 3911.79,
+          "tax": 249.04,
+          "total": 852.86
+        },
+        {
+          "line_number": 32,
+          "cat": "HVC",
+          "sel": "DCT>>",
+          "description": "Ductwork system - hot or cold air - 2200 to 2500 SF home",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 8722.37,
+          "tax": 682.68,
+          "total": 3625.48
+        },
+        {
+          "line_number": 33,
+          "cat": "EQU",
+          "sel": "CRANE",
+          "description": "Crane and operator - 14 ton capacity - 65' extension boom",
+          "calc": "8",
+          "qty": 8.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 180.0,
+          "tax": 0.0,
+          "total": 288.0
+        }
+      ],
+      "section_totals": {
+        "tax": 7291.68,
+        "total": 43750.12,
+        "validation_delta": 36458.44
+      }
+    },
+    {
+      "section_name": "Doors/Windows",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 40,
+          "cat": "WDT",
+          "sel": "DRAPRH",
+          "description": "Window drapery - remove and rehang - per hour",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 86.38,
+          "tax": 0.0,
+          "total": 34.56
+        }
+      ],
+      "section_totals": {
+        "tax": 15517.44,
+        "total": 224561.55,
+        "validation_delta": 224526.99
+      }
+    },
+    {
+      "section_name": "Appliances",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 45,
+          "cat": "APP",
+          "sel": "RFBIXDX",
+          "description": "& R&R Built-in refrigerator - 48\" - Deluxe grade",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 45.52,
+          "replace": 3395.4,
+          "tax": 314.94,
+          "total": 751.16
+        },
+        {
+          "line_number": 47,
+          "cat": "APP",
+          "sel": "HDI",
+          "description": "& R&R Range hood - add on cost for ceiling mount/island hood",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 37.94,
+          "replace": 427.57,
+          "tax": 36.86,
+          "total": 100.48
+        },
+        {
+          "line_number": 50,
+          "cat": "PLM",
+          "sel": "WSBOX",
+          "description": "& R&R Refrigerator/icemaker water supply box with valve",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 7.59,
+          "replace": 167.84,
+          "tax": 6.44,
+          "total": 36.36
+        }
+      ],
+      "section_totals": {
+        "tax": 8553.78,
+        "total": 51322.79,
+        "validation_delta": 50434.79
+      }
+    },
+    {
+      "section_name": "Main Level",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 55,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 86.77,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 3.05,
+          "total": 36.9
+        },
+        {
+          "line_number": 56,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 269.5,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 9.46,
+          "total": 114.56
+        },
+        {
+          "line_number": 57,
+          "cat": "FNC",
+          "sel": "B6H",
+          "description": "& R&R Baseboard - 6\" hardwood",
+          "calc": "",
+          "qty": 24.5,
+          "unit": "LF",
+          "remove": 0.75,
+          "replace": 10.64,
+          "tax": 17.37,
+          "total": 59.3
+        },
+        {
+          "line_number": 58,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 24.5,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 0.84,
+          "total": 14.46
+        },
+        {
+          "line_number": 59,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 24.5,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.65,
+          "total": 10.92
+        },
+        {
+          "line_number": 60,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 86.77,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 0.59,
+          "total": 7.94
+        },
+        {
+          "line_number": 61,
+          "cat": "FCT",
+          "sel": "MAT",
+          "description": "& R&R Tile mat - uncoupling membrane",
+          "calc": "",
+          "qty": 86.77,
+          "unit": "SF",
+          "remove": 1.39,
+          "replace": 6.9,
+          "tax": 22.17,
+          "total": 148.3
+        },
+        {
+          "line_number": 63,
+          "cat": "FCT",
+          "sel": "MORTAR",
+          "description": "& R&R Mortar bed for tile floors",
+          "calc": "",
+          "qty": 86.77,
+          "unit": "SF",
+          "remove": 2.05,
+          "replace": 7.22,
+          "tax": 19.88,
+          "total": 164.86
+        },
+        {
+          "line_number": 64,
+          "cat": "FCT",
+          "sel": "SEALG",
+          "description": "Grout sealer",
+          "calc": "",
+          "qty": 86.77,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.42,
+          "tax": 1.61,
+          "total": 42.32
+        },
+        {
+          "line_number": 71,
+          "cat": "FNH",
+          "sel": "WS",
+          "description": "Door weather stripping",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 40.24,
+          "tax": 0.99,
+          "total": 8.24
+        }
+      ],
+      "section_totals": {
+        "tax": 1558.72,
+        "total": 9352.01,
+        "validation_delta": 8744.21
+      }
+    },
+    {
+      "section_name": "Office",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": 334.4,
+          "sf_ceiling": 177.42,
+          "sf_walls_and_ceiling": 511.81,
+          "sf_floor": 176.67,
+          "sy_flooring": 19.63,
+          "lf_floor_perimeter": 28.83,
+          "lf_ceil_perimeter": 54.18
+        },
+        "doors": [
+          {
+            "dimensions": "3' 1\" X 8'",
+            "opens_into": "ENTRY_FOYER2"
+          },
+          {
+            "dimensions": "3' 1\" X 8'",
+            "opens_into": "GUEST_BATH"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Office Closet (2)",
+          "metadata": {
+            "height": 8.0,
+            "areas": {
+              "sf_walls": 178.0,
+              "sf_ceiling": 39.94,
+              "sf_walls_and_ceiling": 217.94,
+              "sf_floor": 39.94,
+              "sy_flooring": 4.44,
+              "lf_floor_perimeter": 22.25,
+              "lf_ceil_perimeter": 25.33
+            },
+            "doors": [
+              {
+                "dimensions": "3' 1\" X 8'",
+                "opens_into": "OFFICE"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Offset (1)",
+          "metadata": {
+            "height": 10.0,
+            "areas": {
+              "sf_walls": 169.17,
+              "sf_ceiling": 43.33,
+              "sf_walls_and_ceiling": 212.5,
+              "sf_floor": 43.33,
+              "sy_flooring": 4.81,
+              "lf_floor_perimeter": 21.42,
+              "lf_ceil_perimeter": 21.42
+            },
+            "missing_walls": [
+              {
+                "dimensions": "16' X 10'",
+                "opens_into": "OFFICE"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 72,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 260.69,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 9.15,
+          "total": 110.8
+        },
+        {
+          "line_number": 73,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 681.56,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 23.92,
+          "total": 289.68
+        },
+        {
+          "line_number": 74,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 72.5,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 2.47,
+          "total": 42.84
+        },
+        {
+          "line_number": 75,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 72.5,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 1.91,
+          "total": 32.28
+        },
+        {
+          "line_number": 76,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 259.94,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 1.77,
+          "total": 23.76
+        },
+        {
+          "line_number": 77,
+          "cat": "PNT",
+          "sel": "OP>",
+          "description": "Paint door or window opening - Large - 2 coats (per side)",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 60.61,
+          "tax": 0.7,
+          "total": 12.26
+        },
+        {
+          "line_number": 81,
+          "cat": "DOR",
+          "sel": "FRRS",
+          "description": "French door - Detach & reset",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 126.05,
+          "tax": 0.23,
+          "total": 50.46
+        },
+        {
+          "line_number": 83,
+          "cat": "PNT",
+          "sel": "FRS",
+          "description": "Stain & finish French door slab only - (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 235.96,
+          "tax": 4.4,
+          "total": 189.64
+        },
+        {
+          "line_number": 84,
+          "cat": "PNT",
+          "sel": "DORTS",
+          "description": "Stain & finish door/window trim & jamb (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 67.23,
+          "tax": 3.2,
+          "total": 54.42
+        }
+      ],
+      "section_totals": {
+        "tax": 1536.56,
+        "total": 9219.35,
+        "validation_delta": 8413.21
+      }
+    },
+    {
+      "section_name": "Guest Bath",
+      "metadata": {
+        "height": 8.0,
+        "areas": {
+          "sf_walls": 148.67,
+          "sf_ceiling": 49.76,
+          "sf_walls_and_ceiling": 198.42,
+          "sf_floor": 40.93,
+          "sy_flooring": 4.55,
+          "lf_floor_perimeter": 12.0,
+          "lf_ceil_perimeter": 24.75
+        },
+        "doors": [
+          {
+            "dimensions": "3' 1\" X 8'",
+            "opens_into": "OFFICE"
+          },
+          {
+            "dimensions": "3' 1\" X 8'",
+            "opens_into": "ENTRY_FOYER2"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 86,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 49.76,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 1.75,
+          "total": 21.16
+        },
+        {
+          "line_number": 87,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 148.67,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 5.22,
+          "total": 63.18
+        },
+        {
+          "line_number": 88,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 24.75,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.65,
+          "total": 11.04
+        },
+        {
+          "line_number": 89,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 40.93,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 0.28,
+          "total": 3.74
+        },
+        {
+          "line_number": 90,
+          "cat": "FCT",
+          "sel": "SEALG",
+          "description": "Grout sealer",
+          "calc": "",
+          "qty": 52.93,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.42,
+          "tax": 0.98,
+          "total": 25.82
+        },
+        {
+          "line_number": 91,
+          "cat": "DOR",
+          "sel": "FRRS",
+          "description": "French door - Detach & reset",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 126.05,
+          "tax": 0.23,
+          "total": 50.46
+        },
+        {
+          "line_number": 93,
+          "cat": "PNT",
+          "sel": "FRS",
+          "description": "Stain & finish French door slab only - (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 235.96,
+          "tax": 4.4,
+          "total": 189.64
+        },
+        {
+          "line_number": 94,
+          "cat": "PNT",
+          "sel": "DORTS",
+          "description": "Stain & finish door/window trim & jamb (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 67.23,
+          "tax": 3.2,
+          "total": 54.42
+        }
+      ],
+      "section_totals": {
+        "tax": 578.32,
+        "total": 3469.77,
+        "validation_delta": 3050.31
+      }
+    },
+    {
+      "section_name": "Living Room/Dining Room",
+      "metadata": {
+        "height": 11.0,
+        "areas": {
+          "sf_walls": 298.13,
+          "sf_ceiling": 340.68,
+          "sf_walls_and_ceiling": 638.81,
+          "sf_floor": 329.43,
+          "sy_flooring": 36.6,
+          "lf_floor_perimeter": 19.42,
+          "lf_ceil_perimeter": 67.79
+        },
+        "doors": [
+          {
+            "dimensions": "11' 4\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "9' 7\" X 9' 7\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Offset 2 (3)",
+          "metadata": {
+            "height": 9.0,
+            "areas": {
+              "sf_walls": 40.5,
+              "sf_ceiling": 16.5,
+              "sf_walls_and_ceiling": 57.0,
+              "sf_floor": 16.5,
+              "sy_flooring": 1.83,
+              "lf_floor_perimeter": 4.5,
+              "lf_ceil_perimeter": 4.5
+            },
+            "missing_walls": [
+              {
+                "dimensions": "7' 4\" X 9'",
+                "opens_into": "LIVING_ROOM_"
+              },
+              {
+                "dimensions": "7' 4\" X 9'",
+                "opens_into": "ROOM1"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Fireplace (1)",
+          "metadata": {
+            "height": 9.0,
+            "areas": {
+              "sf_walls": 40.5,
+              "sf_ceiling": 11.25,
+              "sf_walls_and_ceiling": 51.75,
+              "lf_ceil_perimeter": 4.5
+            },
+            "missing_walls": [
+              {
+                "dimensions": "5' X 9'",
+                "opens_into": "ROOM1"
+              },
+              {
+                "dimensions": "5' X 9'",
+                "opens_into": "LIVING_ROOM_"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Offset 1 (2)",
+          "metadata": {
+            "height": 9.0,
+            "areas": {
+              "sf_walls": 96.06,
+              "sf_ceiling": 191.16,
+              "sf_walls_and_ceiling": 287.22,
+              "sf_floor": 191.16,
+              "sy_flooring": 21.24,
+              "lf_floor_perimeter": 2.58,
+              "lf_ceil_perimeter": 43.79
+            },
+            "missing_walls": [
+              {
+                "dimensions": "31' X 9'",
+                "opens_into": "ROOM1"
+              },
+              {
+                "dimensions": "15' 1 1/2\" X 9'",
+                "opens_into": "LIVING_ROOM_"
+              },
+              {
+                "dimensions": "15' 10 1/2\" X 9'",
+                "opens_into": "DINING_ROOM"
+              },
+              {
+                "dimensions": "15' 10 1/2\" X 11'",
+                "opens_into": "OFFSET_1"
+              },
+              {
+                "dimensions": "12' 1/2\" X 11'",
+                "opens_into": "LIVING_ROOM_"
+              }
+            ],
+            "doors": [
+              {
+                "dimensions": "5' 8\" X 9' 7\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "5' 8\" X 9' 7\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "7' X 9' 7\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "7' X 9' 7\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 98,
+          "cat": "FCW",
+          "sel": "FINDS",
+          "description": "Add for dustless floor sanding",
+          "calc": "",
+          "qty": 629.34,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 1.0,
+          "tax": 0.0,
+          "total": 125.86
+        },
+        {
+          "line_number": 99,
+          "cat": "FCW",
+          "sel": "FINADD",
+          "description": "Additional coats of finish (per coat)",
+          "calc": "",
+          "qty": 629.34,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 1.47,
+          "tax": 17.79,
+          "total": 188.58
+        },
+        {
+          "line_number": 100,
+          "cat": "FCW",
+          "sel": "LAB",
+          "description": "Wood Floor Covering Installer - per hour",
+          "calc": "16",
+          "qty": 16.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 106.93,
+          "tax": 0.0,
+          "total": 342.18
+        },
+        {
+          "line_number": 101,
+          "cat": "FNC",
+          "sel": "B6H",
+          "description": "& R&R Baseboard - 6\" hardwood",
+          "calc": "",
+          "qty": 31.0,
+          "unit": "LF",
+          "remove": 0.75,
+          "replace": 10.64,
+          "tax": 21.97,
+          "total": 75.02
+        },
+        {
+          "line_number": 102,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 31.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 1.06,
+          "total": 18.32
+        },
+        {
+          "line_number": 103,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 515.69,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 18.1,
+          "total": 219.18
+        },
+        {
+          "line_number": 104,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 31.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.82,
+          "total": 13.8
+        },
+        {
+          "line_number": 105,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 606.84,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 4.14,
+          "total": 55.44
+        },
+        {
+          "line_number": 106,
+          "cat": "FCT",
+          "sel": "MAT",
+          "description": "& R&R Tile mat - uncoupling membrane",
+          "calc": "",
+          "qty": 606.84,
+          "unit": "SF",
+          "remove": 1.39,
+          "replace": 6.9,
+          "tax": 155.02,
+          "total": 1037.14
+        },
+        {
+          "line_number": 108,
+          "cat": "FCT",
+          "sel": "MORTAR",
+          "description": "& R&R Mortar bed for tile floors",
+          "calc": "",
+          "qty": 606.84,
+          "unit": "SF",
+          "remove": 2.05,
+          "replace": 7.22,
+          "tax": 139.04,
+          "total": 1152.88
+        },
+        {
+          "line_number": 109,
+          "cat": "FCT",
+          "sel": "SEALG",
+          "description": "Grout sealer",
+          "calc": "",
+          "qty": 606.84,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.42,
+          "tax": 11.24,
+          "total": 295.96
+        },
+        {
+          "line_number": 113,
+          "cat": "LIT",
+          "sel": "RUN",
+          "description": "& R&R LED light runner - channel-mounted rope light",
+          "calc": "6",
+          "qty": 32.5,
+          "unit": "LF",
+          "remove": 0.65,
+          "replace": 14.81,
+          "tax": 12.04,
+          "total": 102.88
+        },
+        {
+          "line_number": 114,
+          "cat": "PNT",
+          "sel": "OP",
+          "description": "Paint door or window opening - 2 coats (per side)",
+          "calc": "6",
+          "qty": 6.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 51.53,
+          "tax": 3.58,
+          "total": 62.56
+        },
+        {
+          "line_number": 115,
+          "cat": "PNT",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 46.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 0.71,
+          "tax": 0.31,
+          "total": 6.6
+        },
+        {
+          "line_number": 116,
+          "cat": "FPL",
+          "sel": "ELBOX",
+          "description": "& R&R Electric fireplace insert, built-in, w/ heater- 33\" to 39\"",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 142.23,
+          "replace": 1002.63,
+          "tax": 155.81,
+          "total": 489.12
+        },
+        {
+          "line_number": 117,
+          "cat": "TIL",
+          "sel": "BMUD",
+          "description": "& R&R Mortar bed for tile",
+          "calc": "125",
+          "qty": 125.0,
+          "unit": "SF",
+          "remove": 2.53,
+          "replace": 14.04,
+          "tax": 21.08,
+          "total": 418.48
+        }
+      ],
+      "section_totals": {
+        "tax": 11027.74,
+        "total": 66166.37,
+        "validation_delta": 61562.37
+      }
+    },
+    {
+      "section_name": "Kitchen",
+      "metadata": {
+        "height": "Tray",
+        "areas": {
+          "sf_walls": 450.25,
+          "sf_ceiling": 281.97,
+          "sf_walls_and_ceiling": 732.22,
+          "sf_floor": 146.38,
+          "sy_flooring": 16.26,
+          "lf_floor_perimeter": 8.46,
+          "lf_ceil_perimeter": 48.88
+        },
+        "missing_walls": [
+          {
+            "dimensions": "7 1/2\" X 10'",
+            "opens_into": "ROOM1"
+          },
+          {
+            "dimensions": "14' 3 1/2\" X 10'",
+            "opens_into": "ROOM1"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 120,
+          "cat": "FCW",
+          "sel": "FINDS",
+          "description": "Add for dustless floor sanding",
+          "calc": "80.63",
+          "qty": 80.63,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 1.0,
+          "tax": 0.0,
+          "total": 16.12
+        },
+        {
+          "line_number": 121,
+          "cat": "FCW",
+          "sel": "FINADD",
+          "description": "Additional coats of finish (per coat)",
+          "calc": "80.63",
+          "qty": 80.63,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 1.47,
+          "tax": 2.28,
+          "total": 24.16
+        },
+        {
+          "line_number": 122,
+          "cat": "FCW",
+          "sel": "LAB",
+          "description": "Wood Floor Covering Installer - per hour",
+          "calc": "8",
+          "qty": 8.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 106.93,
+          "tax": 0.0,
+          "total": 171.08
+        },
+        {
+          "line_number": 123,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "36.17",
+          "qty": 36.17,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.95,
+          "total": 16.12
+        },
+        {
+          "line_number": 124,
+          "cat": "PNT",
+          "sel": "OP>",
+          "description": "Paint door or window opening - Large - 2 coats (per side)",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 60.61,
+          "tax": 0.7,
+          "total": 12.26
+        },
+        {
+          "line_number": 125,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) part of the ceiling",
+          "calc": "-80.63",
+          "qty": 201.34,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 7.07,
+          "total": 85.58
+        },
+        {
+          "line_number": 126,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 450.25,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 15.8,
+          "total": 191.36
+        },
+        {
+          "line_number": 127,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 146.38,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 1.0,
+          "total": 13.38
+        },
+        {
+          "line_number": 128,
+          "cat": "FCT",
+          "sel": "MAT",
+          "description": "& R&R Tile mat - uncoupling membrane",
+          "calc": "",
+          "qty": 146.38,
+          "unit": "SF",
+          "remove": 1.39,
+          "replace": 6.9,
+          "tax": 37.39,
+          "total": 250.18
+        },
+        {
+          "line_number": 130,
+          "cat": "FCT",
+          "sel": "MORTAR",
+          "description": "& R&R Mortar bed for tile floors",
+          "calc": "",
+          "qty": 146.38,
+          "unit": "SF",
+          "remove": 2.05,
+          "replace": 7.22,
+          "tax": 33.54,
+          "total": 278.1
+        },
+        {
+          "line_number": 131,
+          "cat": "FCT",
+          "sel": "SEALG",
+          "description": "Grout sealer",
+          "calc": "",
+          "qty": 146.38,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.42,
+          "tax": 2.71,
+          "total": 71.38
+        },
+        {
+          "line_number": 136,
+          "cat": "CAB",
+          "sel": "CTGMS",
+          "description": "Add on for undermount sink cutout & polish - single basin",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 231.95,
+          "tax": 0.0,
+          "total": 92.78
+        },
+        {
+          "line_number": 139,
+          "cat": "CAB",
+          "sel": "LZS",
+          "description": "Add for lazy susan",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 101.87,
+          "tax": 9.93,
+          "total": 22.36
+        },
+        {
+          "line_number": 140,
+          "cat": "CAB",
+          "sel": "TRASHBN",
+          "description": "Add for pull out trash bin",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 95.75,
+          "tax": 9.34,
+          "total": 21.02
+        },
+        {
+          "line_number": 141,
+          "cat": "CAB",
+          "sel": "RLOUT",
+          "description": "Add on cost for roll out shelves",
+          "calc": "6",
+          "qty": 6.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 81.8,
+          "tax": 47.85,
+          "total": 107.74
+        },
+        {
+          "line_number": 143,
+          "cat": "PLM",
+          "sel": "EGSV",
+          "description": "& R&R Earthquake gas shut-off valve",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 9.49,
+          "replace": 165.31,
+          "tax": 12.15,
+          "total": 37.4
+        }
+      ],
+      "section_totals": {
+        "tax": 10115.92,
+        "total": 60695.16,
+        "validation_delta": 59284.14
+      }
+    },
+    {
+      "section_name": "Hallway",
+      "metadata": {
+        "height": 11.5,
+        "areas": {
+          "sf_walls": 682.83,
+          "sf_ceiling": 274.19,
+          "sf_walls_and_ceiling": 957.01,
+          "sf_floor": 274.19,
+          "sy_flooring": 30.47,
+          "lf_floor_perimeter": 44.08,
+          "lf_ceil_perimeter": 117.08
+        },
+        "missing_walls": [
+          {
+            "dimensions": "7' 4\" X 11' 6\"",
+            "opens_into": "OFFSET_2"
+          },
+          {
+            "dimensions": "5' X 11' 6\"",
+            "opens_into": "FIREPLACE"
+          },
+          {
+            "dimensions": "31' X 11' 6\"",
+            "opens_into": "OFFSET_1"
+          },
+          {
+            "dimensions": "14' 3 1/2\" X 11' 6\"",
+            "opens_into": "KITCHEN"
+          },
+          {
+            "dimensions": "7 1/2\" X 11' 6\"",
+            "opens_into": "KITCHEN"
+          },
+          {
+            "dimensions": "5' 10\" X 11' 6\"",
+            "opens_into": "OFFSET"
+          }
+        ],
+        "doors": [
+          {
+            "dimensions": "4' 1\" X 9' 7\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Hallway (1)",
+          "metadata": {
+            "height": 8.0,
+            "areas": {
+              "sf_walls": 282.11,
+              "sf_ceiling": 120.73,
+              "sf_walls_and_ceiling": 402.84,
+              "sf_floor": 120.73,
+              "sy_flooring": 13.41,
+              "lf_floor_perimeter": 33.63,
+              "lf_ceil_perimeter": 45.71
+            },
+            "doors": [
+              {
+                "dimensions": "3' X 7'",
+                "opens_into": "BEDROOM_1"
+              },
+              {
+                "dimensions": "3' X 7'",
+                "opens_into": "BEDROOM_2"
+              },
+              {
+                "dimensions": "3' X 7'",
+                "opens_into": "LAUNDRY_ROOM"
+              },
+              {
+                "dimensions": "3' 1\" X 6' 8\"",
+                "opens_into": "MASTER_BEDRO"
+              }
+            ],
+            "missing_walls": [
+              {
+                "dimensions": "4' 10\" X 8'",
+                "opens_into": "ROOM1"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 146,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 394.92,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 13.86,
+          "total": 167.86
+        },
+        {
+          "line_number": 148,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 964.94,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 33.87,
+          "total": 410.12
+        },
+        {
+          "line_number": 149,
+          "cat": "FNC",
+          "sel": "B6H",
+          "description": "& R&R Baseboard - 6\" hardwood",
+          "calc": "",
+          "qty": 77.71,
+          "unit": "LF",
+          "remove": 0.75,
+          "replace": 10.64,
+          "tax": 55.08,
+          "total": 188.04
+        },
+        {
+          "line_number": 150,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 77.71,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 2.65,
+          "total": 45.92
+        },
+        {
+          "line_number": 151,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 77.71,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 2.05,
+          "total": 34.62
+        },
+        {
+          "line_number": 152,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 394.92,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 2.69,
+          "total": 36.08
+        },
+        {
+          "line_number": 153,
+          "cat": "FCT",
+          "sel": "MAT",
+          "description": "& R&R Tile mat - uncoupling membrane",
+          "calc": "",
+          "qty": 394.92,
+          "unit": "SF",
+          "remove": 1.39,
+          "replace": 6.9,
+          "tax": 100.88,
+          "total": 674.96
+        },
+        {
+          "line_number": 155,
+          "cat": "FCT",
+          "sel": "MORTAR",
+          "description": "& R&R Mortar bed for tile floors",
+          "calc": "",
+          "qty": 394.92,
+          "unit": "SF",
+          "remove": 2.05,
+          "replace": 7.22,
+          "tax": 90.49,
+          "total": 750.28
+        },
+        {
+          "line_number": 156,
+          "cat": "FCT",
+          "sel": "SEALG",
+          "description": "Grout sealer",
+          "calc": "",
+          "qty": 394.92,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.42,
+          "tax": 7.32,
+          "total": 192.6
+        }
+      ],
+      "section_totals": {
+        "tax": 6272.98,
+        "total": 37637.68,
+        "validation_delta": 35137.2
+      }
+    },
+    {
+      "section_name": "Master Bedroom",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": 458.41,
+          "sf_ceiling": 374.01,
+          "sf_walls_and_ceiling": 832.42,
+          "sf_floor": 371.03,
+          "sy_flooring": 41.23,
+          "lf_floor_perimeter": 34.92,
+          "lf_ceil_perimeter": 78.67
+        },
+        "doors": [
+          {
+            "dimensions": "6' 2\" X 8'",
+            "opens_into": "MASTER_BATH"
+          },
+          {
+            "dimensions": "3' 1\" X 6' 8\"",
+            "opens_into": "HALLWAY"
+          },
+          {
+            "dimensions": "5' X 8'",
+            "opens_into": "M_CLOSET_HI"
+          },
+          {
+            "dimensions": "6' X 8'",
+            "opens_into": "M_CLOSET_HE"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Offset (1)",
+          "metadata": {
+            "height": 9.0,
+            "areas": {
+              "sf_walls": 149.0,
+              "sf_ceiling": 35.84,
+              "sf_walls_and_ceiling": 184.84,
+              "sf_floor": 35.84,
+              "sy_flooring": 3.98,
+              "lf_floor_perimeter": 15.33,
+              "lf_ceil_perimeter": 26.33
+            },
+            "missing_walls": [
+              {
+                "dimensions": "23' 3\" X 9'",
+                "opens_into": "MASTER_BEDRO"
+              }
+            ],
+            "doors": [
+              {
+                "dimensions": "11' X 8'",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 162,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 409.85,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 14.39,
+          "total": 174.2
+        },
+        {
+          "line_number": 163,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 607.41,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 21.32,
+          "total": 258.16
+        },
+        {
+          "line_number": 164,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 50.25,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 1.72,
+          "total": 29.68
+        },
+        {
+          "line_number": 165,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 50.25,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 1.32,
+          "total": 22.38
+        },
+        {
+          "line_number": 166,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 406.88,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 2.78,
+          "total": 37.18
+        },
+        {
+          "line_number": 167,
+          "cat": "DOR",
+          "sel": "FRRS",
+          "description": "French door - Detach & reset",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 126.05,
+          "tax": 0.23,
+          "total": 50.46
+        },
+        {
+          "line_number": 168,
+          "cat": "PNT",
+          "sel": "FRS",
+          "description": "Stain & finish French door slab only - (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 235.96,
+          "tax": 4.4,
+          "total": 189.64
+        },
+        {
+          "line_number": 170,
+          "cat": "PNT",
+          "sel": "DORTS",
+          "description": "Stain & finish door/window trim & jamb (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 67.23,
+          "tax": 3.2,
+          "total": 54.42
+        },
+        {
+          "line_number": 171,
+          "cat": "PNT",
+          "sel": "DORTS>",
+          "description": "Stain & finish door/window trim & jamb - Large (per side)",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 78.58,
+          "tax": 0.89,
+          "total": 15.9
+        },
+        {
+          "line_number": 176,
+          "cat": "FNH",
+          "sel": "TVRS",
+          "description": "TV Brackets - Wall or ceiling mounted - Detach & reset",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 68.25,
+          "tax": 0.0,
+          "total": 13.66
+        }
+      ],
+      "section_totals": {
+        "tax": 1696.0,
+        "total": 10176.0,
+        "validation_delta": 9330.32
+      }
+    },
+    {
+      "section_name": "M. Closet Hers",
+      "metadata": {
+        "height": 8.0,
+        "areas": {
+          "sf_walls": 248.91,
+          "sf_ceiling": 86.04,
+          "sf_walls_and_ceiling": 334.94,
+          "sf_floor": 86.04,
+          "sy_flooring": 9.56,
+          "lf_floor_perimeter": 31.11,
+          "lf_ceil_perimeter": 37.11
+        },
+        "doors": [
+          {
+            "dimensions": "6' X 8'",
+            "opens_into": "MASTER_BEDRO"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 177,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 86.04,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 3.02,
+          "total": 36.56
+        },
+        {
+          "line_number": 178,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 248.91,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 8.74,
+          "total": 105.78
+        },
+        {
+          "line_number": 179,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 31.11,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 1.06,
+          "total": 18.38
+        },
+        {
+          "line_number": 180,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 31.11,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.82,
+          "total": 13.84
+        },
+        {
+          "line_number": 181,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 86.04,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 0.59,
+          "total": 7.86
+        },
+        {
+          "line_number": 182,
+          "cat": "DOR",
+          "sel": "FRRS",
+          "description": "French door - Detach & reset",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 126.05,
+          "tax": 0.23,
+          "total": 50.46
+        },
+        {
+          "line_number": 183,
+          "cat": "DOR",
+          "sel": "FR2RS",
+          "description": "French double door set - Detach & reset",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 151.02,
+          "tax": 0.11,
+          "total": 30.22
+        },
+        {
+          "line_number": 184,
+          "cat": "PNT",
+          "sel": "FR2",
+          "description": "Paint double French door slabs only - 2 coats (per side)",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 237.6,
+          "tax": 3.98,
+          "total": 95.84
+        },
+        {
+          "line_number": 186,
+          "cat": "PNT",
+          "sel": "LAB",
+          "description": "Painter - per hour",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 116.31,
+          "tax": 0.0,
+          "total": 93.04
+        },
+        {
+          "line_number": 190,
+          "cat": "PNT",
+          "sel": "STRD1",
+          "description": "Paint folding stairway/attic access exterior panel- 1 coat",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 40.7,
+          "tax": 0.71,
+          "total": 8.28
+        }
+      ],
+      "section_totals": {
+        "tax": 1709.44,
+        "total": 10256.89,
+        "validation_delta": 9796.63
+      }
+    },
+    {
+      "section_name": "M. Closet His",
+      "metadata": {
+        "height": 8.0,
+        "areas": {
+          "sf_walls": 234.57,
+          "sf_ceiling": 74.41,
+          "sf_walls_and_ceiling": 308.98,
+          "sf_floor": 74.41,
+          "sy_flooring": 8.27,
+          "lf_floor_perimeter": 29.03,
+          "lf_ceil_perimeter": 35.78
+        },
+        "doors": [
+          {
+            "dimensions": "1' 9\" X 6' 8\"",
+            "opens_into": "SERVER_CLOS2"
+          },
+          {
+            "dimensions": "5' X 8'",
+            "opens_into": "MASTER_BEDRO"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 192,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 74.41,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 2.61,
+          "total": 31.62
+        },
+        {
+          "line_number": 193,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 234.57,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 8.23,
+          "total": 99.7
+        },
+        {
+          "line_number": 194,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 29.03,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 0.99,
+          "total": 17.16
+        },
+        {
+          "line_number": 195,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 29.03,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.76,
+          "total": 12.94
+        },
+        {
+          "line_number": 196,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 74.41,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 0.51,
+          "total": 6.8
+        },
+        {
+          "line_number": 197,
+          "cat": "DOR",
+          "sel": "FRRS",
+          "description": "French door - Detach & reset",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 126.05,
+          "tax": 0.23,
+          "total": 50.46
+        },
+        {
+          "line_number": 198,
+          "cat": "DOR",
+          "sel": "FR2RS",
+          "description": "French double door set - Detach & reset",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 151.02,
+          "tax": 0.11,
+          "total": 30.22
+        },
+        {
+          "line_number": 199,
+          "cat": "PNT",
+          "sel": "FR2",
+          "description": "Paint double French door slabs only - 2 coats (per side)",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 237.6,
+          "tax": 3.98,
+          "total": 95.84
+        },
+        {
+          "line_number": 201,
+          "cat": "PNT",
+          "sel": "LAB",
+          "description": "Painter - per hour",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 116.31,
+          "tax": 0.0,
+          "total": 93.04
+        }
+      ],
+      "section_totals": {
+        "tax": 1615.12,
+        "total": 9690.73,
+        "validation_delta": 9252.95
+      }
+    },
+    {
+      "section_name": "Server Closet",
+      "metadata": {
+        "height": 8.0,
+        "areas": {
+          "sf_walls": 52.33,
+          "sf_ceiling": 3.75,
+          "sf_walls_and_ceiling": 56.08,
+          "sf_floor": 3.75,
+          "sy_flooring": 0.42,
+          "lf_floor_perimeter": 6.25,
+          "lf_ceil_perimeter": 8.0
+        },
+        "doors": [
+          {
+            "dimensions": "1' 9\" X 6' 8\"",
+            "opens_into": "M_CLOSET_HI"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 206,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 3.75,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 0.13,
+          "total": 1.58
+        },
+        {
+          "line_number": 207,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 52.33,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 1.84,
+          "total": 22.24
+        },
+        {
+          "line_number": 208,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 6.25,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 0.21,
+          "total": 3.7
+        },
+        {
+          "line_number": 209,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 6.25,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.16,
+          "total": 2.8
+        },
+        {
+          "line_number": 210,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 3.75,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 0.03,
+          "total": 0.34
+        },
+        {
+          "line_number": 212,
+          "cat": "PNT",
+          "sel": "DOR",
+          "description": "Paint door slab only - 2 coats (per side)",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 60.56,
+          "tax": 1.97,
+          "total": 24.62
+        },
+        {
+          "line_number": 214,
+          "cat": "FNC",
+          "sel": "SH12",
+          "description": "& R&R Shelving - 12\" - in place",
+          "calc": "5*2",
+          "qty": 10.0,
+          "unit": "LF",
+          "remove": 0.57,
+          "replace": 14.33,
+          "tax": 5.42,
+          "total": 30.88
+        },
+        {
+          "line_number": 215,
+          "cat": "PNT",
+          "sel": "SHW",
+          "description": "Seal & paint wood shelving, 12\"- 24\" width",
+          "calc": "2*5",
+          "qty": 10.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 7.49,
+          "tax": 0.63,
+          "total": 15.1
+        }
+      ],
+      "section_totals": {
+        "tax": 131.06,
+        "total": 786.37,
+        "validation_delta": 685.11
+      }
+    },
+    {
+      "section_name": "Master Bath",
+      "metadata": {
+        "height": 8.0,
+        "areas": {
+          "sf_walls": 252.33,
+          "sf_ceiling": 134.79,
+          "sf_walls_and_ceiling": 387.13,
+          "sf_floor": 97.87,
+          "sy_flooring": 10.87,
+          "lf_floor_perimeter": 23.46,
+          "lf_ceil_perimeter": 35.83
+        },
+        "doors": [
+          {
+            "dimensions": "6' 2\" X 8'",
+            "opens_into": "MASTER_BEDRO"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 216,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 134.79,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 4.73,
+          "total": 57.28
+        },
+        {
+          "line_number": 217,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 252.33,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 8.86,
+          "total": 107.26
+        },
+        {
+          "line_number": 218,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 23.46,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.62,
+          "total": 10.44
+        },
+        {
+          "line_number": 219,
+          "cat": "TIL",
+          "sel": "SEALG",
+          "description": "Seal grout on tile wall",
+          "calc": "",
+          "qty": 121.33,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.63,
+          "tax": 2.25,
+          "total": 64.28
+        },
+        {
+          "line_number": 220,
+          "cat": "DOR",
+          "sel": "FRRS",
+          "description": "French door - Detach & reset",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 126.05,
+          "tax": 0.23,
+          "total": 50.46
+        },
+        {
+          "line_number": 221,
+          "cat": "PNT",
+          "sel": "FRS",
+          "description": "Stain & finish French door slab only - (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 235.96,
+          "tax": 4.4,
+          "total": 189.64
+        },
+        {
+          "line_number": 223,
+          "cat": "PNT",
+          "sel": "DORTS",
+          "description": "Stain & finish door/window trim & jamb (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 67.23,
+          "tax": 3.2,
+          "total": 54.42
+        },
+        {
+          "line_number": 224,
+          "cat": "ELE",
+          "sel": "BFAN",
+          "description": "& R&R Bathroom ventilation fan, light, and heater",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 26.73,
+          "replace": 330.49,
+          "tax": 22.12,
+          "total": 75.86
+        },
+        {
+          "line_number": 226,
+          "cat": "LIT",
+          "sel": "BAR2",
+          "description": "& R&R Light bar - 2 lights",
+          "calc": "3",
+          "qty": 3.0,
+          "unit": "EA",
+          "remove": 30.34,
+          "replace": 97.74,
+          "tax": 6.99,
+          "total": 78.24
+        },
+        {
+          "line_number": 228,
+          "cat": "FNH",
+          "sel": "TVRS",
+          "description": "TV Brackets - Wall or ceiling mounted - Detach & reset",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 68.25,
+          "tax": 0.0,
+          "total": 13.66
+        }
+      ],
+      "section_totals": {
+        "tax": 1373.58,
+        "total": 8241.54,
+        "validation_delta": 7540.0
+      }
+    },
+    {
+      "section_name": "Laundry Room",
+      "metadata": {
+        "height": 7.0,
+        "areas": {
+          "sf_walls": 252.21,
+          "sf_ceiling": 86.02,
+          "sf_walls_and_ceiling": 338.23,
+          "sf_floor": 55.35,
+          "sy_flooring": 6.15,
+          "lf_floor_perimeter": 16.55,
+          "lf_ceil_perimeter": 41.89
+        },
+        "doors": [
+          {
+            "dimensions": "3' X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "3' X 7'",
+            "opens_into": "HALLWAY"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 229,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 86.02,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 3.02,
+          "total": 36.56
+        },
+        {
+          "line_number": 230,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 252.21,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 8.85,
+          "total": 107.2
+        },
+        {
+          "line_number": 231,
+          "cat": "FNC",
+          "sel": "B6H",
+          "description": "& R&R Baseboard - 6\" hardwood",
+          "calc": "",
+          "qty": 16.55,
+          "unit": "LF",
+          "remove": 0.75,
+          "replace": 10.64,
+          "tax": 11.73,
+          "total": 40.04
+        },
+        {
+          "line_number": 232,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 16.55,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 0.56,
+          "total": 9.78
+        },
+        {
+          "line_number": 233,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 16.55,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.44,
+          "total": 7.36
+        },
+        {
+          "line_number": 234,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 55.35,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 0.38,
+          "total": 5.06
+        },
+        {
+          "line_number": 235,
+          "cat": "FCT",
+          "sel": "MAT",
+          "description": "& R&R Tile mat - uncoupling membrane",
+          "calc": "",
+          "qty": 55.35,
+          "unit": "SF",
+          "remove": 1.39,
+          "replace": 6.9,
+          "tax": 14.14,
+          "total": 94.58
+        },
+        {
+          "line_number": 237,
+          "cat": "FCT",
+          "sel": "MORTAR",
+          "description": "& R&R Mortar bed for tile floors",
+          "calc": "",
+          "qty": 55.35,
+          "unit": "SF",
+          "remove": 2.05,
+          "replace": 7.22,
+          "tax": 12.68,
+          "total": 105.16
+        },
+        {
+          "line_number": 238,
+          "cat": "FCT",
+          "sel": "SEALG",
+          "description": "Grout sealer",
+          "calc": "",
+          "qty": 55.35,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.42,
+          "tax": 1.03,
+          "total": 27.0
+        },
+        {
+          "line_number": 241,
+          "cat": "PNT",
+          "sel": "FRX",
+          "description": "Prime & paint French door slab only - exterior (per side)",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 168.02,
+          "tax": 3.62,
+          "total": 67.92
+        },
+        {
+          "line_number": 243,
+          "cat": "DOR",
+          "sel": "FRRS",
+          "description": "French door - Detach & reset",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 126.05,
+          "tax": 0.11,
+          "total": 25.24
+        },
+        {
+          "line_number": 245,
+          "cat": "PNT",
+          "sel": "FRS",
+          "description": "Stain & finish French door slab only - (per side)",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 235.96,
+          "tax": 2.2,
+          "total": 94.82
+        },
+        {
+          "line_number": 246,
+          "cat": "PNT",
+          "sel": "DORTS",
+          "description": "Stain & finish door/window trim & jamb (per side)",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 67.23,
+          "tax": 1.6,
+          "total": 27.22
+        },
+        {
+          "line_number": 247,
+          "cat": "PLM",
+          "sel": "CAP",
+          "description": "Gas/water line cap/plug - per cap",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 18.17,
+          "tax": 0.12,
+          "total": 3.66
+        }
+      ],
+      "section_totals": {
+        "tax": 3589.34,
+        "total": 21536.03,
+        "validation_delta": 20884.43
+      }
+    },
+    {
+      "section_name": "Bathroom 1",
+      "metadata": {
+        "height": 8.416666666666666,
+        "areas": {
+          "sf_walls": 337.92,
+          "sf_ceiling": 115.5,
+          "sf_walls_and_ceiling": 453.42,
+          "sf_floor": 76.93,
+          "sy_flooring": 8.55,
+          "lf_floor_perimeter": 16.08,
+          "lf_ceil_perimeter": 43.0
+        },
+        "doors": [
+          {
+            "dimensions": "3' X 8'",
+            "opens_into": "BEDROOM_2"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 254,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 115.5,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 4.05,
+          "total": 49.1
+        },
+        {
+          "line_number": 255,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 337.92,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 11.86,
+          "total": 143.64
+        },
+        {
+          "line_number": 256,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 16.08,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 0.42,
+          "total": 7.16
+        },
+        {
+          "line_number": 257,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 76.93,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 0.53,
+          "total": 7.02
+        },
+        {
+          "line_number": 260,
+          "cat": "PNT",
+          "sel": "DORS",
+          "description": "Stain & finish door slab only (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 95.98,
+          "tax": 4.54,
+          "total": 77.68
+        },
+        {
+          "line_number": 261,
+          "cat": "PNT",
+          "sel": "DORTS",
+          "description": "Stain & finish door/window trim & jamb (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 67.23,
+          "tax": 3.2,
+          "total": 54.42
+        },
+        {
+          "line_number": 263,
+          "cat": "ELE",
+          "sel": "BFAN",
+          "description": "& R&R Bathroom ventilation fan, light, and heater",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 26.73,
+          "replace": 330.49,
+          "tax": 22.12,
+          "total": 75.86
+        },
+        {
+          "line_number": 264,
+          "cat": "PNT",
+          "sel": "MASKSF",
+          "description": "Mask the surface area per square foot - plastic and tape - 4 mil",
+          "calc": "60",
+          "qty": 60.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 0.39,
+          "tax": 0.41,
+          "total": 4.76
+        }
+      ],
+      "section_totals": {
+        "tax": 524.48,
+        "total": 3146.97,
+        "validation_delta": 2727.33
+      }
+    },
+    {
+      "section_name": "Bedroom 1",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": 513.72,
+          "sf_ceiling": 224.57,
+          "sf_walls_and_ceiling": 738.29,
+          "sf_floor": 224.0,
+          "sy_flooring": 24.89,
+          "lf_floor_perimeter": 45.0,
+          "lf_ceil_perimeter": 60.07
+        },
+        "doors": [
+          {
+            "dimensions": "3' X 7'",
+            "opens_into": "HALLWAY"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Closet 1 (1)",
+          "metadata": {
+            "height": 8.0,
+            "areas": {
+              "sf_walls": 206.67,
+              "sf_ceiling": 30.67,
+              "sf_walls_and_ceiling": 237.33,
+              "sf_floor": 30.67,
+              "sy_flooring": 3.41,
+              "lf_floor_perimeter": 23.83,
+              "lf_ceil_perimeter": 35.83
+            },
+            "doors": [
+              {
+                "dimensions": "6' X 6' 8\"",
+                "opens_into": "BEDROOM_1"
+              },
+              {
+                "dimensions": "6' X 6' 8\"",
+                "opens_into": "BEDROOM_1"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "line_number": 265,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 255.24,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 8.96,
+          "total": 108.5
+        },
+        {
+          "line_number": 266,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 720.39,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 25.29,
+          "total": 306.18
+        },
+        {
+          "line_number": 267,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 68.83,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 2.35,
+          "total": 40.68
+        },
+        {
+          "line_number": 268,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 68.83,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 1.81,
+          "total": 30.64
+        },
+        {
+          "line_number": 269,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 254.67,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 1.74,
+          "total": 23.26
+        },
+        {
+          "line_number": 272,
+          "cat": "LIT",
+          "sel": "MISC",
+          "description": "& R&R Large recessed light - Omni ray",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 16.9,
+          "replace": 300.0,
+          "tax": 11.99,
+          "total": 65.78
+        },
+        {
+          "line_number": 273,
+          "cat": "DOR",
+          "sel": "FRRS",
+          "description": "French door - Detach & reset",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 126.05,
+          "tax": 0.11,
+          "total": 25.24
+        },
+        {
+          "line_number": 274,
+          "cat": "PNT",
+          "sel": "FR",
+          "description": "Paint French door slab only - 2 coats (per side)",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 118.8,
+          "tax": 1.99,
+          "total": 47.92
+        },
+        {
+          "line_number": 276,
+          "cat": "PNT",
+          "sel": "LAB",
+          "description": "Painter - per hour",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 116.31,
+          "tax": 0.0,
+          "total": 46.52
+        },
+        {
+          "line_number": 277,
+          "cat": "DOR",
+          "sel": "BPRS",
+          "description": "Bypass (sliding) door set - slabs only - Detach & reset",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 44.08,
+          "tax": 0.0,
+          "total": 17.64
+        },
+        {
+          "line_number": 278,
+          "cat": "PNT",
+          "sel": "FR",
+          "description": "Paint French door slab only - 2 coats (per side)",
+          "calc": "8",
+          "qty": 8.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 118.8,
+          "tax": 7.96,
+          "total": 191.68
+        }
+      ],
+      "section_totals": {
+        "tax": 1848.98,
+        "total": 11093.7,
+        "validation_delta": 10189.66
+      }
+    },
+    {
+      "section_name": "Bedroom 2",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": 159.0,
+          "sf_ceiling": 31.43,
+          "sf_walls_and_ceiling": 190.43,
+          "sf_floor": 31.43,
+          "sy_flooring": 3.49,
+          "lf_floor_perimeter": 19.5,
+          "lf_ceil_perimeter": 22.5
+        },
+        "doors": [
+          {
+            "dimensions": "10' X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "3' X 7'",
+            "opens_into": "HALLWAY"
+          },
+          {
+            "dimensions": "3' X 8'",
+            "opens_into": "BATHROOM_1"
+          },
+          {
+            "dimensions": "3' X 7'",
+            "opens_into": "BEDROOM_2"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 279,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
+          "calc": "",
+          "qty": 381.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 13.37,
+          "total": 161.94
+        },
+        {
+          "line_number": 280,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 704.08,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 24.71,
+          "total": 299.24
+        },
+        {
+          "line_number": 281,
+          "cat": "PNT",
+          "sel": "BS>",
+          "description": "Stain & finish baseboard - oversized",
+          "calc": "",
+          "qty": 75.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.92,
+          "tax": 2.56,
+          "total": 44.32
+        },
+        {
+          "line_number": 282,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 75.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 1.97,
+          "total": 33.4
+        },
+        {
+          "line_number": 283,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 375.68,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 2.56,
+          "total": 34.34
+        },
+        {
+          "line_number": 284,
+          "cat": "DOR",
+          "sel": "FRRS",
+          "description": "French door - Detach & reset",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 126.05,
+          "tax": 0.23,
+          "total": 50.46
+        },
+        {
+          "line_number": 285,
+          "cat": "PNT",
+          "sel": "FR",
+          "description": "Paint French door slab only - 2 coats (per side)",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 118.8,
+          "tax": 3.98,
+          "total": 95.84
+        },
+        {
+          "line_number": 288,
+          "cat": "PNT",
+          "sel": "DORTS",
+          "description": "Stain & finish door/window trim & jamb (per side)",
+          "calc": "3",
+          "qty": 3.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 67.23,
+          "tax": 2.4,
+          "total": 40.82
+        },
+        {
+          "line_number": 289,
+          "cat": "PNT",
+          "sel": "DORTS>",
+          "description": "Stain & finish door/window trim & jamb - Large (per side)",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 78.58,
+          "tax": 0.89,
+          "total": 15.9
+        }
+      ],
+      "section_totals": {
+        "tax": 1590.62,
+        "total": 9543.6,
+        "validation_delta": 8767.34
+      }
+    },
+    {
+      "section_name": "Garage",
+      "metadata": {
+        "height": 9.25,
+        "areas": {
+          "sf_walls": 604.35,
+          "sf_ceiling": 409.48,
+          "lf_ceil_perimeter": 81.45
+        },
+        "doors": [
+          {
+            "dimensions": "18' 9\" X 7'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "2' 8\" X 6' 8\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 291,
+          "cat": "DRY",
+          "sel": "AC",
+          "description": "Acoustic ceiling (popcorn) texture",
+          "calc": "",
+          "qty": 409.48,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 1.96,
+          "tax": 2.79,
+          "total": 161.08
+        },
+        {
+          "line_number": 292,
+          "cat": "PNT",
+          "sel": "AC",
+          "description": "Seal & paint acoustic ceiling (popcorn) texture",
+          "calc": "",
+          "qty": 409.48,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.01,
+          "tax": 17.17,
+          "total": 168.06
+        },
+        {
+          "line_number": 293,
+          "cat": "PNT",
+          "sel": "SP2",
+          "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
+          "calc": "",
+          "qty": 604.35,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.09,
+          "tax": 21.21,
+          "total": 256.86
+        },
+        {
+          "line_number": 294,
+          "cat": "PNT",
+          "sel": "MASKLF",
+          "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
+          "calc": "",
+          "qty": 60.03,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 2.2,
+          "tax": 1.58,
+          "total": 26.74
+        },
+        {
+          "line_number": 295,
+          "cat": "DMO",
+          "sel": "MASKSFP",
+          "description": "Floor protection - heavy paper and tape",
+          "calc": "",
+          "qty": 409.48,
+          "unit": "SF",
+          "remove": 0.45,
+          "replace": 0.0,
+          "tax": 2.79,
+          "total": 37.42
+        },
+        {
+          "line_number": 296,
+          "cat": "CNC",
+          "sel": "CS",
+          "description": "Concrete sealer - brush or spray applied",
+          "calc": "",
+          "qty": 409.48,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 1.43,
+          "tax": 30.74,
+          "total": 123.26
+        },
+        {
+          "line_number": 302,
+          "cat": "DOR",
+          "sel": "FRX",
+          "description": "& R&R French door - Exterior - pre-hung unit",
+          "calc": "4",
+          "qty": 4.0,
+          "unit": "EA",
+          "remove": 21.14,
+          "replace": 171.72,
+          "tax": 38.17,
+          "total": 161.94
+        },
+        {
+          "line_number": 304,
+          "cat": "FNH",
+          "sel": "DBX",
+          "description": "Door lockset & deadbolt - exterior",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 105.29,
+          "tax": 6.36,
+          "total": 22.34
+        },
+        {
+          "line_number": 305,
+          "cat": "PNT",
+          "sel": "FR",
+          "description": "Paint French door slab only - 2 coats (per side)",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 118.8,
+          "tax": 1.99,
+          "total": 47.92
+        },
+        {
+          "line_number": 306,
+          "cat": "PNT",
+          "sel": "MASKF",
+          "description": "Mask French door lites (per side of slab)",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 85.92,
+          "tax": 0.26,
+          "total": 34.42
+        }
+      ],
+      "section_totals": {
+        "tax": 2883.42,
+        "total": 17300.23,
+        "validation_delta": 16260.19
+      }
+    },
+    {
+      "section_name": "Attic Space",
+      "metadata": {
+        "height": 3.0,
+        "areas": {
+          "sf_walls": 790.83,
+          "sf_ceiling": 862.0,
+          "sf_walls_and_ceiling": 1652.82,
+          "sf_floor": 862.0,
+          "sy_flooring": 95.78,
+          "lf_floor_perimeter": 263.61,
+          "lf_ceil_perimeter": 263.61
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 308,
+          "cat": "INS",
+          "sel": "BT12",
+          "description": "& R&R Batt insulation - 12\" - R38 - unfaced batt",
+          "calc": "",
+          "qty": 862.0,
+          "unit": "SF",
+          "remove": 0.59,
+          "replace": 2.59,
+          "tax": 142.88,
+          "total": 576.82
+        },
+        {
+          "line_number": 309,
+          "cat": "INS",
+          "sel": "BTCS",
+          "description": "Batt insulation - Add-on for confined spaces",
+          "calc": "",
+          "qty": 862.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 0.66,
+          "tax": 0.0,
+          "total": 113.78
+        }
+      ],
+      "section_totals": {
+        "tax": 690.6,
+        "total": 4143.56,
+        "validation_delta": 3452.96
+      }
+    },
+    {
+      "section_name": "Exterior - Main Structure",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 312,
+          "cat": "ELS",
+          "sel": "SURVC",
+          "description": "& R&R Surveillance camera - color",
+          "calc": "7",
+          "qty": 7.0,
+          "unit": "EA",
+          "remove": 75.86,
+          "replace": 683.25,
+          "tax": 273.0,
+          "total": 1117.36
+        },
+        {
+          "line_number": 315,
+          "cat": "LIT",
+          "sel": "ARCH",
+          "description": "& R&R Architectural effect lights - exterior",
+          "calc": "16",
+          "qty": 16.0,
+          "unit": "EA",
+          "remove": 21.14,
+          "replace": 272.28,
+          "tax": 248.01,
+          "total": 988.54
+        },
+        {
+          "line_number": 316,
+          "cat": "LIT",
+          "sel": "SPOT2M",
+          "description": "& R&R Spot light fixture - double - w/motion sensor",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 21.14,
+          "replace": 195.31,
+          "tax": 4.65,
+          "total": 44.22
+        },
+        {
+          "line_number": 317,
+          "cat": "LIT",
+          "sel": "BLCFSP",
+          "description": "Light bulb - Compact Flrscnt spot/flood (R30) - mat. only",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 10.99,
+          "tax": 2.14,
+          "total": 4.82
+        },
+        {
+          "line_number": 318,
+          "cat": "LIT",
+          "sel": "BLCFA",
+          "description": "Light bulb - Compact Fluorescent stand. type - mat. only",
+          "calc": "35+11*2",
+          "qty": 57.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 8.4,
+          "tax": 46.68,
+          "total": 105.1
+        },
+        {
+          "line_number": 319,
+          "cat": "LIT",
+          "sel": "BLL",
+          "description": "Light bulb - LED A19 - up to 500 lm - material only",
+          "calc": "16",
+          "qty": 16.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 5.23,
+          "tax": 8.16,
+          "total": 18.38
+        },
+        {
+          "line_number": 321,
+          "cat": "AWN",
+          "sel": "WINCM",
+          "description": "Awning - Canvas (retractable) - Add to motorize",
+          "calc": "2",
+          "qty": 2.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 753.29,
+          "tax": 106.47,
+          "total": 322.62
+        }
+      ],
+      "section_totals": {
+        "tax": 14800.0,
+        "total": 88800.0,
+        "validation_delta": 86198.96
+      }
+    },
+    {
+      "section_name": "Opens into Exterior",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 345,
+          "cat": "PNT",
+          "sel": "MASKTD",
+          "description": "Labor to tape drop cloths",
+          "calc": "150",
+          "qty": 150.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 0.27,
+          "tax": 0.15,
+          "total": 8.14
+        },
+        {
+          "line_number": 347,
+          "cat": "CLN",
+          "sel": "VAC",
+          "description": "Vacuuming - (PER SF)",
+          "calc": "150",
+          "qty": 150.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 0.15,
+          "tax": 0.0,
+          "total": 4.5
+        },
+        {
+          "line_number": 348,
+          "cat": "STU",
+          "sel": "NGT",
+          "description": "Stucco - natural gray - troweled",
+          "calc": "470.92",
+          "qty": 470.92,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 10.55,
+          "tax": 66.58,
+          "total": 1006.96
+        },
+        {
+          "line_number": 349,
+          "cat": "PNT",
+          "sel": "STU",
+          "description": "Seal & paint stucco",
+          "calc": "470.92",
+          "qty": 470.92,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.33,
+          "tax": 16.53,
+          "total": 222.74
+        }
+      ],
+      "section_totals": {
+        "tax": 17658.28,
+        "total": 105949.73,
+        "validation_delta": 104707.39
+      }
+    },
+    {
+      "section_name": "Total: Dwelling 14,766.42 120,233.18 951,374.61",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 350,
+          "cat": "EQC",
+          "sel": "SFTURF",
+          "description": "& R&R Artificial grass / turf",
+          "calc": "-",
+          "qty": 181.75,
+          "unit": "SF",
+          "remove": 3.8,
+          "replace": 15.4,
+          "tax": 166.04,
+          "total": 731.14
+        },
+        {
+          "line_number": 351,
+          "cat": "EQC",
+          "sel": "PGTURF",
+          "description": "& R&R Putting green artifical grass",
+          "calc": "17*7",
+          "qty": 119.0,
+          "unit": "SF",
+          "remove": 3.8,
+          "replace": 37.0,
+          "tax": 0.0,
+          "total": 971.04
+        },
+        {
+          "line_number": 352,
+          "cat": "EQC",
+          "sel": "SFTURF",
+          "description": "& R&R Artificial grass / turf",
+          "calc": "8",
+          "qty": 242.78,
+          "unit": "SF",
+          "remove": 3.8,
+          "replace": 15.4,
+          "tax": 221.8,
+          "total": 976.64
+        },
+        {
+          "line_number": 353,
+          "cat": "FCT",
+          "sel": "BIDITM",
+          "description": "Floor Covering - Tile repair per X3 Build - Estimate #1038",
+          "calc": "1156",
+          "qty": 1156.0,
+          "unit": "SF",
+          "remove": 3.8,
+          "replace": 20.19,
+          "tax": 919.71,
+          "total": 5730.42
+        },
+        {
+          "line_number": 355,
+          "cat": "FCT",
+          "sel": "MORTAR",
+          "description": "& R&R Mortar bed for tile floors",
+          "calc": "1156",
+          "qty": 1156.0,
+          "unit": "SF",
+          "remove": 2.05,
+          "replace": 7.22,
+          "tax": 264.87,
+          "total": 2196.2
+        },
+        {
+          "line_number": 356,
+          "cat": "FCT",
+          "sel": "MAT",
+          "description": "Tile mat - uncoupling membrane",
+          "calc": "1156",
+          "qty": 1156.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 6.9,
+          "tax": 295.3,
+          "total": 1654.34
+        },
+        {
+          "line_number": 357,
+          "cat": "FCT",
+          "sel": "SEALG",
+          "description": "Grout sealer",
+          "calc": "1156",
+          "qty": 1156.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.42,
+          "tax": 21.41,
+          "total": 563.78
+        },
+        {
+          "line_number": 358,
+          "cat": "FCT",
+          "sel": "LAB",
+          "description": "Ceramic Tile Flooring Installer - per hour",
+          "calc": "12",
+          "qty": 12.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 170.74,
+          "tax": 0.0,
+          "total": 409.78
+        },
+        {
+          "line_number": 359,
+          "cat": "PLM",
+          "sel": "FLD",
+          "description": "& R&R Floor drain - tub/shower - metal/plastic",
+          "calc": "6",
+          "qty": 6.0,
+          "unit": "EA",
+          "remove": 11.38,
+          "replace": 49.06,
+          "tax": 4.88,
+          "total": 73.52
+        },
+        {
+          "line_number": 360,
+          "cat": "MAS",
+          "sel": "PAVT",
+          "description": "& R&R Paver travertine",
+          "calc": "33.75",
+          "qty": 33.75,
+          "unit": "SF",
+          "remove": 4.01,
+          "replace": 21.64,
+          "tax": 18.92,
+          "total": 176.92
+        },
+        {
+          "line_number": 370,
+          "cat": "FPL",
+          "sel": "MISC",
+          "description": "& R&R Outside fire pit",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 5500.0,
+          "tax": 219.86,
+          "total": 1143.98
+        },
+        {
+          "line_number": 371,
+          "cat": "PLM",
+          "sel": "CAP",
+          "description": "Gas/water line cap/plug - per cap",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 18.17,
+          "tax": 0.12,
+          "total": 3.66
+        },
+        {
+          "line_number": 373,
+          "cat": "SPE",
+          "sel": "GRILL",
+          "description": "Napoleon grill - Premium",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 1500.0,
+          "tax": 0.0,
+          "total": 300.0
+        },
+        {
+          "line_number": 374,
+          "cat": "ORI",
+          "sel": "ORRS",
+          "description": "Ornamental iron handrail - Detach & reset",
+          "calc": "54",
+          "qty": 54.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 38.72,
+          "tax": 1.53,
+          "total": 418.48
+        },
+        {
+          "line_number": 375,
+          "cat": "ORI",
+          "sel": "LAB",
+          "description": "Ornamental Iron Worker - per hour",
+          "calc": "2*8*2",
+          "qty": 32.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 134.34,
+          "tax": 0.0,
+          "total": 859.78
+        },
+        {
+          "line_number": 376,
+          "cat": "CLN",
+          "sel": "ORI",
+          "description": "Clean ornamental iron handrail",
+          "calc": "54",
+          "qty": 54.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 4.24,
+          "tax": 0.21,
+          "total": 45.84
+        },
+        {
+          "line_number": 377,
+          "cat": "PNT",
+          "sel": "ORI",
+          "description": "Prime & paint ornamental iron handrail, 36\" to 42\" high",
+          "calc": "54",
+          "qty": 54.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 15.73,
+          "tax": 20.64,
+          "total": 174.0
+        },
+        {
+          "line_number": 379,
+          "cat": "CLN",
+          "sel": "HR",
+          "description": "Clean handrail - wall mounted",
+          "calc": "46.33",
+          "qty": 46.33,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 0.85,
+          "tax": 0.0,
+          "total": 7.88
+        },
+        {
+          "line_number": 380,
+          "cat": "PNT",
+          "sel": "HR",
+          "description": "Paint handrail - wall mounted",
+          "calc": "46.33",
+          "qty": 46.33,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 1.87,
+          "tax": 0.99,
+          "total": 17.52
+        },
+        {
+          "line_number": 381,
+          "cat": "ORI",
+          "sel": "ORRS",
+          "description": "Ornamental iron handrail - Detach & reset",
+          "calc": "23*2",
+          "qty": 46.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 38.72,
+          "tax": 1.3,
+          "total": 356.48
+        },
+        {
+          "line_number": 382,
+          "cat": "CLN",
+          "sel": "ORI",
+          "description": "Clean ornamental iron handrail",
+          "calc": "46",
+          "qty": 46.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 4.24,
+          "tax": 0.18,
+          "total": 39.04
+        },
+        {
+          "line_number": 383,
+          "cat": "PNT",
+          "sel": "ORI",
+          "description": "Prime & paint ornamental iron handrail, 36\" to 42\" high",
+          "calc": "46",
+          "qty": 46.0,
+          "unit": "LF",
+          "remove": 0.0,
+          "replace": 15.73,
+          "tax": 17.58,
+          "total": 148.24
+        },
+        {
+          "line_number": 385,
+          "cat": "STU",
+          "sel": "NGT",
+          "description": "Stucco - natural gray - troweled",
+          "calc": "308",
+          "qty": 308.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 10.55,
+          "tax": 43.54,
+          "total": 658.58
+        },
+        {
+          "line_number": 386,
+          "cat": "PNT",
+          "sel": "STU",
+          "description": "Seal & paint stucco",
+          "calc": "308",
+          "qty": 308.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.33,
+          "tax": 10.81,
+          "total": 145.68
+        },
+        {
+          "line_number": 388,
+          "cat": "STU",
+          "sel": "NGT",
+          "description": "Stucco - natural gray - troweled",
+          "calc": "216.54",
+          "qty": 216.54,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 10.55,
+          "tax": 30.61,
+          "total": 463.02
+        },
+        {
+          "line_number": 389,
+          "cat": "PNT",
+          "sel": "STU",
+          "description": "Seal & paint stucco",
+          "calc": "216.54",
+          "qty": 216.54,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.33,
+          "tax": 7.6,
+          "total": 102.42
+        },
+        {
+          "line_number": 391,
+          "cat": "STU",
+          "sel": "NGT",
+          "description": "Stucco - natural gray - troweled",
+          "calc": "23",
+          "qty": 23.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 10.55,
+          "tax": 3.25,
+          "total": 49.2
+        },
+        {
+          "line_number": 392,
+          "cat": "PNT",
+          "sel": "STU",
+          "description": "Seal & paint stucco",
+          "calc": "23",
+          "qty": 23.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 2.33,
+          "tax": 0.81,
+          "total": 10.88
+        },
+        {
+          "line_number": 393,
+          "cat": "LIT",
+          "sel": "ARCH",
+          "description": "& R&R Architectural effect lights - exterior",
+          "calc": "14",
+          "qty": 14.0,
+          "unit": "EA",
+          "remove": 21.14,
+          "replace": 272.28,
+          "tax": 217.01,
+          "total": 864.98
+        },
+        {
+          "line_number": 395,
+          "cat": "FEN",
+          "sel": "WDGT8",
+          "description": "& R&R Wood gate 7'- 8' high - cedar or equal",
+          "calc": "56+15",
+          "qty": 71.0,
+          "unit": "LF",
+          "remove": 9.49,
+          "replace": 114.69,
+          "tax": 327.37,
+          "total": 1828.84
+        },
+        {
+          "line_number": 396,
+          "cat": "PNT",
+          "sel": "FEN",
+          "description": "Seal & paint - wood fence/gate",
+          "calc": "71*7",
+          "qty": 497.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 1.84,
+          "tax": 21.81,
+          "total": 187.26
+        },
+        {
+          "line_number": 397,
+          "cat": "FEN",
+          "sel": "LAB",
+          "description": "Fencing Installer - per hour",
+          "calc": "6",
+          "qty": 6.0,
+          "unit": "HR",
+          "remove": 0.0,
+          "replace": 162.18,
+          "tax": 0.0,
+          "total": 194.62
+        },
+        {
+          "line_number": 399,
+          "cat": "CNC",
+          "sel": "COR1",
+          "description": "Concrete core drilling - 1\" diameter x 1\" deep",
+          "calc": "8*15",
+          "qty": 120.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 15.35,
+          "tax": 0.0,
+          "total": 368.4
+        },
+        {
+          "line_number": 400,
+          "cat": "CNC",
+          "sel": "EPXMN",
+          "description": "Epoxy injection - concrete repair - Minimum charge",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 1148.0,
+          "tax": 2.15,
+          "total": 230.04
+        },
+        {
+          "line_number": 401,
+          "cat": "CNC",
+          "sel": "RBJ47",
+          "description": "Steel rebar - j-bar - #4, 7' 6\"",
+          "calc": "15",
+          "qty": 15.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 21.62,
+          "tax": 5.18,
+          "total": 65.9
+        },
+        {
+          "line_number": 402,
+          "cat": "CLN",
+          "sel": "PWASH",
+          "description": "Clean with pressure/chemical spray",
+          "calc": "380",
+          "qty": 380.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 0.52,
+          "tax": 0.37,
+          "total": 39.6
+        },
+        {
+          "line_number": 403,
+          "cat": "CNC",
+          "sel": "CS",
+          "description": "Concrete sealer - brush or spray applied",
+          "calc": "380",
+          "qty": 380.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 1.43,
+          "tax": 28.53,
+          "total": 114.38
+        },
+        {
+          "line_number": 405,
+          "cat": "PNT",
+          "sel": "ORIF",
+          "description": "Prime & paint Metal fence - per SF",
+          "calc": "26*5.5*2",
+          "qty": 286.0,
+          "unit": "SF",
+          "remove": 0.0,
+          "replace": 5.24,
+          "tax": 36.53,
+          "total": 307.02
+        }
+      ],
+      "section_totals": {
+        "tax": 26646.22,
+        "total": 281377.01,
+        "validation_delta": 258747.51
+      }
+    },
+    {
+      "section_name": "Landscaping",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [],
+      "section_totals": {
+        "tax": 0.0,
+        "total": 95562.8,
+        "validation_delta": 95562.8
+      }
+    },
+    {
+      "section_name": "Labor Minimums Applied",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "line_number": 416,
+          "cat": "LND",
+          "sel": "DMUL",
+          "description": "Mulching",
+          "calc": "1",
+          "qty": 1.0,
+          "unit": "EA",
+          "remove": 0.0,
+          "replace": 43.2,
+          "tax": 0.0,
+          "total": 8.64
+        }
+      ],
+      "section_totals": {
+        "tax": 8.64,
+        "total": 51.84,
+        "validation_delta": 43.2
+      }
+    }
+  ]
+}

@@ -119,7 +119,7 @@ def is_subroom_header(line: str) -> tuple:
 
 def is_line_item(line: str) -> bool:
     """Check if line is a line item."""
-    return bool(re.match(r'^\d+\.\s+[A-Z]{3}\s+', line))
+    return bool(re.match(r'^\d+\.\s+[A-Z]{3,}\s+', line))
 
 
 def is_totals_line(line: str) -> bool:
