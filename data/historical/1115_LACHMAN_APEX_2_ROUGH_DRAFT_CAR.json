@@ -114,6 +114,7 @@
         "tax": "0.00",
         "op": "0.00",
         "total": "0.00",
+        "computed_total": "0.00",
         "validation_delta": "0.00"
       }
     },
@@ -174,6 +175,7 @@
         "tax": "0.00",
         "op": "0.00",
         "total": "0.00",
+        "computed_total": "0.00",
         "validation_delta": "0.00"
       }
     },
@@ -386,6 +388,7 @@
         "tax": "0.00",
         "op": "7,224.46",
         "total": "49,746.72",
+        "computed_total": "49,746.72",
         "validation_delta": "0.00"
       }
     },
@@ -665,6 +668,7 @@
         "tax": "143.29",
         "op": "423.10",
         "total": "75,198.56",
+        "computed_total": "75,198.56",
         "validation_delta": "0.00"
       }
     },
@@ -761,6 +765,7 @@
         "tax": "0.00",
         "op": "207.36",
         "total": "8,104.11",
+        "computed_total": "8,104.11",
         "validation_delta": "0.00"
       }
     },
@@ -858,6 +863,7 @@
         "tax": "1,626.42",
         "op": "7,291.68",
         "total": "43,750.12",
+        "computed_total": "43,750.12",
         "validation_delta": "0.00"
       }
     },
@@ -1027,6 +1033,7 @@
         "tax": "0.00",
         "op": "15,517.44",
         "total": "224,561.55",
+        "computed_total": "224,561.55",
         "validation_delta": "0.00"
       }
     },
@@ -1256,6 +1263,7 @@
         "tax": "2,616.64",
         "op": "8,553.78",
         "total": "51,322.79",
+        "computed_total": "51,322.79",
         "validation_delta": "0.00"
       }
     },
@@ -1353,6 +1361,7 @@
         "tax": "0.00",
         "op": "0.00",
         "total": "19,000.00",
+        "computed_total": "19,000.00",
         "validation_delta": "0.00"
       }
     },
@@ -1773,6 +1782,7 @@
         "tax": "280.98",
         "op": "1,558.72",
         "total": "9,352.01",
+        "computed_total": "9,352.01",
         "validation_delta": "0.00"
       }
     },
@@ -2150,6 +2160,7 @@
         "tax": "193.50",
         "op": "1,536.56",
         "total": "9,219.35",
+        "computed_total": "9,219.35",
         "validation_delta": "0.00"
       }
     },
@@ -2420,6 +2431,7 @@
         "tax": "50.29",
         "op": "578.32",
         "total": "3,469.77",
+        "computed_total": "3,469.77",
         "validation_delta": "0.00"
       }
     },
@@ -3017,6 +3029,7 @@
         "tax": "1,687.89",
         "op": "11,027.74",
         "total": "66,166.37",
+        "computed_total": "66,166.37",
         "validation_delta": "0.00"
       }
     },
@@ -3619,6 +3632,7 @@
         "tax": "2,795.45",
         "op": "10,115.92",
         "total": "60,695.16",
+        "computed_total": "60,695.16",
         "validation_delta": "0.00"
       }
     },
@@ -4053,6 +4067,7 @@
         "tax": "931.93",
         "op": "6,272.98",
         "total": "37,637.68",
+        "computed_total": "37,637.68",
         "validation_delta": "0.00"
       }
     },
@@ -4439,6 +4454,7 @@
         "tax": "257.48",
         "op": "1,696.00",
         "total": "10,176.00",
+        "computed_total": "10,176.00",
         "validation_delta": "0.00"
       }
     },
@@ -4785,6 +4801,7 @@
         "tax": "248.64",
         "op": "1,709.44",
         "total": "10,256.89",
+        "computed_total": "10,256.89",
         "validation_delta": "0.00"
       }
     },
@@ -5115,6 +5132,7 @@
         "tax": "234.03",
         "op": "1,615.12",
         "total": "9,690.73",
+        "computed_total": "9,690.73",
         "validation_delta": "0.00"
       }
     },
@@ -5361,6 +5379,7 @@
         "tax": "10.49",
         "op": "131.06",
         "total": "786.37",
+        "computed_total": "786.37",
         "validation_delta": "0.00"
       }
     },
@@ -5667,6 +5686,7 @@
         "tax": "251.08",
         "op": "1,373.58",
         "total": "8,241.54",
+        "computed_total": "8,241.54",
         "validation_delta": "0.00"
       }
     },
@@ -6221,6 +6241,7 @@
         "tax": "906.75",
         "op": "3,589.34",
         "total": "21,536.03",
+        "computed_total": "21,536.03",
         "validation_delta": "0.00"
       }
     },
@@ -6491,6 +6512,7 @@
         "tax": "56.16",
         "op": "524.48",
         "total": "3,146.97",
+        "computed_total": "3,146.97",
         "validation_delta": "0.00"
       }
     },
@@ -6847,6 +6869,7 @@
         "tax": "238.56",
         "op": "1,848.98",
         "total": "11,093.70",
+        "computed_total": "11,093.70",
         "validation_delta": "0.00"
       }
     },
@@ -7149,6 +7172,7 @@
         "tax": "209.56",
         "op": "1,590.62",
         "total": "9,543.60",
+        "computed_total": "9,543.60",
         "validation_delta": "0.00"
       }
     },
@@ -7538,6 +7562,7 @@
         "tax": "130.90",
         "op": "2,883.42",
         "total": "17,300.23",
+        "computed_total": "17,300.23",
         "validation_delta": "0.00"
       }
     },
@@ -7602,6 +7627,7 @@
         "tax": "142.88",
         "op": "690.60",
         "total": "4,143.56",
+        "computed_total": "4,143.56",
         "validation_delta": "0.00"
       }
     },
@@ -7863,6 +7889,7 @@
         "tax": "1,660.60",
         "op": "7,038.66",
         "total": "42,231.79",
+        "computed_total": "42,231.79",
         "validation_delta": "0.00"
       }
     },
@@ -8190,6 +8217,7 @@
         "tax": "0.00",
         "op": "14,800.00",
         "total": "88,800.00",
+        "computed_total": "88,800.00",
         "validation_delta": "0.00"
       }
     },
@@ -8477,6 +8505,7 @@
         "tax": "92.90",
         "op": "17,658.28",
         "total": "105,949.73",
+        "computed_total": "105,949.73",
         "validation_delta": "0.00"
       }
     },
@@ -9735,6 +9764,7 @@
         "tax": "4,131.88",
         "op": "26,646.22",
         "total": "281,377.01",
+        "computed_total": "281,377.01",
         "validation_delta": "0.00"
       }
     },
@@ -9968,6 +9998,7 @@
         "tax": "1,539.05",
         "op": "0.00",
         "total": "95,562.80",
+        "computed_total": "95,562.80",
         "validation_delta": "0.00"
       }
     },
@@ -10001,6 +10032,7 @@
         "tax": "0.00",
         "op": "8.64",
         "total": "51.84",
+        "computed_total": "51.84",
         "validation_delta": "0.00"
       }
     }
