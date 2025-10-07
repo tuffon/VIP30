@@ -104,9 +104,34 @@ def is_page_header(line: str, header_patterns: list) -> bool:
     return False
 
 
-def is_table_header(line: str) -> bool:
-    """Check if line is the line items table header."""
-    return line == "CAT SEL ACT DESCRIPTION"
+def is_table_header(line: str, next_line: str = None) -> tuple:
+    """Check if line is the line items table header (may span 2 lines)."""
+    if re.match(r'CAT\s+SEL\s+ACT\s+DESCRIPTION', line):
+        # Check both current line and next line for TAX and O&P
+        combined = line
+        if next_line:
+            combined = line + ' ' + next_line
+        
+        has_tax = 'TAX' in combined
+        has_op = 'O&P' in combined or 'O & P' in combined
+        
+        # Check if next line contains the second part of header
+        is_two_line_header = False
+        if next_line and re.search(r'CALC\s+QTY\s+RESET', next_line):
+            is_two_line_header = True
+        
+        # Debug output
+        print(f"Header detected: has_tax={has_tax}, has_op={has_op}, two_line={is_two_line_header}")
+        print(f"Header line: {line}")
+        if is_two_line_header:
+            print(f"Header line 2: {next_line}")
+        
+        return True, has_tax, has_op, is_two_line_header
+    return False, False, False, False
+
+def is_table_continuation(line: str) -> bool:
+    """Check if line indicates a table continuation on new page."""
+    return bool(re.match(r'^CONTINUED\s*-\s*.+', line, re.IGNORECASE))
 
 
 def is_subroom_header(line: str) -> tuple:
@@ -122,25 +147,77 @@ def is_line_item(line: str) -> bool:
     return bool(re.match(r'^\d+\.\s+[A-Z]{3,}\s+', line))
 
 
+def is_line_item_header(line: str) -> tuple:
+    """
+    Check if line is a line item header with delimiters.
+    Returns (is_header, header_text)
+    """
+    # Pattern: delimiter characters surrounding text
+    # Examples: -----Text-----, ***Text***, ===Text===
+    match = re.match(r'^([-*=~_]{2,})\s*(.+?)\s*([-*=~_]{2,})\s*:?\s*$', line)
+    if match:
+        header_text = match.group(2).strip()
+        # Remove trailing colon if present
+        header_text = header_text.rstrip(':')
+        return True, header_text
+    
+    return False, None
+
+
+def could_be_undelimited_header(line: str, next_line: str = None) -> tuple:
+    """
+    Conservative check for undelimited headers.
+    Returns (is_header, header_text)
+    """
+    # Must be relatively short
+    if len(line) > 80:
+        return False, None
+    
+    # Must not have calculation patterns
+    if re.search(r'\d+\.\d+\s*[A-Z]{2,}', line):
+        return False, None
+    
+    # Must not be a line item itself
+    if re.match(r'^\d+\.\s+[A-Z]{3,}\s+', line):
+        return False, None
+    
+    # Must not be a table header
+    if re.match(r'CAT\s+SEL\s+ACT\s+DESCRIPTION', line):
+        return False, None
+    
+    # Must not be a continuation marker
+    if re.match(r'^CONTINUED\s*-\s*.+', line, re.IGNORECASE):
+        return False, None
+    
+    # Check if next line is a line item (strong signal this is a header)
+    if next_line and re.match(r'^\d+\.\s+[A-Z]{3,}\s+', next_line):
+        # Must not have many common prose words (would be a note)
+        prose_words = len(re.findall(r'\b(the|and|or|of|to|for|in|on|at|with|by|that|this|from|are|was|were|been|being|have|has|had)\b', line, re.IGNORECASE))
+        word_count = len(line.split())
+        
+        if word_count > 0 and prose_words / word_count < 0.4:
+            # Title case or short capitalized phrase
+            if line[0].isupper() and word_count <= 5:
+                return True, line.strip()
+    
+    return False, None
+
+
 def is_totals_line(line: str) -> bool:
     """Check if line is a totals line."""
-    return bool(re.match(r'^Totals:', line))
+    # Match both "Total:" and "Totals:" (singular and plural)
+    return bool(re.match(r'^Totals?:', line))
 
 
-def parse_height(height_str: str) -> float:
-    """Parse height string to float."""
-    if height_str.lower() == 'tray':
-        return 'Tray'
-    
-    height_clean = height_str.replace(' ', '')
-    if "'" in height_clean:
-        if '"' in height_clean:
-            match = re.match(r"(\d+)'(\d+)\"", height_clean)
-            if match:
-                return int(match.group(1)) + int(match.group(2)) / 12.0
-        else:
-            return float(height_clean.replace("'", ""))
-    return height_str
+def parse_height(height_str: str) -> str:
+    """Parse height string - keep original format."""
+    # Just return the original string, don't convert to float
+    return height_str.strip()
+
+
+def format_dollar_amount(value: float) -> str:
+    """Format a dollar amount as a string with 2 decimal places."""
+    return f"{value:,.2f}"
 
 
 def extract_metadata_from_line(line: str) -> dict:
@@ -161,7 +238,8 @@ def extract_metadata_from_line(line: str) -> dict:
     for key, pattern in patterns.items():
         match = re.search(pattern, line)
         if match:
-            areas[key] = float(match.group(1).replace(',', ''))
+            # Keep areas as formatted strings
+            areas[key] = format_dollar_amount(float(match.group(1).replace(',', '')))
     
     if areas:
         metadata['areas'] = areas
@@ -169,7 +247,7 @@ def extract_metadata_from_line(line: str) -> dict:
     doors = []
     for match in re.finditer(r'Door\s+([\d\'\"\s]+[Xx][\d\'\"\s]+)\s+Opens\s+into\s+([A-Z_0-9]+)', line, re.IGNORECASE):
         doors.append({
-            'dimensions': match.group(1).strip(),
+            'dimensions': match.group(1).strip(),  # Keep original format
             'opens_into': match.group(2).strip()
         })
     if doors:
@@ -178,7 +256,7 @@ def extract_metadata_from_line(line: str) -> dict:
     walls = []
     for match in re.finditer(r'Missing\s+Wall\s+([\d\'\"\s/]+[Xx][\d\'\"\s]+)\s+Opens\s+into\s+([A-Z_0-9]+)', line, re.IGNORECASE):
         walls.append({
-            'dimensions': match.group(1).strip(),
+            'dimensions': match.group(1).strip(),  # Keep original format
             'opens_into': match.group(2).strip()
         })
     if walls:
@@ -207,38 +285,212 @@ def merge_metadata(base: dict, new: dict) -> dict:
     return base
 
 
-def parse_line_item_calc(calc_line: str) -> dict:
-    """Parse calculation line for line item."""
-    match = re.search(
-        r'(?:([0-9*+\-.\s]+?)\s+)?'
-        r'([0-9]+(?:\.[0-9]+)?)\s*([A-Z]{2,4})\s+'
-        r'([0-9,]+\.[0-9]+)\s*\+\s*([0-9,]+\.[0-9]+)\s*=\s*'
-        r'([0-9,]+\.[0-9]+)\s+([0-9,]+\.[0-9]+)',
-        calc_line
+def parse_line_item_calc(calc_line: str, has_tax: bool, has_op: bool) -> dict:
+    """Parse calculation line for line item with optional TAX and O&P columns.
+    Supports:
+      1) Priced lines like: [calc] QTY UNIT [brackets] REMOVE + REPLACE = [TAX] [O&P] TOTAL
+      2) Price-less directive lines like: [calc] QTY UNIT SEE X3.BUILD  -> total=0.00, total_note
+      3) Generic terminal-status fallback after QTY UNIT (e.g., SEE X3.BUILD, REF ABC-01, etc.)
+    """
+    # Debug logging to file
+    with open('debug_calc.log', 'a', encoding='utf-8') as debug_file:
+        debug_file.write(f"\n{'='*80}\n")
+        debug_file.write(f"calc_line: '{calc_line}'\n")
+        debug_file.write(f"has_tax: {has_tax}, has_op: {has_op}\n")
+
+    # ------------------------------------------------------------------------------
+    # 1) Explicit SEE handler
+    # ------------------------------------------------------------------------------
+    see_match = re.search(
+        r'(?:([0-9*+\-./\s]+?)\s+)?'        # optional calc
+        r'([0-9]+(?:\.[0-9]+)?)\s*'         # qty
+        r'([A-Z]{2,})\s+'                   # unit
+        r'(?:SEE|SEE:)\s+'                  # SEE marker
+        r'([A-Z0-9][A-Z0-9._/\- ]+?)\s*$',  # note
+        calc_line,
+        re.IGNORECASE
     )
-    
+    if see_match:
+        result = {
+            'calc': (see_match.group(1) or '').strip(),
+            'qty': float(see_match.group(2)),
+            'unit': see_match.group(3).upper(),
+            'remove': None,
+            'replace': None,
+            'tax': None,
+            'op': None,
+            'total': '0.00',
+            'total_note': see_match.group(4).strip().upper()
+        }
+        with open('debug_calc.log', 'a', encoding='utf-8') as debug_file:
+            debug_file.write(f"SEE pattern matched. Returning result: {result}\n")
+        return result
+
+    # ------------------------------------------------------------------------------
+    # 2) Priced formats
+    # ------------------------------------------------------------------------------
+    prefix = (
+        r'(?:([0-9*+\-./\s]+?)\s+)?'
+        r'([0-9]+(?:\.[0-9]+)?)\s*([A-Z]{2,})\s*'
+        r'(?:\[[^\]]+\])?\s*'
+        r'([0-9,]+\.[0-9]+)\s*\+\s*'
+        r'([0-9,]+\.[0-9]+)\s*=\s*'
+    )
+
+    if has_tax and has_op:
+        pattern = prefix + r'([0-9,]+\.[0-9]+)\s+([0-9,]+\.[0-9]+)\s+([0-9,]+\.[0-9]+)\s*$'
+    elif has_tax and not has_op:
+        pattern = prefix + r'([0-9,]+\.[0-9]+)\s+([0-9,]+\.[0-9]+)\s*$'
+    elif not has_tax and has_op:
+        pattern = prefix + r'([0-9,]+\.[0-9]+)\s+([0-9,]+\.[0-9]+)\s*$'
+    else:
+        pattern = prefix + r'(?:[0-9,]+\.[0-9]+\s+)*([0-9,]+\.[0-9]+)\s*$'
+
+    match = re.search(pattern, calc_line)
+
     if match:
-        return {
+        result = {
             'calc': (match.group(1) or '').strip(),
             'qty': float(match.group(2)),
             'unit': match.group(3),
-            'remove': float(match.group(4).replace(',', '')),
-            'replace': float(match.group(5).replace(',', '')),
-            'tax': float(match.group(6).replace(',', '')),
-            'total': float(match.group(7).replace(',', ''))
+            'remove': format_dollar_amount(float(match.group(4).replace(',', ''))),
+            'replace': format_dollar_amount(float(match.group(5).replace(',', '')))
         }
+
+        if has_tax and has_op:
+            result['tax'] = format_dollar_amount(float(match.group(6).replace(',', '')))
+            result['op'] = format_dollar_amount(float(match.group(7).replace(',', '')))
+            result['total'] = format_dollar_amount(float(match.group(8).replace(',', '')))
+        elif has_tax and not has_op:
+            result['tax'] = format_dollar_amount(float(match.group(6).replace(',', '')))
+            result['op'] = None
+            result['total'] = format_dollar_amount(float(match.group(7).replace(',', '')))
+        elif not has_tax and has_op:
+            result['tax'] = None
+            result['op'] = format_dollar_amount(float(match.group(6).replace(',', '')))
+            result['total'] = format_dollar_amount(float(match.group(7).replace(',', '')))
+        else:
+            result['tax'] = None
+            result['op'] = None
+            result['total'] = format_dollar_amount(float(match.group(6).replace(',', '')))
+
+        return result
+
+    # ------------------------------------------------------------------------------
+    # 3) Terminal status fallback
+    # ------------------------------------------------------------------------------
+    terminal_status_match = re.search(
+        r'\b([A-Z0-9]+(?:[._/\-][A-Z0-9]+)*(?:\s+[A-Z0-9]+(?:[._/\-][A-Z0-9]+)*)*)\s*$',
+        calc_line,
+        re.IGNORECASE
+    )
+
+    qty_unit_pattern = (
+        r'(?:([0-9*+\-./\s]+?)\s+)?'
+        r'([0-9]+(?:\.[0-9]+)?)\s*'
+        r'([A-Z]{2,})\s*'
+        r'(?:\[[^\]]+\])?\s+'
+    )
+
+    if terminal_status_match:
+        terminal_status = terminal_status_match.group(1).strip()
+        if re.search(qty_unit_pattern + re.escape(terminal_status) + r'\s*$', calc_line, re.IGNORECASE):
+            match2 = re.search(
+                qty_unit_pattern +
+                r'([A-Z0-9]+(?:[._/\-][A-Z0-9]+)*(?:\s+[A-Z0-9]+(?:[._/\-][A-Z0-9]+)*)*)\s*$',
+                calc_line,
+                re.IGNORECASE
+            )
+            if match2:
+                return {
+                    'calc': (match2.group(1) or '').strip(),
+                    'qty': float(match2.group(2)),
+                    'unit': match2.group(3),
+                    'remove': None,
+                    'replace': None,
+                    'tax': None,
+                    'op': None,
+                    'total': '0.00',
+                    'total_note': match2.group(4).strip().upper()
+                }
+
     return {}
 
 
-def parse_totals(totals_line: str) -> dict:
-    """Parse totals line."""
-    match = re.search(r'Totals:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)$', totals_line)
-    if match:
-        return {
-            'tax': float(match.group(1).replace(',', '')),
-            'total': float(match.group(2).replace(',', ''))
-        }
-    return {'tax': 0.0, 'total': 0.0}
+def parse_totals(totals_line: str, has_tax: bool, has_op: bool) -> dict:
+    """Parse totals line with optional TAX and O&P. Supports 'Total:' and 'Totals:'."""
+    # Primary pattern-based parsing (explicit shapes)
+    if has_tax and has_op:
+        # Total(s): <section> TAX O&P TOTAL
+        match = re.search(
+            r'Totals?:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)\s*$',
+            totals_line,
+            re.IGNORECASE
+        )
+        if match:
+            return {
+                'tax': format_dollar_amount(float(match.group(1).replace(',', ''))),
+                'op': format_dollar_amount(float(match.group(2).replace(',', ''))),
+                'total': format_dollar_amount(float(match.group(3).replace(',', '')))
+            }
+    elif has_tax and not has_op:
+        # Total(s): <section> TAX TOTAL
+        match = re.search(
+            r'Totals?:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)\s*$',
+            totals_line,
+            re.IGNORECASE
+        )
+        if match:
+            return {
+                'tax': format_dollar_amount(float(match.group(1).replace(',', ''))),
+                'op': None,
+                'total': format_dollar_amount(float(match.group(2).replace(',', '')))
+            }
+    elif not has_tax and has_op:
+        # Total(s): <section> O&P TOTAL
+        match = re.search(
+            r'Totals?:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)\s*$',
+            totals_line,
+            re.IGNORECASE
+        )
+        if match:
+            return {
+                'tax': None,
+                'op': format_dollar_amount(float(match.group(1).replace(',', ''))),
+                'total': format_dollar_amount(float(match.group(2).replace(',', '')))
+            }
+    else:
+        # Total(s): <section> TOTAL
+        match = re.search(
+            r'Totals?:.*?([\d,]+\.\d+)\s*$',
+            totals_line,
+            re.IGNORECASE
+        )
+        if match:
+            return {
+                'tax': None,
+                'op': None,
+                'total': format_dollar_amount(float(match.group(1).replace(',', '')))
+            }
+
+    # Fallback: infer from however many currency numbers we can find
+    nums = re.findall(r'[\d,]+\.\d+', totals_line)
+    if nums:
+        # Take values from the end to avoid picking earlier incidental numbers
+        amounts = [format_dollar_amount(float(n.replace(',', ''))) for n in nums]
+        n = len(amounts)
+
+        if has_tax and has_op and n >= 3:
+            return {'tax': amounts[-3], 'op': amounts[-2], 'total': amounts[-1]}
+        if has_tax and not has_op and n >= 2:
+            return {'tax': amounts[-2], 'op': None, 'total': amounts[-1]}
+        if not has_tax and has_op and n >= 2:
+            return {'tax': None, 'op': amounts[-2], 'total': amounts[-1]}
+        # Default: last number is total
+        return {'tax': None, 'op': None, 'total': amounts[-1]}
+
+    # If nothing matched, return zeros vs None to be explicit
+    return {'tax': None, 'op': None, 'total': '0.00'}
 
 
 def parse_document(pdf_path: str) -> tuple:
@@ -260,10 +512,15 @@ def parse_document(pdf_path: str) -> tuple:
     current_section = None
     current_subroom = None
     current_line_item = None
+    collecting_notes = False
+    has_tax = False
+    has_op = False
+    pending_header_lines = []
     
     i = 0
     while i < len(lines):
         line = lines[i]
+        next_line = lines[i+1] if i+1 < len(lines) else None
         
         if state == ParseState.LOOKING_FOR_SECTION:
             if is_diagram_artifact(line):
@@ -293,24 +550,37 @@ def parse_document(pdf_path: str) -> tuple:
                     i += 1
                     continue
             
-            if i + 1 < len(lines) and is_table_header(lines[i + 1]):
-                if not is_page_header(line, header_patterns):
-                    section_name = line.strip()
-                    
+            # Check if current line is a table header
+            is_header, header_has_tax, header_has_op, is_two_line = is_table_header(line, next_line)
+            if is_header:
+                # Look back for section name
+                section_name = "Unknown Section"
+                if i > 0 and not is_page_header(lines[i-1], header_patterns):
+                    section_name = lines[i-1].strip()
                     name_match = re.search(r'([A-Z][A-Za-z\s\-/]+)\s*$', section_name)
                     if name_match:
                         section_name = name_match.group(1).strip()
-                    
-                    current_section = {
-                        'section_name': section_name,
-                        'metadata': {},
-                        'subrooms': [],
-                        'line_items': [],
-                        'section_totals': {}
-                    }
-                    state = ParseState.IN_SECTION_METADATA
-                i += 1
+                
+                current_section = {
+                    'section_name': section_name,
+                    'metadata': {},
+                    'subrooms': [],
+                    'line_items': [],
+                    'section_totals': {}
+                }
+                has_tax = header_has_tax
+                has_op = header_has_op
+                state = ParseState.IN_LINE_ITEMS
+                
+                # Skip second header line if two-line header
+                if is_two_line:
+                    i += 2
+                else:
+                    i += 1
                 continue
+            
+            i += 1
+            continue
         
         elif state == ParseState.IN_SECTION_METADATA:
             is_sub, sub_name, sub_height = is_subroom_header(line)
@@ -323,9 +593,19 @@ def parse_document(pdf_path: str) -> tuple:
                 i += 1
                 continue
             
-            if is_table_header(line):
+            # Get next_line and unpack 4 values
+            next_line = lines[i+1] if i+1 < len(lines) else None
+            is_header, header_has_tax, header_has_op, is_two_line = is_table_header(line, next_line)
+            if is_header:
+                # Set has_tax and has_op here
+                has_tax = header_has_tax
+                has_op = header_has_op
                 state = ParseState.IN_LINE_ITEMS
-                i += 1
+                # Skip second header line if two-line header
+                if is_two_line:
+                    i += 2
+                else:
+                    i += 1
                 continue
             
             meta = extract_metadata_from_line(line)
@@ -346,11 +626,21 @@ def parse_document(pdf_path: str) -> tuple:
                 i += 1
                 continue
             
-            if is_table_header(line):
+            # Get next_line and unpack 4 values
+            next_line = lines[i+1] if i+1 < len(lines) else None
+            is_header, header_has_tax, header_has_op, is_two_line = is_table_header(line, next_line)
+            if is_header:
                 current_section['subrooms'].append(current_subroom)
                 current_subroom = None
+                # Set has_tax and has_op here
+                has_tax = header_has_tax
+                has_op = header_has_op
                 state = ParseState.IN_LINE_ITEMS
-                i += 1
+                # Skip second header line if two-line header
+                if is_two_line:
+                    i += 2
+                else:
+                    i += 1
                 continue
             
             meta = extract_metadata_from_line(line)
@@ -361,18 +651,105 @@ def parse_document(pdf_path: str) -> tuple:
             continue
         
         elif state == ParseState.IN_LINE_ITEMS:
+            # Check for table continuation
+            if is_table_continuation(line):
+                # Clear any pending notes - continuation marks a hard break
+                pending_header_lines = []
+                
+                # Skip continuation line
+                i += 1
+                
+                # Read the table header that follows and update has_tax/has_op
+                if i < len(lines):
+                    next_line_after_continuation = lines[i+1] if i+1 < len(lines) else None
+                    is_header, new_has_tax, new_has_op, is_two_line = is_table_header(lines[i], next_line_after_continuation)
+                    if is_header:
+                        # Update has_tax and has_op from continuation header
+                        has_tax = new_has_tax
+                        has_op = new_has_op
+                        # Skip second header line if two-line header
+                        if is_two_line:
+                            i += 2
+                        else:
+                            i += 1
+                continue
+            
+            # Check for totals line - end of section
             if is_totals_line(line):
-                current_section['section_totals'] = parse_totals(line)
+                # Process any pending header lines as notes
+                if pending_header_lines and current_line_item:
+                    note_text = ' '.join(pending_header_lines)
+                    if current_line_item['notes']:
+                        current_line_item['notes'] += ' ' + note_text
+                    else:
+                        current_line_item['notes'] = note_text
+                    pending_header_lines = []
+                
+                # If we were collecting notes, finalize the current line item
+                if collecting_notes and current_line_item:
+                    current_section['line_items'].append(current_line_item)
+                    current_line_item = None
+                    collecting_notes = False
+                
+                current_section['section_totals'] = parse_totals(line, has_tax, has_op)
                 sections.append(current_section)
                 current_section = None
+                # Reset has_tax and has_op when section ends
+                has_tax = False
+                has_op = False
                 state = ParseState.LOOKING_FOR_SECTION
                 i += 1
                 continue
             
+            # Check for line item header (delimited only)
+            is_header_line, header_text = is_line_item_header(line)
+            if is_header_line:
+                # Process pending notes first if any
+                if pending_header_lines and current_line_item:
+                    note_text = ' '.join(pending_header_lines)
+                    if current_line_item['notes']:
+                        current_line_item['notes'] += ' ' + note_text
+                    else:
+                        current_line_item['notes'] = note_text
+                    pending_header_lines = []
+                
+                # Save previous line item if exists
+                if collecting_notes and current_line_item:
+                    current_section['line_items'].append(current_line_item)
+                    current_line_item = None
+                    collecting_notes = False
+                
+                # Add header as a special line item
+                current_section['line_items'].append({
+                    'type': 'header',
+                    'text': header_text
+                })
+                i += 1
+                continue
+            
+            # Check for new line item
             if is_line_item(line):
-                match = re.match(r'^(\d+)\.\s+([A-Z]{3})\s+([A-Z0-9<>]+)\s+[\+\-]?\s*(.*)$', line)
+                # Process pending notes
+                if pending_header_lines and current_line_item:
+                    note_text = ' '.join(pending_header_lines)
+                    if current_line_item['notes']:
+                        current_line_item['notes'] += ' ' + note_text
+                    else:
+                        current_line_item['notes'] = note_text
+                    pending_header_lines = []
+                
+                # FIXED: Save previous line item if it exists (regardless of collecting_notes)
+                if current_line_item:
+                    current_section['line_items'].append(current_line_item)
+                    current_line_item = None
+                    collecting_notes = False
+                
+                # Parse the new line item header
+                # FIXED: Added + and - to SEL code character class to match codes like EVCS+, RC++, etc.
+                match = re.match(r'^(\d+)\.\s+([A-Z]{3,})\s+([A-Z0-9<>+\-/]+)\s+[\+\-&]?\s*(.*)$', line)
                 if match:
                     current_line_item = {
+                        'type': 'line_item',
                         'line_number': int(match.group(1)),
                         'cat': match.group(2),
                         'sel': match.group(3),
@@ -380,19 +757,32 @@ def parse_document(pdf_path: str) -> tuple:
                         'calc': '',
                         'qty': 0.0,
                         'unit': '',
-                        'remove': 0.0,
-                        'replace': 0.0,
-                        'tax': 0.0,
-                        'total': 0.0
+                        'remove': None,
+                        'replace': None,
+                        'tax': None,
+                        'op': None,
+                        'total': None,
+                        'total_note': None,
+                        'notes': ''
                     }
                 i += 1
                 continue
             
-            if current_line_item and re.search(r'\d+\.\d+\s*[A-Z]{2,4}\s+[\d,]+\.\d+\s*\+', line):
-                calc = parse_line_item_calc(line)
-                current_line_item.update(calc)
-                current_section['line_items'].append(current_line_item)
-                current_line_item = None
+            # Check for calculation line (only if we have a current line item)
+            # Enhanced pattern to catch more calc line formats
+            if current_line_item and re.search(r'[0-9.]+\s*[A-Z]{2,}\s*(?:\[[^\]]+\]|\bSEE\b|[0-9,]+\.[0-9]+\s*[+=])', line):
+                calc = parse_line_item_calc(line, has_tax, has_op)
+                if calc:
+                    current_line_item.update(calc)
+                    collecting_notes = True
+                    i += 1
+                    continue
+            
+            # Collect notes if we're in note-collecting mode
+            if collecting_notes and current_line_item:
+                pending_header_lines.append(line)
+                i += 1
+                continue
             
             i += 1
             continue
@@ -445,8 +835,8 @@ def parse_case_metadata(lines: list) -> dict:
             if row_match:
                 coverage_table.append({
                     'coverage_type': row_match.group(1).strip(),
-                    'deductible': float(row_match.group(2).replace(',', '')),
-                    'policy_limit': float(row_match.group(3).replace(',', ''))
+                    'deductible': format_dollar_amount(float(row_match.group(2).replace(',', ''))),
+                    'policy_limit': format_dollar_amount(float(row_match.group(3).replace(',', '')))
                 })
     
     metadata['coverage'] = coverage_table if coverage_table else None
@@ -543,6 +933,10 @@ def parse_case_metadata(lines: list) -> dict:
 
 
 def main():
+    # Clear debug log at start
+    with open('debug_calc.log', 'w', encoding='utf-8') as debug_file:
+        debug_file.write("Debug log started\n")
+    
     input_dir = "documents/historical"
     output_dir = "data/historical"
     
@@ -583,9 +977,19 @@ def main():
         case_metadata = parse_case_metadata(lines)
         
         for section in sections:
-            computed_total = sum(item['total'] for item in section['line_items'])
-            declared_total = section['section_totals'].get('total', 0)
-            section['section_totals']['validation_delta'] = round(declared_total - computed_total, 2)
+            # Convert string totals back to float for validation calculation
+            # Only include line items with totals (not headers or pending items)
+            computed_total = sum(
+                float(item['total'].replace(',', '')) 
+                for item in section['line_items'] 
+                if item.get('type') == 'line_item' and item.get('total') is not None
+            )
+            declared_total_str = section['section_totals'].get('total', '0.00')
+            if declared_total_str:
+                declared_total = float(declared_total_str.replace(',', ''))
+            else:
+                declared_total = 0.0
+            section['section_totals']['validation_delta'] = format_dollar_amount(declared_total - computed_total)
         
         output = {
             'case_metadata': case_metadata,
@@ -604,10 +1008,12 @@ def main():
         
         print(f"Found {len(sections)} sections:")
         for section in sections:
-            items = len(section['line_items'])
-            total = section['section_totals'].get('total', 0)
+            # Count actual line items (not headers)
+            items = sum(1 for item in section['line_items'] if item.get('type') == 'line_item')
+            headers = sum(1 for item in section['line_items'] if item.get('type') == 'header')
+            total = section['section_totals'].get('total', '0.00')
             subrooms_count = len(section['subrooms'])
-            print(f"  - {section['section_name']}: {items} items, ${total:,.2f}, {subrooms_count} subroom(s)")
+            print(f"  - {section['section_name']}: {items} items, {headers} header(s), ${total}, {subrooms_count} subroom(s)")
             for subroom in section['subrooms']:
                 print(f"      └─ {subroom['subroom_name']}")
         
