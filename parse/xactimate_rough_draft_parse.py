@@ -1,9 +1,34 @@
 #!/usr/bin/env python3
 """
-Xactimate Rough Draft Parser
+Xactimate Rough Draft Parser (schema v2)
 - Class accepts input_file and output_path (dir or filename).
 - Writes <stem>.out (raw lines) and <stem>.json (structured).
-- Prints a console table listing ONLY sections with non-zero (cent-rounded) deltas.
+- Console prints per-document table of sections with non-zero deltas.
+- Optional --debug prints doc-level validation table and includes 'validations' in JSON.
+
+Output schema (top-level):
+{
+  "case_metadata": {
+    ...existing fields...,
+    "line_item_totals": {...},
+    "labor_minimums": {...},
+    "additional_charges": {...}
+  },
+  "sections": [...],
+  "grand_total_areas": {...},
+  "coverage": { "rows": [...], "totals": {...} },
+  "recaps_and_summaries": {
+    "summaries_by_coverage": {...},
+    "recap_tax_op": {...},
+    "recap_by_room": {...},
+    "recap_by_category": {...}
+  },
+  // present only when debug=True
+  "validations": {
+    "per_section": [...],
+    "document": {...}
+  }
+}
 """
 
 import os
@@ -62,6 +87,32 @@ ESTIMATE_LINE_PATTERN = r'Estimate:\s*([^\s]+)\s+Depreciate\s+Removal:\s*(Yes|No
 REPEATED_CHAR_PATTERN = r'([A-Z])\1{2,}'
 QUOTE_PATTERN = r'[\"\']{2,}'
 
+# ----- End-of-doc tables -----
+LABOR_MIN_APPLIED_PATTERN = r'^Totals?:\s*Labor\s+Minimums\s+Applied\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)'
+LINE_ITEM_TOTALS_PATTERN = r'^Line\s+Item\s+Totals:\s*([A-Za-z0-9._\-]+)\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)'
+ADD_CHARGE_ROW_PATTERN = r'^([A-Za-z].*?)\s+([\d,]+\.\d+)$'
+ADD_CHARGES_HDR_PATTERN = r'^Additional\s+Charges\s+Charge\s*$'
+ADD_CHARGES_TOTAL_PATTERN = r'^Additional\s+Charges\s+Total\s*\$?([\d,]+\.\d+)'
+
+GRAND_TOTAL_AREAS_HDR = r'^Grand\s+Total\s+Areas:'
+
+# coverage table
+COVERAGE_TABLE_ROW = r'^([A-Za-z0-9][A-Za-z0-9\s,&\-\.\'/]+?)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$'
+COVERAGE_TOTAL_ROW  = r'^Total\s+([\d,]+\.\d+)\s+100\.00%\s+([\d,]+\.\d+)\s+100\.00%$'
+
+# summary pages
+SUMMARY_FOR_HDR = r'^Summary\s+for\s+(.+?)\s*$'
+SUMMARY_KV_ROW  = r'^(Line Item Total|California Lumber Assessment Fee|Material Sales Tax|Subtotal|Overhead|Profit|Replacement Cost Value|Net Claim|Less Deductible|Less Amount Over Limit\(s\))\s+\$?([\d,]+\.\d+)$'
+
+# recap
+RECAP_TAX_OP_HDR = r'^Recap\s+of\s+Taxes,\s+Overhead\s+and\s+Profit\s*$'
+RECAP_TAX_OP_TOTAL_ROW = r'^Total\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)$'
+RECAP_BY_ROOM_HDR = r'^Recap\s+by\s+Room\s*$'
+RECAP_BY_CATEGORY_HDR = r'^Recap\s+by\s+Category\s*$'
+RECAP_LINE_PATTERN = r'^([A-Za-z0-9/_\-\.\s\(\),&\']+?)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$'
+RECAP_COVERAGE_SPLIT = r'^Coverage:\s+(.+?)\s+@?\s*(\d{1,3}\.\d{2})%?\s*=\s*([\d,]+\.\d+)$'
+RECAP_SUBTOTAL_PATTERN = r'^(?:Area\s+Subtotal:|O&P Items Subtotal|Non-O&P Items Subtotal|Subtotal of Areas|Total)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$'
+
 # =========================
 # Data structures
 # =========================
@@ -70,7 +121,6 @@ class TableColumns:
     has_reset: bool = False
     has_tax: bool = False
     has_op: bool = False
-
     def __repr__(self):
         cols = []
         if self.has_reset: cols.append("RESET")
@@ -179,96 +229,37 @@ def is_totals_line(line: str, section_name: Optional[str]) -> bool:
     if section_name and section_name.lower() in line.lower(): return True
     return len(re.findall(r'[\d,]+\.\d{2}', line)) >= 2
 
-def parse_totals(totals_line: str, columns: TableColumns) -> dict:
-    if columns.has_tax and columns.has_op:
-        m = re.search(r'Totals?:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)\s*$', totals_line, re.IGNORECASE)
-        if m:
-            return {'tax': format_dollar_amount(_money_to_float(m.group(1))),
-                    'op': format_dollar_amount(_money_to_float(m.group(2))),
-                    'total': format_dollar_amount(_money_to_float(m.group(3)))} 
-    elif columns.has_tax:
-        m = re.search(r'Totals?:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)\s*$', totals_line, re.IGNORECASE)
-        if m:
-            return {'tax': format_dollar_amount(_money_to_float(m.group(1))),
-                    'op': None,
-                    'total': format_dollar_amount(_money_to_float(m.group(2)))} 
-    elif columns.has_op:
-        m = re.search(r'Totals?:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)\s*$', totals_line, re.IGNORECASE)
-        if m:
-            return {'tax': None,
-                    'op': format_dollar_amount(_money_to_float(m.group(1))),
-                    'total': format_dollar_amount(_money_to_float(m.group(2)))} 
-    else:
-        m = re.search(r'Totals?:.*?([\d,]+\.\d+)\s*$', totals_line, re.IGNORECASE)
-        if m: return {'tax': None, 'op': None, 'total': format_dollar_amount(_money_to_float(m.group(1)))}
-    nums = re.findall(r'[\d,]+\.\d+', totals_line)
-    if nums:
-        amounts = [format_dollar_amount(_money_to_float(n)) for n in nums]
-        res = {'tax': None, 'op': None, 'total': '0.00'}
-        res['total'] = amounts[-1]
-        if columns.has_op and len(amounts) >= 2: res['op'] = amounts[-2]
-        if columns.has_tax and len(amounts) >= (3 if columns.has_op else 2):
-            idx = -3 if columns.has_op else -2
-            res['tax'] = amounts[idx]
-        return res
-    return {'tax': None, 'op': None, 'total': '0.00'}
-
-def extract_metadata_from_line(line: str) -> dict:
-    md: Dict[str, object] = {}
-    areas: Dict[str, str] = {}
-    for key, pat in METADATA_PATTERNS.items():
-        m = re.search(pat, line)
-        if m: areas[key] = format_dollar_amount(_money_to_float(m.group(1)))
-    if areas: md['areas'] = areas
-
-    doors = [{'dimensions': m.group(1).strip(), 'opens_into': m.group(2).strip()}
-             for m in re.finditer(DOOR_PATTERN, line, re.IGNORECASE)]
-    if doors: md['doors'] = doors
-
-    walls = [{'dimensions': m.group(1).strip(), 'opens_into': m.group(2).strip()}
-             for m in re.finditer(MISSING_WALL_PATTERN, line, re.IGNORECASE)]
-    if walls: md['missing_walls'] = walls
-
-    return md
-
-def merge_metadata(base: dict, new: dict) -> dict:
-    for k, v in new.items():
-        if k == 'areas':
-            base.setdefault('areas', {}).update(v)
-        elif k in ('doors', 'missing_walls'):
-            base.setdefault(k, []).extend(v)
-        else:
-            base[k] = v
-    return base
-
 # =========================
 # Parser Class
 # =========================
 class XactimateRoughDraftParser:
-    def __init__(self, input_file: str, output_path: str):
+    def __init__(self, input_file: str, output_path: str, debug: bool = False):
         self.input_file = os.path.abspath(input_file)
         self.output_path = output_path  # dir or filename
+        self.debug = bool(debug)
         if not os.path.exists(self.input_file):
             raise FileNotFoundError(self.input_file)
         self._resolve_outputs()
 
     # ---------- public ----------
     def run(self) -> None:
-        """Parse, write .out/.json, and print delta table."""
-        sections, all_lines = self._parse_document(self.input_file)
+        sections, _ = self._parse_document(self.input_file)
         case_md = self._parse_case_metadata_first_page(self.input_file)
 
-        # compute totals + deltas; collect only non-zero (rounded) deltas for console table
+        # end sections split per new schema
+        full_lines = self._get_full_text_lines()
+        end = self._parse_end_structured(full_lines)
+
+        # attach per-section deltas + collect rows for console
         table_rows = []
+        per_section_validations = []
         for section in sections:
             computed = _round2(self._section_computed_total(section))
             declared_str = section.get('section_totals', {}).get('total', '0.00')
             declared = _round2(_money_to_float(declared_str))
             delta = _round2(declared - computed)
-
             section['section_totals']['computed_total'] = format_dollar_amount(computed)
             section['section_totals']['validation_delta'] = format_dollar_amount(delta)
-
             if delta != 0.0:
                 table_rows.append({
                     'name': section.get('section_name', 'Unknown Section'),
@@ -276,44 +267,68 @@ class XactimateRoughDraftParser:
                     'computed': computed,
                     'delta': delta
                 })
+            per_section_validations.append({
+                'section': section.get('section_name', 'Unknown Section'),
+                'declared': format_dollar_amount(declared),
+                'computed': format_dollar_amount(computed),
+                'delta': format_dollar_amount(delta)
+            })
+
+        # doc-level validations using the new layout
+        doc_validations = self._validate_doc(end, sections)
 
         # writes
-        self._write_raw_lines(all_lines)
-        self._write_json({'case_metadata': case_md, 'sections': sections})
+        self._write_raw_lines(full_lines)
+        payload = {
+            "case_metadata": {
+                **case_md,
+                "line_item_totals": end.get("line_item_totals"),
+                "labor_minimums": end.get("labor_minimums"),
+                "additional_charges": end.get("additional_charges"),
+            },
+            "sections": sections,
+            "grand_total_areas": end.get("grand_total_areas"),
+            "coverage": end.get("coverage"),
+            "recaps_and_summaries": {
+                "summaries_by_coverage": end.get("summaries_by_coverage", {}),
+                "recap_tax_op": end.get("recap_tax_op"),
+                "recap_by_room": end.get("recap_by_room"),
+                "recap_by_category": end.get("recap_by_category"),
+            },
+        }
+        if self.debug:
+            payload["validations"] = {
+                "per_section": per_section_validations,
+                "document": doc_validations
+            }
+        self._write_json(payload)
 
-        # console table
+        # console tables
         self._print_doc_delta_table(os.path.basename(self.input_file), table_rows, len(sections), self.json_path)
+        if self.debug:
+            self._print_doc_validation_table(doc_validations)
 
     # ---------- internals ----------
     def _resolve_outputs(self):
         in_stem = os.path.splitext(os.path.basename(self.input_file))[0]
         out = self.output_path
-
         if os.path.isdir(out):
             base = os.path.join(out, in_stem)
             self.out_path = base + ".out"
             self.json_path = base + ".json"
         else:
-            # treat as filename (ensure dir exists)
             out = os.path.abspath(out)
             os.makedirs(os.path.dirname(out), exist_ok=True)
-            # if caller gave no extension, default to .json
             if os.path.splitext(out)[1] == "":
                 out = out + ".json"
             self.json_path = out
             self.out_path = os.path.splitext(out)[0] + ".out"
-
         os.makedirs(os.path.dirname(self.out_path), exist_ok=True)
 
-    def _write_raw_lines(self, lines: List[str]) -> None:
-        with pdfplumber.open(self.input_file) as pdf:
-            # keep behavior: write full doc text (not just first page)
-            all_lines = []
-            for page in pdf.pages:
-                txt = page.extract_text() or ""
-                all_lines.extend([l.strip() for l in txt.split('\n') if l.strip()])
+    def _write_raw_lines(self, _ignored: List[str]) -> None:
+        lines = self._get_full_text_lines()
         with open(self.out_path, 'w', encoding='utf-8') as f:
-            for l in all_lines:
+            for l in lines:
                 f.write(l + '\n')
 
     def _write_json(self, payload: dict) -> None:
@@ -326,21 +341,32 @@ class XactimateRoughDraftParser:
             print("  - No non-zero deltas.")
             print(f"  ➜ {json_path}")
             return
-
-        name_w = 42
-        amt_w = 16
+        name_w = 42; amt_w = 16
         print("  " + f"{'Section':{name_w}}{'Declared':>{amt_w}}{'Computed':>{amt_w}}{'Δ (Decl-Comp)':>{amt_w}}")
         print("  " + "-" * (name_w + amt_w * 3))
         for r in rows:
-            print(
-                "  "
-                + f"{r['name'][:name_w]:{name_w}}"
-                + f"{_fm(r['declared']):>{amt_w}}"
-                + f"{_fm(r['computed']):>{amt_w}}"
-                + f"{_fm(r['delta']):>{amt_w}}"
-            )
+            print("  " + f"{r['name'][:name_w]:{name_w}}{_fm(r['declared']):>{amt_w}}{_fm(r['computed']):>{amt_w}}{_fm(r['delta']):>{amt_w}}")
         print(f"  (sections with deltas: {len(rows)} / total sections: {total_sections})")
         print(f"  ➜ {json_path}")
+
+    def _print_doc_validation_table(self, v: dict) -> None:
+        print("  Doc-level validations:")
+        keys = [
+            ('sum_sections', 'Sum of section items'),
+            ('end_grand_total', 'End-of-doc grand total'),
+            ('grand_total_vs_sections_delta', 'Δ Grand - Sections'),
+            ('sum_rcv_from_summaries', 'Sum RCV (summaries)'),
+            ('coverage_total_item', 'Coverage table total'),
+            ('coverage_rcv_delta', 'Δ Coverage - Summaries'),
+            ('recap_category_total', 'Recap-by-category total'),
+            ('recap_vs_end_grand_delta', 'Δ Recap - Grand'),
+        ]
+        name_w, val_w = 30, 18
+        print("  " + f"{'Check':{name_w}}{'Value':>{val_w}}")
+        print("  " + "-" * (name_w + val_w))
+        for k, label in keys:
+            if k in v and v[k] is not None:
+                print("  " + f"{label:{name_w}}{v[k]:>{val_w}}")
 
     def _section_computed_total(self, section: dict) -> float:
         return sum(
@@ -357,7 +383,7 @@ class XactimateRoughDraftParser:
                 lines.extend([l.strip() for l in txt.split('\n') if l.strip()])
         return self._parse_case_metadata(lines)
 
-    # ---------- Xactimate-specific parsing below ----------
+    # ---------- core parsing ----------
     def _parse_document(self, pdf_path: str) -> tuple:
         header_patterns = detect_page_header_pattern(pdf_path)
         lines: List[str] = []
@@ -403,8 +429,7 @@ class XactimateRoughDraftParser:
                     if i > 0 and not is_page_header(lines[i-1], header_patterns):
                         prev = lines[i-1].strip()
                         nm = re.search(SECTION_NAME_EXTRACTION, prev)
-                        if nm: section_name = nm.group(1).strip()
-                        else: section_name = prev
+                        section_name = nm.group(1).strip() if nm else prev
                     current_section = {'section_name': section_name, 'metadata': {}, 'subrooms': [],
                                        'line_items': [], 'section_totals': {}}
                     columns = detected_cols
@@ -428,9 +453,9 @@ class XactimateRoughDraftParser:
                     i += 2 if is_two else 1
                     continue
 
-                meta = extract_metadata_from_line(line)
+                meta = self._extract_metadata_from_line(line)
                 if meta:
-                    current_section['metadata'] = merge_metadata(current_section['metadata'], meta)
+                    current_section['metadata'] = self._merge_metadata(current_section['metadata'], meta)
                 i += 1; continue
 
             elif state == ParseState.IN_SUBROOM_METADATA:
@@ -449,9 +474,9 @@ class XactimateRoughDraftParser:
                     i += 2 if is_two else 1
                     continue
 
-                meta = extract_metadata_from_line(line)
+                meta = self._extract_metadata_from_line(line)
                 if meta and current_subroom is not None:
-                    current_subroom['metadata'] = merge_metadata(current_subroom['metadata'], meta)
+                    current_subroom['metadata'] = self._merge_metadata(current_subroom['metadata'], meta)
                 i += 1; continue
 
             elif state == ParseState.IN_LINE_ITEMS:
@@ -492,7 +517,7 @@ class XactimateRoughDraftParser:
                     if collecting_notes and current_line_item:
                         current_section['line_items'].append(current_line_item)
                         current_line_item = None
-                        collecting_notes = False
+                    collecting_notes = False
                     current_section['line_items'].append({'type': 'header', 'text': header_text})
                     i += 1; continue
 
@@ -650,9 +675,364 @@ class XactimateRoughDraftParser:
                     }
         return {}
 
-    def _parse_totals_line(self, line: str, columns: TableColumns) -> dict:
-        return parse_totals(line, columns)
+    def _parse_totals_line(self, totals_line: str, columns: TableColumns) -> dict:
+        if columns.has_tax and columns.has_op:
+            m = re.search(r'Totals?:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)\s+([\d,]+\.\d+)\s*$', totals_line, re.IGNORECASE)
+            if m:
+                return {'tax': format_dollar_amount(_money_to_float(m.group(1))),
+                        'op': format_dollar_amount(_money_to_float(m.group(2))),
+                        'total': format_dollar_amount(_money_to_float(m.group(3)))} 
+        elif columns.has_tax:
+            m = re.search(r'Totals?:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)\s*$', totals_line, re.IGNORECASE)
+            if m:
+                return {'tax': format_dollar_amount(_money_to_float(m.group(1))),
+                        'op': None,
+                        'total': format_dollar_amount(_money_to_float(m.group(2)))} 
+        elif columns.has_op:
+            m = re.search(r'Totals?:.*?([\d,]+\.\d+)\s+([\d,]+\.\d+)\s*$', totals_line, re.IGNORECASE)
+            if m:
+                return {'tax': None,
+                        'op': format_dollar_amount(_money_to_float(m.group(1))),
+                        'total': format_dollar_amount(_money_to_float(m.group(2)))} 
+        else:
+            m = re.search(r'Totals?:.*?([\d,]+\.\d+)\s*$', totals_line, re.IGNORECASE)
+            if m:
+                return {'tax': None, 'op': None, 'total': format_dollar_amount(_money_to_float(m.group(1)))}
+        # fallback inference
+        nums = re.findall(r'[\d,]+\.\d+', totals_line)
+        if nums:
+            amounts = [format_dollar_amount(_money_to_float(n)) for n in nums]
+            res = {'tax': None, 'op': None, 'total': '0.00'}
+            res['total'] = amounts[-1]
+            if columns.has_op and len(amounts) >= 2: res['op'] = amounts[-2]
+            if columns.has_tax and len(amounts) >= (3 if columns.has_op else 2):
+                idx = -3 if columns.has_op else -2
+                res['tax'] = amounts[idx]
+            return res
+        return {'tax': None, 'op': None, 'total': '0.00'}
 
+    def _get_full_text_lines(self) -> List[str]:
+        lines: List[str] = []
+        with pdfplumber.open(self.input_file) as pdf:
+            for page in pdf.pages:
+                txt = pdf.pages[page.page_number-1].extract_text() or ""
+                lines.extend([l.strip() for l in txt.split('\n') if l.strip()])
+        return lines
+
+    # ----- metadata helpers -----
+    def _extract_metadata_from_line(self, line: str) -> dict:
+        md: Dict[str, object] = {}
+        areas: Dict[str, str] = {}
+        for key, pat in METADATA_PATTERNS.items():
+            m = re.search(pat, line)
+            if m: areas[key] = format_dollar_amount(_money_to_float(m.group(1)))
+        if areas: md['areas'] = areas
+
+        doors = [{'dimensions': m.group(1).strip(), 'opens_into': m.group(2).strip()}
+                 for m in re.finditer(DOOR_PATTERN, line, re.IGNORECASE)]
+        if doors: md['doors'] = doors
+
+        walls = [{'dimensions': m.group(1).strip(), 'opens_into': m.group(2).strip()}
+                 for m in re.finditer(MISSING_WALL_PATTERN, line, re.IGNORECASE)]
+        if walls: md['missing_walls'] = walls
+
+        return md
+
+    def _merge_metadata(self, base: dict, new: dict) -> dict:
+        for k, v in new.items():
+            if k == 'areas':
+                base.setdefault('areas', {}).update(v)
+            elif k in ('doors', 'missing_walls'):
+                base.setdefault(k, []).extend(v)
+            else:
+                base[k] = v
+        return base
+
+    # ----- end-of-document parsing in structured form -----
+    def _parse_end_structured(self, all_lines: List[str]) -> dict:
+        result = {
+            "line_item_totals": None,
+            "labor_minimums": None,
+            "additional_charges": None,
+            "grand_total_areas": None,
+            "coverage": {"rows": [], "totals": None},
+            "summaries_by_coverage": {},
+            "recap_tax_op": None,
+            "recap_by_room": {"rows": [], "subtotals": []},
+            "recap_by_category": {"op_items": [], "non_op_items": [], "allocations": {}, "totals": None},
+        }
+
+        i = 0
+        n = len(all_lines)
+        while i < n:
+            line = all_lines[i]
+
+            # Labor Minimums Applied
+            m = re.match(LABOR_MIN_APPLIED_PATTERN, line, re.IGNORECASE)
+            if m:
+                result["labor_minimums"] = {
+                    "labor": format_dollar_amount(_money_to_float(m.group(1))),
+                    "op_profit": format_dollar_amount(_money_to_float(m.group(2))),
+                    "total": format_dollar_amount(_money_to_float(m.group(3))),
+                }
+                i += 1
+                continue
+
+            # Line Item Totals
+            m = re.match(LINE_ITEM_TOTALS_PATTERN, line, re.IGNORECASE)
+            if m:
+                result["line_item_totals"] = {
+                    "estimate": m.group(1),
+                    "material_sales_tax": format_dollar_amount(_money_to_float(m.group(2))),
+                    "overhead_profit": format_dollar_amount(_money_to_float(m.group(3))),
+                    "grand_total": format_dollar_amount(_money_to_float(m.group(4))),
+                }
+                i += 1
+                continue
+
+            # Additional Charges
+            if re.match(ADD_CHARGES_HDR_PATTERN, line):
+                items = []
+                j = i + 1
+                while j < n and not re.match(ADD_CHARGES_TOTAL_PATTERN, all_lines[j]):
+                    rm = re.match(ADD_CHARGE_ROW_PATTERN, all_lines[j])
+                    if rm:
+                        items.append({
+                            "label": rm.group(1).strip(),
+                            "amount": format_dollar_amount(_money_to_float(rm.group(2)))
+                        })
+                    j += 1
+                total = None
+                if j < n:
+                    tm = re.match(ADD_CHARGES_TOTAL_PATTERN, all_lines[j])
+                    if tm:
+                        total = format_dollar_amount(_money_to_float(tm.group(1)))
+                        j += 1
+                result["additional_charges"] = {"items": items, "total": total}
+                i = j
+                continue
+
+            # Grand Total Areas block
+            if re.match(GRAND_TOTAL_AREAS_HDR, line):
+                block_lines = []
+                j = i + 1
+                while j < n:
+                    nxt = all_lines[j]
+                    if not nxt:
+                        break
+                    if nxt.startswith(("Coverage ", "Summary ", "Recap ", "Estimate:")):
+                        break
+                    if "Page:" in nxt or nxt.startswith("Apex "):
+                        break
+                    block_lines.append(nxt)
+                    j += 1
+                blob = " ".join(block_lines)
+                # normalize whitespace
+                blob = re.sub(r'\s+', ' ', blob)
+
+                def grab(pattern: str) -> Optional[str]:
+                    m2 = re.search(pattern, blob, re.IGNORECASE)
+                    return format_dollar_amount(_money_to_float(m2.group(1))) if m2 else None
+
+                gta = {
+                    "sf_walls": grab(r'([\d,]+\.\d+)\s+SF\s+Walls\b'),
+                    "sf_ceiling": grab(r'([\d,]+\.\d+)\s+SF\s+Ceiling\b'),
+                    "sf_walls_and_ceiling": grab(r'([\d,]+\.\d+)\s+SF\s+Walls\s+and\s+Ceiling'),
+                    "sf_floor": grab(r'([\d,]+\.\d+)\s+SF\s+Floor\b'),
+                    "sy_flooring": grab(r'([\d,]+\.\d+)\s+SY\s+Flooring'),
+                    "lf_floor_perimeter": grab(r'([\d,]+\.\d+)\s+LF\s+Floor\s+Perimeter'),
+                    "sf_long_wall": grab(r'([\d,]+\.\d+)\s+SF\s+Long\s+Wall'),
+                    "sf_short_wall": grab(r'([\d,]+\.\d+)\s+SF\s+Short\s+Wall'),
+                    "lf_ceil_perimeter": grab(r'([\d,]+\.\d+)\s+LF\s+Ceil\.\s+Perimeter'),
+                    "floor_area": grab(r'([\d,]+\.\d+)\s+Floor\s+Area'),
+                    "total_area": grab(r'([\d,]+\.\d+)\s+Total\s+Area'),
+                    "interior_wall_area": grab(r'([\d,]+\.\d+)\s+Interior\s+Wall\s+Area'),
+                    "exterior_wall_area": grab(r'([\d,]+\.\d+)\s+Exterior\s+Wall\s+Area'),
+                    "exterior_perimeter_of_walls": grab(r'([\d,]+\.\d+)\s+Exterior\s+Perimeter\s+of\s+Walls'),
+                    "surface_area": grab(r'([\d,]+\.\d+)\s+Surface\s+Area'),
+                    "number_of_squares": grab(r'([\d,]+\.\d+)\s+Number\s+of\s+Squares'),
+                    "total_perimeter_length": grab(r'([\d,]+\.\d+)\s+Total\s+Perimeter\s+Length'),
+                    "total_ridge_length": grab(r'([\d,]+\.\d+)\s+Total\s+Ridge\s+Length'),
+                    "total_hip_length": grab(r'([\d,]+\.\d+)\s+Total\s+Hip\s+Length'),
+                }
+                # remove None keys
+                result["grand_total_areas"] = {k: v for k, v in gta.items() if v is not None}
+                i = j
+                continue
+
+            # Coverage table
+            m = re.match(COVERAGE_TABLE_ROW, line)
+            if m:
+                result["coverage"]["rows"].append({
+                    "name": m.group(1).strip(),
+                    "item_total": format_dollar_amount(_money_to_float(m.group(2))),
+                    "item_pct": float(m.group(3)),
+                    "acv_total": format_dollar_amount(_money_to_float(m.group(4))),
+                    "acv_pct": float(m.group(5)),
+                })
+                i += 1
+                continue
+            m = re.match(COVERAGE_TOTAL_ROW, line)
+            if m:
+                result["coverage"]["totals"] = {
+                    "item_total": format_dollar_amount(_money_to_float(m.group(1))),
+                    "acv_total": format_dollar_amount(_money_to_float(m.group(2))),
+                }
+                i += 1
+                continue
+
+            # Summary for <Coverage>
+            m = re.match(SUMMARY_FOR_HDR, line)
+            if m:
+                cov = m.group(1).strip()
+                j = i + 1
+                kv = {}
+                while j < n and all_lines[j] and not all_lines[j].startswith('Summary for ') \
+                        and not re.match(RECAP_TAX_OP_HDR, all_lines[j]) \
+                        and not re.match(RECAP_BY_ROOM_HDR, all_lines[j]) \
+                        and not re.match(RECAP_BY_CATEGORY_HDR, all_lines[j]):
+                    sm = re.match(SUMMARY_KV_ROW, all_lines[j])
+                    if sm:
+                        kv[sm.group(1)] = format_dollar_amount(_money_to_float(sm.group(2)))
+                    j += 1
+                result["summaries_by_coverage"][cov] = kv
+                i = j
+                continue
+
+            # Recap of Taxes, Overhead and Profit
+            if re.match(RECAP_TAX_OP_HDR, line):
+                j = i + 1
+                total_row = None
+                while j < n:
+                    tm = re.match(RECAP_TAX_OP_TOTAL_ROW, all_lines[j])
+                    if tm:
+                        total_row = {
+                            'overhead': format_dollar_amount(_money_to_float(tm.group(1))),
+                            'profit': format_dollar_amount(_money_to_float(tm.group(2))),
+                            'material_sales_tax': format_dollar_amount(_money_to_float(tm.group(3))),
+                            'storage_rental_tax': format_dollar_amount(_money_to_float(tm.group(4))),
+                        }
+                        j += 1
+                        break
+                    j += 1
+                result["recap_tax_op"] = total_row
+                i = j
+                continue
+
+            # Recap by Room
+            if re.match(RECAP_BY_ROOM_HDR, line):
+                j = i + 1
+                rows, subs = [], []
+                while j < n and not re.match(RECAP_BY_CATEGORY_HDR, all_lines[j]):
+                    rm = re.match(RECAP_LINE_PATTERN, all_lines[j])
+                    if rm:
+                        rows.append({
+                            'name': rm.group(1).strip(),
+                            'total': format_dollar_amount(_money_to_float(rm.group(2))),
+                            'pct': float(rm.group(3)),
+                        })
+                    sm = re.match(RECAP_SUBTOTAL_PATTERN, all_lines[j])
+                    if sm:
+                        subs.append({
+                            'label': all_lines[j].split(':')[0],
+                            'total': format_dollar_amount(_money_to_float(sm.group(1))),
+                            'pct': float(sm.group(2)),
+                        })
+                    j += 1
+                result["recap_by_room"] = {'rows': rows, 'subtotals': subs}
+                i = j
+                continue
+
+            # Recap by Category
+            if re.match(RECAP_BY_CATEGORY_HDR, line):
+                j = i + 1
+                is_non_op = False
+                op_rows, non_op_rows = [], []
+                allocations = {}
+                totals = None
+                while j < n and not re.match(r'^Dwelling\s*-\s*', all_lines[j]):  # stop at diagrams/images
+                    rm = re.match(RECAP_LINE_PATTERN, all_lines[j])
+                    if rm:
+                        item = {
+                            'name': rm.group(1).strip(),
+                            'total': format_dollar_amount(_money_to_float(rm.group(2))),
+                            'pct': float(rm.group(3)),
+                        }
+                        (non_op_rows if is_non_op else op_rows).append(item)
+                    elif re.match(r'^Non-O&P Items (?:Subtotal|Total)', all_lines[j], re.IGNORECASE):
+                        is_non_op = True
+                    else:
+                        am = re.match(r'^(Permits and Fees|Material Sales Tax|Overhead|Profit)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$', all_lines[j])
+                        if am:
+                            key = am.group(1)
+                            allocations[key] = allocations.get(key, {'amount': format_dollar_amount(_money_to_float(am.group(2))), 'pct': float(am.group(3)), 'coverage': []})
+                            k = j + 1
+                            while k < n and re.match(RECAP_COVERAGE_SPLIT, all_lines[k]):
+                                cm = re.match(RECAP_COVERAGE_SPLIT, all_lines[k])
+                                allocations[key]['coverage'].append({
+                                    'coverage': cm.group(1).strip(),
+                                    'pct': float(cm.group(2)),
+                                    'amount': format_dollar_amount(_money_to_float(cm.group(3))),
+                                })
+                                k += 1
+                            j = k - 1
+                        tm = re.match(r'^Total\s+([\d,]+\.\d+)\s+100\.00%$', all_lines[j])
+                        if tm:
+                            totals = {'grand_total': format_dollar_amount(_money_to_float(tm.group(1)))}
+                    j += 1
+                result["recap_by_category"] = {'op_items': op_rows, 'non_op_items': non_op_rows, 'allocations': allocations, 'totals': totals}
+                i = j
+                continue
+
+            i += 1
+
+        return result
+
+    # ----- validations with new layout -----
+    def _validate_doc(self, end: dict, sections: List[dict]) -> dict:
+        v: Dict[str, Optional[str]] = {}
+
+        # sum of all section line-item totals
+        sum_sections = _round2(sum(_money_to_float(li.get('total'))
+                                   for sec in sections
+                                   for li in sec.get('line_items', [])
+                                   if li.get('type') == 'line_item' and li.get('total')))
+        v['sum_sections'] = format_dollar_amount(sum_sections)
+
+        # choose grand_end: prefer line_item_totals.grand_total, else coverage.totals.item_total
+        grand_end = None
+        if end.get('line_item_totals'):
+            grand_end = _money_to_float(end['line_item_totals']['grand_total'])
+        elif end.get('coverage', {}).get('totals'):
+            grand_end = _money_to_float(end['coverage']['totals']['item_total'])
+        if grand_end is not None:
+            grand_end = _round2(grand_end)
+            v['end_grand_total'] = format_dollar_amount(grand_end)
+            v['grand_total_vs_sections_delta'] = format_dollar_amount(_round2(grand_end - sum_sections))
+
+        # coverage totals vs sum of RCV in summaries
+        summaries = end.get('summaries_by_coverage') or {}
+        if summaries:
+            sum_rcv = _round2(sum(_money_to_float(kv.get('Replacement Cost Value', '0.00'))
+                                  for kv in summaries.values() if kv))
+            v['sum_rcv_from_summaries'] = format_dollar_amount(sum_rcv)
+            cov_tot = end.get('coverage', {}).get('totals')
+            if cov_tot:
+                cov_item_total = _round2(_money_to_float(cov_tot['item_total']))
+                v['coverage_total_item'] = format_dollar_amount(cov_item_total)
+                v['coverage_rcv_delta'] = format_dollar_amount(_round2(cov_item_total - sum_rcv))
+
+        # recap-by-category total vs grand_end
+        rbc_total = (end.get('recap_by_category') or {}).get('totals', {}) or {}
+        rbc_val_str = rbc_total.get('grand_total')
+        if rbc_val_str and grand_end is not None:
+            rbc_val = _round2(_money_to_float(rbc_val_str))
+            v['recap_category_total'] = format_dollar_amount(rbc_val)
+            v['recap_vs_end_grand_delta'] = format_dollar_amount(_round2(rbc_val - grand_end))
+
+        return v
+
+    # ----- first-page case metadata -----
     def _parse_case_metadata(self, lines: List[str]) -> dict:
         md: Dict[str, object] = {}
         text = '\n'.join(lines[:50])

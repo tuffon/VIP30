@@ -23,7 +23,10 @@
     "estimate_name": "1115_LACHMAN_CONTENT",
     "depreciate_removal": false,
     "region": "California",
-    "building_type": null
+    "building_type": null,
+    "line_item_totals": null,
+    "labor_minimums": null,
+    "additional_charges": null
   },
   "sections": [
     {
@@ -2648,5 +2651,199 @@
         "validation_delta": "0.00"
       }
     }
-  ]
+  ],
+  "grand_total_areas": {
+    "sf_walls": "8,028.13",
+    "sf_ceiling": "3,649.90",
+    "sf_walls_and_ceiling": "11,678.03",
+    "sf_floor": "3,376.83",
+    "sy_flooring": "375.20",
+    "lf_floor_perimeter": "703.85",
+    "sf_long_wall": "0.00",
+    "sf_short_wall": "0.00",
+    "lf_ceil_perimeter": "1,083.98",
+    "floor_area": "3,376.83",
+    "total_area": "3,934.74",
+    "interior_wall_area": "8,028.13",
+    "exterior_wall_area": "3,798.95",
+    "exterior_perimeter_of_walls": "360.32",
+    "surface_area": "0.00",
+    "number_of_squares": "0.00",
+    "total_perimeter_length": "0.00",
+    "total_ridge_length": "0.00",
+    "total_hip_length": "0.00"
+  },
+  "coverage": {
+    "rows": [],
+    "totals": null
+  },
+  "recaps_and_summaries": {
+    "summaries_by_coverage": {
+      "Contents": {
+        "Line Item Total": "78,738.20",
+        "Material Sales Tax": "566.37",
+        "Replacement Cost Value": "79,304.57",
+        "Net Claim": "79,304.57"
+      }
+    },
+    "recap_tax_op": null,
+    "recap_by_room": {
+      "rows": [
+        {
+          "name": "Pack-Out",
+          "total": "17,022.54",
+          "pct": 21.62
+        },
+        {
+          "name": "Entry/Foyer",
+          "total": "37.07",
+          "pct": 0.05
+        },
+        {
+          "name": "Office",
+          "total": "401.18",
+          "pct": 0.51
+        },
+        {
+          "name": "Guest Bath",
+          "total": "17.59",
+          "pct": 0.02
+        },
+        {
+          "name": "Hallway",
+          "total": "85.09",
+          "pct": 0.11
+        },
+        {
+          "name": "Living Room/Dining Room",
+          "total": "703.30",
+          "pct": 0.89
+        },
+        {
+          "name": "Kitchen",
+          "total": "152.23",
+          "pct": 0.19
+        },
+        {
+          "name": "Master Bedroom",
+          "total": "421.92",
+          "pct": 0.54
+        },
+        {
+          "name": "M. Closet His",
+          "total": "60.70",
+          "pct": 0.08
+        },
+        {
+          "name": "Server Closet",
+          "total": "63.01",
+          "pct": 0.08
+        },
+        {
+          "name": "M. Closet Hers",
+          "total": "96.54",
+          "pct": 0.12
+        },
+        {
+          "name": "Master Bath",
+          "total": "61.26",
+          "pct": 0.08
+        },
+        {
+          "name": "Laundry Room",
+          "total": "80.02",
+          "pct": 0.1
+        },
+        {
+          "name": "Bathroom 1",
+          "total": "23.45",
+          "pct": 0.03
+        },
+        {
+          "name": "Bedroom 1",
+          "total": "268.86",
+          "pct": 0.34
+        },
+        {
+          "name": "Bedroom 2",
+          "total": "287.00",
+          "pct": 0.36
+        },
+        {
+          "name": "Garage",
+          "total": "143.12",
+          "pct": 0.18
+        },
+        {
+          "name": "Cleaning",
+          "total": "29,817.77",
+          "pct": 37.87
+        },
+        {
+          "name": "Storage Area/Room",
+          "total": "13,926.00",
+          "pct": 17.69
+        },
+        {
+          "name": "Pack-back",
+          "total": "15,069.55",
+          "pct": 19.14
+        },
+        {
+          "name": "Subtotal of Areas",
+          "total": "78,738.20",
+          "pct": 100.0
+        },
+        {
+          "name": "Total",
+          "total": "78,738.20",
+          "pct": 100.0
+        }
+      ],
+      "subtotals": [
+        {
+          "label": "Subtotal of Areas 78,738.20 100.00%",
+          "total": "78,738.20",
+          "pct": 100.0
+        },
+        {
+          "label": "Total 78,738.20 100.00%",
+          "total": "78,738.20",
+          "pct": 100.0
+        }
+      ]
+    },
+    "recap_by_category": {
+      "op_items": [
+        {
+          "name": "GENERAL DEMOLITION",
+          "total": "714.69",
+          "pct": 0.9
+        },
+        {
+          "name": "WATER EXTRACTION & REMEDIATION",
+          "total": "47.80",
+          "pct": 0.06
+        },
+        {
+          "name": "Subtotal",
+          "total": "78,738.20",
+          "pct": 99.29
+        },
+        {
+          "name": "Material Sales Tax",
+          "total": "566.37",
+          "pct": 0.71
+        },
+        {
+          "name": "Total",
+          "total": "79,304.57",
+          "pct": 100.0
+        }
+      ],
+      "non_op_items": [],
+      "allocations": {},
+      "totals": null
+    }
+  }
 }

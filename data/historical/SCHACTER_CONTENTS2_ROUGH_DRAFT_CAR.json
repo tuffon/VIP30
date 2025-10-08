@@ -33,7 +33,10 @@
     "estimate_name": "SCHACTER_CONTENTS2",
     "depreciate_removal": false,
     "region": "California",
-    "building_type": null
+    "building_type": null,
+    "line_item_totals": null,
+    "labor_minimums": null,
+    "additional_charges": null
   },
   "sections": [
     {
@@ -2247,5 +2250,169 @@
         "validation_delta": "0.00"
       }
     }
-  ]
+  ],
+  "grand_total_areas": {
+    "sf_walls": "5,618.13",
+    "sf_ceiling": "1,917.56",
+    "sf_walls_and_ceiling": "7,535.69",
+    "sf_floor": "1,897.79",
+    "sy_flooring": "210.87",
+    "lf_floor_perimeter": "678.84",
+    "sf_long_wall": "0.00",
+    "sf_short_wall": "0.00",
+    "lf_ceil_perimeter": "732.00",
+    "floor_area": "1,897.79",
+    "total_area": "2,070.08",
+    "interior_wall_area": "5,643.34",
+    "exterior_wall_area": "2,325.54",
+    "exterior_perimeter_of_walls": "253.50",
+    "surface_area": "0.00",
+    "number_of_squares": "0.00",
+    "total_perimeter_length": "0.00",
+    "total_ridge_length": "0.00",
+    "total_hip_length": "0.00"
+  },
+  "coverage": {
+    "rows": [],
+    "totals": null
+  },
+  "recaps_and_summaries": {
+    "summaries_by_coverage": {
+      "Contents": {
+        "Line Item Total": "61,471.96",
+        "Material Sales Tax": "553.04",
+        "Replacement Cost Value": "62,025.00",
+        "Net Claim": "62,025.00"
+      }
+    },
+    "recap_tax_op": null,
+    "recap_by_room": {
+      "rows": [
+        {
+          "name": "Cleaning",
+          "total": "16,227.30",
+          "pct": 26.4
+        },
+        {
+          "name": "Main Hallway",
+          "total": "130.53",
+          "pct": 0.21
+        },
+        {
+          "name": "Bathroom 1",
+          "total": "34.58",
+          "pct": 0.06
+        },
+        {
+          "name": "Living Room",
+          "total": "564.59",
+          "pct": 0.92
+        },
+        {
+          "name": "Kitchen",
+          "total": "270.32",
+          "pct": 0.44
+        },
+        {
+          "name": "Office",
+          "total": "437.80",
+          "pct": 0.71
+        },
+        {
+          "name": "Laundry Room",
+          "total": "138.92",
+          "pct": 0.23
+        },
+        {
+          "name": "Bedroom 1",
+          "total": "169.99",
+          "pct": 0.28
+        },
+        {
+          "name": "Master bathroom",
+          "total": "102.41",
+          "pct": 0.17
+        },
+        {
+          "name": "Master Bedroom",
+          "total": "306.90",
+          "pct": 0.5
+        },
+        {
+          "name": "Garage",
+          "total": "331.08",
+          "pct": 0.54
+        },
+        {
+          "name": "Storage Area/Room",
+          "total": "11,784.24",
+          "pct": 19.17
+        },
+        {
+          "name": "Pack-back",
+          "total": "13,556.18",
+          "pct": 22.05
+        },
+        {
+          "name": "Subtotal of Areas",
+          "total": "61,471.96",
+          "pct": 100.0
+        },
+        {
+          "name": "Total",
+          "total": "61,471.96",
+          "pct": 100.0
+        }
+      ],
+      "subtotals": [
+        {
+          "label": "Subtotal of Areas 61,471.96 100.00%",
+          "total": "61,471.96",
+          "pct": 100.0
+        },
+        {
+          "label": "Total 61,471.96 100.00%",
+          "total": "61,471.96",
+          "pct": 100.0
+        }
+      ]
+    },
+    "recap_by_category": {
+      "op_items": [
+        {
+          "name": "CLEANING",
+          "total": "1,322.10",
+          "pct": 2.13
+        },
+        {
+          "name": "GENERAL DEMOLITION",
+          "total": "1,389.88",
+          "pct": 2.24
+        },
+        {
+          "name": "WATER EXTRACTION & REMEDIATION",
+          "total": "57.78",
+          "pct": 0.09
+        },
+        {
+          "name": "Subtotal",
+          "total": "61,471.96",
+          "pct": 99.11
+        },
+        {
+          "name": "Material Sales Tax",
+          "total": "553.04",
+          "pct": 0.89
+        },
+        {
+          "name": "Total",
+          "total": "62,025.00",
+          "pct": 100.0
+        }
+      ],
+      "non_op_items": [],
+      "allocations": {},
+      "totals": null
+    }
+  }
 }

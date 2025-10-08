@@ -23,7 +23,10 @@
     "estimate_name": "CHEN_CHAST_CON",
     "depreciate_removal": false,
     "region": "California",
-    "building_type": null
+    "building_type": null,
+    "line_item_totals": null,
+    "labor_minimums": null,
+    "additional_charges": null
   },
   "sections": [
     {
@@ -3342,5 +3345,239 @@
         "validation_delta": "0.00"
       }
     }
-  ]
+  ],
+  "grand_total_areas": {
+    "sf_walls": "16,104.68",
+    "sf_ceiling": "5,355.92",
+    "sf_walls_and_ceiling": "21,460.60",
+    "sf_floor": "5,339.41",
+    "sy_flooring": "593.27",
+    "lf_floor_perimeter": "1,531.02",
+    "sf_long_wall": "0.00",
+    "sf_short_wall": "0.00",
+    "lf_ceil_perimeter": "1,699.67",
+    "floor_area": "5,339.41",
+    "total_area": "5,785.48",
+    "interior_wall_area": "16,057.84",
+    "exterior_wall_area": "7,294.01",
+    "exterior_perimeter_of_walls": "663.28",
+    "surface_area": "0.00",
+    "number_of_squares": "0.00",
+    "total_perimeter_length": "0.00",
+    "total_ridge_length": "0.00",
+    "total_hip_length": "0.00"
+  },
+  "coverage": {
+    "rows": [],
+    "totals": null
+  },
+  "recaps_and_summaries": {
+    "summaries_by_coverage": {
+      "Contents": {
+        "Line Item Total": "115,345.98",
+        "Material Sales Tax": "636.52",
+        "Replacement Cost Value": "115,982.50",
+        "Net Claim": "115,982.50"
+      }
+    },
+    "recap_tax_op": null,
+    "recap_by_room": {
+      "rows": [
+        {
+          "name": "Pack-Out",
+          "total": "32,426.02",
+          "pct": 28.11
+        },
+        {
+          "name": "Cleaning",
+          "total": "30,218.00",
+          "pct": 26.2
+        },
+        {
+          "name": "Storage Area/Room",
+          "total": "32,012.94",
+          "pct": 27.75
+        },
+        {
+          "name": "Pack-Back",
+          "total": "16,469.64",
+          "pct": 14.28
+        },
+        {
+          "name": "Family Room",
+          "total": "121.97",
+          "pct": 0.11
+        },
+        {
+          "name": "Kitchen",
+          "total": "173.75",
+          "pct": 0.15
+        },
+        {
+          "name": "Scullery",
+          "total": "102.05",
+          "pct": 0.09
+        },
+        {
+          "name": "Entry/Foyer",
+          "total": "163.89",
+          "pct": 0.14
+        },
+        {
+          "name": "Dining Room",
+          "total": "239.71",
+          "pct": 0.21
+        },
+        {
+          "name": "Living Room",
+          "total": "645.89",
+          "pct": 0.56
+        },
+        {
+          "name": "Stairs Area",
+          "total": "88.69",
+          "pct": 0.08
+        },
+        {
+          "name": "Guest Bath",
+          "total": "26.48",
+          "pct": 0.02
+        },
+        {
+          "name": "Bedroom 1",
+          "total": "156.68",
+          "pct": 0.14
+        },
+        {
+          "name": "Bed1 Bathroom",
+          "total": "12.14",
+          "pct": 0.01
+        },
+        {
+          "name": "Laundry Room",
+          "total": "34.55",
+          "pct": 0.03
+        },
+        {
+          "name": "Garage Room",
+          "total": "36.36",
+          "pct": 0.03
+        },
+        {
+          "name": "Garage",
+          "total": "25.58",
+          "pct": 0.02
+        },
+        {
+          "name": "Master bedroom",
+          "total": "121.13",
+          "pct": 0.11
+        },
+        {
+          "name": "Master Closet 1",
+          "total": "249.99",
+          "pct": 0.22
+        },
+        {
+          "name": "Master Closet 2",
+          "total": "1,068.62",
+          "pct": 0.93
+        },
+        {
+          "name": "Loft",
+          "total": "105.77",
+          "pct": 0.09
+        },
+        {
+          "name": "Master Bathroom",
+          "total": "76.70",
+          "pct": 0.07
+        },
+        {
+          "name": "Bedroom 3",
+          "total": "263.90",
+          "pct": 0.23
+        },
+        {
+          "name": "Bed 3 Bathroom",
+          "total": "22.61",
+          "pct": 0.02
+        },
+        {
+          "name": "Bedroom 2",
+          "total": "336.82",
+          "pct": 0.29
+        },
+        {
+          "name": "Bathroom 1",
+          "total": "25.87",
+          "pct": 0.02
+        },
+        {
+          "name": "Master Living Room",
+          "total": "120.23",
+          "pct": 0.1
+        },
+        {
+          "name": "Subtotal of Areas",
+          "total": "115,345.98",
+          "pct": 100.0
+        },
+        {
+          "name": "Total",
+          "total": "115,345.98",
+          "pct": 100.0
+        }
+      ],
+      "subtotals": [
+        {
+          "label": "Subtotal of Areas 115,345.98 100.00%",
+          "total": "115,345.98",
+          "pct": 100.0
+        },
+        {
+          "label": "Total 115,345.98 100.00%",
+          "total": "115,345.98",
+          "pct": 100.0
+        }
+      ]
+    },
+    "recap_by_category": {
+      "op_items": [
+        {
+          "name": "CLEANING",
+          "total": "4,186.65",
+          "pct": 3.61
+        },
+        {
+          "name": "GENERAL DEMOLITION",
+          "total": "1,058.82",
+          "pct": 0.91
+        },
+        {
+          "name": "WATER EXTRACTION & REMEDIATION",
+          "total": "200.78",
+          "pct": 0.17
+        },
+        {
+          "name": "Subtotal",
+          "total": "115,345.98",
+          "pct": 99.45
+        },
+        {
+          "name": "Material Sales Tax",
+          "total": "636.52",
+          "pct": 0.55
+        },
+        {
+          "name": "Total",
+          "total": "115,982.50",
+          "pct": 100.0
+        }
+      ],
+      "non_op_items": [],
+      "allocations": {},
+      "totals": null
+    }
+  }
 }

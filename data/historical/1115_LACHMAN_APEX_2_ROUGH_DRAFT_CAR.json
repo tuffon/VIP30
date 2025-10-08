@@ -53,7 +53,27 @@
     "estimate_name": "1115_LACHMAN_APEX_2",
     "depreciate_removal": false,
     "region": "California",
-    "building_type": null
+    "building_type": null,
+    "line_item_totals": {
+      "estimate": "1115_LACHMAN_APEX_2",
+      "material_sales_tax": "20,437.35",
+      "overhead_profit": "154,112.50",
+      "grand_total": "1,378,112.98"
+    },
+    "labor_minimums": {
+      "labor": "0.00",
+      "op_profit": "8.64",
+      "total": "51.84"
+    },
+    "additional_charges": {
+      "items": [
+        {
+          "label": "California Lumber Assessment Fee",
+          "amount": "67.55"
+        }
+      ],
+      "total": "67.55"
+    }
   },
   "sections": [
     {
@@ -10036,5 +10056,557 @@
         "validation_delta": "0.00"
       }
     }
-  ]
+  ],
+  "grand_total_areas": {
+    "sf_walls": "11,031.71",
+    "sf_ceiling": "4,521.52",
+    "sf_walls_and_ceiling": "15,553.23",
+    "sf_floor": "4,238.83",
+    "sy_flooring": "470.98",
+    "lf_floor_perimeter": "1,226.66",
+    "sf_long_wall": "0.00",
+    "sf_short_wall": "0.00",
+    "lf_ceil_perimeter": "1,349.36",
+    "floor_area": "4,238.83",
+    "total_area": "4,907.27",
+    "interior_wall_area": "7,835.93",
+    "exterior_wall_area": "7,110.09",
+    "exterior_perimeter_of_walls": "987.54",
+    "surface_area": "0.00",
+    "number_of_squares": "0.00",
+    "total_perimeter_length": "0.00",
+    "total_ridge_length": "0.00",
+    "total_hip_length": "0.00"
+  },
+  "coverage": {
+    "rows": [
+      {
+        "name": "Dwelling",
+        "item_total": "1,006,331.83",
+        "item_pct": 73.02,
+        "acv_total": "1,006,393.89",
+        "acv_pct": 73.02
+      },
+      {
+        "name": "Dwelling - Debris Removal",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
+        "name": "Dwelling - Code Upgrade",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
+        "name": "Dwelling - Extened Limit",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
+        "name": "Contents",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
+        "name": "Trees, Plants & Shrubs",
+        "item_total": "95,562.80",
+        "item_pct": 6.93,
+        "acv_total": "95,562.80",
+        "acv_pct": 6.93
+      },
+      {
+        "name": "Other Structures",
+        "item_total": "276,218.35",
+        "item_pct": 20.04,
+        "acv_total": "276,237.34",
+        "acv_pct": 20.04
+      },
+      {
+        "name": "Total",
+        "item_total": "1,378,112.98",
+        "item_pct": 100.0,
+        "acv_total": "1,378,194.03",
+        "acv_pct": 100.0
+      }
+    ],
+    "totals": null
+  },
+  "recaps_and_summaries": {
+    "summaries_by_coverage": {
+      "Dwelling": {
+        "Line Item Total": "863,239.35",
+        "California Lumber Assessment Fee": "51.72",
+        "Material Sales Tax": "14,766.42",
+        "Subtotal": "878,057.49",
+        "Overhead": "64,168.20",
+        "Profit": "64,168.20",
+        "Replacement Cost Value": "1,006,393.89",
+        "Net Claim": "1,006,393.89"
+      },
+      "Trees, Plants & Shrubs": {
+        "Line Item Total": "94,023.75",
+        "Material Sales Tax": "1,539.05",
+        "Replacement Cost Value": "95,562.80",
+        "Net Claim": "63,675.00"
+      },
+      "Other Structures": {
+        "Line Item Total": "246,300.03",
+        "California Lumber Assessment Fee": "15.83",
+        "Material Sales Tax": "4,131.88",
+        "Subtotal": "250,447.74",
+        "Overhead": "12,894.80",
+        "Profit": "12,894.80",
+        "Replacement Cost Value": "276,237.34",
+        "Net Claim": "127,350.00"
+      }
+    },
+    "recap_tax_op": {
+      "overhead": "77,063.00",
+      "profit": "77,063.00",
+      "material_sales_tax": "20,437.35",
+      "storage_rental_tax": "0.00"
+    },
+    "recap_by_room": {
+      "rows": [
+        {
+          "name": "General",
+          "total": "42,522.26",
+          "pct": 3.53
+        },
+        {
+          "name": "Electrical",
+          "total": "74,632.17",
+          "pct": 6.2
+        },
+        {
+          "name": "Plumbing",
+          "total": "7,896.75",
+          "pct": 0.66
+        },
+        {
+          "name": "HVAC",
+          "total": "34,832.02",
+          "pct": 2.89
+        },
+        {
+          "name": "Doors/Windows",
+          "total": "209,044.11",
+          "pct": 17.37
+        },
+        {
+          "name": "Appliances",
+          "total": "40,152.37",
+          "pct": 3.34
+        },
+        {
+          "name": "Entry/Foyer",
+          "total": "7,512.31",
+          "pct": 0.62
+        },
+        {
+          "name": "Office",
+          "total": "7,489.29",
+          "pct": 0.62
+        },
+        {
+          "name": "Guest Bath",
+          "total": "2,841.16",
+          "pct": 0.24
+        },
+        {
+          "name": "Living Room/Dining Room",
+          "total": "53,450.74",
+          "pct": 4.44
+        },
+        {
+          "name": "Kitchen",
+          "total": "47,783.79",
+          "pct": 3.97
+        },
+        {
+          "name": "Hallway",
+          "total": "30,432.77",
+          "pct": 2.53
+        },
+        {
+          "name": "Master Bedroom",
+          "total": "8,222.52",
+          "pct": 0.68
+        },
+        {
+          "name": "M. Closet Hers",
+          "total": "8,298.81",
+          "pct": 0.69
+        },
+        {
+          "name": "M. Closet His",
+          "total": "7,841.58",
+          "pct": 0.65
+        },
+        {
+          "name": "Server Closet",
+          "total": "644.82",
+          "pct": 0.05
+        },
+        {
+          "name": "Master Bath",
+          "total": "6,616.88",
+          "pct": 0.55
+        },
+        {
+          "name": "Laundry Room",
+          "total": "17,039.94",
+          "pct": 1.42
+        },
+        {
+          "name": "Bathroom 1",
+          "total": "2,566.33",
+          "pct": 0.21
+        },
+        {
+          "name": "Bedroom 1",
+          "total": "9,006.16",
+          "pct": 0.75
+        },
+        {
+          "name": "Bedroom 2",
+          "total": "7,743.42",
+          "pct": 0.64
+        },
+        {
+          "name": "Garage",
+          "total": "14,285.91",
+          "pct": 1.19
+        },
+        {
+          "name": "Attic Space",
+          "total": "3,310.08",
+          "pct": 0.28
+        },
+        {
+          "name": "Roof",
+          "total": "74,000.00",
+          "pct": 6.15
+        },
+        {
+          "name": "Ext_Surfaces",
+          "total": "88,198.55",
+          "pct": 7.33
+        },
+        {
+          "name": "Other Structures",
+          "total": "250,598.91",
+          "pct": 20.82
+        },
+        {
+          "name": "Landscaping",
+          "total": "94,023.75",
+          "pct": 7.81
+        },
+        {
+          "name": "Subtotal of Areas",
+          "total": "1,203,563.13",
+          "pct": 100.0
+        },
+        {
+          "name": "Total",
+          "total": "1,203,563.13",
+          "pct": 100.0
+        }
+      ],
+      "subtotals": [
+        {
+          "label": "Subtotal of Areas 1,203,563.13 100.00%",
+          "total": "1,203,563.13",
+          "pct": 100.0
+        },
+        {
+          "label": "Total 1,203,563.13 100.00%",
+          "total": "1,203,563.13",
+          "pct": 100.0
+        }
+      ]
+    },
+    "recap_by_category": {
+      "op_items": [
+        {
+          "name": "APPLIANCES",
+          "total": "35,698.07",
+          "pct": 2.59
+        },
+        {
+          "name": "AWNINGS & PATIO COVERS",
+          "total": "12,003.80",
+          "pct": 0.87
+        },
+        {
+          "name": "CABINETRY",
+          "total": "41,153.02",
+          "pct": 2.99
+        },
+        {
+          "name": "CLEANING",
+          "total": "2,984.57",
+          "pct": 0.22
+        },
+        {
+          "name": "CONCRETE & ASPHALT",
+          "total": "4,443.26",
+          "pct": 0.32
+        },
+        {
+          "name": "GENERAL DEMOLITION",
+          "total": "36,153.60",
+          "pct": 2.62
+        },
+        {
+          "name": "DOORS",
+          "total": "11,773.66",
+          "pct": 0.85
+        },
+        {
+          "name": "DRYWALL",
+          "total": "802.58",
+          "pct": 0.06
+        },
+        {
+          "name": "ELECTRICAL",
+          "total": "7,157.62",
+          "pct": 0.52
+        },
+        {
+          "name": "ELECTRICAL - SPECIAL SYSTEMS",
+          "total": "6,674.21",
+          "pct": 0.48
+        },
+        {
+          "name": "MISC. EQUIPMENT - COMMERCIAL",
+          "total": "10,940.76",
+          "pct": 0.79
+        },
+        {
+          "name": "HEAVY EQUIPMENT",
+          "total": "1,440.00",
+          "pct": 0.1
+        },
+        {
+          "name": "FLOOR COVERING - CERAMIC TILE",
+          "total": "92,028.10",
+          "pct": 6.68
+        },
+        {
+          "name": "FLOOR COVERING - WOOD",
+          "total": "10,298.14",
+          "pct": 0.75
+        },
+        {
+          "name": "FENCING",
+          "total": "9,116.07",
+          "pct": 0.66
+        },
+        {
+          "name": "FINISH CARPENTRY / TRIMWORK",
+          "total": "56,562.75",
+          "pct": 4.1
+        },
+        {
+          "name": "FINISH HARDWARE",
+          "total": "1,537.73",
+          "pct": 0.11
+        },
+        {
+          "name": "FIREPLACES",
+          "total": "7,505.26",
+          "pct": 0.54
+        },
+        {
+          "name": "FIRE PROTECTION SYSTEMS",
+          "total": "313.29",
+          "pct": 0.02
+        },
+        {
+          "name": "HEAT, VENT & AIR CONDITIONING",
+          "total": "36,635.03",
+          "pct": 2.66
+        },
+        {
+          "name": "INSULATION",
+          "total": "2,801.50",
+          "pct": 0.2
+        },
+        {
+          "name": "LABOR ONLY",
+          "total": "29,086.50",
+          "pct": 2.11
+        },
+        {
+          "name": "LIGHT FIXTURES",
+          "total": "46,976.13",
+          "pct": 3.41
+        },
+        {
+          "name": "MASONRY",
+          "total": "4,003.29",
+          "pct": 0.29
+        },
+        {
+          "name": "METAL STRUCTURES & COMPONENTS",
+          "total": "894.17",
+          "pct": 0.06
+        },
+        {
+          "name": "ORNAMENTAL IRON",
+          "total": "8,170.88",
+          "pct": 0.59
+        },
+        {
+          "name": "PLUMBING",
+          "total": "2,553.62",
+          "pct": 0.19
+        },
+        {
+          "name": "PAINTING",
+          "total": "42,558.22",
+          "pct": 3.09
+        },
+        {
+          "name": "ROOFING",
+          "total": "32,000.00",
+          "pct": 2.32
+        },
+        {
+          "name": "SPECIALTY ITEMS",
+          "total": "19,224.88",
+          "pct": 1.39
+        },
+        {
+          "name": "STUCCO & EXTERIOR PLASTER",
+          "total": "91,844.76",
+          "pct": 6.66
+        },
+        {
+          "name": "TILE",
+          "total": "6,336.60",
+          "pct": 0.46
+        },
+        {
+          "name": "TEMPORARY REPAIRS",
+          "total": "2,360.00",
+          "pct": 0.17
+        },
+        {
+          "name": "WINDOW TREATMENT",
+          "total": "77,630.31",
+          "pct": 5.63
+        },
+        {
+          "name": "O&P Items Subtotal",
+          "total": "751,662.38",
+          "pct": 54.54
+        }
+      ],
+      "non_op_items": [
+        {
+          "name": "CLEANING",
+          "total": "6,400.00",
+          "pct": 0.46
+        },
+        {
+          "name": "GENERAL DEMOLITION",
+          "total": "47,422.40",
+          "pct": 3.44
+        },
+        {
+          "name": "DRYWALL",
+          "total": "19,000.00",
+          "pct": 1.38
+        },
+        {
+          "name": "ELECTRICAL",
+          "total": "29,560.00",
+          "pct": 2.14
+        },
+        {
+          "name": "ELECTRICAL - SPECIAL SYSTEMS",
+          "total": "43,100.00",
+          "pct": 3.13
+        },
+        {
+          "name": "GLASS, GLAZING, & STOREFRONTS",
+          "total": "32,800.00",
+          "pct": 2.38
+        },
+        {
+          "name": "LANDSCAPING",
+          "total": "46,601.35",
+          "pct": 3.38
+        },
+        {
+          "name": "PLUMBING",
+          "total": "6,860.00",
+          "pct": 0.5
+        },
+        {
+          "name": "SWIMMING POOLS & SPAS",
+          "total": "60,700.00",
+          "pct": 4.4
+        },
+        {
+          "name": "WINDOWS - SLIDING PATIO DOORS",
+          "total": "131,457.00",
+          "pct": 9.54
+        },
+        {
+          "name": "EXTERIOR STRUCTURES",
+          "total": "28,000.00",
+          "pct": 2.03
+        },
+        {
+          "name": "Non-O&P Items Subtotal",
+          "total": "451,900.75",
+          "pct": 32.79
+        },
+        {
+          "name": "O&P Items Subtotal",
+          "total": "751,662.38",
+          "pct": 54.54
+        },
+        {
+          "name": "Permits and Fees",
+          "total": "67.55",
+          "pct": 0.0
+        },
+        {
+          "name": "Material Sales Tax",
+          "total": "20,437.35",
+          "pct": 1.48
+        },
+        {
+          "name": "Overhead",
+          "total": "77,063.00",
+          "pct": 5.59
+        },
+        {
+          "name": "Profit",
+          "total": "77,063.00",
+          "pct": 5.59
+        },
+        {
+          "name": "Total",
+          "total": "1,378,194.03",
+          "pct": 100.0
+        }
+      ],
+      "allocations": {},
+      "totals": null
+    }
+  }
 }
