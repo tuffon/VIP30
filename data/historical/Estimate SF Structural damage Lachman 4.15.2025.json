@@ -1,0 +1,335 @@
+{
+  "case_metadata": {
+    "claim_number": null,
+    "policy_number": null,
+    "loss_type": null,
+    "coverage": null,
+    "property_address": null,
+    "date_of_loss": null,
+    "date_received": null,
+    "date_inspected": null,
+    "date_entered": null,
+    "price_list": null,
+    "depreciate_material": null,
+    "depreciate_op": null,
+    "depreciate_non_material": null,
+    "depreciate_taxes": null,
+    "estimate_name": null,
+    "depreciate_removal": null,
+    "region": null,
+    "building_type": null,
+    "line_item_totals": null,
+    "labor_minimums": null,
+    "additional_charges": null
+  },
+  "sections": [],
+  "grand_total_areas": null,
+  "coverage": {
+    "rows": [],
+    "totals": null
+  },
+  "recaps_and_summaries": {
+    "summaries_by_coverage": {
+      "Dwelling Estimated cost to repair or replace": {},
+      "Coverage A - Dwelling - 39 Smoke": {
+        "Line Item Total": "69,914.45",
+        "Material Sales Tax": "674.52",
+        "Replacement Cost Value": "70,588.97"
+      },
+      "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and": {
+        "Line Item Total": "3,572.27",
+        "Material Sales Tax": "160.81",
+        "Replacement Cost Value": "3,733.08"
+      },
+      "Coverage A - Dwelling Extension - 39 Smoke": {
+        "Line Item Total": "1,262.69",
+        "Material Sales Tax": "1.43",
+        "Replacement Cost Value": "1,264.12"
+      },
+      "Coverage A - Dwelling - 35 Windstorm and Hail": {
+        "Line Item Total": "827.11",
+        "Material Sales Tax": "30.41",
+        "Replacement Cost Value": "857.52"
+      },
+      "Coverage A - Dwelling - 33 Fire, Lightning, &": {
+        "Line Item Total": "10,836.87",
+        "California Lumber Assessment Fee": "11.59",
+        "Material Sales Tax": "441.08",
+        "Replacement Cost Value": "11,289.54"
+      }
+    },
+    "recap_tax_op": {
+      "overhead": "0.00",
+      "profit": "0.00",
+      "material_sales_tax": "1,308.25",
+      "storage_rental_tax": "0.00"
+    },
+    "recap_by_room": {
+      "rows": [],
+      "subtotals": []
+    },
+    "recap_by_category": {
+      "subtotals": [
+        {
+          "label": "Permits and Fees",
+          "total": "11.59",
+          "pct": 0.01,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
+              "pct": 100.0,
+              "amount": "11.59"
+            }
+          ]
+        },
+        {
+          "label": "Material Sales Tax",
+          "total": "1,308.25",
+          "pct": 1.49,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 51.56,
+              "amount": "674.52"
+            },
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and Landscaping",
+              "pct": 12.29,
+              "amount": "160.81"
+            },
+            {
+              "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+              "pct": 0.11,
+              "amount": "1.43"
+            },
+            {
+              "coverage": "Coverage A - Dwelling - 35 Windstorm and Hail",
+              "pct": 2.32,
+              "amount": "30.41"
+            },
+            {
+              "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
+              "pct": 33.72,
+              "amount": "441.08"
+            }
+          ]
+        },
+        {
+          "label": "Total",
+          "total": "87,733.23",
+          "pct": 100.0
+        }
+      ],
+      "Items": [
+        {
+          "item": "CLEANING",
+          "total": "55,248.91",
+          "pct": 62.97,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 98.61,
+              "amount": "54,480.38"
+            },
+            {
+              "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+              "pct": 1.39,
+              "amount": "768.53"
+            }
+          ]
+        },
+        {
+          "item": "CONTENT MANIPULATION",
+          "total": "432.39",
+          "pct": 0.49,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "432.39"
+            }
+          ]
+        },
+        {
+          "item": "GENERAL DEMOLITION",
+          "total": "200.79",
+          "pct": 0.23,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "200.79"
+            }
+          ]
+        },
+        {
+          "item": "DOORS",
+          "total": "1,732.73",
+          "pct": 1.97,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
+              "pct": 100.0,
+              "amount": "1,732.73"
+            }
+          ]
+        },
+        {
+          "item": "ELECTRICAL - SPECIAL SYSTEMS",
+          "total": "827.11",
+          "pct": 0.94,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 35 Windstorm and Hail",
+              "pct": 100.0,
+              "amount": "827.11"
+            }
+          ]
+        },
+        {
+          "item": "MISC. EQUIPMENT - COMMERCIAL",
+          "total": "2,247.60",
+          "pct": 2.56,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and Landscaping",
+              "pct": 100.0,
+              "amount": "2,247.60"
+            }
+          ]
+        },
+        {
+          "item": "FLOOR COVERING - CERAMIC TILE",
+          "total": "2,350.00",
+          "pct": 2.68,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
+              "pct": 100.0,
+              "amount": "2,350.00"
+            }
+          ]
+        },
+        {
+          "item": "FENCING",
+          "total": "4,421.20",
+          "pct": 5.04,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
+              "pct": 100.0,
+              "amount": "4,421.20"
+            }
+          ]
+        },
+        {
+          "item": "HAZARDOUS MATERIAL REMEDIATION",
+          "total": "3,957.61",
+          "pct": 4.51,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "3,957.61"
+            }
+          ]
+        },
+        {
+          "item": "INSULATION",
+          "total": "10,334.17",
+          "pct": 11.78,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "10,334.17"
+            }
+          ]
+        },
+        {
+          "item": "LANDSCAPING",
+          "total": "1,324.67",
+          "pct": 1.51,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and Landscaping",
+              "pct": 100.0,
+              "amount": "1,324.67"
+            }
+          ]
+        },
+        {
+          "item": "SWIMMING POOLS & SPAS",
+          "total": "2,827.10",
+          "pct": 3.22,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+              "pct": 17.48,
+              "amount": "494.16"
+            },
+            {
+              "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
+              "pct": 82.52,
+              "amount": "2,332.94"
+            }
+          ]
+        },
+        {
+          "item": "TILE",
+          "total": "509.11",
+          "pct": 0.58,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "509.11"
+            }
+          ]
+        }
+      ],
+      "Permits and Fees": {
+        "total": "11.59",
+        "pct": 0.01,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
+            "pct": 100.0,
+            "amount": "11.59"
+          }
+        ]
+      },
+      "Material Sales Tax": {
+        "total": "1,308.25",
+        "pct": 1.49,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 51.56,
+            "amount": "674.52"
+          },
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and Landscaping",
+            "pct": 12.29,
+            "amount": "160.81"
+          },
+          {
+            "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+            "pct": 0.11,
+            "amount": "1.43"
+          },
+          {
+            "coverage": "Coverage A - Dwelling - 35 Windstorm and Hail",
+            "pct": 2.32,
+            "amount": "30.41"
+          },
+          {
+            "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
+            "pct": 33.72,
+            "amount": "441.08"
+          }
+        ]
+      }
+    }
+  }
+}

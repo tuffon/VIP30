@@ -1,0 +1,339 @@
+{
+  "source": {
+    "parser": "statefarm",
+    "file_name": "Estimate SF Structural damage Lachman 4.15.2025.pdf",
+    "start_page_index_used": 2
+  },
+  "case_metadata": {
+    "claim_number": null,
+    "policy_number": null,
+    "loss_type": "Smoke",
+    "coverage": [],
+    "property_address": "1115 LACHMAN LN Claim Number: 7579J865X",
+    "date_of_loss": "1/8/2025",
+    "date_received": null,
+    "date_inspected": "2/18/2025",
+    "date_entered": null,
+    "price_list": null,
+    "depreciate_material": null,
+    "depreciate_op": null,
+    "depreciate_non_material": null,
+    "depreciate_taxes": null,
+    "estimate_name": null,
+    "depreciate_removal": null,
+    "region": null,
+    "building_type": null,
+    "line_item_totals": null,
+    "labor_minimums": null,
+    "additional_charges": null
+  },
+  "sections": [],
+  "coverage_table": [
+    {
+      "coverage": "Coverage A - Dwelling - 39 Smoke",
+      "line_item_total": "69,914.45",
+      "material_sales_tax": "674.52",
+      "california_lumber_assessment_fee": null,
+      "replacement_cost_value": "70,588.97",
+      "less_deductible": "-0.00",
+      "net_payment": "70,588.97"
+    },
+    {
+      "coverage": "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and",
+      "line_item_total": "3,572.27",
+      "material_sales_tax": "160.81",
+      "california_lumber_assessment_fee": null,
+      "replacement_cost_value": "3,733.08",
+      "less_deductible": "-0.00",
+      "net_payment": "3,733.08"
+    },
+    {
+      "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+      "line_item_total": "1,262.69",
+      "material_sales_tax": "1.43",
+      "california_lumber_assessment_fee": null,
+      "replacement_cost_value": "-131.46",
+      "less_deductible": "-1,395.58",
+      "net_payment": "0.00"
+    },
+    {
+      "coverage": "Coverage A - Dwelling - 35 Windstorm and Hail",
+      "line_item_total": "827.11",
+      "material_sales_tax": "30.41",
+      "california_lumber_assessment_fee": null,
+      "replacement_cost_value": "857.52",
+      "less_deductible": "-0.00",
+      "net_payment": "857.52"
+    },
+    {
+      "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, &",
+      "line_item_total": "10,836.87",
+      "material_sales_tax": "441.08",
+      "california_lumber_assessment_fee": "11.59",
+      "replacement_cost_value": "11,289.54",
+      "less_deductible": "-0.00",
+      "net_payment": "11,289.54"
+    }
+  ],
+  "coverage_totals": null,
+  "summaries_by_coverage": {
+    "Coverage A - Dwelling - 39 Smoke": {
+      "line_item_total": "69,914.45",
+      "california_lumber_assessment_fee": null,
+      "material_sales_tax": "674.52",
+      "subtotal": null,
+      "overhead": null,
+      "profit": null,
+      "replacement_cost_value": "70,588.97",
+      "less_deductible": "-0.00",
+      "net_payment": "70,588.97"
+    },
+    "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and": {
+      "line_item_total": "3,572.27",
+      "california_lumber_assessment_fee": null,
+      "material_sales_tax": "160.81",
+      "subtotal": null,
+      "overhead": null,
+      "profit": null,
+      "replacement_cost_value": "3,733.08",
+      "less_deductible": "-0.00",
+      "net_payment": "3,733.08"
+    },
+    "Coverage A - Dwelling Extension - 39 Smoke": {
+      "line_item_total": "1,262.69",
+      "california_lumber_assessment_fee": null,
+      "material_sales_tax": "1.43",
+      "subtotal": null,
+      "overhead": null,
+      "profit": null,
+      "replacement_cost_value": "-131.46",
+      "less_deductible": "-1,395.58",
+      "net_payment": "0.00"
+    },
+    "Coverage A - Dwelling - 35 Windstorm and Hail": {
+      "line_item_total": "827.11",
+      "california_lumber_assessment_fee": null,
+      "material_sales_tax": "30.41",
+      "subtotal": null,
+      "overhead": null,
+      "profit": null,
+      "replacement_cost_value": "857.52",
+      "less_deductible": "-0.00",
+      "net_payment": "857.52"
+    },
+    "Coverage A - Dwelling - 33 Fire, Lightning, &": {
+      "line_item_total": "10,836.87",
+      "california_lumber_assessment_fee": "11.59",
+      "material_sales_tax": "441.08",
+      "subtotal": null,
+      "overhead": null,
+      "profit": null,
+      "replacement_cost_value": "11,289.54",
+      "less_deductible": "-0.00",
+      "net_payment": "11,289.54"
+    }
+  },
+  "recap_tax_op": null,
+  "recap_by_room": {
+    "rows": [],
+    "subtotals": []
+  },
+  "recap_by_category": {
+    "op_items": [],
+    "non_op_items": [],
+    "allocations": {},
+    "totals": null
+  },
+  "grand_total_areas": null,
+  "area_totals_blocks": [
+    {
+      "area": "Exterior",
+      "metrics": {
+        "sf_walls": 3581.77,
+        "sf_ceiling": 0.0,
+        "sf_floor": 0.0,
+        "sf_short_wall": 0.0,
+        "lf_floor_perimeter": 0.0,
+        "sf_long_wall": 0.0,
+        "lf_ceil_perimeter": 0.0,
+        "exterior_wall_area": 3581.77,
+        "surface_area": 4558.71,
+        "number_of_squares": 45.59
+      },
+      "total_rcv": null
+    },
+    {
+      "area": "Main Level",
+      "metrics": {
+        "sf_walls": 6612.05,
+        "sf_ceiling": 3364.13,
+        "sf_floor": 3079.7,
+        "total_area": 3983.96,
+        "floor_area": 3524.15,
+        "exterior_wall_area": 3109.95
+      },
+      "total_rcv": null
+    },
+    {
+      "area": "Source - EagleView Roof & Walls",
+      "metrics": {
+        "sf_walls": 0.0,
+        "sf_ceiling": 0.0,
+        "sf_floor": 0.0,
+        "total_area": 3983.96,
+        "floor_area": 3524.15,
+        "exterior_wall_area": 6691.72,
+        "surface_area": 4558.71,
+        "number_of_squares": 45.59,
+        "sf_short_wall": 0.0,
+        "lf_floor_perimeter": 0.0,
+        "sf_long_wall": 0.0,
+        "lf_ceil_perimeter": 0.0
+      },
+      "total_rcv": null
+    },
+    {
+      "area": "Garage",
+      "metrics": {
+        "surface_area": 475.01,
+        "number_of_squares": 4.75,
+        "total_perimeter_length": 87.73,
+        "sf_walls": 600.21,
+        "sf_ceiling": 438.85,
+        "sf_floor": 444.45,
+        "sf_short_wall": 0.0,
+        "lf_floor_perimeter": 0.0,
+        "sf_long_wall": 0.0,
+        "lf_ceil_perimeter": 0.0
+      },
+      "total_rcv": null
+    },
+    {
+      "area": "Other Structures",
+      "metrics": {
+        "sf_walls": 0.0,
+        "sf_ceiling": 0.0,
+        "sf_floor": 0.0,
+        "surface_area": 475.01,
+        "number_of_squares": 4.75,
+        "sf_short_wall": 0.0,
+        "lf_floor_perimeter": 0.0,
+        "sf_long_wall": 0.0,
+        "lf_ceil_perimeter": 0.0
+      },
+      "total_rcv": null
+    }
+  ],
+  "line_items": [
+    {
+      "area": null,
+      "line_no": 23,
+      "description": "Clean window unit (per side) 10 -",
+      "qty": 20.0,
+      "unit": "SF",
+      "unit_price": 1.0,
+      "tax": null,
+      "rcv": 24.4
+    },
+    {
+      "area": null,
+      "line_no": 36,
+      "description": "Clean window unit (per side) 10 -",
+      "qty": 20.0,
+      "unit": "SF",
+      "unit_price": 1.0,
+      "tax": null,
+      "rcv": 24.4
+    },
+    {
+      "area": null,
+      "line_no": 83,
+      "description": "Clean window unit (per side) 10 -",
+      "qty": 20.0,
+      "unit": "SF",
+      "unit_price": 2.0,
+      "tax": null,
+      "rcv": 48.8
+    },
+    {
+      "area": null,
+      "line_no": 119,
+      "description": "Clean window unit (per side) 10 -",
+      "qty": 20.0,
+      "unit": "SF",
+      "unit_price": 1.0,
+      "tax": null,
+      "rcv": 24.4
+    },
+    {
+      "area": null,
+      "line_no": 148,
+      "description": "Clean window unit (per side) 10 -",
+      "qty": 20.0,
+      "unit": "SF",
+      "unit_price": 3.0,
+      "tax": null,
+      "rcv": 73.21
+    },
+    {
+      "area": null,
+      "line_no": 173,
+      "description": "Clean window unit (per side) 10 -",
+      "qty": 20.0,
+      "unit": "SF",
+      "unit_price": 4.0,
+      "tax": null,
+      "rcv": 97.61
+    },
+    {
+      "area": null,
+      "line_no": 174,
+      "description": "Clean window unit (per side) 3 -",
+      "qty": 9.0,
+      "unit": "SF",
+      "unit_price": 9.0,
+      "tax": null,
+      "rcv": 153.64
+    },
+    {
+      "area": null,
+      "line_no": 200,
+      "description": "Clean window unit (per side) 10 -",
+      "qty": 20.0,
+      "unit": "SF",
+      "unit_price": 2.0,
+      "tax": null,
+      "rcv": 48.8
+    },
+    {
+      "area": null,
+      "line_no": 245,
+      "description": "Clean window unit (per side) 10 -",
+      "qty": 20.0,
+      "unit": "SF",
+      "unit_price": 2.0,
+      "tax": null,
+      "rcv": 48.8
+    },
+    {
+      "area": null,
+      "line_no": 271,
+      "description": "Clean window unit (per side) 10 -",
+      "qty": 20.0,
+      "unit": "SF",
+      "unit_price": 1.0,
+      "tax": null,
+      "rcv": 24.4
+    },
+    {
+      "area": null,
+      "line_no": 303,
+      "description": "R&R Swimming pool pump,",
+      "qty": 2.0,
+      "unit": "hp",
+      "unit_price": 1.0,
+      "tax": null,
+      "rcv": 2398.97
+    }
+  ]
+}

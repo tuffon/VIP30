@@ -2267,7 +2267,6 @@
     "exterior_wall_area": "2,325.54",
     "exterior_perimeter_of_walls": "253.50",
     "surface_area": "0.00",
-    "number_of_squares": "0.00",
     "total_perimeter_length": "0.00",
     "total_ridge_length": "0.00",
     "total_hip_length": "0.00"
@@ -2378,41 +2377,44 @@
       ]
     },
     "recap_by_category": {
-      "op_items": [
+      "subtotals": [
         {
-          "name": "CLEANING",
-          "total": "1,322.10",
-          "pct": 2.13
-        },
-        {
-          "name": "GENERAL DEMOLITION",
-          "total": "1,389.88",
-          "pct": 2.24
-        },
-        {
-          "name": "WATER EXTRACTION & REMEDIATION",
-          "total": "57.78",
-          "pct": 0.09
-        },
-        {
-          "name": "Subtotal",
-          "total": "61,471.96",
-          "pct": 99.11
-        },
-        {
-          "name": "Material Sales Tax",
+          "label": "Material Sales Tax",
           "total": "553.04",
-          "pct": 0.89
+          "pct": 0.89,
+          "coverage": []
         },
         {
-          "name": "Total",
+          "label": "Total",
           "total": "62,025.00",
           "pct": 100.0
         }
       ],
-      "non_op_items": [],
-      "allocations": {},
-      "totals": null
+      "Items": [
+        {
+          "item": "CLEANING",
+          "total": "1,322.10",
+          "pct": 2.13,
+          "coverage": []
+        },
+        {
+          "item": "GENERAL DEMOLITION",
+          "total": "1,389.88",
+          "pct": 2.24,
+          "coverage": []
+        },
+        {
+          "item": "WATER EXTRACTION & REMEDIATION",
+          "total": "57.78",
+          "pct": 0.09,
+          "coverage": []
+        }
+      ],
+      "Material Sales Tax": {
+        "total": "553.04",
+        "pct": 0.89,
+        "coverage": []
+      }
     }
   }
 }

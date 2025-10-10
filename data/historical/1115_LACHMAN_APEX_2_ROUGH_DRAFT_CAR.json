@@ -10073,7 +10073,6 @@
     "exterior_wall_area": "7,110.09",
     "exterior_perimeter_of_walls": "987.54",
     "surface_area": "0.00",
-    "number_of_squares": "0.00",
     "total_perimeter_length": "0.00",
     "total_ridge_length": "0.00",
     "total_hip_length": "0.00"
@@ -10336,277 +10335,764 @@
       ]
     },
     "recap_by_category": {
-      "op_items": [
+      "subtotals": [
         {
-          "name": "APPLIANCES",
-          "total": "35,698.07",
-          "pct": 2.59
-        },
-        {
-          "name": "AWNINGS & PATIO COVERS",
-          "total": "12,003.80",
-          "pct": 0.87
-        },
-        {
-          "name": "CABINETRY",
-          "total": "41,153.02",
-          "pct": 2.99
-        },
-        {
-          "name": "CLEANING",
-          "total": "2,984.57",
-          "pct": 0.22
-        },
-        {
-          "name": "CONCRETE & ASPHALT",
-          "total": "4,443.26",
-          "pct": 0.32
-        },
-        {
-          "name": "GENERAL DEMOLITION",
-          "total": "36,153.60",
-          "pct": 2.62
-        },
-        {
-          "name": "DOORS",
-          "total": "11,773.66",
-          "pct": 0.85
-        },
-        {
-          "name": "DRYWALL",
-          "total": "802.58",
-          "pct": 0.06
-        },
-        {
-          "name": "ELECTRICAL",
-          "total": "7,157.62",
-          "pct": 0.52
-        },
-        {
-          "name": "ELECTRICAL - SPECIAL SYSTEMS",
-          "total": "6,674.21",
-          "pct": 0.48
-        },
-        {
-          "name": "MISC. EQUIPMENT - COMMERCIAL",
-          "total": "10,940.76",
-          "pct": 0.79
-        },
-        {
-          "name": "HEAVY EQUIPMENT",
-          "total": "1,440.00",
-          "pct": 0.1
-        },
-        {
-          "name": "FLOOR COVERING - CERAMIC TILE",
-          "total": "92,028.10",
-          "pct": 6.68
-        },
-        {
-          "name": "FLOOR COVERING - WOOD",
-          "total": "10,298.14",
-          "pct": 0.75
-        },
-        {
-          "name": "FENCING",
-          "total": "9,116.07",
-          "pct": 0.66
-        },
-        {
-          "name": "FINISH CARPENTRY / TRIMWORK",
-          "total": "56,562.75",
-          "pct": 4.1
-        },
-        {
-          "name": "FINISH HARDWARE",
-          "total": "1,537.73",
-          "pct": 0.11
-        },
-        {
-          "name": "FIREPLACES",
-          "total": "7,505.26",
-          "pct": 0.54
-        },
-        {
-          "name": "FIRE PROTECTION SYSTEMS",
-          "total": "313.29",
-          "pct": 0.02
-        },
-        {
-          "name": "HEAT, VENT & AIR CONDITIONING",
-          "total": "36,635.03",
-          "pct": 2.66
-        },
-        {
-          "name": "INSULATION",
-          "total": "2,801.50",
-          "pct": 0.2
-        },
-        {
-          "name": "LABOR ONLY",
-          "total": "29,086.50",
-          "pct": 2.11
-        },
-        {
-          "name": "LIGHT FIXTURES",
-          "total": "46,976.13",
-          "pct": 3.41
-        },
-        {
-          "name": "MASONRY",
-          "total": "4,003.29",
-          "pct": 0.29
-        },
-        {
-          "name": "METAL STRUCTURES & COMPONENTS",
-          "total": "894.17",
-          "pct": 0.06
-        },
-        {
-          "name": "ORNAMENTAL IRON",
-          "total": "8,170.88",
-          "pct": 0.59
-        },
-        {
-          "name": "PLUMBING",
-          "total": "2,553.62",
-          "pct": 0.19
-        },
-        {
-          "name": "PAINTING",
-          "total": "42,558.22",
-          "pct": 3.09
-        },
-        {
-          "name": "ROOFING",
-          "total": "32,000.00",
-          "pct": 2.32
-        },
-        {
-          "name": "SPECIALTY ITEMS",
-          "total": "19,224.88",
-          "pct": 1.39
-        },
-        {
-          "name": "STUCCO & EXTERIOR PLASTER",
-          "total": "91,844.76",
-          "pct": 6.66
-        },
-        {
-          "name": "TILE",
-          "total": "6,336.60",
-          "pct": 0.46
-        },
-        {
-          "name": "TEMPORARY REPAIRS",
-          "total": "2,360.00",
-          "pct": 0.17
-        },
-        {
-          "name": "WINDOW TREATMENT",
-          "total": "77,630.31",
-          "pct": 5.63
-        },
-        {
-          "name": "O&P Items Subtotal",
+          "label": "O&P Items",
           "total": "751,662.38",
           "pct": 54.54
-        }
-      ],
-      "non_op_items": [
-        {
-          "name": "CLEANING",
-          "total": "6,400.00",
-          "pct": 0.46
         },
         {
-          "name": "GENERAL DEMOLITION",
-          "total": "47,422.40",
-          "pct": 3.44
-        },
-        {
-          "name": "DRYWALL",
-          "total": "19,000.00",
-          "pct": 1.38
-        },
-        {
-          "name": "ELECTRICAL",
-          "total": "29,560.00",
-          "pct": 2.14
-        },
-        {
-          "name": "ELECTRICAL - SPECIAL SYSTEMS",
-          "total": "43,100.00",
-          "pct": 3.13
-        },
-        {
-          "name": "GLASS, GLAZING, & STOREFRONTS",
-          "total": "32,800.00",
-          "pct": 2.38
-        },
-        {
-          "name": "LANDSCAPING",
-          "total": "46,601.35",
-          "pct": 3.38
-        },
-        {
-          "name": "PLUMBING",
-          "total": "6,860.00",
-          "pct": 0.5
-        },
-        {
-          "name": "SWIMMING POOLS & SPAS",
-          "total": "60,700.00",
-          "pct": 4.4
-        },
-        {
-          "name": "WINDOWS - SLIDING PATIO DOORS",
-          "total": "131,457.00",
-          "pct": 9.54
-        },
-        {
-          "name": "EXTERIOR STRUCTURES",
-          "total": "28,000.00",
-          "pct": 2.03
-        },
-        {
-          "name": "Non-O&P Items Subtotal",
+          "label": "Non-O&P Items",
           "total": "451,900.75",
           "pct": 32.79
         },
         {
-          "name": "O&P Items Subtotal",
-          "total": "751,662.38",
-          "pct": 54.54
-        },
-        {
-          "name": "Permits and Fees",
+          "label": "Permits and Fees",
           "total": "67.55",
-          "pct": 0.0
+          "pct": 0.0,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 76.57,
+              "amount": "51.72"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 23.43,
+              "amount": "15.83"
+            }
+          ]
         },
         {
-          "name": "Material Sales Tax",
+          "label": "Material Sales Tax",
           "total": "20,437.35",
-          "pct": 1.48
+          "pct": 1.48,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 72.25,
+              "amount": "14,766.42"
+            },
+            {
+              "coverage": "Trees, Plants & Shrubs",
+              "pct": 7.53,
+              "amount": "1,539.05"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 20.22,
+              "amount": "4,131.88"
+            }
+          ]
         },
         {
-          "name": "Overhead",
+          "label": "Overhead",
           "total": "77,063.00",
-          "pct": 5.59
+          "pct": 5.59,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 83.27,
+              "amount": "64,168.20"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 16.73,
+              "amount": "12,894.80"
+            }
+          ]
         },
         {
-          "name": "Profit",
+          "label": "Profit",
           "total": "77,063.00",
-          "pct": 5.59
+          "pct": 5.59,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 83.27,
+              "amount": "64,168.20"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 16.73,
+              "amount": "12,894.80"
+            }
+          ]
         },
         {
-          "name": "Total",
+          "label": "Total",
           "total": "1,378,194.03",
           "pct": 100.0
         }
       ],
-      "allocations": {},
-      "totals": null
+      "O&P Items": [
+        {
+          "item": "APPLIANCES",
+          "total": "35,698.07",
+          "pct": 2.59,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "35,698.07"
+            }
+          ]
+        },
+        {
+          "item": "AWNINGS & PATIO COVERS",
+          "total": "12,003.80",
+          "pct": 0.87,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "12,003.80"
+            }
+          ]
+        },
+        {
+          "item": "CABINETRY",
+          "total": "41,153.02",
+          "pct": 2.99,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "41,153.02"
+            }
+          ]
+        },
+        {
+          "item": "CLEANING",
+          "total": "2,984.57",
+          "pct": 0.22,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 33.26,
+              "amount": "992.60"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 66.74,
+              "amount": "1,991.97"
+            }
+          ]
+        },
+        {
+          "item": "CONCRETE & ASPHALT",
+          "total": "4,443.26",
+          "pct": 0.32,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 13.18,
+              "amount": "585.56"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 86.82,
+              "amount": "3,857.70"
+            }
+          ]
+        },
+        {
+          "item": "GENERAL DEMOLITION",
+          "total": "36,153.60",
+          "pct": 2.62,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 69.69,
+              "amount": "25,195.00"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 30.31,
+              "amount": "10,958.60"
+            }
+          ]
+        },
+        {
+          "item": "DOORS",
+          "total": "11,773.66",
+          "pct": 0.85,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "11,773.66"
+            }
+          ]
+        },
+        {
+          "item": "DRYWALL",
+          "total": "802.58",
+          "pct": 0.06,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "802.58"
+            }
+          ]
+        },
+        {
+          "item": "ELECTRICAL",
+          "total": "7,157.62",
+          "pct": 0.52,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "7,157.62"
+            }
+          ]
+        },
+        {
+          "item": "ELECTRICAL - SPECIAL SYSTEMS",
+          "total": "6,674.21",
+          "pct": 0.48,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "6,674.21"
+            }
+          ]
+        },
+        {
+          "item": "MISC. EQUIPMENT - COMMERCIAL",
+          "total": "10,940.76",
+          "pct": 0.79,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "10,940.76"
+            }
+          ]
+        },
+        {
+          "item": "HEAVY EQUIPMENT",
+          "total": "1,440.00",
+          "pct": 0.1,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "1,440.00"
+            }
+          ]
+        },
+        {
+          "item": "FLOOR COVERING - CERAMIC TILE",
+          "total": "92,028.10",
+          "pct": 6.68,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 51.64,
+              "amount": "47,519.34"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 48.36,
+              "amount": "44,508.76"
+            }
+          ]
+        },
+        {
+          "item": "FLOOR COVERING - WOOD",
+          "total": "10,298.14",
+          "pct": 0.75,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "10,298.14"
+            }
+          ]
+        },
+        {
+          "item": "FENCING",
+          "total": "9,116.07",
+          "pct": 0.66,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "9,116.07"
+            }
+          ]
+        },
+        {
+          "item": "FINISH CARPENTRY / TRIMWORK",
+          "total": "56,562.75",
+          "pct": 4.1,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "56,562.75"
+            }
+          ]
+        },
+        {
+          "item": "FINISH HARDWARE",
+          "total": "1,537.73",
+          "pct": 0.11,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "1,537.73"
+            }
+          ]
+        },
+        {
+          "item": "FIREPLACES",
+          "total": "7,505.26",
+          "pct": 0.54,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 26.72,
+              "amount": "2,005.26"
+            },
+            {
+              "coverage": "Other Structures Glendale CA 91203",
+              "pct": 73.28,
+              "amount": "5,500.00"
+            }
+          ]
+        },
+        {
+          "item": "FIRE PROTECTION SYSTEMS",
+          "total": "313.29",
+          "pct": 0.02,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "313.29"
+            }
+          ]
+        },
+        {
+          "item": "HEAT, VENT & AIR CONDITIONING",
+          "total": "36,635.03",
+          "pct": 2.66,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "36,635.03"
+            }
+          ]
+        },
+        {
+          "item": "INSULATION",
+          "total": "2,801.50",
+          "pct": 0.2,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "2,801.50"
+            }
+          ]
+        },
+        {
+          "item": "LABOR ONLY",
+          "total": "29,086.50",
+          "pct": 2.11,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "29,086.50"
+            }
+          ]
+        },
+        {
+          "item": "LIGHT FIXTURES",
+          "total": "46,976.13",
+          "pct": 3.41,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 91.89,
+              "amount": "43,164.21"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 8.11,
+              "amount": "3,811.92"
+            }
+          ]
+        },
+        {
+          "item": "MASONRY",
+          "total": "4,003.29",
+          "pct": 0.29,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "4,003.29"
+            }
+          ]
+        },
+        {
+          "item": "METAL STRUCTURES & COMPONENTS",
+          "total": "894.17",
+          "pct": 0.06,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "894.17"
+            }
+          ]
+        },
+        {
+          "item": "ORNAMENTAL IRON",
+          "total": "8,170.88",
+          "pct": 0.59,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 52.61,
+              "amount": "4,298.88"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 47.39,
+              "amount": "3,872.00"
+            }
+          ]
+        },
+        {
+          "item": "PLUMBING",
+          "total": "2,553.62",
+          "pct": 0.19,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 87.76,
+              "amount": "2,241.09"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 12.24,
+              "amount": "312.53"
+            }
+          ]
+        },
+        {
+          "item": "PAINTING",
+          "total": "42,558.22",
+          "pct": 3.09,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 87.43,
+              "amount": "37,209.69"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 12.57,
+              "amount": "5,348.53"
+            }
+          ]
+        },
+        {
+          "item": "ROOFING",
+          "total": "32,000.00",
+          "pct": 2.32,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "32,000.00"
+            }
+          ]
+        },
+        {
+          "item": "SPECIALTY ITEMS",
+          "total": "19,224.88",
+          "pct": 1.39,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 27.66,
+              "amount": "5,317.70"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 72.34,
+              "amount": "13,907.18"
+            }
+          ]
+        },
+        {
+          "item": "STUCCO & EXTERIOR PLASTER",
+          "total": "91,844.76",
+          "pct": 6.66,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 93.71,
+              "amount": "86,068.21"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 6.29,
+              "amount": "5,776.55"
+            }
+          ]
+        },
+        {
+          "item": "TILE",
+          "total": "6,336.60",
+          "pct": 0.46,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "6,336.60"
+            }
+          ]
+        },
+        {
+          "item": "TEMPORARY REPAIRS",
+          "total": "2,360.00",
+          "pct": 0.17,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "2,360.00"
+            }
+          ]
+        },
+        {
+          "item": "WINDOW TREATMENT",
+          "total": "77,630.31",
+          "pct": 5.63,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "77,630.31"
+            }
+          ]
+        }
+      ],
+      "Non-O&P Items": [
+        {
+          "item": "CLEANING",
+          "total": "6,400.00",
+          "pct": 0.46,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "6,400.00"
+            }
+          ]
+        },
+        {
+          "item": "GENERAL DEMOLITION",
+          "total": "47,422.40",
+          "pct": 3.44,
+          "coverage": [
+            {
+              "coverage": "Trees, Plants & Shrubs",
+              "pct": 100.0,
+              "amount": "47,422.40"
+            }
+          ]
+        },
+        {
+          "item": "DRYWALL",
+          "total": "19,000.00",
+          "pct": 1.38,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "19,000.00"
+            }
+          ]
+        },
+        {
+          "item": "ELECTRICAL",
+          "total": "29,560.00",
+          "pct": 2.14,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "29,560.00"
+            }
+          ]
+        },
+        {
+          "item": "ELECTRICAL - SPECIAL SYSTEMS",
+          "total": "43,100.00",
+          "pct": 3.13,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "43,100.00"
+            }
+          ]
+        },
+        {
+          "item": "GLASS, GLAZING, & STOREFRONTS",
+          "total": "32,800.00",
+          "pct": 2.38,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "32,800.00"
+            }
+          ]
+        },
+        {
+          "item": "LANDSCAPING",
+          "total": "46,601.35",
+          "pct": 3.38,
+          "coverage": [
+            {
+              "coverage": "Trees, Plants & Shrubs",
+              "pct": 100.0,
+              "amount": "46,601.35"
+            }
+          ]
+        },
+        {
+          "item": "PLUMBING",
+          "total": "6,860.00",
+          "pct": 0.5,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "6,860.00"
+            }
+          ]
+        },
+        {
+          "item": "SWIMMING POOLS & SPAS",
+          "total": "60,700.00",
+          "pct": 4.4,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "60,700.00"
+            }
+          ]
+        },
+        {
+          "item": "WINDOWS - SLIDING PATIO DOORS",
+          "total": "131,457.00",
+          "pct": 9.54,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "131,457.00"
+            }
+          ]
+        },
+        {
+          "item": "EXTERIOR STRUCTURES",
+          "total": "28,000.00",
+          "pct": 2.03,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "28,000.00"
+            }
+          ]
+        }
+      ],
+      "Permits and Fees": {
+        "total": "67.55",
+        "pct": 0.0,
+        "coverage": [
+          {
+            "coverage": "Dwelling",
+            "pct": 76.57,
+            "amount": "51.72"
+          },
+          {
+            "coverage": "Other Structures",
+            "pct": 23.43,
+            "amount": "15.83"
+          }
+        ]
+      },
+      "Material Sales Tax": {
+        "total": "20,437.35",
+        "pct": 1.48,
+        "coverage": [
+          {
+            "coverage": "Dwelling",
+            "pct": 72.25,
+            "amount": "14,766.42"
+          },
+          {
+            "coverage": "Trees, Plants & Shrubs",
+            "pct": 7.53,
+            "amount": "1,539.05"
+          },
+          {
+            "coverage": "Other Structures",
+            "pct": 20.22,
+            "amount": "4,131.88"
+          }
+        ]
+      },
+      "Overhead": {
+        "total": "77,063.00",
+        "pct": 5.59,
+        "coverage": [
+          {
+            "coverage": "Dwelling",
+            "pct": 83.27,
+            "amount": "64,168.20"
+          },
+          {
+            "coverage": "Other Structures",
+            "pct": 16.73,
+            "amount": "12,894.80"
+          }
+        ]
+      },
+      "Profit": {
+        "total": "77,063.00",
+        "pct": 5.59,
+        "coverage": [
+          {
+            "coverage": "Dwelling",
+            "pct": 83.27,
+            "amount": "64,168.20"
+          },
+          {
+            "coverage": "Other Structures",
+            "pct": 16.73,
+            "amount": "12,894.80"
+          }
+        ]
+      }
     }
   }
 }
