@@ -749,66 +749,279 @@ class XactimateRoughDraftParser:
         return base
 
     # ----- end-of-document parsing in structured form -----
-    def _parse_end_structured(self, all_lines: List[str]) -> dict:
+    def _find_section_bounds(self, all_lines: List[str],
+                         header_re: re.Pattern,
+                         stop_res: List[re.Pattern],
+                         start_hint: int = 0) -> Tuple[int, int]:
         """
-        End-of-document parsing with robust 'Recap by Category' handling.
+        Find [start, end) bounds of a section.
+        - Normalizes NBSP and collapses whitespace before matching.
+        - Skips over consecutive header lines (page-wrap echoes) so we don't return a zero-length slice.
+        Returns (start_index_exclusive, end_index). If not found: (-1, -1).
+        """
 
-        - Dynamic groups:
-            "<Key> Total %" OR "<Key> Total <pct>%"
-            -> ALL-CAPS item rows (amount + pct), each followed by zero-or-more 'Coverage:' lines
-            (with wrapped continuation lines merged)
-            -> (Either) "<Key> Subtotal <total> <pct>%" OR bare "Subtotal <total> <pct>%"
-        Stored as: recap_by_category[<Key>] = [
-            { item, total, pct, coverage:[{coverage,pct,amount},...] }, ...
+        def norm(s: str) -> str:
+            return re.sub(r"\s+", " ", (s or "").replace("\u00A0", " ").strip())
+
+        n = len(all_lines)
+        header_idx = -1
+
+        # forward scan from hint
+        for idx in range(start_hint, n):
+            if header_re.search(norm(all_lines[idx] or "")):
+                header_idx = idx
+                break
+        # wrap once
+        if header_idx == -1:
+            for idx in range(0, start_hint):
+                if header_re.search(norm(all_lines[idx] or "")):
+                    header_idx = idx
+                    break
+        if header_idx == -1:
+            return -1, -1
+
+        # >>> NEW: collapse consecutive header lines (page-wrap echo) <<<
+        j = header_idx + 1
+        while j < n and header_re.search(norm(all_lines[j] or "")):
+            j += 1
+        start = j  # start AFTER the last consecutive header line
+
+        # find first stopper after 'start'
+        end = n
+        for k in range(start, n):
+            s = norm(all_lines[k] or "")
+            for pat in stop_res:
+                if pat.search(s):
+                    end = k
+                    return start, end
+        return start, end
+
+    def _parse_recap_by_room_section(self, all_lines: List[str], start_idx: int):
+        """
+        Recap by Room parser (group-aware):
+        - Groups:
+            * "Estimate: <id>"  (non-physical)
+            * "Area: <name>"    (dynamic; may appear as header-only or header+item with amount/pct)
+        - Items: "<label> <amount> <pct>%", followed by one-or-more coverage lines:
+                "Coverage: <label> <pct>% = <amount>"  (note: no '@' in Room recap)
+        - Subtotals:
+            * "Area Subtotal: <name> <amount> <pct>%" (+ coverage)
+            * "Subtotal of Areas <amount> <pct>%" (+ coverage)
+            * "Total <amount> 100.00%"
+        - Special item without pct:
+            * "Labor Minimums Applied <amount>" (+ coverage)
+        Returns ({ "groups": {group:[items...]}, "rows": [...], "subtotals": [...] }, next_index_after_section)
+        """
+        import re
+
+        # --- Header and stoppers (IMPORTANT: 'Estimate:' is INSIDE the section, not a stopper) ---
+        HDR_ROOM = re.compile(r"^\s*Recap\s+by\s+Room\s*$", re.IGNORECASE)
+        STOPPERS = [
+            re.compile(r"^\s*Recap\s+by\s+Category\s*$", re.IGNORECASE),
+            re.compile(r"^\s*Recap\s+of\s+Taxes,\s+Overhead\s+and\s+Profit\s*$", re.IGNORECASE),
+            re.compile(r"^\s*Summary\s+for\s+", re.IGNORECASE),
+            re.compile(r"^\s*Grand\s+Total\s+Areas\b", re.IGNORECASE),
         ]
 
-        - Subtotals (no 'totals' key):
-            * Append ANY "… Subtotal <total> <pct>%" when seen (including group-closing and repeated lines).
-            - If bare "Subtotal …", use the current group key as the label.
-            * Allocation rows (Permits and Fees, Material Sales Tax, Overhead, Profit) are captured
-            with coverage and mirrored into 'subtotals'.
-            * Final "Total <amount> 100.00%" is appended to 'subtotals'.
+        seg_start, seg_end = self._find_section_bounds(all_lines, HDR_ROOM, STOPPERS, start_hint=start_idx)
+        if seg_start == -1:
+            return {"groups": {}, "rows": [], "subtotals": []}, start_idx + 1
 
-        - De-dup: identical (label,total,pct) triples in 'subtotals' aren’t added twice (page wraps).
+        # ---------- Local helpers ----------
+        def norm(s: str) -> str:
+            return re.sub(r"\s+", " ", (s or "").replace("\u00A0", " ").strip())
+
+        def is_noise(raw: str) -> bool:
+            s = (raw or "").strip()
+            if not s: return True
+            if "Page:" in s: return True
+            if re.fullmatch(r"\d{1,4}", s): return True
+            if s.startswith(("Date:", "Apex ", "State Farm", "CA DOI", "www.", "Claim #", "Policy #")): return True
+            if "Suite" in s or "Adjusters" in s: return True
+            return False
+
+        def gmoney(x: str) -> str:
+            t = (x or "").replace("\u00A0", " ")
+            t = re.sub(r"\s+", "", t)
+            return format_dollar_amount(_money_to_float(t))
+
+        def gpct(x: str) -> float:
+            return float((x or "").replace(",", ".").strip())
+
+        # Tails & recognizers
+        PCT_CH = r"%\uFF05"  # ASCII % or fullwidth ％
+        TAIL = re.compile(rf"([\d,]+(?:\.\d+)?)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$")
+        AMOUNT_ONLY_TAIL = re.compile(rf"([\d,]+(?:\.\d+)?)\s*$")
+        # Headers
+        EST_HDR = re.compile(r"^\s*Estimate:\s*(.+?)\s*$", re.IGNORECASE)
+        AREA_HDR = re.compile(r"^\s*Area:\s*(.+?)\s*$", re.IGNORECASE)
+        # Subtotals
+        AREA_SUBTOTAL = re.compile(rf"^\s*Area\s+Subtotal:\s*(.+?)\s+([\d,]+(?:\.\d+)?)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$", re.IGNORECASE)
+        SUBTOTAL_OF_AREAS = re.compile(rf"^\s*Subtotal\s+of\s+Areas\s+([\d,]+(?:\.\d+)?)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$", re.IGNORECASE)
+        FINAL_TOTAL = re.compile(rf"^\s*Total\s+([\d,]+(?:\.\d+)?)\s+100(?:\.00)?\s*[{PCT_CH}]?$", re.IGNORECASE)
+        # Coverage lines (ROOM variant: no '@')
+        COVER_SPLIT = re.compile(r"^\s*Coverage:\s+(.+?)\s+(\d{1,3}(?:\.\d{1,2})?)\s*[%\uFF05]\s*=\s*([\d,]+(?:\.\d+)?)\s*$")
+        # Special item without pct
+        LABOR_MIN = re.compile(r"^\s*Labor\s+Minimums\s+Applied\s+([\d,]+(?:\.\d+)?)\s*$", re.IGNORECASE)
+
+        def is_boundary(s: str) -> bool:
+            # boundaries that end coverage collection or item recognition
+            return (
+                EST_HDR.match(s) or AREA_HDR.match(s) or
+                AREA_SUBTOTAL.match(s) or SUBTOTAL_OF_AREAS.match(s) or
+                FINAL_TOTAL.match(s) or
+                TAIL.search(s)  # another item line
+            )
+
+        def capture_coverage(k: int, n: int) -> (list, int):
+            covs = []
+            i2 = k
+            while i2 < n:
+                raw = all_lines[i2] or ""
+                if is_noise(raw):
+                    i2 += 1
+                    continue
+                s = norm(raw)
+                m = COVER_SPLIT.match(s)
+                if not m:
+                    if is_boundary(s):
+                        break
+                    # allow single wrapped continuation tokens to append to label (rare in Room)
+                    # If needed later, add continuation logic here similar to category.
+                    break
+                covs.append({
+                    "coverage": m.group(1).strip(),
+                    "pct": gpct(m.group(2)),
+                    "amount": gmoney(m.group(3)),
+                })
+                i2 += 1
+            return covs, i2
+
+        out_groups: dict = {}
+        flat_rows: list = []
+        subtotals: list = []
+
+        current_group = None  # "Estimate: <id>" or "Area: <name>"
+
+        i = seg_start
+        n = seg_end
+        while i < n:
+            raw = all_lines[i] or ""
+            if is_noise(raw):
+                i += 1
+                continue
+            s = norm(raw)
+
+            # Group headers
+            m_est = EST_HDR.match(s)
+            if m_est:
+                current_group = f"Estimate: {m_est.group(1).strip()}"
+                out_groups.setdefault(current_group, [])
+                i += 1
+                continue
+
+            m_area_hdr = AREA_HDR.match(s)
+            if m_area_hdr:
+                # Could be header-only OR header+item if a tail is present on same line
+                area_label = m_area_hdr.group(1).strip()
+                current_group = f"Area: {area_label}"
+                out_groups.setdefault(current_group, [])
+                # If same line also has an amount/pct tail (rare), treat it as an item too
+                mt = TAIL.search(s)
+                if mt:
+                    amount = gmoney(mt.group(1)); pct = gpct(mt.group(2))
+                    # Item label should be the prefix before numeric tail; keep "Area: <name>"
+                    label = s[:mt.start()].strip()
+                    cov, j2 = capture_coverage(i + 1, n)
+                    item = {"item": label, "total": amount, "pct": pct, "coverage": cov}
+                    out_groups[current_group].append(item); flat_rows.append({k: item[k] for k in ("item","total","pct","coverage")})
+                    i = j2
+                    continue
+                i += 1
+                continue
+
+            # Subtotals
+            m_as = AREA_SUBTOTAL.match(s)
+            if m_as:
+                label = f"Area Subtotal: {m_as.group(1).strip()}"
+                amount = gmoney(m_as.group(2)); pct = gpct(m_as.group(3))
+                cov, j2 = capture_coverage(i + 1, n)
+                subtotals.append({"label": label, "total": amount, "pct": pct, "coverage": cov})
+                i = j2
+                continue
+
+            m_soa = SUBTOTAL_OF_AREAS.match(s)
+            if m_soa:
+                amount = gmoney(m_soa.group(1)); pct = gpct(m_soa.group(2))
+                cov, j2 = capture_coverage(i + 1, n)
+                subtotals.append({"label": "Subtotal of Areas", "total": amount, "pct": pct, "coverage": cov})
+                i = j2
+                continue
+
+            m_ft = FINAL_TOTAL.match(s)
+            if m_ft:
+                subtotals.append({"label": "Total", "total": gmoney(m_ft.group(1)), "pct": 100.00})
+                i += 1
+                continue
+
+            # Special item (no pct)
+            m_lab = LABOR_MIN.match(s)
+            if m_lab:
+                amount = gmoney(m_lab.group(1))
+                cov, j2 = capture_coverage(i + 1, n)
+                label = "Labor Minimums Applied"
+                # Attach to current group if set, else to a synthetic group
+                grp = current_group or "Estimate: (unknown)"
+                out_groups.setdefault(grp, [])
+                item = {"item": label, "total": amount, "pct": None, "coverage": cov}
+                out_groups[grp].append(item); flat_rows.append({k: item[k] for k in ("item","total","pct","coverage")})
+                i = j2
+                continue
+
+            # Generic item with amount + pct tail
+            mt = TAIL.search(s)
+            if mt:
+                amount = gmoney(mt.group(1)); pct = gpct(mt.group(2))
+                label = s[:mt.start()].strip().rstrip(":")
+                cov, j2 = capture_coverage(i + 1, n)
+                grp = current_group or "Estimate: (unknown)"
+                out_groups.setdefault(grp, [])
+                item = {"item": label, "total": amount, "pct": pct, "coverage": cov}
+                out_groups[grp].append(item); flat_rows.append({k: item[k] for k in ("item","total","pct","coverage")})
+                i = j2
+                continue
+
+            # Default advance
+            i += 1
+
+        return {"groups": out_groups, "rows": flat_rows, "subtotals": subtotals}, seg_end
+
+    def _parse_recap_by_category_section(self, all_lines: List[str], start_idx: int) -> Tuple[Dict[str, object], int]:
         """
-
+        Parses a single 'Recap by Category' block starting at start_idx (line matches RECAP_BY_CATEGORY_HDR).
+        - Dynamic groups: "<Key> Total %" or "Total <pct>%"
+        Items: ALL-CAPS lines with "<amount> <pct>%"
+        Coverage: one-or-more "Coverage: ..." lines with wrapped continuation lines merged.
+        Group can close via "<Key> Subtotal ..." or bare "Subtotal ...".
+        - 'subtotals' array: collects every subtotal (group-closing and repeated), plus allocations and final Total 100%.
+        - Allocations ("Permits and Fees", "Material Sales Tax", "Overhead", "Profit") become top-level keys with coverage,
+        and are mirrored into 'subtotals' with coverage.
+        """
         def gmoney(x: str) -> str:
             return format_dollar_amount(_money_to_float(x))
 
-        # --- regex (operate on line.strip()) ---
-        KEY_TOTAL_HDR = re.compile(
-            r"^([A-Za-z0-9/_\-\.\s\(\),&']+?)\s+Total\s+(?:\d{1,3}\.\d{2}%|%)$",
-            re.IGNORECASE
-        )
-        KEY_SUBTOTAL_ROW = re.compile(
-            r"^([A-Za-z0-9/_\-\.\s\(\),&']+?)\s+Subtotal\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$",
-            re.IGNORECASE
-        )
-        BARE_SUBTOTAL_ROW = re.compile(
-            r"^Subtotal\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$",
-            re.IGNORECASE
-        )
-        # Item rows (we’ll require ALL-CAPS name separately)
-        RECAP_ITEM_LINE = re.compile(
-            r"^([A-Za-z0-9/_\-\.\s\(\),&']+?)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$"
-        )
-        # Coverage splits
-        COVER_SPLIT = re.compile(
-            r"^Coverage:\s+(.+?)\s+@\s+(\d{1,3}\.\d{2})%\s*=\s*([\d,]+\.\d+)$"
-        )
-        # Allocation rows (subtotals section)
-        ALLOC_LABEL_ROW = re.compile(
-            r"^(Permits and Fees|Material Sales Tax|Overhead|Profit)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$",
-            re.IGNORECASE
-        )
+        KEY_TOTAL_HDR = re.compile(r"^([A-Za-z0-9/_\-\.\s\(\),&']+?)\s+Total\s+(?:\d{1,3}\.\d{2}%|%)$", re.IGNORECASE)
+        KEY_SUBTOTAL_ROW = re.compile(r"^([A-Za-z0-9/_\-\.\s\(\),&']+?)\s+Subtotal\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$", re.IGNORECASE)
+        BARE_SUBTOTAL_ROW = re.compile(r"^Subtotal\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$", re.IGNORECASE)
+        RECAP_ITEM_LINE = re.compile(RECAP_LINE_PATTERN)
+        COVER_SPLIT = re.compile(RECAP_COVERAGE_SPLIT)
+        ALLOC_LABEL_ROW = re.compile(r"^(Permits and Fees|Material Sales Tax|Overhead|Profit)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$", re.IGNORECASE)
         FINAL_TOTAL_100 = re.compile(r"^Total\s+([\d,]+\.\d+)\s+100\.00%$", re.IGNORECASE)
 
         def is_all_caps_name(s: str) -> bool:
-            # ALL CAPS = no lowercase; allow digits/punct/space
             return not re.search(r"[a-z]", s)
 
         def is_page_noise(s: str) -> bool:
-            # Conservative page/header noise to skip when harvesting coverage across pages.
             if not s:
                 return True
             if "Page:" in s:
@@ -822,7 +1035,6 @@ class XactimateRoughDraftParser:
             return False
 
         def is_signal_boundary(s: str) -> bool:
-            # Boundaries that end a coverage wrap/collection
             return (
                 KEY_TOTAL_HDR.match(s) or
                 KEY_SUBTOTAL_ROW.match(s) or
@@ -833,12 +1045,9 @@ class XactimateRoughDraftParser:
             )
 
         def capture_coverage(k: int, n: int) -> Tuple[List[dict], int]:
-            """Collect one-or-more coverage splits starting at k.
-            Handles wrapped continuation lines and skips page/header noise between splits."""
             covs: List[dict] = []
             while k < n:
                 t = (all_lines[k] or "").strip()
-                # Skip pure page/header noise between coverage blocks
                 if is_page_noise(t):
                     k += 1
                     continue
@@ -858,14 +1067,274 @@ class XactimateRoughDraftParser:
                     if COVER_SPLIT.match(t2) or is_signal_boundary(t2):
                         break
                     if is_page_noise(t2):
-                        k += 1  # skip noise without appending to label
+                        k += 1
                         continue
-                    # treat as continuation of label (e.g., "Lightning, & Removal", "- 39 Smoke")
                     label = (label + " " + t2).strip()
                     k += 1
                 covs.append({"coverage": label, "pct": pct, "amount": amt})
-                # loop to possibly capture another 'Coverage:' after wrap/noise
             return covs, k
+
+        def subtotals_add(arr: List[dict], entry: dict):
+            # de-dup exact (label,total,pct)
+            for e in arr:
+                if e.get("label") == entry.get("label") and e.get("total") == entry.get("total") and e.get("pct") == entry.get("pct"):
+                    return
+            arr.append(entry)
+
+        out = {"subtotals": []}
+        i = start_idx + 1
+        n = len(all_lines)
+        current_key = None
+        pending_items: List[dict] = []
+
+        def flush_group():
+            nonlocal current_key, pending_items
+            if current_key and pending_items:
+                out.setdefault(current_key, []).extend(pending_items)
+            current_key, pending_items = None, []
+
+        while i < n:
+            s = (all_lines[i] or "").strip()
+
+            # Stop on obvious new major section
+            if s.startswith("Dwelling -") or s.startswith("Estimate:") or s.startswith("Summary for "):
+                break
+
+            # Header
+            mt = KEY_TOTAL_HDR.match(s)
+            if mt:
+                flush_group()
+                current_key = mt.group(1).strip()
+                i += 1
+                continue
+
+            # Items within a group
+            if current_key:
+                rm = RECAP_ITEM_LINE.match(s)
+                if rm:
+                    name = rm.group(1).strip()
+                    if is_all_caps_name(name):
+                        item_total = gmoney(rm.group(2))
+                        item_pct = float(rm.group(3))
+                        cov_list, end_k = capture_coverage(i + 1, n)
+                        pending_items.append({
+                            "item": name,
+                            "total": item_total,
+                            "pct": item_pct,
+                            "coverage": cov_list
+                        })
+                        i = end_k
+                        continue
+
+                # Group-closing subtotal (labeled)
+                ms = KEY_SUBTOTAL_ROW.match(s)
+                if ms:
+                    flush_group()
+                    subtotals_add(out["subtotals"], {
+                        "label": ms.group(1).strip(),
+                        "total": gmoney(ms.group(2)),
+                        "pct": float(ms.group(3)),
+                    })
+                    i += 1
+                    continue
+
+                # Bare "Subtotal …" — use current_key as label
+                bs = BARE_SUBTOTAL_ROW.match(s)
+                if bs:
+                    flush_group()
+                    if current_key:
+                        subtotals_add(out["subtotals"], {
+                            "label": current_key,
+                            "total": gmoney(bs.group(1)),
+                            "pct": float(bs.group(2)),
+                        })
+                    i += 1
+                    continue
+
+            # Subtotals section (no active group)
+            if current_key is None:
+                ms_any = KEY_SUBTOTAL_ROW.match(s)
+                if ms_any:
+                    subtotals_add(out["subtotals"], {
+                        "label": ms_any.group(1).strip(),
+                        "total": gmoney(ms_any.group(2)),
+                        "pct": float(ms_any.group(3)),
+                    })
+                    i += 1
+                    continue
+
+                # Allocations (with coverage), also mirrored into subtotals
+                am = ALLOC_LABEL_ROW.match(s)
+                if am:
+                    al_label = am.group(1).strip()
+                    al_total = gmoney(am.group(2))
+                    al_pct = float(am.group(3))
+                    cov_list, end_k = capture_coverage(i + 1, n)
+                    out[al_label] = {"total": al_total, "pct": al_pct, "coverage": cov_list}
+                    subtotals_add(out["subtotals"], {
+                        "label": al_label, "total": al_total, "pct": al_pct, "coverage": cov_list
+                    })
+                    i = end_k
+                    continue
+
+                # Final grand total
+                ft = FINAL_TOTAL_100.match(s)
+                if ft:
+                    subtotals_add(out["subtotals"], {
+                        "label": "Total",
+                        "total": gmoney(ft.group(1)),
+                        "pct": 100.00
+                    })
+                    i += 1
+                    continue
+
+            # Page/header noise skip
+            if ("Page:" in s) or re.fullmatch(r"\d{1,4}", s) or s.startswith(("Date:", "Apex ", "State Farm")):
+                i += 1
+                continue
+
+            # default
+            i += 1
+
+        flush_group()
+        return out, i
+
+    def _parse_recap_tax_op_section(self, all_lines: List[str], start_idx: int) -> Tuple[Optional[Dict[str, str]], int]:
+        """
+        Parses 'Recap of Taxes, Overhead and Profit' from start_idx.
+        Returns (dict or None, next_index)
+        """
+        i, n = start_idx + 1, len(all_lines)
+        total_row = None
+        while i < n:
+            s = (all_lines[i] or "").strip()
+            tm = re.match(RECAP_TAX_OP_TOTAL_ROW, s)
+            if tm:
+                total_row = {
+                    "overhead": format_dollar_amount(_money_to_float(tm.group(1))),
+                    "profit": format_dollar_amount(_money_to_float(tm.group(2))),
+                    "material_sales_tax": format_dollar_amount(_money_to_float(tm.group(3))),
+                    "storage_rental_tax": format_dollar_amount(_money_to_float(tm.group(4))),
+                }
+                i += 1
+                break
+            if s.startswith("Summary for ") or re.match(RECAP_BY_ROOM_HDR, s) or re.match(RECAP_BY_CATEGORY_HDR, s):
+                break
+            i += 1
+        return total_row, i
+
+    def _parse_coverage_rows(self, all_lines: List[str], start_idx: int, existing_coverage: Optional[Dict[str, object]] = None) -> Tuple[Dict[str, object], int]:
+        """
+        Harvests a contiguous block of coverage rows and an optional 'Total' row starting at start_idx.
+        Returns (coverage_dict, next_index)
+        """
+        cov = existing_coverage or {"rows": [], "totals": None}
+        i, n = start_idx, len(all_lines)
+        while i < n:
+            s = (all_lines[i] or "").strip()
+            m = re.match(COVERAGE_TABLE_ROW, s)
+            if m:
+                cov["rows"].append({
+                    "name": m.group(1).strip(),
+                    "item_total": format_dollar_amount(_money_to_float(m.group(2))),
+                    "item_pct": float(m.group(3)),
+                    "acv_total": format_dollar_amount(_money_to_float(m.group(4))),
+                    "acv_pct": float(m.group(5)),
+                })
+                i += 1
+                continue
+            m = re.match(COVERAGE_TOTAL_ROW, s)
+            if m:
+                cov["totals"] = {
+                    "item_total": format_dollar_amount(_money_to_float(m.group(1))),
+                    "acv_total": format_dollar_amount(_money_to_float(m.group(2))),
+                }
+                i += 1
+                # we often want to stop after total
+                break
+            # stop if we hit something that's clearly not coverage
+            if s.startswith(("Summary for ", "Recap ", "Estimate:", "Grand Total Areas")):
+                break
+            # otherwise, exit the block gracefully
+            break
+        return cov, i
+
+    def _parse_summary_block(self, all_lines: List[str], start_idx: int) -> Tuple[Tuple[str, Dict[str, str]], int]:
+        """
+        Parses a single 'Summary for <Coverage>' block starting at start_idx.
+        Returns ((coverage_name, kv_dict), next_index).
+        """
+        def gmoney(x: str) -> str:
+            return format_dollar_amount(_money_to_float(x))
+
+        m = re.match(SUMMARY_FOR_HDR, (all_lines[start_idx] or "").strip())
+        assert m, "Expected 'Summary for' header at start_idx"
+        cov = m.group(1).strip()
+
+        i, n = start_idx + 1, len(all_lines)
+        kv = {}
+        while i < n:
+            s = (all_lines[i] or "").strip()
+            if not s or s.startswith('Summary for ') or re.match(RECAP_TAX_OP_HDR, s) \
+            or re.match(RECAP_BY_ROOM_HDR, s) or re.match(RECAP_BY_CATEGORY_HDR, s):
+                break
+            sm = re.match(SUMMARY_KV_ROW, s)
+            if sm:
+                kv[sm.group(1)] = gmoney(sm.group(2))
+            i += 1
+        return (cov, kv), i
+
+    def _parse_grand_total_areas_block(self, all_lines: List[str], start_idx: int) -> Tuple[Optional[Dict[str, str]], int]:
+        """
+        Parses the 'Grand Total Areas:' block starting at start_idx.
+        Returns (dict or None, next_index)
+        """
+        i, n = start_idx + 1, len(all_lines)
+        block_lines = []
+        while i < n:
+            nxt = (all_lines[i] or "").strip()
+            if not nxt:
+                break
+            if nxt.startswith(("Coverage ", "Summary ", "Recap ", "Estimate:")):
+                break
+            if "Page:" in nxt or nxt.startswith("Apex "):
+                break
+            block_lines.append(nxt)
+            i += 1
+
+        blob = re.sub(r"\s+", " ", " ".join(block_lines))
+
+        def grab(pattern: str) -> Optional[str]:
+            m2 = re.search(pattern, blob, re.IGNORECASE)
+            return format_dollar_amount(_money_to_float(m2.group(1))) if m2 else None
+
+        gta = {
+            "sf_walls": grab(r"([\d,]+\.\d+)\s+SF\s+Walls\b"),
+            "sf_ceiling": grab(r"([\d,]+\.\d+)\s+SF\s+Ceiling\b"),
+            "sf_walls_and_ceiling": grab(r"([\d,]+\.\d+)\s+SF\s+Walls\s+and\s+Ceiling"),
+            "sf_floor": grab(r"([\d,]+\.\d+)\s+SF\s+Floor\b"),
+            "sy_flooring": grab(r"([\d,]+\.\d+)\s+SY\s+Flooring"),
+            "lf_floor_perimeter": grab(r"([\d,]+\.\d+)\s+LF\s+Floor\s+Perimeter"),
+            "sf_long_wall": grab(r"([\d,]+\.\d+)\s+SF\s+Long\s+Wall"),
+            "sf_short_wall": grab(r"([\d,]+\.\d+)\s+SF\s+Short\s+Wall"),
+            "lf_ceil_perimeter": grab(r"([\d,]+\.\d+)\s+LF\s+Ceil\.\s+Perimeter"),
+            "floor_area": grab(r"([\d,]+\.\d+)\s+Floor\s+Area"),
+            "total_area": grab(r"([\d,]+\.\d+)\s+Total\s+Area"),
+            "interior_wall_area": grab(r"([\d,]+\.\d+)\s+Interior\s+Wall\s+Area"),
+            "exterior_wall_area": grab(r"([\d,]+\.\d+)\s+Exterior\s+Wall\s+Area"),
+            "exterior_perimeter_of_walls": grab(r"([\d,]+\.\d+)\s+Exterior\s+Perimeter\s+of\s+Walls"),
+            "surface_area": grab(r"([\d,]+\.\d+)\s+Surface\s+Area"),
+            "number_of_squares": grab(r"([\d,]+\.\d+)\s+Number\s+of\squares"),
+            "total_perimeter_length": grab(r"([\d,]+\.\d+)\s+Total\s+Perimeter\s+Length"),
+            "total_ridge_length": grab(r"([\d,]+\.\d+)\s+Total\s+Ridge\s+Length"),
+            "total_hip_length": grab(r"([\d,]+\.\d+)\s+Total\s+Hip\s+Length"),
+        }
+        gta = {k: v for k, v in gta.items() if v is not None}
+        return (gta or None), i
+
+    def _parse_end_structured(self, all_lines: List[str]) -> dict:
+        def gmoney(x: str) -> str:
+            return format_dollar_amount(_money_to_float(x))
 
         result = {
             "line_item_totals": None,
@@ -876,24 +1345,11 @@ class XactimateRoughDraftParser:
             "summaries_by_coverage": {},
             "recap_tax_op": None,
             "recap_by_room": {"rows": [], "subtotals": []},
-            "recap_by_category": {
-                "subtotals": []  # final totals are appended here; no 'totals' key
-            },
+            "recap_by_category": {"subtotals": []},
         }
 
-        def subtotals_add(entry: dict):
-            # De-dup exact (label,total,pct)
-            label = entry.get("label")
-            total = entry.get("total")
-            pct = entry.get("pct")
-            for e in result["recap_by_category"]["subtotals"]:
-                if e.get("label") == label and e.get("total") == total and e.get("pct") == pct:
-                    return
-            result["recap_by_category"]["subtotals"].append(entry)
-
-        i = 0
-        n_lines = len(all_lines)
-        while i < n_lines:
+        i, n = 0, len(all_lines)
+        while i < n:
             line = (all_lines[i] or "").strip()
 
             # Labor Minimums Applied
@@ -923,270 +1379,59 @@ class XactimateRoughDraftParser:
             if re.match(ADD_CHARGES_HDR_PATTERN, line):
                 items = []
                 j = i + 1
-                while j < n_lines and not re.match(ADD_CHARGES_TOTAL_PATTERN, (all_lines[j] or "").strip()):
+                while j < n and not re.match(ADD_CHARGES_TOTAL_PATTERN, (all_lines[j] or "").strip()):
                     rm = re.match(ADD_CHARGE_ROW_PATTERN, (all_lines[j] or "").strip())
                     if rm:
                         items.append({"label": rm.group(1).strip(), "amount": gmoney(rm.group(2))})
                     j += 1
                 total = None
-                if j < n_lines:
+                if j < n:
                     tm = re.match(ADD_CHARGES_TOTAL_PATTERN, (all_lines[j] or "").strip())
                     if tm:
-                        total = gmoney(tm.group(1))
-                        j += 1
+                        total = gmoney(tm.group(1)); j += 1
                 result["additional_charges"] = {"items": items, "total": total}
                 i = j
                 continue
 
             # Grand Total Areas
             if re.match(GRAND_TOTAL_AREAS_HDR, line):
-                block_lines = []
-                j = i + 1
-                while j < n_lines:
-                    nxt = (all_lines[j] or "").strip()
-                    if not nxt: break
-                    if nxt.startswith(("Coverage ", "Summary ", "Recap ", "Estimate:")): break
-                    if "Page:" in nxt or nxt.startswith("Apex "): break
-                    block_lines.append(nxt)
-                    j += 1
-                blob = re.sub(r"\s+", " ", " ".join(block_lines))
-
-                def grab(pattern: str) -> Optional[str]:
-                    m2 = re.search(pattern, blob, re.IGNORECASE)
-                    return gmoney(m2.group(1)) if m2 else None
-
-                gta = {
-                    "sf_walls": grab(r"([\d,]+\.\d+)\s+SF\s+Walls\b"),
-                    "sf_ceiling": grab(r"([\d,]+\.\d+)\s+SF\s+Ceiling\b"),
-                    "sf_walls_and_ceiling": grab(r"([\d,]+\.\d+)\s+SF\s+Walls\s+and\s+Ceiling"),
-                    "sf_floor": grab(r"([\d,]+\.\d+)\s+SF\s+Floor\b"),
-                    "sy_flooring": grab(r"([\d,]+\.\d+)\s+SY\s+Flooring"),
-                    "lf_floor_perimeter": grab(r"([\d,]+\.\d+)\s+LF\s+Floor\s+Perimeter"),
-                    "sf_long_wall": grab(r"([\d,]+\.\d+)\s+SF\s+Long\s+Wall"),
-                    "sf_short_wall": grab(r"([\d,]+\.\d+)\s+SF\s+Short\s+Wall"),
-                    "lf_ceil_perimeter": grab(r"([\d,]+\.\d+)\s+LF\s+Ceil\.\s+Perimeter"),
-                    "floor_area": grab(r"([\d,]+\.\d+)\s+Floor\s+Area"),
-                    "total_area": grab(r"([\d,]+\.\d+)\s+Total\s+Area"),
-                    "interior_wall_area": grab(r"([\d,]+\.\d+)\s+Interior\s+Wall\s+Area"),
-                    "exterior_wall_area": grab(r"([\d,]+\.\d+)\s+Exterior\s+Wall\s+Area"),
-                    "exterior_perimeter_of_walls": grab(r"([\d,]+\.\d+)\s+Exterior\s+Perimeter\s+of\s+Walls"),
-                    "surface_area": grab(r"([\d,]+\.\d+)\s+Surface\s+Area"),
-                    "number_of_squares": grab(r"([\d,]+\.\d+)\s+Number\s+of\squares"),
-                    "total_perimeter_length": grab(r"([\d,]+\.\d+)\s+Total\s+Perimeter\s+Length"),
-                    "total_ridge_length": grab(r"([\d,]+\.\d+)\s+Total\s+Ridge\s+Length"),
-                    "total_hip_length": grab(r"([\d,]+\.\d+)\s+Total\s+Hip\s+Length"),
-                }
-                result["grand_total_areas"] = {k: v for k, v in gta.items() if v is not None}
-                i = j
+                result["grand_total_areas"], i = self._parse_grand_total_areas_block(all_lines, i)
                 continue
 
-            # Coverage table
-            m = re.match(COVERAGE_TABLE_ROW, line)
-            if m:
-                result["coverage"]["rows"].append({
-                    "name": m.group(1).strip(),
-                    "item_total": gmoney(m.group(2)),
-                    "item_pct": float(m.group(3)),
-                    "acv_total": gmoney(m.group(4)),
-                    "acv_pct": float(m.group(5)),
-                })
-                i += 1
-                continue
-            m = re.match(COVERAGE_TOTAL_ROW, line)
-            if m:
-                result["coverage"]["totals"] = {
-                    "item_total": gmoney(m.group(1)),
-                    "acv_total": gmoney(m.group(2)),
-                }
-                i += 1
+            # Coverage table rows/totals (harvest block)
+            if re.match(COVERAGE_TABLE_ROW, line) or re.match(COVERAGE_TOTAL_ROW, line):
+                result["coverage"], i = self._parse_coverage_rows(all_lines, i, result["coverage"])
                 continue
 
             # Summary for <Coverage>
             m = re.match(SUMMARY_FOR_HDR, line)
             if m:
-                cov = m.group(1).strip()
-                j = i + 1
-                kv = {}
-                while j < n_lines:
-                    nxt = (all_lines[j] or "").strip()
-                    if not nxt or nxt.startswith('Summary for ') or re.match(RECAP_TAX_OP_HDR, nxt) \
-                    or re.match(RECAP_BY_ROOM_HDR, nxt) or re.match(RECAP_BY_CATEGORY_HDR, nxt):
-                        break
-                    sm = re.match(SUMMARY_KV_ROW, nxt)
-                    if sm:
-                        kv[sm.group(1)] = gmoney(sm.group(2))
-                    j += 1
-                result["summaries_by_coverage"][cov] = kv
-                i = j
+                (cov_name, kv), i = self._parse_summary_block(all_lines, i)
+                result["summaries_by_coverage"][cov_name] = kv
                 continue
 
             # Recap of Taxes, Overhead and Profit
             if re.match(RECAP_TAX_OP_HDR, line):
-                j = i + 1
-                total_row = None
-                while j < n_lines:
-                    nxt = (all_lines[j] or "").strip()
-                    tm = re.match(RECAP_TAX_OP_TOTAL_ROW, nxt)
-                    if tm:
-                        total_row = {
-                            "overhead": gmoney(tm.group(1)),
-                            "profit": gmoney(tm.group(2)),
-                            "material_sales_tax": gmoney(tm.group(3)),
-                            "storage_rental_tax": gmoney(tm.group(4)),
-                        }
-                        j += 1
-                        break
-                    j += 1
-                result["recap_tax_op"] = total_row
-                i = j
+                result["recap_tax_op"], i = self._parse_recap_tax_op_section(all_lines, i)
                 continue
 
-            # Recap by Room
-            if re.match(RECAP_BY_ROOM_HDR, line):
-                j = i + 1
-                rows, subs = [], []
-                while j < n_lines and not re.match(RECAP_BY_CATEGORY_HDR, (all_lines[j] or "").strip()):
-                    cur = (all_lines[j] or "").strip()
-                    rm = re.match(RECAP_LINE_PATTERN, cur)
-                    if rm:
-                        rows.append({"name": rm.group(1).strip(), "total": gmoney(rm.group(2)), "pct": float(rm.group(3))})
-                    sm = re.match(RECAP_SUBTOTAL_PATTERN, cur)
-                    if sm:
-                        subs.append({"label": cur.split(":")[0], "total": gmoney(sm.group(1)), "pct": float(sm.group(2))})
-                    j += 1
-                result["recap_by_room"] = {"rows": rows, "subtotals": subs}
-                i = j
+            # >>> TOLERANT HEADER DETECTION (search, not match) <<<
+            if re.search(r"\bRecap\s+by\s+Room\b", line, re.IGNORECASE):
+                result["recap_by_room"], i = self._parse_recap_by_room_section(all_lines, i)
                 continue
 
-            # ===== Recap by Category =====
-            if re.match(RECAP_BY_CATEGORY_HDR, line):
-                j = i + 1
-                current_key = None
-                pending_items: List[dict] = []
-
-                def flush_group():
-                    nonlocal current_key, pending_items
-                    if current_key and pending_items:
-                        arr = result["recap_by_category"].setdefault(current_key, [])
-                        arr.extend(pending_items)
-                    current_key = None
-                    pending_items = []
-
-                while j < n_lines:
-                    s = (all_lines[j] or "").strip()
-
-                    # stop if new major block
-                    if s.startswith("Dwelling -") or s.startswith("Estimate:") or s.startswith("Summary for "):
-                        break
-
-                    # header: "<Key> Total %" OR "<Key> Total <pct>%"
-                    mt = KEY_TOTAL_HDR.match(s)
-                    if mt:
-                        flush_group()
-                        current_key = mt.group(1).strip()
-                        j += 1
-                        continue
-
-                    # item: ALL-CAPS + amount + pct
-                    if current_key:
-                        rm = RECAP_ITEM_LINE.match(s)
-                        if rm:
-                            name = rm.group(1).strip()
-                            if is_all_caps_name(name):
-                                item_total = gmoney(rm.group(2))
-                                item_pct = float(rm.group(3))
-                                cov_list, end_k = capture_coverage(j + 1, n_lines)
-                                pending_items.append({
-                                    "item": name,
-                                    "total": item_total,
-                                    "pct": item_pct,
-                                    "coverage": cov_list
-                                })
-                                j = end_k
-                                continue
-
-                        # group closing subtotal (labeled)
-                        ms = KEY_SUBTOTAL_ROW.match(s)
-                        if ms:
-                            flush_group()
-                            subtotals_add({
-                                "label": ms.group(1).strip(),
-                                "total": gmoney(ms.group(2)),
-                                "pct": float(ms.group(3)),
-                            })
-                            j += 1
-                            continue
-
-                        # bare "Subtotal ..." closes current group and uses current_key as label
-                        bs = BARE_SUBTOTAL_ROW.match(s)
-                        if bs:
-                            flush_group()
-                            if current_key:
-                                subtotals_add({
-                                    "label": current_key,
-                                    "total": gmoney(bs.group(1)),
-                                    "pct": float(bs.group(2)),
-                                })
-                            j += 1
-                            continue
-
-                    # subtotals section (no active group)
-                    if current_key is None:
-                        ms_any = KEY_SUBTOTAL_ROW.match(s)
-                        if ms_any:
-                            subtotals_add({
-                                "label": ms_any.group(1).strip(),
-                                "total": gmoney(ms_any.group(2)),
-                                "pct": float(ms_any.group(3)),
-                            })
-                            j += 1
-                            continue
-
-                        # allocations (with coverage), mirror to subtotals
-                        am = ALLOC_LABEL_ROW.match(s)
-                        if am:
-                            al_label = am.group(1).strip()
-                            al_total = gmoney(am.group(2))
-                            al_pct = float(am.group(3))
-                            cov_list, end_k = capture_coverage(j + 1, n_lines)
-                            result["recap_by_category"][al_label] = {
-                                "total": al_total,
-                                "pct": al_pct,
-                                "coverage": cov_list
-                            }
-                            subtotals_add({
-                                "label": al_label,
-                                "total": al_total,
-                                "pct": al_pct,
-                                "coverage": cov_list
-                            })
-                            j = end_k
-                            continue
-
-                        # final grand total -> append to subtotals
-                        ft = FINAL_TOTAL_100.match(s)
-                        if ft:
-                            subtotals_add({
-                                "label": "Total",
-                                "total": gmoney(ft.group(1)),
-                                "pct": 100.00
-                            })
-                            j += 1
-                            continue
-
-                    # page artifacts: skip common header lines
-                    if is_page_noise(s):
-                        j += 1
-                        continue
-
-                    # default advance
-                    j += 1
-
-                flush_group()
-                i = j
+            if re.search(r"\bRecap\s+by\s+Category\b", line, re.IGNORECASE):
+                rbc, i = self._parse_recap_by_category_section(all_lines, i)
+                for k, v in rbc.items():
+                    if k == "subtotals":
+                        result["recap_by_category"]["subtotals"].extend(v)
+                    else:
+                        if isinstance(v, list):
+                            result["recap_by_category"].setdefault(k, []).extend(v)
+                        else:
+                            result["recap_by_category"][k] = v
                 continue
 
-            # default advance
             i += 1
 
         return result

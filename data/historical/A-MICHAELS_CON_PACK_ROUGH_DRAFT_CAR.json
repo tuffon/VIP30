@@ -2294,91 +2294,390 @@
     },
     "recap_tax_op": null,
     "recap_by_room": {
+      "groups": {
+        "Estimate: A-MICHAELS_CON_PACK": [],
+        "Area: Pack-Out 4,636.89 17.58%": [
+          {
+            "item": "Area: Pack-Out",
+            "total": "4,636.89",
+            "pct": 17.58,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "4,636.89"
+              }
+            ]
+          },
+          {
+            "item": "Cleaning",
+            "total": "7,776.29",
+            "pct": 29.49,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "7,776.29"
+              }
+            ]
+          }
+        ],
+        "Area: Main Level": [
+          {
+            "item": "Bedroom 1",
+            "total": "101.50",
+            "pct": 0.38,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "101.50"
+              }
+            ]
+          },
+          {
+            "item": "Bedroom 2",
+            "total": "97.05",
+            "pct": 0.37,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "97.05"
+              }
+            ]
+          },
+          {
+            "item": "Bathroom 1",
+            "total": "85.55",
+            "pct": 0.32,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "85.55"
+              }
+            ]
+          },
+          {
+            "item": "Master Bath",
+            "total": "103.69",
+            "pct": 0.39,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "103.69"
+              }
+            ]
+          },
+          {
+            "item": "Master Bedroom",
+            "total": "224.33",
+            "pct": 0.85,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "224.33"
+              }
+            ]
+          },
+          {
+            "item": "Living Room",
+            "total": "285.48",
+            "pct": 1.08,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "285.48"
+              }
+            ]
+          },
+          {
+            "item": "Dining Room",
+            "total": "106.73",
+            "pct": 0.4,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "106.73"
+              }
+            ]
+          },
+          {
+            "item": "Kitchen",
+            "total": "59.09",
+            "pct": 0.22,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "59.09"
+              }
+            ]
+          },
+          {
+            "item": "Garage",
+            "total": "66.11",
+            "pct": 0.25,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "66.11"
+              }
+            ]
+          },
+          {
+            "item": "Storage Area/Room",
+            "total": "25.60",
+            "pct": 0.1,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "25.60"
+              }
+            ]
+          },
+          {
+            "item": "Storage Area/Room",
+            "total": "8,158.08",
+            "pct": 30.94,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "8,158.08"
+              }
+            ]
+          },
+          {
+            "item": "Pack-Back",
+            "total": "4,643.20",
+            "pct": 17.61,
+            "coverage": [
+              {
+                "coverage": "Contents",
+                "pct": 100.0,
+                "amount": "4,643.20"
+              }
+            ]
+          }
+        ]
+      },
       "rows": [
         {
-          "name": "Cleaning",
+          "item": "Area: Pack-Out",
+          "total": "4,636.89",
+          "pct": 17.58,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "4,636.89"
+            }
+          ]
+        },
+        {
+          "item": "Cleaning",
           "total": "7,776.29",
-          "pct": 29.49
+          "pct": 29.49,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "7,776.29"
+            }
+          ]
         },
         {
-          "name": "Bedroom 1",
+          "item": "Bedroom 1",
           "total": "101.50",
-          "pct": 0.38
+          "pct": 0.38,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "101.50"
+            }
+          ]
         },
         {
-          "name": "Bedroom 2",
+          "item": "Bedroom 2",
           "total": "97.05",
-          "pct": 0.37
+          "pct": 0.37,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "97.05"
+            }
+          ]
         },
         {
-          "name": "Bathroom 1",
+          "item": "Bathroom 1",
           "total": "85.55",
-          "pct": 0.32
+          "pct": 0.32,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "85.55"
+            }
+          ]
         },
         {
-          "name": "Master Bath",
+          "item": "Master Bath",
           "total": "103.69",
-          "pct": 0.39
+          "pct": 0.39,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "103.69"
+            }
+          ]
         },
         {
-          "name": "Master Bedroom",
+          "item": "Master Bedroom",
           "total": "224.33",
-          "pct": 0.85
+          "pct": 0.85,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "224.33"
+            }
+          ]
         },
         {
-          "name": "Living Room",
+          "item": "Living Room",
           "total": "285.48",
-          "pct": 1.08
+          "pct": 1.08,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "285.48"
+            }
+          ]
         },
         {
-          "name": "Dining Room",
+          "item": "Dining Room",
           "total": "106.73",
-          "pct": 0.4
+          "pct": 0.4,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "106.73"
+            }
+          ]
         },
         {
-          "name": "Kitchen",
+          "item": "Kitchen",
           "total": "59.09",
-          "pct": 0.22
+          "pct": 0.22,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "59.09"
+            }
+          ]
         },
         {
-          "name": "Garage",
+          "item": "Garage",
           "total": "66.11",
-          "pct": 0.25
+          "pct": 0.25,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "66.11"
+            }
+          ]
         },
         {
-          "name": "Storage Area/Room",
+          "item": "Storage Area/Room",
           "total": "25.60",
-          "pct": 0.1
+          "pct": 0.1,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "25.60"
+            }
+          ]
         },
         {
-          "name": "Storage Area/Room",
+          "item": "Storage Area/Room",
           "total": "8,158.08",
-          "pct": 30.94
+          "pct": 30.94,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "8,158.08"
+            }
+          ]
         },
         {
-          "name": "Pack-Back",
+          "item": "Pack-Back",
           "total": "4,643.20",
-          "pct": 17.61
-        },
-        {
-          "name": "Subtotal of Areas",
-          "total": "26,369.59",
-          "pct": 100.0
-        },
-        {
-          "name": "Total",
-          "total": "26,369.59",
-          "pct": 100.0
+          "pct": 17.61,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "4,643.20"
+            }
+          ]
         }
       ],
       "subtotals": [
         {
-          "label": "Subtotal of Areas 26,369.59 100.00%",
-          "total": "26,369.59",
-          "pct": 100.0
+          "label": "Area Subtotal: Main Level",
+          "total": "1,155.13",
+          "pct": 4.38,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "1,155.13"
+            }
+          ]
         },
         {
-          "label": "Total 26,369.59 100.00%",
+          "label": "Area Subtotal: Pack-Out",
+          "total": "13,568.31",
+          "pct": 51.45,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "13,568.31"
+            }
+          ]
+        },
+        {
+          "label": "Subtotal of Areas",
+          "total": "26,369.59",
+          "pct": 100.0,
+          "coverage": [
+            {
+              "coverage": "Contents",
+              "pct": 100.0,
+              "amount": "26,369.59"
+            }
+          ]
+        },
+        {
+          "label": "Total",
           "total": "26,369.59",
           "pct": 100.0
         }

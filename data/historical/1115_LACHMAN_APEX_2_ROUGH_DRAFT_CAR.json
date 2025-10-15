@@ -10174,161 +10174,823 @@
       "storage_rental_tax": "0.00"
     },
     "recap_by_room": {
+      "groups": {
+        "Estimate: 1115_LACHMAN_APEX_2": [
+          {
+            "item": "General",
+            "total": "42,522.26",
+            "pct": 3.53,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "42,522.26"
+              }
+            ]
+          }
+        ],
+        "Area: Dwelling": [
+          {
+            "item": "Electrical",
+            "total": "74,632.17",
+            "pct": 6.2,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "74,632.17"
+              }
+            ]
+          },
+          {
+            "item": "Plumbing",
+            "total": "7,896.75",
+            "pct": 0.66,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "7,896.75"
+              }
+            ]
+          },
+          {
+            "item": "HVAC",
+            "total": "34,832.02",
+            "pct": 2.89,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "34,832.02"
+              }
+            ]
+          },
+          {
+            "item": "Doors/Windows",
+            "total": "209,044.11",
+            "pct": 17.37,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "209,044.11"
+              }
+            ]
+          },
+          {
+            "item": "Appliances",
+            "total": "40,152.37",
+            "pct": 3.34,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "40,152.37"
+              }
+            ]
+          }
+        ],
+        "Area: Main Level 19,000.00 1.58%": [
+          {
+            "item": "Area: Main Level",
+            "total": "19,000.00",
+            "pct": 1.58,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "19,000.00"
+              }
+            ]
+          },
+          {
+            "item": "Entry/Foyer",
+            "total": "7,512.31",
+            "pct": 0.62,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "7,512.31"
+              }
+            ]
+          },
+          {
+            "item": "Office",
+            "total": "7,489.29",
+            "pct": 0.62,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "7,489.29"
+              }
+            ]
+          },
+          {
+            "item": "Guest Bath",
+            "total": "2,841.16",
+            "pct": 0.24,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "2,841.16"
+              }
+            ]
+          },
+          {
+            "item": "Living Room/Dining Room",
+            "total": "53,450.74",
+            "pct": 4.44,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "53,450.74"
+              }
+            ]
+          },
+          {
+            "item": "Kitchen",
+            "total": "47,783.79",
+            "pct": 3.97,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "47,783.79"
+              }
+            ]
+          },
+          {
+            "item": "Hallway",
+            "total": "30,432.77",
+            "pct": 2.53,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "30,432.77"
+              }
+            ]
+          },
+          {
+            "item": "Master Bedroom",
+            "total": "8,222.52",
+            "pct": 0.68,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "8,222.52"
+              }
+            ]
+          },
+          {
+            "item": "M. Closet Hers",
+            "total": "8,298.81",
+            "pct": 0.69,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "8,298.81"
+              }
+            ]
+          },
+          {
+            "item": "M. Closet His",
+            "total": "7,841.58",
+            "pct": 0.65,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "7,841.58"
+              }
+            ]
+          },
+          {
+            "item": "Server Closet",
+            "total": "644.82",
+            "pct": 0.05,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "644.82"
+              }
+            ]
+          },
+          {
+            "item": "Master Bath",
+            "total": "6,616.88",
+            "pct": 0.55,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "6,616.88"
+              }
+            ]
+          },
+          {
+            "item": "Laundry Room",
+            "total": "17,039.94",
+            "pct": 1.42,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "17,039.94"
+              }
+            ]
+          },
+          {
+            "item": "Bathroom 1",
+            "total": "2,566.33",
+            "pct": 0.21,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "2,566.33"
+              }
+            ]
+          },
+          {
+            "item": "Bedroom 1",
+            "total": "9,006.16",
+            "pct": 0.75,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "9,006.16"
+              }
+            ]
+          },
+          {
+            "item": "Bedroom 2",
+            "total": "7,743.42",
+            "pct": 0.64,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "7,743.42"
+              }
+            ]
+          },
+          {
+            "item": "Garage",
+            "total": "14,285.91",
+            "pct": 1.19,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "14,285.91"
+              }
+            ]
+          }
+        ],
+        "Area: Attic": [
+          {
+            "item": "Attic Space",
+            "total": "3,310.08",
+            "pct": 0.28,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "3,310.08"
+              }
+            ]
+          }
+        ],
+        "Area: Exterior - Main Structure 33,532.53 2.79%": [
+          {
+            "item": "Area: Exterior - Main Structure",
+            "total": "33,532.53",
+            "pct": 2.79,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "33,532.53"
+              }
+            ]
+          },
+          {
+            "item": "Roof",
+            "total": "74,000.00",
+            "pct": 6.15,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "74,000.00"
+              }
+            ]
+          },
+          {
+            "item": "Ext_Surfaces",
+            "total": "88,198.55",
+            "pct": 7.33,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "88,198.55"
+              }
+            ]
+          },
+          {
+            "item": "Other Structures",
+            "total": "250,598.91",
+            "pct": 20.82,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 1.72,
+                "amount": "4,298.88"
+              },
+              {
+                "coverage": "Other Structures",
+                "pct": 98.28,
+                "amount": "246,300.03"
+              }
+            ]
+          },
+          {
+            "item": "Landscaping",
+            "total": "94,023.75",
+            "pct": 7.81,
+            "coverage": [
+              {
+                "coverage": "Trees, Plants & Shrubs",
+                "pct": 100.0,
+                "amount": "94,023.75"
+              }
+            ]
+          },
+          {
+            "item": "Labor Minimums Applied",
+            "total": "43.20",
+            "pct": null,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "43.20"
+              }
+            ]
+          }
+        ]
+      },
       "rows": [
         {
-          "name": "General",
+          "item": "General",
           "total": "42,522.26",
-          "pct": 3.53
+          "pct": 3.53,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "42,522.26"
+            }
+          ]
         },
         {
-          "name": "Electrical",
+          "item": "Electrical",
           "total": "74,632.17",
-          "pct": 6.2
+          "pct": 6.2,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "74,632.17"
+            }
+          ]
         },
         {
-          "name": "Plumbing",
+          "item": "Plumbing",
           "total": "7,896.75",
-          "pct": 0.66
+          "pct": 0.66,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "7,896.75"
+            }
+          ]
         },
         {
-          "name": "HVAC",
+          "item": "HVAC",
           "total": "34,832.02",
-          "pct": 2.89
+          "pct": 2.89,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "34,832.02"
+            }
+          ]
         },
         {
-          "name": "Doors/Windows",
+          "item": "Doors/Windows",
           "total": "209,044.11",
-          "pct": 17.37
+          "pct": 17.37,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "209,044.11"
+            }
+          ]
         },
         {
-          "name": "Appliances",
+          "item": "Appliances",
           "total": "40,152.37",
-          "pct": 3.34
+          "pct": 3.34,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "40,152.37"
+            }
+          ]
         },
         {
-          "name": "Entry/Foyer",
+          "item": "Area: Main Level",
+          "total": "19,000.00",
+          "pct": 1.58,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "19,000.00"
+            }
+          ]
+        },
+        {
+          "item": "Entry/Foyer",
           "total": "7,512.31",
-          "pct": 0.62
+          "pct": 0.62,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "7,512.31"
+            }
+          ]
         },
         {
-          "name": "Office",
+          "item": "Office",
           "total": "7,489.29",
-          "pct": 0.62
+          "pct": 0.62,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "7,489.29"
+            }
+          ]
         },
         {
-          "name": "Guest Bath",
+          "item": "Guest Bath",
           "total": "2,841.16",
-          "pct": 0.24
+          "pct": 0.24,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "2,841.16"
+            }
+          ]
         },
         {
-          "name": "Living Room/Dining Room",
+          "item": "Living Room/Dining Room",
           "total": "53,450.74",
-          "pct": 4.44
+          "pct": 4.44,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "53,450.74"
+            }
+          ]
         },
         {
-          "name": "Kitchen",
+          "item": "Kitchen",
           "total": "47,783.79",
-          "pct": 3.97
+          "pct": 3.97,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "47,783.79"
+            }
+          ]
         },
         {
-          "name": "Hallway",
+          "item": "Hallway",
           "total": "30,432.77",
-          "pct": 2.53
+          "pct": 2.53,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "30,432.77"
+            }
+          ]
         },
         {
-          "name": "Master Bedroom",
+          "item": "Master Bedroom",
           "total": "8,222.52",
-          "pct": 0.68
+          "pct": 0.68,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "8,222.52"
+            }
+          ]
         },
         {
-          "name": "M. Closet Hers",
+          "item": "M. Closet Hers",
           "total": "8,298.81",
-          "pct": 0.69
+          "pct": 0.69,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "8,298.81"
+            }
+          ]
         },
         {
-          "name": "M. Closet His",
+          "item": "M. Closet His",
           "total": "7,841.58",
-          "pct": 0.65
+          "pct": 0.65,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "7,841.58"
+            }
+          ]
         },
         {
-          "name": "Server Closet",
+          "item": "Server Closet",
           "total": "644.82",
-          "pct": 0.05
+          "pct": 0.05,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "644.82"
+            }
+          ]
         },
         {
-          "name": "Master Bath",
+          "item": "Master Bath",
           "total": "6,616.88",
-          "pct": 0.55
+          "pct": 0.55,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "6,616.88"
+            }
+          ]
         },
         {
-          "name": "Laundry Room",
+          "item": "Laundry Room",
           "total": "17,039.94",
-          "pct": 1.42
+          "pct": 1.42,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "17,039.94"
+            }
+          ]
         },
         {
-          "name": "Bathroom 1",
+          "item": "Bathroom 1",
           "total": "2,566.33",
-          "pct": 0.21
+          "pct": 0.21,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "2,566.33"
+            }
+          ]
         },
         {
-          "name": "Bedroom 1",
+          "item": "Bedroom 1",
           "total": "9,006.16",
-          "pct": 0.75
+          "pct": 0.75,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "9,006.16"
+            }
+          ]
         },
         {
-          "name": "Bedroom 2",
+          "item": "Bedroom 2",
           "total": "7,743.42",
-          "pct": 0.64
+          "pct": 0.64,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "7,743.42"
+            }
+          ]
         },
         {
-          "name": "Garage",
+          "item": "Garage",
           "total": "14,285.91",
-          "pct": 1.19
+          "pct": 1.19,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "14,285.91"
+            }
+          ]
         },
         {
-          "name": "Attic Space",
+          "item": "Attic Space",
           "total": "3,310.08",
-          "pct": 0.28
+          "pct": 0.28,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "3,310.08"
+            }
+          ]
         },
         {
-          "name": "Roof",
+          "item": "Area: Exterior - Main Structure",
+          "total": "33,532.53",
+          "pct": 2.79,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "33,532.53"
+            }
+          ]
+        },
+        {
+          "item": "Roof",
           "total": "74,000.00",
-          "pct": 6.15
+          "pct": 6.15,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "74,000.00"
+            }
+          ]
         },
         {
-          "name": "Ext_Surfaces",
+          "item": "Ext_Surfaces",
           "total": "88,198.55",
-          "pct": 7.33
+          "pct": 7.33,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "88,198.55"
+            }
+          ]
         },
         {
-          "name": "Other Structures",
+          "item": "Other Structures",
           "total": "250,598.91",
-          "pct": 20.82
+          "pct": 20.82,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 1.72,
+              "amount": "4,298.88"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 98.28,
+              "amount": "246,300.03"
+            }
+          ]
         },
         {
-          "name": "Landscaping",
+          "item": "Landscaping",
           "total": "94,023.75",
-          "pct": 7.81
+          "pct": 7.81,
+          "coverage": [
+            {
+              "coverage": "Trees, Plants & Shrubs",
+              "pct": 100.0,
+              "amount": "94,023.75"
+            }
+          ]
         },
         {
-          "name": "Subtotal of Areas",
-          "total": "1,203,563.13",
-          "pct": 100.0
-        },
-        {
-          "name": "Total",
-          "total": "1,203,563.13",
-          "pct": 100.0
+          "item": "Labor Minimums Applied",
+          "total": "43.20",
+          "pct": null,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "43.20"
+            }
+          ]
         }
       ],
       "subtotals": [
         {
-          "label": "Subtotal of Areas 1,203,563.13 100.00%",
-          "total": "1,203,563.13",
-          "pct": 100.0
+          "label": "Area Subtotal: Main Level",
+          "total": "250,776.43",
+          "pct": 20.84,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "250,776.43"
+            }
+          ]
         },
         {
-          "label": "Total 1,203,563.13 100.00%",
+          "label": "Area Subtotal: Attic",
+          "total": "3,310.08",
+          "pct": 0.28,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "3,310.08"
+            }
+          ]
+        },
+        {
+          "label": "Area Subtotal: Exterior - Main Structure",
+          "total": "195,731.08",
+          "pct": 16.26,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "195,731.08"
+            }
+          ]
+        },
+        {
+          "label": "Area Subtotal: Dwelling",
+          "total": "816,375.01",
+          "pct": 67.83,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "816,375.01"
+            }
+          ]
+        },
+        {
+          "label": "Subtotal of Areas",
+          "total": "1,203,563.13",
+          "pct": 100.0,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 71.72,
+              "amount": "863,239.35"
+            },
+            {
+              "coverage": "Trees, Plants & Shrubs",
+              "pct": 7.81,
+              "amount": "94,023.75"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 20.46,
+              "amount": "246,300.03"
+            }
+          ]
+        },
+        {
+          "label": "Total",
           "total": "1,203,563.13",
           "pct": 100.0
         }

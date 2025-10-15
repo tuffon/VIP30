@@ -4309,151 +4309,329 @@
     },
     "recap_tax_op": null,
     "recap_by_room": {
+      "groups": {
+        "Estimate: BALANIS_CONTENTS": [
+          {
+            "item": "Pack-Out",
+            "total": "28,239.95",
+            "pct": 25.93,
+            "coverage": []
+          },
+          {
+            "item": "Cleaning",
+            "total": "33,897.04",
+            "pct": 31.13,
+            "coverage": []
+          },
+          {
+            "item": "Storage Area/Room",
+            "total": "22,436.94",
+            "pct": 20.61,
+            "coverage": []
+          },
+          {
+            "item": "Pack-Back",
+            "total": "14,124.20",
+            "pct": 12.97,
+            "coverage": []
+          }
+        ],
+        "Area: Main": [
+          {
+            "item": "Entry/Foyer",
+            "total": "138.41",
+            "pct": 0.13,
+            "coverage": []
+          },
+          {
+            "item": "Family Room",
+            "total": "477.31",
+            "pct": 0.44,
+            "coverage": []
+          },
+          {
+            "item": "Guest Bath",
+            "total": "52.20",
+            "pct": 0.05,
+            "coverage": []
+          },
+          {
+            "item": "Office",
+            "total": "878.73",
+            "pct": 0.81,
+            "coverage": []
+          },
+          {
+            "item": "Office Bath",
+            "total": "47.78",
+            "pct": 0.04,
+            "coverage": []
+          },
+          {
+            "item": "Hallway 1",
+            "total": "211.28",
+            "pct": 0.19,
+            "coverage": []
+          },
+          {
+            "item": "Living Room",
+            "total": "925.44",
+            "pct": 0.85,
+            "coverage": []
+          },
+          {
+            "item": "Dining Room",
+            "total": "423.32",
+            "pct": 0.39,
+            "coverage": []
+          },
+          {
+            "item": "Kitchen",
+            "total": "425.15",
+            "pct": 0.39,
+            "coverage": []
+          },
+          {
+            "item": "Pantry",
+            "total": "43.43",
+            "pct": 0.04,
+            "coverage": []
+          },
+          {
+            "item": "Wine Cellar",
+            "total": "430.87",
+            "pct": 0.4,
+            "coverage": []
+          },
+          {
+            "item": "Garage",
+            "total": "940.12",
+            "pct": 0.86,
+            "coverage": []
+          },
+          {
+            "item": "Laundry Room",
+            "total": "278.28",
+            "pct": 0.26,
+            "coverage": []
+          },
+          {
+            "item": "Hallway 2",
+            "total": "327.22",
+            "pct": 0.3,
+            "coverage": []
+          },
+          {
+            "item": "Bedroom 2",
+            "total": "761.80",
+            "pct": 0.7,
+            "coverage": []
+          },
+          {
+            "item": "Bathroom 2",
+            "total": "43.98",
+            "pct": 0.04,
+            "coverage": []
+          },
+          {
+            "item": "Master Bedroom",
+            "total": "1,351.60",
+            "pct": 1.24,
+            "coverage": []
+          },
+          {
+            "item": "Master Bath",
+            "total": "233.52",
+            "pct": 0.21,
+            "coverage": []
+          },
+          {
+            "item": "Master Closet",
+            "total": "1,392.17",
+            "pct": 1.28,
+            "coverage": []
+          },
+          {
+            "item": "Bedroom 1",
+            "total": "756.66",
+            "pct": 0.69,
+            "coverage": []
+          },
+          {
+            "item": "Bathroom 1",
+            "total": "50.27",
+            "pct": 0.05,
+            "coverage": []
+          }
+        ]
+      },
       "rows": [
         {
-          "name": "Pack-Out",
+          "item": "Pack-Out",
           "total": "28,239.95",
-          "pct": 25.93
+          "pct": 25.93,
+          "coverage": []
         },
         {
-          "name": "Cleaning",
+          "item": "Cleaning",
           "total": "33,897.04",
-          "pct": 31.13
+          "pct": 31.13,
+          "coverage": []
         },
         {
-          "name": "Storage Area/Room",
+          "item": "Storage Area/Room",
           "total": "22,436.94",
-          "pct": 20.61
+          "pct": 20.61,
+          "coverage": []
         },
         {
-          "name": "Pack-Back",
+          "item": "Pack-Back",
           "total": "14,124.20",
-          "pct": 12.97
+          "pct": 12.97,
+          "coverage": []
         },
         {
-          "name": "Entry/Foyer",
+          "item": "Entry/Foyer",
           "total": "138.41",
-          "pct": 0.13
+          "pct": 0.13,
+          "coverage": []
         },
         {
-          "name": "Family Room",
+          "item": "Family Room",
           "total": "477.31",
-          "pct": 0.44
+          "pct": 0.44,
+          "coverage": []
         },
         {
-          "name": "Guest Bath",
+          "item": "Guest Bath",
           "total": "52.20",
-          "pct": 0.05
+          "pct": 0.05,
+          "coverage": []
         },
         {
-          "name": "Office",
+          "item": "Office",
           "total": "878.73",
-          "pct": 0.81
+          "pct": 0.81,
+          "coverage": []
         },
         {
-          "name": "Office Bath",
+          "item": "Office Bath",
           "total": "47.78",
-          "pct": 0.04
+          "pct": 0.04,
+          "coverage": []
         },
         {
-          "name": "Hallway 1",
+          "item": "Hallway 1",
           "total": "211.28",
-          "pct": 0.19
+          "pct": 0.19,
+          "coverage": []
         },
         {
-          "name": "Living Room",
+          "item": "Living Room",
           "total": "925.44",
-          "pct": 0.85
+          "pct": 0.85,
+          "coverage": []
         },
         {
-          "name": "Dining Room",
+          "item": "Dining Room",
           "total": "423.32",
-          "pct": 0.39
+          "pct": 0.39,
+          "coverage": []
         },
         {
-          "name": "Kitchen",
+          "item": "Kitchen",
           "total": "425.15",
-          "pct": 0.39
+          "pct": 0.39,
+          "coverage": []
         },
         {
-          "name": "Pantry",
+          "item": "Pantry",
           "total": "43.43",
-          "pct": 0.04
+          "pct": 0.04,
+          "coverage": []
         },
         {
-          "name": "Wine Cellar",
+          "item": "Wine Cellar",
           "total": "430.87",
-          "pct": 0.4
+          "pct": 0.4,
+          "coverage": []
         },
         {
-          "name": "Garage",
+          "item": "Garage",
           "total": "940.12",
-          "pct": 0.86
+          "pct": 0.86,
+          "coverage": []
         },
         {
-          "name": "Laundry Room",
+          "item": "Laundry Room",
           "total": "278.28",
-          "pct": 0.26
+          "pct": 0.26,
+          "coverage": []
         },
         {
-          "name": "Hallway 2",
+          "item": "Hallway 2",
           "total": "327.22",
-          "pct": 0.3
+          "pct": 0.3,
+          "coverage": []
         },
         {
-          "name": "Bedroom 2",
+          "item": "Bedroom 2",
           "total": "761.80",
-          "pct": 0.7
+          "pct": 0.7,
+          "coverage": []
         },
         {
-          "name": "Bathroom 2",
+          "item": "Bathroom 2",
           "total": "43.98",
-          "pct": 0.04
+          "pct": 0.04,
+          "coverage": []
         },
         {
-          "name": "Master Bedroom",
+          "item": "Master Bedroom",
           "total": "1,351.60",
-          "pct": 1.24
+          "pct": 1.24,
+          "coverage": []
         },
         {
-          "name": "Master Bath",
+          "item": "Master Bath",
           "total": "233.52",
-          "pct": 0.21
+          "pct": 0.21,
+          "coverage": []
         },
         {
-          "name": "Master Closet",
+          "item": "Master Closet",
           "total": "1,392.17",
-          "pct": 1.28
+          "pct": 1.28,
+          "coverage": []
         },
         {
-          "name": "Bedroom 1",
+          "item": "Bedroom 1",
           "total": "756.66",
-          "pct": 0.69
+          "pct": 0.69,
+          "coverage": []
         },
         {
-          "name": "Bathroom 1",
+          "item": "Bathroom 1",
           "total": "50.27",
-          "pct": 0.05
-        },
-        {
-          "name": "Subtotal of Areas",
-          "total": "108,887.67",
-          "pct": 100.0
-        },
-        {
-          "name": "Total",
-          "total": "108,887.67",
-          "pct": 100.0
+          "pct": 0.05,
+          "coverage": []
         }
       ],
       "subtotals": [
         {
-          "label": "Subtotal of Areas 108,887.67 100.00%",
-          "total": "108,887.67",
-          "pct": 100.0
+          "label": "Area Subtotal: Main",
+          "total": "10,189.54",
+          "pct": 9.36,
+          "coverage": []
         },
         {
-          "label": "Total 108,887.67 100.00%",
+          "label": "Subtotal of Areas",
+          "total": "108,887.67",
+          "pct": 100.0,
+          "coverage": []
+        },
+        {
+          "label": "Total",
           "total": "108,887.67",
           "pct": 100.0
         }
