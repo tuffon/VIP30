@@ -2286,11 +2286,11 @@
     },
     "recap_tax_op": null,
     "recap_by_room": {
-      "groups": {
-        "Estimate: SCHACTER_CONTENTS2": [],
-        "Area: Pack-Out 17,417.12 28.33%": [
+      "areas": {
+        "estimate: SCHACTER_CONTENTS2": [],
+        "pack-out": [
           {
-            "item": "Area: Pack-Out",
+            "item": "Pack-Out",
             "total": "17,417.12",
             "pct": 28.33,
             "coverage": []
@@ -2302,8 +2302,8 @@
             "coverage": []
           }
         ],
-        "Area: Dwelling": [],
-        "Area: Main Level": [
+        "dwelling": [],
+        "main level": [
           {
             "item": "Main Hallway",
             "total": "130.53",
@@ -2378,116 +2378,26 @@
           }
         ]
       },
-      "rows": [
-        {
-          "item": "Area: Pack-Out",
-          "total": "17,417.12",
-          "pct": 28.33,
-          "coverage": []
-        },
-        {
-          "item": "Cleaning",
-          "total": "16,227.30",
-          "pct": 26.4,
-          "coverage": []
-        },
-        {
-          "item": "Main Hallway",
-          "total": "130.53",
-          "pct": 0.21,
-          "coverage": []
-        },
-        {
-          "item": "Bathroom 1",
-          "total": "34.58",
-          "pct": 0.06,
-          "coverage": []
-        },
-        {
-          "item": "Living Room",
-          "total": "564.59",
-          "pct": 0.92,
-          "coverage": []
-        },
-        {
-          "item": "Kitchen",
-          "total": "270.32",
-          "pct": 0.44,
-          "coverage": []
-        },
-        {
-          "item": "Office",
-          "total": "437.80",
-          "pct": 0.71,
-          "coverage": []
-        },
-        {
-          "item": "Laundry Room",
-          "total": "138.92",
-          "pct": 0.23,
-          "coverage": []
-        },
-        {
-          "item": "Bedroom 1",
-          "total": "169.99",
-          "pct": 0.28,
-          "coverage": []
-        },
-        {
-          "item": "Master bathroom",
-          "total": "102.41",
-          "pct": 0.17,
-          "coverage": []
-        },
-        {
-          "item": "Master Bedroom",
-          "total": "306.90",
-          "pct": 0.5,
-          "coverage": []
-        },
-        {
-          "item": "Garage",
-          "total": "331.08",
-          "pct": 0.54,
-          "coverage": []
-        },
-        {
-          "item": "Storage Area/Room",
-          "total": "11,784.24",
-          "pct": 19.17,
-          "coverage": []
-        },
-        {
-          "item": "Pack-back",
-          "total": "13,556.18",
-          "pct": 22.05,
-          "coverage": []
-        }
-      ],
       "subtotals": [
         {
           "label": "Area Subtotal: Pack-Out",
           "total": "33,644.42",
-          "pct": 54.73,
-          "coverage": []
+          "pct": 54.73
         },
         {
           "label": "Area Subtotal: Main Level",
           "total": "2,487.12",
-          "pct": 4.05,
-          "coverage": []
+          "pct": 4.05
         },
         {
           "label": "Area Subtotal: Dwelling",
           "total": "2,487.12",
-          "pct": 4.05,
-          "coverage": []
+          "pct": 4.05
         },
         {
           "label": "Subtotal of Areas",
           "total": "61,471.96",
-          "pct": 100.0,
-          "coverage": []
+          "pct": 100.0
         },
         {
           "label": "Total",
@@ -2498,6 +2408,11 @@
     },
     "recap_by_category": {
       "subtotals": [
+        {
+          "label": "Items Subtotal",
+          "total": "61,471.96",
+          "pct": 99.11
+        },
         {
           "label": "Material Sales Tax",
           "total": "553.04",
@@ -2518,6 +2433,12 @@
           "coverage": []
         },
         {
+          "item": "CONT: PACKING,HANDLNG,STORAGE",
+          "total": "58,702.20",
+          "pct": 94.64,
+          "coverage": []
+        },
+        {
           "item": "GENERAL DEMOLITION",
           "total": "1,389.88",
           "pct": 2.24,
@@ -2529,12 +2450,7 @@
           "pct": 0.09,
           "coverage": []
         }
-      ],
-      "Material Sales Tax": {
-        "total": "553.04",
-        "pct": 0.89,
-        "coverage": []
-      }
+      ]
     }
   }
 }

@@ -3381,9 +3381,9 @@
     },
     "recap_tax_op": null,
     "recap_by_room": {
-      "groups": {
-        "Estimate: CHEN_CHAST_CON": [],
-        "Area: Contents": [
+      "areas": {
+        "estimate: CHEN_CHAST_CON": [],
+        "contents": [
           {
             "item": "Pack-Out",
             "total": "32,426.02",
@@ -3409,7 +3409,7 @@
             "coverage": []
           }
         ],
-        "Area: Main Level": [
+        "main level": [
           {
             "item": "Family Room",
             "total": "121.97",
@@ -3489,7 +3489,7 @@
             "coverage": []
           }
         ],
-        "Area: Level 2": [
+        "level 2": [
           {
             "item": "Master bedroom",
             "total": "121.13",
@@ -3552,194 +3552,26 @@
           }
         ]
       },
-      "rows": [
-        {
-          "item": "Pack-Out",
-          "total": "32,426.02",
-          "pct": 28.11,
-          "coverage": []
-        },
-        {
-          "item": "Cleaning",
-          "total": "30,218.00",
-          "pct": 26.2,
-          "coverage": []
-        },
-        {
-          "item": "Storage Area/Room",
-          "total": "32,012.94",
-          "pct": 27.75,
-          "coverage": []
-        },
-        {
-          "item": "Pack-Back",
-          "total": "16,469.64",
-          "pct": 14.28,
-          "coverage": []
-        },
-        {
-          "item": "Family Room",
-          "total": "121.97",
-          "pct": 0.11,
-          "coverage": []
-        },
-        {
-          "item": "Kitchen",
-          "total": "173.75",
-          "pct": 0.15,
-          "coverage": []
-        },
-        {
-          "item": "Scullery",
-          "total": "102.05",
-          "pct": 0.09,
-          "coverage": []
-        },
-        {
-          "item": "Entry/Foyer",
-          "total": "163.89",
-          "pct": 0.14,
-          "coverage": []
-        },
-        {
-          "item": "Dining Room",
-          "total": "239.71",
-          "pct": 0.21,
-          "coverage": []
-        },
-        {
-          "item": "Living Room",
-          "total": "645.89",
-          "pct": 0.56,
-          "coverage": []
-        },
-        {
-          "item": "Stairs Area",
-          "total": "88.69",
-          "pct": 0.08,
-          "coverage": []
-        },
-        {
-          "item": "Guest Bath",
-          "total": "26.48",
-          "pct": 0.02,
-          "coverage": []
-        },
-        {
-          "item": "Bedroom 1",
-          "total": "156.68",
-          "pct": 0.14,
-          "coverage": []
-        },
-        {
-          "item": "Bed1 Bathroom",
-          "total": "12.14",
-          "pct": 0.01,
-          "coverage": []
-        },
-        {
-          "item": "Laundry Room",
-          "total": "34.55",
-          "pct": 0.03,
-          "coverage": []
-        },
-        {
-          "item": "Garage Room",
-          "total": "36.36",
-          "pct": 0.03,
-          "coverage": []
-        },
-        {
-          "item": "Garage",
-          "total": "25.58",
-          "pct": 0.02,
-          "coverage": []
-        },
-        {
-          "item": "Master bedroom",
-          "total": "121.13",
-          "pct": 0.11,
-          "coverage": []
-        },
-        {
-          "item": "Master Closet 1",
-          "total": "249.99",
-          "pct": 0.22,
-          "coverage": []
-        },
-        {
-          "item": "Master Closet 2",
-          "total": "1,068.62",
-          "pct": 0.93,
-          "coverage": []
-        },
-        {
-          "item": "Loft",
-          "total": "105.77",
-          "pct": 0.09,
-          "coverage": []
-        },
-        {
-          "item": "Master Bathroom",
-          "total": "76.70",
-          "pct": 0.07,
-          "coverage": []
-        },
-        {
-          "item": "Bedroom 3",
-          "total": "263.90",
-          "pct": 0.23,
-          "coverage": []
-        },
-        {
-          "item": "Bed 3 Bathroom",
-          "total": "22.61",
-          "pct": 0.02,
-          "coverage": []
-        },
-        {
-          "item": "Bedroom 2",
-          "total": "336.82",
-          "pct": 0.29,
-          "coverage": []
-        },
-        {
-          "item": "Bathroom 1",
-          "total": "25.87",
-          "pct": 0.02,
-          "coverage": []
-        },
-        {
-          "item": "Master Living Room",
-          "total": "120.23",
-          "pct": 0.1,
-          "coverage": []
-        }
-      ],
       "subtotals": [
         {
           "label": "Area Subtotal: Main Level",
           "total": "1,827.74",
-          "pct": 1.58,
-          "coverage": []
+          "pct": 1.58
         },
         {
           "label": "Area Subtotal: Level 2",
           "total": "2,391.64",
-          "pct": 2.07,
-          "coverage": []
+          "pct": 2.07
         },
         {
           "label": "Area Subtotal: Contents",
           "total": "115,345.98",
-          "pct": 100.0,
-          "coverage": []
+          "pct": 100.0
         },
         {
           "label": "Subtotal of Areas",
           "total": "115,345.98",
-          "pct": 100.0,
-          "coverage": []
+          "pct": 100.0
         },
         {
           "label": "Total",
@@ -3750,6 +3582,11 @@
     },
     "recap_by_category": {
       "subtotals": [
+        {
+          "label": "Items Subtotal",
+          "total": "115,345.98",
+          "pct": 99.45
+        },
         {
           "label": "Material Sales Tax",
           "total": "636.52",
@@ -3770,6 +3607,12 @@
           "coverage": []
         },
         {
+          "item": "CONT: PACKING,HANDLNG,STORAGE",
+          "total": "109,899.73",
+          "pct": 94.76,
+          "coverage": []
+        },
+        {
           "item": "GENERAL DEMOLITION",
           "total": "1,058.82",
           "pct": 0.91,
@@ -3781,12 +3624,7 @@
           "pct": 0.17,
           "coverage": []
         }
-      ],
-      "Material Sales Tax": {
-        "total": "636.52",
-        "pct": 0.55,
-        "coverage": []
-      }
+      ]
     }
   }
 }

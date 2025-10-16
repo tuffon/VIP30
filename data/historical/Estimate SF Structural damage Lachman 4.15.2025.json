@@ -65,11 +65,16 @@
       "storage_rental_tax": "0.00"
     },
     "recap_by_room": {
-      "rows": [],
+      "areas": {},
       "subtotals": []
     },
     "recap_by_category": {
       "subtotals": [
+        {
+          "label": "Items Subtotal",
+          "total": "86,413.39",
+          "pct": 98.5
+        },
         {
           "label": "Permits and Fees",
           "total": "11.59",
@@ -287,49 +292,7 @@
             }
           ]
         }
-      ],
-      "Permits and Fees": {
-        "total": "11.59",
-        "pct": 0.01,
-        "coverage": [
-          {
-            "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
-            "pct": 100.0,
-            "amount": "11.59"
-          }
-        ]
-      },
-      "Material Sales Tax": {
-        "total": "1,308.25",
-        "pct": 1.49,
-        "coverage": [
-          {
-            "coverage": "Coverage A - Dwelling - 39 Smoke",
-            "pct": 51.56,
-            "amount": "674.52"
-          },
-          {
-            "coverage": "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and Landscaping",
-            "pct": 12.29,
-            "amount": "160.81"
-          },
-          {
-            "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
-            "pct": 0.11,
-            "amount": "1.43"
-          },
-          {
-            "coverage": "Coverage A - Dwelling - 35 Windstorm and Hail",
-            "pct": 2.32,
-            "amount": "30.41"
-          },
-          {
-            "coverage": "Coverage A - Dwelling - 33 Fire, Lightning, & Removal",
-            "pct": 33.72,
-            "amount": "441.08"
-          }
-        ]
-      }
+      ]
     }
   }
 }

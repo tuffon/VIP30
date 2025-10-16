@@ -49,7 +49,7 @@ SECTION_HEIGHT_PATTERN = r'^(.+?)\s+Height:\s*(.+)'
 SECTION_NAME_EXTRACTION = r'([A-Z][A-Za-z\s\.\(\)/]+(?:\s+\d+)?)\s*$'
 SUBROOM_PATTERN = r'^Subroom:\s+(.+?)\s+Height:\s*(.+)'
 TABLE_HEADER_PRIMARY = r'CAT\s+SEL\s+ACT\s+DESCRIPTION'
-TABLE_HEADER_CONTINUATION = r'^CONTINUED\s*-\s*.+'
+TABLE_HEADER_CONTINUATION = r'^CONTINUED\s*-\s*.+'  # continuation banner
 TABLE_HEADER_SECOND_LINE_FRAGMENT = r'CALC\s+QTY'
 LINE_ITEM_PATTERN = r'^(\d+)\.\s+([A-Z]{3,})\s+([A-Z0-9<>+\-/]+)\s+(\S)\s+(.*)$'
 LINE_ITEM_HEADER_PATTERN = r'^([-*=~_]{2,})\s*(.+?)\s*([-*=~_]{2,})\s*:?\s*$'
@@ -243,14 +243,25 @@ class XactimateRoughDraftParser:
 
     # ---------- public ----------
     def run(self) -> None:
-        sections, _ = self._parse_document(self.input_file)
+        # full text (once)
+        full_lines = self._get_full_text_lines()
+
+        # pre-pass recap-by-category (non-sequential), and skip mask
+        recap_cat, recap_cat_spans = self._prepass_recap_by_category(full_lines)
+        skip_mask = self._build_skip_mask(len(full_lines), recap_cat_spans)
+
+        # sequential parse using full_lines and skip_mask
+        sections, _ = self._parse_document_from_lines(full_lines, skip_mask=skip_mask)
+
+        # front-page metadata
         case_md = self._parse_case_metadata_first_page(self.input_file)
 
-        # end sections split per new schema
-        full_lines = self._get_full_text_lines()
+        # end-of-doc structured (but we will not clobber recap_by_category if prepass found it)
         end = self._parse_end_structured(full_lines)
+        if recap_cat and (recap_cat.get("subtotals") or any(k for k in recap_cat.keys() if k != "subtotals")):
+            end["recap_by_category"] = recap_cat
 
-        # attach per-section deltas + collect rows for console
+        # per-section validations
         table_rows = []
         per_section_validations = []
         for section in sections:
@@ -274,7 +285,7 @@ class XactimateRoughDraftParser:
                 'delta': format_dollar_amount(delta)
             })
 
-        # doc-level validations using the new layout
+        # doc-level validations
         doc_validations = self._validate_doc(end, sections)
 
         # writes
@@ -293,7 +304,7 @@ class XactimateRoughDraftParser:
                 "summaries_by_coverage": end.get("summaries_by_coverage", {}),
                 "recap_tax_op": end.get("recap_tax_op"),
                 "recap_by_room": end.get("recap_by_room"),
-                "recap_by_category": end.get("recap_by_category"),
+                "recap_by_category": end.get("recap_by_category") or recap_cat or {"subtotals": []},
             },
         }
         if self.debug:
@@ -325,8 +336,7 @@ class XactimateRoughDraftParser:
             self.out_path = os.path.splitext(out)[0] + ".out"
         os.makedirs(os.path.dirname(self.out_path), exist_ok=True)
 
-    def _write_raw_lines(self, _ignored: List[str]) -> None:
-        lines = self._get_full_text_lines()
+    def _write_raw_lines(self, lines: List[str]) -> None:
         with open(self.out_path, 'w', encoding='utf-8') as f:
             for l in lines:
                 f.write(l + '\n')
@@ -383,18 +393,13 @@ class XactimateRoughDraftParser:
                 lines.extend([l.strip() for l in txt.split('\n') if l.strip()])
         return self._parse_case_metadata(lines)
 
-    # ---------- core parsing ----------
-    def _parse_document(self, pdf_path: str) -> tuple:
-        header_patterns = detect_page_header_pattern(pdf_path)
-        lines: List[str] = []
-        with pdfplumber.open(pdf_path) as pdf:
-            for page in pdf.pages:
-                text = page.extract_text() or ""
-                for line in text.split('\n'):
-                    stripped = line.strip()
-                    if stripped and not is_page_header(stripped, header_patterns):
-                        lines.append(stripped)
+    # ---------- core parsing (from provided full_lines) ----------
+    def _parse_document_from_lines(self, full_lines: List[str], skip_mask: Optional[List[bool]] = None) -> tuple:
+        # header detection needs the original PDF normally; we approximate by filtering number-only and page-lines later.
+        # We still try to skip page headers via simple heuristics present in helpers.
+        header_patterns: List[str] = []  # unknown without page context; rely on PAGE_NUMBER_PATTERN, etc.
 
+        lines = full_lines  # use the same list to keep indexing aligned for skip_mask
         state = ParseState.LOOKING_FOR_SECTION
         sections: List[dict] = []
         current_section = None
@@ -405,9 +410,18 @@ class XactimateRoughDraftParser:
         pending_header_lines: List[str] = []
 
         i = 0
-        while i < len(lines):
-            line = lines[i]
-            next_line = lines[i + 1] if i + 1 < len(lines) else None
+        L = len(lines)
+        while i < L:
+            # global skips
+            if skip_mask is not None and 0 <= i < len(skip_mask) and skip_mask[i]:
+                i += 1
+                continue
+            if is_page_header(lines[i].strip(), header_patterns):
+                i += 1
+                continue
+
+            line = lines[i].strip()
+            next_line = lines[i + 1].strip() if i + 1 < L else None
 
             if state == ParseState.LOOKING_FOR_SECTION:
                 if is_diagram_artifact(line): i += 1; continue
@@ -426,7 +440,7 @@ class XactimateRoughDraftParser:
                 is_header, detected_cols, is_two = is_table_header(line, next_line)
                 if is_header:
                     section_name = "Unknown Section"
-                    if i > 0 and not is_page_header(lines[i-1], header_patterns):
+                    if i > 0 and not is_page_header(lines[i-1].strip(), header_patterns):
                         prev = lines[i-1].strip()
                         nm = re.search(SECTION_NAME_EXTRACTION, prev)
                         section_name = nm.group(1).strip() if nm else prev
@@ -483,9 +497,9 @@ class XactimateRoughDraftParser:
                 if is_table_continuation(line):
                     pending_header_lines = []
                     i += 1
-                    if i < len(lines):
-                        n2 = lines[i + 1] if i + 1 < len(lines) else None
-                        is_header, new_cols, is_two = is_table_header(lines[i], n2)
+                    if i < L:
+                        n2 = lines[i + 1].strip() if i + 1 < L else None
+                        is_header, new_cols, is_two = is_table_header(lines[i].strip(), n2)
                         if is_header:
                             columns = new_cols
                             i += 2 if is_two else 1
@@ -715,7 +729,7 @@ class XactimateRoughDraftParser:
         lines: List[str] = []
         with pdfplumber.open(self.input_file) as pdf:
             for page in pdf.pages:
-                txt = pdf.pages[page.page_number-1].extract_text() or ""
+                txt = page.extract_text() or ""
                 lines.extend([l.strip() for l in txt.split('\n') if l.strip()])
         return lines
 
@@ -748,290 +762,330 @@ class XactimateRoughDraftParser:
                 base[k] = v
         return base
 
-    # ----- end-of-document parsing in structured form -----
-    def _find_section_bounds(self, all_lines: List[str],
-                         header_re: re.Pattern,
-                         stop_res: List[re.Pattern],
-                         start_hint: int = 0) -> Tuple[int, int]:
-        """
-        Find [start, end) bounds of a section.
-        - Normalizes NBSP and collapses whitespace before matching.
-        - Skips over consecutive header lines (page-wrap echoes) so we don't return a zero-length slice.
-        Returns (start_index_exclusive, end_index). If not found: (-1, -1).
-        """
+    # ---------- Non-sequential helpers (Recap by Category pre-pass) ----------
+    def _norm_line(self, s: str) -> str:
+        return re.sub(r'\s+', ' ', (s or '').replace('\u00A0', ' ').strip())
 
-        def norm(s: str) -> str:
-            return re.sub(r"\s+", " ", (s or "").replace("\u00A0", " ").strip())
-
+    def _find_all_section_occurrences(self,
+                                      all_lines: List[str],
+                                      header_re: re.Pattern,
+                                      stoppers: List[re.Pattern]) -> List[Tuple[int, int]]:
         n = len(all_lines)
-        header_idx = -1
+        i = 0
+        spans = []
+        while i < n:
+            if header_re.search(self._norm_line(all_lines[i])):
+                # collapse consecutive header echoes
+                j = i + 1
+                while j < n and header_re.search(self._norm_line(all_lines[j])):
+                    j += 1
+                start = j
+                # find nearest stopper after start
+                k = start
+                end = n
+                while k < n:
+                    s = self._norm_line(all_lines[k])
+                    if any(p.search(s) for p in stoppers):
+                        end = k
+                        break
+                    k += 1
+                if start < end:
+                    spans.append((start, end))
+                    i = end
+                    continue
+            i += 1
+        return spans
 
-        # forward scan from hint
-        for idx in range(start_hint, n):
-            if header_re.search(norm(all_lines[idx] or "")):
-                header_idx = idx
-                break
-        # wrap once
-        if header_idx == -1:
-            for idx in range(0, start_hint):
-                if header_re.search(norm(all_lines[idx] or "")):
-                    header_idx = idx
-                    break
-        if header_idx == -1:
-            return -1, -1
+    def _build_skip_mask(self, n_lines: int, ranges: List[Tuple[int, int]]) -> List[bool]:
+        mask = [False] * n_lines
+        for a, b in ranges:
+            a = max(0, a); b = min(n_lines, b)
+            for i in range(a, b):
+                mask[i] = True
+        return mask
 
-        # >>> NEW: collapse consecutive header lines (page-wrap echo) <<<
-        j = header_idx + 1
-        while j < n and header_re.search(norm(all_lines[j] or "")):
-            j += 1
-        start = j  # start AFTER the last consecutive header line
+    def _prepass_recap_by_category(self, all_lines: List[str]) -> Tuple[Dict[str, object], List[Tuple[int, int]]]:
+        RECAP_BY_CATEGORY_HDR_RELAXED = re.compile(r'\bRecap\s+by\s+Category\b', re.IGNORECASE)
+        STOPPERS = [
+            re.compile(r'^\s*Recap\s+by\s+Room\s*$', re.IGNORECASE),
+            re.compile(r'^\s*Recap\s+of\s+Taxes,\s+Overhead\s+and\s+Profit\s*$', re.IGNORECASE),
+            re.compile(r'^\s*Summary\s+for\s+', re.IGNORECASE),
+            re.compile(r'^\s*Grand\s+Total\s+Areas\b', re.IGNORECASE),
+            re.compile(r'^\s*Coverage\s+Deductible\s+Policy\s+Limit', re.IGNORECASE),
+            re.compile(r'^\s*CAT\s+SEL\s+ACT\s+DESCRIPTION', re.IGNORECASE),
+        ]
 
-        # find first stopper after 'start'
-        end = n
-        for k in range(start, n):
-            s = norm(all_lines[k] or "")
-            for pat in stop_res:
-                if pat.search(s):
-                    end = k
-                    return start, end
-        return start, end
+        spans = self._find_all_section_occurrences(all_lines, RECAP_BY_CATEGORY_HDR_RELAXED, STOPPERS)
+        merged = {"subtotals": []}
 
+        for (start, end) in spans:
+            hdr_idx = start - 1
+            while hdr_idx >= 0 and not RECAP_BY_CATEGORY_HDR_RELAXED.search(self._norm_line(all_lines[hdr_idx])):
+                hdr_idx -= 1
+            if hdr_idx < 0:
+                hdr_idx = start
+
+            block, _ = self._parse_recap_by_category_section(all_lines, hdr_idx)
+            # merge
+            for k, v in block.items():
+                if k == "subtotals":
+                    merged["subtotals"].extend(v)
+                else:
+                    if isinstance(v, list):
+                        merged.setdefault(k, []).extend(v)
+                    else:
+                        merged[k] = v
+
+        # de-dup identical subtotal rows
+        if merged.get("subtotals"):
+            seen = set()
+            uniq = []
+            for e in merged["subtotals"]:
+                key = (e.get("label"), e.get("total"), e.get("pct"))
+                if key not in seen:
+                    seen.add(key)
+                    uniq.append(e)
+            merged["subtotals"] = uniq
+
+        return merged, spans
+
+    # ----- end-of-document parsing in structured form -----
     def _parse_recap_by_room_section(self, all_lines: List[str], start_idx: int):
         """
-        Recap by Room parser (group-aware):
-        - Groups:
-            * "Estimate: <id>"  (non-physical)
-            * "Area: <name>"    (dynamic; may appear as header-only or header+item with amount/pct)
-        - Items: "<label> <amount> <pct>%", followed by one-or-more coverage lines:
-                "Coverage: <label> <pct>% = <amount>"  (note: no '@' in Room recap)
+        Recap by Room → independent parser.
+        Returns: ({"areas": {<group>: [items...]}, "subtotals": [...], "_span": (start,end)}, next_idx)
+
+        Groups (keys in 'areas', insertion-ordered):
+        - "estimate: <id>"         (lowercased prefix)
+        - "<area name>"            (from "Area: <name>"), lowercased
+            * If the Area header line has inline "<amt> <pct>%", it is emitted as an item with:
+            item=<name> (no "Area:" prefix), total=<amt>, pct=<pct>, + captured coverage rows.
+
+        Recognized rows:
+        - Item: "<label> <amount> <pct>%"
+        - Coverage: "Coverage: <label> <pct>% = <amount>"  (0..n lines after an item/special/subtotal)
+        - Special (no pct): "Labor Minimums Applied <amount>"
         - Subtotals:
-            * "Area Subtotal: <name> <amount> <pct>%" (+ coverage)
-            * "Subtotal of Areas <amount> <pct>%" (+ coverage)
-            * "Total <amount> 100.00%"
-        - Special item without pct:
-            * "Labor Minimums Applied <amount>" (+ coverage)
-        Returns ({ "groups": {group:[items...]}, "rows": [...], "subtotals": [...] }, next_index_after_section)
+            "Area Subtotal: <name> <amount> <pct>%"
+            "Subtotal of Areas <amount> <pct>%"
+            "Total <amount> 100.00%"
         """
         import re
 
-        # --- Header and stoppers (IMPORTANT: 'Estimate:' is INSIDE the section, not a stopper) ---
-        HDR_ROOM = re.compile(r"^\s*Recap\s+by\s+Room\s*$", re.IGNORECASE)
-        STOPPERS = [
-            re.compile(r"^\s*Recap\s+by\s+Category\s*$", re.IGNORECASE),
-            re.compile(r"^\s*Recap\s+of\s+Taxes,\s+Overhead\s+and\s+Profit\s*$", re.IGNORECASE),
-            re.compile(r"^\s*Summary\s+for\s+", re.IGNORECASE),
-            re.compile(r"^\s*Grand\s+Total\s+Areas\b", re.IGNORECASE),
-        ]
-
-        seg_start, seg_end = self._find_section_bounds(all_lines, HDR_ROOM, STOPPERS, start_hint=start_idx)
-        if seg_start == -1:
-            return {"groups": {}, "rows": [], "subtotals": []}, start_idx + 1
-
-        # ---------- Local helpers ----------
+        # ---- helpers ----
         def norm(s: str) -> str:
             return re.sub(r"\s+", " ", (s or "").replace("\u00A0", " ").strip())
 
-        def is_noise(raw: str) -> bool:
-            s = (raw or "").strip()
+        def is_noise(s: str) -> bool:
             if not s: return True
-            if "Page:" in s: return True
-            if re.fullmatch(r"\d{1,4}", s): return True
+            if "Page:" in s or re.fullmatch(r"\d{1,4}", s): return True
             if s.startswith(("Date:", "Apex ", "State Farm", "CA DOI", "www.", "Claim #", "Policy #")): return True
             if "Suite" in s or "Adjusters" in s: return True
             return False
 
-        def gmoney(x: str) -> str:
-            t = (x or "").replace("\u00A0", " ")
-            t = re.sub(r"\s+", "", t)
-            return format_dollar_amount(_money_to_float(t))
+        def money(x: str) -> str:
+            return format_dollar_amount(_money_to_float(re.sub(r"\s+", "", (x or "").replace("\u00A0", " "))))
 
-        def gpct(x: str) -> float:
+        def pct(x: str) -> float:
             return float((x or "").replace(",", ".").strip())
-
-        # Tails & recognizers
-        PCT_CH = r"%\uFF05"  # ASCII % or fullwidth ％
-        TAIL = re.compile(rf"([\d,]+(?:\.\d+)?)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$")
-        AMOUNT_ONLY_TAIL = re.compile(rf"([\d,]+(?:\.\d+)?)\s*$")
-        # Headers
-        EST_HDR = re.compile(r"^\s*Estimate:\s*(.+?)\s*$", re.IGNORECASE)
-        AREA_HDR = re.compile(r"^\s*Area:\s*(.+?)\s*$", re.IGNORECASE)
-        # Subtotals
-        AREA_SUBTOTAL = re.compile(rf"^\s*Area\s+Subtotal:\s*(.+?)\s+([\d,]+(?:\.\d+)?)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$", re.IGNORECASE)
-        SUBTOTAL_OF_AREAS = re.compile(rf"^\s*Subtotal\s+of\s+Areas\s+([\d,]+(?:\.\d+)?)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$", re.IGNORECASE)
-        FINAL_TOTAL = re.compile(rf"^\s*Total\s+([\d,]+(?:\.\d+)?)\s+100(?:\.00)?\s*[{PCT_CH}]?$", re.IGNORECASE)
-        # Coverage lines (ROOM variant: no '@')
-        COVER_SPLIT = re.compile(r"^\s*Coverage:\s+(.+?)\s+(\d{1,3}(?:\.\d{1,2})?)\s*[%\uFF05]\s*=\s*([\d,]+(?:\.\d+)?)\s*$")
-        # Special item without pct
-        LABOR_MIN = re.compile(r"^\s*Labor\s+Minimums\s+Applied\s+([\d,]+(?:\.\d+)?)\s*$", re.IGNORECASE)
-
-        def is_boundary(s: str) -> bool:
-            # boundaries that end coverage collection or item recognition
-            return (
-                EST_HDR.match(s) or AREA_HDR.match(s) or
-                AREA_SUBTOTAL.match(s) or SUBTOTAL_OF_AREAS.match(s) or
-                FINAL_TOTAL.match(s) or
-                TAIL.search(s)  # another item line
-            )
 
         def capture_coverage(k: int, n: int) -> (list, int):
             covs = []
             i2 = k
             while i2 < n:
                 raw = all_lines[i2] or ""
-                if is_noise(raw):
-                    i2 += 1
-                    continue
-                s = norm(raw)
-                m = COVER_SPLIT.match(s)
-                if not m:
-                    if is_boundary(s):
-                        break
-                    # allow single wrapped continuation tokens to append to label (rare in Room)
-                    # If needed later, add continuation logic here similar to category.
-                    break
-                covs.append({
-                    "coverage": m.group(1).strip(),
-                    "pct": gpct(m.group(2)),
-                    "amount": gmoney(m.group(3)),
-                })
+                if is_noise(raw): i2 += 1; continue
+                s2 = norm(raw)
+                m = RX["COVER"].match(s2)
+                if not m: break
+                covs.append({"coverage": m.group("label").strip(),
+                            "pct": pct(m.group("pct")),
+                            "amount": money(m.group("amt"))})
                 i2 += 1
             return covs, i2
 
-        out_groups: dict = {}
-        flat_rows: list = []
-        subtotals: list = []
+        def add_item(group_key: str, label: str, amt: str, pc: str, cov_start: int, n: int):
+            cov, j2 = capture_coverage(cov_start, n)
+            areas.setdefault(group_key, []).append({
+                "item": label, "total": money(amt), "pct": pct(pc), "coverage": cov
+            })
+            return j2
 
-        current_group = None  # "Estimate: <id>" or "Area: <name>"
+        def add_subtotal(label: str, amt: str, pc: str, cov_start: int, n: int):
+            cov, j2 = capture_coverage(cov_start, n)
+            entry = {"label": label, "total": money(amt), "pct": pct(pc)}
+            if cov: entry["coverage"] = cov
+            subtotals.append(entry)
+            return j2
 
-        i = seg_start
-        n = seg_end
+        # ---- regexes (compact & tolerant) ----
+        PCT = r"%\uFF05"  # ASCII or fullwidth percent
+        RX = {
+            "HDR": re.compile(r"^\s*Recap\s+by\s+Room\s*$", re.IGNORECASE),
+            "STOP": [
+                re.compile(r"^\s*Recap\s+by\s+Category\s*$", re.IGNORECASE),
+                re.compile(r"^\s*Recap\s+of\s+Taxes,\s+Overhead\s+and\s+Profit\s*$", re.IGNORECASE),
+                re.compile(r"^\s*Summary\s+for\s+", re.IGNORECASE),
+                re.compile(r"^\s*Grand\s+Total\s+Areas\b", re.IGNORECASE),
+            ],
+            "EST": re.compile(r"^\s*Estimate:\s*(?P<id>.+?)\s*$", re.IGNORECASE),
+            # Area header with optional inline amount & pct
+            "AREA": re.compile(
+                rf"^\s*Area:\s*(?P<name>.+?)\s*(?:(?P<amt>[\d,]+(?:\.\d+)?)\s+(?P<pct>\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT}])?\s*$",
+                re.IGNORECASE
+            ),
+            # Generic item tail "<amt> <pct>%"
+            "TAIL": re.compile(rf"(?P<amt>[\d,]+(?:\.\d+)?)\s+(?P<pct>\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT}]$"),
+            # Coverage line (no '@' in Room recap)
+            "COVER": re.compile(r"^\s*Coverage:\s*(?P<label>.+?)\s+(?P<pct>\d{1,3}(?:\.\d{1,2})?)\s*[%\uFF05]\s*=\s*(?P<amt>[\d,]+(?:\.\d+)?)\s*$"),
+            # Subtotals
+            "ASUB": re.compile(rf"^\s*Area\s+Subtotal:\s*(?P<label>.+?)\s+(?P<amt>[\d,]+(?:\.\d+)?)\s+(?P<pct>\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT}]$", re.IGNORECASE),
+            "SOA": re.compile(rf"^\s*Subtotal\s+of\s+Areas\s+(?P<amt>[\d,]+(?:\.\d+)?)\s+(?P<pct>\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT}]$", re.IGNORECASE),
+            "TOTAL": re.compile(rf"^\s*Total\s+(?P<amt>[\d,]+(?:\.\d+)?)\s+100(?:\.00)?\s*[{PCT}]?$", re.IGNORECASE),
+            # Special (no pct)
+            "LABOR": re.compile(r"^\s*Labor\s+Minimums\s+Applied\s+(?P<amt>[\d,]+(?:\.\d+)?)\s*$", re.IGNORECASE),
+        }
+
+        # ---- locate section bounds & init ----
+        seg_start, seg_end = self._find_section_bounds(all_lines, RX["HDR"], RX["STOP"], start_hint=start_idx)
+        if seg_start == -1:
+            return {"areas": {}, "subtotals": [], "_span": None}, start_idx + 1
+
+        areas: Dict[str, List[Dict[str, object]]] = {}
+        subtotals: List[Dict[str, object]] = []
+        current_group: Optional[str] = None
+
+        i, n = seg_start, seg_end
         while i < n:
             raw = all_lines[i] or ""
-            if is_noise(raw):
-                i += 1
-                continue
+            if is_noise(raw): i += 1; continue
             s = norm(raw)
 
-            # Group headers
-            m_est = EST_HDR.match(s)
-            if m_est:
-                current_group = f"Estimate: {m_est.group(1).strip()}"
-                out_groups.setdefault(current_group, [])
+            # Group: Estimate
+            m = RX["EST"].match(s)
+            if m:
+                current_group = f"estimate: {m.group('id').strip()}"
+                areas.setdefault(current_group, [])
                 i += 1
                 continue
 
-            m_area_hdr = AREA_HDR.match(s)
-            if m_area_hdr:
-                # Could be header-only OR header+item if a tail is present on same line
-                area_label = m_area_hdr.group(1).strip()
-                current_group = f"Area: {area_label}"
-                out_groups.setdefault(current_group, [])
-                # If same line also has an amount/pct tail (rare), treat it as an item too
-                mt = TAIL.search(s)
-                if mt:
-                    amount = gmoney(mt.group(1)); pct = gpct(mt.group(2))
-                    # Item label should be the prefix before numeric tail; keep "Area: <name>"
-                    label = s[:mt.start()].strip()
-                    cov, j2 = capture_coverage(i + 1, n)
-                    item = {"item": label, "total": amount, "pct": pct, "coverage": cov}
-                    out_groups[current_group].append(item); flat_rows.append({k: item[k] for k in ("item","total","pct","coverage")})
-                    i = j2
+            # Group: Area (optional inline amt/pct)
+            m = RX["AREA"].match(s)
+            if m:
+                area_name = m.group("name").strip()
+                current_group = area_name.lower()
+                areas.setdefault(current_group, [])
+
+                amt, pc = m.group("amt"), m.group("pct")
+                if amt and pc:
+                    i = add_item(current_group, area_name, amt, pc, i + 1, n)
                     continue
                 i += 1
                 continue
 
             # Subtotals
-            m_as = AREA_SUBTOTAL.match(s)
-            if m_as:
-                label = f"Area Subtotal: {m_as.group(1).strip()}"
-                amount = gmoney(m_as.group(2)); pct = gpct(m_as.group(3))
-                cov, j2 = capture_coverage(i + 1, n)
-                subtotals.append({"label": label, "total": amount, "pct": pct, "coverage": cov})
-                i = j2
+            m = RX["ASUB"].match(s)
+            if m:
+                i = add_subtotal(f"Area Subtotal: {m.group('label').strip()}", m.group("amt"), m.group("pct"), i + 1, n)
                 continue
 
-            m_soa = SUBTOTAL_OF_AREAS.match(s)
-            if m_soa:
-                amount = gmoney(m_soa.group(1)); pct = gpct(m_soa.group(2))
-                cov, j2 = capture_coverage(i + 1, n)
-                subtotals.append({"label": "Subtotal of Areas", "total": amount, "pct": pct, "coverage": cov})
-                i = j2
+            m = RX["SOA"].match(s)
+            if m:
+                i = add_subtotal("Subtotal of Areas", m.group("amt"), m.group("pct"), i + 1, n)
                 continue
 
-            m_ft = FINAL_TOTAL.match(s)
-            if m_ft:
-                subtotals.append({"label": "Total", "total": gmoney(m_ft.group(1)), "pct": 100.00})
+            m = RX["TOTAL"].match(s)
+            if m:
+                subtotals.append({"label": "Total", "total": money(m.group("amt")), "pct": 100.00})
                 i += 1
                 continue
 
-            # Special item (no pct)
-            m_lab = LABOR_MIN.match(s)
-            if m_lab:
-                amount = gmoney(m_lab.group(1))
+            # Special (no pct)
+            m = RX["LABOR"].match(s)
+            if m:
                 cov, j2 = capture_coverage(i + 1, n)
-                label = "Labor Minimums Applied"
-                # Attach to current group if set, else to a synthetic group
-                grp = current_group or "Estimate: (unknown)"
-                out_groups.setdefault(grp, [])
-                item = {"item": label, "total": amount, "pct": None, "coverage": cov}
-                out_groups[grp].append(item); flat_rows.append({k: item[k] for k in ("item","total","pct","coverage")})
+                grp = current_group or "estimate: (unknown)"
+                areas.setdefault(grp, []).append({"item": "Labor Minimums Applied",
+                                                "total": money(m.group("amt")),
+                                                "pct": None,
+                                                "coverage": cov})
                 i = j2
                 continue
 
-            # Generic item with amount + pct tail
-            mt = TAIL.search(s)
+            # Generic item "<label> <amt> <pct>%"
+            mt = RX["TAIL"].search(s)
             if mt:
-                amount = gmoney(mt.group(1)); pct = gpct(mt.group(2))
                 label = s[:mt.start()].strip().rstrip(":")
-                cov, j2 = capture_coverage(i + 1, n)
-                grp = current_group or "Estimate: (unknown)"
-                out_groups.setdefault(grp, [])
-                item = {"item": label, "total": amount, "pct": pct, "coverage": cov}
-                out_groups[grp].append(item); flat_rows.append({k: item[k] for k in ("item","total","pct","coverage")})
-                i = j2
+                amt, pc = mt.group("amt"), mt.group("pct")
+                grp = current_group or "estimate: (unknown)"
+                i = add_item(grp, label, amt, pc, i + 1, n)
                 continue
 
-            # Default advance
             i += 1
 
-        return {"groups": out_groups, "rows": flat_rows, "subtotals": subtotals}, seg_end
+        return {"areas": areas, "subtotals": subtotals, "_span": (seg_start, seg_end)}, seg_end
 
     def _parse_recap_by_category_section(self, all_lines: List[str], start_idx: int) -> Tuple[Dict[str, object], int]:
         """
         Parses a single 'Recap by Category' block starting at start_idx (line matches RECAP_BY_CATEGORY_HDR).
-        - Dynamic groups: "<Key> Total %" or "Total <pct>%"
-        Items: ALL-CAPS lines with "<amount> <pct>%"
-        Coverage: one-or-more "Coverage: ..." lines with wrapped continuation lines merged.
-        Group can close via "<Key> Subtotal ..." or bare "Subtotal ...".
-        - 'subtotals' array: collects every subtotal (group-closing and repeated), plus allocations and final Total 100%.
-        - Allocations ("Permits and Fees", "Material Sales Tax", "Overhead", "Profit") become top-level keys with coverage,
-        and are mirrored into 'subtotals' with coverage.
+
+        Behavior:
+        - Skips page-wrap repeats of "<Category Name> Total %" unless the name actually changes.
+        - Allocation rows ('Permits and Fees', 'Material Sales Tax', 'Overhead', 'Profit') go ONLY to 'subtotals'
+            (with coverage) and are NOT emitted as top-level keys.
+        - Bare "Subtotal <amt> <pct>%" inside an active/only group is captured and labeled "<current_key> Subtotal"
+            (e.g., "Items Subtotal"), even in single-category tables.
+        - Item names allow ':' (e.g., "CONT: CLEAN - GENERAL ITEMS").
+        - Accepts ASCII '%' and fullwidth '％'.
+
+        Fix for missing Items Subtotal:
+        - Capture key_for_label BEFORE flush_group() and use it to emit "<key> Subtotal".
+        - Fallback to last_key_seen_for_pagewrap when current_key is None at bare-subtotal time.
         """
         def gmoney(x: str) -> str:
             return format_dollar_amount(_money_to_float(x))
 
-        KEY_TOTAL_HDR = re.compile(r"^([A-Za-z0-9/_\-\.\s\(\),&']+?)\s+Total\s+(?:\d{1,3}\.\d{2}%|%)$", re.IGNORECASE)
-        KEY_SUBTOTAL_ROW = re.compile(r"^([A-Za-z0-9/_\-\.\s\(\),&']+?)\s+Subtotal\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$", re.IGNORECASE)
-        BARE_SUBTOTAL_ROW = re.compile(r"^Subtotal\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$", re.IGNORECASE)
-        RECAP_ITEM_LINE = re.compile(RECAP_LINE_PATTERN)
+        # support ASCII '%' and fullwidth '％'
+        PCT_CH = r"%\uFF05"
+
+        # Headers and rows
+        KEY_TOTAL_HDR = re.compile(
+            rf"^([A-Za-z0-9/_\-\.\s\(\),&':]+?)\s+Total\s+(?:\d{{1,3}}(?:\.\d{{1,2}})?\s*[{PCT_CH}]|[{PCT_CH}])$",
+            re.IGNORECASE
+        )
+        KEY_SUBTOTAL_ROW = re.compile(
+            rf"^([A-Za-z0-9/_\-\.\s\(\),&':]+?)\s+Subtotal\s+([\d,]+\.\d+)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$",
+            re.IGNORECASE
+        )
+        BARE_SUBTOTAL_ROW = re.compile(
+            rf"^Subtotal\s+([\d,]+\.\d+)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$",
+            re.IGNORECASE
+        )
+
+        # Allow ':' and fullwidth % in item lines
+        RECAP_ITEM_LINE = re.compile(
+            rf"^([A-Za-z0-9/_\-\.\s\(\),&':]+?)\s+([\d,]+\.\d+)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$"
+        )
+
         COVER_SPLIT = re.compile(RECAP_COVERAGE_SPLIT)
-        ALLOC_LABEL_ROW = re.compile(r"^(Permits and Fees|Material Sales Tax|Overhead|Profit)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$", re.IGNORECASE)
-        FINAL_TOTAL_100 = re.compile(r"^Total\s+([\d,]+\.\d+)\s+100\.00%$", re.IGNORECASE)
+        ALLOC_LABEL_ROW = re.compile(
+            rf"^(Permits and Fees|Material Sales Tax|Overhead|Profit)\s+([\d,]+\.\d+)\s+(\d{{1,3}}(?:\.\d{{1,2}})?)\s*[{PCT_CH}]$",
+            re.IGNORECASE
+        )
+        FINAL_TOTAL_100 = re.compile(
+            rf"^Total\s+([\d,]+\.\d+)\s+100(?:\.00)?\s*[{PCT_CH}]$",
+            re.IGNORECASE
+        )
 
         def is_all_caps_name(s: str) -> bool:
             return not re.search(r"[a-z]", s)
 
         def is_page_noise(s: str) -> bool:
-            if not s:
-                return True
-            if "Page:" in s:
-                return True
-            if re.fullmatch(r"\d{1,4}", s):
-                return True
-            if s.startswith(("Date:", "Apex ", "State Farm", "CA DOI", "www.", "CHEN,", "Claim #", "Policy #")):
-                return True
-            if "Suite" in s or "Adjusters" in s:
-                return True
+            if not s: return True
+            if "Page:" in s: return True
+            if re.fullmatch(r"\d{1,4}", s): return True
+            if s.startswith(("Date:", "Apex ", "State Farm", "CA DOI", "www.", "CHEN,", "Claim #", "Policy #")): return True
+            if "Suite" in s or "Adjusters" in s: return True
             return False
 
         def is_signal_boundary(s: str) -> bool:
@@ -1075,7 +1129,7 @@ class XactimateRoughDraftParser:
             return covs, k
 
         def subtotals_add(arr: List[dict], entry: dict):
-            # de-dup exact (label,total,pct)
+            # de-dup by (label, total, pct)
             for e in arr:
                 if e.get("label") == entry.get("label") and e.get("total") == entry.get("total") and e.get("pct") == entry.get("pct"):
                     return
@@ -1084,7 +1138,7 @@ class XactimateRoughDraftParser:
         out = {"subtotals": []}
         i = start_idx + 1
         n = len(all_lines)
-        current_key = None
+        current_key: Optional[str] = None
         pending_items: List[dict] = []
 
         def flush_group():
@@ -1093,6 +1147,8 @@ class XactimateRoughDraftParser:
                 out.setdefault(current_key, []).extend(pending_items)
             current_key, pending_items = None, []
 
+        last_key_seen_for_pagewrap: Optional[str] = None
+
         while i < n:
             s = (all_lines[i] or "").strip()
 
@@ -1100,15 +1156,23 @@ class XactimateRoughDraftParser:
             if s.startswith("Dwelling -") or s.startswith("Estimate:") or s.startswith("Summary for "):
                 break
 
-            # Header
+            # Group header — tolerant to page-top repeats of the SAME key
             mt = KEY_TOTAL_HDR.match(s)
             if mt:
+                new_key = mt.group(1).strip()
+                if current_key == new_key:
+                    i += 1
+                    continue
+                if last_key_seen_for_pagewrap == new_key and not pending_items:
+                    i += 1
+                    continue
                 flush_group()
-                current_key = mt.group(1).strip()
+                current_key = new_key
+                last_key_seen_for_pagewrap = new_key
                 i += 1
                 continue
 
-            # Items within a group
+            # Items within active group
             if current_key:
                 rm = RECAP_ITEM_LINE.match(s)
                 if rm:
@@ -1126,9 +1190,10 @@ class XactimateRoughDraftParser:
                         i = end_k
                         continue
 
-                # Group-closing subtotal (labeled)
+                # Labeled subtotal closes the group
                 ms = KEY_SUBTOTAL_ROW.match(s)
                 if ms:
+                    # close items, then push labeled subtotal as-is
                     flush_group()
                     subtotals_add(out["subtotals"], {
                         "label": ms.group(1).strip(),
@@ -1138,20 +1203,22 @@ class XactimateRoughDraftParser:
                     i += 1
                     continue
 
-                # Bare "Subtotal …" — use current_key as label
+                # Bare "Subtotal …" — attribute to current/last key with " Subtotal" suffix (e.g., "Items Subtotal")
                 bs = BARE_SUBTOTAL_ROW.match(s)
                 if bs:
+                    # capture the key BEFORE flushing
+                    key_for_label = current_key or last_key_seen_for_pagewrap
                     flush_group()
-                    if current_key:
+                    if key_for_label:
                         subtotals_add(out["subtotals"], {
-                            "label": current_key,
+                            "label": f"{key_for_label} Subtotal",
                             "total": gmoney(bs.group(1)),
                             "pct": float(bs.group(2)),
                         })
                     i += 1
                     continue
 
-            # Subtotals section (no active group)
+            # Subtotals & allocations when no active group
             if current_key is None:
                 ms_any = KEY_SUBTOTAL_ROW.match(s)
                 if ms_any:
@@ -1163,21 +1230,19 @@ class XactimateRoughDraftParser:
                     i += 1
                     continue
 
-                # Allocations (with coverage), also mirrored into subtotals
+                # Allocation rows go ONLY into 'subtotals' with coverage; no top-level keys added.
                 am = ALLOC_LABEL_ROW.match(s)
                 if am:
                     al_label = am.group(1).strip()
                     al_total = gmoney(am.group(2))
                     al_pct = float(am.group(3))
                     cov_list, end_k = capture_coverage(i + 1, n)
-                    out[al_label] = {"total": al_total, "pct": al_pct, "coverage": cov_list}
                     subtotals_add(out["subtotals"], {
                         "label": al_label, "total": al_total, "pct": al_pct, "coverage": cov_list
                     })
                     i = end_k
                     continue
 
-                # Final grand total
                 ft = FINAL_TOTAL_100.match(s)
                 if ft:
                     subtotals_add(out["subtotals"], {
@@ -1188,22 +1253,19 @@ class XactimateRoughDraftParser:
                     i += 1
                     continue
 
-            # Page/header noise skip
+            # Page/header noise
             if ("Page:" in s) or re.fullmatch(r"\d{1,4}", s) or s.startswith(("Date:", "Apex ", "State Farm")):
                 i += 1
                 continue
 
-            # default
             i += 1
 
         flush_group()
         return out, i
 
+
+
     def _parse_recap_tax_op_section(self, all_lines: List[str], start_idx: int) -> Tuple[Optional[Dict[str, str]], int]:
-        """
-        Parses 'Recap of Taxes, Overhead and Profit' from start_idx.
-        Returns (dict or None, next_index)
-        """
         i, n = start_idx + 1, len(all_lines)
         total_row = None
         while i < n:
@@ -1224,10 +1286,6 @@ class XactimateRoughDraftParser:
         return total_row, i
 
     def _parse_coverage_rows(self, all_lines: List[str], start_idx: int, existing_coverage: Optional[Dict[str, object]] = None) -> Tuple[Dict[str, object], int]:
-        """
-        Harvests a contiguous block of coverage rows and an optional 'Total' row starting at start_idx.
-        Returns (coverage_dict, next_index)
-        """
         cov = existing_coverage or {"rows": [], "totals": None}
         i, n = start_idx, len(all_lines)
         while i < n:
@@ -1250,20 +1308,13 @@ class XactimateRoughDraftParser:
                     "acv_total": format_dollar_amount(_money_to_float(m.group(2))),
                 }
                 i += 1
-                # we often want to stop after total
                 break
-            # stop if we hit something that's clearly not coverage
             if s.startswith(("Summary for ", "Recap ", "Estimate:", "Grand Total Areas")):
                 break
-            # otherwise, exit the block gracefully
             break
         return cov, i
 
     def _parse_summary_block(self, all_lines: List[str], start_idx: int) -> Tuple[Tuple[str, Dict[str, str]], int]:
-        """
-        Parses a single 'Summary for <Coverage>' block starting at start_idx.
-        Returns ((coverage_name, kv_dict), next_index).
-        """
         def gmoney(x: str) -> str:
             return format_dollar_amount(_money_to_float(x))
 
@@ -1285,10 +1336,6 @@ class XactimateRoughDraftParser:
         return (cov, kv), i
 
     def _parse_grand_total_areas_block(self, all_lines: List[str], start_idx: int) -> Tuple[Optional[Dict[str, str]], int]:
-        """
-        Parses the 'Grand Total Areas:' block starting at start_idx.
-        Returns (dict or None, next_index)
-        """
         i, n = start_idx + 1, len(all_lines)
         block_lines = []
         while i < n:
@@ -1333,6 +1380,11 @@ class XactimateRoughDraftParser:
         return (gta or None), i
 
     def _parse_end_structured(self, all_lines: List[str]) -> dict:
+        """
+        Harvests all end-of-document structured blocks (coverage table, summaries, recap by room/category, etc.)
+        INDEPENDENTLY of the line-by-line sections. Also returns optional skip spans you can use to
+        ignore these ranges during section parsing if desired.
+        """
         def gmoney(x: str) -> str:
             return format_dollar_amount(_money_to_float(x))
 
@@ -1343,9 +1395,12 @@ class XactimateRoughDraftParser:
             "grand_total_areas": None,
             "coverage": {"rows": [], "totals": None},
             "summaries_by_coverage": {},
-            "recap_tax_op": None,
-            "recap_by_room": {"rows": [], "subtotals": []},
+            # NEW SHAPE for room recap:
+            "recap_by_room": {"areas": {}, "subtotals": []},
+            # Category recap remains as previously refactored
             "recap_by_category": {"subtotals": []},
+            # internal: ranges to optionally skip in the line-by-line pass
+            "_skip_spans": []
         }
 
         i, n = 0, len(all_lines)
@@ -1415,13 +1470,19 @@ class XactimateRoughDraftParser:
                 result["recap_tax_op"], i = self._parse_recap_tax_op_section(all_lines, i)
                 continue
 
-            # >>> TOLERANT HEADER DETECTION (search, not match) <<<
+            # >>> Tolerant header detection (search, not match)
             if re.search(r"\bRecap\s+by\s+Room\b", line, re.IGNORECASE):
-                result["recap_by_room"], i = self._parse_recap_by_room_section(all_lines, i)
+                room_obj, i2 = self._parse_recap_by_room_section(all_lines, i)
+                # adopt new structure + record skip span
+                result["recap_by_room"]["areas"] = room_obj.get("areas", {})
+                result["recap_by_room"]["subtotals"] = room_obj.get("subtotals", [])
+                if room_obj.get("_span"):
+                    result["_skip_spans"].append(room_obj["_span"])
+                i = i2
                 continue
 
             if re.search(r"\bRecap\s+by\s+Category\b", line, re.IGNORECASE):
-                rbc, i = self._parse_recap_by_category_section(all_lines, i)
+                rbc, i2 = self._parse_recap_by_category_section(all_lines, i)
                 for k, v in rbc.items():
                     if k == "subtotals":
                         result["recap_by_category"]["subtotals"].extend(v)
@@ -1430,25 +1491,73 @@ class XactimateRoughDraftParser:
                             result["recap_by_category"].setdefault(k, []).extend(v)
                         else:
                             result["recap_by_category"][k] = v
+                # best-effort span detection for category section as well
+                # (Use the same helper used by room to compute bounds)
+                # NOTE: harmless if header repeats; bounds routine collapses consecutive headers.
+                cat_hdr = re.compile(r"^\s*Recap\s+by\s+Category\s*$", re.IGNORECASE)
+                cat_stop = [
+                    re.compile(r"^\s*Recap\s+by\s+Room\s*$", re.IGNORECASE),
+                    re.compile(r"^\s*Recap\s+of\s+Taxes,\s+Overhead\s+and\s+Profit\s*$", re.IGNORECASE),
+                    re.compile(r"^\s*Summary\s+for\s+", re.IGNORECASE),
+                    re.compile(r"^\s*Grand\s+Total\s+Areas\b", re.IGNORECASE),
+                ]
+                s0, s1 = self._find_section_bounds(all_lines, cat_hdr, cat_stop, start_hint=i)
+                if s0 != -1:
+                    result["_skip_spans"].append((s0, s1))
+                i = i2
                 continue
 
             i += 1
 
         return result
 
+    # find section bounds used by recap-by-room
+    def _find_section_bounds(self, all_lines: List[str],
+                         header_re: re.Pattern,
+                         stop_res: List[re.Pattern],
+                         start_hint: int = 0) -> Tuple[int, int]:
+        def norm(s: str) -> str:
+            return re.sub(r"\s+", " ", (s or "").replace("\u00A0", " ").strip())
+
+        n = len(all_lines)
+        header_idx = -1
+
+        for idx in range(start_hint, n):
+            if header_re.search(norm(all_lines[idx] or "")):
+                header_idx = idx
+                break
+        if header_idx == -1:
+            for idx in range(0, start_hint):
+                if header_re.search(norm(all_lines[idx] or "")):
+                    header_idx = idx
+                    break
+        if header_idx == -1:
+            return -1, -1
+
+        j = header_idx + 1
+        while j < n and header_re.search(norm(all_lines[j] or "")):
+            j += 1
+        start = j
+
+        end = n
+        for k in range(start, n):
+            s = norm(all_lines[k] or "")
+            for pat in stop_res:
+                if pat.search(s):
+                    end = k
+                    return start, end
+        return start, end
 
     # ----- validations with new layout -----
     def _validate_doc(self, end: dict, sections: List[dict]) -> dict:
         v: Dict[str, Optional[str]] = {}
 
-        # sum of all section line-item totals
         sum_sections = _round2(sum(_money_to_float(li.get('total'))
                                    for sec in sections
                                    for li in sec.get('line_items', [])
                                    if li.get('type') == 'line_item' and li.get('total')))
         v['sum_sections'] = format_dollar_amount(sum_sections)
 
-        # choose grand_end: prefer line_item_totals.grand_total, else coverage.totals.item_total
         grand_end = None
         if end.get('line_item_totals'):
             grand_end = _money_to_float(end['line_item_totals']['grand_total'])
@@ -1459,7 +1568,6 @@ class XactimateRoughDraftParser:
             v['end_grand_total'] = format_dollar_amount(grand_end)
             v['grand_total_vs_sections_delta'] = format_dollar_amount(_round2(grand_end - sum_sections))
 
-        # coverage totals vs sum of RCV in summaries
         summaries = end.get('summaries_by_coverage') or {}
         if summaries:
             sum_rcv = _round2(sum(_money_to_float(kv.get('Replacement Cost Value', '0.00'))
@@ -1471,11 +1579,14 @@ class XactimateRoughDraftParser:
                 v['coverage_total_item'] = format_dollar_amount(cov_item_total)
                 v['coverage_rcv_delta'] = format_dollar_amount(_round2(cov_item_total - sum_rcv))
 
-        # recap-by-category total vs grand_end
-        rbc_total = (end.get('recap_by_category') or {}).get('totals', {}) or {}
-        rbc_val_str = rbc_total.get('grand_total')
-        if rbc_val_str and grand_end is not None:
-            rbc_val = _round2(_money_to_float(rbc_val_str))
+        rbc_subtotals = (end.get('recap_by_category') or {}).get('subtotals') or []
+        rbc_total_val = None
+        for row in rbc_subtotals:
+            if row.get('label') == 'Total':
+                rbc_total_val = row.get('total')
+                break
+        if rbc_total_val and grand_end is not None:
+            rbc_val = _round2(_money_to_float(rbc_total_val))
             v['recap_category_total'] = format_dollar_amount(rbc_val)
             v['recap_vs_end_grand_delta'] = format_dollar_amount(_round2(rbc_val - grand_end))
 
