@@ -102,7 +102,8 @@ COVERAGE_TOTAL_ROW  = r'^Total\s+([\d,]+\.\d+)\s+100\.00%\s+([\d,]+\.\d+)\s+100\
 
 # summary pages
 SUMMARY_FOR_HDR = r'^Summary\s+for\s+(.+?)\s*$'
-SUMMARY_KV_ROW  = r'^(Line Item Total|California Lumber Assessment Fee|Material Sales Tax|Subtotal|Overhead|Profit|Replacement Cost Value|Net Claim|Less Deductible|Less Amount Over Limit\(s\))\s+\$?([\d,]+\.\d+)$'
+SUMMARY_KV_ROW  = r'^(Line Item Total|California Lumber Assessment Fee|Material Sales Tax|Subtotal|Overhead|Profit|Replacement Cost Value|Net Claim|Less Deductible|Less Amount Over Limit\(s\))\s+\$?([\d,]+\.[\d]+)$'
+SUMMARY_NET_CLAIM_ROW = r'^Net\s+Claim\s+\$?([\d,]+\.[\d]+)\s*$'
 
 # recap
 RECAP_TAX_OP_HDR = r'^Recap\s+of\s+Taxes,\s+Overhead\s+and\s+Profit\s*$'
@@ -290,6 +291,18 @@ class XactimateRoughDraftParser:
 
         # writes
         self._write_raw_lines(full_lines)
+
+        # ------- ONLY CHANGE: build recaps_and_summaries and conditionally add trade_summary -------
+        recaps = {
+            "summaries_by_coverage": end.get("summaries_by_coverage", {}),
+            "recap_tax_op": end.get("recap_tax_op"),
+            "recap_by_room": end.get("recap_by_room"),
+            "recap_by_category": end.get("recap_by_category") or recap_cat or {"subtotals": []},
+        }
+        if end.get("trade_summary"):
+            recaps["trade_summary"] = end["trade_summary"]
+        # -------------------------------------------------------------------------------------------
+
         payload = {
             "case_metadata": {
                 **case_md,
@@ -300,12 +313,7 @@ class XactimateRoughDraftParser:
             "sections": sections,
             "grand_total_areas": end.get("grand_total_areas"),
             "coverage": end.get("coverage"),
-            "recaps_and_summaries": {
-                "summaries_by_coverage": end.get("summaries_by_coverage", {}),
-                "recap_tax_op": end.get("recap_tax_op"),
-                "recap_by_room": end.get("recap_by_room"),
-                "recap_by_category": end.get("recap_by_category") or recap_cat or {"subtotals": []},
-            },
+            "recaps_and_summaries": recaps,
         }
         if self.debug:
             payload["validations"] = {
@@ -849,6 +857,31 @@ class XactimateRoughDraftParser:
 
         return merged, spans
 
+    def _prepass_summaries(self, all_lines: List[str]) -> Tuple[Dict[str, Dict[str, str]], List[Tuple[int, int]]]:
+        """
+        Detect and parse ALL 'Summary for <...>' sections in the document (non-sequential).
+        Each section is bounded from its header to the FIRST 'Net Claim <value>' line encountered.
+        'Trade Summary' is ignored here (handled separately later).
+        Returns: (summaries_by_coverage, spans)
+        """
+        summaries: Dict[str, Dict[str, str]] = {}
+        spans: List[Tuple[int, int]] = []
+
+        n = len(all_lines)
+        i = 0
+        while i < n:
+            s = (all_lines[i] or "").strip()
+            if s.startswith("Summary") and re.match(SUMMARY_FOR_HDR, s, re.IGNORECASE) and not s.lower().startswith("summary trade"):
+                (cov, kv), j = self._parse_summary_section(all_lines, i)
+                if kv:
+                    summaries[cov] = {**summaries.get(cov, {}), **kv}
+                spans.append((i, j))
+                i = j
+                continue
+            i += 1
+
+        return summaries, spans
+
     # ----- end-of-document parsing in structured form -----
     def _parse_recap_by_room_section(self, all_lines: List[str], start_idx: int):
         """
@@ -1335,6 +1368,281 @@ class XactimateRoughDraftParser:
             i += 1
         return (cov, kv), i
 
+    def _parse_summary_section(self, all_lines: List[str], start_idx: int) -> Tuple[Tuple[str, Dict[str, str]], int]:
+        """
+        Parse a 'Summary for <Coverage>' block starting at start_idx (header line),
+        consuming lines through the FIRST 'Net Claim <value>' line (inclusive).
+
+        Returns: ((coverage_name, kv_dict), end_idx_exclusive)
+        """
+        def gmoney(x: str) -> str:
+            return format_dollar_amount(_money_to_float(x))
+
+        hdr = (all_lines[start_idx] or "").strip()
+        m = re.match(SUMMARY_FOR_HDR, hdr)
+        if not m:
+            return (("unknown", {}), start_idx + 1)
+
+        cov = m.group(1).strip()
+        kv: Dict[str, str] = {}
+        i, n = start_idx + 1, len(all_lines)
+
+        while i < n:
+            s = (all_lines[i] or "").strip()
+            nm = re.match(SUMMARY_NET_CLAIM_ROW, s, re.IGNORECASE)
+            if nm:
+                kv["Net Claim"] = gmoney(nm.group(1))
+                i += 1
+                break
+
+            sm = re.match(SUMMARY_KV_ROW, s, re.IGNORECASE)
+            if sm:
+                label, amt = sm.group(1), sm.group(2)
+                kv[label] = gmoney(amt)
+                i += 1
+                continue
+
+            if s == "" or s.isdigit() or "Page:" in s:
+                i += 1
+                continue
+
+            if re.search(r'\bRecap\b', s) or re.search(r'\bGrand\s+Total\s+Areas\b', s) or re.search(r'^\s*Estimate:\s*', s):
+                break
+
+            i += 1
+
+        return ((cov, kv), i)
+
+    def _parse_trade_summary_section(self, all_lines: List[str], start_idx: int):
+        """
+        Parse 'Trade Summary' with strict rule: a trade ends only at 'TOTAL <trade name>'.
+        Fixes:
+        - Skip split two-line table headers so they don't get mis-read as trades (e.g., 'QTY TOTAL DEPREC. AMT AVAIL.').
+        - Harden trade-header acceptance to avoid header terms being classified as trades.
+        - Ignore duplicate headers for the same trade (page wrap) and keep appending items.
+        Returns: (trade_summary_obj | None, end_idx_exclusive)
+        """
+        import re
+
+        # -------- helpers --------
+        def norm(s: str) -> str:
+            return re.sub(r"\s+", " ", (s or "").replace("\u00A0", " ").strip())
+
+        def gmoney(x: str) -> str:
+            cleaned = re.sub(r"[^\d.\-]", "", (x or ""))
+            return format_dollar_amount(_money_to_float(cleaned))
+
+        def is_noise(s: str) -> bool:
+            if not s:
+                return True
+            if "Page:" in s or re.fullmatch(r"\d{1,4}", s):
+                return True
+            if s.startswith(("Date:", "Note:", "Includes all applicable", "Trade Summary")):
+                return True
+            return False
+
+        def trade_key(name: str) -> str:
+            k = re.sub(r"[^a-z0-9]+", " ", (name or "").lower())
+            return re.sub(r"\s+", " ", k).strip()
+
+        def same_trade(a: str, b: str) -> bool:
+            ka, kb = trade_key(a), trade_key(b)
+            return bool(ka and kb) and (ka == kb or ka in kb or kb in ka)
+
+        # -------- patterns --------
+        # Table header can be printed on one line OR split across two lines.
+        TABLE_HDR_ONE = re.compile(
+            r"^DESCRIPTION\s+LINE\s+ITEM\s+REPL\.\s+COST\s+ACV\s+NON-REC\.\s+MAX\s+ADDL\.\s+QTY\s+TOTAL\s+DEPREC\.\s+AMT\s+AVAIL\.?$",
+            re.IGNORECASE
+        )
+        TABLE_HDR_L1 = re.compile(
+            r"^DESCRIPTION\s+LINE\s+ITEM\s+REPL\.\s+COST\s+ACV\s+NON-REC\.\s+MAX\s+ADDL\.?$",
+            re.IGNORECASE
+        )
+        TABLE_HDR_L2 = re.compile(
+            r"^QTY\s+TOTAL\s+DEPREC\.\s+AMT\s+AVAIL\.?$",
+            re.IGNORECASE
+        )
+
+        TRADE_HDR = re.compile(r"^(?P<code>[A-Z]{3})\s+(?P<trade>[A-Z0-9 /&\-\.\(\)']+)$")
+        # Header terms that should never appear as a "trade code" or within a real trade name
+        HEADER_STOP_WORDS = {"QTY", "QTR", "TOTAL", "DEPREC", "AMT", "AVAIL", "REPL.", "REPL", "ACV", "NON-REC.", "NON-REC", "MAX", "ADDL", "ITEM", "LINE", "DESCRIPTION"}
+        def looks_like_header_term(s: str) -> bool:
+            tokens = re.split(r"\s+", s.strip().upper())
+            return any(tok in HEADER_STOP_WORDS for tok in tokens)
+
+        MONEY = r"\$?[\d,]+\.\d{2}"
+        QTY   = r"(?P<qty>[\d,]+(?:\.\d+)?[A-Z]{2,})"
+        ITEM_ROW = re.compile(
+            rf"^(?P<desc>.+?)\s+{QTY}\s+(?P<repl>{MONEY})\s+(?P<acv>{MONEY})\s+(?P<nonrec>{MONEY})\s+(?P<maxaddl>{MONEY})$"
+        )
+        TRADE_TOTAL = re.compile(
+            rf"^TOTAL\s+(?P<trade>[A-Z0-9 /&\-\.\(\)']+)\s+(?P<repl>{MONEY})\s+(?P<acv>{MONEY})\s+(?P<nonrec>{MONEY})\s+(?P<maxaddl>{MONEY})$"
+        )
+        GRAND_TOTALS = re.compile(
+            rf"^TOTALS\s+(?P<repl>{MONEY})\s+(?P<acv>{MONEY})\s+(?P<nonrec>{MONEY})\s+(?P<maxaddl>{MONEY})$"
+        )
+
+        # -------- find 'Trade Summary' header --------
+        n = len(all_lines)
+        hdr_idx = -1
+        for k in range(start_idx, n):
+            if norm(all_lines[k] or "").lower().startswith("trade summary"):
+                hdr_idx = k
+                break
+        if hdr_idx == -1:
+            return None, start_idx + 1
+
+        STOP = [
+            re.compile(r"^\s*Summary\s+for\s+", re.IGNORECASE),
+            re.compile(r"^\s*Recap\s+by\s+Room\s*$", re.IGNORECASE),
+            re.compile(r"^\s*Recap\s+by\s+Category\s*$", re.IGNORECASE),
+            re.compile(r"^\s*Recap\s+of\s+Taxes,\s+Overhead\s+and\s+Profit\s*$", re.IGNORECASE),
+            re.compile(r"^\s*Grand\s+Total\s+Areas\b", re.IGNORECASE),
+            re.compile(COVERAGE_TABLE_ROW),
+            re.compile(COVERAGE_TOTAL_ROW),
+            re.compile(SUMMARY_FOR_HDR, re.IGNORECASE),
+        ]
+        def looks_like_stop(s: str) -> bool:
+            t = norm(s)
+            return any(p.search(t) for p in STOP)
+
+        # -------- parse loop --------
+        out = {"totals": None, "line_items": [], "_span": None}
+
+        current_trade = None
+        current_trade_key = None
+
+        def start_trade(code: str, name: str):
+            nonlocal current_trade, current_trade_key
+            current_trade = {"trade_code": code, "trade": name, "total": None, "items": []}
+            current_trade_key = trade_key(name)
+
+        def close_trade_with_totals(totals_obj: dict):
+            nonlocal current_trade, current_trade_key
+            if current_trade:
+                current_trade["total"] = totals_obj
+                out["line_items"].append(current_trade)
+            current_trade = None
+            current_trade_key = None
+
+        i = hdr_idx + 1
+        seg_start = hdr_idx
+        seg_end = n
+        pending_split_header = False  # we saw line-1 of a split table header; expect to skip line-2 next
+
+        while i < n:
+            raw = all_lines[i] or ""
+            s = norm(raw)
+
+            if looks_like_stop(s):
+                break
+            if is_noise(s):
+                i += 1
+                continue
+
+            # -------- skip table header(s) ----------
+            if TABLE_HDR_ONE.match(s):
+                i += 1
+                continue
+            if TABLE_HDR_L1.match(s):
+                pending_split_header = True
+                i += 1
+                continue
+            if pending_split_header:
+                # eat the second line if present
+                if TABLE_HDR_L2.match(s):
+                    i += 1
+                pending_split_header = False
+                continue
+            if TABLE_HDR_L2.match(s):
+                # stand-alone line 2 (paranoia): skip it
+                i += 1
+                continue
+
+            # -------- section totals (grand) ----------
+            mgt = GRAND_TOTALS.match(s)
+            if mgt:
+                out["totals"] = {
+                    "repl_cost_total": gmoney(mgt.group("repl")),
+                    "acv": gmoney(mgt.group("acv")),
+                    "non_rec_deprec": gmoney(mgt.group("nonrec")),
+                    "max_addl_amt_avail": gmoney(mgt.group("maxaddl")),
+                }
+                i += 1
+                continue
+
+            # -------- trade TOTAL (this *closes* current trade) ----------
+            tt = TRADE_TOTAL.match(s)
+            if tt:
+                tname_total = tt.group("trade").strip()
+                totals_obj = {
+                    "repl_cost_total": gmoney(tt.group("repl")),
+                    "acv": gmoney(tt.group("acv")),
+                    "non_rec_deprec": gmoney(tt.group("nonrec")),
+                    "max_addl_amt_avail": gmoney(tt.group("maxaddl")),
+                }
+                if current_trade and same_trade(current_trade["trade"], tname_total):
+                    close_trade_with_totals(totals_obj)
+                # else: ignore unmatched TOTAL rows (defensive)
+                i += 1
+                continue
+
+            # -------- trade header (open/continue) ----------
+            th = TRADE_HDR.match(s)
+            if th:
+                code = th.group("code").strip()
+                tname = th.group("trade").strip()
+
+                # Harden acceptance: reject header-ish codes or names
+                if code in HEADER_STOP_WORDS or looks_like_header_term(tname):
+                    i += 1
+                    continue
+
+                tkey = trade_key(tname)
+                if current_trade is None:
+                    start_trade(code, tname)
+                else:
+                    if current_trade_key and (tkey == current_trade_key or same_trade(current_trade["trade"], tname)):
+                        # duplicate page-wrap header for the SAME trade: ignore
+                        pass
+                    else:
+                        # New trade header appeared before TOTAL <old>; in well-formed docs this shouldn't happen.
+                        # To avoid losing items, append the open trade (without totals) and start a new one.
+                        out["line_items"].append(current_trade)
+                        start_trade(code, tname)
+                i += 1
+                continue
+
+            # -------- item row ----------
+            ir = ITEM_ROW.match(s)
+            if ir and current_trade:
+                current_trade["items"].append({
+                    "description": ir.group("desc").strip(),
+                    "line_item_qty": ir.group("qty").strip(),
+                    "repl_cost_total": gmoney(ir.group("repl")),
+                    "acv": gmoney(ir.group("acv")),
+                    "non_rec_deprec": gmoney(ir.group("nonrec")),
+                    "max_addl_amt_avail": gmoney(ir.group("maxaddl")),
+                })
+                i += 1
+                continue
+
+            i += 1
+
+        seg_end = i
+        out["_span"] = (seg_start, seg_end)
+
+        # If nothing meaningful parsed, say "not found"
+        if not out["line_items"] and not out["totals"]:
+            return None, seg_end
+
+        # If a trade is still open but we never saw its TOTAL, emit it as-is (fallback)
+        if current_trade and current_trade.get("items"):
+            out["line_items"].append(current_trade)
+
+        return out, seg_end
+
     def _parse_grand_total_areas_block(self, all_lines: List[str], start_idx: int) -> Tuple[Optional[Dict[str, str]], int]:
         i, n = start_idx + 1, len(all_lines)
         block_lines = []
@@ -1403,6 +1711,13 @@ class XactimateRoughDraftParser:
             "_skip_spans": []
         }
 
+        # --- summaries pre-pass (like recaps) ---
+        summaries, sum_spans = self._prepass_summaries(all_lines)
+        if summaries:
+            result["summaries_by_coverage"] = summaries
+        if sum_spans:
+            result["_skip_spans"].extend(sum_spans)
+
         i, n = 0, len(all_lines)
         while i < n:
             line = (all_lines[i] or "").strip()
@@ -1458,11 +1773,23 @@ class XactimateRoughDraftParser:
                 result["coverage"], i = self._parse_coverage_rows(all_lines, i, result["coverage"])
                 continue
 
-            # Summary for <Coverage>
-            m = re.match(SUMMARY_FOR_HDR, line)
-            if m:
-                (cov_name, kv), i = self._parse_summary_block(all_lines, i)
-                result["summaries_by_coverage"][cov_name] = kv
+            # Summary for <Coverage> (handled by _prepass_summaries). Advance cursor to avoid re-parsing.
+            if re.match(SUMMARY_FOR_HDR, line):
+                (_, _), i = self._parse_summary_section(all_lines, i)
+                continue
+
+            # Trade Summary (only set key if a real section is parsed)
+            if re.match(r"^\s*Trade\s+Summary\s*$", line, re.IGNORECASE):
+                ts_obj, i2 = self._parse_trade_summary_section(all_lines, i)
+                if ts_obj:
+                    # Only add the key when section truly exists
+                    result["trade_summary"] = {
+                        "totals": ts_obj.get("totals"),
+                        "line_items": ts_obj.get("line_items"),
+                    }
+                    if ts_obj.get("_span"):
+                        result["_skip_spans"].append(ts_obj["_span"])
+                i = i2
                 continue
 
             # Recap of Taxes, Overhead and Profit
@@ -1492,8 +1819,6 @@ class XactimateRoughDraftParser:
                         else:
                             result["recap_by_category"][k] = v
                 # best-effort span detection for category section as well
-                # (Use the same helper used by room to compute bounds)
-                # NOTE: harmless if header repeats; bounds routine collapses consecutive headers.
                 cat_hdr = re.compile(r"^\s*Recap\s+by\s+Category\s*$", re.IGNORECASE)
                 cat_stop = [
                     re.compile(r"^\s*Recap\s+by\s+Room\s*$", re.IGNORECASE),
@@ -1509,7 +1834,15 @@ class XactimateRoughDraftParser:
 
             i += 1
 
+        # If trade summary key was never set (no section found), nothing to remove.
+        # If it was set but empty (shouldn't happen with parser guard), prune it just in case.
+        if "trade_summary" in result:
+            ts = result["trade_summary"]
+            if not ts or (not ts.get("line_items") and not ts.get("totals")):
+                del result["trade_summary"]
+
         return result
+
 
     # find section bounds used by recap-by-room
     def _find_section_bounds(self, all_lines: List[str],

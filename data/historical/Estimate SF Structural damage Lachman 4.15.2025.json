@@ -23,39 +23,32 @@
     "additional_charges": null
   },
   "sections": [],
-  "grand_total_areas": null,
+  "grand_total_areas": {
+    "sf_walls": "10,794.02",
+    "sf_ceiling": "3,802.98",
+    "sf_walls_and_ceiling": "14,597.00",
+    "sf_floor": "3,524.15",
+    "lf_floor_perimeter": "1,177.57",
+    "lf_ceil_perimeter": "1,372.35",
+    "floor_area": "3,524.15",
+    "total_area": "3,983.96",
+    "interior_wall_area": "7,181.46",
+    "exterior_wall_area": "6,691.72",
+    "exterior_perimeter_of_walls": "869.63",
+    "surface_area": "5,033.71",
+    "total_perimeter_length": "516.08"
+  },
   "coverage": {
     "rows": [],
     "totals": null
   },
   "recaps_and_summaries": {
     "summaries_by_coverage": {
-      "Dwelling Estimated cost to repair or replace": {},
-      "Coverage A - Dwelling - 39 Smoke": {
-        "Line Item Total": "69,914.45",
-        "Material Sales Tax": "674.52",
-        "Replacement Cost Value": "70,588.97"
-      },
-      "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and": {
-        "Line Item Total": "3,572.27",
-        "Material Sales Tax": "160.81",
-        "Replacement Cost Value": "3,733.08"
-      },
-      "Coverage A - Dwelling Extension - 39 Smoke": {
-        "Line Item Total": "1,262.69",
-        "Material Sales Tax": "1.43",
-        "Replacement Cost Value": "1,264.12"
-      },
-      "Coverage A - Dwelling - 35 Windstorm and Hail": {
-        "Line Item Total": "827.11",
-        "Material Sales Tax": "30.41",
-        "Replacement Cost Value": "857.52"
-      },
-      "Coverage A - Dwelling - 33 Fire, Lightning, &": {
+      "Dwelling Estimated cost to repair or replace": {
         "Line Item Total": "10,836.87",
-        "California Lumber Assessment Fee": "11.59",
         "Material Sales Tax": "441.08",
-        "Replacement Cost Value": "11,289.54"
+        "Replacement Cost Value": "11,289.54",
+        "California Lumber Assessment Fee": "11.59"
       }
     },
     "recap_tax_op": {
@@ -289,6 +282,812 @@
               "coverage": "Coverage A - Dwelling - 39 Smoke",
               "pct": 100.0,
               "amount": "509.11"
+            }
+          ]
+        }
+      ]
+    },
+    "trade_summary": {
+      "totals": {
+        "repl_cost_total": "87,721.64",
+        "acv": "87,721.64",
+        "non_rec_deprec": "0.00",
+        "max_addl_amt_avail": "0.00"
+      },
+      "line_items": [
+        {
+          "trade_code": "CLN",
+          "trade": "CLEANING",
+          "total": {
+            "repl_cost_total": "55,291.44",
+            "acv": "55,291.44",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "Clean {V}",
+              "line_item_qty": "10,912.33SF",
+              "repl_cost_total": "6,230.35",
+              "acv": "6,230.35",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean {V}",
+              "line_item_qty": "9,387.72SF",
+              "repl_cost_total": "5,172.17",
+              "acv": "5,172.17",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean light bar",
+              "line_item_qty": "6.00EA",
+              "repl_cost_total": "178.74",
+              "acv": "178.74",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean bathroom fan",
+              "line_item_qty": "3.00EA",
+              "repl_cost_total": "136.59",
+              "acv": "136.59",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Cleaning (Bid Item)",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "14,137.76",
+              "acv": "14,137.76",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean door - bypass set (per side)",
+              "line_item_qty": "2.00EA",
+              "repl_cost_total": "46.68",
+              "acv": "46.68",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean electrical breaker panel",
+              "line_item_qty": "2.00EA",
+              "repl_cost_total": "34.36",
+              "acv": "34.36",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean cold air return cover",
+              "line_item_qty": "2.00EA",
+              "repl_cost_total": "28.18",
+              "acv": "28.18",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean closet organizer and rod",
+              "line_item_qty": "6.00EA",
+              "repl_cost_total": "365.02",
+              "acv": "365.02",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean closet shelf and rod per lineal foot",
+              "line_item_qty": "2.45LF",
+              "repl_cost_total": "4.25",
+              "acv": "4.25",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean countertop",
+              "line_item_qty": "178.34SF",
+              "repl_cost_total": "212.58",
+              "acv": "212.58",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean ductwork - Interior (PER",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "40.75",
+              "acv": "40.75",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean door (per side)",
+              "line_item_qty": "8.00EA",
+              "repl_cost_total": "92.88",
+              "acv": "92.88",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean door hardware",
+              "line_item_qty": "43.00EA",
+              "repl_cost_total": "461.84",
+              "acv": "461.84",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean dishwasher - exterior",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "25.34",
+              "acv": "25.34",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean floor",
+              "line_item_qty": "1,963.30SF",
+              "repl_cost_total": "1,356.53",
+              "acv": "1,356.53",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean sink faucet",
+              "line_item_qty": "8.00EA",
+              "repl_cost_total": "125.20",
+              "acv": "125.20",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean floor - tile",
+              "line_item_qty": "1,548.74SF",
+              "repl_cost_total": "1,481.60",
+              "acv": "1,481.60",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean cabinetry - full height - inside and",
+              "line_item_qty": "5.66LF",
+              "repl_cost_total": "235.75",
+              "acv": "235.75",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean light fixture - fluorescent",
+              "line_item_qty": "4.00EA",
+              "repl_cost_total": "91.18",
+              "acv": "91.18",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean door - French (per side)",
+              "line_item_qty": "29.00EA",
+              "repl_cost_total": "1,045.16",
+              "acv": "1,045.16",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean door - French double door set (per",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "72.03",
+              "acv": "72.03",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean furnace - forced air - Large",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "134.28",
+              "acv": "134.28",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean range hood",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "27.42",
+              "acv": "27.42",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "HEPA Vacuuming - Detailed - (PER SF)",
+              "line_item_qty": "14,424.37SF",
+              "repl_cost_total": "11,683.76",
+              "acv": "11,683.76",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean light fixture",
+              "line_item_qty": "5.00EA",
+              "repl_cost_total": "85.69",
+              "acv": "85.69",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean cabinetry - lower - inside and out",
+              "line_item_qty": "62.40LF",
+              "repl_cost_total": "1,488.27",
+              "acv": "1,488.27",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean mirror",
+              "line_item_qty": "61.00SF",
+              "repl_cost_total": "70.20",
+              "acv": "70.20",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean overhead (garage) door opener",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "42.65",
+              "acv": "42.65",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean door / window opening (per side)",
+              "line_item_qty": "58.00EA",
+              "repl_cost_total": "1,219.97",
+              "acv": "1,219.97",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean outlet or switch",
+              "line_item_qty": "3.00EA",
+              "repl_cost_total": "16.83",
+              "acv": "16.83",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean patio door (sliding glass) (per side)",
+              "line_item_qty": "8.00EA",
+              "repl_cost_total": "507.19",
+              "acv": "507.19",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean with pressure/chemical spray",
+              "line_item_qty": "411.15SF",
+              "repl_cost_total": "210.08",
+              "acv": "210.08",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean with pressure/chemical spray",
+              "line_item_qty": "431.12SF",
+              "repl_cost_total": "220.28",
+              "acv": "220.28",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean with pressure/chemical spray",
+              "line_item_qty": "670.56SF",
+              "repl_cost_total": "342.63",
+              "acv": "342.63",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean with pressure/chemical spray -",
+              "line_item_qty": "405.24SF",
+              "repl_cost_total": "207.05",
+              "acv": "207.05",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean with pressure/chemical spray- Patio",
+              "line_item_qty": "733.96SF",
+              "repl_cost_total": "375.02",
+              "acv": "375.02",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean with pressure/chemical spray-",
+              "line_item_qty": "1,144.00SF",
+              "repl_cost_total": "584.53",
+              "acv": "584.53",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean recessed light fixture",
+              "line_item_qty": "116.00EA",
+              "repl_cost_total": "1,990.38",
+              "acv": "1,990.38",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean register - heat / AC",
+              "line_item_qty": "14.00EA",
+              "repl_cost_total": "127.82",
+              "acv": "127.82",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean range - exterior",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "51.07",
+              "acv": "51.07",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean fireplace screen",
+              "line_item_qty": "2.00EA",
+              "repl_cost_total": "97.54",
+              "acv": "97.54",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean shower door",
+              "line_item_qty": "4.00EA",
+              "repl_cost_total": "115.20",
+              "acv": "115.20",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean soffit - wood",
+              "line_item_qty": "145.17SF",
+              "repl_cost_total": "87.24",
+              "acv": "87.24",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean shelving - wood",
+              "line_item_qty": "22.12LF",
+              "repl_cost_total": "32.18",
+              "acv": "32.18",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean roof window or skylight",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "54.67",
+              "acv": "54.67",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean smoke/carbon monoxide detector",
+              "line_item_qty": "7.00EA",
+              "repl_cost_total": "70.84",
+              "acv": "70.84",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean sink",
+              "line_item_qty": "8.00EA",
+              "repl_cost_total": "168.27",
+              "acv": "168.27",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean shower",
+              "line_item_qty": "3.00EA",
+              "repl_cost_total": "210.36",
+              "acv": "210.36",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean towel bar",
+              "line_item_qty": "2.00EA",
+              "repl_cost_total": "22.76",
+              "acv": "22.76",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean toilet",
+              "line_item_qty": "3.00EA",
+              "repl_cost_total": "106.05",
+              "acv": "106.05",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean toilet seat",
+              "line_item_qty": "3.00EA",
+              "repl_cost_total": "22.86",
+              "acv": "22.86",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean toilet paper dispenser",
+              "line_item_qty": "3.00EA",
+              "repl_cost_total": "34.20",
+              "acv": "34.20",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean thermostat",
+              "line_item_qty": "6.00EA",
+              "repl_cost_total": "124.14",
+              "acv": "124.14",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean tub / shower faucet",
+              "line_item_qty": "4.00EA",
+              "repl_cost_total": "91.09",
+              "acv": "91.09",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean tub",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "34.19",
+              "acv": "34.19",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean cabinetry - upper - inside and out",
+              "line_item_qty": "39.41LF",
+              "repl_cost_total": "939.94",
+              "acv": "939.94",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean cabinetry - upper - top of cabinet",
+              "line_item_qty": "39.41LF",
+              "repl_cost_total": "917.48",
+              "acv": "917.48",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean vanity - inside and out",
+              "line_item_qty": "27.51LF",
+              "repl_cost_total": "587.90",
+              "acv": "587.90",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean window unit (per side) 10 - 20 SF",
+              "line_item_qty": "17.00EA",
+              "repl_cost_total": "414.82",
+              "acv": "414.82",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean window unit (per side) 3 - 9 SF",
+              "line_item_qty": "9.00EA",
+              "repl_cost_total": "153.64",
+              "acv": "153.64",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Clean exterior door (per side)",
+              "line_item_qty": "2.00EA",
+              "repl_cost_total": "46.01",
+              "acv": "46.01",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "CON",
+          "trade": "CONTENT MANIPULATION",
+          "total": {
+            "repl_cost_total": "432.39",
+            "acv": "432.39",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "Content Manipulation charge - per hour",
+              "line_item_qty": "7.00HR",
+              "repl_cost_total": "432.39",
+              "acv": "432.39",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "DMO",
+          "trade": "GENERAL DEMOLITION",
+          "total": {
+            "repl_cost_total": "200.79",
+            "acv": "200.79",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "Haul debris - per pickup truck load -",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "200.79",
+              "acv": "200.79",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "DOR",
+          "trade": "DOORS",
+          "total": {
+            "repl_cost_total": "1,852.89",
+            "acv": "1,852.89",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "R&R Overhead door & hardware - 16' x 7'",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "1,852.89",
+              "acv": "1,852.89",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "ELS",
+          "trade": "ELECTRICAL - SPECIAL SYSTEMS",
+          "total": {
+            "repl_cost_total": "857.52",
+            "acv": "857.52",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "R&R Solar electric panel - up to 200 watt",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "857.52",
+              "acv": "857.52",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "EQC",
+          "trade": "MISC. EQUIPMENT - COMMERCIAL",
+          "total": {
+            "repl_cost_total": "2,354.42",
+            "acv": "2,354.42",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "R&R Artificial grass / turf",
+              "line_item_qty": "120.00SF",
+              "repl_cost_total": "2,354.42",
+              "acv": "2,354.42",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "FCT",
+          "trade": "FLOOR COVERING - CERAMIC TILE",
+          "total": {
+            "repl_cost_total": "2,425.34",
+            "acv": "2,425.34",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "R&R Tile floor covering - High grade",
+              "line_item_qty": "100.00SF",
+              "repl_cost_total": "2,425.34",
+              "acv": "2,425.34",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "FEN",
+          "trade": "FENCING",
+          "total": {
+            "repl_cost_total": "4,600.75",
+            "acv": "4,600.75",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "Wood fence 5'- 6' high - cedar or equal",
+              "line_item_qty": "70.00LF",
+              "repl_cost_total": "4,600.75",
+              "acv": "4,600.75",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "HMR",
+          "trade": "HAZARDOUS MATERIAL REMEDIATION",
+          "total": {
+            "repl_cost_total": "4,028.12",
+            "acv": "4,028.12",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "Equipment setup, take down, and",
+              "line_item_qty": "5.00HR",
+              "repl_cost_total": "475.00",
+              "acv": "475.00",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Add for HEPA filter (for negative air",
+              "line_item_qty": "1.75EA",
+              "repl_cost_total": "412.74",
+              "acv": "412.74",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Carbon vapor filter (for air scrubber) - 16\"",
+              "line_item_qty": "7.00EA",
+              "repl_cost_total": "584.68",
+              "acv": "584.68",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Negative air fan/Air scrubber (24 hr period)",
+              "line_item_qty": "35.00DA",
+              "repl_cost_total": "2,555.70",
+              "acv": "2,555.70",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "INS",
+          "trade": "INSULATION",
+          "total": {
+            "repl_cost_total": "10,897.08",
+            "acv": "10,897.08",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "R&R Batt insulation - 12\" - R38 - unfaced",
+              "line_item_qty": "3,527.02SF",
+              "repl_cost_total": "10,897.08",
+              "acv": "10,897.08",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "LND",
+          "trade": "LANDSCAPING",
+          "total": {
+            "repl_cost_total": "1,378.66",
+            "acv": "1,378.66",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "Plants - shrubs - deciduous - 5 gallon",
+              "line_item_qty": "3.00EA",
+              "repl_cost_total": "320.50",
+              "acv": "320.50",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Plants - shrubs - evergreen - 5 gallon",
+              "line_item_qty": "8.00EA",
+              "repl_cost_total": "1,058.16",
+              "acv": "1,058.16",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "POL",
+          "trade": "SWIMMING POOLS & SPAS",
+          "total": {
+            "repl_cost_total": "2,893.13",
+            "acv": "2,893.13",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "Swimming Pool - General Laborer - per",
+              "line_item_qty": "8.00HR",
+              "repl_cost_total": "494.16",
+              "acv": "494.16",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "R&R Swimming pool pump, 2 hp",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "2,398.97",
+              "acv": "2,398.97",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            }
+          ]
+        },
+        {
+          "trade_code": "TIL",
+          "trade": "TILE",
+          "total": {
+            "repl_cost_total": "509.11",
+            "acv": "509.11",
+            "non_rec_deprec": "0.00",
+            "max_addl_amt_avail": "0.00"
+          },
+          "items": [
+            {
+              "description": "Tile / Cultured Marble - General Laborer -",
+              "line_item_qty": "3.00HR",
+              "repl_cost_total": "185.31",
+              "acv": "185.31",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
+            },
+            {
+              "description": "Tile / marble labor minimum",
+              "line_item_qty": "1.00EA",
+              "repl_cost_total": "323.80",
+              "acv": "323.80",
+              "non_rec_deprec": "0.00",
+              "max_addl_amt_avail": "0.00"
             }
           ]
         }
