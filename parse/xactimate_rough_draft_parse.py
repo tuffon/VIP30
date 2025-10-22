@@ -71,6 +71,13 @@ METADATA_PATTERNS = {
     'lf_floor_perimeter': r'([0-9,]+\.[0-9]+)\s+LF\s+Floor\s+Perimeter',
     'lf_ceil_perimeter': r'([0-9,]+\.[0-9]+)\s+LF\s+Ceil\.\s+Perimeter',
 }
+AREA_SUMMARY_LABELS = [
+    ("Surface Area", "surface_area"),
+    ("Number of Squares", "number_of_squares"),
+    ("Total Perimeter Length", "total_perimeter_length"),
+    ("Total Perimeter", "total_perimeter"),
+    ("Perimeter Length", "perimeter_length"),
+]
 DOOR_PATTERN = r'Door\s+([\d\'\"\s]+[Xx][\d\'\"\s]+)\s+Opens\s+into\s+([A-Z_0-9]+)'
 MISSING_WALL_PATTERN = r'Missing\s+Wall\s+([\d\'\"\s/]+[Xx][\d\'\"\s]+)\s+Opens\s+into\s+([A-Z_0-9]+)'
 TOTALS_PATTERN = r'^Totals?:'
@@ -189,6 +196,32 @@ def is_page_header(line: str, header_patterns: List[str]) -> bool:
     if re.match(SINGLE_PAGE_NUMBER_PATTERN, line): return True
     if re.match(PAGE_NUMBER_PATTERN, line): return True
     return bool(header_patterns and line in header_patterns)
+
+
+def _format_metric_number(value: str) -> str:
+    try:
+        num = float((value or '').replace(',', ''))
+    except (TypeError, ValueError):
+        return (value or '').strip()
+    if abs(num - round(num)) < 1e-6:
+        return f"{int(round(num)):,d}"
+    return f"{num:,.2f}"
+
+
+def _is_footer_line(line: str) -> bool:
+    if not line:
+        return False
+    s = line.lower()
+    return any(keyword in s for keyword in [
+        "apex public adjusters",
+        "suite",
+        "brand blvd",
+        "www.",
+        "phone",
+        "fax",
+        "claim number",
+        "policy number"
+    ])
 
 def detect_page_header_pattern(pdf_path: str) -> List[str]:
     header_lines: List[str] = []
@@ -587,6 +620,8 @@ class XactimateRoughDraftParser:
             md = self._extract_metadata_from_line(s)
             if md:
                 metadata = self._merge_metadata(metadata, md)
+                if area is None and metadata.get('area'):
+                    area = metadata.get('area')
 
             i -= 1
 
@@ -654,6 +689,7 @@ class XactimateRoughDraftParser:
             "calc": "",
             "qty": qty_val,
             "unit": unit,
+            "price": format_dollar_amount(_money_to_float(price)),
             "item_codes": [],
             "reset": None, "remove": None, "replace": None,
             "tax": format_dollar_amount(_money_to_float(tax)) if "TAX" in (profile.get("columns") or []) else None,
@@ -687,6 +723,54 @@ class XactimateRoughDraftParser:
         flags = profile.get("apex_flags") or TableColumns(False, False, False)
         # Reuse your existing _parse_totals_line by faking a TableColumns instance
         return self._parse_totals_line(s, flags)
+
+    def _normalize_line_item_keys(self, item: dict, columns: List[str]) -> dict:
+        if not item:
+            return item
+        if not columns:
+            return dict(item)
+
+        normalized: Dict[str, object] = {}
+        synonyms = {
+            'quantity': ['qty'],
+            'qty': ['quantity'],
+            'total': ['rcv'],
+            'rcv': ['total'],
+            'oandp': ['op'],
+        }
+
+        for column in columns:
+            key = column.lower().replace("&", "and").replace(".", "").replace(" ", "_")
+            candidates = [key]
+            for alias in synonyms.get(key, []):
+                if alias not in candidates:
+                    candidates.append(alias)
+
+            value = None
+            for cand in candidates:
+                if cand in item:
+                    value = item[cand]
+                    break
+            normalized[key] = value
+
+        for extra_key in ('type', 'line_number'):
+            if extra_key in item:
+                normalized[extra_key] = item[extra_key]
+
+        if 'unit' in item and ('unit' not in normalized or normalized['unit'] in (None, '')):
+            normalized['unit'] = item['unit']
+
+        if 'item_codes' in item and 'item_codes' not in normalized:
+            normalized['item_codes'] = item['item_codes']
+
+        if 'total_note' in item and 'total_note' not in normalized:
+            normalized['total_note'] = item['total_note']
+
+        notes_val = item.get('notes')
+        if notes_val:
+            normalized['notes'] = notes_val
+
+        return normalized
 
     # ---------- core parsing (from provided full_lines) ----------
     def _parse_document_from_lines(self, full_lines: List[str], skip_mask: Optional[List[bool]] = None) -> tuple:
@@ -727,26 +811,39 @@ class XactimateRoughDraftParser:
                 # If a section is OPEN and we see another header BEFORE its Totals,
                 # treat as a page-wrap/continuation: just advance and keep appending items.
                 if current_section is not None:
-                    # swallow header and move on
-                    i += consumed
-                    # allow a few "line item header" banner rows like --- Walls --- right after wrapped header
-                    while i < L:
-                        t = (lines[i] or "").strip()
-                        if not t or is_page_header(t, []) or is_diagram_artifact(t):
-                            i += 1; continue
-                        is_hdr, _txt = is_line_item_header(t)
-                        if is_hdr:
-                            current_section['line_items'].append({'type': 'header', 'text': _txt})
-                            i += 1
-                            continue
-                        # stop banner window when we hit a non-header/non-noise
-                        break
-                    continue
+                    prev_cols = (current_section.get("_profile") or {}).get("columns", [])
+                    new_cols = profile.get("columns", [])
+                    if prev_cols == new_cols:
+                        # same table layout → continuation
+                        i += consumed
+                        # allow a few "line item header" banner rows like --- Walls --- right after wrapped header
+                        while i < L:
+                            t = (lines[i] or "").strip()
+                            if not t or is_page_header(t, []) or is_diagram_artifact(t):
+                                i += 1; continue
+                            is_hdr, _txt = is_line_item_header(t)
+                            if is_hdr:
+                                current_section['line_items'].append({'type': 'header', 'text': _txt})
+                                i += 1
+                                continue
+                            # stop banner window when we hit a non-header/non-noise
+                            break
+                        continue
+                    else:
+                        if current_line_item and collecting_notes:
+                            columns = (current_section.get("_profile") or {}).get("columns", [])
+                            normalized_item = self._normalize_line_item_keys(current_line_item, columns)
+                            current_section['line_items'].append(normalized_item)
+                        current_line_item = None
+                        collecting_notes = False
+                        current_section.pop("_profile", None)
+                        sections.append(current_section)
+                        current_section = None
+                        # reopen with new context below
 
                 # 2) Open a NEW section: backtrack to collect context
                 ctx = self.backtrack_section_context(lines, i)
-                if ctx.get("area"):
-                    current_area = ctx["area"]
+                current_area = ctx.get("area")
 
                 current_section = {
                     "section_name": ctx["section_name"],
@@ -756,7 +853,7 @@ class XactimateRoughDraftParser:
                     "section_totals": {},
                     "_profile": profile
                 }
-                if current_area:
+                if current_area and 'area' not in current_section["metadata"]:
                     # put area either top-level or inside metadata; here we choose metadata
                     current_section["metadata"]["area"] = current_area
 
@@ -787,7 +884,9 @@ class XactimateRoughDraftParser:
             if re.match(r"^Totals?:", s, re.IGNORECASE):
                 # flush pending header-notes into the last item
                 if current_line_item and collecting_notes:
-                    current_section['line_items'].append(current_line_item)
+                    columns = (current_section.get("_profile") or {}).get("columns", [])
+                    normalized_item = self._normalize_line_item_keys(current_line_item, columns)
+                    current_section['line_items'].append(normalized_item)
                     current_line_item = None
                     collecting_notes = False
 
@@ -806,7 +905,9 @@ class XactimateRoughDraftParser:
             is_hdr, _txt = is_line_item_header(s)
             if is_hdr:
                 if current_line_item and collecting_notes:
-                    current_section['line_items'].append(current_line_item)
+                    columns = (current_section.get("_profile") or {}).get("columns", [])
+                    normalized_item = self._normalize_line_item_keys(current_line_item, columns)
+                    current_section['line_items'].append(normalized_item)
                     current_line_item = None
                     collecting_notes = False
                 current_section['line_items'].append({'type': 'header', 'text': _txt})
@@ -821,8 +922,11 @@ class XactimateRoughDraftParser:
             if ptype == "statefarm":
                 parsed = self.parse_statefarm_row(s, prof)
                 if parsed:
+                    parsed = self._normalize_line_item_keys(parsed, prof.get("columns", []))
                     if current_line_item and collecting_notes:
-                        current_section['line_items'].append(current_line_item)
+                        columns = (current_section.get("_profile") or {}).get("columns", [])
+                        normalized_item = self._normalize_line_item_keys(current_line_item, columns)
+                        current_section['line_items'].append(normalized_item)
                         current_line_item = None
                     current_section['line_items'].append(parsed)
                     collecting_notes = True
@@ -834,7 +938,9 @@ class XactimateRoughDraftParser:
                 if is_line_item(s):
                     # close previous pending item
                     if current_line_item and collecting_notes:
-                        current_section['line_items'].append(current_line_item)
+                        columns = (current_section.get("_profile") or {}).get("columns", [])
+                        normalized_item = self._normalize_line_item_keys(current_line_item, columns)
+                        current_section['line_items'].append(normalized_item)
                         current_line_item = None
                         collecting_notes = False
 
@@ -855,6 +961,7 @@ class XactimateRoughDraftParser:
                             'tax': None, 'op': None,
                             'total': None, 'total_note': None, 'notes': ''
                         }
+                        current_line_item = self._normalize_line_item_keys(current_line_item, prof.get("columns", []))
                     i += 1
                     continue
 
@@ -870,8 +977,9 @@ class XactimateRoughDraftParser:
             # Notes accumulation for both profiles
             if current_line_item and collecting_notes:
                 # skip obvious noise
-                if not is_page_header(s, []) and not is_diagram_artifact(s):
-                    current_line_item['notes'] = (current_line_item.get('notes') + ' ' + s).strip()
+                if not is_page_header(s, []) and not is_diagram_artifact(s) and not _is_footer_line(s):
+                    existing_notes = current_line_item.get('notes') or ''
+                    current_line_item['notes'] = (existing_notes + ' ' + s).strip()
                 i += 1
                 continue
 
@@ -882,7 +990,9 @@ class XactimateRoughDraftParser:
         # append what we have (rare, but safer than dropping)
         if current_section is not None:
             if current_line_item and collecting_notes:
-                current_section['line_items'].append(current_line_item)
+                columns = (current_section.get("_profile") or {}).get("columns", [])
+                normalized_item = self._normalize_line_item_keys(current_line_item, columns)
+                current_section['line_items'].append(normalized_item)
             current_section.pop("_profile", None)
             sections.append(current_section)
 
@@ -1037,13 +1147,60 @@ class XactimateRoughDraftParser:
         return lines
 
     # ----- metadata helpers -----
+    def _extract_area_summary(self, line: str) -> Tuple[Optional[str], Dict[str, str]]:
+        cleaned = re.sub(r"\s+", " ", (line or "").replace("\u00A0", " ").strip())
+        if not cleaned:
+            return None, {}
+
+        segments: List[Tuple[int, str]] = []
+        values: Dict[str, str] = {}
+        seen_keys = set()
+
+        for label, key in AREA_SUMMARY_LABELS:
+            pattern = rf'([0-9,]+(?:\.[0-9]+)?)\s+({re.escape(label)})'
+            for match in re.finditer(pattern, cleaned, re.IGNORECASE):
+                if key in seen_keys:
+                    continue
+                seen_keys.add(key)
+                num_str = match.group(1)
+                label_text = label
+                formatted = _format_metric_number(num_str)
+                values[key] = formatted
+                segments.append((match.start(), f"{formatted} {label_text}".strip()))
+
+        if not segments:
+            return None, values
+
+        segments.sort(key=lambda pair: pair[0])
+        summary = " ".join(seg for _, seg in segments).strip()
+        return summary, values
+
     def _extract_metadata_from_line(self, line: str) -> dict:
+        if not line:
+            return {}
+
+        lowered = line.lower()
+        if any(keyword in lowered for keyword in ("totals", "recap", "summary", "coverage", "page:")):
+            return {}
+
         md: Dict[str, object] = {}
-        areas: Dict[str, str] = {}
+        summary_text, summary_values = self._extract_area_summary(line)
+        if summary_text:
+            md['area'] = summary_text
+        if summary_values:
+            areas = md.setdefault('areas', {})
+            for key, value in summary_values.items():
+                areas[key] = value
+
+        area_matches = []
         for key, pat in METADATA_PATTERNS.items():
             m = re.search(pat, line)
-            if m: areas[key] = format_dollar_amount(_money_to_float(m.group(1)))
-        if areas: md['areas'] = areas
+            if m:
+                area_matches.append((key, format_dollar_amount(_money_to_float(m.group(1)))))
+
+        if len(area_matches) == 1:
+            key, value = area_matches[0]
+            md.setdefault('areas', {})[key] = value
 
         doors = [{'dimensions': m.group(1).strip(), 'opens_into': m.group(2).strip()}
                  for m in re.finditer(DOOR_PATTERN, line, re.IGNORECASE)]
@@ -1058,7 +1215,15 @@ class XactimateRoughDraftParser:
     def _merge_metadata(self, base: dict, new: dict) -> dict:
         for k, v in new.items():
             if k == 'areas':
-                base.setdefault('areas', {}).update(v)
+                if not isinstance(v, dict):
+                    continue
+                base.setdefault('areas', {})
+                for area_key, value in v.items():
+                    if area_key not in base['areas'] or base['areas'][area_key] != value:
+                        base['areas'][area_key] = value
+            elif k == 'area':
+                if v and not base.get('area'):
+                    base['area'] = v
             elif k in ('doors', 'missing_walls'):
                 base.setdefault(k, []).extend(v)
             else:
