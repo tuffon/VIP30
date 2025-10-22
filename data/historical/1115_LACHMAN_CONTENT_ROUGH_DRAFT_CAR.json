@@ -30,8 +30,10 @@
   },
   "sections": [
     {
-      "section_name": "Out",
-      "metadata": {},
+      "section_name": "Pack-Out",
+      "metadata": {
+        "area": "1115_LACHMAN_CONTENT"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -164,34 +166,30 @@
       }
     },
     {
-      "section_name": "Entry/Foyer",
+      "section_name": "Door 3' 1\" X 8' Opens into OFFICE2",
       "metadata": {
-        "height": "10'",
-        "areas": {
-          "sf_walls": "310.67",
-          "sf_ceiling": "86.77",
-          "sf_walls_and_ceiling": "397.44",
-          "sf_floor": "86.77",
-          "sy_flooring": "9.64",
-          "lf_floor_perimeter": "29.83",
-          "lf_ceil_perimeter": "36.00"
-        },
+        "doors": [
+          {
+            "dimensions": "3' 1\" X 8'",
+            "opens_into": "GUEST_BATH"
+          }
+        ],
         "missing_walls": [
           {
             "dimensions": "5' 10\" X 10'",
             "opens_into": "ROOM1"
           }
         ],
-        "doors": [
-          {
-            "dimensions": "3' 1\" X 8'",
-            "opens_into": "GUEST_BATH"
-          },
-          {
-            "dimensions": "3' 1\" X 8'",
-            "opens_into": "OFFICE2"
-          }
-        ]
+        "areas": {
+          "lf_ceil_perimeter": "36.00",
+          "sy_flooring": "9.64",
+          "lf_floor_perimeter": "29.83",
+          "sf_walls_and_ceiling": "397.44",
+          "sf_floor": "86.77",
+          "sf_walls": "310.67",
+          "sf_ceiling": "86.77"
+        },
+        "area": "Door 3' 1\" X 8' Opens into GUEST_BATH"
       },
       "subrooms": [],
       "line_items": [
@@ -265,70 +263,36 @@
       }
     },
     {
-      "section_name": "Office",
+      "section_name": "Missing Wall 16' X 10' Opens into OFFICE2",
       "metadata": {
-        "height": "11'",
         "areas": {
-          "sf_walls": "360.92",
-          "sf_ceiling": "176.67",
-          "sf_walls_and_ceiling": "537.58",
-          "sf_floor": "176.67",
-          "sy_flooring": "19.63",
-          "lf_floor_perimeter": "28.83",
-          "lf_ceil_perimeter": "54.08"
+          "lf_ceil_perimeter": "25.33",
+          "sy_flooring": "4.44",
+          "lf_floor_perimeter": "22.25",
+          "sf_walls_and_ceiling": "217.94",
+          "sf_floor": "39.94",
+          "sf_walls": "178.00",
+          "sf_ceiling": "39.94"
         },
         "doors": [
           {
             "dimensions": "3' 1\" X 8'",
-            "opens_into": "ENTRY_FOYER"
-          },
-          {
-            "dimensions": "3' 1\" X 8'",
-            "opens_into": "GUEST_BATH"
+            "opens_into": "OFFICE2"
           }
-        ]
+        ],
+        "area": "21.42 LF Ceil. Perimeter"
       },
       "subrooms": [
         {
           "subroom_name": "Office Closet (2)",
           "metadata": {
-            "height": "8'",
-            "areas": {
-              "sf_walls": "178.00",
-              "sf_ceiling": "39.94",
-              "sf_walls_and_ceiling": "217.94",
-              "sf_floor": "39.94",
-              "sy_flooring": "4.44",
-              "lf_floor_perimeter": "22.25",
-              "lf_ceil_perimeter": "25.33"
-            },
-            "doors": [
-              {
-                "dimensions": "3' 1\" X 8'",
-                "opens_into": "OFFICE2"
-              }
-            ]
+            "height": "8'"
           }
         },
         {
           "subroom_name": "Offset (1)",
           "metadata": {
-            "height": "10'",
-            "areas": {
-              "sf_walls": "214.17",
-              "sf_ceiling": "43.33",
-              "sf_walls_and_ceiling": "257.50",
-              "sf_floor": "43.33",
-              "sy_flooring": "4.81",
-              "lf_floor_perimeter": "21.42",
-              "lf_ceil_perimeter": "21.42"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "16' X 10'",
-                "opens_into": "OFFICE2"
-              }
-            ]
+            "height": "10'"
           }
         }
       ],
@@ -443,28 +407,24 @@
       }
     },
     {
-      "section_name": "Guest Bath",
+      "section_name": "Door 3' 1\" X 8' Opens into ENTRY_FOYER",
       "metadata": {
-        "height": "8'",
-        "areas": {
-          "sf_walls": "148.67",
-          "sf_ceiling": "49.76",
-          "sf_walls_and_ceiling": "198.42",
-          "sf_floor": "40.93",
-          "sy_flooring": "4.55",
-          "lf_floor_perimeter": "12.00",
-          "lf_ceil_perimeter": "24.75"
-        },
         "doors": [
           {
             "dimensions": "3' 1\" X 8'",
             "opens_into": "OFFICE2"
-          },
-          {
-            "dimensions": "3' 1\" X 8'",
-            "opens_into": "ENTRY_FOYER"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "24.75",
+          "sy_flooring": "4.55",
+          "lf_floor_perimeter": "12.00",
+          "sf_walls_and_ceiling": "198.42",
+          "sf_floor": "40.93",
+          "sf_walls": "148.67",
+          "sf_ceiling": "49.76"
+        },
+        "area": "Door 3' 1\" X 8' Opens into OFFICE2"
       },
       "subrooms": [],
       "line_items": [
@@ -518,83 +478,42 @@
       }
     },
     {
-      "section_name": "Hallway",
+      "section_name": "Missing Wall 4' 10\" X 8' Opens into ROOM1",
       "metadata": {
-        "height": "11' 6\"",
-        "areas": {
-          "sf_walls": "710.29",
-          "sf_ceiling": "274.19",
-          "sf_walls_and_ceiling": "984.48",
-          "sf_floor": "274.19",
-          "sy_flooring": "30.47",
-          "lf_floor_perimeter": "48.17",
-          "lf_ceil_perimeter": "117.08"
-        },
-        "missing_walls": [
+        "doors": [
           {
-            "dimensions": "7' 4\" X 11' 6\"",
-            "opens_into": "OFFSET_2"
+            "dimensions": "3' 1\" X 6' 8\"",
+            "opens_into": "MASTER_BEDRO"
           },
           {
-            "dimensions": "5' X 11' 6\"",
-            "opens_into": "FIREPLACE"
+            "dimensions": "3' X 7'",
+            "opens_into": "LAUNDRY_ROOM"
           },
           {
-            "dimensions": "31' X 11' 6\"",
-            "opens_into": "OFFSET_1"
+            "dimensions": "3' X 7'",
+            "opens_into": "BEDROOM_2"
           },
           {
-            "dimensions": "14' 3 1/2\" X 11' 6\"",
-            "opens_into": "KITCHEN2"
-          },
-          {
-            "dimensions": "7 1/2\" X 11' 6\"",
-            "opens_into": "KITCHEN2"
-          },
-          {
-            "dimensions": "5' 10\" X 11' 6\"",
-            "opens_into": "ENTRY_FOYER"
+            "dimensions": "3' X 7'",
+            "opens_into": "BEDROOM_1"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "45.71",
+          "sy_flooring": "13.41",
+          "lf_floor_perimeter": "33.63",
+          "sf_walls_and_ceiling": "402.84",
+          "sf_floor": "120.73",
+          "sf_walls": "282.11",
+          "sf_ceiling": "120.73"
+        },
+        "area": "Door 3' X 7' Opens into LAUNDRY_ROOM"
       },
       "subrooms": [
         {
           "subroom_name": "Hallway (1)",
           "metadata": {
-            "height": "8'",
-            "areas": {
-              "sf_walls": "282.11",
-              "sf_ceiling": "120.73",
-              "sf_walls_and_ceiling": "402.84",
-              "sf_floor": "120.73",
-              "sy_flooring": "13.41",
-              "lf_floor_perimeter": "33.63",
-              "lf_ceil_perimeter": "45.71"
-            },
-            "doors": [
-              {
-                "dimensions": "3' X 7'",
-                "opens_into": "BEDROOM_1"
-              },
-              {
-                "dimensions": "3' X 7'",
-                "opens_into": "BEDROOM_2"
-              },
-              {
-                "dimensions": "3' X 7'",
-                "opens_into": "LAUNDRY_ROOM"
-              },
-              {
-                "dimensions": "3' 1\" X 6' 8\"",
-                "opens_into": "MASTER_BEDRO"
-              }
-            ],
-            "missing_walls": [
-              {
-                "dimensions": "4' 10\" X 8'",
-                "opens_into": "ROOM1"
-              }
-            ]
+            "height": "8'"
           }
         }
       ],
@@ -709,104 +628,27 @@
       }
     },
     {
-      "section_name": "Living Room/Dining Room",
+      "section_name": "Missing Wall 5' X 9' Opens into LIVING_ROOM_",
       "metadata": {
-        "height": "11'",
-        "areas": {
-          "sf_walls": "338.83",
-          "sf_ceiling": "191.16",
-          "sf_walls_and_ceiling": "529.99",
-          "sf_floor": "191.16",
-          "sy_flooring": "21.24",
-          "lf_floor_perimeter": "27.92",
-          "lf_ceil_perimeter": "43.79"
-        },
         "missing_walls": [
           {
-            "dimensions": "15' 10 1/2\" X 11'",
-            "opens_into": "OFFSET_1"
-          },
-          {
-            "dimensions": "12' 1/2\" X 11'",
-            "opens_into": "LIVING_ROOM_"
+            "dimensions": "5' X 9'",
+            "opens_into": "ROOM1"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "4.50",
+          "sf_walls_and_ceiling": "51.75",
+          "sf_walls": "40.50",
+          "sf_ceiling": "11.25"
+        },
+        "area": "Missing Wall 5' X 9' Opens into ROOM1"
       },
       "subrooms": [
         {
-          "subroom_name": "Offset 1 (2)",
-          "metadata": {
-            "height": "9'",
-            "areas": {
-              "sf_walls": "40.50",
-              "sf_ceiling": "69.75",
-              "sf_walls_and_ceiling": "110.25",
-              "sf_floor": "69.75",
-              "sy_flooring": "7.75",
-              "lf_floor_perimeter": "4.50",
-              "lf_ceil_perimeter": "4.50"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "31' X 9'",
-                "opens_into": "ROOM1"
-              },
-              {
-                "dimensions": "15' 1 1/2\" X 9'",
-                "opens_into": "LIVING_ROOM_"
-              },
-              {
-                "dimensions": "15' 10 1/2\" X 9'",
-                "opens_into": "DINING_ROOM"
-              }
-            ]
-          }
-        },
-        {
-          "subroom_name": "Offset 2 (3)",
-          "metadata": {
-            "height": "9'",
-            "areas": {
-              "sf_walls": "40.50",
-              "sf_ceiling": "16.50",
-              "sf_walls_and_ceiling": "57.00",
-              "sf_floor": "16.50",
-              "sy_flooring": "1.83",
-              "lf_floor_perimeter": "4.50",
-              "lf_ceil_perimeter": "4.50"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "7' 4\" X 9'",
-                "opens_into": "LIVING_ROOM_"
-              },
-              {
-                "dimensions": "7' 4\" X 9'",
-                "opens_into": "ROOM1"
-              }
-            ]
-          }
-        },
-        {
           "subroom_name": "Fireplace (1)",
           "metadata": {
-            "height": "9'",
-            "areas": {
-              "sf_walls": "40.50",
-              "sf_ceiling": "11.25",
-              "sf_walls_and_ceiling": "51.75",
-              "lf_ceil_perimeter": "4.50"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "5' X 9'",
-                "opens_into": "ROOM1"
-              },
-              {
-                "dimensions": "5' X 9'",
-                "opens_into": "LIVING_ROOM_"
-              }
-            ]
+            "height": "9'"
           }
         }
       ],
@@ -961,28 +803,24 @@
       }
     },
     {
-      "section_name": "Kitchen",
+      "section_name": "Missing Wall 14' 3 1/2\" X 10' Opens into ROOM1",
       "metadata": {
-        "height": "Tray",
-        "areas": {
-          "sf_walls": "488.75",
-          "sf_ceiling": "281.97",
-          "sf_walls_and_ceiling": "770.72",
-          "sf_floor": "146.38",
-          "sy_flooring": "16.26",
-          "lf_floor_perimeter": "8.46",
-          "lf_ceil_perimeter": "48.88"
-        },
         "missing_walls": [
           {
             "dimensions": "7 1/2\" X 10'",
             "opens_into": "ROOM1"
-          },
-          {
-            "dimensions": "14' 3 1/2\" X 10'",
-            "opens_into": "ROOM1"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "48.88",
+          "sy_flooring": "16.26",
+          "lf_floor_perimeter": "8.46",
+          "sf_walls_and_ceiling": "770.72",
+          "sf_floor": "146.38",
+          "sf_walls": "488.75",
+          "sf_ceiling": "281.97"
+        },
+        "area": "14' 4\""
       },
       "subrooms": [],
       "line_items": [
@@ -1116,57 +954,24 @@
       }
     },
     {
-      "section_name": "Master Bedroom",
+      "section_name": "Missing Wall 23' 3\" X 9' Opens into MASTER_BEDRO",
       "metadata": {
-        "height": "11' 11\"",
         "areas": {
-          "sf_walls": "567.33",
-          "sf_ceiling": "371.03",
-          "sf_walls_and_ceiling": "938.36",
-          "sf_floor": "371.03",
-          "sy_flooring": "41.23",
-          "lf_floor_perimeter": "34.92",
-          "lf_ceil_perimeter": "78.42"
+          "lf_ceil_perimeter": "26.33",
+          "sy_flooring": "3.98",
+          "lf_floor_perimeter": "26.33",
+          "sf_walls_and_ceiling": "272.84",
+          "sf_floor": "35.84",
+          "sf_walls": "237.00",
+          "sf_ceiling": "35.84"
         },
-        "doors": [
-          {
-            "dimensions": "6' 2\" X 8'",
-            "opens_into": "MASTER_BATH"
-          },
-          {
-            "dimensions": "3' 1\" X 6' 8\"",
-            "opens_into": "HALLWAY"
-          },
-          {
-            "dimensions": "5' X 8'",
-            "opens_into": "M_CLOSET_HI"
-          },
-          {
-            "dimensions": "6' X 8'",
-            "opens_into": "M_CLOSET_HE"
-          }
-        ]
+        "area": "26.33 LF Ceil. Perimeter"
       },
       "subrooms": [
         {
           "subroom_name": "Offset (1)",
           "metadata": {
-            "height": "9'",
-            "areas": {
-              "sf_walls": "237.00",
-              "sf_ceiling": "35.84",
-              "sf_walls_and_ceiling": "272.84",
-              "sf_floor": "35.84",
-              "sy_flooring": "3.98",
-              "lf_floor_perimeter": "26.33",
-              "lf_ceil_perimeter": "26.33"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "23' 3\" X 9'",
-                "opens_into": "MASTER_BEDRO"
-              }
-            ]
+            "height": "9'"
           }
         }
       ],
@@ -1301,28 +1106,24 @@
       }
     },
     {
-      "section_name": "M. Closet His",
+      "section_name": "Door 5' X 8' Opens into MASTER_BEDRO",
       "metadata": {
-        "height": "8'",
-        "areas": {
-          "sf_walls": "234.57",
-          "sf_ceiling": "74.41",
-          "sf_walls_and_ceiling": "308.98",
-          "sf_floor": "74.41",
-          "sy_flooring": "8.27",
-          "lf_floor_perimeter": "29.03",
-          "lf_ceil_perimeter": "35.78"
-        },
         "doors": [
           {
             "dimensions": "1' 9\" X 6' 8\"",
             "opens_into": "SERVER_CLOSE"
-          },
-          {
-            "dimensions": "5' X 8'",
-            "opens_into": "MASTER_BEDRO"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "35.78",
+          "sy_flooring": "8.27",
+          "lf_floor_perimeter": "29.03",
+          "sf_walls_and_ceiling": "308.98",
+          "sf_floor": "74.41",
+          "sf_walls": "234.57",
+          "sf_ceiling": "74.41"
+        },
+        "area": "35.78 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
@@ -1344,7 +1145,7 @@
           "op": null,
           "total": "42.47",
           "total_note": null,
-          "notes": ""
+          "notes": "West Coast Contents West Coast Contents 3299 NorthBlvd. Burbank, CA. 91504 844-WCC-PACK CAL-T0192673 CONTINUED - M. Closet His"
         },
         {
           "type": "line_item",
@@ -1376,24 +1177,18 @@
       }
     },
     {
-      "section_name": "Server Closet",
+      "section_name": "Door 1' 9\" X 6' 8\" Opens into M_CLOSET_HI",
       "metadata": {
-        "height": "8'",
         "areas": {
-          "sf_walls": "52.33",
-          "sf_ceiling": "3.75",
-          "sf_walls_and_ceiling": "56.08",
-          "sf_floor": "3.75",
+          "lf_ceil_perimeter": "8.00",
           "sy_flooring": "0.42",
           "lf_floor_perimeter": "6.25",
-          "lf_ceil_perimeter": "8.00"
+          "sf_walls_and_ceiling": "56.08",
+          "sf_floor": "3.75",
+          "sf_walls": "52.33",
+          "sf_ceiling": "3.75"
         },
-        "doors": [
-          {
-            "dimensions": "1' 9\" X 6' 8\"",
-            "opens_into": "M_CLOSET_HI"
-          }
-        ]
+        "area": "8.00 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
@@ -1447,24 +1242,9 @@
       }
     },
     {
-      "section_name": "M. Closet Hers",
+      "section_name": "CAL-T0192673",
       "metadata": {
-        "height": "8'",
-        "areas": {
-          "sf_walls": "248.91",
-          "sf_ceiling": "86.04",
-          "sf_walls_and_ceiling": "334.94",
-          "sf_floor": "86.04",
-          "sy_flooring": "9.56",
-          "lf_floor_perimeter": "31.11",
-          "lf_ceil_perimeter": "37.11"
-        },
-        "doors": [
-          {
-            "dimensions": "6' X 8'",
-            "opens_into": "MASTER_BEDRO"
-          }
-        ]
+        "area": "844-WCC-PACK"
       },
       "subrooms": [],
       "line_items": [
@@ -1558,24 +1338,18 @@
       }
     },
     {
-      "section_name": "Master Bath",
+      "section_name": "Door 6' 2\" X 8' Opens into MASTER_BEDRO",
       "metadata": {
-        "height": "8'",
         "areas": {
-          "sf_walls": "277.33",
-          "sf_ceiling": "134.79",
-          "sf_walls_and_ceiling": "412.13",
-          "sf_floor": "97.87",
+          "lf_ceil_perimeter": "40.83",
           "sy_flooring": "10.87",
           "lf_floor_perimeter": "23.46",
-          "lf_ceil_perimeter": "40.83"
+          "sf_walls_and_ceiling": "412.13",
+          "sf_floor": "97.87",
+          "sf_walls": "277.33",
+          "sf_ceiling": "134.79"
         },
-        "doors": [
-          {
-            "dimensions": "6' 2\" X 8'",
-            "opens_into": "MASTER_BEDRO"
-          }
-        ]
+        "area": "11' 5\""
       },
       "subrooms": [],
       "line_items": [
@@ -1669,24 +1443,18 @@
       }
     },
     {
-      "section_name": "Laundry Room",
+      "section_name": "Door 3' X 7' Opens into HALLWAY",
       "metadata": {
-        "height": "7'",
         "areas": {
-          "sf_walls": "272.21",
-          "sf_ceiling": "86.02",
-          "sf_walls_and_ceiling": "358.23",
-          "sf_floor": "55.35",
+          "lf_ceil_perimeter": "41.89",
           "sy_flooring": "6.15",
           "lf_floor_perimeter": "19.55",
-          "lf_ceil_perimeter": "41.89"
+          "sf_walls_and_ceiling": "358.23",
+          "sf_floor": "55.35",
+          "sf_walls": "272.21",
+          "sf_ceiling": "86.02"
         },
-        "doors": [
-          {
-            "dimensions": "3' X 7'",
-            "opens_into": "HALLWAY"
-          }
-        ]
+        "area": "41.89 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
@@ -1760,24 +1528,18 @@
       }
     },
     {
-      "section_name": "Bathroom 1",
+      "section_name": "Door 3' X 8' Opens into BEDROOM_2",
       "metadata": {
-        "height": "8' 5\"",
         "areas": {
-          "sf_walls": "337.92",
-          "sf_ceiling": "115.50",
-          "sf_walls_and_ceiling": "453.42",
-          "sf_floor": "76.93",
+          "lf_ceil_perimeter": "43.00",
           "sy_flooring": "8.55",
           "lf_floor_perimeter": "16.08",
-          "lf_ceil_perimeter": "43.00"
+          "sf_walls_and_ceiling": "453.42",
+          "sf_floor": "76.93",
+          "sf_walls": "337.92",
+          "sf_ceiling": "115.50"
         },
-        "doors": [
-          {
-            "dimensions": "3' X 8'",
-            "opens_into": "BEDROOM_2"
-          }
-        ]
+        "area": "43.00 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
@@ -1831,45 +1593,30 @@
       }
     },
     {
-      "section_name": "Bedroom 1",
+      "section_name": "Door 12' X 6' 8\" Opens into BEDROOM_1",
       "metadata": {
-        "height": "10'",
         "areas": {
-          "sf_walls": "499.00",
-          "sf_ceiling": "224.00",
-          "sf_walls_and_ceiling": "723.00",
-          "sf_floor": "224.00",
+          "lf_ceil_perimeter": "60.00",
           "sy_flooring": "24.89",
           "lf_floor_perimeter": "45.00",
-          "lf_ceil_perimeter": "60.00"
+          "sf_walls_and_ceiling": "723.00",
+          "sf_floor": "224.00",
+          "sf_walls": "499.00",
+          "sf_ceiling": "224.00"
         },
         "doors": [
           {
             "dimensions": "3' X 7'",
             "opens_into": "HALLWAY"
           }
-        ]
+        ],
+        "area": "35.83 LF Ceil. Perimeter"
       },
       "subrooms": [
         {
           "subroom_name": "Closet 1 (1)",
           "metadata": {
-            "height": "8'",
-            "areas": {
-              "sf_walls": "206.67",
-              "sf_ceiling": "30.67",
-              "sf_walls_and_ceiling": "237.33",
-              "sf_floor": "30.67",
-              "sy_flooring": "3.41",
-              "lf_floor_perimeter": "23.83",
-              "lf_ceil_perimeter": "35.83"
-            },
-            "doors": [
-              {
-                "dimensions": "12' X 6' 8\"",
-                "opens_into": "BEDROOM_1"
-              }
-            ]
+            "height": "8'"
           }
         }
       ],
@@ -1984,32 +1731,28 @@
       }
     },
     {
-      "section_name": "Bedroom 2",
+      "section_name": "Door 3' X 7' Opens into BEDROOM_2",
       "metadata": {
-        "height": "8'",
         "areas": {
-          "sf_walls": "159.00",
-          "sf_ceiling": "31.43",
-          "sf_walls_and_ceiling": "190.43",
-          "sf_floor": "31.43",
-          "sy_flooring": "3.49",
-          "lf_floor_perimeter": "19.50",
-          "lf_ceil_perimeter": "22.50"
+          "lf_ceil_perimeter": "74.50",
+          "sy_flooring": "38.25",
+          "lf_floor_perimeter": "65.50",
+          "sf_walls_and_ceiling": "874.25",
+          "sf_floor": "344.25",
+          "sf_walls": "530.00",
+          "sf_ceiling": "344.25"
         },
         "doors": [
-          {
-            "dimensions": "3' X 7'",
-            "opens_into": "HALLWAY"
-          },
           {
             "dimensions": "3' X 8'",
             "opens_into": "BATHROOM_1"
           },
           {
             "dimensions": "3' X 7'",
-            "opens_into": "BEDROOM_2"
+            "opens_into": "HALLWAY"
           }
-        ]
+        ],
+        "area": "22.50 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
@@ -2123,14 +1866,12 @@
       }
     },
     {
-      "section_name": "Garage",
+      "section_name": "18' 5\"",
       "metadata": {
-        "height": "9' 3\"",
         "areas": {
-          "sf_walls": "753.38",
-          "sf_ceiling": "409.48",
           "lf_ceil_perimeter": "81.45"
-        }
+        },
+        "area": "17' 8\""
       },
       "subrooms": [],
       "line_items": [
@@ -2225,7 +1966,9 @@
     },
     {
       "section_name": "Cleaning",
-      "metadata": {},
+      "metadata": {
+        "area": "17' 8\""
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -2330,7 +2073,7 @@
           "op": null,
           "total": "611.61",
           "total_note": null,
-          "notes": ""
+          "notes": "West Coast Contents West Coast Contents 3299 NorthBlvd. Burbank, CA. 91504 844-WCC-PACK CAL-T0192673 CONTINUED - Cleaning"
         },
         {
           "type": "line_item",
@@ -2483,7 +2226,9 @@
     },
     {
       "section_name": "Storage Area/Room",
-      "metadata": {},
+      "metadata": {
+        "area": "17' 8\""
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -2539,7 +2284,9 @@
     },
     {
       "section_name": "CAL-T0192673",
-      "metadata": {},
+      "metadata": {
+        "area": "844-WCC-PACK"
+      },
       "subrooms": [],
       "line_items": [
         {

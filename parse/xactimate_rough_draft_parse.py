@@ -114,6 +114,10 @@ RECAP_LINE_PATTERN = r'^([A-Za-z0-9/_\-\.\s\(\),&\']+?)\s+([\d,]+\.\d+)\s+(\d{1,
 RECAP_COVERAGE_SPLIT = r'^Coverage:\s+(.+?)\s+@?\s*(\d{1,3}\.\d{2})%?\s*=\s*([\d,]+\.\d+)$'
 RECAP_SUBTOTAL_PATTERN = r'^(?:Area\s+Subtotal:|O&P Items Subtotal|Non-O&P Items Subtotal|Subtotal of Areas|Total)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$'
 
+class HeaderType(Enum):
+    STATEFARM = "statefarm"
+    APEX = "apex"
+
 # =========================
 # Data structures
 # =========================
@@ -401,158 +405,440 @@ class XactimateRoughDraftParser:
                 lines.extend([l.strip() for l in txt.split('\n') if l.strip()])
         return self._parse_case_metadata(lines)
 
+    def detect_table_header(self, lines, i):
+        """
+        Detect a table header at index i.
+        Returns: (HeaderType|None, consumed_lines:int, profile:dict|None)
+        profile = {
+            "type": "statefarm" | "apex",
+            "columns": [...],                        # exact column names on header, left->right
+            "apex_flags": TableColumns(...) or None  # for APEX only, to feed _parse_line_item_calc/_parse_totals_line
+        }
+        """
+        n = len(lines)
+        cur = (lines[i] or "").strip()
+        nxt = (lines[i+1] or "").strip() if i+1 < n else ""
+
+        # --- State Farm single-line header ---
+        sf_header = r"^DESCRIPTION\s+QUANTITY\s+UNIT\s+PRICE\s+TAX\s+RCV$"
+        if re.match(sf_header, cur, re.IGNORECASE):
+            return (
+                HeaderType.STATEFARM,
+                1,
+                {"type": "statefarm", "columns": ["DESCRIPTION","QUANTITY","UNIT","PRICE","TAX","RCV"], "apex_flags": None}
+            )
+
+        # --- Apex/Rough Draft header (1-2 lines) ---
+        # First line (required)
+        if re.match(r"^CAT\s+SEL\s+ACT\s+DESCRIPTION\s*$", cur, re.IGNORECASE):
+            # Second line may include various combos, but must contain at least QTY and TOTAL somewhere
+            combined = nxt if nxt else ""
+            cols_line2 = []
+            if nxt:
+                # Assemble second-line columns by scanning canonical tokens in order of appearance
+                tokens = [
+                    ("CALC", r"\bCALC\b"),
+                    ("QTY", r"\bQTY\b"),
+                    ("RESET", r"\bRESET\b"),
+                    ("REMOVE", r"\bREMOVE\b"),
+                    ("REPLACE", r"\bREPLACE\b"),
+                    ("TAX", r"\bTAX\b"),
+                    ("O&P", r"\bO\s*&\s*P\b|\bO&P\b"),
+                    ("TOTAL", r"\bTOTAL\b"),
+                ]
+                posmap = []
+                low = nxt.upper()
+                for name, pat in tokens:
+                    m = re.search(pat, nxt, re.IGNORECASE)
+                    if m:
+                        posmap.append((m.start(), name))
+                posmap.sort(key=lambda x: x[0])
+                cols_line2 = [name for _, name in posmap]
+
+            # Require at least QTY and TOTAL in the second line to consider it a real table start
+            if "QTY" in cols_line2 and "TOTAL" in cols_line2:
+                flags = TableColumns(
+                    has_reset=("RESET" in cols_line2),
+                    has_tax=("TAX" in cols_line2),
+                    has_op=("O&P" in cols_line2 or "O & P" in cols_line2),
+                )
+                profile = {
+                    "type": "apex",
+                    "columns": ["CAT","SEL","ACT","DESCRIPTION"] + cols_line2,
+                    "apex_flags": flags
+                }
+                return (HeaderType.APEX, 2, profile)
+
+            # Some Apex PDFs compress second line; accept single-line variant with QTY/TOTAL seen in the same row
+            if re.search(r"\bQTY\b", cur, re.IGNORECASE) and re.search(r"\bTOTAL\b", cur, re.IGNORECASE):
+                flags = TableColumns(has_reset=("RESET" in cur),
+                                    has_tax=("TAX" in cur),
+                                    has_op=("O&P" in cur or "O & P" in cur))
+                profile = {
+                    "type": "apex",
+                    "columns": re.findall(r"[A-Z&\.]+", cur),
+                    "apex_flags": flags
+                }
+                return (HeaderType.APEX, 1, profile)
+
+        return (None, 0, None)
+
+    def backtrack_section_context(self, lines, header_idx):
+        """
+        Walk upward from header_idx-1 to collect:
+        - area (sticky across sections)
+        - section_name (+ optional height)
+        - metadata (doors/walls/areas via _extract_metadata_from_line)
+        - subrooms [{subroom_name, metadata{height,...}}]
+        Returns:
+        {
+            "area": str|None,
+            "section_name": str,
+            "height": str|None,
+            "metadata": dict,
+            "subrooms": list,
+            "scan_start_idx": int
+        }
+        """
+        i = header_idx - 1
+        area = None
+        section_name = None
+        height = None
+        metadata = {}
+        subrooms = []
+
+        # simple helpers
+        def clean(s): 
+            return re.sub(r"\s+", " ", (s or "").replace("\u00A0"," ").strip())
+
+        def looks_like_stop(s):
+            if not s: 
+                return False
+            s2 = clean(s)
+            if re.match(r"^\s*Totals?:", s2, re.IGNORECASE): 
+                return True
+            if re.search(r"^\s*(Summary\s+for|Recap\s+|Coverage\s+|Grand\s+Total\s+Areas)\b", s2, re.IGNORECASE): 
+                return True
+            if re.match(r"^\d{1,4}$", s2): 
+                return True
+            if "Page:" in s2 or "Date:" in s2: 
+                return True
+            # another header above would also be a stop (handled by main loop via detect_table_header)
+            return False
+
+        # we will accumulate lines upward until a big gap/stop
+        scan_start_idx = max(0, header_idx - 30)  # reasonable cap
+        last_seen_section_line = None
+        pending_subroom = None
+
+        while i >= 0 and i >= scan_start_idx:
+            raw = lines[i] or ""
+            s = clean(raw)
+
+            # NOTE: use module-level helpers (no self.)
+            if looks_like_stop(s) or is_page_header(s, []):
+                break
+            if is_diagram_artifact(s):
+                i -= 1
+                continue
+
+            # Subroom lines (captured while scanning up)
+            is_sub, sub_name, sub_h = is_subroom_header(s)
+            if is_sub:
+                if pending_subroom:
+                    subrooms.append(pending_subroom)
+                pending_subroom = {"subroom_name": sub_name, "metadata": {"height": sub_h}}
+                i -= 1
+                continue
+
+            # Section name with optional Height
+            msec = re.match(r"^(.+?)\s+Height:\s*(.+?)\s*$", s, re.IGNORECASE)
+            if msec and section_name is None:
+                section_name = msec.group(1).strip()
+                height = msec.group(2).strip()
+                last_seen_section_line = s
+                i -= 1
+                continue
+
+            # Plain section name (no height) – prefer the closest good title-like line
+            if section_name is None:
+                # Filter out obvious non-titles
+                if not re.match(r"^(CAT\s+SEL\s+ACT|DESCRIPTION\s+QUANTITY\s+UNIT)", s, re.IGNORECASE) \
+                and not s.lower().startswith("continued -") \
+                and not s.lower().startswith("source -") \
+                and not s.lower().startswith("estimate:") \
+                and not s.lower().startswith("summary"):
+                    # Heuristic: shortish, title-cased or underscored area/room names
+                    if len(s) <= 50 and not re.search(r"\$\d|Totals?:", s, re.IGNORECASE):
+                        section_name = s
+                        last_seen_section_line = s
+                        i -= 1
+                        continue
+
+            # Area: a title-like line above the section name (distinct)
+            if section_name and area is None:
+                if s and s != last_seen_section_line:
+                    if len(s) <= 40 and not re.search(r"(Height:|Totals?:|CAT\s+SEL|DESCRIPTION\s+QUANTITY)", s, re.IGNORECASE):
+                        # avoid summary/coverage
+                        if not re.search(r"(Summary|Coverage|Recap|Trade\s+Summary)", s, re.IGNORECASE):
+                            area = s
+
+            # Metadata (doors/walls/areas)
+            md = self._extract_metadata_from_line(s)
+            if md:
+                metadata = self._merge_metadata(metadata, md)
+
+            i -= 1
+
+        # flush pending subroom (if we saw any while scanning upward)
+        if pending_subroom:
+            subrooms.append(pending_subroom)
+
+        # defaults
+        if not section_name:
+            section_name = "Unknown Section"
+
+        return {
+            "area": area,
+            "section_name": section_name,
+            "height": height,
+            "metadata": metadata,
+            "subrooms": list(reversed(subrooms)),  # keep natural order (top→down)
+            "scan_start_idx": i+1
+        }
+
+    def parse_statefarm_row(self, line, profile):
+        """
+        Parse a State Farm row according to the profile columns.
+        Expected format (canonical):
+        [index.] DESCRIPTION <...>   QUANTITY(unit-suffixed like 4,354.00SF)  UNIT  PRICE  TAX  RCV
+        We will accept:
+        - optional leading index like '1.' (we strip it)
+        - quantity as "<number><UNIT>" or "<number> <UNIT>"
+        Returns: dict or None
+        """
+        s = re.sub(r"\s+", " ", (line or "").replace("\u00A0"," ").strip())
+        # Strip leading "n." index if present
+        s = re.sub(r"^\d+\.\s+", "", s)
+
+        # The safest approach: capture from right to left the last 3 numeric fields (PRICE, TAX, RCV)
+        m = re.search(r"\s(?P<price>[\d,]+\.\d{2})\s+(?P<tax>[\d,]+\.\d{2})\s+(?P<rcv>[\d,]+\.\d{2})\s*$", s)
+        if not m:
+            return None
+
+        price = m.group("price")
+        tax = m.group("tax")
+        rcv = m.group("rcv")
+        left = s[:m.start()].rstrip()
+
+        # Now split left into DESCRIPTION + QUANTITY (with unit)
+        # quantity at the right end as "<num><unit>" or "<num> <unit>"
+        mq = re.search(r"(?P<num>[\d,]+(?:\.\d+)?)[ ]?(?P<unit>[A-Z]{2,})\s*$", left)
+        if not mq:
+            return None
+
+        qty = mq.group("num")
+        unit = mq.group("unit")
+        description = left[:mq.start()].rstrip()
+
+        try:
+            qty_val = float(qty.replace(",", ""))
+        except Exception:
+            qty_val = 0.0
+
+        return {
+            "type": "line_item",
+            "line_number": None,
+            "cat": None, "sel": None, "act": None,
+            "description": description,
+            "calc": "",
+            "qty": qty_val,
+            "unit": unit,
+            "item_codes": [],
+            "reset": None, "remove": None, "replace": None,
+            "tax": format_dollar_amount(_money_to_float(tax)) if "TAX" in (profile.get("columns") or []) else None,
+            "op": None,
+            "total": format_dollar_amount(_money_to_float(rcv)),   # RCV is the line total in SF
+            "total_note": None,
+            "notes": ""
+        }
+
+    def map_totals_from_line(self, profile, totals_line, section_name_hint=None):
+        """
+        Convert a Totals line into {'tax':..., 'op':..., 'total':...} using the profile columns.
+        For STATEFARM the last number is RCV (section total). If TAX column exists, the penultimate number is tax.
+        For APEX, delegate to existing _parse_totals_line using synthesized TableColumns flags from profile['apex_flags'].
+        """
+        s = (totals_line or "").strip()
+
+        if profile["type"] == "statefarm":
+            # Typical: "Totals: <name> <tax> <rcv>" or "Totals: <name> <rcv>"
+            nums = re.findall(r"([\d,]+\.\d{2})", s)
+            if not nums:
+                return {"tax": None, "op": None, "total": "0.00"}
+            # last is total (RCV)
+            total = format_dollar_amount(_money_to_float(nums[-1]))
+            tax = None
+            if "TAX" in profile.get("columns", []) and len(nums) >= 2:
+                tax = format_dollar_amount(_money_to_float(nums[-2]))
+            return {"tax": tax, "op": None, "total": total}
+
+        # APEX: use your existing logic but with the flags from profile
+        flags = profile.get("apex_flags") or TableColumns(False, False, False)
+        # Reuse your existing _parse_totals_line by faking a TableColumns instance
+        return self._parse_totals_line(s, flags)
+
     # ---------- core parsing (from provided full_lines) ----------
     def _parse_document_from_lines(self, full_lines: List[str], skip_mask: Optional[List[bool]] = None) -> tuple:
-        # header detection needs the original PDF normally; we approximate by filtering number-only and page-lines later.
-        # We still try to skip page headers via simple heuristics present in helpers.
-        header_patterns: List[str] = []  # unknown without page context; rely on PAGE_NUMBER_PATTERN, etc.
-
-        lines = full_lines  # use the same list to keep indexing aligned for skip_mask
-        state = ParseState.LOOKING_FOR_SECTION
+        """
+        NEW: Header-anchored, totals-terminated sequential parser.
+        - Opens a section only when a table header is found (STATEFARM or APEX).
+        - Backtracks to assemble Area/SectionName/Height/Metadata/Subrooms.
+        - Consumes page-wrapped headers as CONTINUATIONS while the section is open (until Totals).
+        - Maps Totals by column names from the detected profile.
+        """
+        lines = full_lines
         sections: List[dict] = []
+
         current_section = None
-        current_subroom = None
         current_line_item = None
         collecting_notes = False
-        columns = TableColumns()
-        pending_header_lines: List[str] = []
+        current_area = None  # sticky area label across sections
 
         i = 0
         L = len(lines)
         while i < L:
-            # global skips
             if skip_mask is not None and 0 <= i < len(skip_mask) and skip_mask[i]:
                 i += 1
                 continue
-            if is_page_header(lines[i].strip(), header_patterns):
+
+            line = (lines[i] or "").strip()
+            if is_page_header(line, []):
+                i += 1
+                continue
+            if is_diagram_artifact(line):
                 i += 1
                 continue
 
-            line = lines[i].strip()
-            next_line = lines[i + 1].strip() if i + 1 < L else None
+            # 1) Detect headers (always allowed)
+            hdr_type, consumed, profile = self.detect_table_header(lines, i)
 
-            if state == ParseState.LOOKING_FOR_SECTION:
-                if is_diagram_artifact(line): i += 1; continue
-                if 'Height:' in line and 'Subroom:' not in line:
-                    m = re.match(SECTION_HEIGHT_PATTERN, line)
-                    if m:
-                        raw_name = m.group(1).strip()
-                        height = m.group(2).strip()
-                        name_match = re.search(SECTION_NAME_EXTRACTION, raw_name)
-                        section_name = name_match.group(1).strip() if name_match else raw_name
-                        current_section = {'section_name': section_name,'metadata': {'height': height.strip()},
-                                           'subrooms': [], 'line_items': [], 'section_totals': {}}
-                        state = ParseState.IN_SECTION_METADATA
+            if hdr_type is not None:
+                # If a section is OPEN and we see another header BEFORE its Totals,
+                # treat as a page-wrap/continuation: just advance and keep appending items.
+                if current_section is not None:
+                    # swallow header and move on
+                    i += consumed
+                    # allow a few "line item header" banner rows like --- Walls --- right after wrapped header
+                    while i < L:
+                        t = (lines[i] or "").strip()
+                        if not t or is_page_header(t, []) or is_diagram_artifact(t):
+                            i += 1; continue
+                        is_hdr, _txt = is_line_item_header(t)
+                        if is_hdr:
+                            current_section['line_items'].append({'type': 'header', 'text': _txt})
+                            i += 1
+                            continue
+                        # stop banner window when we hit a non-header/non-noise
+                        break
+                    continue
+
+                # 2) Open a NEW section: backtrack to collect context
+                ctx = self.backtrack_section_context(lines, i)
+                if ctx.get("area"):
+                    current_area = ctx["area"]
+
+                current_section = {
+                    "section_name": ctx["section_name"],
+                    "metadata": {**ctx.get("metadata", {}), **({"height": ctx["height"]} if ctx.get("height") else {})},
+                    "subrooms": ctx.get("subrooms") or [],
+                    "line_items": [],
+                    "section_totals": {},
+                    "_profile": profile
+                }
+                if current_area:
+                    # put area either top-level or inside metadata; here we choose metadata
+                    current_section["metadata"]["area"] = current_area
+
+                # consume header lines
+                i += consumed
+                # after header, optional line-item header banners (--- Walls ---)
+                while i < L:
+                    t = (lines[i] or "").strip()
+                    if not t or is_page_header(t, []) or is_diagram_artifact(t):
                         i += 1; continue
+                    is_hdr, _txt = is_line_item_header(t)
+                    if is_hdr:
+                        current_section['line_items'].append({'type': 'header', 'text': _txt})
+                        i += 1
+                        continue
+                    break
+                continue
 
-                is_header, detected_cols, is_two = is_table_header(line, next_line)
-                if is_header:
-                    section_name = "Unknown Section"
-                    if i > 0 and not is_page_header(lines[i-1].strip(), header_patterns):
-                        prev = lines[i-1].strip()
-                        nm = re.search(SECTION_NAME_EXTRACTION, prev)
-                        section_name = nm.group(1).strip() if nm else prev
-                    current_section = {'section_name': section_name, 'metadata': {}, 'subrooms': [],
-                                       'line_items': [], 'section_totals': {}}
-                    columns = detected_cols
-                    state = ParseState.IN_LINE_ITEMS
-                    i += 2 if is_two else 1
-                    continue
+            # 3) If we don't have an open section yet, advance
+            if current_section is None:
+                i += 1
+                continue
 
-                i += 1; continue
+            # 4) Inside an open section → handle Totals / line-items / notes
+            s = line
 
-            elif state == ParseState.IN_SECTION_METADATA:
-                is_sub, sub_name, sub_h = is_subroom_header(line)
-                if is_sub:
-                    current_subroom = {'subroom_name': sub_name, 'metadata': {'height': sub_h.strip()}}
-                    state = ParseState.IN_SUBROOM_METADATA
-                    i += 1; continue
-
-                is_header, detected_cols, is_two = is_table_header(line, next_line)
-                if is_header:
-                    columns = detected_cols
-                    state = ParseState.IN_LINE_ITEMS
-                    i += 2 if is_two else 1
-                    continue
-
-                meta = self._extract_metadata_from_line(line)
-                if meta:
-                    current_section['metadata'] = self._merge_metadata(current_section['metadata'], meta)
-                i += 1; continue
-
-            elif state == ParseState.IN_SUBROOM_METADATA:
-                is_sub, sub_name, sub_h = is_subroom_header(line)
-                if is_sub:
-                    current_section['subrooms'].append(current_subroom)
-                    current_subroom = {'subroom_name': sub_name, 'metadata': {'height': sub_h.strip()}}
-                    i += 1; continue
-
-                is_header, detected_cols, is_two = is_table_header(line, next_line)
-                if is_header:
-                    current_section['subrooms'].append(current_subroom)
-                    current_subroom = None
-                    columns = detected_cols
-                    state = ParseState.IN_LINE_ITEMS
-                    i += 2 if is_two else 1
-                    continue
-
-                meta = self._extract_metadata_from_line(line)
-                if meta and current_subroom is not None:
-                    current_subroom['metadata'] = self._merge_metadata(current_subroom['metadata'], meta)
-                i += 1; continue
-
-            elif state == ParseState.IN_LINE_ITEMS:
-                if is_table_continuation(line):
-                    pending_header_lines = []
-                    i += 1
-                    if i < L:
-                        n2 = lines[i + 1].strip() if i + 1 < L else None
-                        is_header, new_cols, is_two = is_table_header(lines[i].strip(), n2)
-                        if is_header:
-                            columns = new_cols
-                            i += 2 if is_two else 1
-                    continue
-
-                if is_totals_line(line, current_section['section_name'] if current_section else None):
-                    if pending_header_lines and current_line_item:
-                        note_text = ' '.join(pending_header_lines)
-                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + note_text).strip() if current_line_item['notes'] else note_text
-                        pending_header_lines = []
-                    if collecting_notes and current_line_item:
-                        current_section['line_items'].append(current_line_item)
-                        current_line_item = None
-                        collecting_notes = False
-
-                    current_section['section_totals'] = self._parse_totals_line(line, columns)
-                    sections.append(current_section)
-                    current_section = None
-                    columns = TableColumns()
-                    state = ParseState.LOOKING_FOR_SECTION
-                    i += 1; continue
-
-                is_header_line, header_text = is_line_item_header(line)
-                if is_header_line:
-                    if pending_header_lines and current_line_item:
-                        nt = ' '.join(pending_header_lines)
-                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + nt).strip() if current_line_item['notes'] else nt
-                        pending_header_lines = []
-                    if collecting_notes and current_line_item:
-                        current_section['line_items'].append(current_line_item)
-                        current_line_item = None
+            # Totals: ends the section
+            if re.match(r"^Totals?:", s, re.IGNORECASE):
+                # flush pending header-notes into the last item
+                if current_line_item and collecting_notes:
+                    current_section['line_items'].append(current_line_item)
+                    current_line_item = None
                     collecting_notes = False
-                    current_section['line_items'].append({'type': 'header', 'text': header_text})
-                    i += 1; continue
 
-                if is_line_item(line):
-                    if pending_header_lines and current_line_item:
-                        nt = ' '.join(pending_header_lines)
-                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + nt).strip() if current_line_item['notes'] else nt
-                        pending_header_lines = []
-                    if current_line_item:
+                # profile-aware totals mapping
+                totals = self.map_totals_from_line(current_section["_profile"], s, current_section.get("section_name"))
+                current_section['section_totals'] = totals
+
+                # finalize section
+                current_section.pop("_profile", None)
+                sections.append(current_section)
+                current_section = None
+                i += 1
+                continue
+
+            # Line-item header rows (--- Walls ---)
+            is_hdr, _txt = is_line_item_header(s)
+            if is_hdr:
+                if current_line_item and collecting_notes:
+                    current_section['line_items'].append(current_line_item)
+                    current_line_item = None
+                    collecting_notes = False
+                current_section['line_items'].append({'type': 'header', 'text': _txt})
+                i += 1
+                continue
+
+            # Parse line items per profile
+            prof = current_section.get("_profile", {})
+            ptype = prof.get("type")
+
+            parsed = None
+            if ptype == "statefarm":
+                parsed = self.parse_statefarm_row(s, prof)
+                if parsed:
+                    if current_line_item and collecting_notes:
+                        current_section['line_items'].append(current_line_item)
+                        current_line_item = None
+                    current_section['line_items'].append(parsed)
+                    collecting_notes = True
+                    current_line_item = parsed  # latest becomes the one receiving notes
+                    i += 1
+                    continue
+            else:
+                # APEX flow: use your existing detectors
+                if is_line_item(s):
+                    # close previous pending item
+                    if current_line_item and collecting_notes:
                         current_section['line_items'].append(current_line_item)
                         current_line_item = None
                         collecting_notes = False
-                    m = re.match(LINE_ITEM_PATTERN, line)
+
+                    m = re.match(LINE_ITEM_PATTERN, s)
                     if m:
                         current_line_item = {
                             'type': 'line_item',
@@ -565,31 +851,40 @@ class XactimateRoughDraftParser:
                             'qty': 0.0,
                             'unit': '',
                             'item_codes': [],
-                            'reset': None,
-                            'remove': None,
-                            'replace': None,
-                            'tax': None,
-                            'op': None,
-                            'total': None,
-                            'total_note': None,
-                            'notes': ''
+                            'reset': None, 'remove': None, 'replace': None,
+                            'tax': None, 'op': None,
+                            'total': None, 'total_note': None, 'notes': ''
                         }
-                    i += 1; continue
+                    i += 1
+                    continue
 
-                if current_line_item and re.search(CALC_LINE_DETECTION_PATTERN, line):
-                    calc = self._parse_line_item_calc(line, columns)
+                # calc/price line (gives totals for the item)
+                if current_line_item and re.search(CALC_LINE_DETECTION_PATTERN, s):
+                    calc = self._parse_line_item_calc(s, prof.get("apex_flags") or TableColumns())
                     if calc:
                         current_line_item.update(calc)
                         collecting_notes = True
-                        i += 1; continue
+                        i += 1
+                        continue
 
-                if collecting_notes and current_line_item:
-                    pending_header_lines.append(line)
-                    i += 1; continue
+            # Notes accumulation for both profiles
+            if current_line_item and collecting_notes:
+                # skip obvious noise
+                if not is_page_header(s, []) and not is_diagram_artifact(s):
+                    current_line_item['notes'] = (current_line_item.get('notes') + ' ' + s).strip()
+                i += 1
+                continue
 
-                i += 1; continue
-
+            # Fallback advance
             i += 1
+
+        # If document ends while a section is open but we never saw Totals,
+        # append what we have (rare, but safer than dropping)
+        if current_section is not None:
+            if current_line_item and collecting_notes:
+                current_section['line_items'].append(current_line_item)
+            current_section.pop("_profile", None)
+            sections.append(current_section)
 
         return sections, lines
 

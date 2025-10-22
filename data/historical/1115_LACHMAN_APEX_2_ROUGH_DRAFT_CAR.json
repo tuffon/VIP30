@@ -78,7 +78,9 @@
   "sections": [
     {
       "section_name": "Abatement",
-      "metadata": {},
+      "metadata": {
+        "area": "1115_LACHMAN_APEX_2"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -140,7 +142,9 @@
     },
     {
       "section_name": "Contents",
-      "metadata": {},
+      "metadata": {
+        "area": "1115_LACHMAN_APEX_2"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -201,7 +205,9 @@
     },
     {
       "section_name": "General",
-      "metadata": {},
+      "metadata": {
+        "area": "1115_LACHMAN_APEX_2"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -273,7 +279,7 @@
           "op": "247.00",
           "total": "1,482.00",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - General"
         },
         {
           "type": "line_item",
@@ -334,10 +340,6 @@
           "total": "30,992.40",
           "total_note": null,
           "notes": "On Site Project Superintendent, 15 hours per week for 4 weeks per month for 4 months Supervision is required by the CSLB license requirements that the Qualified licensee or a manager inspect every job site each day until complete. Supervision is not covered in Xactimate's O&P according to Xactimate's white pages. . \"Cal. Admin. Code tit. 16, § 823(a). “Direct supervision and control” “includes any one or any combination of the following activities: supervising construction, managing construction activities by making technical and administrative decisions, checking jobs for proper workmanship, or direct supervision on construction job sites. Section 7068 requires every license to have a qualifier, which may be a Sole Owner, Qualified Partner, Responsible Managing Officer (RMO), Responsible Managing Employee (RME), Responsible Managing Manager or Responsible Managing Member. The qualifier is the person who is listed in the Contractor State License Boards’ (CSLB) personnel of record, has demonstrated his/her knowledge and experience though the CSLB’s licensing process, and holds one or more license classifications. UPDATE: CSLB, CSLB to Get Tough on RMO Abuses (Summer 2014) Starting on January 1, 2014, amended Section 7068.1 of California’s Contractors State License Law, Bus. & Prof. Code §§ 7200et seq., requires licensees’ qualifiers to exercise direct supervision and control over the licensees’ operations to ensure compliance with California’s Contractors State License Law. The amended law contemplates active involvement by the qualifier, and makes a violation of Section 7068.1 grounds for disciplinary action and a misdemeanor punishable by imprisonment in a county jail and/or a fine."
-        },
-        {
-          "type": "header",
-          "text": "Final Cleaning"
         },
         {
           "type": "line_item",
@@ -414,13 +416,11 @@
     },
     {
       "section_name": "CA DOI Lic#2M66539",
-      "metadata": {},
+      "metadata": {
+        "area": "866-379-9970 - www.ApexAdjusters.com"
+      },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Electrical Repair"
-        },
         {
           "type": "line_item",
           "line_number": 14,
@@ -681,7 +681,7 @@
           "op": null,
           "total": "0.00",
           "total_note": "PENDING",
-          "notes": ""
+          "notes": "Left Elevation mounted to Exterior wall Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Electrical"
         }
       ],
       "section_totals": {
@@ -694,7 +694,9 @@
     },
     {
       "section_name": "Plumbing",
-      "metadata": {},
+      "metadata": {
+        "area": "866-379-9970 - www.ApexAdjusters.com"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -791,7 +793,9 @@
     },
     {
       "section_name": "HVAC",
-      "metadata": {},
+      "metadata": {
+        "area": "866-379-9970 - www.ApexAdjusters.com"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -855,10 +859,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Equipment"
-        },
-        {
           "type": "line_item",
           "line_number": 33,
           "cat": "EQU",
@@ -889,7 +889,9 @@
     },
     {
       "section_name": "Doors/Windows",
-      "metadata": {},
+      "metadata": {
+        "area": "CA DOI Lic#2M66539"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -1003,31 +1005,24 @@
           "op": "4,638.02",
           "total": "27,828.08",
           "total_note": null,
-          "notes": "The line item applies to the widow treatment repairs per Home Carpet & Window Treatments Scope of work: Master - 3 Drapery pairs and valances, fabric @149.00 per yard, black out lined Boy's Room - 3 Drapery pairs, and valances, fabric @95.00 per yard, black out lined Fabric: 16,836.00 Lining: 1,389.00 Maufactura: 7,098.00 Shipping: 200.00 Installation: 1.800.00 Tax: 1,776.06 Total: 23,190.06"
-        },
-        {
-          "type": "line_item",
-          "line_number": 39,
-          "cat": "WDT",
-          "sel": "BIDITM",
-          "act": "+",
-          "description": "Window Treatment s per Home Carpet & Windows Treatments",
-          "calc": "1",
-          "qty": 1.0,
-          "unit": "EA",
-          "item_codes": [
-            "*",
-            "E"
-          ],
-          "reset": null,
-          "remove": "0.00",
-          "replace": "54,224.29",
-          "tax": "0.00",
-          "op": "10,844.86",
-          "total": "65,069.15",
-          "total_note": null,
-          "notes": ""
-        },
+          "notes": "The line item applies to the widow treatment repairs per Home Carpet & Window Treatments Scope of work: Master - 3 Drapery pairs and valances, fabric @149.00 per yard, black out lined Boy's Room - 3 Drapery pairs, and valances, fabric @95.00 per yard, black out lined Fabric: 16,836.00 Lining: 1,389.00 Maufactura: 7,098.00 Shipping: 200.00 Installation: 1.800.00 Tax: 1,776.06"
+        }
+      ],
+      "section_totals": {
+        "tax": null,
+        "op": null,
+        "total": "23,190.06",
+        "computed_total": "159,285.08",
+        "validation_delta": "-136,095.02"
+      }
+    },
+    {
+      "section_name": "CA DOI Lic#2M66539",
+      "metadata": {
+        "area": "866-379-9970 - www.ApexAdjusters.com"
+      },
+      "subrooms": [],
+      "line_items": [
         {
           "type": "line_item",
           "line_number": 40,
@@ -1053,19 +1048,17 @@
         "tax": "0.00",
         "op": "15,517.44",
         "total": "224,561.55",
-        "computed_total": "224,561.55",
-        "validation_delta": "0.00"
+        "computed_total": "207.32",
+        "validation_delta": "224,354.23"
       }
     },
     {
       "section_name": "Appliances",
-      "metadata": {},
+      "metadata": {
+        "area": "866-379-9970 - www.ApexAdjusters.com"
+      },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Kitchen"
-        },
         {
           "type": "line_item",
           "line_number": 41,
@@ -1215,10 +1208,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Laundry Room"
-        },
-        {
           "type": "line_item",
           "line_number": 48,
           "cat": "APP",
@@ -1289,7 +1278,9 @@
     },
     {
       "section_name": "Main Level",
-      "metadata": {},
+      "metadata": {
+        "area": "CA DOI Lic#2M66539"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -1386,65 +1377,48 @@
       }
     },
     {
-      "section_name": "Entry/Foyer",
+      "section_name": "Missing Wall 5' 10\" X 8' Opens into ROOM1",
       "metadata": {
-        "height": "10'",
+        "missing_walls": [
+          {
+            "dimensions": "5' 10\" X 8'",
+            "opens_into": "ENTRY_FOYER2"
+          }
+        ],
         "areas": {
-          "sf_walls": "228.83",
-          "sf_ceiling": "73.16",
-          "sf_walls_and_ceiling": "301.99",
-          "sf_floor": "73.16",
+          "lf_ceil_perimeter": "36.75",
           "sy_flooring": "8.13",
           "lf_floor_perimeter": "19.42",
-          "lf_ceil_perimeter": "36.75"
+          "sf_walls_and_ceiling": "301.99",
+          "sf_floor": "73.16",
+          "sf_walls": "228.83",
+          "sf_ceiling": "73.16"
         },
         "doors": [
           {
-            "dimensions": "3' 1\" X 8'",
-            "opens_into": "GUEST_BATH"
+            "dimensions": "5' 4\" X 8'",
+            "opens_into": "Exterior"
           },
           {
             "dimensions": "3' 1\" X 8'",
             "opens_into": "OFFICE"
           },
           {
-            "dimensions": "5' 4\" X 8'",
-            "opens_into": "Exterior"
+            "dimensions": "3' 1\" X 8'",
+            "opens_into": "GUEST_BATH"
           }
-        ]
+        ],
+        "area": "5.08 LF Ceil. Perimeter"
       },
       "subrooms": [
         {
           "subroom_name": "Offset (1)",
           "metadata": {
-            "height": "8'",
-            "areas": {
-              "sf_walls": "40.67",
-              "sf_ceiling": "13.61",
-              "sf_walls_and_ceiling": "54.28",
-              "sf_floor": "13.61",
-              "sy_flooring": "1.51",
-              "lf_floor_perimeter": "5.08",
-              "lf_ceil_perimeter": "5.08"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "5' 10\" X 8'",
-                "opens_into": "ENTRY_FOYER2"
-              },
-              {
-                "dimensions": "5' 10\" X 8'",
-                "opens_into": "ROOM1"
-              }
-            ]
+            "height": "8'"
           }
         }
       ],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 55,
@@ -1464,10 +1438,6 @@
           "total": "221.30",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -1548,10 +1518,6 @@
           "total": "65.47",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Floor"
         },
         {
           "type": "line_item",
@@ -1652,10 +1618,6 @@
           "total": "253.91",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -1807,78 +1769,54 @@
       }
     },
     {
-      "section_name": "Office",
+      "section_name": "Window 9' X 5' Opens into Exterior",
       "metadata": {
-        "height": "Sloped",
+        "missing_walls": [
+          {
+            "dimensions": "16' X 10'",
+            "opens_into": "OFFICE"
+          }
+        ],
         "areas": {
-          "sf_walls": "334.40",
-          "sf_ceiling": "177.42",
-          "sf_walls_and_ceiling": "511.81",
-          "sf_floor": "176.67",
+          "lf_ceil_perimeter": "54.18",
           "sy_flooring": "19.63",
           "lf_floor_perimeter": "28.83",
-          "lf_ceil_perimeter": "54.18"
+          "sf_walls_and_ceiling": "511.81",
+          "sf_floor": "176.67",
+          "sf_walls": "334.40",
+          "sf_ceiling": "177.42"
         },
         "doors": [
           {
             "dimensions": "3' 1\" X 8'",
-            "opens_into": "ENTRY_FOYER2"
+            "opens_into": "OFFICE"
           },
           {
             "dimensions": "3' 1\" X 8'",
             "opens_into": "GUEST_BATH"
+          },
+          {
+            "dimensions": "3' 1\" X 8'",
+            "opens_into": "ENTRY_FOYER2"
           }
-        ]
+        ],
+        "area": "Missing Wall 16' X 10' Opens into OFFICE"
       },
       "subrooms": [
         {
           "subroom_name": "Office Closet (2)",
           "metadata": {
-            "height": "8'",
-            "areas": {
-              "sf_walls": "178.00",
-              "sf_ceiling": "39.94",
-              "sf_walls_and_ceiling": "217.94",
-              "sf_floor": "39.94",
-              "sy_flooring": "4.44",
-              "lf_floor_perimeter": "22.25",
-              "lf_ceil_perimeter": "25.33"
-            },
-            "doors": [
-              {
-                "dimensions": "3' 1\" X 8'",
-                "opens_into": "OFFICE"
-              }
-            ]
+            "height": "8'"
           }
         },
         {
           "subroom_name": "Offset (1)",
           "metadata": {
-            "height": "10'",
-            "areas": {
-              "sf_walls": "169.17",
-              "sf_ceiling": "43.33",
-              "sf_walls_and_ceiling": "212.50",
-              "sf_floor": "43.33",
-              "sy_flooring": "4.81",
-              "lf_floor_perimeter": "21.42",
-              "lf_ceil_perimeter": "21.42"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "16' X 10'",
-                "opens_into": "OFFICE"
-              }
-            ]
+            "height": "10'"
           }
         }
       ],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 72,
@@ -1898,10 +1836,6 @@
           "total": "664.79",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -1961,11 +1895,7 @@
           "op": "32.28",
           "total": "193.69",
           "total_note": null,
-          "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Floor"
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Office"
         },
         {
           "type": "line_item",
@@ -1986,10 +1916,6 @@
           "total": "142.50",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -2152,10 +2078,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Closet"
-        },
-        {
           "type": "line_item",
           "line_number": 85,
           "cat": "FNC",
@@ -2185,35 +2107,12 @@
       }
     },
     {
-      "section_name": "Guest Bath",
+      "section_name": "CA DOI Lic#2M66539",
       "metadata": {
-        "height": "8'",
-        "areas": {
-          "sf_walls": "148.67",
-          "sf_ceiling": "49.76",
-          "sf_walls_and_ceiling": "198.42",
-          "sf_floor": "40.93",
-          "sy_flooring": "4.55",
-          "lf_floor_perimeter": "12.00",
-          "lf_ceil_perimeter": "24.75"
-        },
-        "doors": [
-          {
-            "dimensions": "3' 1\" X 8'",
-            "opens_into": "OFFICE"
-          },
-          {
-            "dimensions": "3' 1\" X 8'",
-            "opens_into": "ENTRY_FOYER2"
-          }
-        ]
+        "area": "866-379-9970 - www.ApexAdjusters.com"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 86,
@@ -2233,10 +2132,6 @@
           "total": "126.91",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -2279,10 +2174,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 89,
           "cat": "DMO",
@@ -2321,10 +2212,6 @@
           "total": "154.89",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -2456,138 +2343,45 @@
       }
     },
     {
-      "section_name": "Living Room/Dining Room",
+      "section_name": "Door 7' X 9' 7\" Opens into Exterior",
       "metadata": {
-        "height": "11'",
-        "areas": {
-          "sf_walls": "298.13",
-          "sf_ceiling": "340.68",
-          "sf_walls_and_ceiling": "638.81",
-          "sf_floor": "329.43",
-          "sy_flooring": "36.60",
-          "lf_floor_perimeter": "19.42",
-          "lf_ceil_perimeter": "67.79"
-        },
         "doors": [
           {
-            "dimensions": "11' 4\" X 9' 7\"",
+            "dimensions": "7' X 9' 7\"",
             "opens_into": "Exterior"
           },
           {
-            "dimensions": "9' 7\" X 9' 7\"",
+            "dimensions": "5' 8\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' 8\" X 9' 7\"",
             "opens_into": "Exterior"
           }
-        ]
+        ],
+        "missing_walls": [
+          {
+            "dimensions": "12' 1/2\" X 11'",
+            "opens_into": "LIVING_ROOM_"
+          },
+          {
+            "dimensions": "15' 10 1/2\" X 11'",
+            "opens_into": "OFFSET_1"
+          }
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "43.79",
+          "sy_flooring": "21.24",
+          "lf_floor_perimeter": "2.58",
+          "sf_walls_and_ceiling": "287.22",
+          "sf_floor": "191.16",
+          "sf_walls": "96.06",
+          "sf_ceiling": "191.16"
+        },
+        "area": "Door 5' 8\" X 9' 7\" Opens into Exterior"
       },
-      "subrooms": [
-        {
-          "subroom_name": "Offset 2 (3)",
-          "metadata": {
-            "height": "9'",
-            "areas": {
-              "sf_walls": "40.50",
-              "sf_ceiling": "16.50",
-              "sf_walls_and_ceiling": "57.00",
-              "sf_floor": "16.50",
-              "sy_flooring": "1.83",
-              "lf_floor_perimeter": "4.50",
-              "lf_ceil_perimeter": "4.50"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "7' 4\" X 9'",
-                "opens_into": "LIVING_ROOM_"
-              },
-              {
-                "dimensions": "7' 4\" X 9'",
-                "opens_into": "ROOM1"
-              }
-            ]
-          }
-        },
-        {
-          "subroom_name": "Fireplace (1)",
-          "metadata": {
-            "height": "9'",
-            "areas": {
-              "sf_walls": "40.50",
-              "sf_ceiling": "11.25",
-              "sf_walls_and_ceiling": "51.75",
-              "lf_ceil_perimeter": "4.50"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "5' X 9'",
-                "opens_into": "ROOM1"
-              },
-              {
-                "dimensions": "5' X 9'",
-                "opens_into": "LIVING_ROOM_"
-              }
-            ]
-          }
-        },
-        {
-          "subroom_name": "Offset 1 (2)",
-          "metadata": {
-            "height": "9'",
-            "areas": {
-              "sf_walls": "96.06",
-              "sf_ceiling": "191.16",
-              "sf_walls_and_ceiling": "287.22",
-              "sf_floor": "191.16",
-              "sy_flooring": "21.24",
-              "lf_floor_perimeter": "2.58",
-              "lf_ceil_perimeter": "43.79"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "31' X 9'",
-                "opens_into": "ROOM1"
-              },
-              {
-                "dimensions": "15' 1 1/2\" X 9'",
-                "opens_into": "LIVING_ROOM_"
-              },
-              {
-                "dimensions": "15' 10 1/2\" X 9'",
-                "opens_into": "DINING_ROOM"
-              },
-              {
-                "dimensions": "15' 10 1/2\" X 11'",
-                "opens_into": "OFFSET_1"
-              },
-              {
-                "dimensions": "12' 1/2\" X 11'",
-                "opens_into": "LIVING_ROOM_"
-              }
-            ],
-            "doors": [
-              {
-                "dimensions": "5' 8\" X 9' 7\"",
-                "opens_into": "Exterior"
-              },
-              {
-                "dimensions": "5' 8\" X 9' 7\"",
-                "opens_into": "Exterior"
-              },
-              {
-                "dimensions": "7' X 9' 7\"",
-                "opens_into": "Exterior"
-              },
-              {
-                "dimensions": "7' X 9' 7\"",
-                "opens_into": "Exterior"
-              }
-            ]
-          }
-        }
-      ],
+      "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 97,
@@ -2667,10 +2461,6 @@
           "total": "2,053.06",
           "total_note": null,
           "notes": "Additional labor for difficulty of finishing a curved wood ceiling"
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -2753,10 +2543,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 105,
           "cat": "DMO",
@@ -2834,7 +2620,7 @@
           "op": "1,152.88",
           "total": "6,917.32",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Living Room/Dining Room"
         },
         {
           "type": "line_item",
@@ -2855,10 +2641,6 @@
           "total": "1,775.75",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -2939,10 +2721,6 @@
           "total": "617.38",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Fireplace"
         },
         {
           "type": "line_item",
@@ -3054,35 +2832,27 @@
       }
     },
     {
-      "section_name": "Kitchen",
+      "section_name": "Missing Wall 14' 3 1/2\" X 10' Opens into ROOM1",
       "metadata": {
-        "height": "Tray",
-        "areas": {
-          "sf_walls": "450.25",
-          "sf_ceiling": "281.97",
-          "sf_walls_and_ceiling": "732.22",
-          "sf_floor": "146.38",
-          "sy_flooring": "16.26",
-          "lf_floor_perimeter": "8.46",
-          "lf_ceil_perimeter": "48.88"
-        },
         "missing_walls": [
           {
             "dimensions": "7 1/2\" X 10'",
             "opens_into": "ROOM1"
-          },
-          {
-            "dimensions": "14' 3 1/2\" X 10'",
-            "opens_into": "ROOM1"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "48.88",
+          "sy_flooring": "16.26",
+          "lf_floor_perimeter": "8.46",
+          "sf_walls_and_ceiling": "732.22",
+          "sf_floor": "146.38",
+          "sf_walls": "450.25",
+          "sf_ceiling": "281.97"
+        },
+        "area": "Window 6' X 3' 6\" Opens into Exterior"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling Wood"
-        },
         {
           "type": "line_item",
           "line_number": 119,
@@ -3204,10 +2974,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Ceiling Drywall"
-        },
-        {
           "type": "line_item",
           "line_number": 125,
           "cat": "PNT",
@@ -3228,10 +2994,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Walls"
-        },
-        {
           "type": "line_item",
           "line_number": 126,
           "cat": "PNT",
@@ -3250,10 +3012,6 @@
           "total": "1,148.18",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Floor"
         },
         {
           "type": "line_item",
@@ -3353,11 +3111,7 @@
           "op": "71.38",
           "total": "428.33",
           "total_note": null,
-          "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Kitchen"
         },
         {
           "type": "line_item",
@@ -3398,10 +3152,6 @@
           "total": "1,231.69",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Cabinetry"
         },
         {
           "type": "line_item",
@@ -3564,10 +3314,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Plumbing"
-        },
-        {
           "type": "line_item",
           "line_number": 142,
           "cat": "PLM",
@@ -3657,97 +3403,46 @@
       }
     },
     {
-      "section_name": "Hallway",
+      "section_name": "Missing Wall 4' 10\" X 8' Opens into ROOM1",
       "metadata": {
-        "height": "11' 6\"",
-        "areas": {
-          "sf_walls": "682.83",
-          "sf_ceiling": "274.19",
-          "sf_walls_and_ceiling": "957.01",
-          "sf_floor": "274.19",
-          "sy_flooring": "30.47",
-          "lf_floor_perimeter": "44.08",
-          "lf_ceil_perimeter": "117.08"
-        },
-        "missing_walls": [
-          {
-            "dimensions": "7' 4\" X 11' 6\"",
-            "opens_into": "OFFSET_2"
-          },
-          {
-            "dimensions": "5' X 11' 6\"",
-            "opens_into": "FIREPLACE"
-          },
-          {
-            "dimensions": "31' X 11' 6\"",
-            "opens_into": "OFFSET_1"
-          },
-          {
-            "dimensions": "14' 3 1/2\" X 11' 6\"",
-            "opens_into": "KITCHEN"
-          },
-          {
-            "dimensions": "7 1/2\" X 11' 6\"",
-            "opens_into": "KITCHEN"
-          },
-          {
-            "dimensions": "5' 10\" X 11' 6\"",
-            "opens_into": "OFFSET"
-          }
-        ],
         "doors": [
           {
-            "dimensions": "4' 1\" X 9' 7\"",
-            "opens_into": "Exterior"
+            "dimensions": "3' 1\" X 6' 8\"",
+            "opens_into": "MASTER_BEDRO"
+          },
+          {
+            "dimensions": "3' X 7'",
+            "opens_into": "LAUNDRY_ROOM"
+          },
+          {
+            "dimensions": "3' X 7'",
+            "opens_into": "BEDROOM_2"
+          },
+          {
+            "dimensions": "3' X 7'",
+            "opens_into": "BEDROOM_1"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "45.71",
+          "sy_flooring": "13.41",
+          "lf_floor_perimeter": "33.63",
+          "sf_walls_and_ceiling": "402.84",
+          "sf_floor": "120.73",
+          "sf_walls": "282.11",
+          "sf_ceiling": "120.73"
+        },
+        "area": "Door 3' X 7' Opens into LAUNDRY_ROOM"
       },
       "subrooms": [
         {
           "subroom_name": "Hallway (1)",
           "metadata": {
-            "height": "8'",
-            "areas": {
-              "sf_walls": "282.11",
-              "sf_ceiling": "120.73",
-              "sf_walls_and_ceiling": "402.84",
-              "sf_floor": "120.73",
-              "sy_flooring": "13.41",
-              "lf_floor_perimeter": "33.63",
-              "lf_ceil_perimeter": "45.71"
-            },
-            "doors": [
-              {
-                "dimensions": "3' X 7'",
-                "opens_into": "BEDROOM_1"
-              },
-              {
-                "dimensions": "3' X 7'",
-                "opens_into": "BEDROOM_2"
-              },
-              {
-                "dimensions": "3' X 7'",
-                "opens_into": "LAUNDRY_ROOM"
-              },
-              {
-                "dimensions": "3' 1\" X 6' 8\"",
-                "opens_into": "MASTER_BEDRO"
-              }
-            ],
-            "missing_walls": [
-              {
-                "dimensions": "4' 10\" X 8'",
-                "opens_into": "ROOM1"
-              }
-            ]
+            "height": "8'"
           }
         }
       ],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 146,
@@ -3791,10 +3486,6 @@
           "notes": "To paint the (2) ledges on either side of the hallway at the top of the wall"
         },
         {
-          "type": "header",
-          "text": "Walls"
-        },
-        {
           "type": "line_item",
           "line_number": 148,
           "cat": "PNT",
@@ -3832,7 +3523,7 @@
           "op": "188.04",
           "total": "1,128.23",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Hallway"
         },
         {
           "type": "line_item",
@@ -3873,10 +3564,6 @@
           "total": "207.63",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Floor"
         },
         {
           "type": "line_item",
@@ -3977,10 +3664,6 @@
           "total": "1,155.63",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -4092,71 +3775,52 @@
       }
     },
     {
-      "section_name": "Master Bedroom",
+      "section_name": "Door 11' X 8' Opens into Exterior",
       "metadata": {
-        "height": "Sloped",
+        "missing_walls": [
+          {
+            "dimensions": "23' 3\" X 9'",
+            "opens_into": "MASTER_BEDRO"
+          }
+        ],
         "areas": {
-          "sf_walls": "458.41",
-          "sf_ceiling": "374.01",
-          "sf_walls_and_ceiling": "832.42",
-          "sf_floor": "371.03",
+          "lf_ceil_perimeter": "78.67",
           "sy_flooring": "41.23",
           "lf_floor_perimeter": "34.92",
-          "lf_ceil_perimeter": "78.67"
+          "sf_walls_and_ceiling": "832.42",
+          "sf_floor": "371.03",
+          "sf_walls": "458.41",
+          "sf_ceiling": "374.01"
         },
         "doors": [
           {
-            "dimensions": "6' 2\" X 8'",
-            "opens_into": "MASTER_BATH"
-          },
-          {
-            "dimensions": "3' 1\" X 6' 8\"",
-            "opens_into": "HALLWAY"
+            "dimensions": "6' X 8'",
+            "opens_into": "M_CLOSET_HE"
           },
           {
             "dimensions": "5' X 8'",
             "opens_into": "M_CLOSET_HI"
           },
           {
-            "dimensions": "6' X 8'",
-            "opens_into": "M_CLOSET_HE"
+            "dimensions": "3' 1\" X 6' 8\"",
+            "opens_into": "HALLWAY"
+          },
+          {
+            "dimensions": "6' 2\" X 8'",
+            "opens_into": "MASTER_BATH"
           }
-        ]
+        ],
+        "area": "26.33 LF Ceil. Perimeter"
       },
       "subrooms": [
         {
           "subroom_name": "Offset (1)",
           "metadata": {
-            "height": "9'",
-            "areas": {
-              "sf_walls": "149.00",
-              "sf_ceiling": "35.84",
-              "sf_walls_and_ceiling": "184.84",
-              "sf_floor": "35.84",
-              "sy_flooring": "3.98",
-              "lf_floor_perimeter": "15.33",
-              "lf_ceil_perimeter": "26.33"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "23' 3\" X 9'",
-                "opens_into": "MASTER_BEDRO"
-              }
-            ],
-            "doors": [
-              {
-                "dimensions": "11' X 8'",
-                "opens_into": "Exterior"
-              }
-            ]
+            "height": "9'"
           }
         }
       ],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 162,
@@ -4176,10 +3840,6 @@
           "total": "1,045.18",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -4242,10 +3902,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 166,
           "cat": "DMO",
@@ -4266,10 +3922,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
-        },
-        {
           "type": "line_item",
           "line_number": 167,
           "cat": "DOR",
@@ -4287,7 +3939,7 @@
           "op": "50.46",
           "total": "302.79",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Master Bedroom"
         },
         {
           "type": "line_item",
@@ -4479,31 +4131,21 @@
       }
     },
     {
-      "section_name": "M. Closet Hers",
+      "section_name": "Door 6' X 8' Opens into MASTER_BEDRO",
       "metadata": {
-        "height": "8'",
         "areas": {
-          "sf_walls": "248.91",
-          "sf_ceiling": "86.04",
-          "sf_walls_and_ceiling": "334.94",
-          "sf_floor": "86.04",
+          "lf_ceil_perimeter": "37.11",
           "sy_flooring": "9.56",
           "lf_floor_perimeter": "31.11",
-          "lf_ceil_perimeter": "37.11"
+          "sf_walls_and_ceiling": "334.94",
+          "sf_floor": "86.04",
+          "sf_walls": "248.91",
+          "sf_ceiling": "86.04"
         },
-        "doors": [
-          {
-            "dimensions": "6' X 8'",
-            "opens_into": "MASTER_BEDRO"
-          }
-        ]
+        "area": "2' 3\" 37.11 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 177,
@@ -4522,11 +4164,7 @@
           "op": "36.56",
           "total": "219.40",
           "total_note": null,
-          "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - M. Closet Hers"
         },
         {
           "type": "line_item",
@@ -4589,10 +4227,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 181,
           "cat": "DMO",
@@ -4611,10 +4245,6 @@
           "total": "47.17",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -4826,35 +4456,27 @@
       }
     },
     {
-      "section_name": "M. Closet His",
+      "section_name": "Door 5' X 8' Opens into MASTER_BEDRO",
       "metadata": {
-        "height": "8'",
-        "areas": {
-          "sf_walls": "234.57",
-          "sf_ceiling": "74.41",
-          "sf_walls_and_ceiling": "308.98",
-          "sf_floor": "74.41",
-          "sy_flooring": "8.27",
-          "lf_floor_perimeter": "29.03",
-          "lf_ceil_perimeter": "35.78"
-        },
         "doors": [
           {
             "dimensions": "1' 9\" X 6' 8\"",
             "opens_into": "SERVER_CLOS2"
-          },
-          {
-            "dimensions": "5' X 8'",
-            "opens_into": "MASTER_BEDRO"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "35.78",
+          "sy_flooring": "8.27",
+          "lf_floor_perimeter": "29.03",
+          "sf_walls_and_ceiling": "308.98",
+          "sf_floor": "74.41",
+          "sf_walls": "234.57",
+          "sf_ceiling": "74.41"
+        },
+        "area": "35.78 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 192,
@@ -4874,10 +4496,6 @@
           "total": "189.75",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -4940,10 +4558,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 196,
           "cat": "DMO",
@@ -4962,10 +4576,6 @@
           "total": "40.79",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -5145,7 +4755,7 @@
           "op": "46.50",
           "total": "279.06",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - M. Closet His"
         }
       ],
       "section_totals": {
@@ -5157,31 +4767,21 @@
       }
     },
     {
-      "section_name": "Server Closet",
+      "section_name": "Door 1' 9\" X 6' 8\" Opens into M_CLOSET_HI",
       "metadata": {
-        "height": "8'",
         "areas": {
-          "sf_walls": "52.33",
-          "sf_ceiling": "3.75",
-          "sf_walls_and_ceiling": "56.08",
-          "sf_floor": "3.75",
+          "lf_ceil_perimeter": "8.00",
           "sy_flooring": "0.42",
           "lf_floor_perimeter": "6.25",
-          "lf_ceil_perimeter": "8.00"
+          "sf_walls_and_ceiling": "56.08",
+          "sf_floor": "3.75",
+          "sf_walls": "52.33",
+          "sf_ceiling": "3.75"
         },
-        "doors": [
-          {
-            "dimensions": "1' 9\" X 6' 8\"",
-            "opens_into": "M_CLOSET_HI"
-          }
-        ]
+        "area": "8.00 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 206,
@@ -5201,10 +4801,6 @@
           "total": "9.55",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -5267,10 +4863,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 210,
           "cat": "DMO",
@@ -5289,10 +4881,6 @@
           "total": "2.06",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -5372,7 +4960,7 @@
           "op": "30.88",
           "total": "185.30",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Server Closet"
         },
         {
           "type": "line_item",
@@ -5404,31 +4992,27 @@
       }
     },
     {
-      "section_name": "Master Bath",
+      "section_name": "Window 5' X 5' Opens into Exterior",
       "metadata": {
-        "height": "8'",
-        "areas": {
-          "sf_walls": "252.33",
-          "sf_ceiling": "134.79",
-          "sf_walls_and_ceiling": "387.13",
-          "sf_floor": "97.87",
-          "sy_flooring": "10.87",
-          "lf_floor_perimeter": "23.46",
-          "lf_ceil_perimeter": "35.83"
-        },
         "doors": [
           {
             "dimensions": "6' 2\" X 8'",
             "opens_into": "MASTER_BEDRO"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "35.83",
+          "sy_flooring": "10.87",
+          "lf_floor_perimeter": "23.46",
+          "sf_walls_and_ceiling": "387.13",
+          "sf_floor": "97.87",
+          "sf_walls": "252.33",
+          "sf_ceiling": "134.79"
+        },
+        "area": "Door 6' 2\" X 8' Opens into MASTER_BEDRO"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 216,
@@ -5448,10 +5032,6 @@
           "total": "343.72",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -5494,10 +5074,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 219,
           "cat": "TIL",
@@ -5516,10 +5092,6 @@
           "total": "385.63",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -5579,7 +5151,7 @@
           "op": "13.74",
           "total": "82.42",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Master Bath"
         },
         {
           "type": "line_item",
@@ -5711,35 +5283,27 @@
       }
     },
     {
-      "section_name": "Laundry Room",
+      "section_name": "Door 3' X 7' Opens into HALLWAY",
       "metadata": {
-        "height": "7'",
-        "areas": {
-          "sf_walls": "252.21",
-          "sf_ceiling": "86.02",
-          "sf_walls_and_ceiling": "338.23",
-          "sf_floor": "55.35",
-          "sy_flooring": "6.15",
-          "lf_floor_perimeter": "16.55",
-          "lf_ceil_perimeter": "41.89"
-        },
         "doors": [
           {
             "dimensions": "3' X 6' 8\"",
             "opens_into": "Exterior"
-          },
-          {
-            "dimensions": "3' X 7'",
-            "opens_into": "HALLWAY"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "41.89",
+          "sy_flooring": "6.15",
+          "lf_floor_perimeter": "16.55",
+          "sf_walls_and_ceiling": "338.23",
+          "sf_floor": "55.35",
+          "sf_walls": "252.21",
+          "sf_ceiling": "86.02"
+        },
+        "area": "Door 3' X 6' 8\" Opens into Exterior"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 229,
@@ -5759,10 +5323,6 @@
           "total": "219.36",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -5802,7 +5362,7 @@
           "op": "40.04",
           "total": "240.27",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Laundry Room"
         },
         {
           "type": "line_item",
@@ -5843,10 +5403,6 @@
           "total": "44.21",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Floor"
         },
         {
           "type": "line_item",
@@ -5947,10 +5503,6 @@
           "total": "161.98",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -6133,10 +5685,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Cabinetry"
-        },
-        {
           "type": "line_item",
           "line_number": 248,
           "cat": "CAB",
@@ -6174,7 +5722,7 @@
           "op": "669.86",
           "total": "4,019.10",
           "total_note": null,
-          "notes": ""
+          "notes": "Includes backsplash Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Laundry Room"
         },
         {
           "type": "line_item",
@@ -6266,31 +5814,21 @@
       }
     },
     {
-      "section_name": "Bathroom 1",
+      "section_name": "Door 3' X 8' Opens into BEDROOM_2",
       "metadata": {
-        "height": "8' 5\"",
         "areas": {
-          "sf_walls": "337.92",
-          "sf_ceiling": "115.50",
-          "sf_walls_and_ceiling": "453.42",
-          "sf_floor": "76.93",
+          "lf_ceil_perimeter": "43.00",
           "sy_flooring": "8.55",
           "lf_floor_perimeter": "16.08",
-          "lf_ceil_perimeter": "43.00"
+          "sf_walls_and_ceiling": "453.42",
+          "sf_floor": "76.93",
+          "sf_walls": "337.92",
+          "sf_ceiling": "115.50"
         },
-        "doors": [
-          {
-            "dimensions": "3' X 8'",
-            "opens_into": "BEDROOM_2"
-          }
-        ]
+        "area": "43.00 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 254,
@@ -6310,10 +5848,6 @@
           "total": "294.55",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -6356,10 +5890,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 257,
           "cat": "DMO",
@@ -6380,10 +5910,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
-        },
-        {
           "type": "line_item",
           "line_number": 258,
           "cat": "DOR",
@@ -6401,7 +5927,7 @@
           "op": "50.46",
           "total": "302.79",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Bathroom 1"
         },
         {
           "type": "line_item",
@@ -6504,10 +6030,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Cabinetry"
-        },
-        {
           "type": "line_item",
           "line_number": 264,
           "cat": "PNT",
@@ -6537,57 +6059,12 @@
       }
     },
     {
-      "section_name": "Bedroom 1",
+      "section_name": "CA DOI Lic#2M66539",
       "metadata": {
-        "height": "Sloped",
-        "areas": {
-          "sf_walls": "513.72",
-          "sf_ceiling": "224.57",
-          "sf_walls_and_ceiling": "738.29",
-          "sf_floor": "224.00",
-          "sy_flooring": "24.89",
-          "lf_floor_perimeter": "45.00",
-          "lf_ceil_perimeter": "60.07"
-        },
-        "doors": [
-          {
-            "dimensions": "3' X 7'",
-            "opens_into": "HALLWAY"
-          }
-        ]
+        "area": "866-379-9970 - www.ApexAdjusters.com"
       },
-      "subrooms": [
-        {
-          "subroom_name": "Closet 1 (1)",
-          "metadata": {
-            "height": "8'",
-            "areas": {
-              "sf_walls": "206.67",
-              "sf_ceiling": "30.67",
-              "sf_walls_and_ceiling": "237.33",
-              "sf_floor": "30.67",
-              "sy_flooring": "3.41",
-              "lf_floor_perimeter": "23.83",
-              "lf_ceil_perimeter": "35.83"
-            },
-            "doors": [
-              {
-                "dimensions": "6' X 6' 8\"",
-                "opens_into": "BEDROOM_1"
-              },
-              {
-                "dimensions": "6' X 6' 8\"",
-                "opens_into": "BEDROOM_1"
-              }
-            ]
-          }
-        }
-      ],
+      "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 265,
@@ -6607,10 +6084,6 @@
           "total": "650.91",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -6673,10 +6146,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 269,
           "cat": "DMO",
@@ -6695,10 +6164,6 @@
           "total": "139.60",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -6801,10 +6266,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Closet"
-        },
-        {
           "type": "line_item",
           "line_number": 275,
           "cat": "FNC",
@@ -6894,43 +6355,35 @@
       }
     },
     {
-      "section_name": "Bedroom 2",
+      "section_name": "Door 3' X 7' Opens into BEDROOM_2",
       "metadata": {
-        "height": "Sloped",
         "areas": {
-          "sf_walls": "159.00",
-          "sf_ceiling": "31.43",
-          "sf_walls_and_ceiling": "190.43",
-          "sf_floor": "31.43",
-          "sy_flooring": "3.49",
-          "lf_floor_perimeter": "19.50",
-          "lf_ceil_perimeter": "22.50"
+          "lf_ceil_perimeter": "75.03",
+          "sy_flooring": "38.25",
+          "lf_floor_perimeter": "55.50",
+          "sf_walls_and_ceiling": "894.65",
+          "sf_floor": "344.25",
+          "sf_walls": "545.08",
+          "sf_ceiling": "349.57"
         },
         "doors": [
-          {
-            "dimensions": "10' X 6' 8\"",
-            "opens_into": "Exterior"
-          },
-          {
-            "dimensions": "3' X 7'",
-            "opens_into": "HALLWAY"
-          },
           {
             "dimensions": "3' X 8'",
             "opens_into": "BATHROOM_1"
           },
           {
             "dimensions": "3' X 7'",
-            "opens_into": "BEDROOM_2"
+            "opens_into": "HALLWAY"
+          },
+          {
+            "dimensions": "10' X 6' 8\"",
+            "opens_into": "Exterior"
           }
-        ]
+        ],
+        "area": "22.50 LF Ceil. Perimeter"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 279,
@@ -6950,10 +6403,6 @@
           "total": "971.60",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Walls"
         },
         {
           "type": "line_item",
@@ -7016,10 +6465,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Floor"
-        },
-        {
           "type": "line_item",
           "line_number": 283,
           "cat": "DMO",
@@ -7038,10 +6483,6 @@
           "total": "205.96",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -7081,7 +6522,7 @@
           "op": "95.84",
           "total": "575.02",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Bedroom 2"
         },
         {
           "type": "line_item",
@@ -7164,10 +6605,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Closet"
-        },
-        {
           "type": "line_item",
           "line_number": 290,
           "cat": "FNC",
@@ -7197,31 +6634,21 @@
       }
     },
     {
-      "section_name": "Garage",
+      "section_name": "Door 2' 8\" X 6' 8\" Opens into Exterior",
       "metadata": {
-        "height": "9' 3\"",
-        "areas": {
-          "sf_walls": "604.35",
-          "sf_ceiling": "409.48",
-          "lf_ceil_perimeter": "81.45"
-        },
         "doors": [
           {
             "dimensions": "18' 9\" X 7'",
             "opens_into": "Exterior"
-          },
-          {
-            "dimensions": "2' 8\" X 6' 8\"",
-            "opens_into": "Exterior"
           }
-        ]
+        ],
+        "areas": {
+          "lf_ceil_perimeter": "81.45"
+        },
+        "area": "Door 18' 9\" X 7' Opens into Exterior"
       },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Ceiling"
-        },
         {
           "type": "line_item",
           "line_number": 291,
@@ -7263,10 +6690,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Walls"
-        },
-        {
           "type": "line_item",
           "line_number": 293,
           "cat": "PNT",
@@ -7284,7 +6707,7 @@
           "op": "256.86",
           "total": "1,541.16",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Garage"
         },
         {
           "type": "line_item",
@@ -7305,10 +6728,6 @@
           "total": "160.39",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Floor"
         },
         {
           "type": "line_item",
@@ -7349,10 +6768,6 @@
           "total": "739.56",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Doors/Windows/Fixtures"
         },
         {
           "type": "line_item",
@@ -7587,18 +7002,17 @@
       }
     },
     {
-      "section_name": "Attic Space",
+      "section_name": "263.61 LF Ceil. Perimeter",
       "metadata": {
-        "height": "3'",
         "areas": {
-          "sf_walls": "790.83",
-          "sf_ceiling": "862.00",
           "sf_walls_and_ceiling": "1,652.82",
           "sf_floor": "862.00",
           "sy_flooring": "95.78",
           "lf_floor_perimeter": "263.61",
-          "lf_ceil_perimeter": "263.61"
-        }
+          "sf_walls": "790.83",
+          "sf_ceiling": "862.00"
+        },
+        "area": "20' 7\""
       },
       "subrooms": [],
       "line_items": [
@@ -7652,14 +7066,12 @@
       }
     },
     {
-      "section_name": "Main Structure",
-      "metadata": {},
+      "section_name": "Exterior - Main Structure",
+      "metadata": {
+        "area": "20' 7\""
+      },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Lights/Fixtures"
-        },
         {
           "type": "line_item",
           "line_number": 310,
@@ -7798,7 +7210,7 @@
           "op": "44.22",
           "total": "265.32",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Exterior - Main Structure"
         },
         {
           "type": "line_item",
@@ -7861,10 +7273,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Awning"
-        },
-        {
           "type": "line_item",
           "line_number": 320,
           "cat": "AWN",
@@ -7915,13 +7323,11 @@
     },
     {
       "section_name": "Roof",
-      "metadata": {},
+      "metadata": {
+        "area": "20' 7\""
+      },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Roof Repairs"
-        },
         {
           "type": "line_item",
           "line_number": 322,
@@ -8043,7 +7449,7 @@
           "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Roof"
         },
         {
           "type": "line_item",
@@ -8084,10 +7490,6 @@
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Soffit"
         },
         {
           "type": "line_item",
@@ -8242,14 +7644,67 @@
       }
     },
     {
-      "section_name": "Opens into Exterior",
-      "metadata": {},
+      "section_name": "Door 18' 9\" X 7' Opens into Exterior",
+      "metadata": {
+        "doors": [
+          {
+            "dimensions": "2' 8\" X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "10' X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "3' X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "11' X 8'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "7' X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "7' X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "9' 7\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "11' 4\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "4' 1\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' 8\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' 8\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' 4\" X 8'",
+            "opens_into": "Exterior"
+          }
+        ],
+        "areas": {
+          "sf_walls_and_ceiling": "3,195.78",
+          "sf_walls": "3,195.78",
+          "lf_floor_perimeter": "360.28"
+        },
+        "area": "Door 2' 8\" X 6' 8\" Opens into Exterior"
+      },
       "subrooms": [],
       "line_items": [
-        {
-          "type": "header",
-          "text": "Stucco Walls"
-        },
         {
           "type": "line_item",
           "line_number": 337,
@@ -8288,7 +7743,7 @@
           "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
-          "notes": "Damaged stucco due to replacing Exterior windows and sliders"
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Ext_Surfaces Damaged stucco due to replacing Exterior windows and sliders"
         },
         {
           "type": "line_item",
@@ -8531,7 +7986,9 @@
     },
     {
       "section_name": "CA DOI Lic#2M66539",
-      "metadata": {},
+      "metadata": {
+        "area": "866-379-9970 - www.ApexAdjusters.com"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -8807,7 +8264,7 @@
           "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Other Structures"
         },
         {
           "type": "line_item",
@@ -8850,10 +8307,6 @@
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "To mill and shape travertine tiling"
-        },
-        {
-          "type": "header",
-          "text": "Pool/Jacuzzi"
         },
         {
           "type": "line_item",
@@ -8924,10 +8377,6 @@
           "notes": "Line 2: Pool equipment: replace all fire damaged pool equipment (pump, heater, sub-panel, vacuum lines, etc)"
         },
         {
-          "type": "header",
-          "text": "Glass Railing"
-        },
-        {
           "type": "line_item",
           "line_number": 368,
           "cat": "GLS",
@@ -8972,10 +8421,6 @@
           "notes": "N0 12: Glass railings: replace glass railings on front patio"
         },
         {
-          "type": "header",
-          "text": "Fire Pit"
-        },
-        {
           "type": "line_item",
           "line_number": 370,
           "cat": "FPL",
@@ -9014,10 +8459,6 @@
           "total": "21.95",
           "total_note": null,
           "notes": "Cap gas line during repairs"
-        },
-        {
-          "type": "header",
-          "text": "Built-In BBQ"
         },
         {
           "type": "line_item",
@@ -9105,7 +8546,7 @@
           "op": "859.78",
           "total": "5,158.66",
           "total_note": null,
-          "notes": ""
+          "notes": "(2) Crew for 1 day to detach all wire support/guide & 1 day wire to reset wire guides. Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Other Structures"
         },
         {
           "type": "line_item",
@@ -9408,10 +8849,6 @@
           "notes": ""
         },
         {
-          "type": "header",
-          "text": "Stairwell Risers"
-        },
-        {
           "type": "line_item",
           "line_number": 390,
           "cat": "CLN",
@@ -9449,7 +8886,7 @@
           "op": "49.20",
           "total": "295.10",
           "total_note": null,
-          "notes": ""
+          "notes": "Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Other Structures"
         },
         {
           "type": "line_item",
@@ -9492,10 +8929,6 @@
           "notes": "Step lights"
         },
         {
-          "type": "header",
-          "text": "Pergola"
-        },
-        {
           "type": "line_item",
           "line_number": 394,
           "cat": "XST",
@@ -9522,10 +8955,6 @@
         {
           "type": "header",
           "text": "Block wall & Wooden Fencing - Rear Elevation"
-        },
-        {
-          "type": "header",
-          "text": "Wooden Fencing"
         },
         {
           "type": "line_item",
@@ -9586,10 +9015,6 @@
           "total": "1,167.70",
           "total_note": null,
           "notes": "To drill and bolt wood slatted fencing into block wall"
-        },
-        {
-          "type": "header",
-          "text": "Block Wall"
         },
         {
           "type": "line_item",
@@ -9670,10 +9095,6 @@
           "total": "395.38",
           "total_note": null,
           "notes": ""
-        },
-        {
-          "type": "header",
-          "text": "Driveway"
         },
         {
           "type": "line_item",
@@ -9757,7 +9178,7 @@
           "op": "307.02",
           "total": "1,842.19",
           "total_note": null,
-          "notes": ""
+          "notes": "Metal Fence/Gate Apex Public Adjusters, Inc. 550 N. Brand Blvd. Suite 950 Glendale CA 91203 866-379-9970 - www.ApexAdjusters.com CA DOI Lic#2M66539 CONTINUED - Other Structures"
         },
         {
           "type": "line_item",
@@ -9790,7 +9211,9 @@
     },
     {
       "section_name": "Landscaping",
-      "metadata": {},
+      "metadata": {
+        "area": "866-379-9970 - www.ApexAdjusters.com"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -10024,7 +9447,9 @@
     },
     {
       "section_name": "CA DOI Lic#2M66539",
-      "metadata": {},
+      "metadata": {
+        "area": "866-379-9970 - www.ApexAdjusters.com"
+      },
       "subrooms": [],
       "line_items": [
         {

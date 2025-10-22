@@ -40,8 +40,10 @@
   },
   "sections": [
     {
-      "section_name": "Out",
-      "metadata": {},
+      "section_name": "Pack-Out",
+      "metadata": {
+        "area": "SCHACTER_CONTENTS2"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -219,7 +221,9 @@
     },
     {
       "section_name": "Cleaning",
-      "metadata": {},
+      "metadata": {
+        "area": "SCHACTER_CONTENTS2"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -242,7 +246,7 @@
           "op": null,
           "total": "1,322.10",
           "total_note": null,
-          "notes": ""
+          "notes": "(6) loads @ 1695 Cubic Feet. Office of Jared V. Boergadine, Licensed Appraiser & Public Adjuster Arizona Public Adjuster License #18382965 California Public Adjuster License #2L70602 Colorado Public Adjuster License #608394 Nevada Public Adjuster License # 3443075 Texas Public Adjuster License #2207166 CONTINUED - Cleaning"
         },
         {
           "type": "line_item",
@@ -538,69 +542,30 @@
       }
     },
     {
-      "section_name": "Main Hallway",
+      "section_name": "10.74 LF Ceil. Perimeter",
       "metadata": {
-        "height": "7' 5\"",
         "areas": {
-          "sf_walls": "462.22",
-          "sf_ceiling": "104.64",
-          "sf_walls_and_ceiling": "566.86",
-          "sf_floor": "104.64",
-          "sy_flooring": "11.63",
-          "lf_floor_perimeter": "62.32",
-          "lf_ceil_perimeter": "62.32"
-        }
+          "sy_flooring": "1.17",
+          "lf_floor_perimeter": "13.04",
+          "sf_walls_and_ceiling": "107.26",
+          "sf_floor": "10.56",
+          "sf_walls": "96.69",
+          "sf_ceiling": "10.56",
+          "lf_ceil_perimeter": "13.04"
+        },
+        "area": "86.82 SF Walls & Ceiling 7.17 SF Floor"
       },
       "subrooms": [
         {
-          "subroom_name": "Kitchen Hallway (1)",
-          "metadata": {
-            "height": "7' 5\"",
-            "areas": {
-              "sf_walls": "177.31",
-              "sf_ceiling": "45.76",
-              "sf_walls_and_ceiling": "223.07",
-              "sf_floor": "45.76",
-              "sy_flooring": "5.08",
-              "lf_floor_perimeter": "23.24",
-              "lf_ceil_perimeter": "28.32"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "3' 9\" X 7' 5\"",
-                "opens_into": "LIVING_ROOM"
-              }
-            ]
-          }
-        },
-        {
           "subroom_name": "HVAC Closet (3)",
           "metadata": {
-            "height": "7' 5\"",
-            "areas": {
-              "sf_walls": "96.69",
-              "sf_ceiling": "10.56",
-              "sf_walls_and_ceiling": "107.26",
-              "sf_floor": "10.56",
-              "sy_flooring": "1.17",
-              "lf_floor_perimeter": "13.04",
-              "lf_ceil_perimeter": "13.04"
-            }
+            "height": "7' 5\""
           }
         },
         {
           "subroom_name": "Coat Closet (2)",
           "metadata": {
-            "height": "7' 5\"",
-            "areas": {
-              "sf_walls": "79.65",
-              "sf_ceiling": "7.17",
-              "sf_walls_and_ceiling": "86.82",
-              "sf_floor": "7.17",
-              "sy_flooring": "0.80",
-              "lf_floor_perimeter": "10.74",
-              "lf_ceil_perimeter": "10.74"
-            }
+            "height": "7' 5\""
           }
         }
       ],
@@ -643,7 +608,7 @@
           "op": null,
           "total": "7.24",
           "total_note": null,
-          "notes": ""
+          "notes": "Office of Jared V. Boergadine, Licensed Appraiser & Public Adjuster Arizona Public Adjuster License #18382965 California Public Adjuster License #2L70602 Colorado Public Adjuster License #608394 Nevada Public Adjuster License # 3443075 Texas Public Adjuster License #2207166 CONTINUED - Main Hallway"
         },
         {
           "type": "line_item",
@@ -715,33 +680,24 @@
       }
     },
     {
-      "section_name": "Bathroom 1",
+      "section_name": "2' 1\"",
       "metadata": {
-        "height": "7' 5\"",
         "areas": {
-          "sf_walls": "264.32",
-          "sf_ceiling": "64.68",
-          "sf_walls_and_ceiling": "329.00",
-          "sf_floor": "64.68",
+          "lf_ceil_perimeter": "32.24",
           "sy_flooring": "7.19",
           "lf_floor_perimeter": "40.64",
-          "lf_ceil_perimeter": "32.24"
-        }
+          "sf_walls_and_ceiling": "329.00",
+          "sf_floor": "64.68",
+          "sf_walls": "264.32",
+          "sf_ceiling": "64.68"
+        },
+        "area": "15.83 LF Ceil. Perimeter"
       },
       "subrooms": [
         {
           "subroom_name": "Bed1 Closet (1)",
           "metadata": {
-            "height": "7' 5\"",
-            "areas": {
-              "sf_walls": "117.43",
-              "sf_ceiling": "11.50",
-              "sf_walls_and_ceiling": "128.93",
-              "sf_floor": "11.50",
-              "sy_flooring": "1.28",
-              "lf_floor_perimeter": "15.83",
-              "lf_ceil_perimeter": "15.83"
-            }
+            "height": "7' 5\""
           }
         }
       ],
@@ -784,7 +740,7 @@
           "op": null,
           "total": "9.71",
           "total_note": null,
-          "notes": ""
+          "notes": "Office of Jared V. Boergadine, Licensed Appraiser & Public Adjuster Arizona Public Adjuster License #18382965 California Public Adjuster License #2L70602 Colorado Public Adjuster License #608394 Nevada Public Adjuster License # 3443075 Texas Public Adjuster License #2207166 CONTINUED - Bathroom 1"
         },
         {
           "type": "line_item",
@@ -836,24 +792,12 @@
       }
     },
     {
-      "section_name": "Living Room",
+      "section_name": "8' 9\"",
       "metadata": {
-        "height": "Peaked",
         "areas": {
-          "sf_walls": "730.95",
-          "sf_ceiling": "411.27",
-          "sf_walls_and_ceiling": "1,142.22",
-          "sf_floor": "404.14",
-          "sy_flooring": "44.90",
-          "lf_floor_perimeter": "28.41",
-          "lf_ceil_perimeter": "84.51"
+          "lf_floor_perimeter": "28.41"
         },
-        "missing_walls": [
-          {
-            "dimensions": "3' 9\" X 7' 8\"",
-            "opens_into": "KITCHEN_HALL"
-          }
-        ]
+        "area": "8' 4\""
       },
       "subrooms": [],
       "line_items": [
@@ -915,7 +859,7 @@
           "op": null,
           "total": "120.73",
           "total_note": null,
-          "notes": ""
+          "notes": "Large amount of crystal objects Office of Jared V. Boergadine, Licensed Appraiser & Public Adjuster Arizona Public Adjuster License #18382965 California Public Adjuster License #2L70602 Colorado Public Adjuster License #608394 Nevada Public Adjuster License # 3443075 Texas Public Adjuster License #2207166 CONTINUED - Living Room"
         },
         {
           "type": "line_item",
@@ -1027,48 +971,24 @@
       }
     },
     {
-      "section_name": "Kitchen",
+      "section_name": "2' 11\"",
       "metadata": {
-        "height": "Sloped",
         "areas": {
-          "sf_walls": "179.51",
-          "sf_ceiling": "90.64",
-          "sf_walls_and_ceiling": "270.15",
-          "sf_floor": "89.07",
-          "sy_flooring": "9.90",
-          "lf_floor_perimeter": "17.17",
-          "lf_ceil_perimeter": "38.15"
-        }
+          "lf_ceil_perimeter": "18.93",
+          "sy_flooring": "1.78",
+          "lf_floor_perimeter": "11.68",
+          "sf_walls_and_ceiling": "102.64",
+          "sf_floor": "16.04",
+          "sf_walls": "86.59",
+          "sf_ceiling": "16.04"
+        },
+        "area": "18.93 LF Ceil. Perimeter"
       },
       "subrooms": [
         {
-          "subroom_name": "Kitchen2 (1)",
-          "metadata": {
-            "height": "Sloped",
-            "areas": {
-              "sf_walls": "103.72",
-              "sf_ceiling": "9.93",
-              "sf_walls_and_ceiling": "113.65",
-              "sf_floor": "9.93",
-              "sy_flooring": "1.10",
-              "lf_floor_perimeter": "12.97",
-              "lf_ceil_perimeter": "12.97"
-            }
-          }
-        },
-        {
           "subroom_name": "Stove inset (2)",
           "metadata": {
-            "height": "7' 5\"",
-            "areas": {
-              "sf_walls": "86.59",
-              "sf_ceiling": "16.04",
-              "sf_walls_and_ceiling": "102.64",
-              "sf_floor": "16.04",
-              "sy_flooring": "1.78",
-              "lf_floor_perimeter": "11.68",
-              "lf_ceil_perimeter": "18.93"
-            }
+            "height": "7' 5\""
           }
         }
       ],
@@ -1203,33 +1123,24 @@
       }
     },
     {
-      "section_name": "Office",
+      "section_name": "21.34 LF Ceil. Perimeter",
       "metadata": {
-        "height": "Sloped",
         "areas": {
-          "sf_walls": "422.45",
-          "sf_ceiling": "141.86",
-          "sf_walls_and_ceiling": "564.31",
-          "sf_floor": "138.87",
           "sy_flooring": "15.43",
           "lf_floor_perimeter": "48.17",
+          "sf_walls_and_ceiling": "564.31",
+          "sf_floor": "138.87",
+          "sf_walls": "422.45",
+          "sf_ceiling": "141.86",
           "lf_ceil_perimeter": "48.73"
-        }
+        },
+        "area": "175.65 SF Walls & Ceiling 17.34 SF Floor"
       },
       "subrooms": [
         {
           "subroom_name": "Office Closet (1)",
           "metadata": {
-            "height": "7' 5\"",
-            "areas": {
-              "sf_walls": "158.31",
-              "sf_ceiling": "17.34",
-              "sf_walls_and_ceiling": "175.65",
-              "sf_floor": "17.34",
-              "sy_flooring": "1.93",
-              "lf_floor_perimeter": "21.34",
-              "lf_ceil_perimeter": "21.34"
-            }
+            "height": "7' 5\""
           }
         }
       ],
@@ -1424,18 +1335,17 @@
       }
     },
     {
-      "section_name": "Laundry Room",
+      "section_name": "30.34 LF Ceil. Perimeter",
       "metadata": {
-        "height": "Sloped",
         "areas": {
-          "sf_walls": "239.13",
-          "sf_ceiling": "52.75",
-          "sf_walls_and_ceiling": "291.88",
-          "sf_floor": "52.08",
           "sy_flooring": "5.79",
           "lf_floor_perimeter": "30.12",
-          "lf_ceil_perimeter": "30.34"
-        }
+          "sf_walls_and_ceiling": "291.88",
+          "sf_floor": "52.08",
+          "sf_walls": "239.13",
+          "sf_ceiling": "52.75"
+        },
+        "area": "291.88 SF Walls & Ceiling 52.08 SF Floor"
       },
       "subrooms": [],
       "line_items": [
@@ -1529,18 +1439,17 @@
       }
     },
     {
-      "section_name": "Bedroom 1",
+      "section_name": "40.55 LF Ceil. Perimeter",
       "metadata": {
-        "height": "Sloped",
         "areas": {
-          "sf_walls": "363.30",
-          "sf_ceiling": "98.35",
-          "sf_walls_and_ceiling": "461.65",
-          "sf_floor": "96.21",
           "sy_flooring": "10.69",
           "lf_floor_perimeter": "40.09",
-          "lf_ceil_perimeter": "40.55"
-        }
+          "sf_walls_and_ceiling": "461.65",
+          "sf_floor": "96.21",
+          "sf_walls": "363.30",
+          "sf_ceiling": "98.35"
+        },
+        "area": "461.65 SF Walls & Ceiling 96.21 SF Floor"
       },
       "subrooms": [],
       "line_items": [
@@ -1634,18 +1543,17 @@
       }
     },
     {
-      "section_name": "Master bathroom",
+      "section_name": "31.33 LF Ceil. Perimeter",
       "metadata": {
-        "height": "7' 5\"",
         "areas": {
-          "sf_walls": "232.39",
-          "sf_ceiling": "57.69",
-          "sf_walls_and_ceiling": "290.08",
-          "sf_floor": "57.69",
           "sy_flooring": "6.41",
           "lf_floor_perimeter": "31.33",
-          "lf_ceil_perimeter": "31.33"
-        }
+          "sf_walls_and_ceiling": "290.08",
+          "sf_floor": "57.69",
+          "sf_walls": "232.39",
+          "sf_ceiling": "57.69"
+        },
+        "area": "290.08 SF Walls & Ceiling 57.69 SF Floor"
       },
       "subrooms": [],
       "line_items": [
@@ -1759,24 +1667,9 @@
       }
     },
     {
-      "section_name": "Master Bedroom",
+      "section_name": "Texas Public Adjuster License #2207166",
       "metadata": {
-        "height": "Peaked",
-        "areas": {
-          "sf_walls": "221.88",
-          "sf_ceiling": "47.40",
-          "sf_walls_and_ceiling": "269.28",
-          "sf_floor": "47.40",
-          "sy_flooring": "5.27",
-          "lf_floor_perimeter": "29.92",
-          "lf_ceil_perimeter": "29.92"
-        },
-        "missing_walls": [
-          {
-            "dimensions": "13' 3\" X 7' 5\"",
-            "opens_into": "MASTER_BEDRO"
-          }
-        ]
+        "area": "Nevada Public Adjuster License # 3443075"
       },
       "subrooms": [],
       "line_items": [
@@ -1950,18 +1843,17 @@
       }
     },
     {
-      "section_name": "Garage",
+      "section_name": "81.91 LF Ceil. Perimeter",
       "metadata": {
-        "height": "Sloped",
         "areas": {
-          "sf_walls": "747.93",
-          "sf_ceiling": "401.36",
-          "sf_walls_and_ceiling": "1,149.29",
-          "sf_floor": "397.32",
           "sy_flooring": "44.15",
           "lf_floor_perimeter": "81.50",
-          "lf_ceil_perimeter": "81.91"
-        }
+          "sf_walls_and_ceiling": "1,149.29",
+          "sf_floor": "397.32",
+          "sf_walls": "747.93",
+          "sf_ceiling": "401.36"
+        },
+        "area": "747.93 SF Walls 401.36 SF Ceiling"
       },
       "subrooms": [],
       "line_items": [
@@ -2076,7 +1968,9 @@
     },
     {
       "section_name": "Storage Area/Room",
-      "metadata": {},
+      "metadata": {
+        "area": "747.93 SF Walls 401.36 SF Ceiling"
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -2156,7 +2050,9 @@
     },
     {
       "section_name": "Pack-back",
-      "metadata": {},
+      "metadata": {
+        "area": "747.93 SF Walls 401.36 SF Ceiling"
+      },
       "subrooms": [],
       "line_items": [
         {
