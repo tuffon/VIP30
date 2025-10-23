@@ -12,6 +12,7 @@ from .helpers import (
     TableColumns,
     extract_metadata_from_line,
     format_dollar_amount,
+    is_diagram_artifact,
     is_line_item_header,
     is_subroom_header,
     is_table_continuation,
@@ -348,13 +349,30 @@ class XactimateRoughDraftParser:
             j -= 1
         return best_match_idx
 
-    @staticmethod
-    def _should_skip_distorted_line(text: str) -> bool:
+    def _should_skip_distorted_line(self, text: str, metadata: Optional[Dict[str, object]] = None) -> bool:
         if not text:
             return False
         collapsed = (text or '').strip()
         if not collapsed:
             return False
+
+        lowered = collapsed.lower()
+        if metadata:
+            return False
+        if 'height:' in lowered:
+            return False
+        if re.search(r'\bsubroom:\b', lowered):
+            return False
+        if re.search(r'totals?:', lowered):
+            return False
+        if re.search(r'\b(?:door|window|missing\s+wall)\b', lowered):
+            return False
+        if re.search(r'\b(?:sf|sy|lf)\b', lowered) and re.search(r'\b(?:walls?|ceiling|floor|perimeter)\b', lowered):
+            return False
+
+        if is_diagram_artifact(collapsed):
+            return True
+
         duplicate_letters = re.findall(r'([A-Za-z])\1+', collapsed)
         if len(duplicate_letters) < 3:
             return False
@@ -386,7 +404,8 @@ class XactimateRoughDraftParser:
             if not line:
                 idx += 1
                 continue
-            if self._should_skip_distorted_line(line):
+            meta = extract_metadata_from_line(line)
+            if self._should_skip_distorted_line(line, meta):
                 idx += 1
                 continue
 
@@ -412,7 +431,6 @@ class XactimateRoughDraftParser:
                     idx += 1
                     continue
 
-            meta = extract_metadata_from_line(line)
             if meta:
                 if current_subroom:
                     current_subroom['metadata'] = merge_metadata(current_subroom.get('metadata', {}), meta)

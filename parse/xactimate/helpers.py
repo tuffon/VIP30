@@ -31,6 +31,7 @@ from .constants import (
     TABLE_HEADER_CONTINUATION,
     TERMINAL_STATUS_PATTERN,
     TOTALS_PATTERN,
+    WINDOW_PATTERN,
 )
 
 
@@ -307,6 +308,13 @@ def extract_metadata_from_line(line: str) -> Dict[str, object]:
     if walls:
         md['missing_walls'] = walls
 
+    windows = [
+        {'dimensions': m.group(1).strip(), 'opens_into': m.group(2).strip()}
+        for m in re.finditer(WINDOW_PATTERN, line, re.IGNORECASE)
+    ]
+    if windows:
+        md['windows'] = windows
+
     return md
 
 
@@ -314,7 +322,7 @@ def merge_metadata(base: Dict[str, object], new: Dict[str, object]) -> Dict[str,
     for k, v in new.items():
         if k == 'areas':
             base.setdefault('areas', {}).update(v)
-        elif k in ('doors', 'missing_walls'):
+        elif k in ('doors', 'missing_walls', 'windows'):
             base.setdefault(k, []).extend(v)
         else:
             base[k] = v

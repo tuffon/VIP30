@@ -49,8 +49,9 @@ METADATA_PATTERNS = {
     'lf_floor_perimeter': r'([0-9,]+\.[0-9]+)\s+LF\s+Floor\s+Perimeter',
     'lf_ceil_perimeter': r'([0-9,]+\.[0-9]+)\s+LF\s+Ceil\.\s+Perimeter',
 }
-DOOR_PATTERN = r'Door\s+([\d\'\"\s]+[Xx][\d\'\"\s]+)\s+Opens\s+into\s+([A-Z_0-9]+)'
-MISSING_WALL_PATTERN = r'Missing\s+Wall\s+([\d\'\"\s/]+[Xx][\d\'\"\s]+)\s+Opens\s+into\s+([A-Z_0-9]+)'
+DOOR_PATTERN = r'Door\s+([\d\'\"\s/]+[Xx][\d\'\"\s/]+)\s+Opens\s+into\s+([A-Za-z0-9_]+(?:\s+[A-Za-z0-9_]+)*)'
+MISSING_WALL_PATTERN = r'Missing\s+Wall\s+([\d\'\"\s/]+[Xx][\d\'\"\s/]+)\s+Opens\s+into\s+([A-Za-z0-9_]+(?:\s+[A-Za-z0-9_]+)*)'
+WINDOW_PATTERN = r'Window\s+([\d\'\"\s/]+[Xx][\d\'\"\s/]+)\s+Opens\s+into\s+([A-Za-z0-9_]+(?:\s+[A-Za-z0-9_]+)*)'
 TOTALS_PATTERN = r'^Totals?:'
 CASE_LINE1_PATTERN = r'Claim\s+Number:\s*(\S*)\s+Policy\s+Number:\s*(\S*)\s+Type\s+of\s+Loss:\s*([^\n]*)'
 COVERAGE_SECTION_PATTERN = r'Coverage\s+Deductible\s+Policy\s+Limit\s*\n((?:.*?\$[\d,]+\.[\d]{2}.*?\n?)+)'
@@ -110,6 +111,7 @@ __all__ = [
     'METADATA_PATTERNS',
     'DOOR_PATTERN',
     'MISSING_WALL_PATTERN',
+    'WINDOW_PATTERN',
     'TOTALS_PATTERN',
     'CASE_LINE1_PATTERN',
     'COVERAGE_SECTION_PATTERN',
