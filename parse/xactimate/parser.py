@@ -40,18 +40,21 @@ class XactimateRoughDraftParser:
         # full text (once)
         full_lines = self.io.read_full_text_lines()
 
-        # pre-pass recap-by-category (non-sequential), and skip mask
+        # pre-pass recap-by-category (non-sequential)
         recap_cat, recap_cat_spans = self._prepass_recap_by_category(full_lines)
-        skip_mask = self._build_skip_mask(len(full_lines), recap_cat_spans)
 
-        # sequential parse using full_lines and skip_mask
+        # end-of-doc structured (but we will not clobber recap_by_category if prepass found it)
+        end = self._parse_end_structured(full_lines)
+
+        # unified skip mask for sequential parsing
+        all_spans = recap_cat_spans + (end.get("_skip_spans") or [])
+        skip_mask = self._build_skip_mask(len(full_lines), all_spans)
+
+        # sequential parse using full_lines and unified skip_mask
         sections, _ = self._parse_document_from_lines(full_lines, skip_mask=skip_mask)
 
         # front-page metadata
         case_md = self._parse_case_metadata(self.io.read_first_page_lines())
-
-        # end-of-doc structured (but we will not clobber recap_by_category if prepass found it)
-        end = self._parse_end_structured(full_lines)
         if recap_cat and (recap_cat.get("subtotals") or any(k for k in recap_cat.keys() if k != "subtotals")):
             end["recap_by_category"] = recap_cat
 
@@ -508,9 +511,30 @@ class XactimateRoughDraftParser:
 
     def _build_skip_mask(self, n_lines: int, ranges: List[Tuple[int, int]]) -> List[bool]:
         mask = [False] * n_lines
+        if not ranges:
+            return mask
+
+        normalized: List[Tuple[int, int]] = []
         for a, b in ranges:
-            a = max(0, a); b = min(n_lines, b)
-            for i in range(a, b):
+            start = max(0, min(n_lines, a))
+            end = max(0, min(n_lines, b))
+            if start >= end:
+                continue
+            normalized.append((start, end))
+
+        if not normalized:
+            return mask
+
+        normalized.sort()
+        merged: List[Tuple[int, int]] = []
+        for start, end in normalized:
+            if merged and start <= merged[-1][1]:
+                merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+            else:
+                merged.append((start, end))
+
+        for start, end in merged:
+            for i in range(start, end):
                 mask[i] = True
         return mask
 
@@ -1543,6 +1567,7 @@ class XactimateRoughDraftParser:
             if not ts or (not ts.get("line_items") and not ts.get("totals")):
                 del result["trade_summary"]
 
+        result["_skip_spans"] = result.get("_skip_spans") or []
         return result
 
 
