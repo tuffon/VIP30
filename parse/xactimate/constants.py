@@ -1,5 +1,7 @@
 """Regex patterns and static configuration for the Xactimate parser."""
 
+import re
+
 PAGE_NUMBER_PATTERN = r'.*\d+/\d+/\d+\s+Page:\s*\d+'
 SINGLE_PAGE_NUMBER_PATTERN = r'^\d{1,3}$'
 SECTION_HEIGHT_PATTERN = r'^(.+?)\s+Height:\s*(.+)'
@@ -67,6 +69,12 @@ RECAP_LINE_PATTERN = r'^([A-Za-z0-9/_\-\.\s\(\),&\']+?)\s+([\d,]+\.\d+)\s+(\d{1,
 RECAP_COVERAGE_SPLIT = r'^Coverage:\s+(.+?)\s+@?\s*(\d{1,3}\.\d{2})%?\s*=\s*([\d,]+\.\d+)$'
 RECAP_SUBTOTAL_PATTERN = r'^(?:Area\s+Subtotal:|O&P Items Subtotal|Non-O&P Items Subtotal|Subtotal of Areas|Total)\s+([\d,]+\.\d+)\s+(\d{1,3}\.\d{2})%$'
 
+PAGE_NUM_PAT = re.compile(r'^(?:Page\s*\d+(?:\s*/\s*\d+)?|Page:\s*\d+(?:\s+of\s+\d+)?|\d{1,4})$')
+DATE_STAMP_PAT = re.compile(r'^Date:\s*\d{1,2}/\d{1,2}/\d{2,4}(?:\s+\d{1,2}:\d{2}(?:\s*[AP]M)?)?$', re.IGNORECASE)
+URL_PAT = re.compile(r'www\.[^\s]+', re.IGNORECASE)
+BRAND_PAT = re.compile(r'(?:Apex|State\s*Farm|CA\s*DOI|Adjusters|Suite)', re.IGNORECASE)
+NO_LETTERS_PAT = re.compile(r'^[^A-Za-z]+$')
+
 __all__ = [
     'PAGE_NUMBER_PATTERN',
     'SINGLE_PAGE_NUMBER_PATTERN',
@@ -118,4 +126,9 @@ __all__ = [
     'RECAP_LINE_PATTERN',
     'RECAP_COVERAGE_SPLIT',
     'RECAP_SUBTOTAL_PATTERN',
+    'PAGE_NUM_PAT',
+    'DATE_STAMP_PAT',
+    'URL_PAT',
+    'BRAND_PAT',
+    'NO_LETTERS_PAT',
 ]

@@ -16,6 +16,7 @@ from .helpers import (
     is_line_item,
     is_line_item_header,
     is_page_header,
+    is_page_noise,
     is_subroom_header,
     is_table_continuation,
     is_table_header,
@@ -40,18 +41,21 @@ class XactimateRoughDraftParser:
         # full text (once)
         full_lines = self.io.read_full_text_lines()
 
-        # pre-pass recap-by-category (non-sequential), and skip mask
+        # pre-pass recap-by-category (non-sequential)
         recap_cat, recap_cat_spans = self._prepass_recap_by_category(full_lines)
-        skip_mask = self._build_skip_mask(len(full_lines), recap_cat_spans)
 
-        # sequential parse using full_lines and skip_mask
+        # end-of-doc structured (but we will not clobber recap_by_category if prepass found it)
+        end = self._parse_end_structured(full_lines)
+
+        # unified skip mask for sequential parsing
+        all_spans = recap_cat_spans + (end.get("_skip_spans") or [])
+        skip_mask = self._build_skip_mask(len(full_lines), all_spans)
+
+        # sequential parse using full_lines and unified skip_mask
         sections, _ = self._parse_document_from_lines(full_lines, skip_mask=skip_mask)
 
         # front-page metadata
         case_md = self._parse_case_metadata(self.io.read_first_page_lines())
-
-        # end-of-doc structured (but we will not clobber recap_by_category if prepass found it)
-        end = self._parse_end_structured(full_lines)
         if recap_cat and (recap_cat.get("subtotals") or any(k for k in recap_cat.keys() if k != "subtotals")):
             end["recap_by_category"] = recap_cat
 
@@ -145,6 +149,43 @@ class XactimateRoughDraftParser:
         collecting_notes = False
         columns = TableColumns()
         pending_header_lines: List[str] = []
+
+        def flush_pending_notes() -> None:
+            nonlocal pending_header_lines
+            if not pending_header_lines or not current_line_item:
+                pending_header_lines = []
+                return
+            filtered = [line for line in pending_header_lines if not is_page_noise(line)]
+            pending_header_lines = []
+            note_text = ' '.join(segment.strip() for segment in filtered if segment.strip())
+            if not note_text:
+                return
+            if not re.search(r'[A-Za-z]', note_text):
+                return
+            notes_seen = current_line_item.setdefault('_notes_seen', [])
+            if note_text in notes_seen:
+                return
+            notes_seen.append(note_text)
+            if len(notes_seen) > 3:
+                notes_seen.pop(0)
+            existing = current_line_item.get('notes') or ''
+            if existing:
+                combined = f"{existing} {note_text}".strip()
+            else:
+                combined = note_text
+            if len(combined) > 1000:
+                combined = combined[:1000].rstrip() + ' …'
+            current_line_item['notes'] = combined
+
+        def finalize_current_line_item() -> bool:
+            nonlocal current_line_item
+            if current_line_item and current_section is not None:
+                current_line_item.pop('_notes_seen', None)
+                current_section['line_items'].append(current_line_item)
+                current_line_item = None
+                return True
+            current_line_item = None
+            return False
 
         i = 0
         L = len(lines)
@@ -243,14 +284,10 @@ class XactimateRoughDraftParser:
                     continue
 
                 if is_totals_line(line, current_section['section_name'] if current_section else None):
-                    if pending_header_lines and current_line_item:
-                        note_text = ' '.join(pending_header_lines)
-                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + note_text).strip() if current_line_item['notes'] else note_text
-                        pending_header_lines = []
+                    flush_pending_notes()
                     if collecting_notes and current_line_item:
-                        current_section['line_items'].append(current_line_item)
-                        current_line_item = None
-                        collecting_notes = False
+                        finalize_current_line_item()
+                    collecting_notes = False
 
                     current_section['section_totals'] = self._parse_totals_line(line, columns)
                     sections.append(current_section)
@@ -261,26 +298,18 @@ class XactimateRoughDraftParser:
 
                 is_header_line, header_text = is_line_item_header(line)
                 if is_header_line:
-                    if pending_header_lines and current_line_item:
-                        nt = ' '.join(pending_header_lines)
-                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + nt).strip() if current_line_item['notes'] else nt
-                        pending_header_lines = []
+                    flush_pending_notes()
                     if collecting_notes and current_line_item:
-                        current_section['line_items'].append(current_line_item)
-                        current_line_item = None
+                        finalize_current_line_item()
                     collecting_notes = False
                     current_section['line_items'].append({'type': 'header', 'text': header_text})
                     i += 1; continue
 
                 if is_line_item(line):
-                    if pending_header_lines and current_line_item:
-                        nt = ' '.join(pending_header_lines)
-                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + nt).strip() if current_line_item['notes'] else nt
-                        pending_header_lines = []
+                    flush_pending_notes()
                     if current_line_item:
-                        current_section['line_items'].append(current_line_item)
-                        current_line_item = None
-                        collecting_notes = False
+                        finalize_current_line_item()
+                    collecting_notes = False
                     m = re.match(LINE_ITEM_PATTERN, line)
                     if m:
                         current_line_item = {
@@ -313,12 +342,16 @@ class XactimateRoughDraftParser:
                         i += 1; continue
 
                 if collecting_notes and current_line_item:
-                    pending_header_lines.append(line)
+                    if not is_page_noise(line):
+                        pending_header_lines.append(line)
                     i += 1; continue
 
                 i += 1; continue
 
             i += 1
+
+        if current_line_item:
+            current_line_item.pop('_notes_seen', None)
 
         return sections, lines
 
@@ -508,9 +541,30 @@ class XactimateRoughDraftParser:
 
     def _build_skip_mask(self, n_lines: int, ranges: List[Tuple[int, int]]) -> List[bool]:
         mask = [False] * n_lines
+        if not ranges:
+            return mask
+
+        normalized: List[Tuple[int, int]] = []
         for a, b in ranges:
-            a = max(0, a); b = min(n_lines, b)
-            for i in range(a, b):
+            start = max(0, min(n_lines, a))
+            end = max(0, min(n_lines, b))
+            if start >= end:
+                continue
+            normalized.append((start, end))
+
+        if not normalized:
+            return mask
+
+        normalized.sort()
+        merged: List[Tuple[int, int]] = []
+        for start, end in normalized:
+            if merged and start <= merged[-1][1]:
+                merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+            else:
+                merged.append((start, end))
+
+        for start, end in merged:
+            for i in range(start, end):
                 mask[i] = True
         return mask
 
@@ -1543,6 +1597,7 @@ class XactimateRoughDraftParser:
             if not ts or (not ts.get("line_items") and not ts.get("totals")):
                 del result["trade_summary"]
 
+        result["_skip_spans"] = result.get("_skip_spans") or []
         return result
 
 
