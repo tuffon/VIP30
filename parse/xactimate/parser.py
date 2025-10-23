@@ -395,6 +395,11 @@ class XactimateRoughDraftParser:
 
         # metadata and subrooms
         current_subroom: Optional[dict] = None
+
+        def _normalize_name(value: Optional[str]) -> str:
+            if not value:
+                return ""
+            return re.sub(r"\s+", " ", value).strip().lower()
         idx = bounds.start_idx
         while idx < bounds.header_idx:
             if skip_mask is not None and idx < len(skip_mask) and skip_mask[idx]:
@@ -423,32 +428,23 @@ class XactimateRoughDraftParser:
             if 'Height:' in line:
                 m = re.match(SECTION_HEIGHT_PATTERN, line)
                 if m:
-                    label = m.group(1).strip()
+                    name_part = (m.group(1) or '').strip()
                     height_value = m.group(2).strip()
+                    normalized_line_name = _normalize_name(name_part)
+                    normalized_section_name = _normalize_name(section['section_name'])
 
-                    def _normalize(value: Optional[str]) -> str:
-                        if not value:
-                            return ''
-                        return re.sub(r"\s+", " ", value).strip().lower()
-
-                    label_norm = _normalize(label)
-                    section_norm = _normalize(section.get('section_name'))
-                    assigned = False
-
-                    if label_norm and section_norm and label_norm == section_norm:
-                        section['metadata']['height'] = height_value
-                        assigned = True
-
-                    if not assigned and current_subroom:
-                        sub_meta = current_subroom.setdefault('metadata', {})
-                        sub_name_norm = _normalize(current_subroom.get('subroom_name'))
-                        if sub_name_norm and (label_norm == sub_name_norm or label_norm.endswith(sub_name_norm)):
-                            sub_meta.setdefault('height', height_value)
-                            assigned = True
-
-                    if not assigned:
-                        if current_subroom and 'height' not in current_subroom.get('metadata', {}):
+                    if current_subroom:
+                        current_name = _normalize_name(current_subroom.get('subroom_name'))
+                        if normalized_line_name and normalized_line_name != current_name:
+                            section['subrooms'].append(current_subroom)
+                            sub_meta = {'height': height_value} if height_value else {}
+                            current_subroom = {'subroom_name': name_part, 'metadata': sub_meta}
+                        else:
                             current_subroom.setdefault('metadata', {})['height'] = height_value
+                    else:
+                        if normalized_line_name and normalized_section_name and normalized_line_name != normalized_section_name:
+                            sub_meta = {'height': height_value} if height_value else {}
+                            current_subroom = {'subroom_name': name_part, 'metadata': sub_meta}
                         else:
                             section['metadata']['height'] = height_value
                     idx += 1
