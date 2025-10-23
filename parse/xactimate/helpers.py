@@ -34,6 +34,12 @@ from .constants import (
 )
 
 
+A_RCV_SINGLE = re.compile(
+    r'^\s*DESCRIPTION\s+Q(?:TY|UANTITY)\s+UNIT\s+PRICE\s+TAX\s+RCV\s*$',
+    re.IGNORECASE
+)
+
+
 @dataclass
 class TableColumns:
     family: Optional[str] = None
@@ -218,6 +224,17 @@ def is_table_header(line: str, next_line: Optional[str]) -> Tuple[bool, TableCol
             has_op='O&P' in bottom_tokens,
         )
         return True, cols, True
+
+    s = (line or '').strip()
+    if A_RCV_SINGLE.match(s):
+        cols = TableColumns(
+            family='A',
+            headers_norm=["DESCRIPTION", "QUANTITY", "UNIT", "PRICE", "TAX", "RCV"],
+            has_tax=True,
+            has_op=False,
+            has_reset=False,
+        )
+        return True, cols, False
 
     layout_a_candidates = {"DESCRIPTION", "QUANTITY", "UNIT", "PRICE", "TAX", "RCV"}
     top_filtered = [t for t in top_tokens if t in layout_a_candidates]

@@ -48,7 +48,16 @@ class XactimateRoughDraftParser:
 
         # unified skip mask for sequential parsing
         all_spans = recap_cat_spans + (end.get("_skip_spans") or [])
-        skip_mask = self._build_skip_mask(len(full_lines), all_spans)
+        first_hdr = self._first_table_header_index(full_lines)
+        safe_spans: List[Tuple[int, int]] = []
+        if first_hdr != -1:
+            for start, end_idx in all_spans:
+                if start <= first_hdr:
+                    continue
+                if self._span_contains_any_table_header(full_lines, start, end_idx):
+                    continue
+                safe_spans.append((start, end_idx))
+        skip_mask = self._build_skip_mask(len(full_lines), safe_spans)
 
         # sequential parse using full_lines and unified skip_mask
         sections, _ = self._parse_document_from_lines(full_lines, skip_mask=skip_mask)
@@ -156,12 +165,16 @@ class XactimateRoughDraftParser:
             if skip_mask is not None and 0 <= i < len(skip_mask) and skip_mask[i]:
                 i += 1
                 continue
-            if is_page_header(lines[i].strip(), header_patterns):
+            raw_line = lines[i]
+            stripped_line = (raw_line or '').strip()
+            if is_page_header(stripped_line, header_patterns):
+                if self.debug and stripped_line:
+                    print(f"[page-header] {stripped_line}")
                 i += 1
                 continue
 
-            line = lines[i].strip()
-            next_line = lines[i + 1].strip() if i + 1 < L else None
+            line = stripped_line
+            next_line = (lines[i + 1] or '').strip() if i + 1 < L else None
 
             if state == ParseState.LOOKING_FOR_SECTION:
                 if is_diagram_artifact(line): i += 1; continue
@@ -179,11 +192,7 @@ class XactimateRoughDraftParser:
 
                 is_header, detected_cols, is_two = is_table_header(line, next_line)
                 if is_header:
-                    section_name = "Unknown Section"
-                    if i > 0 and not is_page_header(lines[i-1].strip(), header_patterns):
-                        prev = lines[i-1].strip()
-                        nm = re.search(SECTION_NAME_EXTRACTION, prev)
-                        section_name = nm.group(1).strip() if nm else prev
+                    section_name = self._guess_section_name(lines, i, header_patterns)
                     current_section = {'section_name': section_name, 'metadata': {}, 'subrooms': [],
                                        'line_items': [], 'section_totals': {}}
                     columns = detected_cols
@@ -238,8 +247,9 @@ class XactimateRoughDraftParser:
                     pending_header_lines = []
                     i += 1
                     if i < L:
-                        n2 = lines[i + 1].strip() if i + 1 < L else None
-                        is_header, new_cols, is_two = is_table_header(lines[i].strip(), n2)
+                        n2 = (lines[i + 1] or '').strip() if i + 1 < L else None
+                        current_line = (lines[i] or '').strip()
+                        is_header, new_cols, is_two = is_table_header(current_line, n2)
                         if is_header:
                             columns = new_cols
                             i += 2 if is_two else 1
@@ -591,6 +601,9 @@ class XactimateRoughDraftParser:
                 k = start
                 end = n
                 while k < n:
+                    if self._is_table_header_at(all_lines, k):
+                        end = k
+                        break
                     s = self._norm_line(all_lines[k])
                     if any(p.search(s) for p in stoppers):
                         end = k
@@ -631,6 +644,49 @@ class XactimateRoughDraftParser:
             for i in range(start, end):
                 mask[i] = True
         return mask
+
+    def _is_table_header_at(self, lines: List[str], idx: int) -> bool:
+        if idx < 0 or idx >= len(lines):
+            return False
+        line = (lines[idx] or '').strip()
+        if not line:
+            return False
+        next_line = (lines[idx + 1] or '').strip() if idx + 1 < len(lines) else None
+        is_header, _, _ = is_table_header(line, next_line)
+        return is_header
+
+    def _first_table_header_index(self, lines: List[str]) -> int:
+        for idx in range(len(lines)):
+            if self._is_table_header_at(lines, idx):
+                return idx
+        return -1
+
+    def _span_contains_any_table_header(self, lines: List[str], start: int, end: int) -> bool:
+        if start >= end:
+            return False
+        s = max(0, start)
+        e = min(len(lines), end)
+        for idx in range(s, e):
+            if self._is_table_header_at(lines, idx):
+                return True
+        return False
+
+    def _guess_section_name(self, lines: List[str], header_idx: int, header_patterns: List[str]) -> str:
+        section_name = "Unknown Section"
+        metrics_re = re.compile(r'(Surface Area|Number of Squares|Perimeter|\b(?:SF|LF|SY)\b)', re.IGNORECASE)
+        for j in range(header_idx - 1, max(-1, header_idx - 7), -1):
+            prev = (lines[j] or '').strip()
+            if not prev:
+                continue
+            if is_page_header(prev, header_patterns):
+                continue
+            if self._is_table_header_at(lines, j):
+                continue
+            if metrics_re.search(prev) or re.match(r'^\d', prev):
+                continue
+            nm = re.search(SECTION_NAME_EXTRACTION, prev)
+            return nm.group(1).strip() if nm else prev
+        return section_name
 
     def _prepass_recap_by_category(self, all_lines: List[str]) -> Tuple[Dict[str, object], List[Tuple[int, int]]]:
         RECAP_BY_CATEGORY_HDR_RELAXED = re.compile(r'\bRecap\s+by\s+Category\b', re.IGNORECASE)
@@ -746,6 +802,8 @@ class XactimateRoughDraftParser:
             covs = []
             i2 = k
             while i2 < n:
+                if self._is_table_header_at(all_lines, i2):
+                    break
                 raw = all_lines[i2] or ""
                 if is_noise(raw): i2 += 1; continue
                 s2 = norm(raw)
@@ -810,6 +868,8 @@ class XactimateRoughDraftParser:
 
         i, n = seg_start, seg_end
         while i < n:
+            if self._is_table_header_at(all_lines, i):
+                break
             raw = all_lines[i] or ""
             if is_noise(raw): i += 1; continue
             s = norm(raw)
@@ -954,6 +1014,8 @@ class XactimateRoughDraftParser:
         def capture_coverage(k: int, n: int) -> Tuple[List[dict], int]:
             covs: List[dict] = []
             while k < n:
+                if self._is_table_header_at(all_lines, k):
+                    break
                 t = (all_lines[k] or "").strip()
                 if is_page_noise(t):
                     k += 1
@@ -1003,6 +1065,8 @@ class XactimateRoughDraftParser:
         last_key_seen_for_pagewrap: Optional[str] = None
 
         while i < n:
+            if self._is_table_header_at(all_lines, i):
+                break
             s = (all_lines[i] or "").strip()
 
             # Stop on obvious new major section
@@ -1209,6 +1273,8 @@ class XactimateRoughDraftParser:
 
         while i < n:
             s = (all_lines[i] or "").strip()
+            if self._is_table_header_at(all_lines, i):
+                break
             nm = re.match(SUMMARY_NET_CLAIM_ROW, s, re.IGNORECASE)
             if nm:
                 kv["Net Claim"] = gmoney(nm.group(1))
@@ -1536,7 +1602,9 @@ class XactimateRoughDraftParser:
         if summaries:
             result["summaries_by_coverage"] = summaries
         if sum_spans:
-            result["_skip_spans"].extend(sum_spans)
+            for span in sum_spans:
+                if span and not self._span_contains_any_table_header(all_lines, span[0], span[1]):
+                    result["_skip_spans"].append(span)
 
         i, n = 0, len(all_lines)
         while i < n:
@@ -1607,7 +1675,7 @@ class XactimateRoughDraftParser:
                         "totals": ts_obj.get("totals"),
                         "line_items": ts_obj.get("line_items"),
                     }
-                    if ts_obj.get("_span"):
+                    if ts_obj.get("_span") and not self._span_contains_any_table_header(all_lines, *ts_obj["_span"]):
                         result["_skip_spans"].append(ts_obj["_span"])
                 i = i2
                 continue
@@ -1623,7 +1691,7 @@ class XactimateRoughDraftParser:
                 # adopt new structure + record skip span
                 result["recap_by_room"]["areas"] = room_obj.get("areas", {})
                 result["recap_by_room"]["subtotals"] = room_obj.get("subtotals", [])
-                if room_obj.get("_span"):
+                if room_obj.get("_span") and not self._span_contains_any_table_header(all_lines, *room_obj["_span"]):
                     result["_skip_spans"].append(room_obj["_span"])
                 i = i2
                 continue
@@ -1647,7 +1715,7 @@ class XactimateRoughDraftParser:
                     re.compile(r"^\s*Grand\s+Total\s+Areas\b", re.IGNORECASE),
                 ]
                 s0, s1 = self._find_section_bounds(all_lines, cat_hdr, cat_stop, start_hint=i)
-                if s0 != -1:
+                if s0 != -1 and not self._span_contains_any_table_header(all_lines, s0, s1):
                     result["_skip_spans"].append((s0, s1))
                 i = i2
                 continue
@@ -1695,6 +1763,9 @@ class XactimateRoughDraftParser:
 
         end = n
         for k in range(start, n):
+            if self._is_table_header_at(all_lines, k):
+                end = k
+                return start, end
             s = norm(all_lines[k] or "")
             for pat in stop_res:
                 if pat.search(s):
