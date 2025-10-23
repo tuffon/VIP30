@@ -12,6 +12,7 @@ from .helpers import (
     TableColumns,
     extract_metadata_from_line,
     format_dollar_amount,
+    is_diagram_artifact,
     is_line_item_header,
     is_subroom_header,
     is_table_continuation,
@@ -233,6 +234,9 @@ class XactimateRoughDraftParser:
                 j += 1
                 continue
             current = (lines[j] or '').strip()
+            if self._should_skip_distorted_line(current):
+                j += 1
+                continue
             if not current:
                 j += 1
                 continue
@@ -326,14 +330,54 @@ class XactimateRoughDraftParser:
     ) -> Optional[int]:
         if not section_name:
             return None
-        target = section_name.lower()
+        target = re.sub(r"\s+", " ", section_name.strip().lower())
+        if not target:
+            return None
+        best_match_idx: Optional[int] = None
         j = header_idx - 1
         while j >= floor and j >= 0:
             current = (lines[j] or '').strip()
-            if target in current.lower():
-                return j
+            if self._should_skip_distorted_line(current):
+                j -= 1
+                continue
+            normalized_current = re.sub(r"\s+", " ", current.lower())
+            if normalized_current and target in normalized_current:
+                if normalized_current.startswith(target):
+                    return j
+                if best_match_idx is None:
+                    best_match_idx = j
             j -= 1
-        return None
+        return best_match_idx
+
+    def _should_skip_distorted_line(self, text: str, metadata: Optional[Dict[str, object]] = None) -> bool:
+        if not text:
+            return False
+        collapsed = (text or '').strip()
+        if not collapsed:
+            return False
+
+        lowered = collapsed.lower()
+        if metadata:
+            return False
+        if 'height:' in lowered:
+            return False
+        if re.search(r'\bsubroom:\b', lowered):
+            return False
+        if re.search(r'totals?:', lowered):
+            return False
+        if re.search(r'\b(?:door|window|missing\s+wall)\b', lowered):
+            return False
+        if re.search(r'\b(?:sf|sy|lf)\b', lowered) and re.search(r'\b(?:walls?|ceiling|floor|perimeter)\b', lowered):
+            return False
+
+        if is_diagram_artifact(collapsed):
+            return True
+
+        duplicate_letters = re.findall(r'([A-Za-z])\1+', collapsed)
+        if len(duplicate_letters) < 3:
+            return False
+        unique_duplicates = {token.lower() for token in duplicate_letters if token.strip()}
+        return len(unique_duplicates) >= 2
 
     def _parse_section(
         self,
@@ -360,6 +404,10 @@ class XactimateRoughDraftParser:
             if not line:
                 idx += 1
                 continue
+            meta = extract_metadata_from_line(line)
+            if self._should_skip_distorted_line(line, meta):
+                idx += 1
+                continue
 
             is_sub, sub_name, sub_h = is_subroom_header(line)
             if is_sub:
@@ -383,7 +431,6 @@ class XactimateRoughDraftParser:
                     idx += 1
                     continue
 
-            meta = extract_metadata_from_line(line)
             if meta:
                 if current_subroom:
                     current_subroom['metadata'] = merge_metadata(current_subroom.get('metadata', {}), meta)
