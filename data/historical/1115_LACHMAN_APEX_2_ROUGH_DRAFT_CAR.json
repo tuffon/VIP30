@@ -96,14 +96,8 @@
             "E",
             "N"
           ],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "AS INCURRED",
-          "notes": ""
+          "total_note": "AS INCURRED"
         },
         {
           "type": "line_item",
@@ -120,14 +114,8 @@
             "E",
             "N"
           ],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "AS INCURRED",
-          "notes": ""
+          "total_note": "AS INCURRED"
         }
       ],
       "section_totals": {
@@ -158,14 +146,8 @@
             "E",
             "N"
           ],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "AS INCURRED",
-          "notes": ""
+          "total_note": "AS INCURRED"
         },
         {
           "type": "line_item",
@@ -181,14 +163,8 @@
             "N",
             "H"
           ],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "PENDING",
-          "notes": ""
+          "total_note": "PENDING"
         }
       ],
       "section_totals": {
@@ -222,11 +198,6 @@
             "E",
             "N"
           ],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "OPEN",
           "notes": "Based on a 1% projection of Job Costs for Permits & Fees"
@@ -245,15 +216,11 @@
           "calc": "5",
           "qty": 5.0,
           "unit": "MO",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "225.00",
           "tax": "0.00",
           "op": "225.00",
-          "total": "1,350.00",
-          "total_note": null,
-          "notes": ""
+          "total": "1,350.00"
         },
         {
           "type": "line_item",
@@ -265,15 +232,11 @@
           "calc": "5",
           "qty": 5.0,
           "unit": "MO",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "247.00",
           "tax": "0.00",
           "op": "247.00",
-          "total": "1,482.00",
-          "total_note": null,
-          "notes": ""
+          "total": "1,482.00"
         },
         {
           "type": "line_item",
@@ -285,15 +248,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "1,168.94",
           "replace": "0.00",
           "tax": "0.00",
           "op": "935.16",
-          "total": "5,610.92",
-          "total_note": null,
-          "notes": ""
+          "total": "5,610.92"
         },
         {
           "type": "line_item",
@@ -305,14 +264,11 @@
           "calc": "2.5*4*5",
           "qty": 50.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "65.19",
           "tax": "0.00",
           "op": "651.90",
           "total": "3,911.40",
-          "total_note": null,
           "notes": "30 minutes per day for 5 days per week, 4 weeks per month for 4 months."
         },
         {
@@ -325,14 +281,11 @@
           "calc": "15*4*5",
           "qty": 300.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "86.09",
           "tax": "0.00",
           "op": "5,165.40",
           "total": "30,992.40",
-          "total_note": null,
           "notes": "On Site Project Superintendent, 15 hours per week for 4 weeks per month for 4 months Supervision is required by the CSLB license requirements that the Qualified licensee or a manager inspect every job site each day until complete. Supervision is not covered in Xactimate's O&P according to Xactimate's white pages. . \"Cal. Admin. Code tit. 16, § 823(a). “Direct supervision and control” “includes any one or any combination of the following activities: supervising construction, managing construction activities by making technical and administrative decisions, checking jobs for proper workmanship, or direct supervision on construction job sites. Section 7068 requires every license to have a qualifier, which may be a Sole Owner, Qualified Partner, Responsible Managing Officer (RMO), Responsible Managing Employee (RME), Responsible Managing Manager or Responsible Managing Member. The qualifier is the person who is listed in the Contractor State License Boards’ (CSLB) personnel of record, has demonstrated his/her knowledge and experience though the CSLB’s licensing process, and holds one or more license classifications. UPDATE: CSLB, CSLB to Get Tough on RMO Abuses (Summer 2014) Starting on January 1, 2014, amended Section 7068.1 of California’s Contractors State License Law, Bus. & Prof. Code §§ 7200et seq., requires licensees’ qualifiers to exercise direct supervision and control over the licensees’ operations to ensure compliance with California’s Contractors State License Law. The amended law contemplates active involvement by the qualifier, and makes a violation of Section 7068.1 grounds for disciplinary action and a misdemeanor punishable by imprisonment in a county jail and/or a fine."
         },
         {
@@ -349,12 +302,6 @@
           "calc": "5000",
           "qty": 5000.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "Includes Exterior areas"
@@ -369,15 +316,8 @@
           "calc": "40",
           "qty": 40.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -394,13 +334,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "6,400.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "6,400.00",
-          "total_note": null,
           "notes": "The line item applies to the deep cleaning per X3 Build Deep cleaning of house and all windows"
         }
       ],
@@ -436,13 +374,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "24,500.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "24,500.00",
-          "total_note": null,
           "notes": "The line item applies to Electrical repairs for the customer's Smart Home system per X3 Build Electrical: lighting and curtain automation controls, replace all Lutron Radio RA switches and LCD displays which were damaged. Price includes labor and materials"
         },
         {
@@ -460,13 +396,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "18,500.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "18,500.00",
-          "total_note": null,
           "notes": "The line item applies low voltage repairs per X3 Build Electrical & Low voltage - replacing all burned lighting controls"
         },
         {
@@ -484,13 +418,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "11,060.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "11,060.00",
-          "total_note": null,
           "notes": "The line item includes: 1. Electrical - replace electrical lines that have shorted due to the fire. New runs from the main panel to multiple outlets and switches 2. Drywall - patch and paint holes made due to new lines"
         },
         {
@@ -503,15 +435,8 @@
           "calc": "3556.11",
           "qty": 3556.11,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -523,15 +448,8 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -543,15 +461,8 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -563,15 +474,8 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "header",
@@ -592,13 +496,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "18,600.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "18,600.00",
-          "total_note": null,
           "notes": "The line item applies to the solar panel repairs per X3 build Solar - repair , burnt solar equipment"
         },
         {
@@ -611,14 +513,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "80.71",
           "replace": "1,891.46",
           "tax": "143.29",
           "op": "423.10",
           "total": "2,538.56",
-          "total_note": null,
           "notes": "In Garage"
         },
         {
@@ -631,12 +530,6 @@
           "calc": "23",
           "qty": 23.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "On Roof"
@@ -651,15 +544,8 @@
           "calc": "23",
           "qty": 23.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -674,14 +560,8 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "PENDING",
-          "notes": ""
+          "total_note": "PENDING"
         }
       ],
       "section_totals": {
@@ -707,15 +587,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "214.36",
           "tax": "0.00",
           "op": "42.88",
-          "total": "257.24",
-          "total_note": null,
-          "notes": ""
+          "total": "257.24"
         },
         {
           "type": "line_item",
@@ -727,15 +603,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "509.10",
           "tax": "0.00",
           "op": "101.82",
-          "total": "610.92",
-          "total_note": null,
-          "notes": ""
+          "total": "610.92"
         },
         {
           "type": "line_item",
@@ -747,15 +619,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "313.29",
           "tax": "0.00",
           "op": "62.66",
-          "total": "375.95",
-          "total_note": null,
-          "notes": ""
+          "total": "375.95"
         },
         {
           "type": "line_item",
@@ -771,13 +639,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "6,860.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "6,860.00",
-          "total_note": null,
           "notes": "No 3: Plumbing: new tankless water heater (Navian) with circulating pump"
         }
       ],
@@ -804,15 +670,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "367.07",
           "replace": "5,598.95",
           "tax": "694.70",
           "op": "2,525.34",
-          "total": "15,152.08",
-          "total_note": null,
-          "notes": ""
+          "total": "15,152.08"
         },
         {
           "type": "line_item",
@@ -824,15 +686,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "103.45",
           "replace": "3,911.79",
           "tax": "249.04",
           "op": "852.86",
-          "total": "5,117.14",
-          "total_note": null,
-          "notes": ""
+          "total": "5,117.14"
         },
         {
           "type": "line_item",
@@ -844,15 +702,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "8,722.37",
           "tax": "682.68",
           "op": "3,625.48",
-          "total": "21,752.90",
-          "total_note": null,
-          "notes": ""
+          "total": "21,752.90"
         },
         {
           "type": "header",
@@ -868,15 +722,11 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "180.00",
           "tax": "0.00",
           "op": "288.00",
-          "total": "1,728.00",
-          "total_note": null,
-          "notes": ""
+          "total": "1,728.00"
         }
       ],
       "section_totals": {
@@ -907,13 +757,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "12,300.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "12,300.00",
-          "total_note": null,
           "notes": "No 4: Demo: remove all existing window and doors and haul off"
         },
         {
@@ -931,13 +779,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "119,157.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "119,157.00",
-          "total_note": null,
           "notes": "No 5: Exterior doors & windows (materials) :replace all Milgard windows & doors with like kind No 6: Installation including sheet metal pans for all doors"
         },
         {
@@ -950,15 +796,8 @@
           "calc": "62*10",
           "qty": 620.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE BID",
-          "notes": ""
+          "total_note": "SEE BID"
         },
         {
           "type": "line_item",
@@ -973,14 +812,8 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE BID",
-          "notes": ""
+          "total_note": "SEE BID"
         },
         {
           "type": "line_item",
@@ -996,13 +829,11 @@
             "*",
             "E"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "23,190.06",
           "tax": "0.00",
           "op": "4,638.02",
           "total": "27,828.08",
-          "total_note": null,
           "notes": "The line item applies to the widow treatment repairs per Home Carpet & Window Treatments Scope of work: Master - 3 Drapery pairs and valances, fabric @149.00 per yard, black out lined Boy's Room - 3 Drapery pairs, and valances, fabric @95.00 per yard, black out lined Fabric: 16,836.00 Lining: 1,389.00 Maufactura: 7,098.00 Shipping: 200.00 Installation: 1.800.00 Tax: 1,776.06 Total: 23,190.06"
         },
         {
@@ -1019,14 +850,11 @@
             "*",
             "E"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "54,224.29",
           "tax": "0.00",
           "op": "10,844.86",
-          "total": "65,069.15",
-          "total_note": null,
-          "notes": ""
+          "total": "65,069.15"
         },
         {
           "type": "line_item",
@@ -1038,14 +866,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "86.38",
           "tax": "0.00",
           "op": "34.56",
           "total": "207.32",
-          "total_note": null,
           "notes": "Master Bedroom"
         }
       ],
@@ -1079,14 +904,11 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "30.55",
           "replace": "12,399.00",
           "tax": "536.25",
           "op": "2,593.18",
-          "total": "15,558.98",
-          "total_note": null,
-          "notes": ""
+          "total": "15,558.98"
         },
         {
           "type": "line_item",
@@ -1101,14 +923,11 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "40.63",
           "replace": "2,499.00",
           "tax": "174.92",
           "op": "542.90",
-          "total": "3,257.45",
-          "total_note": null,
-          "notes": ""
+          "total": "3,257.45"
         },
         {
           "type": "line_item",
@@ -1120,15 +939,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "37.94",
           "replace": "384.92",
           "tax": "23.89",
           "op": "89.34",
-          "total": "536.09",
-          "total_note": null,
-          "notes": ""
+          "total": "536.09"
         },
         {
           "type": "line_item",
@@ -1143,14 +958,11 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "21.92",
           "replace": "3,799.00",
           "tax": "105.30",
           "op": "785.24",
-          "total": "4,711.46",
-          "total_note": null,
-          "notes": ""
+          "total": "4,711.46"
         },
         {
           "type": "line_item",
@@ -1165,14 +977,11 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "194.19",
           "replace": "12,500.00",
           "tax": "1,047.54",
           "op": "2,748.34",
-          "total": "16,490.07",
-          "total_note": null,
-          "notes": ""
+          "total": "16,490.07"
         },
         {
           "type": "line_item",
@@ -1184,15 +993,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "45.52",
           "replace": "3,395.40",
           "tax": "314.94",
           "op": "751.16",
-          "total": "4,507.02",
-          "total_note": null,
-          "notes": ""
+          "total": "4,507.02"
         },
         {
           "type": "line_item",
@@ -1204,15 +1009,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "37.94",
           "replace": "427.57",
           "tax": "36.86",
           "op": "100.48",
-          "total": "602.85",
-          "total_note": null,
-          "notes": ""
+          "total": "602.85"
         },
         {
           "type": "header",
@@ -1228,15 +1029,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "40.63",
           "replace": "2,329.86",
           "tax": "214.50",
           "op": "517.00",
-          "total": "3,101.99",
-          "total_note": null,
-          "notes": ""
+          "total": "3,101.99"
         },
         {
           "type": "line_item",
@@ -1248,15 +1045,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "30.55",
           "replace": "1,762.32",
           "tax": "156.00",
           "op": "389.78",
-          "total": "2,338.65",
-          "total_note": null,
-          "notes": ""
+          "total": "2,338.65"
         },
         {
           "type": "line_item",
@@ -1268,15 +1061,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "7.59",
           "replace": "167.84",
           "tax": "6.44",
           "op": "36.36",
-          "total": "218.23",
-          "total_note": null,
-          "notes": ""
+          "total": "218.23"
         }
       ],
       "section_totals": {
@@ -1307,13 +1096,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "19,000.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "19,000.00",
-          "total_note": null,
           "notes": "No. 7: Drywall: demo and patch drywall around all doors & windows"
         },
         {
@@ -1326,12 +1113,6 @@
           "calc": "862",
           "qty": 862.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "Gain Access to replace ductwork and insulation in very small attic spaces"
@@ -1346,15 +1127,8 @@
           "calc": "263.61",
           "qty": 263.61,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -1366,15 +1140,8 @@
           "calc": "1000",
           "qty": 1000.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         }
       ],
       "section_totals": {
@@ -1452,18 +1219,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 86.77,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "3.05",
           "op": "36.90",
-          "total": "221.30",
-          "total_note": null,
-          "notes": ""
+          "total": "221.30"
         },
         {
           "type": "header",
@@ -1476,18 +1238,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 269.5,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "9.46",
           "op": "114.56",
-          "total": "687.28",
-          "total_note": null,
-          "notes": ""
+          "total": "687.28"
         },
         {
           "type": "line_item",
@@ -1496,18 +1253,13 @@
           "sel": "B6H",
           "act": "&",
           "description": "R&R Baseboard - 6\" hardwood",
-          "calc": "",
           "qty": 24.5,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.75",
           "replace": "10.64",
           "tax": "17.37",
           "op": "59.30",
-          "total": "355.73",
-          "total_note": null,
-          "notes": ""
+          "total": "355.73"
         },
         {
           "type": "line_item",
@@ -1516,18 +1268,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 24.5,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "0.84",
           "op": "14.46",
-          "total": "86.84",
-          "total_note": null,
-          "notes": ""
+          "total": "86.84"
         },
         {
           "type": "line_item",
@@ -1536,18 +1283,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 24.5,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.65",
           "op": "10.92",
-          "total": "65.47",
-          "total_note": null,
-          "notes": ""
+          "total": "65.47"
         },
         {
           "type": "header",
@@ -1560,18 +1302,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 86.77,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "0.59",
           "op": "7.94",
-          "total": "47.58",
-          "total_note": null,
-          "notes": ""
+          "total": "47.58"
         },
         {
           "type": "line_item",
@@ -1580,18 +1317,13 @@
           "sel": "MAT",
           "act": "&",
           "description": "R&R Tile mat - uncoupling membrane",
-          "calc": "",
           "qty": 86.77,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "1.39",
           "replace": "6.90",
           "tax": "22.17",
           "op": "148.30",
-          "total": "889.79",
-          "total_note": null,
-          "notes": ""
+          "total": "889.79"
         },
         {
           "type": "line_item",
@@ -1600,18 +1332,13 @@
           "sel": "AV+",
           "act": "&",
           "description": "R&R Tile floor covering - High grade",
-          "calc": "",
           "qty": 86.77,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.80",
           "replace": "20.19",
           "tax": "69.03",
           "op": "430.12",
-          "total": "2,580.77",
-          "total_note": null,
-          "notes": ""
+          "total": "2,580.77"
         },
         {
           "type": "line_item",
@@ -1620,18 +1347,13 @@
           "sel": "MORTAR",
           "act": "&",
           "description": "R&R Mortar bed for tile floors",
-          "calc": "",
           "qty": 86.77,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "2.05",
           "replace": "7.22",
           "tax": "19.88",
           "op": "164.86",
-          "total": "989.10",
-          "total_note": null,
-          "notes": ""
+          "total": "989.10"
         },
         {
           "type": "line_item",
@@ -1640,18 +1362,13 @@
           "sel": "SEALG",
           "act": "+",
           "description": "Grout sealer",
-          "calc": "",
           "qty": 86.77,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.42",
           "tax": "1.61",
           "op": "42.32",
-          "total": "253.91",
-          "total_note": null,
-          "notes": ""
+          "total": "253.91"
         },
         {
           "type": "header",
@@ -1667,15 +1384,11 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "61.37",
           "op": "313.86",
-          "total": "1,883.15",
-          "total_note": null,
-          "notes": ""
+          "total": "1,883.15"
         },
         {
           "type": "line_item",
@@ -1687,15 +1400,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.83",
           "replace": "193.86",
           "tax": "14.14",
           "op": "44.96",
-          "total": "269.79",
-          "total_note": null,
-          "notes": ""
+          "total": "269.79"
         },
         {
           "type": "line_item",
@@ -1707,15 +1416,8 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -1727,12 +1429,6 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "Above entry door"
@@ -1747,15 +1443,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "9.54",
           "replace": "288.33",
           "tax": "19.65",
           "op": "63.50",
-          "total": "381.02",
-          "total_note": null,
-          "notes": ""
+          "total": "381.02"
         },
         {
           "type": "line_item",
@@ -1767,15 +1459,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "452.15",
           "tax": "40.18",
           "op": "98.48",
-          "total": "590.81",
-          "total_note": null,
-          "notes": ""
+          "total": "590.81"
         },
         {
           "type": "line_item",
@@ -1787,15 +1475,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "40.24",
           "tax": "0.99",
           "op": "8.24",
-          "total": "49.47",
-          "total_note": null,
-          "notes": ""
+          "total": "49.47"
         }
       ],
       "section_totals": {
@@ -1886,18 +1570,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 260.69,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "9.15",
           "op": "110.80",
-          "total": "664.79",
-          "total_note": null,
-          "notes": ""
+          "total": "664.79"
         },
         {
           "type": "header",
@@ -1910,18 +1589,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 681.56,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "23.92",
           "op": "289.68",
-          "total": "1,738.06",
-          "total_note": null,
-          "notes": ""
+          "total": "1,738.06"
         },
         {
           "type": "line_item",
@@ -1930,18 +1604,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 72.5,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "2.47",
           "op": "42.84",
-          "total": "257.01",
-          "total_note": null,
-          "notes": ""
+          "total": "257.01"
         },
         {
           "type": "line_item",
@@ -1950,18 +1619,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 72.5,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "1.91",
           "op": "32.28",
-          "total": "193.69",
-          "total_note": null,
-          "notes": ""
+          "total": "193.69"
         },
         {
           "type": "header",
@@ -1974,18 +1638,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 259.94,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "1.77",
           "op": "23.76",
-          "total": "142.50",
-          "total_note": null,
-          "notes": ""
+          "total": "142.50"
         },
         {
           "type": "header",
@@ -2001,15 +1660,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "60.61",
           "tax": "0.70",
           "op": "12.26",
-          "total": "73.57",
-          "total_note": null,
-          "notes": ""
+          "total": "73.57"
         },
         {
           "type": "line_item",
@@ -2021,15 +1676,11 @@
           "calc": "7",
           "qty": 7.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "71.60",
           "op": "366.16",
-          "total": "2,197.00",
-          "total_note": null,
-          "notes": ""
+          "total": "2,197.00"
         },
         {
           "type": "line_item",
@@ -2041,15 +1692,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.83",
           "replace": "244.73",
           "tax": "19.09",
           "op": "56.12",
-          "total": "336.77",
-          "total_note": null,
-          "notes": ""
+          "total": "336.77"
         },
         {
           "type": "line_item",
@@ -2061,15 +1708,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "19.09",
           "replace": "177.11",
           "tax": "10.07",
           "op": "41.26",
-          "total": "247.53",
-          "total_note": null,
-          "notes": ""
+          "total": "247.53"
         },
         {
           "type": "line_item",
@@ -2081,15 +1724,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "126.05",
           "tax": "0.23",
           "op": "50.46",
-          "total": "302.79",
-          "total_note": null,
-          "notes": ""
+          "total": "302.79"
         },
         {
           "type": "line_item",
@@ -2101,15 +1740,12 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "34.34",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "13.74",
-          "total": "82.42",
-          "total_note": null,
-          "notes": ""
+          "total": "82.42"
         },
         {
           "type": "line_item",
@@ -2121,15 +1757,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "235.96",
           "tax": "4.40",
           "op": "189.64",
-          "total": "1,137.88",
-          "total_note": null,
-          "notes": ""
+          "total": "1,137.88"
         },
         {
           "type": "line_item",
@@ -2141,15 +1773,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "67.23",
           "tax": "3.20",
           "op": "54.42",
-          "total": "326.54",
-          "total_note": null,
-          "notes": ""
+          "total": "326.54"
         },
         {
           "type": "header",
@@ -2165,15 +1793,11 @@
           "calc": "7",
           "qty": 7.33,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.38",
           "replace": "155.15",
           "tax": "44.99",
           "op": "253.14",
-          "total": "1,518.80",
-          "total_note": null,
-          "notes": ""
+          "total": "1,518.80"
         }
       ],
       "section_totals": {
@@ -2221,18 +1845,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 49.76,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "1.75",
           "op": "21.16",
-          "total": "126.91",
-          "total_note": null,
-          "notes": ""
+          "total": "126.91"
         },
         {
           "type": "header",
@@ -2245,18 +1864,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 148.67,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "5.22",
           "op": "63.18",
-          "total": "379.12",
-          "total_note": null,
-          "notes": ""
+          "total": "379.12"
         },
         {
           "type": "line_item",
@@ -2265,18 +1879,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 24.75,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.65",
           "op": "11.04",
-          "total": "66.14",
-          "total_note": null,
-          "notes": ""
+          "total": "66.14"
         },
         {
           "type": "header",
@@ -2289,18 +1898,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 40.93,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "0.28",
           "op": "3.74",
-          "total": "22.44",
-          "total_note": null,
-          "notes": ""
+          "total": "22.44"
         },
         {
           "type": "line_item",
@@ -2309,18 +1913,13 @@
           "sel": "SEALG",
           "act": "+",
           "description": "Grout sealer",
-          "calc": "",
           "qty": 52.93,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.42",
           "tax": "0.98",
           "op": "25.82",
-          "total": "154.89",
-          "total_note": null,
-          "notes": ""
+          "total": "154.89"
         },
         {
           "type": "header",
@@ -2336,15 +1935,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "126.05",
           "tax": "0.23",
           "op": "50.46",
-          "total": "302.79",
-          "total_note": null,
-          "notes": ""
+          "total": "302.79"
         },
         {
           "type": "line_item",
@@ -2356,15 +1951,12 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "34.34",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "13.74",
-          "total": "82.42",
-          "total_note": null,
-          "notes": ""
+          "total": "82.42"
         },
         {
           "type": "line_item",
@@ -2376,15 +1968,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "235.96",
           "tax": "4.40",
           "op": "189.64",
-          "total": "1,137.88",
-          "total_note": null,
-          "notes": ""
+          "total": "1,137.88"
         },
         {
           "type": "line_item",
@@ -2396,15 +1984,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "67.23",
           "tax": "3.20",
           "op": "54.42",
-          "total": "326.54",
-          "total_note": null,
-          "notes": ""
+          "total": "326.54"
         },
         {
           "type": "line_item",
@@ -2416,15 +2000,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "30.34",
           "replace": "228.85",
           "tax": "15.11",
           "op": "54.86",
-          "total": "329.16",
-          "total_note": null,
-          "notes": ""
+          "total": "329.16"
         },
         {
           "type": "line_item",
@@ -2436,15 +2016,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "22.76",
           "replace": "409.99",
           "tax": "18.47",
           "op": "90.26",
-          "total": "541.48",
-          "total_note": null,
-          "notes": ""
+          "total": "541.48"
         }
       ],
       "section_totals": {
@@ -2595,18 +2171,13 @@
           "sel": "FIN+",
           "act": "+",
           "description": "Sand, stain, and finish wood ceiling",
-          "calc": "",
           "qty": 629.34,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "6.56",
           "tax": "72.41",
           "op": "840.18",
-          "total": "5,041.06",
-          "total_note": null,
-          "notes": ""
+          "total": "5,041.06"
         },
         {
           "type": "line_item",
@@ -2615,18 +2186,13 @@
           "sel": "FINDS",
           "act": "+",
           "description": "Add for dustless floor sanding",
-          "calc": "",
           "qty": 629.34,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.00",
           "tax": "0.00",
           "op": "125.86",
-          "total": "755.20",
-          "total_note": null,
-          "notes": ""
+          "total": "755.20"
         },
         {
           "type": "line_item",
@@ -2635,18 +2201,13 @@
           "sel": "FINADD",
           "act": "+",
           "description": "Additional coats of finish (per coat)",
-          "calc": "",
           "qty": 629.34,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.47",
           "tax": "17.79",
           "op": "188.58",
-          "total": "1,131.50",
-          "total_note": null,
-          "notes": ""
+          "total": "1,131.50"
         },
         {
           "type": "line_item",
@@ -2658,14 +2219,11 @@
           "calc": "16",
           "qty": 16.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "106.93",
           "tax": "0.00",
           "op": "342.18",
           "total": "2,053.06",
-          "total_note": null,
           "notes": "Additional labor for difficulty of finishing a curved wood ceiling"
         },
         {
@@ -2679,18 +2237,13 @@
           "sel": "B6H",
           "act": "&",
           "description": "R&R Baseboard - 6\" hardwood",
-          "calc": "",
           "qty": 31.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.75",
           "replace": "10.64",
           "tax": "21.97",
           "op": "75.02",
-          "total": "450.08",
-          "total_note": null,
-          "notes": ""
+          "total": "450.08"
         },
         {
           "type": "line_item",
@@ -2699,18 +2252,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 31.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "1.06",
           "op": "18.32",
-          "total": "109.90",
-          "total_note": null,
-          "notes": ""
+          "total": "109.90"
         },
         {
           "type": "line_item",
@@ -2719,18 +2267,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 515.69,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "18.10",
           "op": "219.18",
-          "total": "1,315.07",
-          "total_note": null,
-          "notes": ""
+          "total": "1,315.07"
         },
         {
           "type": "line_item",
@@ -2739,18 +2282,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 31.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.82",
           "op": "13.80",
-          "total": "82.82",
-          "total_note": null,
-          "notes": ""
+          "total": "82.82"
         },
         {
           "type": "header",
@@ -2763,18 +2301,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 606.84,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "4.14",
           "op": "55.44",
-          "total": "332.66",
-          "total_note": null,
-          "notes": ""
+          "total": "332.66"
         },
         {
           "type": "line_item",
@@ -2783,18 +2316,13 @@
           "sel": "MAT",
           "act": "&",
           "description": "R&R Tile mat - uncoupling membrane",
-          "calc": "",
           "qty": 606.84,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "1.39",
           "replace": "6.90",
           "tax": "155.02",
           "op": "1,037.14",
-          "total": "6,222.87",
-          "total_note": null,
-          "notes": ""
+          "total": "6,222.87"
         },
         {
           "type": "line_item",
@@ -2803,18 +2331,13 @@
           "sel": "AV+",
           "act": "&",
           "description": "R&R Tile floor covering - High grade",
-          "calc": "",
           "qty": 606.84,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.80",
           "replace": "20.19",
           "tax": "482.80",
           "op": "3,008.18",
-          "total": "18,049.07",
-          "total_note": null,
-          "notes": ""
+          "total": "18,049.07"
         },
         {
           "type": "line_item",
@@ -2823,18 +2346,13 @@
           "sel": "MORTAR",
           "act": "&",
           "description": "R&R Mortar bed for tile floors",
-          "calc": "",
           "qty": 606.84,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "2.05",
           "replace": "7.22",
           "tax": "139.04",
           "op": "1,152.88",
-          "total": "6,917.32",
-          "total_note": null,
-          "notes": ""
+          "total": "6,917.32"
         },
         {
           "type": "line_item",
@@ -2843,18 +2361,13 @@
           "sel": "SEALG",
           "act": "+",
           "description": "Grout sealer",
-          "calc": "",
           "qty": 606.84,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.42",
           "tax": "11.24",
           "op": "295.96",
-          "total": "1,775.75",
-          "total_note": null,
-          "notes": ""
+          "total": "1,775.75"
         },
         {
           "type": "header",
@@ -2870,15 +2383,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "12.64",
           "replace": "328.67",
           "tax": "53.63",
           "op": "147.24",
-          "total": "883.49",
-          "total_note": null,
-          "notes": ""
+          "total": "883.49"
         },
         {
           "type": "line_item",
@@ -2890,15 +2399,11 @@
           "calc": "24",
           "qty": 24.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "245.49",
           "op": "1,255.44",
-          "total": "7,532.61",
-          "total_note": null,
-          "notes": ""
+          "total": "7,532.61"
         },
         {
           "type": "line_item",
@@ -2910,15 +2415,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "7.59",
           "replace": "468.37",
           "tax": "74.49",
           "op": "205.28",
-          "total": "1,231.69",
-          "total_note": null,
-          "notes": ""
+          "total": "1,231.69"
         },
         {
           "type": "line_item",
@@ -2930,15 +2431,11 @@
           "calc": "6",
           "qty": 32.5,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.65",
           "replace": "14.81",
           "tax": "12.04",
           "op": "102.88",
-          "total": "617.38",
-          "total_note": null,
-          "notes": ""
+          "total": "617.38"
         },
         {
           "type": "header",
@@ -2954,15 +2451,11 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "51.53",
           "tax": "3.58",
           "op": "62.56",
-          "total": "375.32",
-          "total_note": null,
-          "notes": ""
+          "total": "375.32"
         },
         {
           "type": "line_item",
@@ -2971,17 +2464,13 @@
           "sel": "MASKSFP",
           "act": "+",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 46.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.71",
           "tax": "0.31",
           "op": "6.60",
           "total": "39.57",
-          "total_note": null,
           "notes": "To cover opening and fireplace doors/countertop"
         },
         {
@@ -2994,15 +2483,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "142.23",
           "replace": "1,002.63",
           "tax": "155.81",
           "op": "489.12",
-          "total": "2,934.65",
-          "total_note": null,
-          "notes": ""
+          "total": "2,934.65"
         },
         {
           "type": "line_item",
@@ -3014,15 +2499,11 @@
           "calc": "125",
           "qty": 125.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "2.53",
           "replace": "14.04",
           "tax": "21.08",
           "op": "418.48",
-          "total": "2,510.81",
-          "total_note": null,
-          "notes": ""
+          "total": "2,510.81"
         },
         {
           "type": "line_item",
@@ -3034,15 +2515,11 @@
           "calc": "125",
           "qty": 125.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.02",
           "replace": "34.10",
           "tax": "197.07",
           "op": "967.42",
-          "total": "5,804.49",
-          "total_note": null,
-          "notes": ""
+          "total": "5,804.49"
         }
       ],
       "section_totals": {
@@ -3090,18 +2567,13 @@
           "sel": "FIN+",
           "act": "+",
           "description": "Sand, stain, and finish wood ceiling",
-          "calc": "",
           "qty": 281.97,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "6.56",
           "tax": "32.44",
           "op": "376.42",
-          "total": "2,258.58",
-          "total_note": null,
-          "notes": ""
+          "total": "2,258.58"
         },
         {
           "type": "line_item",
@@ -3113,15 +2585,11 @@
           "calc": "80.63",
           "qty": 80.63,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.00",
           "tax": "0.00",
           "op": "16.12",
-          "total": "96.75",
-          "total_note": null,
-          "notes": ""
+          "total": "96.75"
         },
         {
           "type": "line_item",
@@ -3133,15 +2601,11 @@
           "calc": "80.63",
           "qty": 80.63,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.47",
           "tax": "2.28",
           "op": "24.16",
-          "total": "144.97",
-          "total_note": null,
-          "notes": ""
+          "total": "144.97"
         },
         {
           "type": "line_item",
@@ -3153,15 +2617,11 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "106.93",
           "tax": "0.00",
           "op": "171.08",
-          "total": "1,026.52",
-          "total_note": null,
-          "notes": ""
+          "total": "1,026.52"
         },
         {
           "type": "line_item",
@@ -3173,15 +2633,11 @@
           "calc": "36.17",
           "qty": 36.17,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.95",
           "op": "16.12",
-          "total": "96.64",
-          "total_note": null,
-          "notes": ""
+          "total": "96.64"
         },
         {
           "type": "line_item",
@@ -3193,15 +2649,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "60.61",
           "tax": "0.70",
           "op": "12.26",
-          "total": "73.57",
-          "total_note": null,
-          "notes": ""
+          "total": "73.57"
         },
         {
           "type": "header",
@@ -3217,15 +2669,11 @@
           "calc": "-80.63",
           "qty": 201.34,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "7.07",
           "op": "85.58",
-          "total": "513.45",
-          "total_note": null,
-          "notes": ""
+          "total": "513.45"
         },
         {
           "type": "header",
@@ -3238,18 +2686,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 450.25,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "15.80",
           "op": "191.36",
-          "total": "1,148.18",
-          "total_note": null,
-          "notes": ""
+          "total": "1,148.18"
         },
         {
           "type": "header",
@@ -3262,18 +2705,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 146.38,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "1.00",
           "op": "13.38",
-          "total": "80.25",
-          "total_note": null,
-          "notes": ""
+          "total": "80.25"
         },
         {
           "type": "line_item",
@@ -3282,18 +2720,13 @@
           "sel": "MAT",
           "act": "&",
           "description": "R&R Tile mat - uncoupling membrane",
-          "calc": "",
           "qty": 146.38,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "1.39",
           "replace": "6.90",
           "tax": "37.39",
           "op": "250.18",
-          "total": "1,501.06",
-          "total_note": null,
-          "notes": ""
+          "total": "1,501.06"
         },
         {
           "type": "line_item",
@@ -3302,18 +2735,13 @@
           "sel": "AV+",
           "act": "&",
           "description": "R&R Tile floor covering - High grade",
-          "calc": "",
           "qty": 146.38,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.80",
           "replace": "20.19",
           "tax": "116.46",
           "op": "725.62",
-          "total": "4,353.73",
-          "total_note": null,
-          "notes": ""
+          "total": "4,353.73"
         },
         {
           "type": "line_item",
@@ -3322,18 +2750,13 @@
           "sel": "MORTAR",
           "act": "&",
           "description": "R&R Mortar bed for tile floors",
-          "calc": "",
           "qty": 146.38,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "2.05",
           "replace": "7.22",
           "tax": "33.54",
           "op": "278.10",
-          "total": "1,668.58",
-          "total_note": null,
-          "notes": ""
+          "total": "1,668.58"
         },
         {
           "type": "line_item",
@@ -3342,18 +2765,13 @@
           "sel": "SEALG",
           "act": "+",
           "description": "Grout sealer",
-          "calc": "",
           "qty": 146.38,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.42",
           "tax": "2.71",
           "op": "71.38",
-          "total": "428.33",
-          "total_note": null,
-          "notes": ""
+          "total": "428.33"
         },
         {
           "type": "header",
@@ -3369,15 +2787,11 @@
           "calc": "13",
           "qty": 13.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "132.97",
           "op": "680.04",
-          "total": "4,080.17",
-          "total_note": null,
-          "notes": ""
+          "total": "4,080.17"
         },
         {
           "type": "line_item",
@@ -3389,15 +2803,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "7.59",
           "replace": "468.37",
           "tax": "74.49",
           "op": "205.28",
-          "total": "1,231.69",
-          "total_note": null,
-          "notes": ""
+          "total": "1,231.69"
         },
         {
           "type": "header",
@@ -3413,15 +2823,11 @@
           "calc": "9",
           "qty": 31.67,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.39",
           "replace": "478.54",
           "tax": "1,286.64",
           "op": "3,360.54",
-          "total": "20,163.26",
-          "total_note": null,
-          "notes": ""
+          "total": "20,163.26"
         },
         {
           "type": "line_item",
@@ -3433,15 +2839,11 @@
           "calc": "2*31.67",
           "qty": 63.34,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "8.18",
           "replace": "110.40",
           "tax": "369.55",
           "op": "1,576.08",
-          "total": "9,456.49",
-          "total_note": null,
-          "notes": ""
+          "total": "9,456.49"
         },
         {
           "type": "line_item",
@@ -3453,15 +2855,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "231.95",
           "tax": "0.00",
           "op": "92.78",
-          "total": "556.68",
-          "total_note": null,
-          "notes": ""
+          "total": "556.68"
         },
         {
           "type": "line_item",
@@ -3473,15 +2871,11 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "13.67",
           "replace": "689.43",
           "tax": "178.76",
           "op": "457.62",
-          "total": "2,745.68",
-          "total_note": null,
-          "notes": ""
+          "total": "2,745.68"
         },
         {
           "type": "line_item",
@@ -3493,15 +2887,11 @@
           "calc": "6*6",
           "qty": 15.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.39",
           "replace": "346.21",
           "tax": "415.86",
           "op": "1,156.00",
-          "total": "6,935.86",
-          "total_note": null,
-          "notes": ""
+          "total": "6,935.86"
         },
         {
           "type": "line_item",
@@ -3513,15 +2903,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "101.87",
           "tax": "9.93",
           "op": "22.36",
-          "total": "134.16",
-          "total_note": null,
-          "notes": ""
+          "total": "134.16"
         },
         {
           "type": "line_item",
@@ -3533,15 +2919,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "95.75",
           "tax": "9.34",
           "op": "21.02",
-          "total": "126.11",
-          "total_note": null,
-          "notes": ""
+          "total": "126.11"
         },
         {
           "type": "line_item",
@@ -3553,15 +2935,11 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "81.80",
           "tax": "47.85",
           "op": "107.74",
-          "total": "646.39",
-          "total_note": null,
-          "notes": ""
+          "total": "646.39"
         },
         {
           "type": "header",
@@ -3577,15 +2955,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "76.95",
           "tax": "7.41",
           "op": "32.26",
-          "total": "193.57",
-          "total_note": null,
-          "notes": ""
+          "total": "193.57"
         },
         {
           "type": "line_item",
@@ -3597,15 +2971,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "9.49",
           "replace": "165.31",
           "tax": "12.15",
           "op": "37.40",
-          "total": "224.35",
-          "total_note": null,
-          "notes": ""
+          "total": "224.35"
         },
         {
           "type": "line_item",
@@ -3617,15 +2987,12 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "149.84",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "59.94",
-          "total": "359.62",
-          "total_note": null,
-          "notes": ""
+          "total": "359.62"
         },
         {
           "type": "line_item",
@@ -3637,15 +3004,12 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "187.63",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.16",
           "op": "75.10",
-          "total": "450.52",
-          "total_note": null,
-          "notes": ""
+          "total": "450.52"
         }
       ],
       "section_totals": {
@@ -3755,18 +3119,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 394.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "13.86",
           "op": "167.86",
-          "total": "1,007.10",
-          "total_note": null,
-          "notes": ""
+          "total": "1,007.10"
         },
         {
           "type": "line_item",
@@ -3781,13 +3140,11 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "169.18",
           "tax": "0.00",
           "op": "135.34",
           "total": "812.06",
-          "total_note": null,
           "notes": "To paint the (2) ledges on either side of the hallway at the top of the wall"
         },
         {
@@ -3801,18 +3158,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 964.94,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "33.87",
           "op": "410.12",
-          "total": "2,460.71",
-          "total_note": null,
-          "notes": ""
+          "total": "2,460.71"
         },
         {
           "type": "line_item",
@@ -3821,18 +3173,13 @@
           "sel": "B6H",
           "act": "&",
           "description": "R&R Baseboard - 6\" hardwood",
-          "calc": "",
           "qty": 77.71,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.75",
           "replace": "10.64",
           "tax": "55.08",
           "op": "188.04",
-          "total": "1,128.23",
-          "total_note": null,
-          "notes": ""
+          "total": "1,128.23"
         },
         {
           "type": "line_item",
@@ -3841,18 +3188,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 77.71,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "2.65",
           "op": "45.92",
-          "total": "275.48",
-          "total_note": null,
-          "notes": ""
+          "total": "275.48"
         },
         {
           "type": "line_item",
@@ -3861,18 +3203,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 77.71,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "2.05",
           "op": "34.62",
-          "total": "207.63",
-          "total_note": null,
-          "notes": ""
+          "total": "207.63"
         },
         {
           "type": "header",
@@ -3885,18 +3222,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 394.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "2.69",
           "op": "36.08",
-          "total": "216.48",
-          "total_note": null,
-          "notes": ""
+          "total": "216.48"
         },
         {
           "type": "line_item",
@@ -3905,18 +3237,13 @@
           "sel": "MAT",
           "act": "&",
           "description": "R&R Tile mat - uncoupling membrane",
-          "calc": "",
           "qty": 394.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "1.39",
           "replace": "6.90",
           "tax": "100.88",
           "op": "674.96",
-          "total": "4,049.73",
-          "total_note": null,
-          "notes": ""
+          "total": "4,049.73"
         },
         {
           "type": "line_item",
@@ -3925,18 +3252,13 @@
           "sel": "AV+",
           "act": "&",
           "description": "R&R Tile floor covering - High grade",
-          "calc": "",
           "qty": 394.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.80",
           "replace": "20.19",
           "tax": "314.20",
           "op": "1,957.66",
-          "total": "11,745.99",
-          "total_note": null,
-          "notes": ""
+          "total": "11,745.99"
         },
         {
           "type": "line_item",
@@ -3945,18 +3267,13 @@
           "sel": "MORTAR",
           "act": "&",
           "description": "R&R Mortar bed for tile floors",
-          "calc": "",
           "qty": 394.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "2.05",
           "replace": "7.22",
           "tax": "90.49",
           "op": "750.28",
-          "total": "4,501.68",
-          "total_note": null,
-          "notes": ""
+          "total": "4,501.68"
         },
         {
           "type": "line_item",
@@ -3965,18 +3282,13 @@
           "sel": "SEALG",
           "act": "+",
           "description": "Grout sealer",
-          "calc": "",
           "qty": 394.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.42",
           "tax": "7.32",
           "op": "192.60",
-          "total": "1,155.63",
-          "total_note": null,
-          "notes": ""
+          "total": "1,155.63"
         },
         {
           "type": "header",
@@ -3992,15 +3304,11 @@
           "calc": "14",
           "qty": 14.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "143.20",
           "op": "732.34",
-          "total": "4,394.02",
-          "total_note": null,
-          "notes": ""
+          "total": "4,394.02"
         },
         {
           "type": "line_item",
@@ -4012,15 +3320,11 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "12.64",
           "replace": "328.67",
           "tax": "80.44",
           "op": "220.86",
-          "total": "1,325.23",
-          "total_note": null,
-          "notes": ""
+          "total": "1,325.23"
         },
         {
           "type": "line_item",
@@ -4032,15 +3336,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.83",
           "replace": "121.12",
           "tax": "7.05",
           "op": "29.00",
-          "total": "174.00",
-          "total_note": null,
-          "notes": ""
+          "total": "174.00"
         },
         {
           "type": "line_item",
@@ -4052,15 +3352,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "10.83",
           "replace": "281.60",
           "tax": "13.80",
           "op": "61.24",
-          "total": "367.47",
-          "total_note": null,
-          "notes": ""
+          "total": "367.47"
         },
         {
           "type": "line_item",
@@ -4072,15 +3368,11 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "5.72",
           "replace": "1,032.89",
           "tax": "64.35",
           "op": "636.06",
-          "total": "3,816.24",
-          "total_note": null,
-          "notes": ""
+          "total": "3,816.24"
         }
       ],
       "section_totals": {
@@ -4164,18 +3456,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 409.85,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "14.39",
           "op": "174.20",
-          "total": "1,045.18",
-          "total_note": null,
-          "notes": ""
+          "total": "1,045.18"
         },
         {
           "type": "header",
@@ -4188,18 +3475,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 607.41,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "21.32",
           "op": "258.16",
-          "total": "1,548.97",
-          "total_note": null,
-          "notes": ""
+          "total": "1,548.97"
         },
         {
           "type": "line_item",
@@ -4208,18 +3490,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 50.25,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "1.72",
           "op": "29.68",
-          "total": "178.13",
-          "total_note": null,
-          "notes": ""
+          "total": "178.13"
         },
         {
           "type": "line_item",
@@ -4228,18 +3505,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 50.25,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "1.32",
           "op": "22.38",
-          "total": "134.25",
-          "total_note": null,
-          "notes": ""
+          "total": "134.25"
         },
         {
           "type": "header",
@@ -4252,18 +3524,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 406.88,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "2.78",
           "op": "37.18",
-          "total": "223.06",
-          "total_note": null,
-          "notes": ""
+          "total": "223.06"
         },
         {
           "type": "header",
@@ -4279,15 +3546,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "126.05",
           "tax": "0.23",
           "op": "50.46",
-          "total": "302.79",
-          "total_note": null,
-          "notes": ""
+          "total": "302.79"
         },
         {
           "type": "line_item",
@@ -4299,15 +3562,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "235.96",
           "tax": "4.40",
           "op": "189.64",
-          "total": "1,137.88",
-          "total_note": null,
-          "notes": ""
+          "total": "1,137.88"
         },
         {
           "type": "line_item",
@@ -4319,15 +3578,12 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "34.34",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "13.74",
-          "total": "82.42",
-          "total_note": null,
-          "notes": ""
+          "total": "82.42"
         },
         {
           "type": "line_item",
@@ -4339,15 +3595,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "67.23",
           "tax": "3.20",
           "op": "54.42",
-          "total": "326.54",
-          "total_note": null,
-          "notes": ""
+          "total": "326.54"
         },
         {
           "type": "line_item",
@@ -4359,15 +3611,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "78.58",
           "tax": "0.89",
           "op": "15.90",
-          "total": "95.37",
-          "total_note": null,
-          "notes": ""
+          "total": "95.37"
         },
         {
           "type": "line_item",
@@ -4379,15 +3627,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.83",
           "replace": "121.12",
           "tax": "7.05",
           "op": "29.00",
-          "total": "174.00",
-          "total_note": null,
-          "notes": ""
+          "total": "174.00"
         },
         {
           "type": "line_item",
@@ -4399,15 +3643,11 @@
           "calc": "10",
           "qty": 10.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "102.29",
           "op": "523.10",
-          "total": "3,138.59",
-          "total_note": null,
-          "notes": ""
+          "total": "3,138.59"
         },
         {
           "type": "line_item",
@@ -4419,15 +3659,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "12.64",
           "replace": "173.67",
           "tax": "23.40",
           "op": "79.20",
-          "total": "475.22",
-          "total_note": null,
-          "notes": ""
+          "total": "475.22"
         },
         {
           "type": "line_item",
@@ -4439,15 +3675,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "7.59",
           "replace": "468.37",
           "tax": "74.49",
           "op": "205.28",
-          "total": "1,231.69",
-          "total_note": null,
-          "notes": ""
+          "total": "1,231.69"
         },
         {
           "type": "line_item",
@@ -4459,15 +3691,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "68.25",
           "tax": "0.00",
           "op": "13.66",
-          "total": "81.91",
-          "total_note": null,
-          "notes": ""
+          "total": "81.91"
         }
       ],
       "section_totals": {
@@ -4511,18 +3739,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 86.04,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "3.02",
           "op": "36.56",
-          "total": "219.40",
-          "total_note": null,
-          "notes": ""
+          "total": "219.40"
         },
         {
           "type": "header",
@@ -4535,18 +3758,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 248.91,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "8.74",
           "op": "105.78",
-          "total": "634.74",
-          "total_note": null,
-          "notes": ""
+          "total": "634.74"
         },
         {
           "type": "line_item",
@@ -4555,18 +3773,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 31.11,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "1.06",
           "op": "18.38",
-          "total": "110.28",
-          "total_note": null,
-          "notes": ""
+          "total": "110.28"
         },
         {
           "type": "line_item",
@@ -4575,18 +3788,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 31.11,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.82",
           "op": "13.84",
-          "total": "83.10",
-          "total_note": null,
-          "notes": ""
+          "total": "83.10"
         },
         {
           "type": "header",
@@ -4599,18 +3807,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 86.04,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "0.59",
           "op": "7.86",
-          "total": "47.17",
-          "total_note": null,
-          "notes": ""
+          "total": "47.17"
         },
         {
           "type": "header",
@@ -4626,15 +3829,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "126.05",
           "tax": "0.23",
           "op": "50.46",
-          "total": "302.79",
-          "total_note": null,
-          "notes": ""
+          "total": "302.79"
         },
         {
           "type": "line_item",
@@ -4646,15 +3845,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "151.02",
           "tax": "0.11",
           "op": "30.22",
-          "total": "181.35",
-          "total_note": null,
-          "notes": ""
+          "total": "181.35"
         },
         {
           "type": "line_item",
@@ -4666,15 +3861,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "237.60",
           "tax": "3.98",
           "op": "95.84",
-          "total": "575.02",
-          "total_note": null,
-          "notes": ""
+          "total": "575.02"
         },
         {
           "type": "line_item",
@@ -4686,15 +3877,12 @@
           "calc": "5",
           "qty": 5.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "34.34",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "34.34",
-          "total": "206.04",
-          "total_note": null,
-          "notes": ""
+          "total": "206.04"
         },
         {
           "type": "line_item",
@@ -4706,14 +3894,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "116.31",
           "tax": "0.00",
           "op": "93.04",
           "total": "558.28",
-          "total_note": null,
           "notes": "(2) crew for 2 hours"
         },
         {
@@ -4726,15 +3911,11 @@
           "calc": "4",
           "qty": 26.78,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.38",
           "replace": "155.15",
           "tax": "164.37",
           "op": "924.82",
-          "total": "5,548.87",
-          "total_note": null,
-          "notes": ""
+          "total": "5,548.87"
         },
         {
           "type": "line_item",
@@ -4746,15 +3927,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.83",
           "replace": "145.18",
           "tax": "9.38",
           "op": "34.28",
-          "total": "205.67",
-          "total_note": null,
-          "notes": ""
+          "total": "205.67"
         },
         {
           "type": "line_item",
@@ -4766,15 +3943,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "40.91",
           "op": "209.24",
-          "total": "1,255.43",
-          "total_note": null,
-          "notes": ""
+          "total": "1,255.43"
         },
         {
           "type": "line_item",
@@ -4786,15 +3959,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "40.70",
           "tax": "0.71",
           "op": "8.28",
-          "total": "49.69",
-          "total_note": null,
-          "notes": ""
+          "total": "49.69"
         },
         {
           "type": "line_item",
@@ -4806,15 +3975,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "12.64",
           "replace": "205.20",
           "tax": "14.72",
           "op": "46.50",
-          "total": "279.06",
-          "total_note": null,
-          "notes": ""
+          "total": "279.06"
         }
       ],
       "section_totals": {
@@ -4862,18 +4027,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 74.41,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "2.61",
           "op": "31.62",
-          "total": "189.75",
-          "total_note": null,
-          "notes": ""
+          "total": "189.75"
         },
         {
           "type": "header",
@@ -4886,18 +4046,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 234.57,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "8.23",
           "op": "99.70",
-          "total": "598.18",
-          "total_note": null,
-          "notes": ""
+          "total": "598.18"
         },
         {
           "type": "line_item",
@@ -4906,18 +4061,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 29.03,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "0.99",
           "op": "17.16",
-          "total": "102.92",
-          "total_note": null,
-          "notes": ""
+          "total": "102.92"
         },
         {
           "type": "line_item",
@@ -4926,18 +4076,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 29.03,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.76",
           "op": "12.94",
-          "total": "77.57",
-          "total_note": null,
-          "notes": ""
+          "total": "77.57"
         },
         {
           "type": "header",
@@ -4950,18 +4095,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 74.41,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "0.51",
           "op": "6.80",
-          "total": "40.79",
-          "total_note": null,
-          "notes": ""
+          "total": "40.79"
         },
         {
           "type": "header",
@@ -4977,15 +4117,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "126.05",
           "tax": "0.23",
           "op": "50.46",
-          "total": "302.79",
-          "total_note": null,
-          "notes": ""
+          "total": "302.79"
         },
         {
           "type": "line_item",
@@ -4997,15 +4133,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "151.02",
           "tax": "0.11",
           "op": "30.22",
-          "total": "181.35",
-          "total_note": null,
-          "notes": ""
+          "total": "181.35"
         },
         {
           "type": "line_item",
@@ -5017,15 +4149,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "237.60",
           "tax": "3.98",
           "op": "95.84",
-          "total": "575.02",
-          "total_note": null,
-          "notes": ""
+          "total": "575.02"
         },
         {
           "type": "line_item",
@@ -5037,15 +4165,12 @@
           "calc": "5",
           "qty": 5.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "34.34",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "34.34",
-          "total": "206.04",
-          "total_note": null,
-          "notes": ""
+          "total": "206.04"
         },
         {
           "type": "line_item",
@@ -5057,14 +4182,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "116.31",
           "tax": "0.00",
           "op": "93.04",
           "total": "558.28",
-          "total_note": null,
           "notes": "(2) crew for 2 hours"
         },
         {
@@ -5077,15 +4199,11 @@
           "calc": "4",
           "qty": 24.7,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.38",
           "replace": "155.15",
           "tax": "151.60",
           "op": "852.98",
-          "total": "5,117.88",
-          "total_note": null,
-          "notes": ""
+          "total": "5,117.88"
         },
         {
           "type": "line_item",
@@ -5097,15 +4215,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.83",
           "replace": "145.18",
           "tax": "9.38",
           "op": "34.28",
-          "total": "205.67",
-          "total_note": null,
-          "notes": ""
+          "total": "205.67"
         },
         {
           "type": "line_item",
@@ -5117,15 +4231,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "40.91",
           "op": "209.24",
-          "total": "1,255.43",
-          "total_note": null,
-          "notes": ""
+          "total": "1,255.43"
         },
         {
           "type": "line_item",
@@ -5137,15 +4247,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "12.64",
           "replace": "205.20",
           "tax": "14.72",
           "op": "46.50",
-          "total": "279.06",
-          "total_note": null,
-          "notes": ""
+          "total": "279.06"
         }
       ],
       "section_totals": {
@@ -5189,18 +4295,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 3.75,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "0.13",
           "op": "1.58",
-          "total": "9.55",
-          "total_note": null,
-          "notes": ""
+          "total": "9.55"
         },
         {
           "type": "header",
@@ -5213,18 +4314,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 52.33,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "1.84",
           "op": "22.24",
-          "total": "133.45",
-          "total_note": null,
-          "notes": ""
+          "total": "133.45"
         },
         {
           "type": "line_item",
@@ -5233,18 +4329,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 6.25,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "0.21",
           "op": "3.70",
-          "total": "22.16",
-          "total_note": null,
-          "notes": ""
+          "total": "22.16"
         },
         {
           "type": "line_item",
@@ -5253,18 +4344,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 6.25,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.16",
           "op": "2.80",
-          "total": "16.71",
-          "total_note": null,
-          "notes": ""
+          "total": "16.71"
         },
         {
           "type": "header",
@@ -5277,18 +4363,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 3.75,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "0.03",
           "op": "0.34",
-          "total": "2.06",
-          "total_note": null,
-          "notes": ""
+          "total": "2.06"
         },
         {
           "type": "header",
@@ -5304,15 +4385,12 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "114.56",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.10",
           "op": "22.94",
-          "total": "137.60",
-          "total_note": null,
-          "notes": ""
+          "total": "137.60"
         },
         {
           "type": "line_item",
@@ -5324,15 +4402,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "60.56",
           "tax": "1.97",
           "op": "24.62",
-          "total": "147.71",
-          "total_note": null,
-          "notes": ""
+          "total": "147.71"
         },
         {
           "type": "line_item",
@@ -5344,15 +4418,12 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "34.34",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "6.86",
-          "total": "41.20",
-          "total_note": null,
-          "notes": ""
+          "total": "41.20"
         },
         {
           "type": "line_item",
@@ -5364,15 +4435,11 @@
           "calc": "5*2",
           "qty": 10.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.57",
           "replace": "14.33",
           "tax": "5.42",
           "op": "30.88",
-          "total": "185.30",
-          "total_note": null,
-          "notes": ""
+          "total": "185.30"
         },
         {
           "type": "line_item",
@@ -5384,15 +4451,11 @@
           "calc": "2*5",
           "qty": 10.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "7.49",
           "tax": "0.63",
           "op": "15.10",
-          "total": "90.63",
-          "total_note": null,
-          "notes": ""
+          "total": "90.63"
         }
       ],
       "section_totals": {
@@ -5436,18 +4499,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 134.79,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "4.73",
           "op": "57.28",
-          "total": "343.72",
-          "total_note": null,
-          "notes": ""
+          "total": "343.72"
         },
         {
           "type": "header",
@@ -5460,18 +4518,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 252.33,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "8.86",
           "op": "107.26",
-          "total": "643.49",
-          "total_note": null,
-          "notes": ""
+          "total": "643.49"
         },
         {
           "type": "line_item",
@@ -5480,18 +4533,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 23.46,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.62",
           "op": "10.44",
-          "total": "62.67",
-          "total_note": null,
-          "notes": ""
+          "total": "62.67"
         },
         {
           "type": "header",
@@ -5504,18 +4552,13 @@
           "sel": "SEALG",
           "act": "+",
           "description": "Seal grout on tile wall",
-          "calc": "",
           "qty": 121.33,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.63",
           "tax": "2.25",
           "op": "64.28",
-          "total": "385.63",
-          "total_note": null,
-          "notes": ""
+          "total": "385.63"
         },
         {
           "type": "header",
@@ -5531,15 +4574,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "126.05",
           "tax": "0.23",
           "op": "50.46",
-          "total": "302.79",
-          "total_note": null,
-          "notes": ""
+          "total": "302.79"
         },
         {
           "type": "line_item",
@@ -5551,15 +4590,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "235.96",
           "tax": "4.40",
           "op": "189.64",
-          "total": "1,137.88",
-          "total_note": null,
-          "notes": ""
+          "total": "1,137.88"
         },
         {
           "type": "line_item",
@@ -5571,15 +4606,12 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "34.34",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "13.74",
-          "total": "82.42",
-          "total_note": null,
-          "notes": ""
+          "total": "82.42"
         },
         {
           "type": "line_item",
@@ -5591,15 +4623,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "67.23",
           "tax": "3.20",
           "op": "54.42",
-          "total": "326.54",
-          "total_note": null,
-          "notes": ""
+          "total": "326.54"
         },
         {
           "type": "line_item",
@@ -5611,15 +4639,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "26.73",
           "replace": "330.49",
           "tax": "22.12",
           "op": "75.86",
-          "total": "455.20",
-          "total_note": null,
-          "notes": ""
+          "total": "455.20"
         },
         {
           "type": "line_item",
@@ -5631,15 +4655,11 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "61.37",
           "op": "313.86",
-          "total": "1,883.15",
-          "total_note": null,
-          "notes": ""
+          "total": "1,883.15"
         },
         {
           "type": "line_item",
@@ -5651,15 +4671,11 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "30.34",
           "replace": "97.74",
           "tax": "6.99",
           "op": "78.24",
-          "total": "469.47",
-          "total_note": null,
-          "notes": ""
+          "total": "469.47"
         },
         {
           "type": "line_item",
@@ -5671,15 +4687,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "7.59",
           "replace": "785.37",
           "tax": "136.31",
           "op": "344.44",
-          "total": "2,066.67",
-          "total_note": null,
-          "notes": ""
+          "total": "2,066.67"
         },
         {
           "type": "line_item",
@@ -5691,15 +4703,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "68.25",
           "tax": "0.00",
           "op": "13.66",
-          "total": "81.91",
-          "total_note": null,
-          "notes": ""
+          "total": "81.91"
         }
       ],
       "section_totals": {
@@ -5747,18 +4755,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 86.02,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "3.02",
           "op": "36.56",
-          "total": "219.36",
-          "total_note": null,
-          "notes": ""
+          "total": "219.36"
         },
         {
           "type": "header",
@@ -5771,18 +4774,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 252.21,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "8.85",
           "op": "107.20",
-          "total": "643.17",
-          "total_note": null,
-          "notes": ""
+          "total": "643.17"
         },
         {
           "type": "line_item",
@@ -5791,18 +4789,13 @@
           "sel": "B6H",
           "act": "&",
           "description": "R&R Baseboard - 6\" hardwood",
-          "calc": "",
           "qty": 16.55,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.75",
           "replace": "10.64",
           "tax": "11.73",
           "op": "40.04",
-          "total": "240.27",
-          "total_note": null,
-          "notes": ""
+          "total": "240.27"
         },
         {
           "type": "line_item",
@@ -5811,18 +4804,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 16.55,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "0.56",
           "op": "9.78",
-          "total": "58.67",
-          "total_note": null,
-          "notes": ""
+          "total": "58.67"
         },
         {
           "type": "line_item",
@@ -5831,18 +4819,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 16.55,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.44",
           "op": "7.36",
-          "total": "44.21",
-          "total_note": null,
-          "notes": ""
+          "total": "44.21"
         },
         {
           "type": "header",
@@ -5855,18 +4838,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 55.35,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "0.38",
           "op": "5.06",
-          "total": "30.35",
-          "total_note": null,
-          "notes": ""
+          "total": "30.35"
         },
         {
           "type": "line_item",
@@ -5875,18 +4853,13 @@
           "sel": "MAT",
           "act": "&",
           "description": "R&R Tile mat - uncoupling membrane",
-          "calc": "",
           "qty": 55.35,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "1.39",
           "replace": "6.90",
           "tax": "14.14",
           "op": "94.58",
-          "total": "567.58",
-          "total_note": null,
-          "notes": ""
+          "total": "567.58"
         },
         {
           "type": "line_item",
@@ -5895,18 +4868,13 @@
           "sel": "AV+",
           "act": "&",
           "description": "R&R Tile floor covering - High grade",
-          "calc": "",
           "qty": 55.35,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.80",
           "replace": "20.19",
           "tax": "44.04",
           "op": "274.36",
-          "total": "1,646.25",
-          "total_note": null,
-          "notes": ""
+          "total": "1,646.25"
         },
         {
           "type": "line_item",
@@ -5915,18 +4883,13 @@
           "sel": "MORTAR",
           "act": "&",
           "description": "R&R Mortar bed for tile floors",
-          "calc": "",
           "qty": 55.35,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "2.05",
           "replace": "7.22",
           "tax": "12.68",
           "op": "105.16",
-          "total": "630.94",
-          "total_note": null,
-          "notes": ""
+          "total": "630.94"
         },
         {
           "type": "line_item",
@@ -5935,18 +4898,13 @@
           "sel": "SEALG",
           "act": "+",
           "description": "Grout sealer",
-          "calc": "",
           "qty": 55.35,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.42",
           "tax": "1.03",
           "op": "27.00",
-          "total": "161.98",
-          "total_note": null,
-          "notes": ""
+          "total": "161.98"
         },
         {
           "type": "header",
@@ -5962,15 +4920,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "40.91",
           "op": "209.24",
-          "total": "1,255.43",
-          "total_note": null,
-          "notes": ""
+          "total": "1,255.43"
         },
         {
           "type": "line_item",
@@ -5982,15 +4936,8 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -6002,15 +4949,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "168.02",
           "tax": "3.62",
           "op": "67.92",
-          "total": "407.58",
-          "total_note": null,
-          "notes": ""
+          "total": "407.58"
         },
         {
           "type": "line_item",
@@ -6022,15 +4965,12 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "48.07",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "9.62",
-          "total": "57.69",
-          "total_note": null,
-          "notes": ""
+          "total": "57.69"
         },
         {
           "type": "line_item",
@@ -6042,15 +4982,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "126.05",
           "tax": "0.11",
           "op": "25.24",
-          "total": "151.40",
-          "total_note": null,
-          "notes": ""
+          "total": "151.40"
         },
         {
           "type": "line_item",
@@ -6062,15 +4998,12 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "34.34",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "6.86",
-          "total": "41.20",
-          "total_note": null,
-          "notes": ""
+          "total": "41.20"
         },
         {
           "type": "line_item",
@@ -6082,15 +5015,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "235.96",
           "tax": "2.20",
           "op": "94.82",
-          "total": "568.94",
-          "total_note": null,
-          "notes": ""
+          "total": "568.94"
         },
         {
           "type": "line_item",
@@ -6102,15 +5031,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "67.23",
           "tax": "1.60",
           "op": "27.22",
-          "total": "163.28",
-          "total_note": null,
-          "notes": ""
+          "total": "163.28"
         },
         {
           "type": "line_item",
@@ -6122,15 +5047,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "18.17",
           "tax": "0.12",
           "op": "3.66",
-          "total": "21.95",
-          "total_note": null,
-          "notes": ""
+          "total": "21.95"
         },
         {
           "type": "header",
@@ -6146,15 +5067,11 @@
           "calc": "6",
           "qty": 8.5,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.39",
           "replace": "342.02",
           "tax": "236.87",
           "op": "648.18",
-          "total": "3,889.04",
-          "total_note": null,
-          "notes": ""
+          "total": "3,889.04"
         },
         {
           "type": "line_item",
@@ -6166,15 +5083,11 @@
           "calc": "6",
           "qty": 26.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "8.18",
           "replace": "110.40",
           "tax": "157.06",
           "op": "669.86",
-          "total": "4,019.10",
-          "total_note": null,
-          "notes": ""
+          "total": "4,019.10"
         },
         {
           "type": "line_item",
@@ -6186,15 +5099,11 @@
           "calc": "3*3",
           "qty": 9.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "2.94",
           "replace": "29.94",
           "tax": "16.07",
           "op": "62.42",
-          "total": "374.41",
-          "total_note": null,
-          "notes": ""
+          "total": "374.41"
         },
         {
           "type": "line_item",
@@ -6206,15 +5115,11 @@
           "calc": "7",
           "qty": 13.58,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.39",
           "replace": "327.14",
           "tax": "351.24",
           "op": "989.70",
-          "total": "5,938.18",
-          "total_note": null,
-          "notes": ""
+          "total": "5,938.18"
         },
         {
           "type": "line_item",
@@ -6226,15 +5131,12 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "187.63",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.08",
           "op": "37.54",
-          "total": "225.25",
-          "total_note": null,
-          "notes": ""
+          "total": "225.25"
         },
         {
           "type": "line_item",
@@ -6246,15 +5148,12 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "149.84",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "29.96",
-          "total": "179.80",
-          "total_note": null,
-          "notes": ""
+          "total": "179.80"
         }
       ],
       "section_totals": {
@@ -6298,18 +5197,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 115.5,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "4.05",
           "op": "49.10",
-          "total": "294.55",
-          "total_note": null,
-          "notes": ""
+          "total": "294.55"
         },
         {
           "type": "header",
@@ -6322,18 +5216,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 337.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "11.86",
           "op": "143.64",
-          "total": "861.75",
-          "total_note": null,
-          "notes": ""
+          "total": "861.75"
         },
         {
           "type": "line_item",
@@ -6342,18 +5231,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 16.08,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "0.42",
           "op": "7.16",
-          "total": "42.96",
-          "total_note": null,
-          "notes": ""
+          "total": "42.96"
         },
         {
           "type": "header",
@@ -6366,18 +5250,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 76.93,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "0.53",
           "op": "7.02",
-          "total": "42.17",
-          "total_note": null,
-          "notes": ""
+          "total": "42.17"
         },
         {
           "type": "header",
@@ -6393,15 +5272,12 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "126.05",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.23",
           "op": "50.46",
-          "total": "302.79",
-          "total_note": null,
-          "notes": ""
+          "total": "302.79"
         },
         {
           "type": "line_item",
@@ -6413,15 +5289,12 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
           "reset": "34.34",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "13.74",
-          "total": "82.42",
-          "total_note": null,
-          "notes": ""
+          "total": "82.42"
         },
         {
           "type": "line_item",
@@ -6433,15 +5306,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "95.98",
           "tax": "4.54",
           "op": "77.68",
-          "total": "466.14",
-          "total_note": null,
-          "notes": ""
+          "total": "466.14"
         },
         {
           "type": "line_item",
@@ -6453,15 +5322,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "67.23",
           "tax": "3.20",
           "op": "54.42",
-          "total": "326.54",
-          "total_note": null,
-          "notes": ""
+          "total": "326.54"
         },
         {
           "type": "line_item",
@@ -6473,15 +5338,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "30.34",
           "replace": "164.10",
           "tax": "8.80",
           "op": "40.64",
-          "total": "243.88",
-          "total_note": null,
-          "notes": ""
+          "total": "243.88"
         },
         {
           "type": "line_item",
@@ -6493,15 +5354,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "26.73",
           "replace": "330.49",
           "tax": "22.12",
           "op": "75.86",
-          "total": "455.20",
-          "total_note": null,
-          "notes": ""
+          "total": "455.20"
         },
         {
           "type": "header",
@@ -6517,15 +5374,11 @@
           "calc": "60",
           "qty": 60.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.39",
           "tax": "0.41",
           "op": "4.76",
-          "total": "28.57",
-          "total_note": null,
-          "notes": ""
+          "total": "28.57"
         }
       ],
       "section_totals": {
@@ -6595,18 +5448,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 255.24,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "8.96",
           "op": "108.50",
-          "total": "650.91",
-          "total_note": null,
-          "notes": ""
+          "total": "650.91"
         },
         {
           "type": "header",
@@ -6619,18 +5467,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 720.39,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "25.29",
           "op": "306.18",
-          "total": "1,837.09",
-          "total_note": null,
-          "notes": ""
+          "total": "1,837.09"
         },
         {
           "type": "line_item",
@@ -6639,18 +5482,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 68.83,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "2.35",
           "op": "40.68",
-          "total": "244.01",
-          "total_note": null,
-          "notes": ""
+          "total": "244.01"
         },
         {
           "type": "line_item",
@@ -6659,18 +5497,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 68.83,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "1.81",
           "op": "30.64",
-          "total": "183.88",
-          "total_note": null,
-          "notes": ""
+          "total": "183.88"
         },
         {
           "type": "header",
@@ -6683,18 +5516,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 254.67,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "1.74",
           "op": "23.26",
-          "total": "139.60",
-          "total_note": null,
-          "notes": ""
+          "total": "139.60"
         },
         {
           "type": "header",
@@ -6710,15 +5538,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.83",
           "replace": "121.12",
           "tax": "7.05",
           "op": "29.00",
-          "total": "174.00",
-          "total_note": null,
-          "notes": ""
+          "total": "174.00"
         },
         {
           "type": "line_item",
@@ -6730,15 +5554,11 @@
           "calc": "7",
           "qty": 7.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "71.60",
           "op": "366.16",
-          "total": "2,197.00",
-          "total_note": null,
-          "notes": ""
+          "total": "2,197.00"
         },
         {
           "type": "line_item",
@@ -6750,15 +5570,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "300.00",
           "tax": "11.99",
           "op": "65.78",
-          "total": "394.67",
-          "total_note": null,
-          "notes": ""
+          "total": "394.67"
         },
         {
           "type": "line_item",
@@ -6770,15 +5586,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "126.05",
           "tax": "0.11",
           "op": "25.24",
-          "total": "151.40",
-          "total_note": null,
-          "notes": ""
+          "total": "151.40"
         },
         {
           "type": "line_item",
@@ -6790,15 +5602,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "118.80",
           "tax": "1.99",
           "op": "47.92",
-          "total": "287.51",
-          "total_note": null,
-          "notes": ""
+          "total": "287.51"
         },
         {
           "type": "header",
@@ -6814,15 +5622,11 @@
           "calc": "11",
           "qty": 15.92,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.38",
           "replace": "155.15",
           "tax": "97.71",
           "op": "549.78",
-          "total": "3,298.65",
-          "total_note": null,
-          "notes": ""
+          "total": "3,298.65"
         },
         {
           "type": "line_item",
@@ -6834,14 +5638,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "116.31",
           "tax": "0.00",
           "op": "46.52",
           "total": "279.14",
-          "total_note": null,
           "notes": "To paint closet organizer"
         },
         {
@@ -6854,15 +5655,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "44.08",
           "tax": "0.00",
           "op": "17.64",
-          "total": "105.80",
-          "total_note": null,
-          "notes": ""
+          "total": "105.80"
         },
         {
           "type": "line_item",
@@ -6874,15 +5671,11 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "118.80",
           "tax": "7.96",
           "op": "191.68",
-          "total": "1,150.04",
-          "total_note": null,
-          "notes": ""
+          "total": "1,150.04"
         }
       ],
       "section_totals": {
@@ -6938,18 +5731,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
-          "calc": "",
           "qty": 381.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "13.37",
           "op": "161.94",
-          "total": "971.60",
-          "total_note": null,
-          "notes": ""
+          "total": "971.60"
         },
         {
           "type": "header",
@@ -6962,18 +5750,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 704.08,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "24.71",
           "op": "299.24",
-          "total": "1,795.48",
-          "total_note": null,
-          "notes": ""
+          "total": "1,795.48"
         },
         {
           "type": "line_item",
@@ -6982,18 +5765,13 @@
           "sel": "BS>",
           "act": "+",
           "description": "Stain & finish baseboard - oversized",
-          "calc": "",
           "qty": 75.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.92",
           "tax": "2.56",
           "op": "44.32",
-          "total": "265.88",
-          "total_note": null,
-          "notes": ""
+          "total": "265.88"
         },
         {
           "type": "line_item",
@@ -7002,18 +5780,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 75.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "1.97",
           "op": "33.40",
-          "total": "200.37",
-          "total_note": null,
-          "notes": ""
+          "total": "200.37"
         },
         {
           "type": "header",
@@ -7026,18 +5799,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 375.68,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "2.56",
           "op": "34.34",
-          "total": "205.96",
-          "total_note": null,
-          "notes": ""
+          "total": "205.96"
         },
         {
           "type": "header",
@@ -7053,15 +5821,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "126.05",
           "tax": "0.23",
           "op": "50.46",
-          "total": "302.79",
-          "total_note": null,
-          "notes": ""
+          "total": "302.79"
         },
         {
           "type": "line_item",
@@ -7073,15 +5837,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "118.80",
           "tax": "3.98",
           "op": "95.84",
-          "total": "575.02",
-          "total_note": null,
-          "notes": ""
+          "total": "575.02"
         },
         {
           "type": "line_item",
@@ -7093,15 +5853,11 @@
           "calc": "11",
           "qty": 11.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "112.52",
           "op": "575.40",
-          "total": "3,452.44",
-          "total_note": null,
-          "notes": ""
+          "total": "3,452.44"
         },
         {
           "type": "line_item",
@@ -7113,15 +5869,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.83",
           "replace": "121.12",
           "tax": "7.05",
           "op": "29.00",
-          "total": "174.00",
-          "total_note": null,
-          "notes": ""
+          "total": "174.00"
         },
         {
           "type": "line_item",
@@ -7133,15 +5885,11 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "67.23",
           "tax": "2.40",
           "op": "40.82",
-          "total": "244.91",
-          "total_note": null,
-          "notes": ""
+          "total": "244.91"
         },
         {
           "type": "line_item",
@@ -7153,15 +5901,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "78.58",
           "tax": "0.89",
           "op": "15.90",
-          "total": "95.37",
-          "total_note": null,
-          "notes": ""
+          "total": "95.37"
         },
         {
           "type": "header",
@@ -7177,15 +5921,11 @@
           "calc": "1",
           "qty": 6.08,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.38",
           "replace": "155.15",
           "tax": "37.32",
           "op": "209.96",
-          "total": "1,259.78",
-          "total_note": null,
-          "notes": ""
+          "total": "1,259.78"
         }
       ],
       "section_totals": {
@@ -7229,18 +5969,13 @@
           "sel": "AC",
           "act": "+",
           "description": "Acoustic ceiling (popcorn) texture",
-          "calc": "",
           "qty": 409.48,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.96",
           "tax": "2.79",
           "op": "161.08",
-          "total": "966.45",
-          "total_note": null,
-          "notes": ""
+          "total": "966.45"
         },
         {
           "type": "line_item",
@@ -7249,18 +5984,13 @@
           "sel": "AC",
           "act": "+",
           "description": "Seal & paint acoustic ceiling (popcorn) texture",
-          "calc": "",
           "qty": 409.48,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.01",
           "tax": "17.17",
           "op": "168.06",
-          "total": "1,008.28",
-          "total_note": null,
-          "notes": ""
+          "total": "1,008.28"
         },
         {
           "type": "header",
@@ -7273,18 +6003,13 @@
           "sel": "SP2",
           "act": "+",
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
-          "calc": "",
           "qty": 604.35,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.09",
           "tax": "21.21",
           "op": "256.86",
-          "total": "1,541.16",
-          "total_note": null,
-          "notes": ""
+          "total": "1,541.16"
         },
         {
           "type": "line_item",
@@ -7293,18 +6018,13 @@
           "sel": "MASKLF",
           "act": "+",
           "description": "Mask and prep for paint - plastic, paper, tape (per LF)",
-          "calc": "",
           "qty": 60.03,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.20",
           "tax": "1.58",
           "op": "26.74",
-          "total": "160.39",
-          "total_note": null,
-          "notes": ""
+          "total": "160.39"
         },
         {
           "type": "header",
@@ -7317,18 +6037,13 @@
           "sel": "MASKSFP",
           "act": "-",
           "description": "Floor protection - heavy paper and tape",
-          "calc": "",
           "qty": 409.48,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "2.79",
           "op": "37.42",
-          "total": "224.48",
-          "total_note": null,
-          "notes": ""
+          "total": "224.48"
         },
         {
           "type": "line_item",
@@ -7337,18 +6052,13 @@
           "sel": "CS",
           "act": "+",
           "description": "Concrete sealer - brush or spray applied",
-          "calc": "",
           "qty": 409.48,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.43",
           "tax": "30.74",
           "op": "123.26",
-          "total": "739.56",
-          "total_note": null,
-          "notes": ""
+          "total": "739.56"
         },
         {
           "type": "header",
@@ -7368,14 +6078,11 @@
             "*",
             "E"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "9,000.00",
           "tax": "0.00",
           "op": "1,800.00",
-          "total": "10,800.00",
-          "total_note": null,
-          "notes": ""
+          "total": "10,800.00"
         },
         {
           "type": "line_item",
@@ -7387,15 +6094,8 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -7407,15 +6107,8 @@
           "calc": "5",
           "qty": 5.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -7427,15 +6120,8 @@
           "calc": "10",
           "qty": 10.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -7447,15 +6133,8 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -7467,15 +6146,8 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -7487,15 +6159,11 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "21.14",
           "replace": "171.72",
           "tax": "38.17",
           "op": "161.94",
-          "total": "971.55",
-          "total_note": null,
-          "notes": ""
+          "total": "971.55"
         },
         {
           "type": "line_item",
@@ -7507,15 +6175,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "105.29",
           "tax": "6.36",
           "op": "22.34",
-          "total": "133.99",
-          "total_note": null,
-          "notes": ""
+          "total": "133.99"
         },
         {
           "type": "line_item",
@@ -7527,15 +6191,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "118.80",
           "tax": "1.99",
           "op": "47.92",
-          "total": "287.51",
-          "total_note": null,
-          "notes": ""
+          "total": "287.51"
         },
         {
           "type": "line_item",
@@ -7547,15 +6207,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "85.92",
           "tax": "0.26",
           "op": "34.42",
-          "total": "206.52",
-          "total_note": null,
-          "notes": ""
+          "total": "206.52"
         },
         {
           "type": "line_item",
@@ -7567,15 +6223,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "12.64",
           "replace": "196.48",
           "tax": "7.84",
           "op": "43.38",
-          "total": "260.34",
-          "total_note": null,
-          "notes": ""
+          "total": "260.34"
         }
       ],
       "section_totals": {
@@ -7609,18 +6261,13 @@
           "sel": "BT12",
           "act": "&",
           "description": "R&R Batt insulation - 12\" - R38 - unfaced batt",
-          "calc": "",
           "qty": 862.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.59",
           "replace": "2.59",
           "tax": "142.88",
           "op": "576.82",
-          "total": "3,460.86",
-          "total_note": null,
-          "notes": ""
+          "total": "3,460.86"
         },
         {
           "type": "line_item",
@@ -7629,18 +6276,13 @@
           "sel": "BTCS",
           "act": "+",
           "description": "Batt insulation - Add-on for confined spaces",
-          "calc": "",
           "qty": 862.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.66",
           "tax": "0.00",
           "op": "113.78",
-          "total": "682.70",
-          "total_note": null,
-          "notes": ""
+          "total": "682.70"
         }
       ],
       "section_totals": {
@@ -7670,14 +6312,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "22.76",
           "replace": "1,167.67",
           "tax": "79.94",
           "op": "254.08",
           "total": "1,524.45",
-          "total_note": null,
           "notes": "Streetfront"
         },
         {
@@ -7690,14 +6329,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "7.59",
           "replace": "468.37",
           "tax": "74.49",
           "op": "205.28",
           "total": "1,231.69",
-          "total_note": null,
           "notes": "Poolside"
         },
         {
@@ -7710,14 +6346,11 @@
           "calc": "7",
           "qty": 7.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "75.86",
           "replace": "683.25",
           "tax": "273.00",
           "op": "1,117.36",
           "total": "6,704.13",
-          "total_note": null,
           "notes": "Perimeter of home plus 2 streetside"
         },
         {
@@ -7730,14 +6363,11 @@
           "calc": "24",
           "qty": 24.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "16.90",
           "replace": "234.42",
           "tax": "245.49",
           "op": "1,255.44",
           "total": "7,532.61",
-          "total_note": null,
           "notes": "In wood Soffit"
         },
         {
@@ -7750,14 +6380,11 @@
           "calc": "11",
           "qty": 11.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "19.03",
           "replace": "208.50",
           "tax": "117.98",
           "op": "524.16",
           "total": "3,144.97",
-          "total_note": null,
           "notes": "Exterior sconces"
         },
         {
@@ -7770,14 +6397,11 @@
           "calc": "16",
           "qty": 16.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "21.14",
           "replace": "272.28",
           "tax": "248.01",
           "op": "988.54",
           "total": "5,931.27",
-          "total_note": null,
           "notes": "Floor light fixtures"
         },
         {
@@ -7790,15 +6414,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "21.14",
           "replace": "195.31",
           "tax": "4.65",
           "op": "44.22",
-          "total": "265.32",
-          "total_note": null,
-          "notes": ""
+          "total": "265.32"
         },
         {
           "type": "line_item",
@@ -7810,15 +6430,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "10.99",
           "tax": "2.14",
           "op": "4.82",
-          "total": "28.94",
-          "total_note": null,
-          "notes": ""
+          "total": "28.94"
         },
         {
           "type": "line_item",
@@ -7830,15 +6446,11 @@
           "calc": "35+11*2",
           "qty": 57.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "8.40",
           "tax": "46.68",
           "op": "105.10",
-          "total": "630.58",
-          "total_note": null,
-          "notes": ""
+          "total": "630.58"
         },
         {
           "type": "line_item",
@@ -7850,15 +6462,11 @@
           "calc": "16",
           "qty": 16.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "5.23",
           "tax": "8.16",
           "op": "18.38",
-          "total": "110.22",
-          "total_note": null,
-          "notes": ""
+          "total": "110.22"
         },
         {
           "type": "header",
@@ -7874,15 +6482,11 @@
           "calc": "17+14",
           "qty": 31.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "1.37",
           "replace": "338.62",
           "tax": "453.59",
           "op": "2,198.66",
-          "total": "13,191.94",
-          "total_note": null,
-          "notes": ""
+          "total": "13,191.94"
         },
         {
           "type": "line_item",
@@ -7894,15 +6498,11 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "753.29",
           "tax": "106.47",
           "op": "322.62",
-          "total": "1,935.67",
-          "total_note": null,
-          "notes": ""
+          "total": "1,935.67"
         }
       ],
       "section_totals": {
@@ -7932,15 +6532,8 @@
           "calc": "43",
           "qty": 43.0,
           "unit": "SQ",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -7952,15 +6545,8 @@
           "calc": "300",
           "qty": 300.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -7976,13 +6562,11 @@
             "*",
             "E"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "32,000.00",
           "tax": "0.00",
           "op": "6,400.00",
           "total": "38,400.00",
-          "total_note": null,
           "notes": "The following line item applies to roofing repairs per X3 Build Roof remove & replace torch down roof"
         },
         {
@@ -7995,12 +6579,6 @@
           "calc": "4300",
           "qty": 4300.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "Pre-loss condition includes elastomeric - not included in contractor's estimate"
@@ -8015,12 +6593,6 @@
           "calc": "4300",
           "qty": 4300.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "Pre-loss condition includes elastomeric - not included in contractor's estimate"
@@ -8035,15 +6607,8 @@
           "calc": "300",
           "qty": 300.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8055,15 +6620,8 @@
           "calc": "20",
           "qty": 20.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8075,15 +6633,8 @@
           "calc": "20",
           "qty": 20.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "header",
@@ -8099,12 +6650,6 @@
           "calc": "285*2+150",
           "qty": 720.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "See X3 Build estimate no 1038- Item # 14"
@@ -8119,12 +6664,6 @@
           "calc": "720",
           "qty": 720.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "See X3 Build estimate no 1038- Item # 14"
@@ -8139,12 +6678,6 @@
           "calc": "720",
           "qty": 720.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "See X3 Build estimate no 1038- Item # 14"
@@ -8159,12 +6692,6 @@
           "calc": "720",
           "qty": 720.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "See X3 Build estimate no 1038- Item # 14"
@@ -8179,12 +6706,6 @@
           "calc": "300",
           "qty": 300.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "See X3 Build estimate no 1038- Item # 14"
@@ -8199,12 +6720,6 @@
           "calc": "300",
           "qty": 300.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "See X3 Build estimate no 1038- Item # 14"
@@ -8223,13 +6738,11 @@
             "*",
             "E"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "42,000.00",
           "tax": "0.00",
           "op": "8,400.00",
           "total": "50,400.00",
-          "total_note": null,
           "notes": "No 14: Finish carpentry: replace damaged wood under the eaves"
         }
       ],
@@ -8260,15 +6773,8 @@
           "calc": "600+300",
           "qty": 900.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8280,12 +6786,6 @@
           "calc": "400",
           "qty": 400.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "Damaged stucco due to replacing Exterior windows and sliders"
@@ -8297,18 +6797,10 @@
           "sel": "SB+",
           "act": "+",
           "description": "Sandblasting - Heavy",
-          "calc": "",
           "qty": 3195.78,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8320,15 +6812,8 @@
           "calc": "300*5",
           "qty": 1500.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8337,18 +6822,10 @@
           "sel": "NGT",
           "act": "+",
           "description": "Stucco - natural gray - troweled",
-          "calc": "",
           "qty": 3195.78,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8357,18 +6834,10 @@
           "sel": "STU",
           "act": "+",
           "description": "Seal & paint stucco",
-          "calc": "",
           "qty": 3195.78,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8384,13 +6853,11 @@
             "*",
             "E"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "22,100.00",
           "tax": "0.00",
           "op": "4,420.00",
           "total": "26,520.00",
-          "total_note": null,
           "notes": "The line item applies to the exterior stucco removal per X3 Build Demolition - remove & haul off the existing stucco exterior"
         },
         {
@@ -8407,13 +6874,11 @@
             "*",
             "E"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "59,000.00",
           "tax": "0.00",
           "op": "11,800.00",
           "total": "70,800.00",
-          "total_note": null,
           "notes": "The following line item applies to the stucco repairs per X3 Build New smooth stucco throughout the exterior"
         },
         {
@@ -8430,15 +6895,11 @@
           "calc": "150",
           "qty": 150.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.27",
           "tax": "0.15",
           "op": "8.14",
-          "total": "48.79",
-          "total_note": null,
-          "notes": ""
+          "total": "48.79"
         },
         {
           "type": "line_item",
@@ -8450,15 +6911,11 @@
           "calc": "-117",
           "qty": 470.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.06",
           "tax": "9.64",
           "op": "195.94",
-          "total": "1,175.68",
-          "total_note": null,
-          "notes": ""
+          "total": "1,175.68"
         },
         {
           "type": "line_item",
@@ -8470,15 +6927,11 @@
           "calc": "150",
           "qty": 150.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.15",
           "tax": "0.00",
           "op": "4.50",
-          "total": "27.00",
-          "total_note": null,
-          "notes": ""
+          "total": "27.00"
         },
         {
           "type": "line_item",
@@ -8490,15 +6943,11 @@
           "calc": "470.92",
           "qty": 470.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "10.55",
           "tax": "66.58",
           "op": "1,006.96",
-          "total": "6,041.75",
-          "total_note": null,
-          "notes": ""
+          "total": "6,041.75"
         },
         {
           "type": "line_item",
@@ -8510,15 +6959,11 @@
           "calc": "470.92",
           "qty": 470.92,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.33",
           "tax": "16.53",
           "op": "222.74",
-          "total": "1,336.51",
-          "total_note": null,
-          "notes": ""
+          "total": "1,336.51"
         }
       ],
       "section_totals": {
@@ -8548,14 +6993,11 @@
           "calc": "-",
           "qty": 181.75,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.80",
           "replace": "15.40",
           "tax": "166.04",
           "op": "731.14",
           "total": "4,386.78",
-          "total_note": null,
           "notes": "(18*7) Applies to left elevation of the putting green area"
         },
         {
@@ -8568,15 +7010,11 @@
           "calc": "17*7",
           "qty": 119.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.80",
           "replace": "37.00",
           "tax": "0.00",
           "op": "971.04",
-          "total": "5,826.24",
-          "total_note": null,
-          "notes": ""
+          "total": "5,826.24"
         },
         {
           "type": "line_item",
@@ -8588,14 +7026,11 @@
           "calc": "8",
           "qty": 242.78,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.80",
           "replace": "15.40",
           "tax": "221.80",
           "op": "976.64",
           "total": "5,859.81",
-          "total_note": null,
           "notes": "Applies to left elevation of the putting green area"
         },
         {
@@ -8616,13 +7051,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "0.00",
-          "total_note": null,
           "notes": "The line item applies to the exterior tile tile repairs per X3 Build Tile work 1. Tiles around the pool, demo and replace 2. Entire interior floor to match the exterior deck tiles"
         },
         {
@@ -8635,15 +7068,11 @@
           "calc": "1156",
           "qty": 1156.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "3.80",
           "replace": "20.19",
           "tax": "919.71",
           "op": "5,730.42",
-          "total": "34,382.57",
-          "total_note": null,
-          "notes": ""
+          "total": "34,382.57"
         },
         {
           "type": "line_item",
@@ -8655,15 +7084,11 @@
           "calc": "1156",
           "qty": 1156.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "2.05",
           "replace": "7.22",
           "tax": "264.87",
           "op": "2,196.20",
-          "total": "13,177.19",
-          "total_note": null,
-          "notes": ""
+          "total": "13,177.19"
         },
         {
           "type": "line_item",
@@ -8675,15 +7100,11 @@
           "calc": "1156",
           "qty": 1156.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "6.90",
           "tax": "295.30",
           "op": "1,654.34",
-          "total": "9,926.04",
-          "total_note": null,
-          "notes": ""
+          "total": "9,926.04"
         },
         {
           "type": "line_item",
@@ -8695,15 +7116,11 @@
           "calc": "1156",
           "qty": 1156.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.42",
           "tax": "21.41",
           "op": "563.78",
-          "total": "3,382.71",
-          "total_note": null,
-          "notes": ""
+          "total": "3,382.71"
         },
         {
           "type": "line_item",
@@ -8715,14 +7132,11 @@
           "calc": "12",
           "qty": 12.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "170.74",
           "tax": "0.00",
           "op": "409.78",
           "total": "2,458.66",
-          "total_note": null,
           "notes": "To cut tile for re-installation of glass stantions/supports, posts, floor lights, drains, fire pit and other protrusions."
         },
         {
@@ -8735,15 +7149,11 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "11.38",
           "replace": "49.06",
           "tax": "4.88",
           "op": "73.52",
-          "total": "441.04",
-          "total_note": null,
-          "notes": ""
+          "total": "441.04"
         },
         {
           "type": "line_item",
@@ -8755,14 +7165,11 @@
           "calc": "33.75",
           "qty": 33.75,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "4.01",
           "replace": "21.64",
           "tax": "18.92",
           "op": "176.92",
           "total": "1,061.53",
-          "total_note": null,
           "notes": "Stones steps in grass"
         },
         {
@@ -8776,15 +7183,8 @@
           "sel": "TRAV++",
           "act": "&",
           "description": "R&R Travertine tile - Premium grade",
-          "calc": "",
           "qty": 283.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "+(21*4) Includes steps & landings"
@@ -8799,15 +7199,8 @@
           "calc": "283",
           "qty": 283.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8819,15 +7212,8 @@
           "calc": "283",
           "qty": 283.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8842,11 +7228,6 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
           "total_note": "SEE X3.BUILD",
           "notes": "To mill and shape travertine tiling"
@@ -8865,15 +7246,8 @@
           "calc": "1",
           "qty": 129.17,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8890,13 +7264,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "22,000.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "22,000.00",
-          "total_note": null,
           "notes": "Line 1: Pool replaster: demo existing plaster and apply new mini pebble finish"
         },
         {
@@ -8914,13 +7286,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "38,700.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "38,700.00",
-          "total_note": null,
           "notes": "Line 2: Pool equipment: replace all fire damaged pool equipment (pump, heater, sub-panel, vacuum lines, etc)"
         },
         {
@@ -8937,15 +7307,8 @@
           "calc": "100",
           "qty": 100.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         },
         {
           "type": "line_item",
@@ -8962,13 +7325,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "32,800.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "32,800.00",
-          "total_note": null,
           "notes": "N0 12: Glass railings: replace glass railings on front patio"
         },
         {
@@ -8985,14 +7346,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "5,500.00",
           "tax": "219.86",
           "op": "1,143.98",
           "total": "6,863.84",
-          "total_note": null,
           "notes": "Gas supplied 5' X 1' X 2\"H with line stone exterior face and glass wind-guards"
         },
         {
@@ -9005,14 +7363,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "18.17",
           "tax": "0.12",
           "op": "3.66",
           "total": "21.95",
-          "total_note": null,
           "notes": "Cap gas line during repairs"
         },
         {
@@ -9029,15 +7384,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "12,407.18",
           "tax": "1,121.25",
           "op": "2,705.70",
-          "total": "16,234.13",
-          "total_note": null,
-          "notes": ""
+          "total": "16,234.13"
         },
         {
           "type": "line_item",
@@ -9049,15 +7400,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1,500.00",
           "tax": "0.00",
           "op": "300.00",
-          "total": "1,800.00",
-          "total_note": null,
-          "notes": ""
+          "total": "1,800.00"
         },
         {
           "type": "header",
@@ -9077,15 +7424,11 @@
           "calc": "54",
           "qty": 54.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "38.72",
           "tax": "1.53",
           "op": "418.48",
-          "total": "2,510.89",
-          "total_note": null,
-          "notes": ""
+          "total": "2,510.89"
         },
         {
           "type": "line_item",
@@ -9097,15 +7440,11 @@
           "calc": "2*8*2",
           "qty": 32.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "134.34",
           "tax": "0.00",
           "op": "859.78",
-          "total": "5,158.66",
-          "total_note": null,
-          "notes": ""
+          "total": "5,158.66"
         },
         {
           "type": "line_item",
@@ -9117,15 +7456,11 @@
           "calc": "54",
           "qty": 54.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "4.24",
           "tax": "0.21",
           "op": "45.84",
-          "total": "275.01",
-          "total_note": null,
-          "notes": ""
+          "total": "275.01"
         },
         {
           "type": "line_item",
@@ -9137,15 +7472,11 @@
           "calc": "54",
           "qty": 54.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "15.73",
           "tax": "20.64",
           "op": "174.00",
-          "total": "1,044.06",
-          "total_note": null,
-          "notes": ""
+          "total": "1,044.06"
         },
         {
           "type": "header",
@@ -9161,15 +7492,12 @@
           "calc": "8",
           "qty": 46.33,
           "unit": "LF",
-          "item_codes": [],
           "reset": "19.30",
           "remove": "0.00",
           "replace": "0.00",
           "tax": "0.00",
           "op": "178.84",
-          "total": "1,073.01",
-          "total_note": null,
-          "notes": ""
+          "total": "1,073.01"
         },
         {
           "type": "line_item",
@@ -9181,15 +7509,11 @@
           "calc": "46.33",
           "qty": 46.33,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.85",
           "tax": "0.00",
           "op": "7.88",
-          "total": "47.26",
-          "total_note": null,
-          "notes": ""
+          "total": "47.26"
         },
         {
           "type": "line_item",
@@ -9201,15 +7525,11 @@
           "calc": "46.33",
           "qty": 46.33,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.87",
           "tax": "0.99",
           "op": "17.52",
-          "total": "105.15",
-          "total_note": null,
-          "notes": ""
+          "total": "105.15"
         },
         {
           "type": "header",
@@ -9225,15 +7545,11 @@
           "calc": "23*2",
           "qty": 46.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "38.72",
           "tax": "1.30",
           "op": "356.48",
-          "total": "2,138.90",
-          "total_note": null,
-          "notes": ""
+          "total": "2,138.90"
         },
         {
           "type": "line_item",
@@ -9245,15 +7561,11 @@
           "calc": "46",
           "qty": 46.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "4.24",
           "tax": "0.18",
           "op": "39.04",
-          "total": "234.26",
-          "total_note": null,
-          "notes": ""
+          "total": "234.26"
         },
         {
           "type": "line_item",
@@ -9265,15 +7577,11 @@
           "calc": "46",
           "qty": 46.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "15.73",
           "tax": "17.58",
           "op": "148.24",
-          "total": "889.40",
-          "total_note": null,
-          "notes": ""
+          "total": "889.40"
         },
         {
           "type": "header",
@@ -9290,18 +7598,13 @@
           "sel": "SB+",
           "act": "+",
           "description": "Sandblasting - Heavy",
-          "calc": "",
           "qty": 308.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.06",
           "tax": "6.31",
           "op": "128.16",
-          "total": "768.95",
-          "total_note": null,
-          "notes": ""
+          "total": "768.95"
         },
         {
           "type": "line_item",
@@ -9313,15 +7616,11 @@
           "calc": "308",
           "qty": 308.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "10.55",
           "tax": "43.54",
           "op": "658.58",
-          "total": "3,951.52",
-          "total_note": null,
-          "notes": ""
+          "total": "3,951.52"
         },
         {
           "type": "line_item",
@@ -9333,15 +7632,11 @@
           "calc": "308",
           "qty": 308.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.33",
           "tax": "10.81",
           "op": "145.68",
-          "total": "874.13",
-          "total_note": null,
-          "notes": ""
+          "total": "874.13"
         },
         {
           "type": "header",
@@ -9357,14 +7652,11 @@
           "calc": "6+16*5+11",
           "qty": 216.54,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.06",
           "tax": "4.43",
           "op": "90.10",
           "total": "540.60",
-          "total_note": null,
           "notes": "*5"
         },
         {
@@ -9377,15 +7669,11 @@
           "calc": "216.54",
           "qty": 216.54,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "10.55",
           "tax": "30.61",
           "op": "463.02",
-          "total": "2,778.13",
-          "total_note": null,
-          "notes": ""
+          "total": "2,778.13"
         },
         {
           "type": "line_item",
@@ -9397,15 +7685,11 @@
           "calc": "216.54",
           "qty": 216.54,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.33",
           "tax": "7.60",
           "op": "102.42",
-          "total": "614.56",
-          "total_note": null,
-          "notes": ""
+          "total": "614.56"
         },
         {
           "type": "header",
@@ -9421,15 +7705,11 @@
           "calc": "23",
           "qty": 23.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.06",
           "tax": "0.47",
           "op": "9.58",
-          "total": "57.43",
-          "total_note": null,
-          "notes": ""
+          "total": "57.43"
         },
         {
           "type": "line_item",
@@ -9441,15 +7721,11 @@
           "calc": "23",
           "qty": 23.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "10.55",
           "tax": "3.25",
           "op": "49.20",
-          "total": "295.10",
-          "total_note": null,
-          "notes": ""
+          "total": "295.10"
         },
         {
           "type": "line_item",
@@ -9461,15 +7737,11 @@
           "calc": "23",
           "qty": 23.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.33",
           "tax": "0.81",
           "op": "10.88",
-          "total": "65.28",
-          "total_note": null,
-          "notes": ""
+          "total": "65.28"
         },
         {
           "type": "line_item",
@@ -9481,14 +7753,11 @@
           "calc": "14",
           "qty": 14.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "21.14",
           "replace": "272.28",
           "tax": "217.01",
           "op": "864.98",
           "total": "5,189.87",
-          "total_note": null,
           "notes": "Step lights"
         },
         {
@@ -9510,13 +7779,11 @@
             "E",
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "28,000.00",
           "tax": "0.00",
           "op": "0.00",
           "total": "28,000.00",
-          "total_note": null,
           "notes": "N0 9: Painting: Powder coat metal pergola"
         },
         {
@@ -9537,15 +7804,11 @@
           "calc": "56+15",
           "qty": 71.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "9.49",
           "replace": "114.69",
           "tax": "327.37",
           "op": "1,828.84",
-          "total": "10,972.99",
-          "total_note": null,
-          "notes": ""
+          "total": "10,972.99"
         },
         {
           "type": "line_item",
@@ -9557,15 +7820,11 @@
           "calc": "71*7",
           "qty": 497.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.84",
           "tax": "21.81",
           "op": "187.26",
-          "total": "1,123.55",
-          "total_note": null,
-          "notes": ""
+          "total": "1,123.55"
         },
         {
           "type": "line_item",
@@ -9577,14 +7836,11 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "162.18",
           "tax": "0.00",
           "op": "194.62",
           "total": "1,167.70",
-          "total_note": null,
           "notes": "To drill and bolt wood slatted fencing into block wall"
         },
         {
@@ -9601,14 +7857,11 @@
           "calc": "/2",
           "qty": 209.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "4.58",
           "replace": "15.66",
           "tax": "88.23",
           "op": "863.66",
           "total": "5,182.05",
-          "total_note": null,
           "notes": "Footings are excluded from this estimate"
         },
         {
@@ -9621,14 +7874,11 @@
           "calc": "8*15",
           "qty": 120.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "15.35",
           "tax": "0.00",
           "op": "368.40",
           "total": "2,210.40",
-          "total_note": null,
           "notes": "8\" drilling x every 2 feet"
         },
         {
@@ -9641,15 +7891,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1,148.00",
           "tax": "2.15",
           "op": "230.04",
-          "total": "1,380.19",
-          "total_note": null,
-          "notes": ""
+          "total": "1,380.19"
         },
         {
           "type": "line_item",
@@ -9661,15 +7907,11 @@
           "calc": "15",
           "qty": 15.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "21.62",
           "tax": "5.18",
           "op": "65.90",
-          "total": "395.38",
-          "total_note": null,
-          "notes": ""
+          "total": "395.38"
         },
         {
           "type": "header",
@@ -9685,15 +7927,11 @@
           "calc": "380",
           "qty": 380.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.52",
           "tax": "0.37",
           "op": "39.60",
-          "total": "237.57",
-          "total_note": null,
-          "notes": ""
+          "total": "237.57"
         },
         {
           "type": "line_item",
@@ -9705,15 +7943,11 @@
           "calc": "380",
           "qty": 380.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.43",
           "tax": "28.53",
           "op": "114.38",
-          "total": "686.31",
-          "total_note": null,
-          "notes": ""
+          "total": "686.31"
         },
         {
           "type": "header",
@@ -9729,15 +7963,11 @@
           "calc": "286",
           "qty": 286.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.71",
           "tax": "0.28",
           "op": "40.68",
-          "total": "244.02",
-          "total_note": null,
-          "notes": ""
+          "total": "244.02"
         },
         {
           "type": "line_item",
@@ -9749,15 +7979,11 @@
           "calc": "26*5.5*2",
           "qty": 286.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "5.24",
           "tax": "36.53",
           "op": "307.02",
-          "total": "1,842.19",
-          "total_note": null,
-          "notes": ""
+          "total": "1,842.19"
         },
         {
           "type": "line_item",
@@ -9769,15 +7995,8 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
-          "remove": null,
-          "replace": null,
-          "tax": null,
-          "op": null,
           "total": "0.00",
-          "total_note": "SEE X3.BUILD",
-          "notes": ""
+          "total_note": "SEE X3.BUILD"
         }
       ],
       "section_totals": {
@@ -9806,14 +8025,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "65.00",
           "tax": "0.00",
           "op": "0.00",
-          "total": "13,000.00",
-          "total_note": null,
-          "notes": ""
+          "total": "13,000.00"
         },
         {
           "type": "line_item",
@@ -9828,14 +8044,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "1,215.14",
           "replace": "0.00",
           "tax": "0.00",
           "op": "0.00",
-          "total": "12,151.40",
-          "total_note": null,
-          "notes": ""
+          "total": "12,151.40"
         },
         {
           "type": "line_item",
@@ -9850,13 +8063,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "413.88",
           "tax": "354.90",
           "op": "0.00",
           "total": "8,632.50",
-          "total_note": null,
           "notes": "Rear Elevation trees alongside damaged CMU Block wall"
         },
         {
@@ -9872,14 +8083,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "2,351.40",
           "replace": "0.00",
           "tax": "0.00",
           "op": "0.00",
-          "total": "35,271.00",
-          "total_note": null,
-          "notes": ""
+          "total": "35,271.00"
         },
         {
           "type": "line_item",
@@ -9894,13 +8102,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "676.45",
           "tax": "548.44",
           "op": "0.00",
           "total": "10,695.19",
-          "total_note": null,
           "notes": "Right Elevation hillside trees"
         },
         {
@@ -9916,14 +8122,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "24.20",
           "tax": "178.04",
           "op": "0.00",
-          "total": "5,018.04",
-          "total_note": null,
-          "notes": ""
+          "total": "5,018.04"
         },
         {
           "type": "line_item",
@@ -9938,14 +8141,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "130.35",
           "tax": "169.65",
           "op": "0.00",
-          "total": "4,080.15",
-          "total_note": null,
-          "notes": ""
+          "total": "4,080.15"
         },
         {
           "type": "line_item",
@@ -9960,14 +8160,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "108.73",
           "tax": "226.59",
           "op": "0.00",
-          "total": "5,663.09",
-          "total_note": null,
-          "notes": ""
+          "total": "5,663.09"
         },
         {
           "type": "line_item",
@@ -9982,14 +8179,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.13",
           "tax": "0.98",
           "op": "0.00",
-          "total": "130.98",
-          "total_note": null,
-          "notes": ""
+          "total": "130.98"
         },
         {
           "type": "line_item",
@@ -10004,14 +8198,11 @@
           "item_codes": [
             "N"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.86",
           "tax": "60.45",
           "op": "0.00",
-          "total": "920.45",
-          "total_note": null,
-          "notes": ""
+          "total": "920.45"
         }
       ],
       "section_totals": {
@@ -10037,15 +8228,11 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "43.20",
           "tax": "0.00",
           "op": "8.64",
-          "total": "51.84",
-          "total_note": null,
-          "notes": ""
+          "total": "51.84"
         }
       ],
       "section_totals": {

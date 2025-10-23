@@ -57,13 +57,10 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "80.81",
           "tax": "0.00",
-          "op": null,
           "total": "9,697.20",
-          "total_note": null,
           "notes": "(5) Crew for 3 days, 8 hours per day."
         },
         {
@@ -79,13 +76,10 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "114.94",
           "tax": "0.00",
-          "op": null,
           "total": "2,758.56",
-          "total_note": null,
           "notes": "(1) Working Supervisor to coordinate all phases of the pack-out, storage. Pack-out: (1) Supervisor for 3 days"
         },
         {
@@ -98,14 +92,10 @@
           "calc": "2*6*3",
           "qty": 36.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.41",
           "tax": "1.44",
-          "op": null,
           "total": "16.20",
-          "total_note": null,
           "notes": "(2) Sets of gloves for (5) crew & (1) Supervisor for 3 days - pack-out"
         },
         {
@@ -118,14 +108,10 @@
           "calc": ".25",
           "qty": 0.25,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "211.75",
           "replace": "0.00",
           "tax": "0.00",
-          "op": null,
           "total": "52.94",
-          "total_note": null,
           "notes": "For all debris generated during pack-out services."
         },
         {
@@ -138,14 +124,10 @@
           "calc": "3*6",
           "qty": 18.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "1.57",
           "tax": "2.76",
-          "op": null,
           "total": "31.02",
-          "total_note": null,
           "notes": "(1) Set of mask for (5) crew that includes (1) Working Supervisor for 3 days - Pack-out"
         },
         {
@@ -155,17 +137,12 @@
           "sel": "TR>",
           "act": "+",
           "description": "Moving van (21'-27') and equipment (per day)",
-          "calc": "",
           "qty": 12.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "210.45",
           "tax": "0.00",
-          "op": null,
           "total": "2,525.40",
-          "total_note": null,
           "notes": "(1) Truck for day for 3 days pack-out & 3 days pack-back from the job site to the off-site storage site and from the off-site storage facility back to the customer's residence"
         },
         {
@@ -178,15 +155,10 @@
           "calc": "1200",
           "qty": 1200.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.62",
           "replace": "0.00",
           "tax": "10.53",
-          "op": null,
-          "total": "754.53",
-          "total_note": null,
-          "notes": ""
+          "total": "754.53"
         },
         {
           "type": "line_item",
@@ -198,14 +170,10 @@
           "calc": "8*3",
           "qty": 24.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "66.50",
           "tax": "0.00",
-          "op": null,
           "total": "1,596.00",
-          "total_note": null,
           "notes": "Labor to move large objects and other debris to access salvable items for precessing and storage"
         }
       ],
@@ -235,14 +203,10 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.13",
           "tax": "0.00",
-          "op": null,
-          "total": "1,322.10",
-          "total_note": null,
-          "notes": ""
+          "total": "1,322.10"
         },
         {
           "type": "line_item",
@@ -254,14 +218,10 @@
           "calc": "6*3*8",
           "qty": 144.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "66.50",
           "tax": "0.00",
-          "op": null,
           "total": "9,576.00",
-          "total_note": null,
           "notes": "(6) Crew for 8 hours for 3 days. To clean all items from the customer's residence prior to re-packing."
         },
         {
@@ -274,14 +234,10 @@
           "calc": "6*2*3",
           "qty": 36.0,
           "unit": "HR",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "66.50",
           "tax": "0.00",
-          "op": null,
           "total": "2,394.00",
-          "total_note": null,
           "notes": "(6) Crew for 2 hours for 3 days to repack contents for storage in vaults."
         },
         {
@@ -298,15 +254,10 @@
           "calc": "2130",
           "qty": 2130.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "45.69",
-          "op": null,
-          "total": "514.29",
-          "total_note": null,
-          "notes": ""
+          "total": "514.29"
         },
         {
           "type": "line_item",
@@ -318,15 +269,10 @@
           "calc": "107",
           "qty": 107.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.91",
           "tax": "40.79",
-          "op": null,
-          "total": "459.16",
-          "total_note": null,
-          "notes": ""
+          "total": "459.16"
         },
         {
           "type": "line_item",
@@ -338,15 +284,10 @@
           "calc": "15",
           "qty": 15.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "5.28",
           "tax": "7.72",
-          "op": null,
-          "total": "86.92",
-          "total_note": null,
-          "notes": ""
+          "total": "86.92"
         },
         {
           "type": "line_item",
@@ -358,15 +299,10 @@
           "calc": "30",
           "qty": 30.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.91",
           "tax": "11.44",
-          "op": null,
-          "total": "128.74",
-          "total_note": null,
-          "notes": ""
+          "total": "128.74"
         },
         {
           "type": "line_item",
@@ -378,15 +314,10 @@
           "calc": "12",
           "qty": 12.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "27.89",
           "tax": "32.63",
-          "op": null,
-          "total": "367.31",
-          "total_note": null,
-          "notes": ""
+          "total": "367.31"
         },
         {
           "type": "line_item",
@@ -398,15 +329,10 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "10.29",
           "tax": "6.02",
-          "op": null,
-          "total": "67.76",
-          "total_note": null,
-          "notes": ""
+          "total": "67.76"
         },
         {
           "type": "line_item",
@@ -418,15 +344,10 @@
           "calc": "5",
           "qty": 5.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "6.76",
           "tax": "3.30",
-          "op": null,
-          "total": "37.10",
-          "total_note": null,
-          "notes": ""
+          "total": "37.10"
         },
         {
           "type": "line_item",
@@ -438,15 +359,10 @@
           "calc": "18",
           "qty": 18.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.79",
           "tax": "6.65",
-          "op": null,
-          "total": "74.87",
-          "total_note": null,
-          "notes": ""
+          "total": "74.87"
         },
         {
           "type": "line_item",
@@ -458,15 +374,10 @@
           "calc": "4",
           "qty": 4.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.20",
           "tax": "3.59",
-          "op": null,
-          "total": "40.39",
-          "total_note": null,
-          "notes": ""
+          "total": "40.39"
         },
         {
           "type": "line_item",
@@ -478,15 +389,10 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "28.53",
           "tax": "8.35",
-          "op": null,
-          "total": "93.94",
-          "total_note": null,
-          "notes": ""
+          "total": "93.94"
         },
         {
           "type": "line_item",
@@ -498,15 +404,10 @@
           "calc": "102",
           "qty": 102.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "90.20",
-          "op": null,
-          "total": "1,015.34",
-          "total_note": null,
-          "notes": ""
+          "total": "1,015.34"
         },
         {
           "type": "line_item",
@@ -518,15 +419,10 @@
           "calc": "10.25",
           "qty": 10.25,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "29.81",
-          "op": null,
-          "total": "335.57",
-          "total_note": null,
-          "notes": ""
+          "total": "335.57"
         }
       ],
       "section_totals": {
@@ -615,15 +511,10 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "7.07",
-          "op": null,
-          "total": "79.63",
-          "total_note": null,
-          "notes": ""
+          "total": "79.63"
         },
         {
           "type": "line_item",
@@ -635,15 +526,10 @@
           "calc": "30",
           "qty": 30.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "0.64",
-          "op": null,
-          "total": "7.24",
-          "total_note": null,
-          "notes": ""
+          "total": "7.24"
         },
         {
           "type": "line_item",
@@ -655,15 +541,10 @@
           "calc": ".5",
           "qty": 0.5,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "1.45",
-          "op": null,
-          "total": "16.37",
-          "total_note": null,
-          "notes": ""
+          "total": "16.37"
         },
         {
           "type": "line_item",
@@ -675,15 +556,10 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.20",
           "tax": "2.69",
-          "op": null,
-          "total": "30.29",
-          "total_note": null,
-          "notes": ""
+          "total": "30.29"
         },
         {
           "type": "line_item",
@@ -695,15 +571,10 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "0.86",
-          "op": null,
-          "total": "9.71",
-          "total_note": null,
-          "notes": ""
+          "total": "9.71"
         }
       ],
       "section_totals": {
@@ -756,15 +627,10 @@
           "calc": ".25",
           "qty": 0.25,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "0.73",
-          "op": null,
-          "total": "8.19",
-          "total_note": null,
-          "notes": ""
+          "total": "8.19"
         },
         {
           "type": "line_item",
@@ -776,15 +642,10 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "0.86",
-          "op": null,
-          "total": "9.71",
-          "total_note": null,
-          "notes": ""
+          "total": "9.71"
         },
         {
           "type": "line_item",
@@ -796,15 +657,10 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.20",
           "tax": "0.90",
-          "op": null,
-          "total": "10.10",
-          "total_note": null,
-          "notes": ""
+          "total": "10.10"
         },
         {
           "type": "line_item",
@@ -816,15 +672,10 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "0.88",
-          "op": null,
-          "total": "9.95",
-          "total_note": null,
-          "notes": ""
+          "total": "9.95"
         }
       ],
       "section_totals": {
@@ -867,15 +718,10 @@
           "calc": "24",
           "qty": 24.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "21.22",
-          "op": null,
-          "total": "238.90",
-          "total_note": null,
-          "notes": ""
+          "total": "238.90"
         },
         {
           "type": "line_item",
@@ -887,15 +733,10 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "5.82",
-          "op": null,
-          "total": "65.48",
-          "total_note": null,
-          "notes": ""
+          "total": "65.48"
         },
         {
           "type": "line_item",
@@ -907,15 +748,10 @@
           "calc": "500",
           "qty": 500.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "10.73",
-          "op": null,
-          "total": "120.73",
-          "total_note": null,
-          "notes": ""
+          "total": "120.73"
         },
         {
           "type": "line_item",
@@ -927,15 +763,10 @@
           "calc": "10",
           "qty": 10.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.79",
           "tax": "3.70",
-          "op": null,
-          "total": "41.60",
-          "total_note": null,
-          "notes": ""
+          "total": "41.60"
         },
         {
           "type": "line_item",
@@ -947,15 +778,10 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "6.76",
           "tax": "0.66",
-          "op": null,
-          "total": "7.42",
-          "total_note": null,
-          "notes": ""
+          "total": "7.42"
         },
         {
           "type": "line_item",
@@ -967,15 +793,10 @@
           "calc": "15",
           "qty": 15.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "4.31",
-          "op": null,
-          "total": "48.56",
-          "total_note": null,
-          "notes": ""
+          "total": "48.56"
         },
         {
           "type": "line_item",
@@ -987,15 +808,10 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.91",
           "tax": "3.05",
-          "op": null,
-          "total": "34.33",
-          "total_note": null,
-          "notes": ""
+          "total": "34.33"
         },
         {
           "type": "line_item",
@@ -1007,15 +823,10 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "28.53",
           "tax": "5.56",
-          "op": null,
-          "total": "62.62",
-          "total_note": null,
-          "notes": ""
+          "total": "62.62"
         }
       ],
       "section_totals": {
@@ -1083,15 +894,10 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "5.31",
-          "op": null,
-          "total": "59.73",
-          "total_note": null,
-          "notes": ""
+          "total": "59.73"
         },
         {
           "type": "line_item",
@@ -1103,15 +909,10 @@
           "calc": "25",
           "qty": 25.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "7.19",
-          "op": null,
-          "total": "80.94",
-          "total_note": null,
-          "notes": ""
+          "total": "80.94"
         },
         {
           "type": "line_item",
@@ -1123,15 +924,10 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.91",
           "tax": "3.05",
-          "op": null,
-          "total": "34.33",
-          "total_note": null,
-          "notes": ""
+          "total": "34.33"
         },
         {
           "type": "line_item",
@@ -1143,15 +939,10 @@
           "calc": "350",
           "qty": 350.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "7.51",
-          "op": null,
-          "total": "84.51",
-          "total_note": null,
-          "notes": ""
+          "total": "84.51"
         },
         {
           "type": "line_item",
@@ -1163,15 +954,10 @@
           "calc": ".5",
           "qty": 0.5,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "1.45",
-          "op": null,
-          "total": "16.37",
-          "total_note": null,
-          "notes": ""
+          "total": "16.37"
         },
         {
           "type": "line_item",
@@ -1183,15 +969,10 @@
           "calc": "5",
           "qty": 5.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.79",
           "tax": "1.85",
-          "op": null,
-          "total": "20.80",
-          "total_note": null,
-          "notes": ""
+          "total": "20.80"
         }
       ],
       "section_totals": {
@@ -1244,15 +1025,10 @@
           "calc": "19",
           "qty": 19.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "16.80",
-          "op": null,
-          "total": "189.13",
-          "total_note": null,
-          "notes": ""
+          "total": "189.13"
         },
         {
           "type": "line_item",
@@ -1264,15 +1040,10 @@
           "calc": "1.5",
           "qty": 1.5,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "4.36",
-          "op": null,
-          "total": "49.11",
-          "total_note": null,
-          "notes": ""
+          "total": "49.11"
         },
         {
           "type": "line_item",
@@ -1284,15 +1055,10 @@
           "calc": "350",
           "qty": 350.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "7.51",
-          "op": null,
-          "total": "84.51",
-          "total_note": null,
-          "notes": ""
+          "total": "84.51"
         },
         {
           "type": "line_item",
@@ -1304,15 +1070,10 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "6.76",
           "tax": "1.98",
-          "op": null,
-          "total": "22.26",
-          "total_note": null,
-          "notes": ""
+          "total": "22.26"
         },
         {
           "type": "line_item",
@@ -1324,15 +1085,10 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.79",
           "tax": "1.11",
-          "op": null,
-          "total": "12.48",
-          "total_note": null,
-          "notes": ""
+          "total": "12.48"
         },
         {
           "type": "line_item",
@@ -1344,15 +1100,10 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "10.29",
           "tax": "1.00",
-          "op": null,
-          "total": "11.29",
-          "total_note": null,
-          "notes": ""
+          "total": "11.29"
         },
         {
           "type": "line_item",
@@ -1364,15 +1115,10 @@
           "calc": "10",
           "qty": 10.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "5.28",
           "tax": "5.15",
-          "op": null,
-          "total": "57.95",
-          "total_note": null,
-          "notes": ""
+          "total": "57.95"
         },
         {
           "type": "line_item",
@@ -1384,15 +1130,10 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "1.73",
-          "op": null,
-          "total": "19.43",
-          "total_note": null,
-          "notes": ""
+          "total": "19.43"
         },
         {
           "type": "line_item",
@@ -1404,15 +1145,10 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.91",
           "tax": "3.05",
-          "op": null,
-          "total": "34.33",
-          "total_note": null,
-          "notes": ""
+          "total": "34.33"
         }
       ],
       "section_totals": {
@@ -1449,15 +1185,10 @@
           "calc": "7",
           "qty": 7.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "6.19",
-          "op": null,
-          "total": "69.68",
-          "total_note": null,
-          "notes": ""
+          "total": "69.68"
         },
         {
           "type": "line_item",
@@ -1469,15 +1200,10 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "2.30",
-          "op": null,
-          "total": "25.90",
-          "total_note": null,
-          "notes": ""
+          "total": "25.90"
         },
         {
           "type": "line_item",
@@ -1489,15 +1215,10 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "2.91",
-          "op": null,
-          "total": "32.74",
-          "total_note": null,
-          "notes": ""
+          "total": "32.74"
         },
         {
           "type": "line_item",
@@ -1509,15 +1230,10 @@
           "calc": "100",
           "qty": 100.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "2.15",
-          "op": null,
-          "total": "24.15",
-          "total_note": null,
-          "notes": ""
+          "total": "24.15"
         }
       ],
       "section_totals": {
@@ -1554,15 +1270,10 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "7.07",
-          "op": null,
-          "total": "79.63",
-          "total_note": null,
-          "notes": ""
+          "total": "79.63"
         },
         {
           "type": "line_item",
@@ -1574,15 +1285,10 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "2.91",
-          "op": null,
-          "total": "32.74",
-          "total_note": null,
-          "notes": ""
+          "total": "32.74"
         },
         {
           "type": "line_item",
@@ -1594,15 +1300,10 @@
           "calc": "200",
           "qty": 200.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "4.29",
-          "op": null,
-          "total": "48.29",
-          "total_note": null,
-          "notes": ""
+          "total": "48.29"
         },
         {
           "type": "line_item",
@@ -1614,15 +1315,10 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "2.30",
-          "op": null,
-          "total": "25.90",
-          "total_note": null,
-          "notes": ""
+          "total": "25.90"
         }
       ],
       "section_totals": {
@@ -1659,15 +1355,10 @@
           "calc": "3",
           "qty": 3.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "2.65",
-          "op": null,
-          "total": "29.86",
-          "total_note": null,
-          "notes": ""
+          "total": "29.86"
         },
         {
           "type": "line_item",
@@ -1679,15 +1370,10 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "1.73",
-          "op": null,
-          "total": "19.43",
-          "total_note": null,
-          "notes": ""
+          "total": "19.43"
         },
         {
           "type": "line_item",
@@ -1699,15 +1385,10 @@
           "calc": "100",
           "qty": 100.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "2.15",
-          "op": null,
-          "total": "24.15",
-          "total_note": null,
-          "notes": ""
+          "total": "24.15"
         },
         {
           "type": "line_item",
@@ -1719,15 +1400,10 @@
           "calc": ".5",
           "qty": 0.5,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "1.45",
-          "op": null,
-          "total": "16.37",
-          "total_note": null,
-          "notes": ""
+          "total": "16.37"
         },
         {
           "type": "line_item",
@@ -1739,15 +1415,10 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "10.29",
           "tax": "2.01",
-          "op": null,
-          "total": "22.59",
-          "total_note": null,
-          "notes": ""
+          "total": "22.59"
         }
       ],
       "section_totals": {
@@ -1790,15 +1461,10 @@
           "calc": "10",
           "qty": 10.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "8.84",
-          "op": null,
-          "total": "99.54",
-          "total_note": null,
-          "notes": ""
+          "total": "99.54"
         },
         {
           "type": "line_item",
@@ -1810,15 +1476,10 @@
           "calc": "1.5",
           "qty": 1.5,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "4.36",
-          "op": null,
-          "total": "49.11",
-          "total_note": null,
-          "notes": ""
+          "total": "49.11"
         },
         {
           "type": "line_item",
@@ -1830,15 +1491,10 @@
           "calc": "300",
           "qty": 300.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "6.44",
-          "op": null,
-          "total": "72.44",
-          "total_note": null,
-          "notes": ""
+          "total": "72.44"
         },
         {
           "type": "line_item",
@@ -1850,15 +1506,10 @@
           "calc": "5",
           "qty": 5.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "5.28",
           "tax": "2.57",
-          "op": null,
-          "total": "28.97",
-          "total_note": null,
-          "notes": ""
+          "total": "28.97"
         },
         {
           "type": "line_item",
@@ -1870,15 +1521,10 @@
           "calc": "8",
           "qty": 8.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "2.30",
-          "op": null,
-          "total": "25.90",
-          "total_note": null,
-          "notes": ""
+          "total": "25.90"
         },
         {
           "type": "line_item",
@@ -1890,15 +1536,10 @@
           "calc": "2",
           "qty": 2.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "10.08",
           "tax": "1.97",
-          "op": null,
-          "total": "22.13",
-          "total_note": null,
-          "notes": ""
+          "total": "22.13"
         },
         {
           "type": "line_item",
@@ -1910,15 +1551,10 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "6.76",
           "tax": "0.66",
-          "op": null,
-          "total": "7.42",
-          "total_note": null,
-          "notes": ""
+          "total": "7.42"
         },
         {
           "type": "line_item",
@@ -1930,15 +1566,10 @@
           "calc": "1",
           "qty": 1.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "28.53",
           "tax": "2.78",
-          "op": null,
-          "total": "31.31",
-          "total_note": null,
-          "notes": ""
+          "total": "31.31"
         }
       ],
       "section_totals": {
@@ -1975,15 +1606,10 @@
           "calc": "16",
           "qty": 16.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "9.07",
           "tax": "14.15",
-          "op": null,
-          "total": "159.27",
-          "total_note": null,
-          "notes": ""
+          "total": "159.27"
         },
         {
           "type": "line_item",
@@ -1995,15 +1621,10 @@
           "calc": "25",
           "qty": 25.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "2.95",
           "tax": "7.19",
-          "op": null,
-          "total": "80.94",
-          "total_note": null,
-          "notes": ""
+          "total": "80.94"
         },
         {
           "type": "line_item",
@@ -2015,15 +1636,10 @@
           "calc": "1.5",
           "qty": 1.5,
           "unit": "RL",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "29.83",
           "tax": "4.36",
-          "op": null,
-          "total": "49.11",
-          "total_note": null,
-          "notes": ""
+          "total": "49.11"
         },
         {
           "type": "line_item",
@@ -2035,15 +1651,10 @@
           "calc": "200",
           "qty": 200.0,
           "unit": "LF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.22",
           "tax": "4.29",
-          "op": null,
-          "total": "48.29",
-          "total_note": null,
-          "notes": ""
+          "total": "48.29"
         },
         {
           "type": "line_item",
@@ -2055,15 +1666,10 @@
           "calc": "6",
           "qty": 6.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "3.91",
           "tax": "2.29",
-          "op": null,
-          "total": "25.75",
-          "total_note": null,
-          "notes": ""
+          "total": "25.75"
         }
       ],
       "section_totals": {
@@ -2092,13 +1698,10 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "89.92",
           "tax": "0.00",
-          "op": null,
           "total": "3,237.12",
-          "total_note": null,
           "notes": "(6) Crew for 2 hrs for 3 days to unload contents from the truck and place into climate controlled vaults ."
         },
         {
@@ -2114,13 +1717,10 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "295.00",
           "tax": "0.00",
-          "op": null,
           "total": "5,310.00",
-          "total_note": null,
           "notes": "(6) Vaults for 3 months"
         },
         {
@@ -2136,13 +1736,10 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "89.92",
           "tax": "0.00",
-          "op": null,
           "total": "3,237.12",
-          "total_note": null,
           "notes": "(6) Crew for 2 hours for 3 days to unload contents from the vaults and place onto the truck for transport back to the customer's residence."
         }
       ],
@@ -2169,15 +1766,10 @@
           "calc": "1200",
           "qty": 1200.0,
           "unit": "SF",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.45",
           "replace": "0.00",
           "tax": "8.19",
-          "op": null,
-          "total": "548.19",
-          "total_note": null,
-          "notes": ""
+          "total": "548.19"
         },
         {
           "type": "line_item",
@@ -2192,13 +1784,10 @@
           "item_codes": [
             "*"
           ],
-          "reset": null,
           "remove": "0.00",
           "replace": "89.92",
           "tax": "0.00",
-          "op": null,
           "total": "12,948.48",
-          "total_note": null,
           "notes": "(6) Crew for 3 days to unload contents from the truck and place back into the customer's residence"
         },
         {
@@ -2211,14 +1800,10 @@
           "calc": "2*6*3",
           "qty": 36.0,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "0.00",
           "replace": "0.41",
           "tax": "1.44",
-          "op": null,
           "total": "16.20",
-          "total_note": null,
           "notes": "(2) Sets of gloves for (6) Crew for 3 days."
         },
         {
@@ -2231,14 +1816,10 @@
           "calc": ".25",
           "qty": 0.25,
           "unit": "EA",
-          "item_codes": [],
-          "reset": null,
           "remove": "211.75",
           "replace": "0.00",
           "tax": "0.00",
-          "op": null,
           "total": "52.94",
-          "total_note": null,
           "notes": "For all debris generated during pack-back services."
         }
       ],
