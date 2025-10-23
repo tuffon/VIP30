@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from typing import Dict, List, Optional, Tuple
@@ -14,6 +14,7 @@ from .constants import (
     BRACKETS_PATTERN,
     CALC_LINE_DETECTION_PATTERN,
     CALC_PREFIX_PATTERN,
+    HEADER_VARIANTS,
     DOOR_PATTERN,
     LINE_ITEM_HEADER_PATTERN,
     LINE_ITEM_PATTERN,
@@ -28,8 +29,6 @@ from .constants import (
     SINGLE_PAGE_NUMBER_PATTERN,
     SUBROOM_PATTERN,
     TABLE_HEADER_CONTINUATION,
-    TABLE_HEADER_PRIMARY,
-    TABLE_HEADER_SECOND_LINE_FRAGMENT,
     TERMINAL_STATUS_PATTERN,
     TOTALS_PATTERN,
 )
@@ -37,6 +36,8 @@ from .constants import (
 
 @dataclass
 class TableColumns:
+    family: Optional[str] = None
+    headers_norm: List[str] = field(default_factory=list)
     has_reset: bool = False
     has_tax: bool = False
     has_op: bool = False
@@ -49,7 +50,24 @@ class TableColumns:
             cols.append("TAX")
         if self.has_op:
             cols.append("O&P")
-        return f"TableColumns({', '.join(cols) if cols else 'base only'})"
+        fam = f"family={self.family}" if self.family else "family=?"
+        hdrs = f"headers={self.headers_norm}" if self.headers_norm else "headers=[]"
+        extras = ', '.join(cols) if cols else 'base only'
+        return f"TableColumns({fam}, {hdrs}, {extras})"
+
+
+def normalize_header_label(s: str) -> Optional[str]:
+    def norm(val: Optional[str]) -> str:
+        return re.sub(r'[\s\.&/]+', ' ', (val or '').upper()).strip()
+
+    t = norm(s)
+    if not t:
+        return None
+    for canon, variants in HEADER_VARIANTS.items():
+        for variant in variants:
+            if t == norm(variant):
+                return canon
+    return None
 
 
 class ParseState(Enum):
@@ -151,16 +169,69 @@ def detect_page_header_pattern(pdf_path: str) -> List[str]:
 
 
 def is_table_header(line: str, next_line: Optional[str]) -> Tuple[bool, TableColumns, bool]:
-    if not re.match(TABLE_HEADER_PRIMARY, line):
-        return False, TableColumns(), False
-    combined = f"{line} {next_line}" if next_line else line
-    cols = TableColumns(
-        has_reset='RESET' in combined,
-        has_tax='TAX' in combined,
-        has_op=('O&P' in combined or 'O & P' in combined),
-    )
-    two_line = bool(next_line and re.search(TABLE_HEADER_SECOND_LINE_FRAGMENT, next_line))
-    return True, cols, two_line
+    def extract_tokens(raw: Optional[str]) -> List[str]:
+        if not raw:
+            return []
+        stripped = raw.strip()
+        if not stripped:
+            return []
+        chunks = [c.strip() for c in re.split(r'\s{2,}|\t+', stripped) if c.strip()]
+        tokens: List[str] = []
+        for chunk in chunks:
+            norm = normalize_header_label(chunk)
+            if norm:
+                tokens.append(norm)
+        if tokens:
+            return tokens
+        words = [w for w in stripped.split() if w]
+        i, n = 0, len(words)
+        while i < n:
+            single = normalize_header_label(words[i])
+            if single:
+                tokens.append(single)
+                i += 1
+                continue
+            matched = False
+            for j in range(n, i, -1):
+                candidate = ' '.join(words[i:j])
+                norm = normalize_header_label(candidate)
+                if norm:
+                    tokens.append(norm)
+                    i = j
+                    matched = True
+                    break
+            if not matched:
+                i += 1
+        return tokens
+
+    top_tokens = extract_tokens(line)
+    bottom_tokens = extract_tokens(next_line)
+
+    layout_b_required = {"CAT", "SEL", "ACT", "DESCRIPTION"}
+    bottom_allowed = {"CALC", "QTY", "RESET", "REMOVE", "REPLACE", "TAX", "O&P", "TOTAL"}
+    if layout_b_required.issubset(set(top_tokens)) and bottom_tokens and all(t in bottom_allowed for t in bottom_tokens):
+        cols = TableColumns(
+            family='B',
+            headers_norm=top_tokens + bottom_tokens,
+            has_reset='RESET' in bottom_tokens,
+            has_tax='TAX' in bottom_tokens,
+            has_op='O&P' in bottom_tokens,
+        )
+        return True, cols, True
+
+    layout_a_candidates = {"DESCRIPTION", "QUANTITY", "UNIT", "PRICE", "TAX", "RCV"}
+    top_filtered = [t for t in top_tokens if t in layout_a_candidates]
+    if len(top_filtered) >= 4 and "DESCRIPTION" in top_filtered and "RCV" in top_filtered:
+        cols = TableColumns(
+            family='A',
+            headers_norm=top_filtered,
+            has_reset=False,
+            has_tax='TAX' in top_filtered,
+            has_op=False,
+        )
+        return True, cols, False
+
+    return False, TableColumns(), False
 
 
 def is_table_continuation(line: str) -> bool:

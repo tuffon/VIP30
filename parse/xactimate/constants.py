@@ -19,6 +19,27 @@ CURRENCY_PATTERN = r'([0-9,]+\.[0-9]+)'
 SEE_PATTERN = r'(?:SEE|SEE:)\s+([A-Z0-9][A-Z0-9._/\- ]+?)\s*$'
 TERMINAL_STATUS_PATTERN = r'\b([A-Z0-9]+(?:[._/\-][A-Z0-9]+)*(?:\s+[A-Z0-9]+(?:[._/\-][A-Z0-9]+)*)*)\s*$'
 
+HEADER_VARIANTS = {
+    # Layout A (Final Draft)
+    "DESCRIPTION": {"DESCRIPTION", "DESC"},
+    "QUANTITY": {"QUANTITY"},
+    "UNIT": {"UNIT", "UNITS"},
+    "PRICE": {"PRICE", "UNIT PRICE", "UNIT-PRICE", "UNITPRICE"},
+    "TAX": {"TAX", "SALES TAX", "MATERIAL TAX"},
+    "RCV": {"RCV", "REPLACEMENT COST VALUE", "REPL COST VALUE", "REPL. COST VALUE"},
+    # Layout B (Rough Draft)
+    "CAT": {"CAT", "CATEGORY"},
+    "SEL": {"SEL", "SELECTION"},
+    "ACT": {"ACT", "ACTIVITY"},
+    "CALC": {"CALC", "CALCULATION"},
+    "QTY": {"QTY"},
+    "RESET": {"RESET", "RST"},
+    "REMOVE": {"REMOVE", "RMV", "REM"},
+    "REPLACE": {"REPLACE", "RPL", "R/R", "R & R", "R&R"},
+    "O&P": {"O&P", "OP", "O & P", "O / P", "OVERHEAD/PROFIT", "O&P."},
+    "TOTAL": {"TOTAL", "TOT"},
+}
+
 METADATA_PATTERNS = {
     'sf_walls_and_ceiling': r'([0-9,]+\.[0-9]+)\s+SF\s+Walls\s+&\s+Ceiling',
     'sf_walls': r'([0-9,]+\.[0-9]+)\s+SF\s+Walls(?!\s+&)',
@@ -85,6 +106,7 @@ __all__ = [
     'CURRENCY_PATTERN',
     'SEE_PATTERN',
     'TERMINAL_STATUS_PATTERN',
+    'HEADER_VARIANTS',
     'METADATA_PATTERNS',
     'DOOR_PATTERN',
     'MISSING_WALL_PATTERN',
