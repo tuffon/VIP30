@@ -34,7 +34,11 @@ from .constants import (
 )
 
 
-A_RCV_SINGLE = re.compile(
+A_RCV = re.compile(
+    r'^\s*DESCRIPTION\s+QUANTITY\s+UNIT\s+PRICE\s+TAX\s+RCV\s*$',
+    re.IGNORECASE
+)
+A_RCV_QTY = re.compile(
     r'^\s*DESCRIPTION\s+Q(?:TY|UANTITY)\s+UNIT\s+PRICE\s+TAX\s+RCV\s*$',
     re.IGNORECASE
 )
@@ -226,7 +230,7 @@ def is_table_header(line: str, next_line: Optional[str]) -> Tuple[bool, TableCol
         return True, cols, True
 
     s = (line or '').strip()
-    if A_RCV_SINGLE.match(s):
+    if A_RCV.match(s) or A_RCV_QTY.match(s):
         cols = TableColumns(
             family='A',
             headers_norm=["DESCRIPTION", "QUANTITY", "UNIT", "PRICE", "TAX", "RCV"],

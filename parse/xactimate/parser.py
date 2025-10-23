@@ -192,7 +192,19 @@ class XactimateRoughDraftParser:
 
                 is_header, detected_cols, is_two = is_table_header(line, next_line)
                 if is_header:
-                    section_name = self._guess_section_name(lines, i, header_patterns)
+                    section_name = "Unknown Section"
+                    if i > 0:
+                        for j in range(i - 1, max(-1, i - 6), -1):
+                            prev = lines[j].strip()
+                            if not prev:
+                                continue
+                            if is_page_header(prev, header_patterns):
+                                continue
+                            if re.search(r'^\d|Surface Area|Number of Squares|Perimeter Length', prev):
+                                continue
+                            nm = re.search(SECTION_NAME_EXTRACTION, prev)
+                            section_name = nm.group(1).strip() if nm else prev
+                            break
                     current_section = {'section_name': section_name, 'metadata': {}, 'subrooms': [],
                                        'line_items': [], 'section_totals': {}}
                     columns = detected_cols
