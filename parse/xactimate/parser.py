@@ -395,6 +395,11 @@ class XactimateRoughDraftParser:
 
         # metadata and subrooms
         current_subroom: Optional[dict] = None
+
+        def _normalize_name(value: Optional[str]) -> str:
+            if not value:
+                return ""
+            return re.sub(r"\s+", " ", value).strip().lower()
         idx = bounds.start_idx
         while idx < bounds.header_idx:
             if skip_mask is not None and idx < len(skip_mask) and skip_mask[idx]:
@@ -423,11 +428,25 @@ class XactimateRoughDraftParser:
             if 'Height:' in line:
                 m = re.match(SECTION_HEIGHT_PATTERN, line)
                 if m:
+                    name_part = (m.group(1) or '').strip()
                     height_value = m.group(2).strip()
+                    normalized_line_name = _normalize_name(name_part)
+                    normalized_section_name = _normalize_name(section['section_name'])
+
                     if current_subroom:
-                        current_subroom.setdefault('metadata', {})['height'] = height_value
+                        current_name = _normalize_name(current_subroom.get('subroom_name'))
+                        if normalized_line_name and normalized_line_name != current_name:
+                            section['subrooms'].append(current_subroom)
+                            sub_meta = {'height': height_value} if height_value else {}
+                            current_subroom = {'subroom_name': name_part, 'metadata': sub_meta}
+                        else:
+                            current_subroom.setdefault('metadata', {})['height'] = height_value
                     else:
-                        section['metadata']['height'] = height_value
+                        if normalized_line_name and normalized_section_name and normalized_line_name != normalized_section_name:
+                            sub_meta = {'height': height_value} if height_value else {}
+                            current_subroom = {'subroom_name': name_part, 'metadata': sub_meta}
+                        else:
+                            section['metadata']['height'] = height_value
                     idx += 1
                     continue
 
