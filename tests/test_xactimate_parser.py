@@ -122,3 +122,25 @@ def test_integration_headers_and_totals():
     )
     declared = sum(money_to_float(sec['section_totals']['total']) for sec in sections)
     assert math.isclose(total_sections_sum, declared, abs_tol=1e-6)
+
+
+def test_subroom_height_preserved_when_section_height_present():
+    parser = _make_parser()
+    lines = [
+        "Living Room Height: 11'",
+        "Subroom: Offset 1 (2) Height: 9'",
+        "40.50 SF Walls 16.50 SF Ceiling",
+        "CAT SEL ACT DESCRIPTION",
+        "CALC QTY REMOVE REPLACE TAX TOTAL",
+        "1. ABC DEF + Item",
+        "1*1 1.00EA 0.00+ 0.00 = 0.00 0.00",
+        "Totals: Living Room 0.00 0.00",
+    ]
+
+    sections, _ = parser._parse_document_from_lines(lines)
+    assert len(sections) == 1
+
+    section = sections[0]
+    assert section['metadata']['height'] == "11'"
+    assert section['subrooms']
+    assert section['subrooms'][0]['metadata']['height'] == "9'"
