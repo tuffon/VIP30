@@ -179,7 +179,12 @@ class XactimateRoughDraftParser:
 
             header_idx = i
             header_span = 2 if is_two else 1
-            totals_idx, totals_line = self._find_totals_index(lines, header_idx + header_span, skip_mask)
+            totals_idx, totals_line = self._find_totals_index(
+                lines,
+                header_idx + header_span,
+                skip_mask,
+                columns,
+            )
             errors: List[str] = []
             if totals_idx == -1:
                 errors.append(f"Missing totals after table header at line {header_idx + 1}")
@@ -219,6 +224,7 @@ class XactimateRoughDraftParser:
         lines: List[str],
         start_idx: int,
         skip_mask: Optional[List[bool]],
+        columns: TableColumns,
     ) -> Tuple[int, str]:
         L = len(lines)
         j = start_idx
@@ -231,7 +237,8 @@ class XactimateRoughDraftParser:
                 j += 1
                 continue
             if re.search(r'Totals?:', current, re.IGNORECASE):
-                return j, current
+                if self._is_valid_totals_candidate(lines, j, current, columns, skip_mask):
+                    return j, current
             next_line = (lines[j + 1] or '').strip() if j + 1 < L else None
             is_header, _, is_two = is_table_header(current, next_line)
             if is_header:
@@ -239,6 +246,58 @@ class XactimateRoughDraftParser:
                 continue
             j += 1
         return -1, ''
+
+    def _is_valid_totals_candidate(
+        self,
+        lines: List[str],
+        idx: int,
+        line: str,
+        columns: TableColumns,
+        skip_mask: Optional[List[bool]],
+    ) -> bool:
+        match = re.match(r'Totals?:\s*(.*)', line, re.IGNORECASE)
+        if not match:
+            return False
+        tail = match.group(1).strip()
+        if not tail:
+            return False
+
+        amount_pattern = re.compile(r'[\d,]+\.\d+')
+        amounts = list(amount_pattern.finditer(tail))
+
+        # Expect a section descriptor before the monetary amounts.
+        name_slice_end = amounts[0].start() if amounts else len(tail)
+        name_part = tail[:name_slice_end].strip()
+        if not name_part or not re.search(r'[A-Za-z]', name_part):
+            return False
+
+        expected_amounts = 1
+        if columns.has_tax and columns.has_op:
+            expected_amounts = 3
+        elif columns.has_tax or columns.has_op:
+            expected_amounts = 2
+
+        if len(amounts) < expected_amounts:
+            return False
+
+        # Ensure we are not mistakenly treating a line-item note as totals by
+        # checking the next meaningful line. A genuine totals row should not be
+        # immediately followed by another line item within the same table span.
+        L = len(lines)
+        k = idx + 1
+        while k < L:
+            if skip_mask is not None and k < len(skip_mask) and skip_mask[k]:
+                k += 1
+                continue
+            candidate = (lines[k] or '').strip()
+            if not candidate:
+                k += 1
+                continue
+            if re.match(r'^\d+\.', candidate):
+                return False
+            break
+
+        return True
 
     def _extract_section_name_from_totals_line(self, totals_line: str) -> Optional[str]:
         if not totals_line:
