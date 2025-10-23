@@ -312,6 +312,15 @@ class XactimateRoughDraftParser:
         tail = m.group(1).strip()
         if not tail:
             return None
+        amount_match = re.search(r'[0-9][0-9,]*\.[0-9]+', tail)
+        if amount_match:
+            name_part = tail[:amount_match.start()].strip()
+            name_part = re.sub(r'[\s$:-]+$', '', name_part)
+        else:
+            name_part = tail.strip()
+        if name_part:
+            return name_part
+
         tokens = tail.split()
         name_tokens: List[str] = []
         for token in tokens:
@@ -400,6 +409,13 @@ class XactimateRoughDraftParser:
             if not value:
                 return ""
             return re.sub(r"\s+", " ", value).strip().lower()
+
+        def _names_equivalent(candidate: str, reference: str) -> bool:
+            if not candidate or not reference:
+                return False
+            if candidate == reference:
+                return True
+            return candidate.endswith(reference) or reference.endswith(candidate)
         idx = bounds.start_idx
         while idx < bounds.header_idx:
             if skip_mask is not None and idx < len(skip_mask) and skip_mask[idx]:
@@ -435,18 +451,24 @@ class XactimateRoughDraftParser:
 
                     if current_subroom:
                         current_name = _normalize_name(current_subroom.get('subroom_name'))
-                        if normalized_line_name and normalized_line_name != current_name:
+                        if normalized_line_name and not _names_equivalent(normalized_line_name, current_name):
                             section['subrooms'].append(current_subroom)
                             sub_meta = {'height': height_value} if height_value else {}
                             current_subroom = {'subroom_name': name_part, 'metadata': sub_meta}
                         else:
-                            current_subroom.setdefault('metadata', {})['height'] = height_value
+                            if height_value:
+                                current_subroom.setdefault('metadata', {})['height'] = height_value
                     else:
-                        if normalized_line_name and normalized_section_name and normalized_line_name != normalized_section_name:
+                        if (
+                            normalized_line_name
+                            and normalized_section_name
+                            and not _names_equivalent(normalized_line_name, normalized_section_name)
+                        ):
                             sub_meta = {'height': height_value} if height_value else {}
                             current_subroom = {'subroom_name': name_part, 'metadata': sub_meta}
                         else:
-                            section['metadata']['height'] = height_value
+                            if height_value:
+                                section['metadata']['height'] = height_value
                     idx += 1
                     continue
 

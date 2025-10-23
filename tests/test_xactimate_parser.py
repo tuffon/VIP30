@@ -144,3 +144,36 @@ def test_height_line_creates_subroom_when_name_differs():
     assert len(section['subrooms']) == 1
     assert section['subrooms'][0]['subroom_name'] == 'Bathroom 1'
     assert section['subrooms'][0]['metadata'].get('height') == "8' 5\""
+
+
+def test_section_with_dimension_prefix_keeps_metadata_on_section():
+    parser = _make_parser()
+    lines = [
+        "20' 11\" Bedroom 2 Height: Sloped",
+        "Door 10' X 6' 8\" Opens into Exterior",
+        "Door 3' X 7' Opens into HALLWAY",
+        "Door 3' X 8' Opens into BATHROOM_1",
+        "Window 3' X 5' Opens into Exterior",
+        "Window 3' X 5' Opens into Exterior",
+        "5' 5\" Subroom: Closet 2 (1) Height: 8'",
+        "Door 3' X 7' Opens into BEDROOM_2",
+        "CAT SEL ACT DESCRIPTION",
+        "CALC QTY REMOVE REPLACE TAX TOTAL",
+        "1. ABC DEF + First item",
+        "1*1 1.00EA 0.00+ 5.00 = 0.00 5.00",
+        "Totals: Bedroom 2 0.00 5.00",
+    ]
+
+    sections, _ = parser._parse_document_from_lines(lines)
+    assert len(sections) == 1
+    section = sections[0]
+
+    assert section['section_name'] == 'Bedroom 2'
+    metadata = section['metadata']
+    assert metadata.get('height') == 'Sloped'
+    assert len(metadata.get('doors', [])) == 3
+    assert len(metadata.get('windows', [])) == 2
+    assert len(section['subrooms']) == 1
+    sub = section['subrooms'][0]
+    assert sub['subroom_name'] == 'Closet 2 (1)'
+    assert sub['metadata'].get('height') == "8'"
