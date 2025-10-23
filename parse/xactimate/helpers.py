@@ -11,19 +11,15 @@ from typing import Dict, List, Optional, Tuple
 import pdfplumber
 
 from .constants import (
-    BRAND_PAT,
     BRACKETS_PATTERN,
     CALC_LINE_DETECTION_PATTERN,
     CALC_PREFIX_PATTERN,
-    DATE_STAMP_PAT,
     DOOR_PATTERN,
     LINE_ITEM_HEADER_PATTERN,
     LINE_ITEM_PATTERN,
     METADATA_PATTERNS,
     MISSING_WALL_PATTERN,
-    NO_LETTERS_PAT,
     PAGE_NUMBER_PATTERN,
-    PAGE_NUM_PAT,
     QUOTE_PATTERN,
     REPEATED_CHAR_PATTERN,
     SECTION_HEIGHT_PATTERN,
@@ -36,7 +32,6 @@ from .constants import (
     TABLE_HEADER_SECOND_LINE_FRAGMENT,
     TERMINAL_STATUS_PATTERN,
     TOTALS_PATTERN,
-    URL_PAT,
 )
 
 
@@ -136,60 +131,6 @@ def is_page_header(line: str, header_patterns: List[str]) -> bool:
     if re.match(PAGE_NUMBER_PATTERN, line):
         return True
     return bool(header_patterns and line in header_patterns)
-
-
-def _letters_ratio(text: str) -> float:
-    cleaned = (text or '').strip()
-    if not cleaned:
-        return 0.0
-    non_space = sum(1 for c in cleaned if not c.isspace())
-    if non_space == 0:
-        return 0.0
-    letters = sum(1 for c in cleaned if c.isalpha())
-    return letters / non_space if non_space else 0.0
-
-
-def is_page_footer(line: str) -> bool:
-    s = (line or '').strip()
-    if not s:
-        return False
-    if PAGE_NUM_PAT.match(s):
-        return True
-    if DATE_STAMP_PAT.match(s):
-        return True
-    if URL_PAT.search(s):
-        return True
-    if BRAND_PAT.search(s):
-        return True
-    return False
-
-
-def is_page_header_line(line: str) -> bool:
-    s = (line or '').strip()
-    if not s:
-        return False
-    if is_page_footer(s):
-        return True
-    lowered = s.lower()
-    if 'claim #' in lowered or 'policy #' in lowered:
-        return True
-    return bool(BRAND_PAT.search(s))
-
-
-def is_page_noise(line: str) -> bool:
-    s = (line or '').strip()
-    if not s:
-        return True
-    if is_page_footer(s) or is_page_header_line(s):
-        return True
-    if NO_LETTERS_PAT.match(s):
-        return True
-    if _letters_ratio(s) <= 0.25:
-        return True
-    lowered = s.lower()
-    if 'claim #' in lowered or 'policy #' in lowered:
-        return True
-    return False
 
 
 def detect_page_header_pattern(pdf_path: str) -> List[str]:

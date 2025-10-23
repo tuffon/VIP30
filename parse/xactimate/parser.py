@@ -16,7 +16,6 @@ from .helpers import (
     is_line_item,
     is_line_item_header,
     is_page_header,
-    is_page_noise,
     is_subroom_header,
     is_table_continuation,
     is_table_header,
@@ -150,43 +149,6 @@ class XactimateRoughDraftParser:
         columns = TableColumns()
         pending_header_lines: List[str] = []
 
-        def flush_pending_notes() -> None:
-            nonlocal pending_header_lines
-            if not pending_header_lines or not current_line_item:
-                pending_header_lines = []
-                return
-            filtered = [line for line in pending_header_lines if not is_page_noise(line)]
-            pending_header_lines = []
-            note_text = ' '.join(segment.strip() for segment in filtered if segment.strip())
-            if not note_text:
-                return
-            if not re.search(r'[A-Za-z]', note_text):
-                return
-            notes_seen = current_line_item.setdefault('_notes_seen', [])
-            if note_text in notes_seen:
-                return
-            notes_seen.append(note_text)
-            if len(notes_seen) > 3:
-                notes_seen.pop(0)
-            existing = current_line_item.get('notes') or ''
-            if existing:
-                combined = f"{existing} {note_text}".strip()
-            else:
-                combined = note_text
-            if len(combined) > 1000:
-                combined = combined[:1000].rstrip() + ' …'
-            current_line_item['notes'] = combined
-
-        def finalize_current_line_item() -> bool:
-            nonlocal current_line_item
-            if current_line_item and current_section is not None:
-                current_line_item.pop('_notes_seen', None)
-                current_section['line_items'].append(current_line_item)
-                current_line_item = None
-                return True
-            current_line_item = None
-            return False
-
         i = 0
         L = len(lines)
         while i < L:
@@ -284,10 +246,14 @@ class XactimateRoughDraftParser:
                     continue
 
                 if is_totals_line(line, current_section['section_name'] if current_section else None):
-                    flush_pending_notes()
+                    if pending_header_lines and current_line_item:
+                        note_text = ' '.join(pending_header_lines)
+                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + note_text).strip() if current_line_item['notes'] else note_text
+                        pending_header_lines = []
                     if collecting_notes and current_line_item:
-                        finalize_current_line_item()
-                    collecting_notes = False
+                        current_section['line_items'].append(current_line_item)
+                        current_line_item = None
+                        collecting_notes = False
 
                     current_section['section_totals'] = self._parse_totals_line(line, columns)
                     sections.append(current_section)
@@ -298,18 +264,26 @@ class XactimateRoughDraftParser:
 
                 is_header_line, header_text = is_line_item_header(line)
                 if is_header_line:
-                    flush_pending_notes()
+                    if pending_header_lines and current_line_item:
+                        nt = ' '.join(pending_header_lines)
+                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + nt).strip() if current_line_item['notes'] else nt
+                        pending_header_lines = []
                     if collecting_notes and current_line_item:
-                        finalize_current_line_item()
+                        current_section['line_items'].append(current_line_item)
+                        current_line_item = None
                     collecting_notes = False
                     current_section['line_items'].append({'type': 'header', 'text': header_text})
                     i += 1; continue
 
                 if is_line_item(line):
-                    flush_pending_notes()
+                    if pending_header_lines and current_line_item:
+                        nt = ' '.join(pending_header_lines)
+                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + nt).strip() if current_line_item['notes'] else nt
+                        pending_header_lines = []
                     if current_line_item:
-                        finalize_current_line_item()
-                    collecting_notes = False
+                        current_section['line_items'].append(current_line_item)
+                        current_line_item = None
+                        collecting_notes = False
                     m = re.match(LINE_ITEM_PATTERN, line)
                     if m:
                         current_line_item = {
@@ -342,16 +316,12 @@ class XactimateRoughDraftParser:
                         i += 1; continue
 
                 if collecting_notes and current_line_item:
-                    if not is_page_noise(line):
-                        pending_header_lines.append(line)
+                    pending_header_lines.append(line)
                     i += 1; continue
 
                 i += 1; continue
 
             i += 1
-
-        if current_line_item:
-            current_line_item.pop('_notes_seen', None)
 
         return sections, lines
 
