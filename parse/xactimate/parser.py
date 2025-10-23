@@ -2,24 +2,20 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass, field
 from pathlib import Path
 import re
 from typing import Dict, List, Optional, Tuple
 
 from .constants import *  # noqa: F401,F403
 from .helpers import (
-    ParseState,
     TableColumns,
     extract_metadata_from_line,
     format_dollar_amount,
-    is_diagram_artifact,
-    is_line_item,
     is_line_item_header,
-    is_page_header,
     is_subroom_header,
     is_table_continuation,
     is_table_header,
-    is_totals_line,
     merge_metadata,
     money_to_float,
     parse_datetime_string,
@@ -27,6 +23,17 @@ from .helpers import (
     round2,
 )
 from .io import ParserIO
+
+
+@dataclass
+class SectionBounds:
+    name: str
+    start_idx: int
+    header_idx: int
+    header_span: int
+    totals_idx: int
+    columns: TableColumns
+    errors: List[str] = field(default_factory=list)
 
 
 class XactimateRoughDraftParser:
@@ -144,186 +151,330 @@ class XactimateRoughDraftParser:
 
     # ---------- core parsing (from provided full_lines) ----------
     def _parse_document_from_lines(self, full_lines: List[str], skip_mask: Optional[List[bool]] = None) -> tuple:
-        # header detection needs the original PDF normally; we approximate by filtering number-only and page-lines later.
-        # We still try to skip page headers via simple heuristics present in helpers.
-        header_patterns: List[str] = []  # unknown without page context; rely on PAGE_NUMBER_PATTERN, etc.
-
-        lines = full_lines  # use the same list to keep indexing aligned for skip_mask
-        state = ParseState.LOOKING_FOR_SECTION
+        lines = full_lines
         sections: List[dict] = []
-        current_section = None
-        current_subroom = None
-        current_line_item = None
-        collecting_notes = False
-        columns = TableColumns()
-        pending_header_lines: List[str] = []
+        bounds_list = self._identify_section_bounds(lines, skip_mask)
+        for bounds in bounds_list:
+            section = self._parse_section(lines, bounds, skip_mask)
+            if bounds.errors:
+                section.setdefault('errors', []).extend(bounds.errors)
+            sections.append(section)
+        return sections, lines
 
+    def _identify_section_bounds(self, lines: List[str], skip_mask: Optional[List[bool]]) -> List[SectionBounds]:
+        bounds: List[SectionBounds] = []
         i = 0
         L = len(lines)
+        floor = 0
         while i < L:
-            # global skips
-            if skip_mask is not None and 0 <= i < len(skip_mask) and skip_mask[i]:
+            if skip_mask is not None and i < len(skip_mask) and skip_mask[i]:
                 i += 1
                 continue
-            raw_line = lines[i]
-            stripped_line = (raw_line or '').strip()
-            if is_page_header(stripped_line, header_patterns):
-                if self.debug and stripped_line:
-                    print(f"[page-header] {stripped_line}")
-                i += 1
-                continue
-
-            line = stripped_line
+            line = (lines[i] or '').strip()
             next_line = (lines[i + 1] or '').strip() if i + 1 < L else None
+            is_header, columns, is_two = is_table_header(line, next_line)
+            if not is_header:
+                i += 1
+                continue
 
-            if state == ParseState.LOOKING_FOR_SECTION:
-                if is_diagram_artifact(line): i += 1; continue
-                if 'Height:' in line and 'Subroom:' not in line:
-                    m = re.match(SECTION_HEIGHT_PATTERN, line)
-                    if m:
-                        raw_name = m.group(1).strip()
-                        height = m.group(2).strip()
-                        name_match = re.search(SECTION_NAME_EXTRACTION, raw_name)
-                        section_name = name_match.group(1).strip() if name_match else raw_name
-                        current_section = {'section_name': section_name,'metadata': {'height': height.strip()},
-                                           'subrooms': [], 'line_items': [], 'section_totals': {}}
-                        state = ParseState.IN_SECTION_METADATA
-                        i += 1; continue
+            header_idx = i
+            header_span = 2 if is_two else 1
+            totals_idx, totals_line = self._find_totals_index(
+                lines,
+                header_idx + header_span,
+                skip_mask,
+                columns,
+            )
+            errors: List[str] = []
+            if totals_idx == -1:
+                errors.append(f"Missing totals after table header at line {header_idx + 1}")
+                totals_idx = min(header_idx + header_span, L - 1)
+                totals_line = ''
 
-                is_header, detected_cols, is_two = is_table_header(line, next_line)
-                if is_header:
-                    section_name = "Unknown Section"
-                    if i > 0:
-                        for j in range(i - 1, max(-1, i - 6), -1):
-                            prev = lines[j].strip()
-                            if not prev:
-                                continue
-                            if is_page_header(prev, header_patterns):
-                                continue
-                            if re.search(r'^\d|Surface Area|Number of Squares|Perimeter Length', prev):
-                                continue
-                            nm = re.search(SECTION_NAME_EXTRACTION, prev)
-                            section_name = nm.group(1).strip() if nm else prev
-                            break
-                    current_section = {'section_name': section_name, 'metadata': {}, 'subrooms': [],
-                                       'line_items': [], 'section_totals': {}}
-                    columns = detected_cols
-                    state = ParseState.IN_LINE_ITEMS
-                    i += 2 if is_two else 1
+            section_name = self._extract_section_name_from_totals_line(totals_line)
+            if not section_name:
+                section_name = 'Unknown Section'
+                if totals_line:
+                    errors.append(f"Unable to determine section name from totals line: '{totals_line}'")
+                else:
+                    errors.append('Unable to determine section name because totals line was not found')
+
+            start_idx = self._find_section_start(lines, header_idx, section_name, floor)
+            if start_idx is None:
+                start_idx = header_idx
+                errors.append(f"Section name '{section_name}' not found above table starting at line {header_idx + 1}")
+
+            bounds.append(SectionBounds(
+                name=section_name,
+                start_idx=start_idx,
+                header_idx=header_idx,
+                header_span=header_span,
+                totals_idx=totals_idx,
+                columns=columns,
+                errors=errors,
+            ))
+
+            advance_to = max(totals_idx + 1, header_idx + header_span)
+            i = advance_to
+            floor = advance_to
+        return bounds
+
+    def _find_totals_index(
+        self,
+        lines: List[str],
+        start_idx: int,
+        skip_mask: Optional[List[bool]],
+        columns: TableColumns,
+    ) -> Tuple[int, str]:
+        L = len(lines)
+        j = start_idx
+        while j < L:
+            if skip_mask is not None and j < len(skip_mask) and skip_mask[j]:
+                j += 1
+                continue
+            current = (lines[j] or '').strip()
+            if not current:
+                j += 1
+                continue
+            if re.search(r'Totals?:', current, re.IGNORECASE):
+                if self._is_valid_totals_candidate(lines, j, current, columns, skip_mask):
+                    return j, current
+            next_line = (lines[j + 1] or '').strip() if j + 1 < L else None
+            is_header, _, is_two = is_table_header(current, next_line)
+            if is_header:
+                j += 2 if is_two else 1
+                continue
+            j += 1
+        return -1, ''
+
+    def _is_valid_totals_candidate(
+        self,
+        lines: List[str],
+        idx: int,
+        line: str,
+        columns: TableColumns,
+        skip_mask: Optional[List[bool]],
+    ) -> bool:
+        match = re.match(r'Totals?:\s*(.*)', line, re.IGNORECASE)
+        if not match:
+            return False
+        tail = match.group(1).strip()
+        if not tail:
+            return False
+
+        amount_pattern = re.compile(r'[\d,]+\.\d+')
+        amounts = list(amount_pattern.finditer(tail))
+
+        # Expect a section descriptor before the monetary amounts.
+        name_slice_end = amounts[0].start() if amounts else len(tail)
+        name_part = tail[:name_slice_end].strip()
+        if not name_part or not re.search(r'[A-Za-z]', name_part):
+            return False
+
+        expected_amounts = 1
+        if columns.has_tax and columns.has_op:
+            expected_amounts = 3
+        elif columns.has_tax or columns.has_op:
+            expected_amounts = 2
+
+        if len(amounts) < expected_amounts:
+            return False
+
+        # Ensure we are not mistakenly treating a line-item note as totals by
+        # checking the next meaningful line. A genuine totals row should not be
+        # immediately followed by another line item within the same table span.
+        L = len(lines)
+        k = idx + 1
+        while k < L:
+            if skip_mask is not None and k < len(skip_mask) and skip_mask[k]:
+                k += 1
+                continue
+            candidate = (lines[k] or '').strip()
+            if not candidate:
+                k += 1
+                continue
+            if re.match(r'^\d+\.', candidate):
+                return False
+            break
+
+        return True
+
+    def _extract_section_name_from_totals_line(self, totals_line: str) -> Optional[str]:
+        if not totals_line:
+            return None
+        m = re.search(r'Totals?:\s*(.*)', totals_line, re.IGNORECASE)
+        if not m:
+            return None
+        tail = m.group(1).strip()
+        if not tail:
+            return None
+        tokens = tail.split()
+        name_tokens: List[str] = []
+        for token in tokens:
+            if re.match(r'^[\d,]+(?:\.\d+)?$', token):
+                break
+            name_tokens.append(token)
+        name = ' '.join(name_tokens).strip(':-')
+        return name or None
+
+    def _find_section_start(
+        self,
+        lines: List[str],
+        header_idx: int,
+        section_name: str,
+        floor: int,
+    ) -> Optional[int]:
+        if not section_name:
+            return None
+        target = section_name.lower()
+        j = header_idx - 1
+        while j >= floor and j >= 0:
+            current = (lines[j] or '').strip()
+            if target in current.lower():
+                return j
+            j -= 1
+        return None
+
+    def _parse_section(
+        self,
+        lines: List[str],
+        bounds: SectionBounds,
+        skip_mask: Optional[List[bool]],
+    ) -> dict:
+        section = {
+            'section_name': bounds.name,
+            'metadata': {},
+            'subrooms': [],
+            'line_items': [],
+            'section_totals': {},
+        }
+
+        # metadata and subrooms
+        current_subroom: Optional[dict] = None
+        idx = bounds.start_idx
+        while idx < bounds.header_idx:
+            if skip_mask is not None and idx < len(skip_mask) and skip_mask[idx]:
+                idx += 1
+                continue
+            line = (lines[idx] or '').strip()
+            if not line:
+                idx += 1
+                continue
+
+            is_sub, sub_name, sub_h = is_subroom_header(line)
+            if is_sub:
+                if current_subroom:
+                    section['subrooms'].append(current_subroom)
+                sub_meta: Dict[str, object] = {}
+                if sub_h:
+                    sub_meta['height'] = sub_h.strip()
+                current_subroom = {'subroom_name': sub_name, 'metadata': sub_meta}
+                idx += 1
+                continue
+
+            if 'Height:' in line:
+                m = re.match(SECTION_HEIGHT_PATTERN, line)
+                if m:
+                    height_value = m.group(2).strip()
+                    if current_subroom:
+                        current_subroom.setdefault('metadata', {})['height'] = height_value
+                    else:
+                        section['metadata']['height'] = height_value
+                    idx += 1
                     continue
 
-                i += 1; continue
+            meta = extract_metadata_from_line(line)
+            if meta:
+                if current_subroom:
+                    current_subroom['metadata'] = merge_metadata(current_subroom.get('metadata', {}), meta)
+                else:
+                    section['metadata'] = merge_metadata(section.get('metadata', {}), meta)
+            idx += 1
 
-            elif state == ParseState.IN_SECTION_METADATA:
-                is_sub, sub_name, sub_h = is_subroom_header(line)
-                if is_sub:
-                    current_subroom = {'subroom_name': sub_name, 'metadata': {'height': sub_h.strip()}}
-                    state = ParseState.IN_SUBROOM_METADATA
-                    i += 1; continue
+        if current_subroom:
+            section['subrooms'].append(current_subroom)
 
-                is_header, detected_cols, is_two = is_table_header(line, next_line)
-                if is_header:
-                    columns = detected_cols
-                    state = ParseState.IN_LINE_ITEMS
-                    i += 2 if is_two else 1
-                    continue
+        # line items
+        columns = bounds.columns
+        current_line_item: Optional[dict] = None
+        collecting_notes = False
+        pending_header_lines: List[str] = []
+        idx = bounds.header_idx + bounds.header_span
+        while idx < bounds.totals_idx:
+            if skip_mask is not None and idx < len(skip_mask) and skip_mask[idx]:
+                idx += 1
+                continue
+            line = (lines[idx] or '').strip()
+            if not line:
+                idx += 1
+                continue
 
-                meta = extract_metadata_from_line(line)
-                if meta:
-                    current_section['metadata'] = merge_metadata(current_section['metadata'], meta)
-                i += 1; continue
+            if is_table_continuation(line):
+                pending_header_lines = []
+                idx += 1
+                if idx < bounds.totals_idx:
+                    current_line = (lines[idx] or '').strip()
+                    next_line = (lines[idx + 1] or '').strip() if idx + 1 < len(lines) else None
+                    is_header, new_cols, is_two = is_table_header(current_line, next_line)
+                    if is_header:
+                        columns = new_cols
+                        idx += 2 if is_two else 1
+                continue
 
-            elif state == ParseState.IN_SUBROOM_METADATA:
-                is_sub, sub_name, sub_h = is_subroom_header(line)
-                if is_sub:
-                    current_section['subrooms'].append(current_subroom)
-                    current_subroom = {'subroom_name': sub_name, 'metadata': {'height': sub_h.strip()}}
-                    i += 1; continue
+            next_line = (lines[idx + 1] or '').strip() if idx + 1 < len(lines) else None
+            header_detected, new_cols, is_two = is_table_header(line, next_line)
+            if header_detected:
+                pending_header_lines = []
+                columns = new_cols
+                idx += 2 if is_two else 1
+                continue
 
-                is_header, detected_cols, is_two = is_table_header(line, next_line)
-                if is_header:
-                    current_section['subrooms'].append(current_subroom)
-                    current_subroom = None
-                    columns = detected_cols
-                    state = ParseState.IN_LINE_ITEMS
-                    i += 2 if is_two else 1
-                    continue
-
-                meta = extract_metadata_from_line(line)
-                if meta and current_subroom is not None:
-                    current_subroom['metadata'] = merge_metadata(current_subroom['metadata'], meta)
-                i += 1; continue
-
-            elif state == ParseState.IN_LINE_ITEMS:
-                if is_table_continuation(line):
-                    pending_header_lines = []
-                    i += 1
-                    if i < L:
-                        n2 = (lines[i + 1] or '').strip() if i + 1 < L else None
-                        current_line = (lines[i] or '').strip()
-                        is_header, new_cols, is_two = is_table_header(current_line, n2)
-                        if is_header:
-                            columns = new_cols
-                            i += 2 if is_two else 1
-                    continue
-
-                if is_totals_line(line, current_section['section_name'] if current_section else None):
-                    self._attach_pending_notes(current_line_item, pending_header_lines)
-                    if collecting_notes and current_line_item:
-                        current_section['line_items'].append(self._finalize_line_item(current_line_item))
-                        current_line_item = None
-                        collecting_notes = False
-
-                    current_section['section_totals'] = self._parse_totals_line(line, columns)
-                    sections.append(current_section)
-                    current_section = None
-                    columns = TableColumns()
-                    state = ParseState.LOOKING_FOR_SECTION
-                    i += 1; continue
-
-                is_header_line, header_text = is_line_item_header(line)
-                if is_header_line:
-                    self._attach_pending_notes(current_line_item, pending_header_lines)
-                    if collecting_notes and current_line_item:
-                        current_section['line_items'].append(self._finalize_line_item(current_line_item))
-                        current_line_item = None
-                    collecting_notes = False
-                    current_section['line_items'].append({'type': 'header', 'text': header_text})
-                    i += 1; continue
-
-                new_line_item, start_collecting = self._try_start_line_item(line, columns)
-                if new_line_item:
-                    self._attach_pending_notes(current_line_item, pending_header_lines)
-                    if current_line_item:
-                        current_section['line_items'].append(self._finalize_line_item(current_line_item))
-                        current_line_item = None
-                        collecting_notes = False
-                    current_line_item = new_line_item
-                    collecting_notes = start_collecting
-                    i += 1; continue
-
-                if current_line_item and columns.family == 'B' and re.search(CALC_LINE_DETECTION_PATTERN, line):
-                    calc = self._parse_line_item_calc(line, columns)
-                    if calc:
-                        current_line_item.update(calc)
-                        collecting_notes = True
-                        i += 1; continue
-
+            is_header_line, header_text = is_line_item_header(line)
+            if is_header_line:
+                self._attach_pending_notes(current_line_item, pending_header_lines)
                 if collecting_notes and current_line_item:
-                    pending_header_lines.append(line)
-                    i += 1; continue
+                    section['line_items'].append(self._finalize_line_item(current_line_item))
+                    current_line_item = None
+                collecting_notes = False
+                section['line_items'].append({'type': 'header', 'text': header_text})
+                idx += 1
+                continue
 
-                i += 1; continue
+            new_line_item, start_collecting = self._try_start_line_item(line, columns)
+            if new_line_item:
+                self._attach_pending_notes(current_line_item, pending_header_lines)
+                if current_line_item:
+                    section['line_items'].append(self._finalize_line_item(current_line_item))
+                    current_line_item = None
+                    collecting_notes = False
+                current_line_item = new_line_item
+                collecting_notes = start_collecting
+                idx += 1
+                continue
 
-            i += 1
+            if current_line_item and columns.family == 'B' and re.search(CALC_LINE_DETECTION_PATTERN, line):
+                calc = self._parse_line_item_calc(line, columns)
+                if calc:
+                    current_line_item.update(calc)
+                    collecting_notes = True
+                    idx += 1
+                    continue
 
-        if current_line_item and current_section:
-            self._attach_pending_notes(current_line_item, pending_header_lines)
-            current_section['line_items'].append(self._finalize_line_item(current_line_item))
-        if current_section:
-            sections.append(current_section)
+            if collecting_notes and current_line_item:
+                pending_header_lines.append(line)
+                idx += 1
+                continue
 
-        return sections, lines
+            idx += 1
+
+        self._attach_pending_notes(current_line_item, pending_header_lines)
+        if current_line_item:
+            section['line_items'].append(self._finalize_line_item(current_line_item))
+
+        totals_line = (lines[bounds.totals_idx] or '').strip() if 0 <= bounds.totals_idx < len(lines) else ''
+        section['section_totals'] = self._parse_totals_line(totals_line, columns)
+
+        return section
 
     def _parse_line_item_calc(self, calc_line: str, columns: TableColumns) -> dict:
         # SEE handler
