@@ -233,6 +233,9 @@ class XactimateRoughDraftParser:
                 j += 1
                 continue
             current = (lines[j] or '').strip()
+            if self._should_skip_distorted_line(current):
+                j += 1
+                continue
             if not current:
                 j += 1
                 continue
@@ -326,14 +329,37 @@ class XactimateRoughDraftParser:
     ) -> Optional[int]:
         if not section_name:
             return None
-        target = section_name.lower()
+        target = re.sub(r"\s+", " ", section_name.strip().lower())
+        if not target:
+            return None
+        best_match_idx: Optional[int] = None
         j = header_idx - 1
         while j >= floor and j >= 0:
             current = (lines[j] or '').strip()
-            if target in current.lower():
-                return j
+            if self._should_skip_distorted_line(current):
+                j -= 1
+                continue
+            normalized_current = re.sub(r"\s+", " ", current.lower())
+            if normalized_current and target in normalized_current:
+                if normalized_current.startswith(target):
+                    return j
+                if best_match_idx is None:
+                    best_match_idx = j
             j -= 1
-        return None
+        return best_match_idx
+
+    @staticmethod
+    def _should_skip_distorted_line(text: str) -> bool:
+        if not text:
+            return False
+        collapsed = (text or '').strip()
+        if not collapsed:
+            return False
+        duplicate_letters = re.findall(r'([A-Za-z])\1+', collapsed)
+        if len(duplicate_letters) < 3:
+            return False
+        unique_duplicates = {token.lower() for token in duplicate_letters if token.strip()}
+        return len(unique_duplicates) >= 2
 
     def _parse_section(
         self,
@@ -358,6 +384,9 @@ class XactimateRoughDraftParser:
                 continue
             line = (lines[idx] or '').strip()
             if not line:
+                idx += 1
+                continue
+            if self._should_skip_distorted_line(line):
                 idx += 1
                 continue
 
