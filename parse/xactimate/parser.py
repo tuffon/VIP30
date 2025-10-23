@@ -423,11 +423,34 @@ class XactimateRoughDraftParser:
             if 'Height:' in line:
                 m = re.match(SECTION_HEIGHT_PATTERN, line)
                 if m:
+                    label = m.group(1).strip()
                     height_value = m.group(2).strip()
-                    if current_subroom:
-                        current_subroom.setdefault('metadata', {})['height'] = height_value
-                    else:
+
+                    def _normalize(value: Optional[str]) -> str:
+                        if not value:
+                            return ''
+                        return re.sub(r"\s+", " ", value).strip().lower()
+
+                    label_norm = _normalize(label)
+                    section_norm = _normalize(section.get('section_name'))
+                    assigned = False
+
+                    if label_norm and section_norm and label_norm == section_norm:
                         section['metadata']['height'] = height_value
+                        assigned = True
+
+                    if not assigned and current_subroom:
+                        sub_meta = current_subroom.setdefault('metadata', {})
+                        sub_name_norm = _normalize(current_subroom.get('subroom_name'))
+                        if sub_name_norm and (label_norm == sub_name_norm or label_norm.endswith(sub_name_norm)):
+                            sub_meta.setdefault('height', height_value)
+                            assigned = True
+
+                    if not assigned:
+                        if current_subroom and 'height' not in current_subroom.get('metadata', {}):
+                            current_subroom.setdefault('metadata', {})['height'] = height_value
+                        else:
+                            section['metadata']['height'] = height_value
                     idx += 1
                     continue
 
