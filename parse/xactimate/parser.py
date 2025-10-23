@@ -246,12 +246,9 @@ class XactimateRoughDraftParser:
                     continue
 
                 if is_totals_line(line, current_section['section_name'] if current_section else None):
-                    if pending_header_lines and current_line_item:
-                        note_text = ' '.join(pending_header_lines)
-                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + note_text).strip() if current_line_item['notes'] else note_text
-                        pending_header_lines = []
+                    self._attach_pending_notes(current_line_item, pending_header_lines)
                     if collecting_notes and current_line_item:
-                        current_section['line_items'].append(current_line_item)
+                        current_section['line_items'].append(self._finalize_line_item(current_line_item))
                         current_line_item = None
                         collecting_notes = False
 
@@ -264,51 +261,26 @@ class XactimateRoughDraftParser:
 
                 is_header_line, header_text = is_line_item_header(line)
                 if is_header_line:
-                    if pending_header_lines and current_line_item:
-                        nt = ' '.join(pending_header_lines)
-                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + nt).strip() if current_line_item['notes'] else nt
-                        pending_header_lines = []
+                    self._attach_pending_notes(current_line_item, pending_header_lines)
                     if collecting_notes and current_line_item:
-                        current_section['line_items'].append(current_line_item)
+                        current_section['line_items'].append(self._finalize_line_item(current_line_item))
                         current_line_item = None
                     collecting_notes = False
                     current_section['line_items'].append({'type': 'header', 'text': header_text})
                     i += 1; continue
 
-                if is_line_item(line):
-                    if pending_header_lines and current_line_item:
-                        nt = ' '.join(pending_header_lines)
-                        current_line_item['notes'] = (current_line_item['notes'] + ' ' + nt).strip() if current_line_item['notes'] else nt
-                        pending_header_lines = []
+                new_line_item, start_collecting = self._try_start_line_item(line, columns)
+                if new_line_item:
+                    self._attach_pending_notes(current_line_item, pending_header_lines)
                     if current_line_item:
-                        current_section['line_items'].append(current_line_item)
+                        current_section['line_items'].append(self._finalize_line_item(current_line_item))
                         current_line_item = None
                         collecting_notes = False
-                    m = re.match(LINE_ITEM_PATTERN, line)
-                    if m:
-                        current_line_item = {
-                            'type': 'line_item',
-                            'line_number': int(m.group(1)),
-                            'cat': m.group(2),
-                            'sel': m.group(3),
-                            'act': m.group(4),
-                            'description': m.group(5).strip(),
-                            'calc': '',
-                            'qty': 0.0,
-                            'unit': '',
-                            'item_codes': [],
-                            'reset': None,
-                            'remove': None,
-                            'replace': None,
-                            'tax': None,
-                            'op': None,
-                            'total': None,
-                            'total_note': None,
-                            'notes': ''
-                        }
+                    current_line_item = new_line_item
+                    collecting_notes = start_collecting
                     i += 1; continue
 
-                if current_line_item and re.search(CALC_LINE_DETECTION_PATTERN, line):
+                if current_line_item and columns.family == 'B' and re.search(CALC_LINE_DETECTION_PATTERN, line):
                     calc = self._parse_line_item_calc(line, columns)
                     if calc:
                         current_line_item.update(calc)
@@ -322,6 +294,12 @@ class XactimateRoughDraftParser:
                 i += 1; continue
 
             i += 1
+
+        if current_line_item and current_section:
+            self._attach_pending_notes(current_line_item, pending_header_lines)
+            current_section['line_items'].append(self._finalize_line_item(current_line_item))
+        if current_section:
+            sections.append(current_section)
 
         return sections, lines
 
@@ -337,7 +315,7 @@ class XactimateRoughDraftParser:
                 'unit': m.group(3).upper(),
                 'item_codes': parse_item_codes(codes_str),
                 'reset': None, 'remove': None, 'replace': None, 'tax': None, 'op': None,
-                'total': '0.00', 'total_note': 'SEE ' + m.group(5).strip().upper()
+                'total': format_dollar_amount(0.0), 'total_note': 'SEE ' + m.group(5).strip().upper()
             }
 
         # priced formats
@@ -425,9 +403,125 @@ class XactimateRoughDraftParser:
                         'unit': m2.group(3),
                         'item_codes': parse_item_codes(codes_str),
                         'reset': None, 'remove': None, 'replace': None, 'tax': None, 'op': None,
-                        'total': '0.00', 'total_note': note
+                        'total': format_dollar_amount(0.0), 'total_note': note
                     }
         return {}
+
+    def _attach_pending_notes(self, current_line_item: Optional[dict], pending: List[str]) -> None:
+        if current_line_item is None or not pending:
+            return
+        note_text = ' '.join(pending).strip()
+        pending.clear()
+        if not note_text:
+            return
+        existing = current_line_item.get('notes') or ''
+        current_line_item['notes'] = f"{existing} {note_text}".strip() if existing else note_text
+
+    def _try_start_line_item(self, line: str, columns: TableColumns) -> Tuple[Optional[dict], bool]:
+        if columns.family == 'A':
+            item = self._parse_layout_a_line(line, columns)
+            return (item, True) if item else (None, False)
+        m = re.match(LINE_ITEM_PATTERN, line)
+        if not m:
+            return None, False
+        item = {
+            'type': 'line_item',
+            'line_number': int(m.group(1)),
+            'cat': m.group(2),
+            'sel': m.group(3),
+            'act': m.group(4),
+            'description': m.group(5).strip(),
+            'calc': '',
+            'qty': 0.0,
+            'unit': '',
+            'item_codes': [],
+            'reset': None,
+            'remove': None,
+            'replace': None,
+            'tax': None,
+            'op': None,
+            'total': None,
+            'total_note': None,
+            'notes': ''
+        }
+        return item, False
+
+    def _parse_layout_a_line(self, line: str, columns: TableColumns) -> Optional[dict]:
+        raw = line.strip()
+        if not raw:
+            return None
+        if raw.startswith('*'):
+            raw = raw[1:].strip()
+        m = re.match(r'^(\d+)\.\s+(.*)$', raw)
+        if not m:
+            return None
+        number = int(m.group(1))
+        remainder = m.group(2).strip()
+        if not remainder:
+            return None
+        tokens = remainder.split()
+        if len(tokens) < 2:
+            return None
+        num_pattern = re.compile(r'^[\d,]+(?:\.\d+)?$')
+        numeric_tokens: List[str] = []
+        while tokens and num_pattern.match(tokens[-1]):
+            numeric_tokens.append(tokens.pop())
+        required_numeric = 3 if columns.has_tax else 2
+        if len(numeric_tokens) < required_numeric:
+            return None
+        total_token = numeric_tokens[0]
+        tax_token = numeric_tokens[1] if columns.has_tax else None
+        qty_unit_token = tokens.pop() if tokens else ''
+        qty_match = re.match(r'^([\d,]+(?:\.\d+)?)([A-Z%]+)$', qty_unit_token)
+        if not qty_match and tokens:
+            prev = tokens.pop()
+            qty_match = re.match(r'^([\d,]+(?:\.\d+)?)([A-Z%]+)$', prev + qty_unit_token)
+        if not qty_match:
+            return None
+        qty_str = qty_match.group(1)
+        unit = qty_match.group(2)
+        description = ' '.join(tokens).strip()
+        if not description:
+            return None
+        item = {
+            'type': 'line_item',
+            'line_number': number,
+            'description': description,
+            'qty': float(money_to_float(qty_str)),
+            'unit': unit.upper(),
+            'total': format_dollar_amount(money_to_float(total_token)),
+            'total_note': None,
+            'notes': ''
+        }
+        if columns.has_tax:
+            item['tax'] = format_dollar_amount(money_to_float(tax_token))
+        return item
+
+    def _finalize_line_item(self, item: dict) -> dict:
+        if not item:
+            return item
+        if isinstance(item.get('notes'), str):
+            item['notes'] = item['notes'].strip()
+        cleaned: Dict[str, object] = {}
+        for key, value in item.items():
+            if key == 'notes':
+                if isinstance(value, str) and value.strip():
+                    cleaned[key] = value.strip()
+                continue
+            if value is None:
+                continue
+            if isinstance(value, str):
+                trimmed = value.strip()
+                if not trimmed:
+                    continue
+                cleaned[key] = trimmed
+                continue
+            if isinstance(value, list):
+                if value:
+                    cleaned[key] = value
+                continue
+            cleaned[key] = value
+        return cleaned
 
     def _parse_totals_line(self, totals_line: str, columns: TableColumns) -> dict:
         if columns.has_tax and columns.has_op:
