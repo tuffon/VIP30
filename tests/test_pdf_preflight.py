@@ -13,6 +13,7 @@ import pdfplumber
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from preflight.pdf_preflight import PDFPreflight
+from preflight.ocr import OCRProcessingResult
 
 
 class RecordingOCRProcessor:
@@ -22,6 +23,11 @@ class RecordingOCRProcessor:
     def process(self, input_pdf: Path, output_pdf: Path, pages_to_ocr):
         self.calls.append(list(pages_to_ocr))
         shutil.copyfile(input_pdf, output_pdf)
+        return OCRProcessingResult(
+            backend="recording",
+            pages_ocrd=list(pages_to_ocr),
+            ocr_performed=bool(pages_to_ocr),
+        )
 
 
 @pytest.fixture
@@ -128,6 +134,8 @@ def test_cli_entry(monkeypatch, tmp_path: Path, stub_pdf):
                 "output_pdf": str(output_pdf or input_pdf.with_name(f"{input_pdf.stem}_preflight.pdf")),
                 "pages_scanned": 0,
                 "pages_re_ocrd": 0,
+                "ocr_backend": "dummy",
+                "ocr_performed": False,
                 "page_reports": [],
             }
             out_pdf = output_pdf or input_pdf.with_name(f"{input_pdf.stem}_preflight.pdf")

@@ -10,7 +10,7 @@ from typing import Dict, List, Optional, Sequence
 import pdfplumber
 
 from .analysis import LineAnalysis, score_page_lines
-from .ocr import AutoOCRProcessor, OCRProcessor
+from .ocr import AutoOCRProcessor, OCRProcessingResult, OCRProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +36,8 @@ class PreflightReport:
     output_pdf: str
     pages_scanned: int
     pages_ocrd: int
+    ocr_backend: str
+    ocr_performed: bool
     page_reports: List[Dict[str, object]]
 
     def to_dict(self) -> Dict[str, object]:
@@ -44,6 +46,8 @@ class PreflightReport:
             "output_pdf": self.output_pdf,
             "pages_scanned": self.pages_scanned,
             "pages_re_ocrd": self.pages_ocrd,
+            "ocr_backend": self.ocr_backend,
+            "ocr_performed": self.ocr_performed,
             "page_reports": self.page_reports,
         }
 
@@ -89,9 +93,14 @@ class PDFPreflight:
         pages_to_ocr = [res.page_number for res in page_results if res.needs_ocr]
         logger.info("Identified %d/%d page(s) requiring OCR", len(pages_to_ocr), len(page_results))
 
-        self.ocr_processor.process(input_pdf, output_pdf, pages_to_ocr)
-
-        report = self._build_report(input_pdf, output_pdf, page_results)
+        ocr_result = self.ocr_processor.process(input_pdf, output_pdf, pages_to_ocr)
+        if pages_to_ocr and not ocr_result.ocr_performed:
+            logger.warning(
+                "OCR requested for pages %s but backend '%s' did not perform OCR",
+                pages_to_ocr,
+                ocr_result.backend,
+            )
+        report = self._build_report(input_pdf, output_pdf, page_results, ocr_result)
         if report_path is not None:
             with report_path.open("w", encoding="utf-8") as fh:
                 json.dump(report.to_dict(), fh, indent=2)
@@ -137,6 +146,7 @@ class PDFPreflight:
         input_pdf: Path,
         output_pdf: Path,
         page_results: Sequence[PageAnalysisResult],
+        ocr_result: OCRProcessingResult,
     ) -> PreflightReport:
         page_entries: List[Dict[str, object]] = []
         for result in page_results:
@@ -163,6 +173,8 @@ class PDFPreflight:
             input_pdf=str(input_pdf),
             output_pdf=str(output_pdf),
             pages_scanned=len(page_results),
-            pages_ocrd=sum(1 for res in page_results if res.needs_ocr),
+            pages_ocrd=len(ocr_result.pages_ocrd),
+            ocr_backend=ocr_result.backend,
+            ocr_performed=ocr_result.ocr_performed,
             page_reports=page_entries,
         )

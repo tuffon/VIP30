@@ -5,6 +5,7 @@ import logging
 import shutil
 import subprocess
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Sequence
 
@@ -16,26 +17,50 @@ except Exception:  # pragma: no cover
 logger = logging.getLogger(__name__)
 
 
+@dataclass
+class OCRProcessingResult:
+    """Outcome of running an :class:`OCRProcessor`."""
+
+    backend: str
+    pages_ocrd: List[int]
+    ocr_performed: bool
+
+
 class OCRProcessor(ABC):
     """Interface for producing normalized, single-layer PDFs."""
 
+    name: str = "unknown"
+
     @abstractmethod
-    def process(self, input_pdf: Path, output_pdf: Path, pages_to_ocr: Sequence[int]) -> None:
+    def process(
+        self, input_pdf: Path, output_pdf: Path, pages_to_ocr: Sequence[int]
+    ) -> OCRProcessingResult:
         """Create ``output_pdf`` from ``input_pdf`` applying OCR where requested."""
 
 
 class PassthroughOCRProcessor(OCRProcessor):
     """Fallback OCR processor that only copies the input file."""
 
-    def process(self, input_pdf: Path, output_pdf: Path, pages_to_ocr: Sequence[int]) -> None:
+    name = "passthrough"
+
+    def process(
+        self, input_pdf: Path, output_pdf: Path, pages_to_ocr: Sequence[int]
+    ) -> OCRProcessingResult:
         logger.warning(
             "PassthroughOCRProcessor used; PDF will not be normalized or OCR'd."
         )
         shutil.copyfile(input_pdf, output_pdf)
+        return OCRProcessingResult(
+            backend=self.name,
+            pages_ocrd=[],
+            ocr_performed=False,
+        )
 
 
 class OcrmypdfProcessor(OCRProcessor):
     """OCR processor that shells out to ``ocrmypdf``."""
+
+    name = "ocrmypdf"
 
     def __init__(self, executable: str = "ocrmypdf") -> None:
         if shutil.which(executable) is None:
@@ -46,7 +71,9 @@ class OcrmypdfProcessor(OCRProcessor):
             raise RuntimeError("pypdf is required for ocrmypdf integration")
         self.executable = executable
 
-    def process(self, input_pdf: Path, output_pdf: Path, pages_to_ocr: Sequence[int]) -> None:
+    def process(
+        self, input_pdf: Path, output_pdf: Path, pages_to_ocr: Sequence[int]
+    ) -> OCRProcessingResult:
         input_pdf = Path(input_pdf)
         output_pdf = Path(output_pdf)
         pages = sorted(set(int(p) for p in pages_to_ocr if p >= 1))
@@ -58,7 +85,11 @@ class OcrmypdfProcessor(OCRProcessor):
                 output_pdf,
                 force_ocr=False,
             )
-            return
+            return OCRProcessingResult(
+                backend=self.name,
+                pages_ocrd=[],
+                ocr_performed=False,
+            )
 
         logger.info("Re-OCR'ing %d page(s) via ocrmypdf", len(pages))
         with TemporaryWorkdir() as tmp:
@@ -84,6 +115,11 @@ class OcrmypdfProcessor(OCRProcessor):
 
             with output_pdf.open("wb") as fh:
                 writer.write(fh)
+        return OCRProcessingResult(
+            backend=self.name,
+            pages_ocrd=pages,
+            ocr_performed=bool(pages),
+        )
 
     def _write_single_page(self, input_pdf: Path, zero_index: int, output_pdf: Path) -> None:
         reader = PdfReader(str(input_pdf))
@@ -113,9 +149,19 @@ class AutoOCRProcessor(OCRProcessor):
         except Exception as exc:  # pragma: no cover - exercised in production
             logger.warning("Falling back to passthrough OCR: %s", exc)
             self._delegate = PassthroughOCRProcessor()
+        self.name = f"auto:{self._delegate.name}"
 
-    def process(self, input_pdf: Path, output_pdf: Path, pages_to_ocr: Sequence[int]) -> None:
-        self._delegate.process(input_pdf, output_pdf, pages_to_ocr)
+    def process(
+        self, input_pdf: Path, output_pdf: Path, pages_to_ocr: Sequence[int]
+    ) -> OCRProcessingResult:
+        result = self._delegate.process(input_pdf, output_pdf, pages_to_ocr)
+        if result.backend == "unknown":  # pragma: no cover - defensive
+            return OCRProcessingResult(
+                backend=self.name,
+                pages_ocrd=result.pages_ocrd,
+                ocr_performed=result.ocr_performed,
+            )
+        return result
 
 
 class TemporaryWorkdir:
