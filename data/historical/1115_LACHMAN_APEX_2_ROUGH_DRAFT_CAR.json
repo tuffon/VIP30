@@ -351,7 +351,7 @@
       }
     },
     {
-      "section_name": "CA DOI Lic#2M66539",
+      "section_name": "Electrical",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -1554,6 +1554,12 @@
                 "dimensions": "16' X 10'",
                 "opens_into": "OFFICE"
               }
+            ],
+            "windows": [
+              {
+                "dimensions": "9' X 5'",
+                "opens_into": "Exterior"
+              }
             ]
           }
         }
@@ -2108,13 +2114,13 @@
           "metadata": {
             "height": "9'",
             "areas": {
-              "sf_walls": "96.06",
-              "sf_ceiling": "191.16",
-              "sf_walls_and_ceiling": "287.22",
-              "sf_floor": "191.16",
-              "sy_flooring": "21.24",
-              "lf_floor_perimeter": "2.58",
-              "lf_ceil_perimeter": "43.79"
+              "sf_walls": "40.50",
+              "sf_ceiling": "69.75",
+              "sf_walls_and_ceiling": "110.25",
+              "sf_floor": "69.75",
+              "sy_flooring": "7.75",
+              "lf_floor_perimeter": "4.50",
+              "lf_ceil_perimeter": "4.50"
             },
             "missing_walls": [
               {
@@ -2128,16 +2134,23 @@
               {
                 "dimensions": "15' 10 1/2\" X 9'",
                 "opens_into": "DINING_ROOM"
-              },
-              {
-                "dimensions": "15' 10 1/2\" X 11'",
-                "opens_into": "OFFSET_1"
-              },
-              {
-                "dimensions": "12' 1/2\" X 11'",
-                "opens_into": "LIVING_ROOM_"
               }
-            ],
+            ]
+          }
+        },
+        {
+          "subroom_name": "Dining Room (4)",
+          "metadata": {
+            "height": "11'",
+            "areas": {
+              "sf_walls": "96.06",
+              "sf_ceiling": "191.16",
+              "sf_walls_and_ceiling": "287.22",
+              "sf_floor": "191.16",
+              "sy_flooring": "21.24",
+              "lf_floor_perimeter": "2.58",
+              "lf_ceil_perimeter": "43.79"
+            },
             "doors": [
               {
                 "dimensions": "5' 8\" X 9' 7\"",
@@ -2154,6 +2167,16 @@
               {
                 "dimensions": "7' X 9' 7\"",
                 "opens_into": "Exterior"
+              }
+            ],
+            "missing_walls": [
+              {
+                "dimensions": "15' 10 1/2\" X 11'",
+                "opens_into": "OFFSET_1"
+              },
+              {
+                "dimensions": "12' 1/2\" X 11'",
+                "opens_into": "LIVING_ROOM_"
               }
             ]
           }
@@ -2543,6 +2566,16 @@
           "lf_floor_perimeter": "8.46",
           "lf_ceil_perimeter": "48.88"
         },
+        "windows": [
+          {
+            "dimensions": "5' X 3' 6\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "6' X 3' 6\"",
+            "opens_into": "Exterior"
+          }
+        ],
         "missing_walls": [
           {
             "dimensions": "7 1/2\" X 10'",
@@ -3412,6 +3445,16 @@
           {
             "dimensions": "6' X 8'",
             "opens_into": "M_CLOSET_HE"
+          }
+        ],
+        "windows": [
+          {
+            "dimensions": "3' X 6'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "3' X 6'",
+            "opens_into": "Exterior"
           }
         ]
       },
@@ -4484,6 +4527,12 @@
             "dimensions": "6' 2\" X 8'",
             "opens_into": "MASTER_BEDRO"
           }
+        ],
+        "windows": [
+          {
+            "dimensions": "5' X 5'",
+            "opens_into": "Exterior"
+          }
         ]
       },
       "subrooms": [],
@@ -5402,6 +5451,12 @@
           "lf_floor_perimeter": "45.00",
           "lf_ceil_perimeter": "60.07"
         },
+        "windows": [
+          {
+            "dimensions": "3' 4\" X 4' 7\"",
+            "opens_into": "Exterior"
+          }
+        ],
         "doors": [
           {
             "dimensions": "3' X 7'",
@@ -5691,13 +5746,13 @@
       "metadata": {
         "height": "Sloped",
         "areas": {
-          "sf_walls": "159.00",
-          "sf_ceiling": "31.43",
-          "sf_walls_and_ceiling": "190.43",
-          "sf_floor": "31.43",
-          "sy_flooring": "3.49",
-          "lf_floor_perimeter": "19.50",
-          "lf_ceil_perimeter": "22.50"
+          "sf_walls": "545.08",
+          "sf_ceiling": "349.57",
+          "sf_walls_and_ceiling": "894.65",
+          "sf_floor": "344.25",
+          "sy_flooring": "38.25",
+          "lf_floor_perimeter": "55.50",
+          "lf_ceil_perimeter": "75.03"
         },
         "doors": [
           {
@@ -5711,14 +5766,42 @@
           {
             "dimensions": "3' X 8'",
             "opens_into": "BATHROOM_1"
+          }
+        ],
+        "windows": [
+          {
+            "dimensions": "3' X 5'",
+            "opens_into": "Exterior"
           },
           {
-            "dimensions": "3' X 7'",
-            "opens_into": "BEDROOM_2"
+            "dimensions": "3' X 5'",
+            "opens_into": "Exterior"
           }
         ]
       },
-      "subrooms": [],
+      "subrooms": [
+        {
+          "subroom_name": "Closet 2 (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "sf_walls": "159.00",
+              "sf_ceiling": "31.43",
+              "sf_walls_and_ceiling": "190.43",
+              "sf_floor": "31.43",
+              "sy_flooring": "3.49",
+              "lf_floor_perimeter": "19.50",
+              "lf_ceil_perimeter": "22.50"
+            },
+            "doors": [
+              {
+                "dimensions": "3' X 7'",
+                "opens_into": "BEDROOM_2"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "header",
@@ -6294,7 +6377,7 @@
       }
     },
     {
-      "section_name": "Main Structure",
+      "section_name": "Exterior - Main Structure",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -6755,8 +6838,106 @@
       }
     },
     {
-      "section_name": "Opens into Exterior",
-      "metadata": {},
+      "section_name": "Ext_Surfaces",
+      "metadata": {
+        "areas": {
+          "sf_walls": "3,195.78",
+          "lf_floor_perimeter": "360.28",
+          "sf_walls_and_ceiling": "3,195.78"
+        },
+        "windows": [
+          {
+            "dimensions": "3' X 5'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "3' X 5'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "3' 4\" X 4' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "9' X 5'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "6' X 3' 6\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' X 3' 6\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' X 5'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "3' X 6'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "3' X 6'",
+            "opens_into": "Exterior"
+          }
+        ],
+        "doors": [
+          {
+            "dimensions": "5' 4\" X 8'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' 8\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' 8\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "4' 1\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "11' 4\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "9' 7\" X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "7' X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "7' X 9' 7\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "11' X 8'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "3' X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "10' X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "2' 8\" X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "18' 9\" X 7'",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -6975,7 +7156,7 @@
       }
     },
     {
-      "section_name": "CA DOI Lic#2M66539",
+      "section_name": "Other Structures",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -8005,7 +8186,10 @@
         "total": "281,377.01",
         "computed_total": "281,377.01",
         "validation_delta": "0.00"
-      }
+      },
+      "errors": [
+        "Section name 'Other Structures' not found above table starting at line 1974"
+      ]
     },
     {
       "section_name": "Landscaping",
@@ -8214,7 +8398,7 @@
       }
     },
     {
-      "section_name": "CA DOI Lic#2M66539",
+      "section_name": "Labor Minimums Applied",
       "metadata": {},
       "subrooms": [],
       "line_items": [

@@ -40,7 +40,7 @@
   },
   "sections": [
     {
-      "section_name": "Out",
+      "section_name": "Pack-Out",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -696,7 +696,7 @@
           "sf_walls_and_ceiling": "1,142.22",
           "sf_floor": "404.14",
           "sy_flooring": "44.90",
-          "lf_floor_perimeter": "28.41",
+          "lf_floor_perimeter": "80.14",
           "lf_ceil_perimeter": "84.51"
         },
         "missing_walls": [
@@ -706,7 +706,17 @@
           }
         ]
       },
-      "subrooms": [],
+      "subrooms": [
+        {
+          "subroom_name": "Fireplace (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "lf_floor_perimeter": "28.41"
+            }
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "line_item",
@@ -856,6 +866,21 @@
           "subroom_name": "Kitchen2 (1)",
           "metadata": {
             "height": "Sloped",
+            "areas": {
+              "sf_walls": "370.72",
+              "sf_ceiling": "118.47",
+              "sf_walls_and_ceiling": "489.19",
+              "sf_floor": "116.98",
+              "sy_flooring": "13.00",
+              "lf_floor_perimeter": "40.78",
+              "lf_ceil_perimeter": "49.45"
+            }
+          }
+        },
+        {
+          "subroom_name": "Pantry (3)",
+          "metadata": {
+            "height": "8'",
             "areas": {
               "sf_walls": "103.72",
               "sf_ceiling": "9.93",
@@ -1434,22 +1459,38 @@
       "metadata": {
         "height": "Peaked",
         "areas": {
-          "sf_walls": "221.88",
-          "sf_ceiling": "47.40",
-          "sf_walls_and_ceiling": "269.28",
-          "sf_floor": "47.40",
-          "sy_flooring": "5.27",
-          "lf_floor_perimeter": "29.92",
-          "lf_ceil_perimeter": "29.92"
-        },
-        "missing_walls": [
-          {
-            "dimensions": "13' 3\" X 7' 5\"",
-            "opens_into": "MASTER_BEDRO"
-          }
-        ]
+          "sf_walls": "336.31",
+          "sf_ceiling": "173.08",
+          "sf_walls_and_ceiling": "509.40",
+          "sf_floor": "173.35",
+          "sy_flooring": "19.26",
+          "lf_floor_perimeter": "39.42",
+          "lf_ceil_perimeter": "52.97"
+        }
       },
-      "subrooms": [],
+      "subrooms": [
+        {
+          "subroom_name": "Master entry (1)",
+          "metadata": {
+            "height": "7' 5\"",
+            "areas": {
+              "sf_walls": "221.88",
+              "sf_ceiling": "47.40",
+              "sf_walls_and_ceiling": "269.28",
+              "sf_floor": "47.40",
+              "sy_flooring": "5.27",
+              "lf_floor_perimeter": "29.92",
+              "lf_ceil_perimeter": "29.92"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "13' 3\" X 7' 5\"",
+                "opens_into": "MASTER_BEDRO"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "line_item",

@@ -30,7 +30,7 @@
   },
   "sections": [
     {
-      "section_name": "Out",
+      "section_name": "Pack-Out",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -156,6 +156,15 @@
           "act": "+",
           "description": "Rugs",
           "qty": 0.0
+        },
+        {
+          "type": "line_item",
+          "line_number": 10,
+          "cat": "CPS",
+          "sel": "BIDITM",
+          "act": "+",
+          "description": "Master Closet - clothes",
+          "qty": 0.0
         }
       ],
       "section_totals": {
@@ -167,19 +176,10 @@
       }
     },
     {
-      "section_name": "CAL-T0192673",
+      "section_name": "Cleaning",
       "metadata": {},
       "subrooms": [],
       "line_items": [
-        {
-          "type": "line_item",
-          "line_number": 10,
-          "cat": "CPS",
-          "sel": "BIDITM",
-          "act": "+",
-          "description": "Master Closet - clothes",
-          "qty": 0.0
-        },
         {
           "type": "line_item",
           "line_number": 11,
@@ -550,7 +550,7 @@
       }
     },
     {
-      "section_name": "Back",
+      "section_name": "Pack-Back",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -665,6 +665,12 @@
           {
             "dimensions": "14' 6\" X 11' 3\"",
             "opens_into": "FAMILY_ROOM"
+          }
+        ],
+        "windows": [
+          {
+            "dimensions": "4' X 6'",
+            "opens_into": "Exterior"
           }
         ]
       },
@@ -781,6 +787,12 @@
           "lf_floor_perimeter": "32.17",
           "lf_ceil_perimeter": "44.25"
         },
+        "windows": [
+          {
+            "dimensions": "10' X 6'",
+            "opens_into": "Exterior"
+          }
+        ],
         "missing_walls": [
           {
             "dimensions": "14' 6\" X 10' 3\"",
@@ -1798,6 +1810,12 @@
             "dimensions": "3' X 8'",
             "opens_into": "PANTRY"
           }
+        ],
+        "windows": [
+          {
+            "dimensions": "6' X 4'",
+            "opens_into": "Exterior"
+          }
         ]
       },
       "subrooms": [],
@@ -2685,6 +2703,12 @@
           "lf_floor_perimeter": "10.25",
           "lf_ceil_perimeter": "30.50"
         },
+        "windows": [
+          {
+            "dimensions": "2' 7\" X 4'",
+            "opens_into": "Exterior"
+          }
+        ],
         "doors": [
           {
             "dimensions": "3' X 6' 8\"",
@@ -2951,6 +2975,12 @@
             "dimensions": "3' X 7' 6\"",
             "opens_into": "MASTER_BEDRO"
           }
+        ],
+        "windows": [
+          {
+            "dimensions": "8' 7\" X 6'",
+            "opens_into": "Exterior"
+          }
         ]
       },
       "subrooms": [
@@ -2967,6 +2997,12 @@
               "lf_floor_perimeter": "21.06",
               "lf_ceil_perimeter": "24.06"
             },
+            "windows": [
+              {
+                "dimensions": "3' X 4'",
+                "opens_into": "Exterior"
+              }
+            ],
             "doors": [
               {
                 "dimensions": "3' X 7' 6\"",
@@ -3383,6 +3419,12 @@
           "lf_floor_perimeter": "14.79",
           "lf_ceil_perimeter": "24.50"
         },
+        "windows": [
+          {
+            "dimensions": "2' 7\" X 4'",
+            "opens_into": "Exterior"
+          }
+        ],
         "doors": [
           {
             "dimensions": "3' X 7' 6\"",

@@ -30,7 +30,7 @@
   },
   "sections": [
     {
-      "section_name": "Out",
+      "section_name": "Pack-Out",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -614,26 +614,41 @@
       "metadata": {
         "height": "11'",
         "areas": {
-          "sf_walls": "338.83",
-          "sf_ceiling": "191.16",
-          "sf_walls_and_ceiling": "529.99",
-          "sf_floor": "191.16",
-          "sy_flooring": "21.24",
-          "lf_floor_perimeter": "27.92",
-          "lf_ceil_perimeter": "43.79"
-        },
-        "missing_walls": [
-          {
-            "dimensions": "15' 10 1/2\" X 11'",
-            "opens_into": "OFFSET_1"
-          },
-          {
-            "dimensions": "12' 1/2\" X 11'",
-            "opens_into": "LIVING_ROOM_"
-          }
-        ]
+          "sf_walls": "498.58",
+          "sf_ceiling": "340.68",
+          "sf_walls_and_ceiling": "839.26",
+          "sf_floor": "329.43",
+          "sy_flooring": "36.60",
+          "lf_floor_perimeter": "40.33",
+          "lf_ceil_perimeter": "67.79"
+        }
       },
       "subrooms": [
+        {
+          "subroom_name": "Dining Room (4)",
+          "metadata": {
+            "height": "11'",
+            "areas": {
+              "sf_walls": "338.83",
+              "sf_ceiling": "191.16",
+              "sf_walls_and_ceiling": "529.99",
+              "sf_floor": "191.16",
+              "sy_flooring": "21.24",
+              "lf_floor_perimeter": "27.92",
+              "lf_ceil_perimeter": "43.79"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "15' 10 1/2\" X 11'",
+                "opens_into": "OFFSET_1"
+              },
+              {
+                "dimensions": "12' 1/2\" X 11'",
+                "opens_into": "LIVING_ROOM_"
+              }
+            ]
+          }
+        },
         {
           "subroom_name": "Offset 1 (2)",
           "metadata": {
@@ -1684,13 +1699,13 @@
       "metadata": {
         "height": "8'",
         "areas": {
-          "sf_walls": "159.00",
-          "sf_ceiling": "31.43",
-          "sf_walls_and_ceiling": "190.43",
-          "sf_floor": "31.43",
-          "sy_flooring": "3.49",
-          "lf_floor_perimeter": "19.50",
-          "lf_ceil_perimeter": "22.50"
+          "sf_walls": "530.00",
+          "sf_ceiling": "344.25",
+          "sf_walls_and_ceiling": "874.25",
+          "sf_floor": "344.25",
+          "sy_flooring": "38.25",
+          "lf_floor_perimeter": "65.50",
+          "lf_ceil_perimeter": "74.50"
         },
         "doors": [
           {
@@ -1700,14 +1715,32 @@
           {
             "dimensions": "3' X 8'",
             "opens_into": "BATHROOM_1"
-          },
-          {
-            "dimensions": "3' X 7'",
-            "opens_into": "BEDROOM_2"
           }
         ]
       },
-      "subrooms": [],
+      "subrooms": [
+        {
+          "subroom_name": "Closet 2 (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "sf_walls": "159.00",
+              "sf_ceiling": "31.43",
+              "sf_walls_and_ceiling": "190.43",
+              "sf_floor": "31.43",
+              "sy_flooring": "3.49",
+              "lf_floor_perimeter": "19.50",
+              "lf_ceil_perimeter": "22.50"
+            },
+            "doors": [
+              {
+                "dimensions": "3' X 7'",
+                "opens_into": "BEDROOM_2"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "line_item",
@@ -2124,7 +2157,7 @@
       }
     },
     {
-      "section_name": "CAL-T0192673",
+      "section_name": "Pack-back",
       "metadata": {},
       "subrooms": [],
       "line_items": [

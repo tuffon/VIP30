@@ -40,7 +40,7 @@
   },
   "sections": [
     {
-      "section_name": "Out",
+      "section_name": "Pack-Out",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -523,6 +523,12 @@
             "dimensions": "2' 6\" X 6' 8\"",
             "opens_into": "HALLWAY_TO_2"
           }
+        ],
+        "windows": [
+          {
+            "dimensions": "8' X 4'",
+            "opens_into": "Exterior"
+          }
         ]
       },
       "subrooms": [
@@ -651,6 +657,12 @@
             "dimensions": "2' 6\" X 6' 8\"",
             "opens_into": "HALLWAY_TO_2"
           }
+        ],
+        "windows": [
+          {
+            "dimensions": "4' X 4'",
+            "opens_into": "Exterior"
+          }
         ]
       },
       "subrooms": [
@@ -774,6 +786,12 @@
           "lf_floor_perimeter": "21.69",
           "lf_ceil_perimeter": "32.21"
         },
+        "windows": [
+          {
+            "dimensions": "3' 7\" X 2' 7\"",
+            "opens_into": "Exterior"
+          }
+        ],
         "doors": [
           {
             "dimensions": "2' X 6' 8\"",
@@ -900,6 +918,12 @@
             "dimensions": "2' X 6' 8\"",
             "opens_into": "MASTER_BEDRO"
           }
+        ],
+        "windows": [
+          {
+            "dimensions": "3' 7\" X 2' 7\"",
+            "opens_into": "Exterior"
+          }
         ]
       },
       "subrooms": [],
@@ -1016,6 +1040,16 @@
           "lf_floor_perimeter": "57.50",
           "lf_ceil_perimeter": "69.83"
         },
+        "windows": [
+          {
+            "dimensions": "5' X 4'",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' X 4'",
+            "opens_into": "Exterior"
+          }
+        ],
         "doors": [
           {
             "dimensions": "2' 6\" X 6' 8\"",
@@ -1220,6 +1254,12 @@
             "opens_into": "Exterior"
           }
         ],
+        "windows": [
+          {
+            "dimensions": "6' X 4'",
+            "opens_into": "Exterior"
+          }
+        ],
         "missing_walls": [
           {
             "dimensions": "9' 7 1/2\" X 8'",
@@ -1338,6 +1378,12 @@
           "lf_floor_perimeter": "25.84",
           "lf_ceil_perimeter": "28.50"
         },
+        "windows": [
+          {
+            "dimensions": "6' X 4'",
+            "opens_into": "Exterior"
+          }
+        ],
         "doors": [
           {
             "dimensions": "2' 8\" X 6' 8\"",
@@ -1456,6 +1502,12 @@
             "dimensions": "9' 1 15/16\" X 8'",
             "opens_into": "DINING_ROOM"
           }
+        ],
+        "windows": [
+          {
+            "dimensions": "4' X 3'",
+            "opens_into": "Exterior"
+          }
         ]
       },
       "subrooms": [],
@@ -1527,6 +1579,12 @@
           "lf_floor_perimeter": "63.50",
           "lf_ceil_perimeter": "87.00"
         },
+        "windows": [
+          {
+            "dimensions": "6' X 2'",
+            "opens_into": "Exterior"
+          }
+        ],
         "doors": [
           {
             "dimensions": "2' 8\" X 6' 8\"",
@@ -1600,6 +1658,12 @@
           "lf_floor_perimeter": "32.00",
           "lf_ceil_perimeter": "40.33"
         },
+        "windows": [
+          {
+            "dimensions": "6' X 5'",
+            "opens_into": "Exterior"
+          }
+        ],
         "doors": [
           {
             "dimensions": "2' 8\" X 6' 8\"",
@@ -1812,7 +1876,7 @@
       }
     },
     {
-      "section_name": "CAL-T0192673",
+      "section_name": "Pack-Back",
       "metadata": {},
       "subrooms": [],
       "line_items": [

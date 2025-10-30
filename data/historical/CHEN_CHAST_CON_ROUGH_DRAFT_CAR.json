@@ -30,7 +30,7 @@
   },
   "sections": [
     {
-      "section_name": "Out",
+      "section_name": "Pack-Out",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -458,7 +458,7 @@
       }
     },
     {
-      "section_name": "Back",
+      "section_name": "Pack-Back",
       "metadata": {},
       "subrooms": [],
       "line_items": [
@@ -721,8 +721,13 @@
       }
     },
     {
-      "section_name": "Opens into KITCHEN",
-      "metadata": {},
+      "section_name": "Scullery",
+      "metadata": {
+        "areas": {
+          "sf_walls": "193.24",
+          "sf_ceiling": "38.35"
+        }
+      },
       "subrooms": [],
       "line_items": [
         {
@@ -1013,18 +1018,7 @@
     },
     {
       "section_name": "Living Room",
-      "metadata": {
-        "height": "15' 4\"",
-        "areas": {
-          "sf_walls": "905.95",
-          "sf_ceiling": "309.07",
-          "sf_walls_and_ceiling": "1,215.02",
-          "sf_floor": "309.07",
-          "sy_flooring": "34.34",
-          "lf_floor_perimeter": "49.25",
-          "lf_ceil_perimeter": "70.83"
-        }
-      },
+      "metadata": {},
       "subrooms": [
         {
           "subroom_name": "Wet bar/ Living room (1)",
@@ -1404,7 +1398,7 @@
       }
     },
     {
-      "section_name": "Bathroom",
+      "section_name": "Bed1 Bathroom",
       "metadata": {
         "height": "9'",
         "areas": {
@@ -1782,30 +1776,48 @@
       "metadata": {
         "height": "8' 9\"",
         "areas": {
-          "sf_walls_and_ceiling": "815.69",
-          "sf_walls": "457.02",
-          "sf_ceiling": "358.66",
-          "sf_floor": "356.00",
-          "sy_flooring": "39.56",
-          "lf_floor_perimeter": "38.25",
-          "lf_ceil_perimeter": "77.47"
+          "sf_walls_and_ceiling": "682.18",
+          "sf_walls": "509.04",
+          "sf_ceiling": "173.14",
+          "sf_floor": "173.14",
+          "sy_flooring": "19.24",
+          "lf_floor_perimeter": "58.19",
+          "lf_ceil_perimeter": "58.19"
         },
         "missing_walls": [
           {
             "dimensions": "9' 9\" X 8' 9\"",
             "opens_into": "MASTER_LIVIN"
-          },
-          {
-            "dimensions": "16' X 9' 10\"",
-            "opens_into": "MASTER_BEDRO"
-          },
-          {
-            "dimensions": "22' 3\" X 9' 10\"",
-            "opens_into": "MASTER_BEDRO"
           }
         ]
       },
-      "subrooms": [],
+      "subrooms": [
+        {
+          "subroom_name": "Master BedroomA (1)",
+          "metadata": {
+            "height": "Peaked",
+            "areas": {
+              "sf_walls": "457.02",
+              "sf_ceiling": "358.66",
+              "sf_walls_and_ceiling": "815.69",
+              "sf_floor": "356.00",
+              "sy_flooring": "39.56",
+              "lf_floor_perimeter": "38.25",
+              "lf_ceil_perimeter": "77.47"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "16' X 9' 10\"",
+                "opens_into": "MASTER_BEDRO"
+              },
+              {
+                "dimensions": "22' 3\" X 9' 10\"",
+                "opens_into": "MASTER_BEDRO"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "line_item",
@@ -2056,7 +2068,7 @@
           "sf_walls_and_ceiling": "472.33",
           "sf_floor": "127.55",
           "sy_flooring": "14.17",
-          "lf_floor_perimeter": "19.45",
+          "lf_floor_perimeter": "24.80",
           "lf_ceil_perimeter": "30.40"
         },
         "missing_walls": [
@@ -2067,18 +2079,30 @@
           {
             "dimensions": "10' 7 13/16\" X 13'",
             "opens_into": "Exterior"
-          },
-          {
-            "dimensions": "4' 10 1/16\" X 9'",
-            "opens_into": "LOFT"
-          },
-          {
-            "dimensions": "6 7/16\" X 9'",
-            "opens_into": "LOFT"
           }
         ]
       },
-      "subrooms": [],
+      "subrooms": [
+        {
+          "subroom_name": "Loft Hall (1)",
+          "metadata": {
+            "height": "9'",
+            "areas": {
+              "lf_floor_perimeter": "19.45"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "4' 10 1/16\" X 9'",
+                "opens_into": "LOFT"
+              },
+              {
+                "dimensions": "6 7/16\" X 9'",
+                "opens_into": "LOFT"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "line_item",
@@ -2181,70 +2205,8 @@
     },
     {
       "section_name": "Master Bathroom",
-      "metadata": {
-        "height": "Peaked",
-        "areas": {
-          "sf_walls": "716.13",
-          "sf_ceiling": "252.30",
-          "sf_walls_and_ceiling": "968.43",
-          "sf_floor": "252.92",
-          "sy_flooring": "28.10",
-          "lf_floor_perimeter": "57.27",
-          "lf_ceil_perimeter": "70.33"
-        }
-      },
+      "metadata": {},
       "subrooms": [
-        {
-          "subroom_name": "Master toilet 1 (4)",
-          "metadata": {
-            "height": "9' 10\"",
-            "areas": {
-              "sf_walls": "229.44",
-              "sf_ceiling": "30.97",
-              "sf_walls_and_ceiling": "260.41",
-              "sf_floor": "30.97",
-              "sy_flooring": "3.44",
-              "lf_floor_perimeter": "23.33",
-              "lf_ceil_perimeter": "23.33"
-            }
-          }
-        },
-        {
-          "subroom_name": "Master Toilet 2 (3)",
-          "metadata": {
-            "height": "9' 10\"",
-            "areas": {
-              "sf_walls": "232.00",
-              "sf_ceiling": "34.77",
-              "sf_walls_and_ceiling": "266.77",
-              "sf_floor": "34.77",
-              "sy_flooring": "3.86",
-              "lf_floor_perimeter": "23.59",
-              "lf_ceil_perimeter": "23.59"
-            }
-          }
-        },
-        {
-          "subroom_name": "Master Shower (2)",
-          "metadata": {
-            "height": "9' 2\"",
-            "areas": {
-              "sf_walls": "142.48",
-              "sf_ceiling": "20.97",
-              "sf_walls_and_ceiling": "163.45",
-              "sf_floor": "20.97",
-              "sy_flooring": "2.33",
-              "lf_floor_perimeter": "15.54",
-              "lf_ceil_perimeter": "15.54"
-            },
-            "missing_walls": [
-              {
-                "dimensions": "3' 6 1/2\" X 9' 2\"",
-                "opens_into": "MASTER_BATH1"
-              }
-            ]
-          }
-        },
         {
           "subroom_name": "Master Bathroom Hall (1)",
           "metadata": {
@@ -2353,16 +2315,32 @@
       "metadata": {
         "height": "10'",
         "areas": {
-          "sf_walls": "218.98",
-          "sf_ceiling": "44.04",
-          "sf_walls_and_ceiling": "263.02",
-          "sf_floor": "44.04",
-          "sy_flooring": "4.89",
-          "lf_floor_perimeter": "27.37",
-          "lf_ceil_perimeter": "27.37"
+          "sf_walls": "572.62",
+          "sf_ceiling": "192.86",
+          "sf_walls_and_ceiling": "765.48",
+          "sf_floor": "192.86",
+          "sy_flooring": "21.43",
+          "lf_floor_perimeter": "57.26",
+          "lf_ceil_perimeter": "57.26"
         }
       },
-      "subrooms": [],
+      "subrooms": [
+        {
+          "subroom_name": "Bed3 Closet (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "sf_walls": "218.98",
+              "sf_ceiling": "44.04",
+              "sf_walls_and_ceiling": "263.02",
+              "sf_floor": "44.04",
+              "sy_flooring": "4.89",
+              "lf_floor_perimeter": "27.37",
+              "lf_ceil_perimeter": "27.37"
+            }
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "line_item",
@@ -2449,7 +2427,7 @@
       }
     },
     {
-      "section_name": "Bathroom",
+      "section_name": "Bed 3 Bathroom",
       "metadata": {
         "height": "9'",
         "areas": {
