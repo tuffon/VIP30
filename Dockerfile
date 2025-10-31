@@ -1,0 +1,25 @@
+# syntax=docker/dockerfile:1.7
+
+FROM node:20-bullseye AS base
+
+ENV PNPM_HOME=/root/.local/share/pnpm \
+    PATH=${PNPM_HOME}:/app/node_modules/.bin:${PATH}
+
+RUN corepack enable pnpm
+
+WORKDIR /app
+
+# Copy workspace manifests to install dependencies
+COPY package.json pnpm-workspace.yaml turbo.json tsconfig.base.json ./
+COPY apps/vipclaims-saas/package.json apps/vipclaims-saas/
+COPY apps/vip-parse/package.json apps/vip-parse/
+COPY packages/shared/package.json packages/shared/
+
+RUN pnpm install --recursive --ignore-scripts
+
+FROM base AS dev
+
+WORKDIR /app
+
+CMD ["pnpm", "--filter", "vipclaims-saas", "dev", "--hostname", "0.0.0.0", "--port", "3000"]
+

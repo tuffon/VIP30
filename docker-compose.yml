@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  vipclaims-web:
+    build:
+      context: .
+      target: dev
+    command: sh -c "./docker/dev-entrypoint.sh"
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://host.docker.internal:4000
+    volumes:
+      - .:/app
+      - pnpm-store:/root/.local/share/pnpm/store
+      - pnpm-node-modules:/app/node_modules
+    stdin_open: true
+    tty: true
+
+volumes:
+  pnpm-store:
+  pnpm-node-modules:
+

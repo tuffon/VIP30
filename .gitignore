@@ -1,3 +1,15 @@
+node_modules
+dist
+.next
+out
+.env
+.env.*
+.DS_Store
+.pnpm-store
+
+# POSIX containers
+pnpm-store
+
 # Python cache and compiled files
 __pycache__/
 *.py[cod]

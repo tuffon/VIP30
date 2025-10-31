@@ -1,0 +1,21 @@
+{
+  "name": "vip-parse",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "python src/main.py",
+    "build": "echo \"python project - no build step\"",
+    "lint": "echo \"no js lint for python app\"",
+    "test": "pytest -q",
+    "clean": "rimraf **/__pycache__ .pytest_cache dist build"
+  },
+  "dependencies": {
+    "@vip/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
+}
+
+
