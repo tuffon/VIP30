@@ -1,9 +1,10 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, Form, HTTPException, Query, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 
 from .retriever import retrieve_cost_items
+from .render import BidCompRenderResponse, process_bid_comp_render
 
 app = FastAPI(title="Costbook Retrieval API", version="1.0.0")
 
@@ -58,3 +59,39 @@ async def search_cost_items(query: str = Query(..., min_length=1, description="S
     except Exception as exc:
         # Convert unexpected errors into 500 responses
         raise HTTPException(status_code=500, detail=str(exc)) 
+
+
+@app.post(
+    "/render/bid-comp",
+    response_model=BidCompRenderResponse,
+    summary="Parse estimates and request bid comparison analysis",
+)
+async def render_bid_comparison(
+    carrier_estimate: UploadFile = File(..., description="Carrier or benchmark estimate PDF"),
+    contractor_estimate: UploadFile = File(..., description="Contractor or internal bid PDF"),
+    prompt_template: Optional[str] = Form(
+        default=None,
+        description="Optional custom prompt template to override the default analysis prompt",
+    ),
+    model: str = Form(default="gpt-4o-mini", description="OpenAI model identifier"),
+    temperature: float = Form(default=0.2, description="OpenAI sampling temperature"),
+    max_output_tokens: Optional[int] = Form(
+        default=None,
+        description="Optional cap on OpenAI response tokens",
+    ),
+    debug_parser: bool = Form(
+        default=False,
+        description="Enable verbose parser validations (writes additional metadata)",
+    ),
+):
+    """Render a bid comparison analysis for two uploaded estimates."""
+
+    return await process_bid_comp_render(
+        carrier_estimate=carrier_estimate,
+        contractor_estimate=contractor_estimate,
+        prompt_template=prompt_template,
+        model=model,
+        temperature=temperature,
+        max_output_tokens=max_output_tokens,
+        debug_parser=debug_parser,
+    )
