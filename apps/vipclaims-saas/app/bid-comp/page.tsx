@@ -1,23 +1,54 @@
 "use client";
 
-import { useId } from "react";
+import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
 
-function UploadDropzone({
-  title,
-  description,
-}: {
+type RequestInfo = {
+  url: string;
+  method: string;
+  fields: Array<{ name: string; value: string }>;
+  files: Array<{ field: string; name: string; size: number }>;
+  response?: {
+    ok: boolean;
+    status: number;
+    statusText: string;
+    error?: string;
+  };
+};
+
+type UploadDropzoneProps = {
   title: string;
   description: string;
-}) {
-  const id = useId();
+  file: File | null;
+  onFileSelect: (file: File | null) => void;
+};
+
+function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzoneProps) {
+  const id = useMemo(() => `${title.toLowerCase().replace(/\s+/g, "-")}-${Math.random().toString(36).slice(2)}`, [title]);
+
+  const handleFileChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const nextFile = event.target.files?.[0] ?? null;
+      onFileSelect(nextFile);
+    },
+    [onFileSelect]
+  );
+
+  const hasFile = Boolean(file);
+  const borderClass = hasFile ? "border-green-400 bg-green-50" : "border-gray-300 bg-white";
 
   return (
     <label
       htmlFor={id}
-      className="flex h-60 w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-300 bg-white p-6 text-center transition hover:border-blue-500 hover:bg-blue-50"
+      className={`flex h-60 w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition hover:border-blue-500 hover:bg-blue-50 ${borderClass}`}
     >
-      <input id={id} type="file" multiple className="hidden" />
-      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+      <input
+        id={id}
+        type="file"
+        accept="application/pdf"
+        className="hidden"
+        onChange={handleFileChange}
+      />
+      <span className={`inline-flex h-12 w-12 items-center justify-center rounded-full ${hasFile ? "bg-green-200 text-green-700" : "bg-blue-100 text-blue-600"}`}>
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
@@ -34,37 +65,273 @@ function UploadDropzone({
       <span className="mt-4 text-base font-semibold text-gray-900">{title}</span>
       <span className="mt-2 text-sm text-gray-600">{description}</span>
       <span className="mt-4 text-sm font-medium text-blue-600">Drag and drop or click to upload</span>
+      {file ? (
+        <span className="mt-3 w-full truncate text-xs text-green-600">Selected: {file.name}</span>
+      ) : (
+        <span className="mt-3 text-xs text-gray-400">No file selected</span>
+      )}
     </label>
   );
 }
 
 export default function BidCompPage() {
+  const [carrierFile, setCarrierFile] = useState<File | null>(null);
+  const [contractorFile, setContractorFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<any>(null);
+  const [requestInfo, setRequestInfo] = useState<RequestInfo | null>(null);
+
+  const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
+
+  const handleSubmit = useCallback(
+    async (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      if (!carrierFile || !contractorFile) {
+        setError("Please select both PDF files before running the comparison.");
+        return;
+      }
+
+      setIsSubmitting(true);
+      setError(null);
+      setResult(null);
+      setRequestInfo(null);
+
+      const formData = new FormData();
+      formData.append("carrier_estimate", carrierFile);
+      formData.append("contractor_estimate", contractorFile);
+      formData.append("model", "gpt-4o-mini");
+      formData.append("temperature", "0.2");
+      formData.append("row_label_header", "Category");
+
+      const endpoint = `${apiBase.replace(/\/$/, "")}/render/bid-comp`;
+      setRequestInfo({
+        url: endpoint,
+        method: "POST",
+        fields: [
+          { name: "model", value: "gpt-4o-mini" },
+          { name: "temperature", value: "0.2" },
+          { name: "row_label_header", value: "Category" },
+        ],
+        files: [
+          { field: "carrier_estimate", name: carrierFile.name, size: carrierFile.size },
+          { field: "contractor_estimate", name: contractorFile.name, size: contractorFile.size },
+        ],
+      });
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: formData,
+        });
+
+        const responseSummary = {
+          ok: response.ok,
+          status: response.status,
+          statusText: response.statusText || (response.ok ? "OK" : "Error"),
+        };
+
+        if (!response.ok) {
+          const text = await response.text();
+          setRequestInfo((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  response: {
+                    ...responseSummary,
+                    error: text || `Request failed with status ${response.status}`,
+                  },
+                }
+              : prev
+          );
+          throw new Error(text || `Request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        setResult(data);
+        setRequestInfo((prev) =>
+          prev
+            ? {
+                ...prev,
+                response: {
+                  ...responseSummary,
+                },
+              }
+            : prev
+        );
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Unexpected error";
+        setError(message);
+        setRequestInfo((prev) =>
+          prev
+            ? {
+                ...prev,
+                response: {
+                  ok: false,
+                  status: prev.response?.status ?? 0,
+                  statusText: prev.response?.statusText ?? "Request Failed",
+                  error: message,
+                },
+              }
+            : prev
+        );
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [apiBase, carrierFile, contractorFile]
+  );
+
+  const openAiText = result?.openai_result?.response_text as string | undefined;
+  const requestStatus = requestInfo?.response;
+  const openAiRequest = result?.openai_request_preview;
+  const hasOpenAiResponse = Boolean(result?.openai_result);
+
   return (
     <div className="space-y-10">
       <header className="max-w-3xl space-y-4">
         <h1 className="text-3xl font-semibold text-gray-900">Bid Comparison</h1>
         <p className="text-base text-gray-600">
-          Upload the scope documents to generate a side-by-side cost comparison in seconds. We will
-          notify you when the analysis is ready.
+          Upload the scope documents to generate a side-by-side cost comparison. The analysis runs
+          through the parser and OpenAI to create a recap-by-category summary.
         </p>
       </header>
 
-      <section className="grid gap-6 md:grid-cols-2">
-        <UploadDropzone
-          title="Carrier Estimate"
-          description="Attach the carrier or benchmark estimate (PDF, ESX, XLSX)."
-        />
-        <UploadDropzone
-          title="Contractor Bid"
-          description="Upload the contractor or internal bid files to compare."
-        />
-      </section>
+      <form className="space-y-8" onSubmit={handleSubmit}>
+        <section className="grid gap-6 md:grid-cols-2">
+          <UploadDropzone
+            title="Carrier Estimate"
+            description="Attach the carrier or benchmark estimate (PDF only)."
+            file={carrierFile}
+            onFileSelect={setCarrierFile}
+          />
+          <UploadDropzone
+            title="Contractor Bid"
+            description="Upload the contractor or internal bid (PDF only)."
+            file={contractorFile}
+            onFileSelect={setContractorFile}
+          />
+        </section>
 
-      <div>
-        <button className="rounded-full bg-blue-600 px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-          Instant Bid Comp
-        </button>
-      </div>
+        <div className="flex flex-wrap items-center gap-4">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="rounded-full bg-blue-600 px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isSubmitting ? "Running..." : "Instant Bid Comp"}
+          </button>
+          <span className="text-xs text-gray-400">API base: {apiBase}</span>
+          {isSubmitting && <span className="text-xs text-blue-600">Uploading & processing…</span>}
+          {requestStatus && (
+            <span
+              className={`rounded-full px-3 py-1 text-xs font-semibold ${requestStatus.ok ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"}`}
+            >
+              {requestStatus.ok ? "Success" : "Failed"}
+            </span>
+          )}
+        </div>
+      </form>
+
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          {error}
+        </div>
+      )}
+
+      {requestInfo && (
+        <section className="space-y-4">
+          <h2 className="text-lg font-semibold text-gray-900">API Request Details</h2>
+          <div className="rounded-lg border border-gray-200 bg-white p-4 text-xs text-gray-800">
+            <div className="space-y-2">
+              <div>
+                <span className="font-medium">Method:</span> {requestInfo.method}
+              </div>
+              <div>
+                <span className="font-medium">URL:</span> {requestInfo.url}
+              </div>
+              <div>
+                <span className="font-medium">Fields:</span>
+                <ul className="mt-1 list-disc space-y-1 pl-5">
+                  {requestInfo.fields.map((field) => (
+                    <li key={field.name}>
+                      {field.name} = {field.value}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <span className="font-medium">Files:</span>
+                <ul className="mt-1 list-disc space-y-1 pl-5">
+                  {requestInfo.files.map((fileMeta) => (
+                    <li key={fileMeta.field}>
+                      {fileMeta.field}: {fileMeta.name} ({(fileMeta.size / 1024).toFixed(1)} KB)
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {requestInfo.response && (
+                <div>
+                  <span className="font-medium">Response:</span> {requestInfo.response.status} {requestInfo.response.statusText}
+                  {requestInfo.response.error && (
+                    <span className="text-red-600"> — {requestInfo.response.error}</span>
+                  )}
+                </div>
+              )}
+              {!requestInfo.response && (
+                <div>
+                  <span className="font-medium">Response:</span> <span className="text-blue-500">Pending…</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {result && (
+        <section className="space-y-4">
+          <h2 className="text-lg font-semibold text-gray-900">Latest Result</h2>
+          <div className="rounded-lg border border-gray-200 bg-white p-4 text-sm text-gray-700">
+            <p className="font-medium">Estimate Labels</p>
+            <ul className="mt-2 list-disc space-y-1 pl-5">
+              <li>
+                <span className="font-semibold">Left:</span> {result.left_label}
+              </li>
+              <li>
+                <span className="font-semibold">Right:</span> {result.right_label}
+              </li>
+              <li>
+                <span className="font-semibold">Row Header:</span> {result.row_label_header}
+              </li>
+            </ul>
+          </div>
+
+          {openAiText && (
+            <div className="rounded-lg border border-gray-200 bg-white p-4">
+              <p className="text-sm font-medium text-gray-900">OpenAI CSV Output</p>
+              <pre className="mt-3 max-h-64 overflow-auto rounded bg-gray-900 p-4 text-xs text-white">
+                {openAiText}
+              </pre>
+            </div>
+          )}
+
+          {!hasOpenAiResponse && openAiRequest && (
+            <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-800">
+              <p className="font-semibold">OpenAI request not executed</p>
+              <p className="mt-1">Add your <code className="rounded bg-yellow-100 px-1 py-0.5">OPENAI_API_KEY</code> to run the completion. Preview below:</p>
+            </div>
+          )}
+
+          {openAiRequest && (
+            <div className="rounded-lg border border-gray-200 bg-white p-4">
+              <p className="text-sm font-medium text-gray-900">OpenAI Request Preview</p>
+              <pre className="mt-3 max-h-64 overflow-auto rounded bg-gray-900 p-4 text-xs text-white">
+                {JSON.stringify(openAiRequest, null, 2)}
+              </pre>
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 }

@@ -73,6 +73,18 @@ async def render_bid_comparison(
         default=None,
         description="Optional custom prompt template to override the default analysis prompt",
     ),
+    left_label: Optional[str] = Form(
+        default=None,
+        description="Display label to use for the carrier (Estimate A) side in generated outputs",
+    ),
+    right_label: Optional[str] = Form(
+        default=None,
+        description="Display label to use for the contractor (Estimate B) side in generated outputs",
+    ),
+    row_label_header: Optional[str] = Form(
+        default=None,
+        description="Header to use for the first column in the CSV output (defaults to 'Category')",
+    ),
     model: str = Form(default="gpt-4o-mini", description="OpenAI model identifier"),
     temperature: float = Form(default=0.2, description="OpenAI sampling temperature"),
     max_output_tokens: Optional[int] = Form(
@@ -90,6 +102,9 @@ async def render_bid_comparison(
         carrier_estimate=carrier_estimate,
         contractor_estimate=contractor_estimate,
         prompt_template=prompt_template,
+        left_label_override=left_label,
+        right_label_override=right_label,
+        row_label_header=row_label_header,
         model=model,
         temperature=temperature,
         max_output_tokens=max_output_tokens,

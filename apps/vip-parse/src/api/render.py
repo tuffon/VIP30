@@ -9,6 +9,7 @@ import re
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any, Dict, Optional
+from string import Template
 
 from dotenv import load_dotenv
 from fastapi import HTTPException, UploadFile, status
@@ -28,6 +29,227 @@ if OPENAI_API_KEY and not getattr(openai, "api_key", None):
 DEFAULT_SYSTEM_PROMPT = (
     "You are an estimating analyst trained on Xactimate scopes. "
     "Use the provided JSON payloads to prepare a detailed comparison."
+)
+
+
+DEFAULT_PROMPT_TEMPLATE = Template(
+    """Goal
+
+Generate a bid comparison CSV (Excel-compatible) using only the provided recap_by_category segments from two estimates.
+
+
+Output Columns (exact order & headers):
+
+$ROW_LABEL_HEADER,$LEFT_LABEL,$RIGHT_LABEL,Difference,Notes
+
+
+$ROW_LABEL_HEADER = first column header text (e.g., KITCHEN in the sample export).
+
+
+$LEFT_LABEL = label for Estimate A (e.g., APEX).
+
+
+$RIGHT_LABEL = label for Estimate B (e.g., State Farm).
+
+
+Currency Format: $$12,345.67
+
+
+Zero/empty: $$ -
+
+
+Negative: parentheses (e.g., $$ (5,541.86))
+
+
+Two decimals, thousands separators.
+
+
+Inputs (replace placeholders)
+
+
+Estimate A label ($LEFT_LABEL) and recap JSON A:
+
+$RECAP_A_JSON
+
+
+
+Estimate B label ($RIGHT_LABEL) and recap JSON B:
+
+$RECAP_B_JSON
+
+
+
+Row label header: $ROW_LABEL_HEADER
+
+
+Schema subset guaranteed (example):
+
+
+recap_by_category: {
+  "subtotals": [
+    { "label": "O&P Items", "total": "…", "pct": … },
+    { "label": "Non-O&P Items", "total": "…", "pct": … },
+    { "label": "Overhead", "total": "…", "pct": … },
+    { "label": "Profit", "total": "…", "pct": … },
+    { "label": "Material Sales Tax", "total": "…", "pct": … },
+    { "label": "Permits and Fees", "total": "…", "pct": … },
+    { "label": "Total", "total": "…", "pct": … }
+  ],
+  "O&P Items": [ { "item": "APPLIANCES", "total": "…", "pct": …, "coverage": [...] }, ... ],
+  "Non-O&P Items": [ { "item": "CLEANING", "total": "…", "pct": …, "coverage": [...] }, ... ]
+}
+
+
+What to Include as Rows
+
+
+Top meta rows (if present in either side):
+
+
+O& P Line items (if subtotals include “O&P Items” / “Non-O&P Items”)
+
+
+Overhead
+
+
+Profit
+
+
+Material Sales Tax
+
+
+Permits and Fees
+
+
+Total
+
+
+For each, LEFT/RIGHT = numeric from each JSON’s subtotals by matching label (case-insensitive, trim spaces). If missing on one side → $$ -.
+
+
+Category rows by group:
+
+
+From arrays under "O&P Items" and "Non-O&P Items".
+
+
+Row label = category item (e.g., APPLIANCES, FLOOR COVERING - WOOD).
+
+
+LEFT/RIGHT = category total for that group. If present only on one side, the other side is $$ -.
+
+
+Keep categories distinct per group; do not merge O&P vs Non-O&P for the same name.
+
+
+Normalization & Matching
+
+
+Label matching: case-insensitive; trim; collapse multiple spaces; treat hyphen vs en dash as equal.
+
+
+Totals: use the total strings; parse to numbers for diff; reformat to currency on output.
+
+
+Duplicates: if a category item appears multiple times within a group, sum totals within that group before comparison.
+
+
+Difference & Notes
+
+
+Difference = $RIGHT_LABEL − $LEFT_LABEL (B minus A) values per row.
+
+
+Notes guidance (only if applicable):
+
+
+Category present only in $LEFT_LABEL / $RIGHT_LABEL.
+
+
+O&P/Non-O&P mix differs between estimates.
+
+
+Subtotal missing on $LEFT_LABEL/$RIGHT_LABEL.
+
+
+Otherwise leave Notes blank.
+
+
+Ordering
+
+
+Block 1: meta rows in this order if present:
+
+O& P Line items (see note below), Overhead, Profit, Material Sales Tax, Permits and Fees, Total.
+
+
+“O& P Line items” rule: If subtotals include both “O&P Items” and “Non-O&P Items”, make a single row labeled exactly O& P Line items with LEFT = sum of A’s O&P + Non-O&P; RIGHT = sum of B’s O&P + Non-O&P. If only one exists on a side, use that one; if neither exists on a side, $$ -.
+
+
+Block 2: categories by group. Emit all O&P Items categories first, then Non-O&P Items categories.
+
+
+Within each block, sort by absolute Difference descending; ties by row label A-Z.
+
+
+Validation
+
+
+Headers exactly: $ROW_LABEL_HEADER,$LEFT_LABEL,$RIGHT_LABEL,Difference,Notes
+
+
+Every money cell is $$ - or $$X,XXX.XX with parentheses for negatives.
+
+
+No extra columns. No formulas. No trailing spaces.
+
+
+Output Format
+
+
+Return a single CSV with the exact header row followed by data rows.
+
+
+Do not include markdown fences or extra commentary.
+
+
+If your tool supports file writing, also save as bid-comp.xlsx with the same columns and values (no formulas). Otherwise, the CSV is sufficient for Excel import.
+
+
+Deterministic Steps (Do This Exactly)
+
+
+Parse both recap_by_category objects.
+
+
+Build meta map from subtotals by normalized label.
+
+
+Build group maps for "O&P Items" and "Non-O&P Items": { normalized_item -> summed_total }.
+
+
+Create rows:
+
+
+Meta rows (including computed O& P Line items), then O&P categories, then Non-O&P categories.
+
+
+For each row, compute LEFT/RIGHT, then Difference.
+
+
+Format currency cells.
+
+
+Sort within blocks as specified.
+
+
+Emit CSV exactly per spec.
+
+
+Example header line (replace placeholders)
+
+$ROW_LABEL_HEADER,$LEFT_LABEL,$RIGHT_LABEL,Difference,Notes
+"""
 )
 
 
@@ -63,7 +285,11 @@ class BidCompRenderResponse(BaseModel):
 
     carrier_estimate: ParsedEstimate
     contractor_estimate: ParsedEstimate
-    openai_result: OpenAIResult
+    openai_result: Optional[OpenAIResult] = Field(default=None, description="OpenAI completion response when executed")
+    openai_request_preview: Dict[str, Any]
+    left_label: str = Field(description="Label used for the carrier/Estimate A side")
+    right_label: str = Field(description="Label used for the contractor/Estimate B side")
+    row_label_header: str = Field(description="Header used for the first column in the CSV output")
 
 
 def _sanitize_filename(filename: Optional[str], fallback: str) -> str:
@@ -119,6 +345,35 @@ def _extract_text_from_openai_content(choice: Any) -> str:
     return str(content)
 
 
+def _extract_recap_by_category(payload: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    recaps = payload.get("recaps_and_summaries") or {}
+    recap = recaps.get("recap_by_category") if isinstance(recaps, dict) else None
+    if recap:
+        return recap
+    return payload.get("recap_by_category")
+
+
+def _infer_estimate_label(parsed: ParsedEstimate) -> str:
+    case_md = parsed.payload.get("case_metadata") if isinstance(parsed.payload, dict) else {}
+    estimate_name = (case_md or {}).get("estimate_name") if isinstance(case_md, dict) else None
+    if estimate_name:
+        return str(estimate_name)
+    return Path(parsed.filename).stem
+
+
+def _render_prompt_template(template_str: str, context: Dict[str, str]) -> str:
+    try:
+        return Template(template_str).substitute(context)
+    except (KeyError, ValueError):
+        try:
+            return template_str.format_map(context)
+        except Exception as exc:  # noqa: BLE001
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Prompt template rendering failed: {exc}",
+            ) from exc
+
+
 def _ensure_openai_ready() -> None:
     if not getattr(openai, "api_key", None):
         raise HTTPException(
@@ -129,21 +384,17 @@ def _ensure_openai_ready() -> None:
 
 async def _call_openai(
     *,
-    prompt: str,
     model: str,
     temperature: float,
     max_output_tokens: Optional[int],
-    system_prompt: str,
+    messages: list[dict],
 ) -> OpenAIResult:
     _ensure_openai_ready()
 
     def _invoke() -> OpenAIResult:
         kwargs: Dict[str, Any] = {
             "model": model,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt},
-            ],
+            "messages": messages,
             "temperature": temperature,
         }
         if max_output_tokens is not None:
@@ -208,6 +459,9 @@ async def process_bid_comp_render(
     carrier_estimate: UploadFile,
     contractor_estimate: UploadFile,
     prompt_template: Optional[str],
+    left_label_override: Optional[str],
+    right_label_override: Optional[str],
+    row_label_header: Optional[str],
     model: str,
     temperature: float,
     max_output_tokens: Optional[int],
@@ -237,24 +491,53 @@ async def process_bid_comp_render(
         carrier_parsed, contractor_parsed = await asyncio.gather(carrier_task, contractor_task)
         await asyncio.gather(carrier_estimate.close(), contractor_estimate.close())
 
-        prompt_body = prompt_template or (
-            "Provide a concise summary of key differences between these estimates.\n\n"
-            f"Carrier Estimate JSON:\n{json.dumps(carrier_parsed.payload, ensure_ascii=False)}\n\n"
-            f"Contractor Estimate JSON:\n{json.dumps(contractor_parsed.payload, ensure_ascii=False)}"
-        )
+        left_label = (left_label_override or _infer_estimate_label(carrier_parsed)).strip()
+        right_label = (right_label_override or _infer_estimate_label(contractor_parsed)).strip()
+        row_header = (row_label_header or "Category").strip() or "Category"
 
-        openai_result = await _call_openai(
-            prompt=prompt_body,
-            model=model,
-            temperature=temperature,
-            max_output_tokens=max_output_tokens,
-            system_prompt=DEFAULT_SYSTEM_PROMPT,
-        )
+        recap_a = _extract_recap_by_category(carrier_parsed.payload) or {}
+        recap_b = _extract_recap_by_category(contractor_parsed.payload) or {}
+
+        context = {
+            "LEFT_LABEL": left_label,
+            "RIGHT_LABEL": right_label,
+            "ROW_LABEL_HEADER": row_header,
+            "RECAP_A_JSON": json.dumps(recap_a, ensure_ascii=False, indent=2),
+            "RECAP_B_JSON": json.dumps(recap_b, ensure_ascii=False, indent=2),
+        }
+
+        template_source = prompt_template or DEFAULT_PROMPT_TEMPLATE.template
+        prompt_body = _render_prompt_template(template_source, context)
+
+        messages = [
+            {"role": "system", "content": DEFAULT_SYSTEM_PROMPT},
+            {"role": "user", "content": prompt_body},
+        ]
+
+        openai_request_preview = {
+            "model": model,
+            "temperature": temperature,
+            "max_output_tokens": max_output_tokens,
+            "messages": messages,
+        }
+
+        openai_result: Optional[OpenAIResult] = None
+        if getattr(openai, "api_key", None):
+            openai_result = await _call_openai(
+                model=model,
+                temperature=temperature,
+                max_output_tokens=max_output_tokens,
+                messages=messages,
+            )
 
     return BidCompRenderResponse(
         carrier_estimate=carrier_parsed,
         contractor_estimate=contractor_parsed,
+        openai_request_preview=openai_request_preview,
         openai_result=openai_result,
+        left_label=left_label,
+        right_label=right_label,
+        row_label_header=row_header,
     )
 
 
