@@ -22,14 +22,18 @@ app = FastAPI(title="Costbook Retrieval API", version="1.0.0")
 async def startup_event():
     """Initialize the application on startup."""
     logger.info("FastAPI application starting up (LOG_LEVEL=%s)", _log_level)
-    try:
-        # Test the retriever initialization
-        from .retriever import _get_qdrant_client
-        _get_qdrant_client()
-        logger.info("Application startup completed successfully")
-    except Exception as e:
-        logger.warning("Failed to initialize retriever during startup: %s", e)
-        logger.warning("Application will start but search functionality may not work")
+    # Lightweight Qdrant connectivity probe with clean logging
+    qdrant_url = os.getenv("QDRANT_URL")
+    qdrant_key = os.getenv("QDRANT_API_KEY")
+    if not qdrant_url or not qdrant_key:
+        logger.info("Qdrant probe: env not set; skipping connectivity check")
+    else:
+        try:
+            from .retriever import _get_qdrant_client
+            _get_qdrant_client()
+            logger.info("Qdrant probe: connected")
+        except Exception as e:  # noqa: BLE001
+            logger.info("Qdrant probe: not reachable (%s)", e)
 
 # Allow all origins by default; adjust in production as needed.
 app.add_middleware(

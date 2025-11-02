@@ -11,6 +11,13 @@ import lz4.frame
 
 from parse.xactimate import XactimateRoughDraftParser
 
+# Configure worker logging early so RQ shows our logs
+_worker_log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(
+    level=getattr(logging, _worker_log_level, logging.INFO),
+    format="%(asctime)s %(levelname)-8s %(name)s :: %(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S",
+)
 logger = logging.getLogger("vip-parse.worker")
 
 
@@ -35,11 +42,17 @@ def _write_temp_pdf(data: bytes) -> str:
 
 def _run_parser(input_path: str, out_dir: Path) -> Dict[str, Any]:
     out_dir.mkdir(parents=True, exist_ok=True)
+    logger.info("parser: start input=%s out_dir=%s", input_path, out_dir)
     parser = XactimateRoughDraftParser(input_path, str(out_dir), debug=False)
+    t0 = time.time()
     parser.run()
+    elapsed = int((time.time() - t0) * 1000)
     json_path = out_dir / f"{Path(input_path).stem}.json"
     if not json_path.exists():
+        logger.error("parser: missing output json: %s", json_path)
         raise FileNotFoundError(f"Expected parser output missing: {json_path}")
+    size = json_path.stat().st_size
+    logger.info("parser: done in %dms json=%s size=%d bytes", elapsed, json_path, size)
     with json_path.open("r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -73,8 +86,12 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
     t0 = time.time()
     with _SEM:
         logger.info("job start: job_id=%s", job_id)
+        logger.info("job env: TMPDIR=%s", os.getenv("TMPDIR") or tempfile.gettempdir())
+        # Decompress inputs
+        td = time.time()
         carrier_bytes = lz4.frame.decompress(carrier_lz4)
         contractor_bytes = lz4.frame.decompress(contractor_lz4)
+        logger.info("job decompress: %dms", int((time.time() - td) * 1000))
         logger.info(
             "job input: job_id=%s sizes=(carrier=%d contractor=%d) lz4_sizes=(%d,%d)",
             job_id,
@@ -84,14 +101,18 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
             len(contractor_lz4),
         )
 
+        # Write temp PDFs
+        tw = time.time()
         carrier_path = _write_temp_pdf(carrier_bytes)
         contractor_path = _write_temp_pdf(contractor_bytes)
+        logger.info("job tmpfiles: carrier=%s contractor=%s (%dms)", carrier_path, contractor_path, int((time.time() - tw) * 1000))
         tmp_dir = Path(tempfile.mkdtemp(prefix="bidcomp-"))
+        logger.info("job workspace: %s", tmp_dir)
 
         try:
             logger.info("job parse: job_id=%s carrier_path=%s", job_id, carrier_path)
             carrier_payload = _run_parser(carrier_path, tmp_dir / "carrier")
-            logger.info("job parse done: job_id=%s contractor_path=%s", job_id, contractor_path)
+            logger.info("job parse: job_id=%s contractor_path=%s", job_id, contractor_path)
             contractor_payload = _run_parser(contractor_path, tmp_dir / "contractor")
 
             recap_a = _extract_recap(carrier_payload)
@@ -116,6 +137,7 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
             logger.info("job done: job_id=%s meta=%s", job_id, meta)
             return {"recap_by_category": recap_bundle, "meta": meta}
         finally:
+            logger.info("job cleanup: removing temp files and workspace")
             for p in (carrier_path, contractor_path):
                 try:
                     os.remove(p)
