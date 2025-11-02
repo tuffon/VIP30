@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useCallback, useId, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useId, useMemo, useRef, useState } from "react";
 
 type RequestInfo = {
   url: string;
@@ -35,6 +35,7 @@ type UploadDropzoneProps = {
 function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzoneProps) {
   const reactId = useId();
   const id = useMemo(() => `${title.toLowerCase().replace(/\s+/g, "-")}-${reactId.replace(/:/g, "")}`,[title, reactId]);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -50,14 +51,23 @@ function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzo
   return (
     <label
       htmlFor={id}
+      onClick={() => {
+        // Ensure click opens file dialog even if label->input association is flaky
+        inputRef.current?.click();
+      }}
       className={`flex h-60 w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition hover:border-blue-500 hover:bg-blue-50 ${borderClass}`}
     >
       <input
+        ref={inputRef}
         id={id}
         type="file"
         accept="application/pdf"
         className="hidden"
-        onChange={handleFileChange}
+        onChange={(e) => {
+          // eslint-disable-next-line no-console
+          console.log(`[UploadDropzone] ${title} selected:`, e.target.files?.[0]?.name);
+          handleFileChange(e);
+        }}
       />
       <span className={`inline-flex h-12 w-12 items-center justify-center rounded-full ${hasFile ? "bg-green-200 text-green-700" : "bg-blue-100 text-blue-600"}`}>
         <svg
@@ -94,6 +104,8 @@ export default function BidCompPage() {
   const [requestInfo, setRequestInfo] = useState<RequestInfo | null>(null);
   const [pingStatus, setPingStatus] = useState<string | null>(null);
   const [echoStatus, setEchoStatus] = useState<string | null>(null);
+  const [jobId, setJobId] = useState<string | null>(null);
+  const [jobStatus, setJobStatus] = useState<string | null>(null);
 
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
 
@@ -146,10 +158,12 @@ export default function BidCompPage() {
       setError(null);
       setResult(null);
       setRequestInfo(null);
+      setJobId(null);
+      setJobStatus(null);
 
       const formData = new FormData();
-      formData.append("carrier_estimate", carrierFile);
-      formData.append("contractor_estimate", contractorFile);
+      formData.append("carrier", carrierFile);
+      formData.append("contractor", contractorFile);
       formData.append("model", "gpt-4o-mini");
       formData.append("temperature", "0.2");
       formData.append("row_label_header", "Category");
@@ -164,8 +178,8 @@ export default function BidCompPage() {
           { name: "row_label_header", value: "Category" },
         ],
         files: [
-          { field: "carrier_estimate", name: carrierFile.name, size: carrierFile.size },
-          { field: "contractor_estimate", name: contractorFile.name, size: contractorFile.size },
+          { field: "carrier", name: carrierFile.name, size: carrierFile.size },
+          { field: "contractor", name: contractorFile.name, size: contractorFile.size },
         ],
       });
 
@@ -197,8 +211,11 @@ export default function BidCompPage() {
           throw new Error(text || `Request failed with status ${response.status}`);
         }
 
+        // eslint-disable-next-line no-console
+        console.log("[POST] /render/bid-comp status:", response.status);
         const data = await response.json();
-        setResult(data);
+        // eslint-disable-next-line no-console
+        console.log("[POST] response json:", data);
         setRequestInfo((prev) =>
           prev
             ? {
@@ -209,6 +226,44 @@ export default function BidCompPage() {
               }
             : prev
         );
+
+        const jid: string | undefined = data?.job_id;
+        if (!jid) {
+          throw new Error("Server did not return a job_id");
+        }
+        setJobId(jid);
+        setJobStatus(data?.status || "queued");
+
+        // Poll job status for up to ~10 minutes
+        const statusUrl = `${apiBase.replace(/\/$/, "")}/render/bid-comp/${jid}`;
+        // eslint-disable-next-line no-console
+        console.log("[Poll] starting:", statusUrl);
+        for (let i = 0; i < 300; i++) {
+          try {
+            // eslint-disable-next-line no-console
+            console.log(`[Poll] iter ${i}`);
+            const sResp = await fetch(statusUrl);
+            const s = await sResp.json();
+            // eslint-disable-next-line no-console
+            console.log(`[Poll] iter ${i} status:`, s?.status, s);
+            setJobStatus(s?.status ?? null);
+            if (s?.status === "finished") {
+              setResult(s);
+              // eslint-disable-next-line no-console
+              console.log("[Poll] finished");
+              break;
+            }
+            if (s?.status === "failed") {
+              // eslint-disable-next-line no-console
+              console.error("[Poll] failed:", s?.error);
+              throw new Error(s?.error || "Job failed");
+            }
+          } catch (pollErr) {
+            // eslint-disable-next-line no-console
+            console.warn(`[Poll] iter ${i} error:`, pollErr);
+          }
+          await new Promise((r) => setTimeout(r, 2000));
+        }
       } catch (err) {
         const message = err instanceof Error ? err.message : "Unexpected error";
         setError(message);
@@ -330,6 +385,11 @@ export default function BidCompPage() {
               {requestStatus.ok ? "Success" : "Failed"}
             </span>
           )}
+          {jobId && (
+            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">
+              Job {jobId.slice(0, 8)}… {jobStatus ?? ""}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center gap-3 text-xs">
@@ -407,7 +467,23 @@ export default function BidCompPage() {
         </section>
       )}
 
-      {result && (
+      {result?.recap_by_category && (
+        <section className="space-y-4">
+          <h2 className="text-lg font-semibold text-gray-900">Job Result</h2>
+          {result?.meta && (
+            <div className="rounded-lg border border-gray-200 bg-white p-4 text-sm text-gray-700">
+              <p className="font-medium">Meta</p>
+              <pre className="mt-2 max-h-64 overflow-auto rounded bg-gray-900 p-4 text-xs text-white">{JSON.stringify(result.meta, null, 2)}</pre>
+            </div>
+          )}
+          <div className="rounded-lg border border-gray-200 bg-white p-4">
+            <p className="text-sm font-medium text-gray-900">recap_by_category</p>
+            <pre className="mt-3 max-h-96 overflow-auto rounded bg-gray-900 p-4 text-xs text-white">{JSON.stringify(result.recap_by_category, null, 2)}</pre>
+          </div>
+        </section>
+      )}
+
+      {result && !result.recap_by_category && (
         <section className="space-y-4">
           <h2 className="text-lg font-semibold text-gray-900">Latest Result</h2>
           <div className="rounded-lg border border-gray-200 bg-white p-4 text-sm text-gray-700">

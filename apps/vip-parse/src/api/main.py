@@ -1,4 +1,6 @@
 from typing import List, Dict
+import logging
+import os
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,20 +8,28 @@ from fastapi.middleware.cors import CORSMiddleware
 from .retriever import retrieve_cost_items
 from src.routes.bid_comp import router as bid_comp_router
 
+_log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(
+    level=getattr(logging, _log_level, logging.INFO),
+    format="%(asctime)s %(levelname)-8s %(name)s :: %(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S",
+)
+logger = logging.getLogger("vip-parse.api")
+
 app = FastAPI(title="Costbook Retrieval API", version="1.0.0")
 
 @app.on_event("startup")
 async def startup_event():
     """Initialize the application on startup."""
-    print("FastAPI application starting up...")
+    logger.info("FastAPI application starting up (LOG_LEVEL=%s)", _log_level)
     try:
         # Test the retriever initialization
         from .retriever import _get_qdrant_client
         _get_qdrant_client()
-        print("Application startup completed successfully")
+        logger.info("Application startup completed successfully")
     except Exception as e:
-        print(f"Warning: Failed to initialize retriever during startup: {e}")
-        print("Application will start but search functionality may not work")
+        logger.warning("Failed to initialize retriever during startup: %s", e)
+        logger.warning("Application will start but search functionality may not work")
 
 # Allow all origins by default; adjust in production as needed.
 app.add_middleware(

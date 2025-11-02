@@ -3,12 +3,15 @@ import os
 import tempfile
 import threading
 import time
+import logging
 from pathlib import Path
-from typing import Any, Dict, Tuple
+from typing import Any, Dict
 
 import lz4.frame
 
 from parse.xactimate import XactimateRoughDraftParser
+
+logger = logging.getLogger("vip-parse.worker")
 
 
 # global concurrency cap inside worker process
@@ -69,19 +72,36 @@ def _count_categories(recap: Dict[str, Any]) -> int:
 def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict[str, Any]:
     t0 = time.time()
     with _SEM:
+        logger.info("job start: job_id=%s", job_id)
         carrier_bytes = lz4.frame.decompress(carrier_lz4)
         contractor_bytes = lz4.frame.decompress(contractor_lz4)
+        logger.info(
+            "job input: job_id=%s sizes=(carrier=%d contractor=%d) lz4_sizes=(%d,%d)",
+            job_id,
+            len(carrier_bytes),
+            len(contractor_bytes),
+            len(carrier_lz4),
+            len(contractor_lz4),
+        )
 
         carrier_path = _write_temp_pdf(carrier_bytes)
         contractor_path = _write_temp_pdf(contractor_bytes)
         tmp_dir = Path(tempfile.mkdtemp(prefix="bidcomp-"))
 
         try:
+            logger.info("job parse: job_id=%s carrier_path=%s", job_id, carrier_path)
             carrier_payload = _run_parser(carrier_path, tmp_dir / "carrier")
+            logger.info("job parse done: job_id=%s contractor_path=%s", job_id, contractor_path)
             contractor_payload = _run_parser(contractor_path, tmp_dir / "contractor")
 
             recap_a = _extract_recap(carrier_payload)
             recap_b = _extract_recap(contractor_payload)
+            logger.info(
+                "job recap extracted: job_id=%s carrier_keys=%s contractor_keys=%s",
+                job_id,
+                list(recap_a.keys())[:5] if isinstance(recap_a, dict) else None,
+                list(recap_b.keys())[:5] if isinstance(recap_b, dict) else None,
+            )
 
             # return only what the client needs
             recap_bundle = {"carrier": recap_a, "contractor": recap_b}
@@ -93,6 +113,7 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
                 "contractor_size": len(contractor_bytes),
                 "categories": int(categories),
             }
+            logger.info("job done: job_id=%s meta=%s", job_id, meta)
             return {"recap_by_category": recap_bundle, "meta": meta}
         finally:
             for p in (carrier_path, contractor_path):
