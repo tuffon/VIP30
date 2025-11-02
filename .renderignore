@@ -1,0 +1,35 @@
+# Exclude large, non-runtime assets from Render build context to speed compression/upload
+
+# Node modules and virtual envs
+node_modules/
+**/node_modules/
+.venv/
+**/.venv/
+
+# Git and local artifacts
+.git/
+.gitignore
+.DS_Store
+
+# Big data/docs not needed at runtime on Render
+apps/vip-parse/data/**
+apps/vip-parse/documents/**
+apps/vip-parse/embeddings/**
+apps/vip-parse/debug_*.log
+
+# Tests and local outputs
+apps/vip-parse/tests/**
+**/*.out
+
+# Not needed for server runtime
+apps/vipclaims-saas/.next/
+apps/vipclaims-saas/out/
+apps/vipclaims-saas/.turbo/
+
+# Large standalone binaries/assets
+**/*.pdf
+**/*.xlsx
+**/*.xls
+**/*.csv
+
+
