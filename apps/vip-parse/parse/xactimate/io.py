@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 from typing import Iterable, List
+import logging
 
 import pdfplumber
 
@@ -43,8 +44,12 @@ class ParserIO:
 
     def read_full_text_lines(self) -> List[str]:
         lines: List[str] = []
+        log = logging.getLogger("vip-parse.worker")
         with pdfplumber.open(self.input_file) as pdf:
-            for page in pdf.pages:
+            total = len(pdf.pages)
+            for idx, page in enumerate(pdf.pages):
+                if idx % 5 == 0:
+                    log.info("pdf read: page %d/%d", idx + 1, total)
                 txt = page.extract_text() or ''
                 lines.extend([l.strip() for l in txt.split('\n') if l.strip()])
         return lines
