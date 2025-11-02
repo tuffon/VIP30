@@ -29,6 +29,7 @@ services:
       - key: PARSE_CONCURRENCY
         value: "1"
 
-redis:
-  - name: vip30-redis
+  - type: redis
+    name: vip30-redis
+    plan: free
 
