@@ -32,4 +32,5 @@ services:
   - type: redis
     name: vip30-redis
     plan: free
+    ipAllowList: []
 
