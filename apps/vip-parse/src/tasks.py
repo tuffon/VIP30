@@ -5,6 +5,9 @@ import threading
 import time
 import logging
 from pathlib import Path
+import subprocess
+import sys
+import gc
 from typing import Any, Dict
 from rq.job import Job
 
@@ -186,6 +189,7 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
         logger.info("job env: TMPDIR=%s", os.getenv("TMPDIR") or tempfile.gettempdir())
         # Decompress inputs
         td = time.time()
+        import lz4.frame
         carrier_bytes = lz4.frame.decompress(carrier_lz4)
         contractor_bytes = lz4.frame.decompress(contractor_lz4)
         logger.info("job decompress: %dms", int((time.time() - td) * 1000))
@@ -207,10 +211,33 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
         logger.info("job workspace: %s", tmp_dir)
 
         try:
-            logger.info("job parse: job_id=%s carrier_path=%s", job_id, carrier_path)
-            carrier_recap_payload = _run_parser_recap_only(carrier_path, tmp_dir / "carrier")
-            logger.info("job parse: job_id=%s contractor_path=%s", job_id, contractor_path)
-            contractor_recap_payload = _run_parser_recap_only(contractor_path, tmp_dir / "contractor")
+            def _parse_via_subprocess(pdf_path: str) -> Dict[str, Any]:
+                # call helper in a separate process to free memory after exit
+                proc = subprocess.run(
+                    [sys.executable, "-m", "src.worker_parse_helper", pdf_path],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                )
+                out = proc.stdout.strip() or "{}"
+                return {"recap_by_category": json.loads(out)}
+
+            logger.info("job parse: job_id=%s carrier_path=%s (subprocess)", job_id, carrier_path)
+            carrier_recap_payload = _parse_via_subprocess(carrier_path)
+            # free carrier temp bytes from memory aggressively
+            try:
+                del carrier_bytes
+            except Exception:
+                pass
+            gc.collect()
+
+            logger.info("job parse: job_id=%s contractor_path=%s (subprocess)", job_id, contractor_path)
+            contractor_recap_payload = _parse_via_subprocess(contractor_path)
+            try:
+                del contractor_bytes
+            except Exception:
+                pass
+            gc.collect()
 
             recap_a = _extract_recap(carrier_recap_payload)
             recap_b = _extract_recap(contractor_recap_payload)

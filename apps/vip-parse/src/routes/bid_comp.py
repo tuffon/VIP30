@@ -1,7 +1,8 @@
 import os
 import uuid
 import logging
-from typing import Any, Dict
+import io
+from typing import Any, Dict, Tuple
 
 import lz4.frame
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
@@ -41,73 +42,60 @@ async def enqueue_bid_comp(
 ) -> Dict[str, Any]:
     if _q is None:
         raise HTTPException(status_code=503, detail="Redis not configured")
-    # Read entire files (they are small ~3-5MB each)
-    carrier_bytes = await carrier.read()
-    contractor_bytes = await contractor.read()
-
-    total_size = len(carrier_bytes) + len(contractor_bytes)
-    if total_size > MAX_BYTES:
-        logger.warning("enqueue rejected: payload too large (%d bytes)", total_size)
-        raise HTTPException(status_code=413, detail=f"payload too large: {total_size} bytes")
-
-    # MIME and header validation
+    # MIME validation (cheap)
     if not (carrier.content_type or "").lower().endswith("pdf") or not (contractor.content_type or "").lower().endswith("pdf"):
         raise HTTPException(status_code=415, detail="only PDFs are accepted")
-    if not _is_pdf_header(carrier_bytes) or not _is_pdf_header(contractor_bytes):
-        logger.warning("enqueue rejected: invalid pdf headers (carrier_ok=%s contractor_ok=%s)", _is_pdf_header(carrier_bytes), _is_pdf_header(contractor_bytes))
+
+    async def _stream_compress(upload: UploadFile) -> Tuple[bytes, int, bool]:
+        head = await upload.read(5)
+        if not _is_pdf_header(head):
+            return b"", 0, False
+        comp = lz4.frame.LZ4FrameCompressor()
+        buf = io.BytesIO()
+        total = len(head)
+        buf.write(comp.begin())
+        buf.write(comp.compress(head))
+        while True:
+            chunk = await upload.read(1024 * 1024)
+            if not chunk:
+                break
+            total += len(chunk)
+            if total > MAX_BYTES:
+                return b"", total, False
+            buf.write(comp.compress(chunk))
+        buf.write(comp.flush())
+        return buf.getvalue(), total, True
+
+    c_comp, c_size, ok_c = await _stream_compress(carrier)
+    k_comp, k_size, ok_k = await _stream_compress(contractor)
+    total_size = c_size + k_size
+    if not ok_c or not ok_k:
+        if total_size > MAX_BYTES:
+            logger.warning("enqueue rejected: payload too large (%d bytes)", total_size)
+            raise HTTPException(status_code=413, detail=f"payload too large: {total_size} bytes")
+        logger.warning("enqueue rejected: invalid pdf content (carrier_ok=%s contractor_ok=%s)", ok_c, ok_k)
         raise HTTPException(status_code=415, detail="invalid PDF content")
 
-    # Compress before enqueue to keep Redis lean
-    c_comp = lz4.frame.compress(carrier_bytes)
-    k_comp = lz4.frame.compress(contractor_bytes)
-
-    # Enqueue one job per PDF
-    job_c = _q.enqueue(
-        "src.tasks.parse_pdf",
-        "carrier",
+    # Single job parses both PDFs sequentially (in-process semaphore caps concurrency)
+    job_id = str(uuid.uuid4())
+    job = _q.enqueue(
+        "src.tasks.run_bid_comp",
+        job_id,
         c_comp,
-        job_timeout=600,
-        result_ttl=86400,
-        failure_ttl=86400,
-    )
-    job_k = _q.enqueue(
-        "src.tasks.parse_pdf",
-        "contractor",
         k_comp,
         job_timeout=600,
         result_ttl=86400,
         failure_ttl=86400,
     )
-
-    # Join job waits for both
-    corr_id = str(uuid.uuid4())
-    join_job = _q.enqueue(
-        "src.tasks.join_bid_comp",
-        corr_id,
-        job_c.id,
-        job_k.id,
-        depends_on=[job_c, job_k],
-        job_timeout=120,
-        result_ttl=86400,
-        failure_ttl=86400,
-    )
-    try:
-        join_job.meta = {"deps": [job_c.id, job_k.id]}
-        join_job.save()
-    except Exception:
-        pass
-
     logger.info(
-        "enqueue ok: join=%s deps=(%s,%s) sizes=(%d,%d) comp=(%d,%d)",
-        join_job.id,
-        job_c.id,
-        job_k.id,
-        len(carrier_bytes),
-        len(contractor_bytes),
+        "enqueue ok: job_id=%s sizes=(%d,%d) comp=(%d,%d)",
+        job.id,
+        c_size,
+        k_size,
         len(c_comp),
         len(k_comp),
     )
-    return {"job_id": join_job.id, "status": "queued"}
+    return {"job_id": job.id, "status": "queued"}
 
 
 @router.get("/{job_id}")
@@ -123,22 +111,6 @@ def get_status(job_id: str) -> Dict[str, Any]:
     status_str = job.get_status(refresh=True)
     logger.info("status: job_id=%s status=%s", job_id, status_str)
     if status_str in ("queued", "started", "deferred"):
-        # If deferred, check dependency failures to surface a terminal error
-        if status_str == "deferred":
-            deps = None
-            try:
-                deps = (job.meta or {}).get("deps")
-            except Exception:
-                deps = None
-            if deps and _r is not None:
-                try:
-                    from rq.job import Job as _J
-                    dep_jobs = [_J.fetch(jid, connection=_r) for jid in deps if jid]
-                    for dj in dep_jobs:
-                        if dj.get_status(refresh=True) == "failed":
-                            return {"job_id": job_id, "status": "failed", "error": str(dj.exc_info or "dependency failed")}
-                except Exception:
-                    pass
         return {"job_id": job_id, "status": status_str}
     if status_str == "finished":
         result = job.result or {}
