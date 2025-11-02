@@ -13,13 +13,18 @@ from rq.job import Job
 router = APIRouter(prefix="/render/bid-comp", tags=["bid-comp"])
 logger = logging.getLogger("vip-parse.web")
 
-try:
-    _redis_url = os.environ["REDIS_URL"]
-except KeyError as exc:
-    raise RuntimeError("REDIS_URL env var must be set") from exc
-
-_r = Redis.from_url(_redis_url)
-_q = Queue("bidcomp", connection=_r)
+_redis_url = os.getenv("REDIS_URL")
+_r = None
+_q = None
+if _redis_url:
+    try:
+        _r = Redis.from_url(_redis_url)
+        _q = Queue("bidcomp", connection=_r)
+        logger.info("Redis connected for web routes")
+    except Exception as e:  # noqa: BLE001
+        logger.error("Failed to connect Redis: %s", e)
+else:
+    logger.warning("REDIS_URL not set; bid-comp endpoints will return 503")
 
 MAX_BYTES = 12 * 1024 * 1024  # 12 MB cap for combined uploads
 
@@ -34,6 +39,8 @@ async def enqueue_bid_comp(
     carrier: UploadFile = File(...),
     contractor: UploadFile = File(...),
 ) -> Dict[str, Any]:
+    if _q is None:
+        raise HTTPException(status_code=503, detail="Redis not configured")
     # Read entire files (they are small ~3-5MB each)
     carrier_bytes = await carrier.read()
     contractor_bytes = await contractor.read()
@@ -80,6 +87,8 @@ async def enqueue_bid_comp(
 
 @router.get("/{job_id}")
 def get_status(job_id: str) -> Dict[str, Any]:
+    if _r is None:
+        raise HTTPException(status_code=503, detail="Redis not configured")
     try:
         job = Job.fetch(job_id, connection=_r)
     except Exception:
