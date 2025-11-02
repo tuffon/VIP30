@@ -6,6 +6,7 @@ import time
 import logging
 from pathlib import Path
 from typing import Any, Dict
+from rq.job import Job
 
 import lz4.frame
 
@@ -67,6 +68,87 @@ def _run_parser_recap_only(input_path: str, out_dir: Path) -> Dict[str, Any]:
     logger.info("parser: done in %dms json=%s size=%d bytes", elapsed, json_path, size)
     with json_path.open("r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def parse_pdf(role: str, pdf_lz4: bytes) -> Dict[str, Any]:
+    """Parse a single PDF and return only recap_by_category with meta.
+
+    Args:
+        role: "carrier" or "contractor" (for logs only)
+        pdf_lz4: compressed PDF bytes (lz4)
+    Returns:
+        { "recap_by_category": {...}, "meta": {...} }
+    """
+    t0 = time.time()
+    with _SEM:
+        logger.info("single job start: role=%s", role)
+        pdf_bytes = lz4.frame.decompress(pdf_lz4)
+        path = _write_temp_pdf(pdf_bytes)
+        tmp_dir = Path(tempfile.mkdtemp(prefix=f"bidcomp-{role}-"))
+        try:
+            payload = _run_parser_recap_only(path, tmp_dir)
+            recap = _extract_recap(payload)
+            meta = {
+                "elapsed_ms": int((time.time() - t0) * 1000),
+                "pdf_size": len(pdf_bytes),
+                "role": role,
+            }
+            logger.info("single job done: role=%s meta=%s", role, meta)
+            return {"recap_by_category": recap, "meta": meta}
+        finally:
+            try:
+                os.remove(path)
+            except OSError:
+                pass
+            try:
+                for root, _dirs, files in os.walk(tmp_dir, topdown=False):
+                    for name in files:
+                        try:
+                            os.remove(Path(root) / name)
+                        except OSError:
+                            pass
+                os.removedirs(tmp_dir)
+            except OSError:
+                pass
+
+
+def join_bid_comp(correlation_id: str, carrier_job_id: str, contractor_job_id: str) -> Dict[str, Any]:
+    """Join two finished parse jobs and return merged recap structure.
+
+    Returns:
+        { "status": "succeeded", "recap_by_category": {"carrier":...,"contractor":...}, "meta": {...} }
+    """
+    t0 = time.time()
+    # Fetch dependency results
+    try:
+        c_job = Job.fetch(carrier_job_id, connection=_r) if '_r' in globals() and _r else None
+        k_job = Job.fetch(contractor_job_id, connection=_r) if '_r' in globals() and _r else None
+    except Exception as e:  # noqa: BLE001
+        logger.error("join: failed to fetch dependency jobs: %s", e)
+        raise
+
+    def _get_result(job: Job) -> Dict[str, Any]:
+        if not job:
+            return {}
+        s = job.get_status(refresh=True)
+        if s == 'failed':
+            raise RuntimeError(f"dependency failed: {job.id}")
+        return job.result or {}
+
+    carrier_res = _get_result(c_job)
+    contractor_res = _get_result(k_job)
+
+    recap_a = _extract_recap(carrier_res)
+    recap_b = _extract_recap(contractor_res)
+
+    meta = {
+        "elapsed_ms": int((time.time() - t0) * 1000),
+        "carrier_job_id": carrier_job_id,
+        "contractor_job_id": contractor_job_id,
+        "correlation_id": correlation_id,
+    }
+    logger.info("join: done corr=%s", correlation_id)
+    return {"status": "succeeded", "recap_by_category": {"carrier": recap_a, "contractor": recap_b}, "meta": meta}
 
 
 def _extract_recap(payload: Dict[str, Any]) -> Dict[str, Any]:
