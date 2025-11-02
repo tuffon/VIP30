@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: vip30-web
+    env: python
+    buildCommand: |
+      cd apps/vip-parse && pip install -r requirements.txt
+    startCommand: |
+      cd apps/vip-parse && gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          name: vip30-redis
+          type: redis
+          property: connectionString
+
+  - type: worker
+    name: vip30-worker
+    env: python
+    buildCommand: |
+      cd apps/vip-parse && pip install -r requirements.txt
+    startCommand: |
+      cd apps/vip-parse && rq worker -u $REDIS_URL bidcomp
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          name: vip30-redis
+          type: redis
+          property: connectionString
+      - key: PARSE_CONCURRENCY
+        value: "1"
+
+redis:
+  - name: vip30-redis
+
