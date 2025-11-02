@@ -1,10 +1,9 @@
 import os
 import uuid
 import logging
-import io
-from typing import Any, Dict, Tuple
-
-import lz4.frame
+import tempfile
+import shutil
+from typing import Any, Dict
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
 from redis import Redis
 from rq import Queue
@@ -46,56 +45,46 @@ async def enqueue_bid_comp(
     if not (carrier.content_type or "").lower().endswith("pdf") or not (contractor.content_type or "").lower().endswith("pdf"):
         raise HTTPException(status_code=415, detail="only PDFs are accepted")
 
-    async def _stream_compress(upload: UploadFile) -> Tuple[bytes, int, bool]:
-        head = await upload.read(5)
-        if not _is_pdf_header(head):
-            return b"", 0, False
-        comp = lz4.frame.LZ4FrameCompressor()
-        buf = io.BytesIO()
-        total = len(head)
-        buf.write(comp.begin())
-        buf.write(comp.compress(head))
-        while True:
-            chunk = await upload.read(1024 * 1024)
-            if not chunk:
-                break
-            total += len(chunk)
-            if total > MAX_BYTES:
-                return b"", total, False
-            buf.write(comp.compress(chunk))
-        buf.write(comp.flush())
-        return buf.getvalue(), total, True
+    def save_to_tmp(upload: UploadFile) -> str:
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as out:
+            shutil.copyfileobj(upload.file, out, length=1024 * 1024)
+            return out.name
 
-    c_comp, c_size, ok_c = await _stream_compress(carrier)
-    k_comp, k_size, ok_k = await _stream_compress(contractor)
-    total_size = c_size + k_size
-    if not ok_c or not ok_k:
-        if total_size > MAX_BYTES:
-            logger.warning("enqueue rejected: payload too large (%d bytes)", total_size)
-            raise HTTPException(status_code=413, detail=f"payload too large: {total_size} bytes")
-        logger.warning("enqueue rejected: invalid pdf content (carrier_ok=%s contractor_ok=%s)", ok_c, ok_k)
-        raise HTTPException(status_code=415, detail="invalid PDF content")
+    p1, p2 = save_to_tmp(carrier), save_to_tmp(contractor)
+    try:
+        def _check_size_and_header(path: str) -> tuple[int, bool]:
+            size = os.path.getsize(path)
+            with open(path, "rb") as f:
+                ok = _is_pdf_header(f.read(5))
+            return size, ok
 
-    # Single job parses both PDFs sequentially (in-process semaphore caps concurrency)
-    job_id = str(uuid.uuid4())
-    job = _q.enqueue(
-        "src.tasks.run_bid_comp",
-        job_id,
-        c_comp,
-        k_comp,
-        job_timeout=600,
-        result_ttl=86400,
-        failure_ttl=86400,
-    )
-    logger.info(
-        "enqueue ok: job_id=%s sizes=(%d,%d) comp=(%d,%d)",
-        job.id,
-        c_size,
-        k_size,
-        len(c_comp),
-        len(k_comp),
-    )
-    return {"job_id": job.id, "status": "queued"}
+        s1, ok1 = _check_size_and_header(p1)
+        s2, ok2 = _check_size_and_header(p2)
+        if (s1 + s2) > MAX_BYTES:
+            logger.warning("enqueue rejected: payload too large (%d bytes)", s1 + s2)
+            raise HTTPException(status_code=413, detail=f"payload too large: {s1 + s2} bytes")
+        if not ok1 or not ok2:
+            logger.warning("enqueue rejected: invalid pdf content (carrier_ok=%s contractor_ok=%s)", ok1, ok2)
+            raise HTTPException(status_code=415, detail="invalid PDF content")
+
+        with open(p1, "rb") as f1, open(p2, "rb") as f2:
+            payload = {"carrier_bytes": f1.read(), "contractor_bytes": f2.read()}
+
+        job = _q.enqueue(
+            "src.tasks.run_bid_comp_bytes",
+            payload,
+            job_timeout=600,
+            result_ttl=86400,
+            failure_ttl=86400,
+        )
+        logger.info("enqueue ok: job_id=%s sizes=(%d,%d)", job.id, s1, s2)
+        return {"job_id": job.id, "status": "queued"}
+    finally:
+        for p in (p1, p2):
+            try:
+                os.remove(p)
+            except OSError:
+                pass
 
 
 @router.get("/{job_id}")

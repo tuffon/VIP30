@@ -182,6 +182,71 @@ def _count_categories(recap: Dict[str, Any]) -> int:
     return _collect(recap)
 
 
+def run_bid_comp_bytes(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Single-job entrypoint taking raw bytes for both PDFs.
+
+    Writes bytes to /tmp, parses each via subprocess, returns recap_by_category bundle + meta.
+    """
+    t0 = time.time()
+    with _SEM:
+        logger.info("job start (bytes payload)")
+
+        carrier_bytes = payload.get("carrier_bytes") or b""
+        contractor_bytes = payload.get("contractor_bytes") or b""
+
+        # Write temp PDFs
+        tw = time.time()
+        carrier_path = _write_temp_pdf(carrier_bytes)
+        contractor_path = _write_temp_pdf(contractor_bytes)
+        logger.info("job tmpfiles: carrier=%s contractor=%s (%dms)", carrier_path, contractor_path, int((time.time() - tw) * 1000))
+
+        try:
+            def _parse_via_subprocess(pdf_path: str) -> Dict[str, Any]:
+                proc = subprocess.run(
+                    [sys.executable, "-m", "src.worker_parse_helper", pdf_path],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                )
+                out = proc.stdout.strip() or "{}"
+                return {"recap_by_category": json.loads(out)}
+
+            logger.info("job parse (bytes): carrier=%s", carrier_path)
+            carrier_recap_payload = _parse_via_subprocess(carrier_path)
+            try:
+                del carrier_bytes
+            except Exception:
+                pass
+            gc.collect()
+
+            logger.info("job parse (bytes): contractor=%s", contractor_path)
+            contractor_recap_payload = _parse_via_subprocess(contractor_path)
+            try:
+                del contractor_bytes
+            except Exception:
+                pass
+            gc.collect()
+
+            recap_a = _extract_recap(carrier_recap_payload)
+            recap_b = _extract_recap(contractor_recap_payload)
+
+            recap_bundle = {"carrier": recap_a, "contractor": recap_b}
+            categories = _count_categories(recap_a) + _count_categories(recap_b)
+            meta = {
+                "elapsed_ms": int((time.time() - t0) * 1000),
+                "carrier_size": os.path.getsize(carrier_path),
+                "contractor_size": os.path.getsize(contractor_path),
+                "categories": int(categories),
+            }
+            logger.info("job done (bytes): meta=%s", meta)
+            return {"recap_by_category": recap_bundle, "meta": meta}
+        finally:
+            logger.info("job cleanup: removing temp files")
+            for p in (carrier_path, contractor_path):
+                try:
+                    os.remove(p)
+                except OSError:
+                    pass
 def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict[str, Any]:
     t0 = time.time()
     with _SEM:
