@@ -8,8 +8,9 @@ services:
     command: sh -c "./docker/dev-entrypoint.sh"
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     environment:
-      NEXT_PUBLIC_API_BASE_URL: https://vip30.onrender.com
       PNPM_PROGRESS_BAR: "0"
     volumes:
       - .:/app

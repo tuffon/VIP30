@@ -1,7 +1,7 @@
 services:
   - type: web
     name: vip30-web
-    plan: free
+    plan: starter
     env: python
     buildCommand: |
       cd apps/vip-parse && pip install -r requirements.txt

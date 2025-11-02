@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useId, useMemo, useState } from "react";
 
 type RequestInfo = {
   url: string;
@@ -33,7 +33,8 @@ type UploadDropzoneProps = {
 };
 
 function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzoneProps) {
-  const id = useMemo(() => `${title.toLowerCase().replace(/\s+/g, "-")}-${Math.random().toString(36).slice(2)}`, [title]);
+  const reactId = useId();
+  const id = useMemo(() => `${title.toLowerCase().replace(/\s+/g, "-")}-${reactId.replace(/:/g, "")}`,[title, reactId]);
 
   const handleFileChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -99,11 +100,16 @@ export default function BidCompPage() {
   const handlePing = useCallback(async () => {
     setPingStatus("Testing…");
     try {
+      // Debug: verify clicks and URL
+      // eslint-disable-next-line no-console
+      console.log("[Ping] using apiBase:", apiBase);
       const response = await fetch(`${apiBase.replace(/\/$/, "")}/render/debug/ping`);
       const data = await response.json();
       setPingStatus(`Status ${response.status}: ${JSON.stringify(data)}`);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Unexpected error";
+      // eslint-disable-next-line no-console
+      console.error("[Ping] failed:", err);
       setPingStatus(`Failed: ${message}`);
     }
   }, [apiBase]);
@@ -111,6 +117,8 @@ export default function BidCompPage() {
   const handleEcho = useCallback(async () => {
     setEchoStatus("Testing…");
     try {
+      // eslint-disable-next-line no-console
+      console.log("[Echo] using apiBase:", apiBase);
       const response = await fetch(`${apiBase.replace(/\/$/, "")}/render/debug/echo`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -120,6 +128,8 @@ export default function BidCompPage() {
       setEchoStatus(`Status ${response.status}: ${JSON.stringify(data)}`);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Unexpected error";
+      // eslint-disable-next-line no-console
+      console.error("[Echo] failed:", err);
       setEchoStatus(`Failed: ${message}`);
     }
   }, [apiBase]);
