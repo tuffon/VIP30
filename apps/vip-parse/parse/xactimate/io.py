@@ -31,6 +31,7 @@ class ParserIO:
             base = os.path.join(out, in_stem)
             self.out_path = base + '.out'
             self.json_path = base + '.json'
+            self.recap_path = base + '.recap.json'
         else:
             out = os.path.abspath(out)
             os.makedirs(os.path.dirname(out), exist_ok=True)
@@ -38,6 +39,7 @@ class ParserIO:
                 out = out + '.json'
             self.json_path = out
             self.out_path = os.path.splitext(out)[0] + '.out'
+            self.recap_path = os.path.splitext(out)[0] + '.recap.json'
         os.makedirs(os.path.dirname(self.out_path), exist_ok=True)
 
     # ---- reading -------------------------------------------------------
@@ -72,6 +74,10 @@ class ParserIO:
     def write_json(self, payload: dict) -> None:
         with open(self.json_path, 'w', encoding='utf-8') as f:
             json.dump(payload, f, indent=2, ensure_ascii=False)
+
+    def write_recap(self, recap_by_category: dict) -> None:
+        with open(self.recap_path, 'w', encoding='utf-8') as f:
+            json.dump({"recap_by_category": recap_by_category or {}}, f, indent=2, ensure_ascii=False)
 
     # ---- console output ------------------------------------------------
 

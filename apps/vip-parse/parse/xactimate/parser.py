@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import logging
+import time
 from pathlib import Path
 import re
 from typing import Dict, List, Optional, Tuple
@@ -42,17 +44,41 @@ class XactimateRoughDraftParser:
         self.io = ParserIO(input_file, output_path)
         self.input_file = self.io.input_file
         self.debug = bool(debug)
+        self._logger = logging.getLogger("vip-parse.worker")
 
     # ---------- public ----------
     def run(self) -> None:
+        t0 = time.time()
+        self._logger.info("parser.run: begin input=%s", self.input_file)
         # full text (once)
         full_lines = self.io.read_full_text_lines()
+        self._logger.info("parser.run: read_full_text_lines -> %d lines", len(full_lines))
 
         # pre-pass recap-by-category (non-sequential)
         recap_cat, recap_cat_spans = self._prepass_recap_by_category(full_lines)
+        self._logger.info("parser.run: prepass recap_by_category spans=%d", len(recap_cat_spans or []))
+
+        # Fast path: only emit recap_by_category (skip heavy sequential parse)
+        if os.getenv("FAST_RECAP_ONLY", "0").strip().lower() in {"1", "true", "yes"}:
+            recap_out = recap_cat or {"subtotals": []}
+            self._logger.info("parser.run: FAST_RECAP_ONLY enabled; writing recap only")
+            try:
+                self.io.write_recap(recap_out)
+            finally:
+                self._logger.info(
+                    "parser.run: recap written to %s (elapsed=%dms)",
+                    getattr(self.io, "recap_path", "<unknown>"),
+                    int((time.time() - t0) * 1000),
+                )
+            return
 
         # end-of-doc structured (but we will not clobber recap_by_category if prepass found it)
         end = self._parse_end_structured(full_lines)
+        self._logger.info(
+            "parser.run: end_structured keys=%s skip_spans=%d",
+            list(end.keys())[:6],
+            len(end.get("_skip_spans") or []),
+        )
 
         # unified skip mask for sequential parsing
         all_spans = recap_cat_spans + (end.get("_skip_spans") or [])
@@ -68,10 +94,13 @@ class XactimateRoughDraftParser:
         skip_mask = self._build_skip_mask(len(full_lines), safe_spans)
 
         # sequential parse using full_lines and unified skip_mask
+        self._logger.info("parser.run: sequential parse starting (skip_spans=%d)", len(safe_spans))
         sections, _ = self._parse_document_from_lines(full_lines, skip_mask=skip_mask)
+        self._logger.info("parser.run: sequential parse done sections=%d", len(sections))
 
         # front-page metadata
         case_md = self._parse_case_metadata(self.io.read_first_page_lines())
+        self._logger.info("parser.run: extracted case metadata keys=%s", list(case_md.keys())[:6])
         if recap_cat and (recap_cat.get("subtotals") or any(k for k in recap_cat.keys() if k != "subtotals")):
             end["recap_by_category"] = recap_cat
 
@@ -133,7 +162,13 @@ class XactimateRoughDraftParser:
                 "per_section": per_section_validations,
                 "document": doc_validations
             }
+        self._logger.info("parser.run: writing json & recap")
         self.io.write_json(payload)
+        try:
+            self.io.write_recap(recaps.get("recap_by_category") or {})
+        except Exception as wre:  # noqa: BLE001
+            self._logger.info("parser.run: write_recap skipped: %s", wre)
+        self._logger.info("parser.run: json written to %s (elapsed=%dms)", self.io.json_path, int((time.time() - t0) * 1000))
 
         # console tables
         pdf_name = Path(self.input_file).name

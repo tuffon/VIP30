@@ -40,14 +40,26 @@ def _write_temp_pdf(data: bytes) -> str:
         raise
 
 
-def _run_parser(input_path: str, out_dir: Path) -> Dict[str, Any]:
+def _run_parser_recap_only(input_path: str, out_dir: Path) -> Dict[str, Any]:
     out_dir.mkdir(parents=True, exist_ok=True)
     logger.info("parser: start input=%s out_dir=%s", input_path, out_dir)
     parser = XactimateRoughDraftParser(input_path, str(out_dir), debug=False)
     t0 = time.time()
+    # enforce fast recap path to reduce memory/CPU
+    os.environ.setdefault("FAST_RECAP_ONLY", "1")
     parser.run()
     elapsed = int((time.time() - t0) * 1000)
-    json_path = out_dir / f"{Path(input_path).stem}.json"
+    base = Path(out_dir) / Path(input_path).stem
+    recap_path = base.with_suffix("")
+    recap_path = Path(str(base))  # ensure string base
+    recap_file = Path(f"{recap_path}.recap.json")
+    if recap_file.exists():
+        size = recap_file.stat().st_size
+        logger.info("parser: done in %dms recap=%s size=%d bytes", elapsed, recap_file, size)
+        with recap_file.open("r", encoding="utf-8") as f:
+            return json.load(f)
+    # Fallback to full JSON if recap file missing
+    json_path = Path(f"{recap_path}.json")
     if not json_path.exists():
         logger.error("parser: missing output json: %s", json_path)
         raise FileNotFoundError(f"Expected parser output missing: {json_path}")
@@ -111,12 +123,12 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
 
         try:
             logger.info("job parse: job_id=%s carrier_path=%s", job_id, carrier_path)
-            carrier_payload = _run_parser(carrier_path, tmp_dir / "carrier")
+            carrier_recap_payload = _run_parser_recap_only(carrier_path, tmp_dir / "carrier")
             logger.info("job parse: job_id=%s contractor_path=%s", job_id, contractor_path)
-            contractor_payload = _run_parser(contractor_path, tmp_dir / "contractor")
+            contractor_recap_payload = _run_parser_recap_only(contractor_path, tmp_dir / "contractor")
 
-            recap_a = _extract_recap(carrier_payload)
-            recap_b = _extract_recap(contractor_payload)
+            recap_a = _extract_recap(carrier_recap_payload)
+            recap_b = _extract_recap(contractor_recap_payload)
             logger.info(
                 "job recap extracted: job_id=%s carrier_keys=%s contractor_keys=%s",
                 job_id,
