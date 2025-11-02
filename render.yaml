@@ -16,7 +16,6 @@ services:
 
   - type: worker
     name: vip30-worker
-    plan: free
     env: python
     buildCommand: |
       cd apps/vip-parse && pip install -r requirements.txt
