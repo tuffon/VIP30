@@ -18,7 +18,7 @@ _r = None
 _q = None
 if _redis_url:
     try:
-        _r = Redis.from_url(_redis_url)
+        _r = Redis.from_url(_redis_url, socket_connect_timeout=5, socket_timeout=5, health_check_interval=30)
         _q = Queue("bidcomp", connection=_r)
         logger.info("Redis connected for web routes")
     except Exception as e:  # noqa: BLE001

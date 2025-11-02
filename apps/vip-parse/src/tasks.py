@@ -8,9 +8,7 @@ from pathlib import Path
 from typing import Any, Dict
 from rq.job import Job
 
-import lz4.frame
-
-from parse.xactimate import XactimateRoughDraftParser
+from redis import Redis
 
 # Configure worker logging early so RQ shows our logs
 _worker_log_level = os.getenv("LOG_LEVEL", "INFO").upper()
@@ -44,6 +42,8 @@ def _write_temp_pdf(data: bytes) -> str:
 def _run_parser_recap_only(input_path: str, out_dir: Path) -> Dict[str, Any]:
     out_dir.mkdir(parents=True, exist_ok=True)
     logger.info("parser: start input=%s out_dir=%s", input_path, out_dir)
+    # Lazy import heavy parser
+    from parse.xactimate import XactimateRoughDraftParser
     parser = XactimateRoughDraftParser(input_path, str(out_dir), debug=False)
     t0 = time.time()
     # enforce fast recap path to reduce memory/CPU
@@ -82,6 +82,8 @@ def parse_pdf(role: str, pdf_lz4: bytes) -> Dict[str, Any]:
     t0 = time.time()
     with _SEM:
         logger.info("single job start: role=%s", role)
+        # Lazy import lz4
+        import lz4.frame
         pdf_bytes = lz4.frame.decompress(pdf_lz4)
         path = _write_temp_pdf(pdf_bytes)
         tmp_dir = Path(tempfile.mkdtemp(prefix=f"bidcomp-{role}-"))
@@ -121,8 +123,9 @@ def join_bid_comp(correlation_id: str, carrier_job_id: str, contractor_job_id: s
     t0 = time.time()
     # Fetch dependency results
     try:
-        c_job = Job.fetch(carrier_job_id, connection=_r) if '_r' in globals() and _r else None
-        k_job = Job.fetch(contractor_job_id, connection=_r) if '_r' in globals() and _r else None
+        r = Redis.from_url(os.environ.get("REDIS_URL"), socket_connect_timeout=5, socket_timeout=5, health_check_interval=30)
+        c_job = Job.fetch(carrier_job_id, connection=r)
+        k_job = Job.fetch(contractor_job_id, connection=r)
     except Exception as e:  # noqa: BLE001
         logger.error("join: failed to fetch dependency jobs: %s", e)
         raise

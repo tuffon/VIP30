@@ -4,6 +4,7 @@ services:
     plan: starter
     env: python
     rootDir: apps/vip-parse
+    healthCheckPath: /render/debug/ping
     buildCommand: |
       pip install -r requirements-web.txt
     startCommand: |
@@ -13,7 +14,7 @@ services:
         fromService:
           name: vip30-redis
           type: redis
-          property: connectionString
+          property: internalConnectionString
 
   - type: worker
     name: vip30-worker
@@ -24,13 +25,27 @@ services:
     buildCommand: |
       pip install -r requirements-worker.txt
     startCommand: |
-      rq worker -u $REDIS_URL bidcomp --max-jobs 1
+      echo "Boot $(date)" && \
+      python - << 'PY'
+import os, sys, redis
+url = os.environ.get('REDIS_URL')
+if not url:
+    print('REDIS_URL not set', file=sys.stderr)
+    sys.exit(1)
+safe = url.split('@')[-1] if '@' in url else url
+print(f"Preflight Redis: {safe}")
+r = redis.Redis.from_url(url, socket_connect_timeout=5, socket_timeout=5)
+r.ping()
+print("Redis OK")
+PY
+      \
+      rq worker -u $REDIS_URL bidcomp
     envVars:
       - key: REDIS_URL
         fromService:
           name: vip30-redis
           type: redis
-          property: connectionString
+          property: internalConnectionString
       - key: PARSE_CONCURRENCY
         value: "1"
 
