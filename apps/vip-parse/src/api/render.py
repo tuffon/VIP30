@@ -25,6 +25,18 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if OPENAI_API_KEY and not getattr(openai, "api_key", None):
     openai.api_key = OPENAI_API_KEY
 
+# Concurrency and timeout controls (tunable via env)
+PARSE_CONCURRENCY = max(1, int(os.getenv("PARSE_CONCURRENCY", "1")))
+PARSE_IN_PARALLEL = os.getenv("PARSE_IN_PARALLEL", "false").strip().lower() in {"1", "true", "yes"}
+PARSE_TIMEOUT_SEC = max(30, int(os.getenv("PARSE_TIMEOUT_SEC", "180")))
+
+_parse_semaphore = None
+try:
+    import asyncio as _asyncio
+    _parse_semaphore = _asyncio.Semaphore(PARSE_CONCURRENCY)
+except Exception:
+    _parse_semaphore = None
+
 
 DEFAULT_SYSTEM_PROMPT = (
     "You are an estimating analyst trained on Xactimate scopes. "
@@ -450,7 +462,13 @@ async def _parse_estimate(
     await _persist_upload(upload, input_path)
 
     print(f"[bid-comp] Starting parse for {role_label} file '{safe_name}'")
-    payload = await asyncio.to_thread(_run_xactimate_parser, input_path, output_dir, debug)
+    try:
+        payload = await asyncio.wait_for(
+            asyncio.to_thread(_run_xactimate_parser, input_path, output_dir, debug),
+            timeout=PARSE_TIMEOUT_SEC,
+        )
+    except asyncio.TimeoutError as te:  # noqa: F821
+        raise HTTPException(status_code=status.HTTP_504_GATEWAY_TIMEOUT, detail="Parser timeout") from te
     print(f"[bid-comp] Completed parse for {role_label} file '{safe_name}'")
 
     return ParsedEstimate(filename=safe_name, payload=payload)
@@ -477,27 +495,59 @@ async def process_bid_comp_render(
         (workspace / "inputs").mkdir(parents=True, exist_ok=True)
         (workspace / "outputs").mkdir(parents=True, exist_ok=True)
 
-        carrier_task = _parse_estimate(
-            upload=carrier_estimate,
-            role_label="carrier",
-            workspace=workspace,
-            debug=debug_parser,
-        )
-        contractor_task = _parse_estimate(
-            upload=contractor_estimate,
-            role_label="contractor",
-            workspace=workspace,
-            debug=debug_parser,
-        )
-
+        # Concurrency guard across requests
+        if _parse_semaphore is not None:
+            print(f"[bid-comp] Waiting on parse semaphore (limit={PARSE_CONCURRENCY})")
+            await _parse_semaphore.acquire()
+            print("[bid-comp] Acquired parse semaphore")
         try:
-            carrier_parsed, contractor_parsed = await asyncio.gather(carrier_task, contractor_task)
-            print("[bid-comp] Both parses completed successfully")
-        except Exception as parse_err:  # pylint: disable=broad-except
-            print("[bid-comp] Parser failure: ", parse_err)
+            if PARSE_IN_PARALLEL:
+                carrier_task = _parse_estimate(
+                    upload=carrier_estimate,
+                    role_label="carrier",
+                    workspace=workspace,
+                    debug=debug_parser,
+                )
+                contractor_task = _parse_estimate(
+                    upload=contractor_estimate,
+                    role_label="contractor",
+                    workspace=workspace,
+                    debug=debug_parser,
+                )
+                try:
+                    carrier_parsed, contractor_parsed = await asyncio.gather(carrier_task, contractor_task)
+                    print("[bid-comp] Both parses completed successfully (parallel)")
+                finally:
+                    await asyncio.gather(carrier_estimate.close(), contractor_estimate.close())
+            else:
+                # Sequential to reduce CPU/memory pressure
+                try:
+                    carrier_parsed = await _parse_estimate(
+                        upload=carrier_estimate,
+                        role_label="carrier",
+                        workspace=workspace,
+                        debug=debug_parser,
+                    )
+                finally:
+                    await carrier_estimate.close()
+
+                try:
+                    contractor_parsed = await _parse_estimate(
+                        upload=contractor_estimate,
+                        role_label="contractor",
+                        workspace=workspace,
+                        debug=debug_parser,
+                    )
+                finally:
+                    await contractor_estimate.close()
+                print("[bid-comp] Both parses completed successfully (sequential)")
+        except Exception as parse_err:  # noqa: BLE001
+            print("[bid-comp] Parser failure:", repr(parse_err))
             raise HTTPException(status_code=500, detail=f"Parser failure: {parse_err}") from parse_err
         finally:
-            await asyncio.gather(carrier_estimate.close(), contractor_estimate.close())
+            if _parse_semaphore is not None:
+                _parse_semaphore.release()
+                print("[bid-comp] Released parse semaphore")
 
         left_label = (left_label_override or _infer_estimate_label(carrier_parsed)).strip()
         right_label = (right_label_override or _infer_estimate_label(contractor_parsed)).strip()

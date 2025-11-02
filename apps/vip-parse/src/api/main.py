@@ -98,6 +98,8 @@ async def render_bid_comparison(
 ):
     """Render a bid comparison analysis for two uploaded estimates."""
 
+    print("[bid-comp] /render/bid-comp request received")
+
     return await process_bid_comp_render(
         carrier_estimate=carrier_estimate,
         contractor_estimate=contractor_estimate,
