@@ -51,10 +51,6 @@ function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzo
   return (
     <label
       htmlFor={id}
-      onClick={() => {
-        // Ensure click opens file dialog even if label->input association is flaky
-        inputRef.current?.click();
-      }}
       className={`flex h-60 w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition hover:border-blue-500 hover:bg-blue-50 ${borderClass}`}
     >
       <input
