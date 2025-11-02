@@ -490,8 +490,14 @@ async def process_bid_comp_render(
             debug=debug_parser,
         )
 
-        carrier_parsed, contractor_parsed = await asyncio.gather(carrier_task, contractor_task)
-        await asyncio.gather(carrier_estimate.close(), contractor_estimate.close())
+        try:
+            carrier_parsed, contractor_parsed = await asyncio.gather(carrier_task, contractor_task)
+            print("[bid-comp] Both parses completed successfully")
+        except Exception as parse_err:  # pylint: disable=broad-except
+            print("[bid-comp] Parser failure: ", parse_err)
+            raise HTTPException(status_code=500, detail=f"Parser failure: {parse_err}") from parse_err
+        finally:
+            await asyncio.gather(carrier_estimate.close(), contractor_estimate.close())
 
         left_label = (left_label_override or _infer_estimate_label(carrier_parsed)).strip()
         right_label = (right_label_override or _infer_estimate_label(contractor_parsed)).strip()
