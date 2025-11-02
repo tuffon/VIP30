@@ -3,10 +3,11 @@ services:
     name: vip30-web
     plan: starter
     env: python
+    rootDir: apps/vip-parse
     buildCommand: |
-      cd apps/vip-parse && pip install -r requirements.txt
+      pip install -r requirements-web.txt
     startCommand: |
-      cd apps/vip-parse && gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
+      gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
     envVars:
       - key: REDIS_URL
         fromService:
@@ -17,10 +18,12 @@ services:
   - type: worker
     name: vip30-worker
     env: python
+    rootDir: apps/vip-parse
+    autoDeploy: false
     buildCommand: |
-      cd apps/vip-parse && pip install -r requirements.txt
+      pip install -r requirements-worker.txt
     startCommand: |
-      cd apps/vip-parse && rq worker -u $REDIS_URL bidcomp
+      rq worker -u $REDIS_URL bidcomp
     envVars:
       - key: REDIS_URL
         fromService:
