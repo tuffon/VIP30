@@ -449,7 +449,9 @@ async def _parse_estimate(
 
     await _persist_upload(upload, input_path)
 
+    print(f"[bid-comp] Starting parse for {role_label} file '{safe_name}'")
     payload = await asyncio.to_thread(_run_xactimate_parser, input_path, output_dir, debug)
+    print(f"[bid-comp] Completed parse for {role_label} file '{safe_name}'")
 
     return ParsedEstimate(filename=safe_name, payload=payload)
 
@@ -522,13 +524,6 @@ async def process_bid_comp_render(
         }
 
         openai_result: Optional[OpenAIResult] = None
-        if getattr(openai, "api_key", None):
-            openai_result = await _call_openai(
-                model=model,
-                temperature=temperature,
-                max_output_tokens=max_output_tokens,
-                messages=messages,
-            )
 
     return BidCompRenderResponse(
         carrier_estimate=carrier_parsed,

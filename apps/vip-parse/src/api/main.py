@@ -110,3 +110,17 @@ async def render_bid_comparison(
         max_output_tokens=max_output_tokens,
         debug_parser=debug_parser,
     )
+
+
+@app.get("/render/debug/ping")
+async def render_ping():
+    """Simple health probe for render integration tests."""
+    print("[bid-comp] Received ping")
+    return {"status": "ok", "message": "render/bid-comp backend reachable"}
+
+
+@app.post("/render/debug/echo")
+async def render_echo(payload: dict):
+    """Echo endpoint to validate JSON POST requests end-to-end."""
+    print("[bid-comp] Received echo payload", payload)
+    return {"status": "ok", "received": payload}

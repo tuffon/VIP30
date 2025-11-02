@@ -15,6 +15,16 @@ type RequestInfo = {
   };
 };
 
+type JsonPreview = {
+  filename: string;
+  payload: Record<string, unknown>;
+};
+
+type RecapPreview = {
+  filename: string;
+  recap: Record<string, unknown> | null;
+};
+
 type UploadDropzoneProps = {
   title: string;
   description: string;
@@ -81,8 +91,38 @@ export default function BidCompPage() {
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<any>(null);
   const [requestInfo, setRequestInfo] = useState<RequestInfo | null>(null);
+  const [pingStatus, setPingStatus] = useState<string | null>(null);
+  const [echoStatus, setEchoStatus] = useState<string | null>(null);
 
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
+
+  const handlePing = useCallback(async () => {
+    setPingStatus("Testing…");
+    try {
+      const response = await fetch(`${apiBase.replace(/\/$/, "")}/render/debug/ping`);
+      const data = await response.json();
+      setPingStatus(`Status ${response.status}: ${JSON.stringify(data)}`);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Unexpected error";
+      setPingStatus(`Failed: ${message}`);
+    }
+  }, [apiBase]);
+
+  const handleEcho = useCallback(async () => {
+    setEchoStatus("Testing…");
+    try {
+      const response = await fetch(`${apiBase.replace(/\/$/, "")}/render/debug/echo`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: "hello from bid-comp", timestamp: Date.now() }),
+      });
+      const data = await response.json();
+      setEchoStatus(`Status ${response.status}: ${JSON.stringify(data)}`);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Unexpected error";
+      setEchoStatus(`Failed: ${message}`);
+    }
+  }, [apiBase]);
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -186,6 +226,56 @@ export default function BidCompPage() {
   const requestStatus = requestInfo?.response;
   const openAiRequest = result?.openai_request_preview;
   const hasOpenAiResponse = Boolean(result?.openai_result);
+  const jsonPreviews: JsonPreview[] = useMemo(() => {
+    if (!result) return [];
+    const previews: JsonPreview[] = [];
+    if (result.carrier_estimate) {
+      previews.push({
+        filename: result.carrier_estimate.filename,
+        payload: result.carrier_estimate.payload,
+      });
+    }
+    if (result.contractor_estimate) {
+      previews.push({
+        filename: result.contractor_estimate.filename,
+        payload: result.contractor_estimate.payload,
+      });
+    }
+    return previews;
+  }, [result]);
+
+  const recapPreviews: RecapPreview[] = useMemo(() => {
+    if (!result) return [];
+    const extractRecap = (payload: Record<string, unknown>): Record<string, unknown> | null => {
+      const recapsAndSummaries = payload?.recaps_and_summaries as Record<string, unknown> | undefined;
+      const directRecap = payload?.recap_by_category as Record<string, unknown> | undefined;
+      if (recapsAndSummaries && typeof recapsAndSummaries === "object") {
+        const nested = recapsAndSummaries.recap_by_category as Record<string, unknown> | undefined;
+        if (nested && typeof nested === "object") {
+          return nested;
+        }
+      }
+      if (directRecap && typeof directRecap === "object") {
+        return directRecap;
+      }
+      return null;
+    };
+
+    const previews: RecapPreview[] = [];
+    if (result.carrier_estimate?.payload) {
+      previews.push({
+        filename: result.carrier_estimate.filename,
+        recap: extractRecap(result.carrier_estimate.payload),
+      });
+    }
+    if (result.contractor_estimate?.payload) {
+      previews.push({
+        filename: result.contractor_estimate.filename,
+        recap: extractRecap(result.contractor_estimate.payload),
+      });
+    }
+    return previews;
+  }, [result]);
 
   return (
     <div className="space-y-10">
@@ -230,6 +320,25 @@ export default function BidCompPage() {
               {requestStatus.ok ? "Success" : "Failed"}
             </span>
           )}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3 text-xs">
+          <button
+            type="button"
+            onClick={handlePing}
+            className="rounded bg-gray-200 px-3 py-2 font-semibold text-gray-700 transition hover:bg-gray-300"
+          >
+            Test API Ping
+          </button>
+          <button
+            type="button"
+            onClick={handleEcho}
+            className="rounded bg-gray-200 px-3 py-2 font-semibold text-gray-700 transition hover:bg-gray-300"
+          >
+            Test API Echo
+          </button>
+          {pingStatus && <span className="text-gray-600">Ping: {pingStatus}</span>}
+          {echoStatus && <span className="text-gray-600">Echo: {echoStatus}</span>}
         </div>
       </form>
 
@@ -305,6 +414,42 @@ export default function BidCompPage() {
               </li>
             </ul>
           </div>
+
+          {jsonPreviews.length > 0 && (
+            <div className="rounded-lg border border-gray-200 bg-white p-4">
+              <p className="text-sm font-medium text-gray-900">Parsed Estimate JSON</p>
+              <div className="mt-3 space-y-4">
+                {jsonPreviews.map((preview) => (
+                  <details key={preview.filename} className="overflow-hidden rounded border border-gray-200" open>
+                    <summary className="cursor-pointer bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700">
+                      {preview.filename}
+                    </summary>
+                    <pre className="max-h-72 overflow-auto bg-gray-900 p-4 text-xs text-white">
+                      {JSON.stringify(preview.payload, null, 2)}
+                    </pre>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {recapPreviews.length > 0 && (
+            <div className="rounded-lg border border-gray-200 bg-white p-4">
+              <p className="text-sm font-medium text-gray-900">recap_by_category Context</p>
+              <div className="mt-3 space-y-4">
+                {recapPreviews.map((preview) => (
+                  <details key={`${preview.filename}-recap`} className="overflow-hidden rounded border border-gray-200" open>
+                    <summary className="cursor-pointer bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700">
+                      {preview.filename}
+                    </summary>
+                    <pre className="max-h-72 overflow-auto bg-gray-900 p-4 text-xs text-white">
+                      {preview.recap ? JSON.stringify(preview.recap, null, 2) : "{\n  \"recap_by_category\": null\n}"}
+                    </pre>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
 
           {openAiText && (
             <div className="rounded-lg border border-gray-200 bg-white p-4">
