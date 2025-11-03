@@ -8,13 +8,18 @@ services:
     buildCommand: |
       pip install -r requirements-web.txt
     startCommand: |
-      gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 1 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
+      export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 1 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
     envVars:
-      - key: REDIS_URL
+      - key: REDIS_HOST
         fromService:
           name: vip30-redis
           type: redis
-          property: internalConnectionString
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: vip30-redis
+          type: redis
+          property: port
 
   - type: worker
     name: vip30-worker
@@ -25,13 +30,18 @@ services:
     buildCommand: |
       pip install -r requirements-worker.txt
     startCommand: |
-      echo "Boot $(date)" && python -c "import os,sys,redis; url=os.environ.get('REDIS_URL') or sys.exit('REDIS_URL not set'); safe=(url.split('@')[-1] if '@' in url else url); print(f'Preflight Redis: {safe}'); r=redis.Redis.from_url(url, socket_connect_timeout=5, socket_timeout=5); r.ping(); print('Redis OK')" && exec rq worker -u "$REDIS_URL" bidcomp
+      export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && echo "Boot $(date)" && python -c "import os,sys,redis; url=os.environ.get('REDIS_URL') or sys.exit('REDIS_URL not set'); safe=(url.split('@')[-1] if '@' in url else url); print(f'Preflight Redis: {safe}'); r=redis.Redis.from_url(url, socket_connect_timeout=5, socket_timeout=5); r.ping(); print('Redis OK')" && exec rq worker -u "$REDIS_URL" bidcomp
     envVars:
-      - key: REDIS_URL
+      - key: REDIS_HOST
         fromService:
           name: vip30-redis
           type: redis
-          property: internalConnectionString
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: vip30-redis
+          type: redis
+          property: port
       - key: PARSE_CONCURRENCY
         value: "1"
 
