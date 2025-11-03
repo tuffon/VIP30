@@ -18,28 +18,14 @@ services:
 
   - type: worker
     name: vip30-worker
-    plan: starter
+    plan: standard
     env: python
     rootDir: apps/vip-parse
     autoDeploy: false
     buildCommand: |
       pip install -r requirements-worker.txt
     startCommand: |
-      echo "Boot $(date)" && \
-      python - << 'PY'
-import os, sys, redis
-url = os.environ.get('REDIS_URL')
-if not url:
-    print('REDIS_URL not set', file=sys.stderr)
-    sys.exit(1)
-safe = url.split('@')[-1] if '@' in url else url
-print(f"Preflight Redis: {safe}")
-r = redis.Redis.from_url(url, socket_connect_timeout=5, socket_timeout=5)
-r.ping()
-print("Redis OK")
-PY
-      \
-      rq worker -u $REDIS_URL bidcomp
+      echo "Boot $(date)" && python -c "import os,sys,redis; url=os.environ.get('REDIS_URL') or sys.exit('REDIS_URL not set'); safe=(url.split('@')[-1] if '@' in url else url); print(f'Preflight Redis: {safe}'); r=redis.Redis.from_url(url, socket_connect_timeout=5, socket_timeout=5); r.ping(); print('Redis OK')" && exec rq worker -u "$REDIS_URL" bidcomp
     envVars:
       - key: REDIS_URL
         fromService:
