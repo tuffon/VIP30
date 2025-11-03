@@ -10,12 +10,28 @@ node_modules/
 .git/
 .gitignore
 .DS_Store
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+env/
+*.ipynb
+*.whl
+*.parquet
+*.zip
+*.tar
+*.gz
 
 # Big data/docs not needed at runtime on Render
 apps/vip-parse/data/**
 apps/vip-parse/documents/**
 apps/vip-parse/embeddings/**
 apps/vip-parse/debug_*.log
+samples/
+fixtures/
+testdata/
+docs/
+artifacts/
 
 # Tests and local outputs
 apps/vip-parse/tests/**

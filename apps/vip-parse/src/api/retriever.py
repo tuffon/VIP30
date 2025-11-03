@@ -30,7 +30,7 @@ def _get_qdrant_client() -> QdrantClient:
     if _qdrant_client is None:
         try:
             print(f"Initializing Qdrant client with URL: {QDRANT_URL}")
-            _qdrant_client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY, timeout=60)
+            _qdrant_client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY, timeout=5)
             # Test the connection
             _qdrant_client.get_collections()
             print("Qdrant client initialized successfully")

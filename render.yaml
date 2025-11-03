@@ -8,7 +8,7 @@ services:
     buildCommand: |
       pip install -r requirements-web.txt
     startCommand: |
-      gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
+      gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 1 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
     envVars:
       - key: REDIS_URL
         fromService:
