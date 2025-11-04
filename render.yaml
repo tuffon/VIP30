@@ -42,7 +42,11 @@ services:
     buildCommand: |
       pip install -r requirements-worker.txt
     startCommand: |
-      export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && echo "Boot $(date)" && python -c "import os,sys,redis; url=os.environ.get('REDIS_URL') or sys.exit('REDIS_URL not set'); safe=(url.split('@')[-1] if '@' in url else url); print(f'Preflight Redis: {safe}'); r=redis.Redis.from_url(url, socket_connect_timeout=5, socket_timeout=5); r.ping(); print('Redis OK')" && exec rq worker -u "$REDIS_URL" bidcomp
+      export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && \
+      export PYTHONPATH="$PYTHONPATH:$(pwd)" && \
+      echo "Boot $(date)" && \
+      python -c "import os,sys,redis; url=os.environ.get('REDIS_URL') or sys.exit('REDIS_URL not set'); safe=(url.split('@')[-1] if '@' in url else url); print(f'Preflight Redis: {safe}'); r=redis.Redis.from_url(url, socket_connect_timeout=5, socket_timeout=5); r.ping(); print('Redis OK'); print('PYTHONPATH:', sys.path)" && \
+      exec rq worker -u "$REDIS_URL" bidcomp
     envVars:
       - key: REDIS_HOST
         fromService:
