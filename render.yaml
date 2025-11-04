@@ -4,7 +4,7 @@ services:
     plan: starter
     env: python
     rootDir: apps/vip-parse
-    healthCheckPath: /
+    healthCheckPath: /healthz
     buildCommand: |
       pip install -r requirements-web.txt
     startCommand: |

@@ -43,6 +43,11 @@ async def health_check():
     return {"status": "healthy", "message": "Costbook API is running"}
 
 
+@app.get("/healthz")
+async def healthz():
+    return {"status": "ok"}
+
+
 @app.get("/debug")
 async def debug_info():
     """Debug endpoint to check environment and configuration."""
