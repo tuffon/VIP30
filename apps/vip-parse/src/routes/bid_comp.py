@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException, status
 from redis import Redis
 from rq import Queue
 from rq.job import Job
-from src.utils.s3_client import get_s3
+from src.utils.s3_client import get_s3, get_bucket
 
 
 router = APIRouter(prefix="/render/bid-comp", tags=["bid-comp"])
@@ -77,7 +77,7 @@ def get_status(job_id: str) -> Dict[str, Any]:
         if isinstance(result, dict) and result.get("result_keys"):
             try:
                 s3 = get_s3()
-                bucket = os.environ["S3_BUCKET"]
+                bucket = get_bucket()
                 expire = int(os.getenv("PRESIGN_EXPIRE_SEC", "900"))
                 presigned: Dict[str, str] = {}
                 for name, key in (result.get("result_keys") or {}).items():

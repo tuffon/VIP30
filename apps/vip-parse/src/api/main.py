@@ -25,11 +25,14 @@ async def startup_event():
     logger.info("FastAPI application starting up (LOG_LEVEL=%s)", _log_level)
     logger.info("Startup ready")
 
-# Allow all origins by default; adjust in production as needed.
+# CORS configuration
+# Default: wildcard origins allowed, no credentials (so browsers accept '*').
+_cors_origins = [o.strip() for o in os.getenv("CORS_ALLOW_ORIGINS", "*").split(",") if o.strip()]
+_cors_credentials = os.getenv("CORS_ALLOW_CREDENTIALS", "false").lower() in {"1", "true", "yes"}
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=_cors_origins,
+    allow_credentials=_cors_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )

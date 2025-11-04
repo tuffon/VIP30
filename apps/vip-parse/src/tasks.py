@@ -9,7 +9,7 @@ import subprocess
 import sys
 import gc
 import httpx
-from src.utils.s3_client import get_s3
+from src.utils.s3_client import get_s3, get_bucket
 from typing import Any, Dict
 from rq.job import Job
 
@@ -383,7 +383,7 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
     with _SEM:
         logger.info("job start (r2 keys): job_id=%s", job_id)
         s3 = get_s3()
-        bucket = os.environ["S3_BUCKET"]
+        bucket = get_bucket()
 
         # Download to temp
         carrier_path = tempfile.mktemp(suffix=".pdf")

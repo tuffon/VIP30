@@ -20,6 +20,18 @@ services:
           name: vip30-redis
           type: redis
           property: port
+      - key: S3_ENDPOINT
+        value: ""
+      - key: S3_ACCESS_KEY_ID
+        value: ""
+      - key: S3_SECRET_ACCESS_KEY
+        value: ""
+      - key: S3_BUCKET
+        value: ""
+      - key: S3_REGION
+        value: "auto"
+      - key: PRESIGN_EXPIRE_SEC
+        value: "900"
 
   - type: worker
     name: vip30-worker
@@ -44,6 +56,16 @@ services:
           property: port
       - key: PARSE_CONCURRENCY
         value: "1"
+      - key: S3_ENDPOINT
+        value: ""
+      - key: S3_ACCESS_KEY_ID
+        value: ""
+      - key: S3_SECRET_ACCESS_KEY
+        value: ""
+      - key: S3_BUCKET
+        value: ""
+      - key: S3_REGION
+        value: "auto"
 
   - type: redis
     name: vip30-redis
