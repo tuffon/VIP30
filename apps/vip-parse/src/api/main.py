@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .retriever import retrieve_cost_items
 from src.routes.bid_comp import router as bid_comp_router
+from src.routes.s3 import router as r2_router
 
 _log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 logging.basicConfig(
@@ -34,6 +35,7 @@ app.add_middleware(
 )
 
 app.include_router(bid_comp_router)
+app.include_router(r2_router)
 
 @app.get("/")
 async def health_check():

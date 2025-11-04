@@ -8,6 +8,8 @@ from pathlib import Path
 import subprocess
 import sys
 import gc
+import httpx
+from src.utils.s3_client import get_s3
 from typing import Any, Dict
 from rq.job import Job
 
@@ -71,6 +73,9 @@ def _run_parser_recap_only(input_path: str, out_dir: Path) -> Dict[str, Any]:
     logger.info("parser: done in %dms json=%s size=%d bytes", elapsed, json_path, size)
     with json_path.open("r", encoding="utf-8") as f:
         return json.load(f)
+
+
+# removed full-parse helper per product decision; only recap is needed
 
 
 def parse_pdf(role: str, pdf_lz4: bytes) -> Dict[str, Any]:
@@ -238,8 +243,36 @@ def run_bid_comp_bytes(payload: Dict[str, Any]) -> Dict[str, Any]:
                 "contractor_size": os.path.getsize(contractor_path),
                 "categories": int(categories),
             }
+            result: Dict[str, Any] = {"recap_by_category": recap_bundle, "meta": meta}
+
+            # Optional downstream API call with context/template
+            ds_url = os.getenv("DOWNSTREAM_API_URL")
+            if ds_url:
+                template = payload.get("template")
+                body: Dict[str, Any] = {
+                    "context": recap_bundle,
+                }
+                if template is not None:
+                    body["template"] = template
+                headers = {}
+                token = os.getenv("DOWNSTREAM_API_KEY")
+                if token:
+                    headers["Authorization"] = f"Bearer {token}"
+                try:
+                    with httpx.Client(timeout=30) as client:
+                        resp = client.post(ds_url, json=body, headers=headers)
+                        api_obj: Dict[str, Any] = {"status": resp.status_code}
+                        try:
+                            api_obj["json"] = resp.json()
+                        except Exception:
+                            api_obj["text"] = resp.text
+                        result["api"] = api_obj
+                except Exception as e:  # noqa: BLE001
+                    logger.warning("downstream api call failed: %s", e)
+                    result["api"] = {"error": str(e)}
+
             logger.info("job done (bytes): meta=%s", meta)
-            return {"recap_by_category": recap_bundle, "meta": meta}
+            return result
         finally:
             logger.info("job cleanup: removing temp files")
             for p in (carrier_path, contractor_path):
@@ -345,3 +378,76 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
                 pass
 
 
+def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, template: str | None = None) -> Dict[str, Any]:
+    t0 = time.time()
+    with _SEM:
+        logger.info("job start (r2 keys): job_id=%s", job_id)
+        s3 = get_s3()
+        bucket = os.environ["S3_BUCKET"]
+
+        # Download to temp
+        carrier_path = tempfile.mktemp(suffix=".pdf")
+        contractor_path = tempfile.mktemp(suffix=".pdf")
+        s3.download_file(bucket, carrier_key, carrier_path)
+        s3.download_file(bucket, contractor_key, contractor_path)
+
+        try:
+            def _parse(pdf_path: str) -> Dict[str, Any]:
+                proc = subprocess.run(
+                    [sys.executable, "-m", "src.worker_parse_helper", pdf_path],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                )
+                out = proc.stdout.strip() or "{}"
+                return {"recap_by_category": json.loads(out)}
+
+            rec_car = _parse(carrier_path)
+            rec_con = _parse(contractor_path)
+
+            recap_a = _extract_recap(rec_car)
+            recap_b = _extract_recap(rec_con)
+            recap_bundle = {"carrier": recap_a, "contractor": recap_b}
+
+            result: Dict[str, Any] = {
+                "recap_by_category": recap_bundle,
+                "meta": {
+                    "elapsed_ms": int((time.time() - t0) * 1000),
+                },
+            }
+
+            # Optional downstream API call
+            ds_url = os.getenv("DOWNSTREAM_API_URL")
+            if ds_url:
+                body: Dict[str, Any] = {"context": recap_bundle}
+                if template is not None:
+                    body["template"] = template
+                headers = {}
+                token = os.getenv("DOWNSTREAM_API_KEY")
+                if token:
+                    headers["Authorization"] = f"Bearer {token}"
+                try:
+                    with httpx.Client(timeout=60) as client:
+                        resp = client.post(ds_url, json=body, headers=headers)
+                        api_obj: Dict[str, Any] = {"status": resp.status_code}
+                        try:
+                            api_obj["json"] = resp.json()
+                        except Exception:
+                            api_obj["text"] = resp.text
+                        result["api"] = api_obj
+                except Exception as e:  # noqa: BLE001
+                    logger.warning("downstream api call failed: %s", e)
+                    result["api"] = {"error": str(e)}
+
+            logger.info("job done (r2 keys): job_id=%s", job_id)
+            return result
+        finally:
+            for p in (carrier_path, contractor_path):
+                try:
+                    os.remove(p)
+                except OSError:
+                    pass
+
+
+
+# removed full-parse worker per product decision; recap-only flow remains
