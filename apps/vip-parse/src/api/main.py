@@ -17,6 +17,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger("vip-parse.api")
 
+# Quiet Uvicorn access logs (health checks generate lots of noise)
+try:
+    logging.getLogger("uvicorn.access").disabled = True
+except Exception:
+    pass
+
 app = FastAPI(title="Costbook Retrieval API", version="1.0.0")
 
 @app.on_event("startup")

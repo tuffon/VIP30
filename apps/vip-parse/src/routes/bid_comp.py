@@ -7,6 +7,7 @@ from redis import Redis
 from rq import Queue
 from rq.job import Job
 from src.utils.s3_client import get_s3, get_bucket
+from src.tasks import run_bid_comp_keys
 
 
 router = APIRouter(prefix="/render/bid-comp", tags=["bid-comp"])
@@ -38,7 +39,7 @@ def enqueue_bid_comp_keys(payload: Dict[str, Any]) -> Dict[str, Any]:
         raise HTTPException(status_code=400, detail="carrier_key and contractor_key are required")
     job_id = str(uuid.uuid4())
     job = _q.enqueue(
-        "src.tasks.run_bid_comp_keys",
+        run_bid_comp_keys,
         job_id,
         carrier_key,
         contractor_key,
