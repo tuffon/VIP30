@@ -66,16 +66,4 @@ async def search_cost_items(query: str = Query(..., min_length=1, description="S
         # Convert unexpected errors into 500 responses
         raise HTTPException(status_code=500, detail=str(exc)) 
 
-
-@app.get("/render/debug/ping")
-async def render_ping():
-    """Simple health probe for render integration tests."""
-    print("[bid-comp] Received ping")
-    return {"status": "ok", "message": "render/bid-comp backend reachable"}
-
-
-@app.post("/render/debug/echo")
-async def render_echo(payload: dict):
-    """Echo endpoint to validate JSON POST requests end-to-end."""
-    print("[bid-comp] Received echo payload", payload)
-    return {"status": "ok", "received": payload}
+# removed legacy debug endpoints

@@ -98,49 +98,13 @@ export default function BidCompPage() {
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<any>(null);
   const [requestInfo, setRequestInfo] = useState<RequestInfo | null>(null);
-  const [pingStatus, setPingStatus] = useState<string | null>(null);
-  const [echoStatus, setEchoStatus] = useState<string | null>(null);
+  // removed debug ping/echo
   const [jobId, setJobId] = useState<string | null>(null);
   const [jobStatus, setJobStatus] = useState<string | null>(null);
 
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
 
-  const handlePing = useCallback(async () => {
-    setPingStatus("Testing…");
-    try {
-      // Debug: verify clicks and URL
-      // eslint-disable-next-line no-console
-      console.log("[Ping] using apiBase:", apiBase);
-      const response = await fetch(`${apiBase.replace(/\/$/, "")}/render/debug/ping`);
-      const data = await response.json();
-      setPingStatus(`Status ${response.status}: ${JSON.stringify(data)}`);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Unexpected error";
-      // eslint-disable-next-line no-console
-      console.error("[Ping] failed:", err);
-      setPingStatus(`Failed: ${message}`);
-    }
-  }, [apiBase]);
-
-  const handleEcho = useCallback(async () => {
-    setEchoStatus("Testing…");
-    try {
-      // eslint-disable-next-line no-console
-      console.log("[Echo] using apiBase:", apiBase);
-      const response = await fetch(`${apiBase.replace(/\/$/, "")}/render/debug/echo`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: "hello from bid-comp", timestamp: Date.now() }),
-      });
-      const data = await response.json();
-      setEchoStatus(`Status ${response.status}: ${JSON.stringify(data)}`);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Unexpected error";
-      // eslint-disable-next-line no-console
-      console.error("[Echo] failed:", err);
-      setEchoStatus(`Failed: ${message}`);
-    }
-  }, [apiBase]);
+  // removed debug ping/echo handlers
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -157,33 +121,45 @@ export default function BidCompPage() {
       setJobId(null);
       setJobStatus(null);
 
-      const formData = new FormData();
-      formData.append("carrier", carrierFile);
-      formData.append("contractor", contractorFile);
-      formData.append("model", "gpt-4o-mini");
-      formData.append("temperature", "0.2");
-      formData.append("row_label_header", "Category");
+      // 1) Create presigned upload URLs
+      const base = apiBase.replace(/\/$/, "");
+      async function createUploadUrl(filename: string): Promise<{ upload_url: string; key: string }> {
+        const resp = await fetch(`${base}/render/upload-url?filename=${encodeURIComponent(filename)}`, { method: "POST" });
+        if (!resp.ok) throw new Error(`Failed to create upload URL: ${resp.status}`);
+        return resp.json();
+      }
 
-      const endpoint = `${apiBase.replace(/\/$/, "")}/render/bid-comp`;
       setRequestInfo({
-        url: endpoint,
+        url: `${base}/render/bid-comp/keys`,
         method: "POST",
-        fields: [
-          { name: "model", value: "gpt-4o-mini" },
-          { name: "temperature", value: "0.2" },
-          { name: "row_label_header", value: "Category" },
-        ],
+        fields: [],
         files: [
           { field: "carrier", name: carrierFile.name, size: carrierFile.size },
           { field: "contractor", name: contractorFile.name, size: contractorFile.size },
         ],
       });
 
+      const carrierUrl = await createUploadUrl(carrierFile.name);
+      const contractorUrl = await createUploadUrl(contractorFile.name);
+
+      // 2) Upload PDFs directly to R2 using PUT
+      const putHeaders: HeadersInit = { "Content-Type": "application/pdf" };
+      const put1 = fetch(carrierUrl.upload_url, { method: "PUT", body: carrierFile, headers: putHeaders });
+      const put2 = fetch(contractorUrl.upload_url, { method: "PUT", body: contractorFile, headers: putHeaders });
+      const [r1, r2] = await Promise.all([put1, put2]);
+      if (!r1.ok || !r2.ok) throw new Error(`Upload failed: ${r1.status}/${r2.status}`);
+
+      // 3) Enqueue job by keys
+      const endpoint = `${base}/render/bid-comp/keys`;
+      setRequestInfo({
+        url: endpoint,
+        method: "POST",
+        fields: [{ name: "carrier_key", value: carrierUrl.key }, { name: "contractor_key", value: contractorUrl.key }],
+        files: [],
+      });
+
       try {
-        const response = await fetch(endpoint, {
-          method: "POST",
-          body: formData,
-        });
+        const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ carrier_key: carrierUrl.key, contractor_key: contractorUrl.key }) });
 
         const responseSummary = {
           ok: response.ok,
@@ -208,7 +184,7 @@ export default function BidCompPage() {
         }
 
         // eslint-disable-next-line no-console
-        console.log("[POST] /render/bid-comp status:", response.status);
+        console.log("[POST] /render/bid-comp/keys status:", response.status);
         const data = await response.json();
         // eslint-disable-next-line no-console
         console.log("[POST] response json:", data);
@@ -231,7 +207,7 @@ export default function BidCompPage() {
         setJobStatus(data?.status || "queued");
 
         // Poll job status for up to ~10 minutes
-        const statusUrl = `${apiBase.replace(/\/$/, "")}/render/bid-comp/${jid}`;
+        const statusUrl = `${base}/render/bid-comp/${jid}`;
         // eslint-disable-next-line no-console
         console.log("[Poll] starting:", statusUrl);
         for (let i = 0; i < 300; i++) {
@@ -388,24 +364,7 @@ export default function BidCompPage() {
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 text-xs">
-          <button
-            type="button"
-            onClick={handlePing}
-            className="rounded bg-gray-200 px-3 py-2 font-semibold text-gray-700 transition hover:bg-gray-300"
-          >
-            Test API Ping
-          </button>
-          <button
-            type="button"
-            onClick={handleEcho}
-            className="rounded bg-gray-200 px-3 py-2 font-semibold text-gray-700 transition hover:bg-gray-300"
-          >
-            Test API Echo
-          </button>
-          {pingStatus && <span className="text-gray-600">Ping: {pingStatus}</span>}
-          {echoStatus && <span className="text-gray-600">Echo: {echoStatus}</span>}
-        </div>
+        <div className="flex flex-wrap items-center gap-3 text-xs" />
       </form>
 
       {error && (
