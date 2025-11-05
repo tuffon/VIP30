@@ -6,6 +6,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from .normalize import normalize_group, normalize_label, normalize_money, normalize_coverage_label
 from .matchers import HeuristicMatcher
 from .export_xlsx import export_xlsx
+from ..llm.adapter import LLMAdapterBase  # type: ignore
 
 
 class LLMAdapter:
@@ -19,7 +20,7 @@ class BidComp:
     fuzzy_threshold: float = 0.90
     delta_abs_alert: float = 10000.0
     delta_pct_alert: float = 20.0
-    llm_adapter: Optional[LLMAdapter] = None
+    llm_adapter: Optional[LLMAdapterBase] = None
 
     def __post_init__(self) -> None:
         # lightweight validation without external deps
@@ -43,7 +44,6 @@ class BidComp:
 
         rows: List[Dict[str, Any]] = []
         structure_text = self._structure_summary(c_groups, k_groups)
-        coverage_notes: Tuple[str, str] | None = None  # future use
 
         # Build rows per matched group or fallback to item-level when unmatched
         for left_norm, mr in match_map.items():
@@ -64,6 +64,35 @@ class BidComp:
         # Reconciliation checks
         rows.extend(self._reconciliation_rows(carrier, side="Carrier"))
         rows.extend(self._reconciliation_rows(contractor, side="Contractor"))
+
+        # Optional LLM notes
+        if self.llm_adapter is not None and self.matcher_mode in {"llm", "hybrid"}:
+            try:
+                # Build compact rows context: top 6 by abs delta
+                def delta_abs_value(r: Dict[str, Any]) -> float:
+                    v = r.get("Δ ($)")
+                    return abs(float(v)) if isinstance(v, (int, float)) else 0.0
+                top = sorted([r for r in rows if r.get("Δ ($)") is not None], key=delta_abs_value, reverse=True)[:6]
+                context = {"rows_json": __import__("json").dumps(top, ensure_ascii=False)}
+                notes = self.llm_adapter.generate("explain_bid_comp", context).strip()
+                if notes:
+                    rows.insert(0, {
+                        "TYPE": "SUBTOTAL",
+                        "CANONICAL GROUP": "TOTAL",
+                        "NAME": "LLM Notes",
+                        "CARRIER TOTAL ($)": None,
+                        "CONTRACTOR TOTAL ($)": None,
+                        "Δ ($)": None,
+                        "Δ (% OF CARRIER)": None,
+                        "SOURCE GROUPS": None,
+                        "COVERAGE NOTE": None,
+                        "MATCHING NOTE": "LLM",
+                        "FLAGS": None,
+                        "COMMENTS": notes,
+                    })
+            except Exception:
+                # fail-closed: no LLM output
+                pass
 
         # Totals for summary rows
         carrier_total = self._sum_total(carrier)

@@ -60,6 +60,10 @@ services:
           property: port
       - key: PARSE_CONCURRENCY
         value: "1"
+      - key: PROMPT_DIR
+        value: "src/prompts"
+      - key: OPENAI_MODEL
+        value: "gpt-4o-mini"
       - key: S3_ENDPOINT
         value: ""
       - key: S3_ACCESS_KEY_ID

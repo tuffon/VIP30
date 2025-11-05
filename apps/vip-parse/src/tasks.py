@@ -15,6 +15,7 @@ from rq.job import Job
 
 from redis import Redis
 from src.bid_comp import BidComp
+from src.llm import OpenAIChatAdapter
 
 # Configure worker logging early so RQ shows our logs
 _worker_log_level = os.getenv("LOG_LEVEL", "INFO").upper()
@@ -410,9 +411,15 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
             recap_b = _extract_recap(rec_con)
             recap_bundle = {"carrier": recap_a, "contractor": recap_b}
 
-            # Generate XLSX using deterministic BidComp and upload to R2
+            # Generate XLSX using deterministic BidComp; include LLM notes if OPENAI_API_KEY present
             try:
-                xlsx_bytes = BidComp().run(recap_bundle, job_id)
+                llm = None
+                if os.getenv("OPENAI_API_KEY"):
+                    try:
+                        llm = OpenAIChatAdapter(model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"))
+                    except Exception:
+                        llm = None
+                xlsx_bytes = BidComp(matcher_mode="hybrid", llm_adapter=llm).run(recap_bundle, job_id)
                 xlsx_tmp = tempfile.mktemp(suffix=".xlsx")
                 with open(xlsx_tmp, "wb") as xf:
                     xf.write(xlsx_bytes)
