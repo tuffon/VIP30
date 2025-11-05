@@ -14,6 +14,7 @@ from typing import Any, Dict
 from rq.job import Job
 
 from redis import Redis
+from src.bid_comp import BidComp
 
 # Configure worker logging early so RQ shows our logs
 _worker_log_level = os.getenv("LOG_LEVEL", "INFO").upper()
@@ -409,11 +410,26 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
             recap_b = _extract_recap(rec_con)
             recap_bundle = {"carrier": recap_a, "contractor": recap_b}
 
+            # Generate XLSX using deterministic BidComp and upload to R2
+            try:
+                xlsx_bytes = BidComp().run(recap_bundle, job_id)
+                xlsx_tmp = tempfile.mktemp(suffix=".xlsx")
+                with open(xlsx_tmp, "wb") as xf:
+                    xf.write(xlsx_bytes)
+                xlsx_key = f"results/{job_id}/bid-comp.xlsx"
+                s3.upload_file(xlsx_tmp, bucket, xlsx_key)
+            finally:
+                try:
+                    os.remove(xlsx_tmp)
+                except Exception:
+                    pass
+
             result: Dict[str, Any] = {
                 "recap_by_category": recap_bundle,
                 "meta": {
                     "elapsed_ms": int((time.time() - t0) * 1000),
                 },
+                "result_keys": {"xlsx": xlsx_key},
             }
 
             # Optional downstream API call
