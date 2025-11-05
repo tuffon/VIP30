@@ -11,4 +11,9 @@ boto3==1.35.24
 rq==1.15.1
 redis==5.0.1
 lz4==4.3.3
+Pillow==10.4.0
+pandas==2.2.3
+openpyxl==3.1.5
+rapidfuzz==3.9.7
+pydantic==2.7.4
 
