@@ -3,8 +3,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
 
-from pydantic import BaseModel, Field
-
 from .normalize import normalize_group, normalize_label, normalize_money, normalize_coverage_label
 from .matchers import HeuristicMatcher
 from .export_xlsx import export_xlsx
@@ -13,13 +11,6 @@ from .export_xlsx import export_xlsx
 class LLMAdapter:
     def map_labels(self, labels: List[str]) -> Dict[str, str]:  # pragma: no cover
         raise NotImplementedError
-
-
-class BidCompConfig(BaseModel):
-    matcher_mode: str = Field(default="hybrid")
-    fuzzy_threshold: float = Field(default=0.90)
-    delta_abs_alert: float = Field(default=10000.0)
-    delta_pct_alert: float = Field(default=20.0)
 
 
 @dataclass
@@ -31,13 +22,12 @@ class BidComp:
     llm_adapter: Optional[LLMAdapter] = None
 
     def __post_init__(self) -> None:
-        # validate
-        BidCompConfig(
-            matcher_mode=self.matcher_mode,
-            fuzzy_threshold=self.fuzzy_threshold,
-            delta_abs_alert=self.delta_abs_alert,
-            delta_pct_alert=self.delta_pct_alert,
-        )
+        # lightweight validation without external deps
+        if self.matcher_mode not in {"heuristic", "llm", "hybrid"}:
+            raise ValueError("matcher_mode must be one of {'heuristic','llm','hybrid'}")
+        self.fuzzy_threshold = float(self.fuzzy_threshold)
+        self.delta_abs_alert = float(self.delta_abs_alert)
+        self.delta_pct_alert = float(self.delta_pct_alert)
 
     def run(self, recap_by_category: dict, job_id: str) -> bytes:
         carrier = recap_by_category.get("carrier") or {}
