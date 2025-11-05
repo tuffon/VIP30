@@ -186,6 +186,22 @@ class BidComp:
         r = ",".join(sorted((right_group or {}).get("source", []))) or ""
         return f"carrier={l} | contractor={r}"
 
+    def _structure_summary(self, c_groups: Dict[str, Any], k_groups: Dict[str, Any]) -> str:
+        def summarize(groups: Dict[str, Any]) -> str:
+            has_split = any(g in groups for g in ("O&P ITEMS", "NON-O&P ITEMS"))
+            has_items = "ITEMS" in groups
+            if has_split and not has_items:
+                return "split O&P/Non-O&P"
+            if has_items and not has_split:
+                return "only Items"
+            if has_split and has_items:
+                return "Items plus O&P split"
+            return "unknown"
+
+        c_txt = summarize(c_groups)
+        k_txt = summarize(k_groups)
+        return f"Carrier {c_txt}; Contractor {k_txt}"
+
     def _subtotal_rows(self, carrier: dict, contractor: dict) -> List[Dict[str, Any]]:
         rows: List[Dict[str, Any]] = []
         # Recognizable labels are groups like OVERHEAD, PROFIT, TAX, PERMITS/FEES
