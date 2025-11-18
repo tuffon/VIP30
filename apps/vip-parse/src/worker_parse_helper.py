@@ -19,7 +19,7 @@ def _extract_recap(payload: dict) -> dict:
 
 def main(pdf_path: str) -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-8s %(message)s")
-    os.environ.setdefault("FAST_RECAP_ONLY", "1")
+    os.environ.setdefault("FAST_RECAP_ONLY", "0")
 
     # Lazy-import heavy parser here so the parent process doesn't retain it
     from parse.xactimate import XactimateRoughDraftParser
@@ -31,23 +31,32 @@ def main(pdf_path: str) -> None:
 
         base = out_dir / Path(pdf_path).stem
         recap_file = Path(f"{base}.recap.json")
-        if recap_file.exists():
-            with recap_file.open("r", encoding="utf-8") as f:
-                recap = json.load(f)
-            # recap is {"recap_by_category": {...}} per writer
-            if isinstance(recap, dict) and "recap_by_category" in recap:
-                print(json.dumps(recap["recap_by_category"]))
-                return
-
         json_file = Path(f"{base}.json")
+
+        sections: list = []
+        recap: dict = {}
+
         if json_file.exists():
             with json_file.open("r", encoding="utf-8") as f:
                 payload = json.load(f)
-            print(json.dumps(_extract_recap(payload)))
-            return
+            sections_raw = payload.get("sections")
+            if isinstance(sections_raw, list):
+                sections = sections_raw
+            recap = _extract_recap(payload)
 
-        # Nothing produced; emit empty
-        print(json.dumps({}))
+        if not recap and recap_file.exists():
+            with recap_file.open("r", encoding="utf-8") as f:
+                recap_payload = json.load(f)
+            if isinstance(recap_payload, dict) and "recap_by_category" in recap_payload:
+                maybe_recap = recap_payload.get("recap_by_category")
+                if isinstance(maybe_recap, dict):
+                    recap = maybe_recap
+
+        output = {
+            "recap_by_category": recap or {},
+            "sections": sections,
+        }
+        print(json.dumps(output))
     finally:
         try:
             for root, _dirs, files in os.walk(out_dir, topdown=False):

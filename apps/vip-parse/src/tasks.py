@@ -216,10 +216,10 @@ def run_bid_comp_bytes(payload: Dict[str, Any]) -> Dict[str, Any]:
                     text=True,
                 )
                 out = proc.stdout.strip() or "{}"
-                return {"recap_by_category": json.loads(out)}
+                return json.loads(out)
 
             logger.info("job parse (bytes): carrier=%s", carrier_path)
-            carrier_recap_payload = _parse_via_subprocess(carrier_path)
+            carrier_payload = _parse_via_subprocess(carrier_path)
             try:
                 del carrier_bytes
             except Exception:
@@ -227,17 +227,18 @@ def run_bid_comp_bytes(payload: Dict[str, Any]) -> Dict[str, Any]:
             gc.collect()
 
             logger.info("job parse (bytes): contractor=%s", contractor_path)
-            contractor_recap_payload = _parse_via_subprocess(contractor_path)
+            contractor_payload = _parse_via_subprocess(contractor_path)
             try:
                 del contractor_bytes
             except Exception:
                 pass
             gc.collect()
 
-            recap_a = _extract_recap(carrier_recap_payload)
-            recap_b = _extract_recap(contractor_recap_payload)
+            recap_a = _extract_recap(carrier_payload)
+            recap_b = _extract_recap(contractor_payload)
 
             recap_bundle = {"carrier": recap_a, "contractor": recap_b}
+            bid_context = {"carrier": carrier_payload, "contractor": contractor_payload}
             categories = _count_categories(recap_a) + _count_categories(recap_b)
             meta = {
                 "elapsed_ms": int((time.time() - t0) * 1000),
@@ -245,7 +246,11 @@ def run_bid_comp_bytes(payload: Dict[str, Any]) -> Dict[str, Any]:
                 "contractor_size": os.path.getsize(contractor_path),
                 "categories": int(categories),
             }
-            result: Dict[str, Any] = {"recap_by_category": recap_bundle, "meta": meta}
+            result: Dict[str, Any] = {
+                "recap_by_category": recap_bundle,
+                "bid_context": bid_context,
+                "meta": meta,
+            }
 
             # Optional downstream API call with context/template
             ds_url = os.getenv("DOWNSTREAM_API_URL")
@@ -320,10 +325,10 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
                     text=True,
                 )
                 out = proc.stdout.strip() or "{}"
-                return {"recap_by_category": json.loads(out)}
+                return json.loads(out)
 
             logger.info("job parse: job_id=%s carrier_path=%s (subprocess)", job_id, carrier_path)
-            carrier_recap_payload = _parse_via_subprocess(carrier_path)
+            carrier_payload = _parse_via_subprocess(carrier_path)
             # free carrier temp bytes from memory aggressively
             try:
                 del carrier_bytes
@@ -332,15 +337,15 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
             gc.collect()
 
             logger.info("job parse: job_id=%s contractor_path=%s (subprocess)", job_id, contractor_path)
-            contractor_recap_payload = _parse_via_subprocess(contractor_path)
+            contractor_payload = _parse_via_subprocess(contractor_path)
             try:
                 del contractor_bytes
             except Exception:
                 pass
             gc.collect()
 
-            recap_a = _extract_recap(carrier_recap_payload)
-            recap_b = _extract_recap(contractor_recap_payload)
+            recap_a = _extract_recap(carrier_payload)
+            recap_b = _extract_recap(contractor_payload)
             logger.info(
                 "job recap extracted: job_id=%s carrier_keys=%s contractor_keys=%s",
                 job_id,
@@ -350,6 +355,7 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
 
             # return only what the client needs
             recap_bundle = {"carrier": recap_a, "contractor": recap_b}
+            bid_context = {"carrier": carrier_payload, "contractor": contractor_payload}
 
             categories = _count_categories(recap_a) + _count_categories(recap_b)
             meta = {
@@ -359,7 +365,7 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
                 "categories": int(categories),
             }
             logger.info("job done: job_id=%s meta=%s", job_id, meta)
-            return {"recap_by_category": recap_bundle, "meta": meta}
+            return {"recap_by_category": recap_bundle, "bid_context": bid_context, "meta": meta}
         finally:
             logger.info("job cleanup: removing temp files and workspace")
             for p in (carrier_path, contractor_path):
@@ -402,14 +408,15 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                     text=True,
                 )
                 out = proc.stdout.strip() or "{}"
-                return {"recap_by_category": json.loads(out)}
+                return json.loads(out)
 
-            rec_car = _parse(carrier_path)
-            rec_con = _parse(contractor_path)
+            carrier_payload = _parse(carrier_path)
+            contractor_payload = _parse(contractor_path)
 
-            recap_a = _extract_recap(rec_car)
-            recap_b = _extract_recap(rec_con)
+            recap_a = _extract_recap(carrier_payload)
+            recap_b = _extract_recap(contractor_payload)
             recap_bundle = {"carrier": recap_a, "contractor": recap_b}
+            bid_context = {"carrier": carrier_payload, "contractor": contractor_payload}
 
             # Generate XLSX using deterministic BidComp; include LLM notes if OPENAI_API_KEY present
             try:
@@ -419,7 +426,7 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                         llm = OpenAIChatAdapter(model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"))
                     except Exception:
                         llm = None
-                xlsx_bytes = BidComp(matcher_mode="hybrid", llm_adapter=llm).run(recap_bundle, job_id)
+                xlsx_bytes = BidComp(matcher_mode="hybrid", llm_adapter=llm).run(bid_context, job_id)
                 xlsx_tmp = tempfile.mktemp(suffix=".xlsx")
                 with open(xlsx_tmp, "wb") as xf:
                     xf.write(xlsx_bytes)

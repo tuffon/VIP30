@@ -21,6 +21,7 @@ COLUMNS = [
     "MATCHING NOTE",
     "FLAGS",
     "COMMENTS",
+    "NARRATIVE",
 ]
 
 
@@ -91,8 +92,8 @@ def export_xlsx(
             CellIsRule(operator="lessThanOrEqual", formula=[f"-{abs(delta_pct_alert) / 100.0}"], fill=red_fill),
         )
 
-        # Wrap text for notes columns (8–12)
-        for col in range(8, 13):
+        # Wrap text for notes columns (8–13)
+        for col in range(8, 14):
             for cell in ws.iter_cols(min_col=col, max_col=col, min_row=1, max_row=ws.max_row):
                 for c in cell:
                     c.alignment = Alignment(wrap_text=True, vertical="top")
