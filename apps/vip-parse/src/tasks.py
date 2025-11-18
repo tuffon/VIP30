@@ -31,6 +31,54 @@ logger = logging.getLogger("vip-parse.worker")
 _SEM = threading.Semaphore(int(os.getenv("PARSE_CONCURRENCY", "1")))
 
 
+def _split_pdf_to_chunks(src_path: str, pages_per_chunk: int = 20) -> list[str]:
+    from pypdf import PdfReader, PdfWriter  # local import to avoid worker startup failures if missing
+    reader = PdfReader(src_path)
+    total = len(reader.pages)
+    tmp_paths: list[str] = []
+    for start in range(0, total, pages_per_chunk):
+        end = min(start + pages_per_chunk, total)
+        writer = PdfWriter()
+        for i in range(start, end):
+            writer.add_page(reader.pages[i])
+        dst = tempfile.mktemp(suffix=f".{start+1}-{end}.pdf")
+        with open(dst, "wb") as f:
+            writer.write(f)
+        tmp_paths.append(dst)
+    return tmp_paths
+
+
+def _merge_recap_dicts(recaps: list[dict]) -> dict:
+    merged: dict = {}
+    for recap in recaps:
+        if not isinstance(recap, dict):
+            continue
+        for group, items in recap.items():
+            if not isinstance(items, list):
+                continue
+            bucket = merged.setdefault(group, [])
+            # map by name to sum totals
+            name_to_idx: dict[str, int] = {it.get("name"): idx for idx, it in enumerate(bucket) if isinstance(it, dict) and it.get("name")}
+            for it in items:
+                if not isinstance(it, dict):
+                    continue
+                name = it.get("name")
+                total = it.get("total")
+                if name in name_to_idx:
+                    idx = name_to_idx[name]
+                    try:
+                        prev = float(bucket[idx].get("total") or 0.0)
+                        curr = float(total or 0.0)
+                        bucket[idx]["total"] = round(prev + curr, 2)
+                    except Exception:
+                        # keep previous if cannot sum
+                        pass
+                else:
+                    bucket.append({"name": name, "total": total})
+                    name_to_idx[name] = len(bucket) - 1
+    return merged
+
+
 def _write_temp_pdf(data: bytes) -> str:
     fd, path = tempfile.mkstemp(suffix=".pdf")
     try:
@@ -220,7 +268,7 @@ def run_bid_comp_bytes(payload: Dict[str, Any]) -> Dict[str, Any]:
                     logger.warning("parse helper returned empty stdout for %s; stderr=%s", pdf_path, (proc.stderr or "").strip()[:300])
                     return {"recap_by_category": {}}
                 try:
-                    return json.loads(out)
+                    return {"recap_by_category": json.loads(out)}
                 except Exception as e:  # noqa: BLE001
                     logger.warning("parse helper invalid json for %s: %s; stderr=%s", pdf_path, e, (proc.stderr or "").strip()[:300])
                     return {"recap_by_category": {}}
@@ -336,7 +384,7 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
                     logger.warning("parse helper returned empty stdout for %s; stderr=%s", pdf_path, (proc.stderr or "").strip()[:300])
                     return {"recap_by_category": {}}
                 try:
-                    return json.loads(out)
+                    return {"recap_by_category": json.loads(out)}
                 except Exception as e:  # noqa: BLE001
                     logger.warning("parse helper invalid json for %s: %s; stderr=%s", pdf_path, e, (proc.stderr or "").strip()[:300])
                     return {"recap_by_category": {}}
@@ -425,12 +473,74 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                 err = (proc.stderr or "").strip()
                 if not out:
                     logger.error("parse helper empty stdout for %s; stderr=%s", pdf_path, err[:500])
-                    raise RuntimeError(f"parser produced no output (stderr: {err[:400]})")
+                    # Fallback: page-chunked parse and merge (fail if any chunk fails)
+                    chunks = _split_pdf_to_chunks(pdf_path, pages_per_chunk=int(os.getenv("PAGES_PER_CHUNK", "20")))
+                    try:
+                        recaps: list[dict] = []
+                        success = 0
+                        for cp in chunks:
+                            sub = subprocess.run(
+                                [sys.executable, "-m", "src.worker_parse_helper", cp],
+                                check=True,
+                                capture_output=True,
+                                text=True,
+                            )
+                            sub_out = (sub.stdout or "").strip()
+                            if not sub_out:
+                                logger.error("chunk parse empty stdout: %s; stderr=%s", cp, (sub.stderr or "").strip()[:300])
+                            else:
+                                try:
+                                    sub_recap = json.loads(sub_out)
+                                    recaps.append(sub_recap if isinstance(sub_recap, dict) else {})
+                                    success += 1
+                                except Exception as se:  # noqa: BLE001
+                                    logger.error("chunk parse invalid json: %s err=%s; stderr=%s", cp, se, (sub.stderr or "").strip()[:300])
+                        if success != len(chunks):
+                            raise RuntimeError(f"chunked parse incomplete: {success}/{len(chunks)} chunks succeeded")
+                        merged = _merge_recap_dicts(recaps)
+                        return {"recap_by_category": merged}
+                    finally:
+                        for cp in chunks:
+                            try:
+                                os.remove(cp)
+                            except OSError:
+                                pass
                 try:
-                    return json.loads(out)
+                    return {"recap_by_category": json.loads(out)}
                 except Exception as e:  # noqa: BLE001
                     logger.error("parse helper invalid json for %s: %s; stderr=%s", pdf_path, e, err[:500])
-                    raise RuntimeError(f"parser returned invalid json ({e}); stderr: {err[:400]}")
+                    # Fallback: try chunked parse as above (fail if any chunk fails)
+                    chunks = _split_pdf_to_chunks(pdf_path, pages_per_chunk=int(os.getenv("PAGES_PER_CHUNK", "20")))
+                    try:
+                        recaps: list[dict] = []
+                        success = 0
+                        for cp in chunks:
+                            sub = subprocess.run(
+                                [sys.executable, "-m", "src.worker_parse_helper", cp],
+                                check=True,
+                                capture_output=True,
+                                text=True,
+                            )
+                            sub_out = (sub.stdout or "").strip()
+                            if not sub_out:
+                                logger.error("chunk parse empty stdout: %s; stderr=%s", cp, (sub.stderr or "").strip()[:300])
+                            else:
+                                try:
+                                    sub_recap = json.loads(sub_out)
+                                    recaps.append(sub_recap if isinstance(sub_recap, dict) else {})
+                                    success += 1
+                                except Exception as se:  # noqa: BLE001
+                                    logger.error("chunk parse invalid json: %s err=%s; stderr=%s", cp, se, (sub.stderr or "").strip()[:300])
+                        if success != len(chunks):
+                            raise RuntimeError(f"chunked parse incomplete: {success}/{len(chunks)} chunks succeeded")
+                        merged = _merge_recap_dicts(recaps)
+                        return {"recap_by_category": merged}
+                    finally:
+                        for cp in chunks:
+                            try:
+                                os.remove(cp)
+                            except OSError:
+                                pass
 
             carrier_payload = _parse(carrier_path)
             contractor_payload = _parse(contractor_path)
