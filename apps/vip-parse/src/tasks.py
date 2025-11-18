@@ -215,8 +215,15 @@ def run_bid_comp_bytes(payload: Dict[str, Any]) -> Dict[str, Any]:
                     capture_output=True,
                     text=True,
                 )
-                out = proc.stdout.strip() or "{}"
-                return json.loads(out)
+                out = (proc.stdout or "").strip()
+                if not out:
+                    logger.warning("parse helper returned empty stdout for %s; stderr=%s", pdf_path, (proc.stderr or "").strip()[:300])
+                    return {"recap_by_category": {}}
+                try:
+                    return json.loads(out)
+                except Exception as e:  # noqa: BLE001
+                    logger.warning("parse helper invalid json for %s: %s; stderr=%s", pdf_path, e, (proc.stderr or "").strip()[:300])
+                    return {"recap_by_category": {}}
 
             logger.info("job parse (bytes): carrier=%s", carrier_path)
             carrier_payload = _parse_via_subprocess(carrier_path)
@@ -324,8 +331,15 @@ def run_bid_comp(job_id: str, carrier_lz4: bytes, contractor_lz4: bytes) -> Dict
                     capture_output=True,
                     text=True,
                 )
-                out = proc.stdout.strip() or "{}"
-                return json.loads(out)
+                out = (proc.stdout or "").strip()
+                if not out:
+                    logger.warning("parse helper returned empty stdout for %s; stderr=%s", pdf_path, (proc.stderr or "").strip()[:300])
+                    return {"recap_by_category": {}}
+                try:
+                    return json.loads(out)
+                except Exception as e:  # noqa: BLE001
+                    logger.warning("parse helper invalid json for %s: %s; stderr=%s", pdf_path, e, (proc.stderr or "").strip()[:300])
+                    return {"recap_by_category": {}}
 
             logger.info("job parse: job_id=%s carrier_path=%s (subprocess)", job_id, carrier_path)
             carrier_payload = _parse_via_subprocess(carrier_path)
@@ -407,8 +421,16 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                     capture_output=True,
                     text=True,
                 )
-                out = proc.stdout.strip() or "{}"
-                return json.loads(out)
+                out = (proc.stdout or "").strip()
+                err = (proc.stderr or "").strip()
+                if not out:
+                    logger.error("parse helper empty stdout for %s; stderr=%s", pdf_path, err[:500])
+                    raise RuntimeError(f"parser produced no output (stderr: {err[:400]})")
+                try:
+                    return json.loads(out)
+                except Exception as e:  # noqa: BLE001
+                    logger.error("parse helper invalid json for %s: %s; stderr=%s", pdf_path, e, err[:500])
+                    raise RuntimeError(f"parser returned invalid json ({e}); stderr: {err[:400]}")
 
             carrier_payload = _parse(carrier_path)
             contractor_payload = _parse(contractor_path)

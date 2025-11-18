@@ -5,7 +5,7 @@ services:
     build:
       context: .
       target: dev
-    command: sh -c "./docker/dev-entrypoint.sh"
+    command: bash -lc "sed -i 's/\\r$//' docker/dev-entrypoint.sh || true; bash docker/dev-entrypoint.sh"
     ports:
       - "3000:3000"
     env_file:

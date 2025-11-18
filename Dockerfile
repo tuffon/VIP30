@@ -21,5 +21,8 @@ FROM base AS dev
 
 WORKDIR /app
 
+COPY docker/dev-entrypoint.sh docker/dev-entrypoint.sh
+RUN chmod +x docker/dev-entrypoint.sh
+
 CMD ["pnpm", "--filter", "vipclaims-saas", "dev", "--hostname", "0.0.0.0", "--port", "3000"]
 
