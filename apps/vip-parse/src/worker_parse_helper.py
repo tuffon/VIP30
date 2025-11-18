@@ -24,10 +24,20 @@ def main(pdf_path: str) -> None:
     # Lazy-import heavy parser here so the parent process doesn't retain it
     from parse.xactimate import XactimateRoughDraftParser
 
-    out_dir = Path(tempfile.mkdtemp(prefix="parse-helper-"))
+    out_dir_env = os.getenv("HELPER_OUTDIR")
+    if out_dir_env:
+        out_dir = Path(out_dir_env)
+        out_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        out_dir = Path(tempfile.mkdtemp(prefix="parse-helper-"))
     try:
         parser = XactimateRoughDraftParser(pdf_path, str(out_dir), debug=False)
-        parser.run()
+        try:
+            parser.run()
+        except Exception:  # noqa: BLE001
+            # Log full traceback to stderr so callers can see exact failure
+            logging.exception("worker_parse_helper: parser.run() failed for %s", pdf_path)
+            raise
 
         base = out_dir / Path(pdf_path).stem
         recap_file = Path(f"{base}.recap.json")
@@ -58,16 +68,17 @@ def main(pdf_path: str) -> None:
         }
         print(json.dumps(output))
     finally:
-        try:
-            for root, _dirs, files in os.walk(out_dir, topdown=False):
-                for name in files:
-                    try:
-                        os.remove(Path(root) / name)
-                    except OSError:
-                        pass
-            os.removedirs(out_dir)
-        except OSError:
-            pass
+        if not out_dir_env:
+            try:
+                for root, _dirs, files in os.walk(out_dir, topdown=False):
+                    for name in files:
+                        try:
+                            os.remove(Path(root) / name)
+                        except OSError:
+                            pass
+                os.removedirs(out_dir)
+            except OSError:
+                pass
 
 
 if __name__ == "__main__":

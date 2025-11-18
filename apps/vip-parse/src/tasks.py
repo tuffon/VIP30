@@ -468,22 +468,25 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                     check=True,
                     capture_output=True,
                     text=True,
+                    env={**os.environ, "HELPER_OUTDIR": tempfile.mkdtemp(prefix="helper-out-")},
                 )
                 out = (proc.stdout or "").strip()
                 err = (proc.stderr or "").strip()
                 if not out:
-                    logger.error("parse helper empty stdout for %s; stderr=%s", pdf_path, err[:500])
+                    logger.error("parse helper empty stdout for %s; stderr=%s", pdf_path, err)
                     # Fallback: page-chunked parse and merge (fail if any chunk fails)
                     chunks = _split_pdf_to_chunks(pdf_path, pages_per_chunk=int(os.getenv("PAGES_PER_CHUNK", "20")))
                     try:
                         recaps: list[dict] = []
                         success = 0
                         for cp in chunks:
+                            helper_out = tempfile.mkdtemp(prefix="helper-out-")
                             sub = subprocess.run(
                                 [sys.executable, "-m", "src.worker_parse_helper", cp],
                                 check=True,
                                 capture_output=True,
                                 text=True,
+                                env={**os.environ, "HELPER_OUTDIR": helper_out},
                             )
                             sub_out = (sub.stdout or "").strip()
                             if not sub_out:
@@ -495,6 +498,27 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                                     success += 1
                                 except Exception as se:  # noqa: BLE001
                                     logger.error("chunk parse invalid json: %s err=%s; stderr=%s", cp, se, (sub.stderr or "").strip()[:300])
+                            # also try to read recap file from helper_out if stdout was empty
+                            if not sub_out:
+                                try:
+                                    base = Path(helper_out) / Path(cp).stem
+                                    recap_file = Path(f"{base}.recap.json")
+                                    json_file = Path(f"{base}.json")
+                                    if recap_file.exists():
+                                        with open(recap_file, "r", encoding="utf-8") as f:
+                                            r = json.load(f)
+                                        if isinstance(r, dict) and "recap_by_category" in r:
+                                            recaps.append(r.get("recap_by_category") or {})
+                                            success += 1
+                                    elif json_file.exists():
+                                        with open(json_file, "r", encoding="utf-8") as f:
+                                            p = json.load(f)
+                                        rb = (p.get("recap_by_category") or (p.get("recaps_and_summaries") or {}).get("recap_by_category")) or {}
+                                        if isinstance(rb, dict):
+                                            recaps.append(rb)
+                                            success += 1
+                                except Exception:
+                                    pass
                         if success != len(chunks):
                             raise RuntimeError(f"chunked parse incomplete: {success}/{len(chunks)} chunks succeeded")
                         merged = _merge_recap_dicts(recaps)
@@ -508,18 +532,20 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                 try:
                     return {"recap_by_category": json.loads(out)}
                 except Exception as e:  # noqa: BLE001
-                    logger.error("parse helper invalid json for %s: %s; stderr=%s", pdf_path, e, err[:500])
+                    logger.error("parse helper invalid json for %s: %s; stderr=%s", pdf_path, e, err)
                     # Fallback: try chunked parse as above (fail if any chunk fails)
                     chunks = _split_pdf_to_chunks(pdf_path, pages_per_chunk=int(os.getenv("PAGES_PER_CHUNK", "20")))
                     try:
                         recaps: list[dict] = []
                         success = 0
                         for cp in chunks:
+                            helper_out = tempfile.mkdtemp(prefix="helper-out-")
                             sub = subprocess.run(
                                 [sys.executable, "-m", "src.worker_parse_helper", cp],
                                 check=True,
                                 capture_output=True,
                                 text=True,
+                                env={**os.environ, "HELPER_OUTDIR": helper_out},
                             )
                             sub_out = (sub.stdout or "").strip()
                             if not sub_out:
@@ -531,6 +557,26 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                                     success += 1
                                 except Exception as se:  # noqa: BLE001
                                     logger.error("chunk parse invalid json: %s err=%s; stderr=%s", cp, se, (sub.stderr or "").strip()[:300])
+                            if not sub_out:
+                                try:
+                                    base = Path(helper_out) / Path(cp).stem
+                                    recap_file = Path(f"{base}.recap.json")
+                                    json_file = Path(f"{base}.json")
+                                    if recap_file.exists():
+                                        with open(recap_file, "r", encoding="utf-8") as f:
+                                            r = json.load(f)
+                                        if isinstance(r, dict) and "recap_by_category" in r:
+                                            recaps.append(r.get("recap_by_category") or {})
+                                            success += 1
+                                    elif json_file.exists():
+                                        with open(json_file, "r", encoding="utf-8") as f:
+                                            p = json.load(f)
+                                        rb = (p.get("recap_by_category") or (p.get("recaps_and_summaries") or {}).get("recap_by_category")) or {}
+                                        if isinstance(rb, dict):
+                                            recaps.append(rb)
+                                            success += 1
+                                except Exception:
+                                    pass
                         if success != len(chunks):
                             raise RuntimeError(f"chunked parse incomplete: {success}/{len(chunks)} chunks succeeded")
                         merged = _merge_recap_dicts(recaps)
