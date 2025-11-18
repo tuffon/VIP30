@@ -21,7 +21,7 @@ The goal is to make construction-cost knowledge query-able with semantic search 
 
 ---
 
-## Quick start
+## Quick start (parser local debug)
 
 1. **Clone** the repo and create a virtual environment (recommended):
 
@@ -30,10 +30,11 @@ python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 ```
 
-2. **Install dependencies**:
+2. **Install parser dependencies** (for local full-parse debug):
 
 ```bash
-pip install -r requirements.txt
+cd apps/vip-parse
+pip install pdfplumber==0.10.0 pypdfium2==4.30.0
 ```
 
 3. **Configure secrets**:
@@ -49,13 +50,19 @@ QDRANT_API_KEY=xxxx
 
 4. **Place or update the input data** in `data/unit_costs1_structured.json`.
 
-5. **Run the pipeline**:
+5. **Run the Xactimate parser helper on a PDF**:
 
 ```bash
-python embeddings/embed_and_upload_bni_costs.py
+cd apps/vip-parse
+python src/worker_parse_helper.py "path/to/estimate.pdf" > out.json
 ```
 
-The script batches 500 rows at a time, so ≈ 11 k rows will take several minutes.
+This prints a JSON object with:
+
+- `sections`: full parsed sections + line items
+- `recap_by_category`: recap view derived from `recaps_and_summaries`
+
+Use this to reproduce and inspect parse behaviour locally without R2/S3 or worker-only dependencies.
 
 ---
 
