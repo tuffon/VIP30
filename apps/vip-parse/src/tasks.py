@@ -161,6 +161,26 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
             # full-context input for BidComp: full JSON, not recap-only
             bid_context = {"carrier": carrier_payload, "contractor": contractor_payload}
 
+            # Persist JSON payloads alongside XLS output for debugging
+            json_prefix = f"results/{job_id}"
+            try:
+                carrier_json_key = f"{json_prefix}/carrier-context.json"
+                contractor_json_key = f"{json_prefix}/contractor-context.json"
+                s3.put_object(
+                    Bucket=bucket,
+                    Key=carrier_json_key,
+                    Body=json.dumps(carrier_payload, ensure_ascii=False, indent=2).encode("utf-8"),
+                    ContentType="application/json",
+                )
+                s3.put_object(
+                    Bucket=bucket,
+                    Key=contractor_json_key,
+                    Body=json.dumps(contractor_payload, ensure_ascii=False, indent=2).encode("utf-8"),
+                    ContentType="application/json",
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("failed to upload bid comp JSON artifacts: %s", exc)
+
             # Generate XLSX using deterministic BidComp; include LLM notes if OPENAI_API_KEY present
             try:
                 llm = None
