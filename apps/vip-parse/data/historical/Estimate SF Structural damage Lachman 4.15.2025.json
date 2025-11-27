@@ -419,9 +419,78 @@
       }
     },
     {
-      "section_name": "Guest Bathroom VVaanniittyy44 ((BB11))",
-      "metadata": {},
-      "subrooms": [],
+      "section_name": "Guest Room",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "213.60",
+          "sf_ceiling": "122.69",
+          "sf_walls_and_ceiling": "336.29",
+          "sf_floor": "122.28",
+          "lf_floor_perimeter": "15.58",
+          "lf_ceil_perimeter": "31.40"
+        },
+        "doors": [
+          {
+            "dimensions": "3' 1/8\" X 7' 5/8\"",
+            "opens_into": "HALLWAY_2"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Guest Room Closet (2)",
+          "metadata": {
+            "height": "10'",
+            "areas": {
+              "sf_walls": "295.41",
+              "sf_ceiling": "48.68",
+              "sf_walls_and_ceiling": "344.08",
+              "sf_floor": "48.68",
+              "lf_floor_perimeter": "26.56",
+              "lf_ceil_perimeter": "39.32"
+            },
+            "doors": [
+              {
+                "dimensions": "12' 9 1/8\" X 7' 8\"",
+                "opens_into": "GUEST_ROOM1"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Guest Room (1)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "276.06",
+              "sf_ceiling": "113.98",
+              "sf_walls_and_ceiling": "390.04",
+              "sf_floor": "113.76",
+              "lf_floor_perimeter": "27.24",
+              "lf_ceil_perimeter": "47.12"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "16' 9 1/16\" X 10' 2\"",
+                "opens_into": "GUEST_ROOM1"
+              }
+            ],
+            "doors": [
+              {
+                "dimensions": "3' 1 1/16\" X 8' 2 1/16\"",
+                "opens_into": "GUEST_BATHRO"
+              }
+            ],
+            "windows": [
+              {
+                "dimensions": "3' 4 1/2\" X 5'",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "header",
@@ -541,17 +610,15 @@
           "qty": 285.34,
           "unit": "SF",
           "total": "162.91",
-          "notes": "BBaatthhttuubb11 ((BB22))",
           "tax": "0.27"
         },
         {
           "type": "line_item",
           "line_number": 27,
-          "description": "Clean SSrhheoocwweeerrs22s ((BBe33d)) light fixture",
+          "description": "Clean recessed light fixture",
           "qty": 7.0,
           "unit": "EA",
           "total": "120.11",
-          "notes": "GGaarraaggee iinntteerriioorr",
           "tax": "0.06"
         },
         {
@@ -561,7 +628,7 @@
           "qty": 1.0,
           "unit": "EA",
           "total": "10.12",
-          "notes": "VVaanniittyy44 ((BB11)) CONMMTaassttEeerr BBNaattThhrroo ooMmmANIPULATIONBBeeddrroooomm SSttppaaUUiirrss ((11)) FFiirreeFFppiirrllaaeeccppeellaa22cc ((eeBB11))",
+          "notes": "CONTENT MANIPULATION",
           "tax": "0.00"
         },
         {
@@ -571,8 +638,62 @@
           "qty": 1.0,
           "unit": "HR",
           "total": "61.77",
+          "notes": "to facilitate cleaning of the room by moving things in place",
           "tax": "0.00"
+        }
+      ],
+      "section_totals": {
+        "tax": "1.58",
+        "op": null,
+        "total": "2,360.75",
+        "computed_total": "2,360.75",
+        "validation_delta": "0.00"
+      }
+    },
+    {
+      "section_name": "Guest Bathroom",
+      "metadata": {
+        "height": "8'",
+        "areas": {
+          "sf_walls": "177.90",
+          "sf_ceiling": "98.98",
+          "sf_walls_and_ceiling": "276.88",
+          "sf_floor": "76.20",
+          "lf_floor_perimeter": "21.56",
+          "lf_ceil_perimeter": "34.75"
         },
+        "windows": [
+          {
+            "dimensions": "4' X 3'",
+            "opens_into": "Exterior"
+          }
+        ],
+        "doors": [
+          {
+            "dimensions": "3' 1 1/16\" X 8' 2 1/16\"",
+            "opens_into": "GUEST_ROOM"
+          },
+          {
+            "dimensions": "2' 2\" X 7' 11\"",
+            "opens_into": "GUEST_BEDRO4"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Guest Bathroom (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "sf_walls": "61.82",
+              "sf_ceiling": "13.39",
+              "sf_walls_and_ceiling": "75.21",
+              "lf_ceil_perimeter": "7.49"
+            }
+          }
+        }
+      ],
+      "line_items": [
         {
           "type": "header",
           "text": "FLOORING"
@@ -772,6 +893,7 @@
           "qty": 1.0,
           "unit": "EA",
           "total": "28.80",
+          "notes": "BB",
           "tax": "0.01"
         },
         {
@@ -794,8 +916,16 @@
           "qty": 112.37,
           "unit": "SF",
           "total": "64.16",
-          "notes": "BBaatthhttuubb11 ((BB22)) 53. Clean recessed light fixture 2.00ESSAhhoowweerr22 ((BB33)) 17.15 0.02 34.32 GGaarraaggee iinntteerriioorr",
           "tax": "0.11"
+        },
+        {
+          "type": "line_item",
+          "line_number": 53,
+          "description": "Clean recessed light fixture",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "34.32",
+          "tax": "0.02"
         },
         {
           "type": "line_item",
@@ -811,17 +941,14 @@
         "tax": "1.15",
         "op": null,
         "total": "1,513.82",
-        "computed_total": "3,840.25",
-        "validation_delta": "-2,326.43"
-      },
-      "errors": [
-        "Section name 'Guest Bathroom VVaanniittyy44 ((BB11))' not found above table starting at line 433"
-      ]
+        "computed_total": "1,513.82",
+        "validation_delta": "0.00"
+      }
     },
     {
       "section_name": "Office Bath",
       "metadata": {
-        "height": "8' BBeeddrroooomm",
+        "height": "8'",
         "areas": {
           "sf_walls": "139.64",
           "sf_ceiling": "51.09",
@@ -836,7 +963,7 @@
           },
           {
             "dimensions": "3' 7/16\" X 8' 1 1/4\"",
-            "opens_into": "FOYER LLiinneenn CClloosseett"
+            "opens_into": "FOYER"
           }
         ]
       },
@@ -855,10 +982,6 @@
               {
                 "dimensions": "3' 4 3/16\" X 8'",
                 "opens_into": "OFFICE_BATH2"
-              },
-              {
-                "dimensions": "3 9/16\" X 8'",
-                "opens_into": "OFFICE_BATH1"
               }
             ]
           }
@@ -890,20 +1013,12 @@
           "metadata": {
             "height": "Tray",
             "areas": {
-              "sf_walls": "21.33",
+              "sf_walls": "1.33",
               "sf_ceiling": "12.17",
               "sf_walls_and_ceiling": "33.50",
               "lf_ceil_perimeter": "2.67"
             },
             "missing_walls": [
-              {
-                "dimensions": "2' 8\" X 8'",
-                "opens_into": "OFFICE_BATH1"
-              },
-              {
-                "dimensions": "3' 4 3/16\" X 8'",
-                "opens_into": "OFFICE_BATH3"
-              },
               {
                 "dimensions": "3' 4 3/16\" X 8'",
                 "opens_into": "OFFICE_BATH4"
@@ -950,6 +1065,7 @@
           "qty": 42.39,
           "unit": "SF",
           "total": "34.34",
+          "notes": "GGuueesstt BBeeddrroooomm CCllooss OOffffiiccee",
           "tax": "0.00"
         },
         {
@@ -960,19 +1076,6 @@
           "unit": "SF",
           "total": "40.55",
           "tax": "0.28"
-        },
-        {
-          "type": "header",
-          "text": "WALLS"
-        },
-        {
-          "type": "line_item",
-          "line_number": 57,
-          "description": "HEPA Vacuuming - Detailed - (PER SF)",
-          "qty": 214.49,
-          "unit": "SF",
-          "total": "173.74",
-          "tax": "0.00"
         },
         {
           "type": "line_item",
@@ -1167,21 +1270,155 @@
         "tax": "0.71",
         "op": null,
         "total": "1,039.49",
-        "computed_total": "1,039.49",
-        "validation_delta": "0.00"
+        "computed_total": "865.75",
+        "validation_delta": "173.74"
       }
     },
     {
       "section_name": "Kitchen",
       "metadata": {
-        "missing_walls": [
-          {
-            "dimensions": "2' 4\" X 9'",
-            "opens_into": "KITCHEN"
-          }
-        ]
+        "height": "Tray",
+        "areas": {
+          "sf_walls": "8.74",
+          "sf_ceiling": "160.58",
+          "sf_walls_and_ceiling": "169.32",
+          "sf_floor": "114.75",
+          "lf_ceil_perimeter": "48.66"
+        }
       },
-      "subrooms": [],
+      "subrooms": [
+        {
+          "subroom_name": "Kitchen (4)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "17.71",
+              "sf_ceiling": "17.07",
+              "sf_walls_and_ceiling": "34.79",
+              "sf_floor": "13.72",
+              "lf_floor_perimeter": "1.13",
+              "lf_ceil_perimeter": "16.44"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "2' 4\" X 10' 11 1/4\"",
+                "opens_into": "KITCHEN"
+              },
+              {
+                "dimensions": "9' 3 15/16\" X 10' 11 1/4\"",
+                "opens_into": "KITCHEN2"
+              },
+              {
+                "dimensions": "2' 4\" X 10' 11 1/4\"",
+                "opens_into": "KITCHEN3"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Kitchen (1)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "73.57",
+              "sf_ceiling": "17.88",
+              "sf_walls_and_ceiling": "91.44",
+              "sf_floor": "17.31",
+              "lf_floor_perimeter": "7.42",
+              "lf_ceil_perimeter": "9.99"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "2' 4\" X 9'",
+                "opens_into": "KITCHEN1"
+              },
+              {
+                "dimensions": "2' 4\" X 9'",
+                "opens_into": "KITCHEN4"
+              },
+              {
+                "dimensions": "7' 5\" X 9'",
+                "opens_into": "KITCHEN2"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Kitchen (3)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "26.74",
+              "sf_ceiling": "17.88",
+              "sf_walls_and_ceiling": "44.61",
+              "sf_floor": "3.71",
+              "lf_ceil_perimeter": "9.99"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "7' 5\" X 9'",
+                "opens_into": "KITCHEN2"
+              },
+              {
+                "dimensions": "2' 4\" X 9'",
+                "opens_into": "KITCHEN1"
+              },
+              {
+                "dimensions": "2' 4\" X 9'",
+                "opens_into": "KITCHEN4"
+              }
+            ],
+            "windows": [
+              {
+                "dimensions": "4' 11 1/16\" X 3' 9 11/16\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Kitchen (2)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "187.56",
+              "sf_ceiling": "49.22",
+              "sf_walls_and_ceiling": "236.78",
+              "sf_floor": "25.80",
+              "lf_floor_perimeter": "11.25",
+              "lf_ceil_perimeter": "35.88"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "7' 7\" X 9'",
+                "opens_into": "KITCHEN2"
+              },
+              {
+                "dimensions": "9' 3 15/16\" X 9'",
+                "opens_into": "KITCHEN2"
+              },
+              {
+                "dimensions": "7' 7\" X 9'",
+                "opens_into": "KITCHEN2"
+              },
+              {
+                "dimensions": "2' 4\" X 9'",
+                "opens_into": "KITCHEN3"
+              },
+              {
+                "dimensions": "2' 4\" X 9'",
+                "opens_into": "KITCHEN"
+              }
+            ],
+            "windows": [
+              {
+                "dimensions": "5' 11 1/8\" X 3' 5 3/4\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "header",
@@ -1409,6 +1646,14 @@
           {
             "dimensions": "2' 11 9/16\" X 6' 11 1/16\"",
             "opens_into": "GUEST_BEDROO"
+          },
+          {
+            "dimensions": "2' 10 13/16\" X 6' 11 7/8\"",
+            "opens_into": "UTILITY_ROOM"
+          },
+          {
+            "dimensions": "3' 1 3/8\" X 7' 10 7/8\"",
+            "opens_into": "BEDROOM"
           }
         ]
       },
@@ -1451,7 +1696,7 @@
               },
               {
                 "dimensions": "9' 1 5/16\" X 12' 6\"",
-                "opens_into": "HALLWAY1 GGaarraaggee iinntteerriioorr"
+                "opens_into": "HALLWAY1"
               }
             ]
           }
@@ -1711,108 +1956,6 @@
       ],
       "line_items": [
         {
-          "type": "header",
-          "text": "FLOORING"
-        },
-        {
-          "type": "line_item",
-          "line_number": 113,
-          "description": "HEPA Vacuuming - Detailed - (PER SF)",
-          "qty": 90.54,
-          "unit": "SF",
-          "total": "73.34",
-          "tax": "0.00"
-        },
-        {
-          "type": "line_item",
-          "line_number": 114,
-          "description": "Clean floor - tile",
-          "qty": 90.54,
-          "unit": "SF",
-          "total": "86.61",
-          "tax": "0.60"
-        },
-        {
-          "type": "header",
-          "text": "WALLS"
-        },
-        {
-          "type": "line_item",
-          "line_number": 115,
-          "description": "HEPA Vacuuming - Detailed - (PER SF)",
-          "qty": 343.13,
-          "unit": "SF",
-          "total": "277.94",
-          "tax": "0.00"
-        },
-        {
-          "type": "line_item",
-          "line_number": 116,
-          "description": "Clean the walls",
-          "qty": 343.13,
-          "unit": "SF",
-          "total": "195.91",
-          "tax": "0.33"
-        },
-        {
-          "type": "line_item",
-          "line_number": 117,
-          "description": "Clean door / window opening (per side)",
-          "qty": 2.0,
-          "unit": "EA",
-          "total": "42.07",
-          "tax": "0.01"
-        },
-        {
-          "type": "line_item",
-          "line_number": 118,
-          "description": "Clean door - French (per side)",
-          "qty": 1.0,
-          "unit": "EA",
-          "total": "36.04",
-          "tax": "0.01"
-        },
-        {
-          "type": "line_item",
-          "line_number": 119,
-          "description": "Clean window unit (per side) 10 - 20 SF",
-          "qty": 1.0,
-          "unit": "EA",
-          "total": "24.40",
-          "tax": "0.00"
-        },
-        {
-          "type": "header",
-          "text": "FIXTURES"
-        },
-        {
-          "type": "line_item",
-          "line_number": 120,
-          "description": "Clean vanity - inside and out",
-          "qty": 10.33,
-          "unit": "LF",
-          "total": "220.76",
-          "tax": "0.11"
-        },
-        {
-          "type": "line_item",
-          "line_number": 121,
-          "description": "Clean countertop",
-          "qty": 10.33,
-          "unit": "SF",
-          "total": "12.31",
-          "tax": "0.02"
-        },
-        {
-          "type": "line_item",
-          "line_number": 122,
-          "description": "Clean sink",
-          "qty": 2.0,
-          "unit": "EA",
-          "total": "42.07",
-          "tax": "0.01"
-        },
-        {
           "type": "line_item",
           "line_number": 123,
           "description": "Clean sink faucet",
@@ -1983,14 +2126,65 @@
         "tax": "1.39",
         "op": null,
         "total": "1,814.02",
-        "computed_total": "1,814.02",
-        "validation_delta": "0.00"
+        "computed_total": "802.57",
+        "validation_delta": "1,011.45"
       }
     },
     {
-      "section_name": "Linen Closet",
-      "metadata": {},
-      "subrooms": [],
+      "section_name": "Office",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "308.03",
+          "sf_ceiling": "134.41",
+          "sf_walls_and_ceiling": "442.44",
+          "sf_floor": "133.36",
+          "lf_floor_perimeter": "32.66",
+          "lf_ceil_perimeter": "32.79"
+        },
+        "windows": [
+          {
+            "dimensions": "8' 7 1/8\" X 5'",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Office (1)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "209.62",
+              "sf_ceiling": "89.73",
+              "sf_walls_and_ceiling": "299.34",
+              "sf_floor": "89.45",
+              "lf_floor_perimeter": "18.20",
+              "lf_ceil_perimeter": "43.75"
+            },
+            "doors": [
+              {
+                "dimensions": "3' 7/8\" X 7' 11 11/16\"",
+                "opens_into": "FOYER"
+              },
+              {
+                "dimensions": "2' 11 13/16\" X 8' 1/16\"",
+                "opens_into": "OFFICE_BATH"
+              },
+              {
+                "dimensions": "3' 5/8\" X 7' 11 1/4\"",
+                "opens_into": "OFFICE_CLOSE"
+              }
+            ],
+            "missing_walls": [
+              {
+                "dimensions": "16' 4 13/16\" X 10'",
+                "opens_into": "OFFICE1"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "header",
@@ -2101,7 +2295,6 @@
           "qty": 224.13,
           "unit": "SF",
           "total": "181.55",
-          "notes": "SShhoowweerr22 ((BB33))",
           "tax": "0.00"
         },
         {
@@ -2111,7 +2304,6 @@
           "qty": 224.13,
           "unit": "SF",
           "total": "127.96",
-          "notes": "GGaarraaggee iinntteerriioorr",
           "tax": "0.21"
         },
         {
@@ -2140,20 +2332,42 @@
           "qty": 1.0,
           "unit": "HR",
           "total": "61.77",
+          "notes": "to facilitate cleaning of the room by moving things in place",
           "tax": "0.00"
+        }
+      ],
+      "section_totals": {
+        "tax": "1.07",
+        "op": null,
+        "total": "1,866.55",
+        "computed_total": "1,866.55",
+        "validation_delta": "0.00"
+      }
+    },
+    {
+      "section_name": "Linen Closet",
+      "metadata": {
+        "height": "8'",
+        "areas": {
+          "sf_walls": "49.63",
+          "sf_ceiling": "3.67",
+          "sf_walls_and_ceiling": "53.30",
+          "sf_floor": "3.67",
+          "lf_floor_perimeter": "5.87",
+          "lf_ceil_perimeter": "7.89"
         },
+        "doors": [
+          {
+            "dimensions": "2' 3/16\" X 6' 8 5/16\"",
+            "opens_into": "MASTER_CLOS5"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
         {
           "type": "header",
           "text": "FLOORING"
-        },
-        {
-          "type": "line_item",
-          "line_number": 156,
-          "description": "HEPA Vacuuming - Detailed - (PER SF)",
-          "qty": 3.67,
-          "unit": "SF",
-          "total": "2.97",
-          "tax": "0.00"
         },
         {
           "type": "line_item",
@@ -2175,6 +2389,7 @@
           "qty": 49.63,
           "unit": "SF",
           "total": "40.20",
+          "notes": "UUttiilliittyy RRoooomm",
           "tax": "0.00"
         },
         {
@@ -2184,16 +2399,8 @@
           "qty": 49.63,
           "unit": "SF",
           "total": "28.34",
+          "notes": "160. Clean door /FF wuuillnlld HHowee iioggphhettn22in ((gBB (66pe))r sidLLeoo)wweerr CCaabbii1nn.0220 ((EBBA22)) 21.03 0.00 21.03 UUppppeerr CCaabbiinn22 ((BB11))",
           "tax": "0.05"
-        },
-        {
-          "type": "line_item",
-          "line_number": 160,
-          "description": "Clean door / window opening (per side)",
-          "qty": 1.0,
-          "unit": "EA",
-          "total": "21.03",
-          "tax": "0.00"
         },
         {
           "type": "line_item",
@@ -2240,12 +2447,9 @@
         "tax": "0.08",
         "op": null,
         "total": "115.99",
-        "computed_total": "1,982.54",
-        "validation_delta": "-1,866.55"
-      },
-      "errors": [
-        "Section name 'Linen Closet' not found above table starting at line 1591"
-      ]
+        "computed_total": "91.99",
+        "validation_delta": "24.00"
+      }
     },
     {
       "section_name": "Great Room 2",
@@ -2641,7 +2845,7 @@
           "qty": 34.0,
           "unit": "EA",
           "total": "583.39",
-          "notes": "CONTENT MANIPULATION BBaatthhttuubb11 ((BB22)) SShhoowweerr22 ((BB33))",
+          "notes": "CONTENT MANIPULATION",
           "tax": "0.29"
         },
         {
@@ -2651,7 +2855,7 @@
           "qty": 1.0,
           "unit": "HR",
           "total": "61.77",
-          "notes": "GGaarraaggee iinntteerriioorr to facilitate cleaning of the room by moving things in place VVaanniittyy44 ((BB11))",
+          "notes": "to facilitate cleaning of the room by moving things in place",
           "tax": "0.00"
         }
       ],
@@ -3266,9 +3470,46 @@
       }
     },
     {
-      "section_name": "GueHHsaatllll wwBaayyedroom",
-      "metadata": {},
-      "subrooms": [],
+      "section_name": "Master Closet Hers",
+      "metadata": {
+        "height": "Tray",
+        "areas": {
+          "sf_walls": "172.02",
+          "sf_ceiling": "81.70",
+          "sf_walls_and_ceiling": "253.72",
+          "sf_floor": "75.72",
+          "lf_floor_perimeter": "21.46",
+          "lf_ceil_perimeter": "27.48"
+        },
+        "doors": [
+          {
+            "dimensions": "6' 5/16\" X 7' 11 1/4\"",
+            "opens_into": "BEDROOM"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Master Closet Hers (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "sf_walls": "89.78",
+              "sf_ceiling": "13.68",
+              "sf_walls_and_ceiling": "103.46",
+              "sf_floor": "13.68",
+              "lf_floor_perimeter": "11.22",
+              "lf_ceil_perimeter": "11.22"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "7' 3 3/4\" X 8'",
+                "opens_into": "MASTER_CLOSE"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "header",
@@ -3407,8 +3648,118 @@
           "qty": 1.0,
           "unit": "HR",
           "total": "61.77",
+          "notes": "to facilitate cleaning of the room by moving things in place",
           "tax": "0.00"
+        }
+      ],
+      "section_totals": {
+        "tax": "0.93",
+        "op": null,
+        "total": "1,076.22",
+        "computed_total": "1,076.22",
+        "validation_delta": "0.00"
+      }
+    },
+    {
+      "section_name": "Guest Bedroom",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "211.79",
+          "sf_ceiling": "134.00",
+          "sf_walls_and_ceiling": "345.79",
+          "sf_floor": "133.65",
+          "lf_floor_perimeter": "24.85",
+          "lf_ceil_perimeter": "33.59"
         },
+        "doors": [
+          {
+            "dimensions": "2' 10\" X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "2' 11 9/16\" X 6' 11 1/16\"",
+            "opens_into": "HALLWAY_2"
+          },
+          {
+            "dimensions": "2' 10 13/16\" X 6' 11 7/8\"",
+            "opens_into": "GUEST_BEDRO1"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Guest Bedroom (1)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "282.97",
+              "sf_ceiling": "125.07",
+              "sf_walls_and_ceiling": "408.04",
+              "sf_floor": "120.00",
+              "lf_floor_perimeter": "27.64",
+              "lf_ceil_perimeter": "53.25"
+            },
+            "doors": [
+              {
+                "dimensions": "2' 2\" X 7' 11\"",
+                "opens_into": "GUEST_BATHRO"
+              },
+              {
+                "dimensions": "2' 5\" X 6' 8\"",
+                "opens_into": "Exterior"
+              }
+            ],
+            "missing_walls": [
+              {
+                "dimensions": "20' 6 3/8\" X 9' 4\"",
+                "opens_into": "GUEST_BEDRO3"
+              }
+            ],
+            "windows": [
+              {
+                "dimensions": "2' 6\" X 5' 8\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "2' 6\" X 5' 8\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Guest Bedroom (2)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "57.69",
+              "sf_ceiling": "103.98",
+              "sf_walls_and_ceiling": "161.67",
+              "sf_floor": "102.66",
+              "lf_floor_perimeter": "5.33",
+              "lf_ceil_perimeter": "30.66"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "20' 6 3/8\" X 8' 6\"",
+                "opens_into": "GUEST_BEDRO4"
+              },
+              {
+                "dimensions": "20' 6 3/8\" X 8' 6\"",
+                "opens_into": "GUEST_BEDROO"
+              }
+            ],
+            "doors": [
+              {
+                "dimensions": "4' 8\" X 6' 8\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
         {
           "type": "header",
           "text": "FLOORING"
@@ -3554,7 +3905,6 @@
           "qty": 1.0,
           "unit": "EA",
           "total": "10.12",
-          "notes": "GGrreeaatt RRoooomm 22 LLiinneenn CClloosseett",
           "tax": "0.00"
         },
         {
@@ -3564,7 +3914,7 @@
           "qty": 1.0,
           "unit": "HR",
           "total": "61.77",
-          "notes": "to facilitate cleaning of the room by moving things in place UUppLLppooeewwrr CCeerraa CCbbiiaannbb99ii 11((33BB 11((BB22))88)) IIssllaanndd33 ((BB3333)) LLUUoowwppppeeeerrrr CC CCaaaabbbbii11ii11 ((55BB ((22BB4422))66)) SShhoowweerr66 ((BB55)) VVaanniittyy88 ((BB11)) MMaasstteerr CClloosseett MMaasstteerr CClloosseett HHeerrss UUppppeerr CCaabbiinn88 ((BB1111)) SShhoowweerr33 ((SSBBhh44oo))wweerr44 ((BB33)) GGuueesstt RRoooomm CClloosseett ((22)) LLooUUwwppeepprree rrCC CCaabbaaiibb11ii9911 44(( BB((BB223322))55))OOffffiiccee CClloosseett SShhoowweerr77 ((BB66))",
+          "notes": "to facilitate cleaning of the room by moving things in place",
           "tax": "0.00"
         }
       ],
@@ -3572,12 +3922,9 @@
         "tax": "1.54",
         "op": null,
         "total": "2,470.98",
-        "computed_total": "3,547.20",
-        "validation_delta": "-1,076.22"
-      },
-      "errors": [
-        "Section name 'GueHHsaatllll wwBaayyedroom' not found above table starting at line 2364"
-      ]
+        "computed_total": "2,470.98",
+        "validation_delta": "0.00"
+      }
     },
     {
       "section_name": "Guest Bedroom Closet",
@@ -3696,11 +4043,10 @@
         {
           "type": "line_item",
           "line_number": 262,
-          "description": "Clean light fixture BBaatthhttuubb11 ((BB22))",
+          "description": "Clean light fixture",
           "qty": 1.0,
           "unit": "EA",
           "total": "17.14",
-          "notes": "SShhoowweerr22 ((BB33)) GGaarraaggee iinntteerriioorr",
           "tax": "0.01"
         }
       ],
@@ -3713,9 +4059,56 @@
       }
     },
     {
-      "section_name": "Utility Room",
-      "metadata": {},
-      "subrooms": [],
+      "section_name": "Foyer",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "228.01",
+          "sf_ceiling": "75.29",
+          "sf_walls_and_ceiling": "303.29",
+          "sf_floor": "75.05",
+          "lf_floor_perimeter": "19.65",
+          "lf_ceil_perimeter": "37.49"
+        },
+        "doors": [
+          {
+            "dimensions": "3' 7/16\" X 8' 1 1/4\"",
+            "opens_into": "OFFICE_BATH"
+          },
+          {
+            "dimensions": "3' 7/8\" X 7' 11 11/16\"",
+            "opens_into": "OFFICE"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Foyer (1)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "63.25",
+              "sf_ceiling": "13.21",
+              "sf_walls_and_ceiling": "76.46",
+              "sf_floor": "13.12",
+              "lf_floor_perimeter": "5.10",
+              "lf_ceil_perimeter": "10.36"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "5' 9 15/16\" X 10'",
+                "opens_into": "FOYER"
+              }
+            ],
+            "doors": [
+              {
+                "dimensions": "5' 2 3/4\" X 8' 7/16\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
         {
           "type": "header",
@@ -3845,7 +4238,41 @@
           "unit": "EA",
           "total": "10.12",
           "tax": "0.00"
+        }
+      ],
+      "section_totals": {
+        "tax": "1.17",
+        "op": null,
+        "total": "1,062.85",
+        "computed_total": "1,062.85",
+        "validation_delta": "0.00"
+      }
+    },
+    {
+      "section_name": "Utility Room",
+      "metadata": {
+        "height": "8'",
+        "areas": {
+          "sf_walls": "210.29",
+          "sf_ceiling": "85.78",
+          "sf_walls_and_ceiling": "296.07",
+          "sf_floor": "66.54",
+          "lf_floor_perimeter": "24.01",
+          "lf_ceil_perimeter": "42.16"
         },
+        "doors": [
+          {
+            "dimensions": "2' 10 15/16\" X 6' 7 1/8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "2' 10 13/16\" X 6' 11 7/8\"",
+            "opens_into": "HALLWAY_2"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
         {
           "type": "header",
           "text": "FLOORING"
@@ -4039,12 +4466,9 @@
         "tax": "1.27",
         "op": null,
         "total": "1,783.06",
-        "computed_total": "2,845.91",
-        "validation_delta": "-1,062.85"
-      },
-      "errors": [
-        "Section name 'Utility Room' not found above table starting at line 2647"
-      ]
+        "computed_total": "1,783.06",
+        "validation_delta": "0.00"
+      }
     },
     {
       "section_name": "General Provisions",
@@ -4235,10 +4659,61 @@
       }
     },
     {
-      "section_name": "Garage Roof",
-      "metadata": {},
-      "subrooms": [],
+      "section_name": "Garage interior",
+      "metadata": {
+        "height": "9'",
+        "areas": {
+          "sf_walls": "569.41",
+          "sf_ceiling": "433.98",
+          "sf_walls_and_ceiling": "1,003.38",
+          "sf_floor": "433.98",
+          "lf_floor_perimeter": "61.31",
+          "lf_ceil_perimeter": "79.06"
+        },
+        "doors": [
+          {
+            "dimensions": "17' 9\" X 8' 1/16\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Stairs (1)",
+          "metadata": {
+            "height": "9'",
+            "areas": {
+              "sf_walls": "30.80",
+              "sf_ceiling": "4.87",
+              "sf_walls_and_ceiling": "35.67",
+              "sf_floor": "10.47",
+              "lf_floor_perimeter": "6.60",
+              "lf_ceil_perimeter": "6.46"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 6 13/16\" X 9'",
+                "opens_into": "GARAGE_INTER"
+              },
+              {
+                "dimensions": "1' 7\" X 9'",
+                "opens_into": "GARAGE_INTER"
+              }
+            ],
+            "doors": [
+              {
+                "dimensions": "2' 11 7/8\" X 6' 8\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
       "line_items": [
+        {
+          "type": "header",
+          "text": "FLOORING"
+        },
         {
           "type": "line_item",
           "line_number": 304,
@@ -4246,8 +4721,20 @@
           "qty": 444.45,
           "unit": "SF",
           "total": "360.00",
-          "notes": "FFooyyeerr 305. Clean floor 444.45SF 0.69 0.42 307.09 GGuueesstt RRoooomm UUppppeerr CCaabbiinn66 ((BB99)) FFuullll HHeeiigghhtt33 ((BB2211)) UUttiilliittyy RRoooomm ** WALLS ** UUppLLppooeewwrr eeCCrraa CCbbaaiinnbb77iinn ((99BB ((11BB0055)))) KKiittcchheenn FFuullll HHeeiigghhtt44 ((BB2222)) FFuullll HHeeiigghhtt22 ((BB66)) LLoowweerr CCaabbiinn22 ((BB22)) UUppppeerr CCaabbiinn22 ((BB11))",
           "tax": "0.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 305,
+          "description": "Clean floor",
+          "qty": 444.45,
+          "unit": "SF",
+          "total": "307.09",
+          "tax": "0.42"
+        },
+        {
+          "type": "header",
+          "text": "WALLS"
         },
         {
           "type": "line_item",
@@ -4256,7 +4743,6 @@
           "qty": 600.21,
           "unit": "SF",
           "total": "486.17",
-          "notes": "OOvveerr FFrriiddggee11 ((BB2277))",
           "tax": "0.00"
         },
         {
@@ -4275,8 +4761,25 @@
           "qty": 2.0,
           "unit": "EA",
           "total": "42.07",
-          "notes": "LLoowweerr CCaabbii1188 ((BB2200)) GGuueesstt BBeeddrroooomm CClloosseett GGuueesstt BBeeddrroooomm LLoowweerr CCaabbiinn55 ((BB33)) UUppppeerr CCaabbii33 ((BB2299)) 309. Clean door - French (per side) 1.00EA 36.03 0.01 36.04 UUppppeerr CCaabbii44 ((BB3311)) LLoowweerr CCaabbii1177 ((WWBBDD1188))LLoowweerr CCaabbii1155 ((BB1155)) LLoowweerr CCaabbiinn44 ((BB44)) 310. Clean door hardware 1.00EA 10.72 0.02 10.74 UUppppeeLLrr ooCCwwaabbeerrii11 CC11aa ((bbBBii11336600 ))((WWBBDD1177)) LLoowweerr CCaaUUbbppii11pp44ee rr(( BBCC11aa44bb))ii22 ((BB2288)) OOffffiiccee",
           "tax": "0.01"
+        },
+        {
+          "type": "line_item",
+          "line_number": 309,
+          "description": "Clean door - French (per side)",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "36.04",
+          "tax": "0.01"
+        },
+        {
+          "type": "line_item",
+          "line_number": 310,
+          "description": "Clean door hardware",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "10.74",
+          "tax": "0.02"
         },
         {
           "type": "line_item",
@@ -4285,7 +4788,6 @@
           "qty": 1.0,
           "unit": "EA",
           "total": "17.18",
-          "notes": "VVaanniittyy11 ((BB11))",
           "tax": "0.01"
         },
         {
@@ -4295,7 +4797,6 @@
           "qty": 3.0,
           "unit": "EA",
           "total": "16.83",
-          "notes": "VVaanniittyy33 ((BB22))",
           "tax": "0.00"
         },
         {
@@ -4331,6 +4832,29 @@
         },
         {
           "type": "line_item",
+          "line_number": 316,
+          "description": "Clean overhead (garage) door opener",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "42.65",
+          "tax": "0.00"
+        }
+      ],
+      "section_totals": {
+        "tax": "1.48",
+        "op": null,
+        "total": "2,358.67",
+        "computed_total": "2,358.67",
+        "validation_delta": "0.00"
+      }
+    },
+    {
+      "section_name": "Garage Roof",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "line_item",
           "line_number": 317,
           "description": "Clean the surface area",
           "qty": 475.01,
@@ -4343,12 +4867,9 @@
         "tax": "0.45",
         "op": null,
         "total": "261.71",
-        "computed_total": "2,223.86",
-        "validation_delta": "-1,962.15"
-      },
-      "errors": [
-        "Section name 'Garage Roof' not found above table starting at line 2854"
-      ]
+        "computed_total": "261.71",
+        "validation_delta": "0.00"
+      }
     },
     {
       "section_name": "Garage Exterior Door",

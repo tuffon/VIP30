@@ -1009,58 +1009,14 @@
     {
       "section_name": "Office",
       "metadata": {
-        "height": "10' 3\"",
-        "areas": {
-          "sf_walls": "466.83",
-          "sf_ceiling": "242.57",
-          "sf_walls_and_ceiling": "709.40",
-          "sf_floor": "242.57",
-          "sy_flooring": "26.95",
-          "lf_floor_perimeter": "40.81",
-          "lf_ceil_perimeter": "62.39"
-        },
         "doors": [
           {
-            "dimensions": "2' 1\" X 8'",
-            "opens_into": "Exterior"
-          },
-          {
-            "dimensions": "6' X 8'",
-            "opens_into": "Exterior"
-          },
-          {
-            "dimensions": "2' 6\" X 8'",
-            "opens_into": "OFFICE_BATH"
-          },
-          {
-            "dimensions": "6' X 8'",
-            "opens_into": "HALLWAY_1"
+            "dimensions": "5' X 8'",
+            "opens_into": "OFFICE2"
           }
         ]
       },
-      "subrooms": [
-        {
-          "subroom_name": "Office Closet (1)",
-          "metadata": {
-            "height": "10' 3\"",
-            "areas": {
-              "sf_walls": "130.14",
-              "sf_ceiling": "12.08",
-              "sf_walls_and_ceiling": "142.22",
-              "sf_floor": "12.08",
-              "sy_flooring": "1.34",
-              "lf_floor_perimeter": "11.60",
-              "lf_ceil_perimeter": "16.60"
-            },
-            "doors": [
-              {
-                "dimensions": "5' X 8'",
-                "opens_into": "OFFICE2"
-              }
-            ]
-          }
-        }
-      ],
+      "subrooms": [],
       "line_items": [
         {
           "type": "line_item",
@@ -1418,7 +1374,7 @@
     {
       "section_name": "Living Room",
       "metadata": {
-        "height": "10' 3\"",
+        "height": "10' 3\" \"21",
         "areas": {
           "sf_walls": "335.79",
           "sf_ceiling": "547.16",
@@ -2058,7 +2014,7 @@
     {
       "section_name": "Garage",
       "metadata": {
-        "height": "9'",
+        "height": "9' \"21 \"9",
         "areas": {
           "sf_walls": "423.86",
           "sf_ceiling": "409.37",

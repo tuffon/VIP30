@@ -4,23 +4,35 @@ from __future__ import annotations
 
 import json
 import os
-from typing import Iterable, List
+from typing import Iterable, List, Optional
 import logging
 
 import pdfplumber
 
 from .helpers import format_money
+from .visible_text import (
+    VisibleTextConfig,
+    extract_visible_lines,
+    get_visible_text_config,
+)
 
 
 class ParserIO:
     """Handle file-system interactions and console output for the parser."""
 
-    def __init__(self, input_file: str, output_path: str):
+    def __init__(
+        self,
+        input_file: str,
+        output_path: str,
+        *,
+        visible_text_config: Optional[VisibleTextConfig] = None,
+    ):
         self.input_file = os.path.abspath(input_file)
         self.output_path = output_path
         if not os.path.exists(self.input_file):
             raise FileNotFoundError(self.input_file)
         self._resolve_outputs()
+        self._visible_text_config = visible_text_config or get_visible_text_config()
 
     # ---- paths ---------------------------------------------------------
 
@@ -52,16 +64,25 @@ class ParserIO:
             for idx, page in enumerate(pdf.pages):
                 if idx % 5 == 0:
                     log.info("pdf read: page %d/%d", idx + 1, total)
-                txt = page.extract_text() or ''
-                lines.extend([l.strip() for l in txt.split('\n') if l.strip()])
+                page_lines = extract_visible_lines(
+                    page,
+                    config=self._visible_text_config,
+                    debug_page_number=idx + 1,
+                )
+                lines.extend(page_lines)
         return lines
 
     def read_first_page_lines(self) -> List[str]:
         lines: List[str] = []
         with pdfplumber.open(self.input_file) as pdf:
             if pdf.pages:
-                txt = pdf.pages[0].extract_text() or ''
-                lines.extend([l.strip() for l in txt.split('\n') if l.strip()])
+                lines.extend(
+                    extract_visible_lines(
+                        pdf.pages[0],
+                        config=self._visible_text_config,
+                        debug_page_number=1,
+                    )
+                )
         return lines
 
     # ---- writing -------------------------------------------------------

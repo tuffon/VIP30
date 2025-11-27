@@ -1,0 +1,78 @@
+{
+  "recap_by_category": {
+    "subtotals": [
+      {
+        "label": "Items Subtotal",
+        "total": "26,369.59",
+        "pct": 99.16
+      },
+      {
+        "label": "Material Sales Tax",
+        "total": "222.95",
+        "pct": 0.84,
+        "coverage": [
+          {
+            "coverage": "Contents",
+            "pct": 100.0,
+            "amount": "222.95"
+          }
+        ]
+      },
+      {
+        "label": "Total",
+        "total": "26,592.54",
+        "pct": 100.0
+      }
+    ],
+    "Items": [
+      {
+        "item": "CLEANING",
+        "total": "1,322.10",
+        "pct": 4.97,
+        "coverage": [
+          {
+            "coverage": "Contents",
+            "pct": 100.0,
+            "amount": "1,322.10"
+          }
+        ]
+      },
+      {
+        "item": "CONT: PACKING,HANDLNG,STORAGE",
+        "total": "24,656.38",
+        "pct": 92.72,
+        "coverage": [
+          {
+            "coverage": "Contents",
+            "pct": 100.0,
+            "amount": "24,656.38"
+          }
+        ]
+      },
+      {
+        "item": "GENERAL DEMOLITION",
+        "total": "375.88",
+        "pct": 1.41,
+        "coverage": [
+          {
+            "coverage": "Contents",
+            "pct": 100.0,
+            "amount": "375.88"
+          }
+        ]
+      },
+      {
+        "item": "WATER EXTRACTION & REMEDIATION",
+        "total": "15.23",
+        "pct": 0.06,
+        "coverage": [
+          {
+            "coverage": "Contents",
+            "pct": 100.0,
+            "amount": "15.23"
+          }
+        ]
+      }
+    ]
+  }
+}

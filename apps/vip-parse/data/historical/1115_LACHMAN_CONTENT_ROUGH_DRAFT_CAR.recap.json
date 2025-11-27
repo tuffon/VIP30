@@ -1,0 +1,48 @@
+{
+  "recap_by_category": {
+    "subtotals": [
+      {
+        "label": "Items Subtotal",
+        "total": "78,738.20",
+        "pct": 99.29
+      },
+      {
+        "label": "Material Sales Tax",
+        "total": "566.37",
+        "pct": 0.71,
+        "coverage": []
+      },
+      {
+        "label": "Total",
+        "total": "79,304.57",
+        "pct": 100.0
+      }
+    ],
+    "Items": [
+      {
+        "item": "CONT: CLEAN - GENERAL ITEMS",
+        "total": "2,423.85",
+        "pct": 3.06,
+        "coverage": []
+      },
+      {
+        "item": "CONT: PACKING,HANDLNG,STORAGE",
+        "total": "75,551.86",
+        "pct": 95.27,
+        "coverage": []
+      },
+      {
+        "item": "GENERAL DEMOLITION",
+        "total": "714.69",
+        "pct": 0.9,
+        "coverage": []
+      },
+      {
+        "item": "WATER EXTRACTION & REMEDIATION",
+        "total": "47.80",
+        "pct": 0.06,
+        "coverage": []
+      }
+    ]
+  }
+}

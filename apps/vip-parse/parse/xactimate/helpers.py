@@ -33,6 +33,7 @@ from .constants import (
     TOTALS_PATTERN,
     WINDOW_PATTERN,
 )
+from .visible_text import extract_visible_lines, get_visible_text_config
 
 
 A_RCV = re.compile(
@@ -167,8 +168,9 @@ def detect_page_header_pattern(pdf_path: str) -> List[str]:
     with pdfplumber.open(pdf_path) as pdf:
         if len(pdf.pages) < 2:
             return header_lines
-        p1 = [l.strip() for l in (pdf.pages[0].extract_text() or '').split('\n') if l.strip()]
-        p2 = [l.strip() for l in (pdf.pages[1].extract_text() or '').split('\n') if l.strip()]
+        config = get_visible_text_config()
+        p1 = extract_visible_lines(pdf.pages[0], config=config, debug_page_number=1)
+        p2 = extract_visible_lines(pdf.pages[1], config=config, debug_page_number=2)
         for line in p1[:10]:
             if line in p2[:10]:
                 header_lines.append(line)

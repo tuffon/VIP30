@@ -689,7 +689,7 @@
     {
       "section_name": "Living Room",
       "metadata": {
-        "height": "Peaked",
+        "height": "Peaked \"61",
         "areas": {
           "sf_walls": "730.95",
           "sf_ceiling": "411.27",
@@ -712,7 +712,13 @@
           "metadata": {
             "height": "8'",
             "areas": {
-              "lf_floor_perimeter": "28.41"
+              "sf_walls": "227.30",
+              "sf_ceiling": "37.04",
+              "sf_walls_and_ceiling": "264.35",
+              "sf_floor": "37.04",
+              "sy_flooring": "4.12",
+              "lf_floor_perimeter": "28.41",
+              "lf_ceil_perimeter": "28.41"
             }
           }
         }
@@ -849,65 +855,8 @@
     },
     {
       "section_name": "Kitchen",
-      "metadata": {
-        "height": "Sloped",
-        "areas": {
-          "sf_walls": "179.51",
-          "sf_ceiling": "90.64",
-          "sf_walls_and_ceiling": "270.15",
-          "sf_floor": "89.07",
-          "sy_flooring": "9.90",
-          "lf_floor_perimeter": "17.17",
-          "lf_ceil_perimeter": "38.15"
-        }
-      },
-      "subrooms": [
-        {
-          "subroom_name": "Kitchen2 (1)",
-          "metadata": {
-            "height": "Sloped",
-            "areas": {
-              "sf_walls": "370.72",
-              "sf_ceiling": "118.47",
-              "sf_walls_and_ceiling": "489.19",
-              "sf_floor": "116.98",
-              "sy_flooring": "13.00",
-              "lf_floor_perimeter": "40.78",
-              "lf_ceil_perimeter": "49.45"
-            }
-          }
-        },
-        {
-          "subroom_name": "Pantry (3)",
-          "metadata": {
-            "height": "8'",
-            "areas": {
-              "sf_walls": "103.72",
-              "sf_ceiling": "9.93",
-              "sf_walls_and_ceiling": "113.65",
-              "sf_floor": "9.93",
-              "sy_flooring": "1.10",
-              "lf_floor_perimeter": "12.97",
-              "lf_ceil_perimeter": "12.97"
-            }
-          }
-        },
-        {
-          "subroom_name": "Stove inset (2)",
-          "metadata": {
-            "height": "7' 5\"",
-            "areas": {
-              "sf_walls": "86.59",
-              "sf_ceiling": "16.04",
-              "sf_walls_and_ceiling": "102.64",
-              "sf_floor": "16.04",
-              "sy_flooring": "1.78",
-              "lf_floor_perimeter": "11.68",
-              "lf_ceil_perimeter": "18.93"
-            }
-          }
-        }
-      ],
+      "metadata": {},
+      "subrooms": [],
       "line_items": [
         {
           "type": "line_item",

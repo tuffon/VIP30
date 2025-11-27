@@ -31,6 +31,8 @@ from typing import Dict, Any, List, Optional, Tuple
 
 import pdfplumber
 
+from .xactimate.visible_text import extract_visible_lines, get_visible_text_config
+
 # -----------------------
 # Utilities
 # -----------------------
@@ -236,10 +238,13 @@ class StateFarmParser:
     def _extract_pages(self) -> List[str]:
         pages: List[str] = []
         with pdfplumber.open(self.input_file) as pdf:
-            for page in pdf.pages:
-                txt = page.extract_text() or ""
-                # normalize per page: strip empty lines
-                lines = [ln.strip() for ln in txt.split("\n") if ln.strip()]
+            config = get_visible_text_config()
+            for idx, page in enumerate(pdf.pages):
+                lines = extract_visible_lines(
+                    page,
+                    config=config,
+                    debug_page_number=idx + 1,
+                )
                 pages.append("\n".join(lines))
         return pages
 

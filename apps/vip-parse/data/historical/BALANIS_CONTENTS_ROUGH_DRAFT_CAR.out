@@ -174,25 +174,13 @@ Burbank, CA. 91504
 844-WCC-PACK
 CAL-T0192673
 Main
-EEnnttrryy//FFooyyeerr
-BALANIS_CONTENTS 8/25/2025 Page: 5
-"01
-'3
-"4
-'5
-"5
-'3
-'6
-"2
-'5
-1' 5" 7'
-"6
-'41
 2' 6" 4' 2' 4" Entry/Foyer Height: 11' 3"
+"13
+53
 223.90 SF Walls 121.44 SF Ceiling
-345.33 SF Walls & Ceiling 121.44 SF Floor
+345.33 SF Walls & Ceiling 121.44 SF Floor 6 "641
 13.49 SY Flooring 18.25 LF Floor Perimeter
-31.25 LF Ceil. Perimeter
+31.25 LF Ceil. Perimeter "45 "25
 Door 6' X 9' Opens into Exterior
 Missing Wall - Goes to Floor 7' X 9' 2" Opens into HALLWAY_1
 Missing Wall 14' 6" X 11' 3" Opens into FAMILY_ROOM
@@ -212,6 +200,7 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 43. CLN AV + Clean the floor
 F 121.44SF 0.00+ 0.57 = 0.11 69.33
 Totals: Entry/Foyer 6.68 145.09
+BALANIS_CONTENTS 8/25/2025 Page: 5
 6
 West Coast Contents
 West Coast Contents
@@ -219,22 +208,11 @@ West Coast Contents
 Burbank, CA. 91504
 844-WCC-PACK
 CAL-T0192673
-OOffffiiccee BBaatthh
-EEnnttrryy//FFooyyeerr FFaammiillyy RRoooomm
-GGuueesstt BBaatthh
-BALANIS_CONTENTS 8/25/2025 Page: 6
-"6
-'41
-"11
-'7
-"5
-'6
 2' 7" 10' 2' 7" Family Room Height: 10' 3"
-2' 4"
-282.80 SF Walls 215.69 SF Ceiling
-498.49 SF Walls & Ceiling 215.69 SF Floor
+282.80 SF Walls 215.69 SF Ceiling "117
+498.49 SF Walls & Ceiling 215.69 SF Floor "641
 23.97 SY Flooring 32.17 LF Floor Perimeter
-44.25 LF Ceil. Perimeter
+44.25 LF Ceil. Perimeter "56
 1' 5" 12' 1" 1' 5"
 Window 10' X 6' Opens into Exterior
 Missing Wall 14' 6" X 10' 3" Opens into ENTRY_FOYER
@@ -255,25 +233,18 @@ Additional labor due to large/heavy and fragile/expensive contents.
 49. CLN AV + Clean the floor
 F 215.69SF 0.00+ 0.57 = 0.21 123.15
 Totals: Family Room 21.24 498.55
-5' 9"
-5' 6"
-GGuueesstt BBaatthhOOffffiiccee CClloosseett ((11))
-HHaallllwwaayy 11
-"5
-'6
-"3
-"5
-'6
 Guest Bath Height: 9'
 191.11 SF Walls 35.51 SF Ceiling
+"56 "56
 226.62 SF Walls & Ceiling 29.16 SF Floor
 3.24 SY Flooring 15.57 LF Floor Perimeter
 2' 3" 3' 4"
-23.90 LF Ceil. Perimeter
+23.90 LF Ceil. Perimeter "3
 2' 8" 6"
 Door 3' X 8' Opens into HALLWAY_1
 CAT SEL ACT DESCRIPTION
 CALC QTY REMOVE REPLACE TAX TOTAL
+BALANIS_CONTENTS 8/25/2025 Page: 6
 7
 West Coast Contents
 West Coast Contents
@@ -295,52 +266,29 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 54. CLN AV + Clean the floor
 F 29.16SF 0.00+ 0.57 = 0.03 16.65
 Totals: Guest Bath 3.42 55.62
-6' 10" 9' 11"
+6' 10" 9' 11" Office Height: 10' 3"
 4' 8" 6' 3' 10"
-4' 5"
-OOffffiiccee BBaatthh 6' 8" LLaauunnddrryy RRoooomm
-OOffffiiccee
-GGuuOOeessffttff iiBBcceeaa ttCChhlloosseett ((11)) HHaallllwwaayy CClloosseett 22 ((22))
-HHaallllwwaayy 11
-BALANIS_CONTENTS 8/25/2025 Page: 7
-"2 '5"5
-"7
-'5"1
-'1
-6' 5' 2"
-5' 4"
-"9
-'41
-"4
-'1
-"6 '7
-"4
-'5
-Office Height: 10' 3"
+"41
 466.83 SF Walls 242.57 SF Ceiling
-709.40 SF Walls & Ceiling 242.57 SF Floor
+"25" "67
+709.40 SF Walls & Ceiling 242.57 SF Floor "941
+"
 26.95 SY Flooring 40.81 LF Floor Perimeter
-62.39 LF Ceil. Perimeter
+"45
+62.39 LF Ceil. Perimeter "11
 Door 2' 1" X 8' Opens into Exterior
 Door 6' X 8' Opens into Exterior
 Door 2' 6" X 8' Opens into OFFICE_BATH
 Door 6' X 8' Opens into HALLWAY_1
-GGuueesstt BBaatthh OOffffiiccee CClloosseett ((11))
-"7
-'5
-"1
-'1
-2' 1"
-1' 11"
-"5
-'6
 Subroom: Office Closet (1) Height: 10' 3"
+"7
 130.14 SF Walls 12.08 SF Ceiling
 142.22 SF Walls & Ceiling 12.08 SF Floor
+56 5
 1.34 SY Flooring 11.60 LF Floor Perimeter
-16.60 LF Ceil. Perimeter
-2' 4"
+16.60 LF Ceil. Perimeter "11
 Door 5' X 8' Opens into OFFICE2
+BALANIS_CONTENTS 8/25/2025 Page: 7
 8
 West Coast Contents
 West Coast Contents
@@ -372,27 +320,14 @@ Additional labor due to large/heavy and fragile/expensive contents. Additional l
 64. CLN AV + Clean the floor
 F 254.65SF 0.00+ 0.57 = 0.24 145.39
 Totals: Office 44.67 923.40
-OOffffiiccee BBaatthh
-5' 6" 1' 11"
-BALANIS_CONTENTS 8/25/2025 Page: 8
-"2
-'8
-"11
-'7
-8' 3"
-7' 10"
-"2
-'5
-"4
-"6
-'2
-"4
-'5
 Office Bath Height: 9'
+"4
+"62
 263.50 SF Walls 62.01 SF Ceiling
-325.51 SF Walls & Ceiling 34.50 SF Floor
-3.83 SY Flooring 13.92 LF Floor Perimeter
+325.51 SF Walls & Ceiling 34.50 SF Floor "17
+3.83 SY Flooring 13.92 LF Floor Perimeter 8 "2 "45
 31.50 LF Ceil. Perimeter
+5' 6" 1' 11"
 Door 2' 6" X 8' Opens into OFFICE2
 CAT SEL ACT DESCRIPTION
 CALC QTY REMOVE REPLACE TAX TOTAL
@@ -402,6 +337,7 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 3 3.00EA 0.00+ 3.87 = 1.10 12.71
 67. CLN AV + Clean the floor
 F 34.50SF 0.00+ 0.57 = 0.03 19.70
+BALANIS_CONTENTS 8/25/2025 Page: 8
 9
 West Coast Contents
 West Coast Contents
@@ -415,9 +351,10 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 Totals: Office Bath 2.70 50.48
 Hallway 1 Height: 9' 2"
 496.74 SF Walls 268.67 SF Ceiling
-9' 11"13' 11" 3' 5' HH4"aall6llww'5aa'yy 2 CC"lloosseett 22 ((22)) 765.40 SF Walls & Ceiling 268.67 SF Floor
-7' 1" 11' 11HH"aall5llww' 5aa"yy1 111' 9" 6' 5"CClloosseett 22 ((11))
-11HH' 7aa"WWllllwwiinnaa3eeyy' HH5CCCC"aaeelloollllCCllllsswwaaeellrrooaatt ssyy11ee 22tt ((1111 )) ((11)) 29.85 SY Flooring 52.33 LF Floor Perimeter
+9' 11"13' 11" 3' 5' 4"6'5' 2" 765.40 SF Walls & Ceiling 268.67 SF Floor
+7' 1" 11' 11"5' 5"11' 9" 6' 5"
+29.85 SY Flooring 52.33 LF Floor Perimeter
+11' 7" 3' 5"
 113.00 LF Ceil. Perimeter
 Missing Wall - Goes to Floor 11' 11" X 9' 2" Opens into LIVING_ROOM
 Missing Wall - Goes to Floor 7' 1" X 9' 2" Opens into LIVING_ROOM
@@ -449,35 +386,15 @@ West Coast Contents
 Burbank, CA. 91504
 844-WCC-PACK
 CAL-T0192673
-HHaallllwwaayy 11
-DDiinniinngg RRoooomm
-LLiivviinngg RRoooomm
-21' 11"
-16' 18' 11"
-9' 8" 12' 8"
+7' 1" 11' 11" 8" Living Room Height: 10' 3" "21
+1
+5
+335.79 SF Walls 547.16 SF Ceiling "1 "1161"671
+882.95 SF Walls & Ceiling 531.00 SF Floor 1"1171 1
+16' 18' 11" 59.00 SY Flooring 16.25 LF Floor Perimeter
+9' 8" 12' 8" 73.17 LF Ceil. Perimeter 5
 3' 5" 5' 5' 5' 5'5"
-3' 10"
-10' 1"
-BALANIS_CONTENTS 8/25/2025 Page: 10
-'91
-7' 1" 11' 11" 8"
-"1
-'71"11
-'71
-"2
-'1
-'2
-'1
-'5
-'5
-"11
-'61"6
-'71
-Living Room Height: 10' 3"
-335.79 SF Walls 547.16 SF Ceiling
-882.95 SF Walls & Ceiling 531.00 SF Floor
-59.00 SY Flooring 16.25 LF Floor Perimeter
-73.17 LF Ceil. Perimeter
+2
 Door 5' X 8' Opens into Exterior
 Door 5' X 8' Opens into Exterior
 Door 5' X 8' Opens into Exterior
@@ -511,6 +428,7 @@ Additional labor due to large/heavy and fragile/expensive contents. Additional l
 81. CLN AV + Clean the floor
 F 531.00SF 0.00+ 0.57 = 0.50 303.17
 Totals: Living Room 47.03 972.47
+BALANIS_CONTENTS 8/25/2025 Page: 10
 11
 West Coast Contents
 West Coast Contents
@@ -518,22 +436,12 @@ West Coast Contents
 Burbank, CA. 91504
 844-WCC-PACK
 CAL-T0192673
-DDiinniinngg RRoooomm
-4' 10" 5'
-BALANIS_CONTENTS 8/25/2025 Page: 11
-"9
-'21
-3' 2"
-"7
-'2"9
-'3
-10"5' 5" 3"
-1"
-'91
-Dining Room Height: 10' 3"
+10"5' 5" 3" Dining Room Height: 10' 3"
+"72"93
 40.89 SF Walls 164.72 SF Ceiling
 205.61 SF Walls & Ceiling 164.72 SF Floor
-18.30 SY Flooring 3.42 LF Floor Perimeter
+91
+18.30 SY Flooring 3.42 LF Floor Perimeter "921
 12.58 LF Ceil. Perimeter
 Missing Wall 4' 10" X 10' 3" Opens into LIVING_ROOM
 Missing Wall 5' X 10' 3" Opens into KITCHEN
@@ -559,6 +467,7 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 88. CLN AV + Clean the floor
 F 164.72SF 0.00+ 0.57 = 0.16 94.05
 Totals: Dining Room 31.45 454.77
+BALANIS_CONTENTS 8/25/2025 Page: 11
 12
 West Coast Contents
 West Coast Contents
@@ -566,37 +475,18 @@ West Coast Contents
 Burbank, CA. 91504
 844-WCC-PACK
 CAL-T0192673
-HHWWaalliillnnwweeaa yyCC eeCCllllllaaoorrsseett 11 ((11)) HHaallllwwaayy 22
-3' 2"
-DDiinniinngg RRoooomm KKiittcchheenn
-PPaannttrryy
-BALANIS_CONTENTS 8/25/2025 Page: 12
-"9
-'3
 11' 9" 3'1'
-11' 7" 6" 3' 9"
-3' 3"
-"4
-'31
-"01
-'9
-"7
-'3 8"3' 3'
-2' 10"
-"8
-'1
-6' 3" 6' 4' 9"
-4' 11"
-"5
-'4
-5'
-"9
-'21
 Kitchen Height: 10' 3"
+6"3 9" "93
 571.01 SF Walls 418.53 SF Ceiling
-989.54 SF Walls & Ceiling 357.55 SF Floor
+"019
+989.54 SF Walls & Ceiling 357.55 SF Floor "431
+"921
 39.73 SY Flooring 20.56 LF Floor Perimeter
-70.87 LF Ceil. Perimeter
+"73
+3'" 70.87 LF Ceil. Perimeter
+"54
+6' 3" 6' 4' 9" "81
 Missing Wall 3' 1 1/2" X 10' 3" Opens into DINING_ROOM
 Missing Wall - Goes to Floor 3' 9" X 10' 3" Opens into DINING_ROOM
 Door 3' X 8' Opens into HALLWAY_1
@@ -617,27 +507,18 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 92. CLN AV + Clean the floor
 F 357.55SF 0.00+ 0.57 = 0.34 204.14
 Totals: Kitchen 21.37 446.52
-8" 3'
-3' 6"2' 10"
-1'
-2"
-PPaannttrryy
-"01
-'4
-"6
-'5
-6'
-8" 5' 7"
-"01
-'1
-"8
-'1
 Pantry Height: 10' 3"
-179.13 SF Walls 24.02 SF Ceiling
-203.15 SF Walls & Ceiling 24.02 SF Floor
-2.67 SY Flooring 16.82 LF Floor Perimeter
-19.82 LF Ceil. Perimeter
+8"
+6"
+3' 179.13 SF Walls 24.02 SF Ceiling
+2" 203.15 SF Walls & Ceiling 24.02 SF Floor "
+1' 1 6
+2.67 SY Flooring 16.82 LF Floor Perimeter 4 5
+"01 "8
+6' 19.82 LF Ceil. Perimeter 1 1
+8" 5' 7"
 Door 3' X 8' Opens into KITCHEN
+BALANIS_CONTENTS 8/25/2025 Page: 12
 13
 West Coast Contents
 West Coast Contents
@@ -654,23 +535,15 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 95. CLN AV + Clean the floor
 F 24.02SF 0.00+ 0.57 = 0.02 13.71
 Totals: Pantry 2.85 46.28
-HHaallllwwaayy CClloosseett 11 ((11))
-WWiinnee CCeellllaarr
-2' 3"
-BALANIS_CONTENTS 8/25/2025 Page: 13
-"4 '2 "11 '1
-"1
-'2
-"6
-'2
-3' 10"
-3' 5" "9 '1
 Wine Cellar Height: 10' 3"
-144.35 SF Walls 13.90 SF Ceiling
-6"
-3'
+"9 "11
+144.35 SF Walls 13.90 SF Ceiling "4
+1
+2 1
 158.25 SF Walls & Ceiling 13.90 SF Floor
-1.54 SY Flooring 13.42 LF Floor Perimeter 6"
+6" 3' "1 "6
+1.54 SY Flooring 13.42 LF Floor Perimeter
+6" 2 2
 16.42 LF Ceil. Perimeter
 8"
 Door 3' X 8' Opens into KITCHEN
@@ -687,6 +560,7 @@ Additional labor to wrap bottles
 99. CLN AV + Clean the floor
 F 13.90SF 0.00+ 0.57 = 0.01 7.93
 Totals: Wine Cellar 21.24 452.11
+BALANIS_CONTENTS 8/25/2025 Page: 13
 14
 West Coast Contents
 West Coast Contents
@@ -694,26 +568,14 @@ West Coast Contents
 Burbank, CA. 91504
 844-WCC-PACK
 CAL-T0192673
-22'
-21' 2"
-GGaarraaggee
-LLaauunnddrryy RRoooomm
-BALANIS_CONTENTS 8/25/2025 Page: 14
-"2
-'1
-"5
-'1
-"9
-'61
-"7
-'1 2' 10" 12' 7"
-2' 1" 12' 7"
-"7 '91 '02
-Garage Height: 9'
+Garage Height: 9' "21 "9
 423.86 SF Walls 409.37 SF Ceiling
-833.23 SF Walls & Ceiling 371.02 SF Floor
+833.23 SF Walls & Ceiling 371.02 SF Floor 61 " 02
+91
 41.22 SY Flooring 34.82 LF Floor Perimeter
 77.15 LF Ceil. Perimeter
+2' 10" 12' 7"
+2' 1" 12' 7"
 Door 16' X 7' 6" Opens into Exterior
 Door 2' 10" X 7' 6" Opens into LAUNDRY_ROOM
 CAT SEL ACT DESCRIPTION
@@ -734,25 +596,15 @@ Additional labor due to large/heavy and quantity of contents.
 106. CLN AV + Clean the floor
 F 371.02SF 0.00+ 0.57 = 0.35 211.83
 Totals: Garage 63.25 1,003.37
-3' 6" 2' 10" 2' 3"
-2' 1"
-LLaauunnddrryy RRoooomm
-HHaallllwwaayy CClloosseett 22 ((22))
-"11
-'7
-"6
-'7
-2' 1"1' 11"2' 10"1' 7"
-1' 11"1' 9"
-"9
-'7
 Laundry Room Height: 8' 7"
+3' 6" 2' 10" 2' 3"
 230.25 SF Walls 62.91 SF Ceiling
-293.16 SF Walls & Ceiling 49.97 SF Floor
-5.55 SY Flooring 12.32 LF Floor Perimeter
-31.78 LF Ceil. Perimeter
+293.16 SF Walls & Ceiling 49.97 SF Floor "117 "67 "
+5.55 SY Flooring 12.32 LF Floor Perimeter 7
+2' 1"1' 11"2' 10"1' 7" 31.78 LF Ceil. Perimeter
 Door 2' 10" X 7' 6" Opens into GARAGE
 Door 2' 10" X 7' 6" Opens into HALLWAY_2
+BALANIS_CONTENTS 8/25/2025 Page: 14
 15
 West Coast Contents
 West Coast Contents
@@ -776,63 +628,30 @@ Additional labor due to large/heavy and quantity of contents.
 112. CLN AV + Clean the floor
 F 49.97SF 0.00+ 0.57 = 0.05 28.53
 Totals: Laundry Room 11.15 289.43
-2' 10"
-OOffffiiccee CClloosseett ((11))HHaallllwwaayy CClloosseett 22 ((22))
-CClloosseett 22 ((11))
-HHaaWWllllwwiinnaaeeyy CC CCeeHH lllloollaaaass llrrll ee ww tt CC aa 11 yy ll oo (( 22 ss11ee))BBtt aa11tt hh ((tt11uu))bb ((11))
-MMaasstteerr CClloosseett
-PPaannttrryy
-BALANIS_CONTENTS 8/25/2025 Page: 15
-"2
-'5
-"5
-"01
-'9
-"9 '3
-"9 '3
-"01
-'9
-"8
-"8"11
-'01"11
-"8
-'6
-'3
-"1
-'5
-'5
-'3"11
-'6
 Hallway 2 Height: 8' 7"
-341.50 SF Walls 157.72 SF Ceiling
-499.22 SF Walls & Ceiling 157.72 SF Floor
-17.52 SY Flooring 36.75 LF Floor Perimeter
-58.50 LF Ceil. Perimeter
+"8
+"9
+"
+341.50 SF Walls 157.72 SF Ceiling "15
+25 110
+499.22 SF Walls & Ceiling 157.72 SF Floor "
+"5 3 "11
+17.52 SY Flooring 36.75 LF Floor Perimeter "019 "0 3"116
+58.50 LF Ceil. Perimeter 9 86
 Door 2' 10" X 7' 6" Opens into LAUNDRY_ROOM
 Missing Wall 5' 2" X 8' 7" Opens into HALLWAY_1
 Door 5' 5" X 7' 6" Opens into MASTER_BEDRO
 Door 3' X 7' 6" Opens into BEDROOM_1
 Door 3' X 6' 8" Opens into BEDROOM_3
-HHaallllwwaayy CClloosseett 22 ((22))
-"7
-'5
-"4
-'5
-2' 1"
-1' 11"
-"9
-"11
-"9
-'3
-"2
-'1
 Subroom: Hallway Closet 2 (2) Height: 8' 7"
+"11
 95.84 SF Walls 10.07 SF Ceiling
-105.91 SF Walls & Ceiling 10.07 SF Floor
-1.12 SY Flooring 10.69 LF Floor Perimeter
-14.44 LF Ceil. Perimeter
-2' 6"
+105.91 SF Walls & Ceiling 10.07 SF Floor "7 "4 "9
+1.12 SY Flooring 10.69 LF Floor Perimeter 5 3
+14.44 LF Ceil. Perimeter "9 "2
+1
 Door 3' 9" X 7' 6" Opens into HALLWAY_2
+BALANIS_CONTENTS 8/25/2025 Page: 15
 16
 West Coast Contents
 West Coast Contents
@@ -840,28 +659,13 @@ West Coast Contents
 Burbank, CA. 91504
 844-WCC-PACK
 CAL-T0192673
-HHaallllwwaayy CClloosseett 11 ((11))
-WWiinnee CCeellllaarr
-HHaallllwwaayy 22
-BALANIS_CONTENTS 8/25/2025 Page: 16
-"4
-'2
-"1
-'2
-"6
-'2
-2' 7"
-1' 11"
-"5
+2' 7" Subroom: Hallway Closet 1 (1) Height: 8' 7"
 "9
-"9
-'3
-"7
-Subroom: Hallway Closet 1 (1) Height: 8' 7"
-80.60 SF Walls 5.55 SF Ceiling
-86.15 SF Walls & Ceiling 5.55 SF Floor
-0.62 SY Flooring 8.92 LF Floor Perimeter
-12.67 LF Ceil. Perimeter
+1' 11" 80.60 SF Walls 5.55 SF Ceiling "4
+86.15 SF Walls & Ceiling 5.55 SF Floor 2 "9
+0.62 SY Flooring 8.92 LF Floor Perimeter "1 "6 3
+12.67 LF Ceil. Perimeter 2 2
+"5 "7
 1'
 Door 3' 9" X 7' 6" Opens into HALLWAY_2
 CAT SEL ACT DESCRIPTION
@@ -879,45 +683,20 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 118. CLN AV + Clean the floor
 F 173.34SF 0.00+ 0.57 = 0.16 98.96
 Totals: Hallway 2 21.87 349.09
-LLaauunnddrryy RRoooomm
-BBeeddrroooomm 22
-HHaallllwwaayy CClloosseett 22 ((22)) 3' 2" 3'8" 7' 2" 3'3"
-6" 7'
-CClloosseett 22 ((11)) BBaatthhrroooomm 22
-CCaabbiinneett1177 ((BB11))
-"6
-'7
-"8
-"9
-'7
-"01
-12' 7" 4' 10"
-17' 2" "1
-'9
-"01 '2
-"3
-'3
-"2 "6 '2
-"11
-'5
-"6
-'2
-"3 '3
-"6
-'3
-"6
-'9"7
-'9
 Bedroom 2 Height: 8' 7"
-358.82 SF Walls 206.00 SF Ceiling
-564.82 SF Walls & Ceiling 206.00 SF Floor
-22.89 SY Flooring 38.42 LF Floor Perimeter
-58.33 LF Ceil. Perimeter
+12' 7" 4' 10"
+17' 2" 358.82 SF Walls 206.00 SF Ceiling "012 "2 "6 "33
+"67 "97 "19 "69"79
+564.82 SF Walls & Ceiling 206.00 SF Floor "
+22.89 SY Flooring 38.42 LF Floor Perimeter "8 "01 5
+"63
+3' 2" 3'8" 7' 2" 3'3" 58.33 LF Ceil. Perimeter 3 2
 Door 3' X 6' 8" Opens into BATHROOM_2
 Door 3' X 6' 8" Opens into HALLWAY_2
 Door 2' 6" X 7' 6" Opens into Exterior
 Door 5' 11" X 7' 6" Opens into Exterior
 Door 2' 6" X 7' 6" Opens into Exterior
+BALANIS_CONTENTS 8/25/2025 Page: 16
 17
 West Coast Contents
 West Coast Contents
@@ -925,19 +704,11 @@ West Coast Contents
 Burbank, CA. 91504
 844-WCC-PACK
 CAL-T0192673
-3' 2" 3' 8"
-6"
-CClloosseett 22 ((11))
-BALANIS_CONTENTS 8/25/2025 Page: 17
-"6
-'5
-6' 7"
-"1
-'5
 Subroom: Closet 2 (1) Height: 8' 7"
+3' 2" 3' 8"
 180.28 SF Walls 33.47 SF Ceiling
 213.74 SF Walls & Ceiling 33.47 SF Floor
-3.72 SY Flooring 20.33 LF Floor Perimeter
+3.72 SY Flooring 20.33 LF Floor Perimeter "65 "15
 23.33 LF Ceil. Perimeter
 Door 3' X 6' 8" Opens into BEDROOM_3
 CAT SEL ACT DESCRIPTION
@@ -960,26 +731,19 @@ Additional labor due to large/heavy contents.
 126. CLN AV + Clean the floor
 F 239.47SF 0.00+ 0.57 = 0.23 136.73
 Totals: Bedroom 2 46.99 808.79
-CClloosseett 22 ((11)) BBaatthhrroooomm 22
-CCaabbiinneett1177 ((BB11))
-"9
-"9
-'1
-'1
-"7
-'2
-'2
-7' 2" 3' 3"
-7'
-"1 '5
 Bathroom 2 Height: 8' 7"
-149.58 SF Walls 51.68 SF Ceiling
+7' 2" 3' 3" 149.58 SF Walls 51.68 SF Ceiling
+9 1
 201.26 SF Walls & Ceiling 28.29 SF Floor
+"72
+"15
 3.14 SY Flooring 10.25 LF Floor Perimeter
-10' 2" 30.50 LF Ceil. Perimeter
+"91
+10' 2" 30.50 LF Ceil. Perimeter 2
 2' 6" 7' 3"
 Window 2' 7" X 4' Opens into Exterior
 Door 3' X 6' 8" Opens into BEDROOM_3
+BALANIS_CONTENTS 8/25/2025 Page: 17
 18
 West Coast Contents
 West Coast Contents
@@ -996,41 +760,19 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 129. CLN AV + Clean the floor
 F 28.29SF 0.00+ 0.57 = 0.03 16.16
 Totals: Bathroom 2 2.67 46.65
-KKiittcchheenn BBeeddrroooomm 11
-MMaasstteerr CClloosseettTTooiilleett ((11))
-PPaannttrryy
-16' 11"
-17' 6"
-MMaasstteerr BBeeddrroooomm MMaasstteerr BBaatthh
-12' 1"
+Master Bedroom Height: 8' 7"
+"51
+"118
+577.83 SF Walls 418.53 SF Ceiling
+5' 5" 11' 1"
+996.37 SF Walls & Ceiling 407.38 SF Floor "113
+3
+45.26 SY Flooring 57.17 LF Floor Perimeter
+"221 911 "521
+12' 1" 95.50 LF Ceil. Perimeter "113
 3' 5' 5' 3' 1"
 2' 11" 3' 3"
 6' 4" 12' 3"
-BALANIS_CONTENTS 8/25/2025 Page: 18
-'3
-"5
-'21
-11' 1"
-11' 3"
-"11
-'8
-"5
-'1
-5' 5"
-5' 5"
-"2
-'21
-"11
-'3
-"11
-'3
-"9
-'11
-Master Bedroom Height: 8' 7"
-577.83 SF Walls 418.53 SF Ceiling
-996.37 SF Walls & Ceiling 407.38 SF Floor
-45.26 SY Flooring 57.17 LF Floor Perimeter
-95.50 LF Ceil. Perimeter
 Door 3' X 7' 6" Opens into Exterior
 Door 5' X 7' 6" Opens into Exterior
 Door 5' X 7' 6" Opens into Exterior
@@ -1052,6 +794,7 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 134. CPS LAB + Inventory, Packing, Boxing, and Moving charge - per hour
 6 6.00HR 0.00+ 66.50 = 0.00 399.00
 Additional labor due to large/heavy contents.
+BALANIS_CONTENTS 8/25/2025 Page: 18
 19
 West Coast Contents
 West Coast Contents
@@ -1069,52 +812,34 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 137. CLN AV + Clean the floor
 F 407.38SF 0.00+ 0.57 = 0.39 232.60
 Totals: Master Bedroom 68.82 1,420.42
-MMaasstteerr BBeeddrroooomm MMaasstteerr BBaatthh
-BALANIS_CONTENTS 8/25/2025 Page: 19
-"7
-'6
-"3
-"9
-'6
-'6
-"8
-2' 9" 3' 6"3'1' 9" 4'
-8" 1' 11" 4' 5" 4' 9" "7'3
-"5
-'21
 Master Bath Height: 8' 7"
-307.31 SF Walls 229.51 SF Ceiling
-536.82 SF Walls & Ceiling 182.38 SF Floor
-20.26 SY Flooring 28.83 LF Floor Perimeter
-54.83 LF Ceil. Perimeter
-5' 2" 8' 7"
+2' 9" 3' 6"3'1' 9" 4'
+5"4' "7
+8" 1' 11" 4' 9" 307.31 SF Walls 229.51 SF Ceiling 3
+536.82 SF Walls & Ceiling 182.38 SF Floor 7 9
+20.26 SY Flooring 28.83 LF Floor Perimeter 521
+54.83 LF Ceil. Perimeter 6
+5' 2" 8' 7" "3 "8
 5' 5" 5' 7"
 Door 6' X 7' 6" Opens into Exterior
 Door 3' X 7' 6" Opens into MASTER_CLOSE
 Door 3' X 7' 6" Opens into MASTER_BEDRO
 Window 8' 7" X 6' Opens into Exterior
-TTooiilleett ((11))
-"3
-'2
-"8
-'2
-'3
-"8
-'1
-5' 7"
-5' 2"
-"01
-'6
 Subroom: Toilet (1) Height: 8' 7"
+"32 "82
 172.06 SF Walls 35.47 SF Ceiling
+"016
 207.53 SF Walls & Ceiling 35.47 SF Floor
+3
 3.94 SY Flooring 21.06 LF Floor Perimeter
+"81
 6" 3' 1' 9" 24.06 LF Ceil. Perimeter
 8" 1' 11"
 Window 3' X 4' Opens into Exterior
 Door 3' X 7' 6" Opens into MASTER_BATH
 CAT SEL ACT DESCRIPTION
 CALC QTY REMOVE REPLACE TAX TOTAL
+BALANIS_CONTENTS 8/25/2025 Page: 19
 20
 West Coast Contents
 West Coast Contents
@@ -1134,20 +859,11 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 141. CLN AV + Clean the floor
 F 217.85SF 0.00+ 0.57 = 0.21 124.38
 Totals: Master Bath 10.59 244.11
-MMaasstteerr CClloosseett TTooiilleett ((11))
-11' 1" 2' 9" 3' 5"
-11' 3" 2' 7" 7"
-BALANIS_CONTENTS 8/25/2025 Page: 20
-"6
-'7
-17' 2"
-"01
-'6
 Master Closet Height: 8' 7"
 390.06 SF Walls 117.86 SF Ceiling
-507.92 SF Walls & Ceiling 117.86 SF Floor
-13.10 SY Flooring 45.06 LF Floor Perimeter
-48.06 LF Ceil. Perimeter
+507.92 SF Walls & Ceiling 117.86 SF Floor "67 "016
+11' 1" 2' 9" 3' 5" 13.10 SY Flooring 45.06 LF Floor Perimeter
+11' 3" 2' 7" 7" 48.06 LF Ceil. Perimeter
 Door 3' X 7' 6" Opens into MASTER_BATH
 CAT SEL ACT DESCRIPTION
 CALC QTY REMOVE REPLACE TAX TOTAL
@@ -1164,6 +880,7 @@ Additional labor due to large/heavy contents.
 600 600.00LF 0.00+ 0.22 = 12.54 144.54
 147. CLN AV + Clean the floor
 F 117.86SF 0.00+ 0.57 = 0.11 67.29
+BALANIS_CONTENTS 8/25/2025 Page: 20
 21
 West Coast Contents
 West Coast Contents
@@ -1175,53 +892,24 @@ CONTINUED - Master Closet
 CAT SEL ACT DESCRIPTION
 CALC QTY REMOVE REPLACE TAX TOTAL
 Totals: Master Closet 75.44 1,467.61
-HHWWaaiillnnllwwee aaCCyyee CCllllaalloorrsseett 11 ((11))
-HHaallllwwaayy 223' 2" 3' 2' 6" 4' 1" 3'3"
-2' 11"4' 3"
-BBeeddrroooomm 11
-BALANIS_CONTENTS 8/25/2025 Page: 21
-"11
-"8
-'6
-"5 '1
-"8'3
-"11
-'6
-"5 '1 17' 2"
-"4
-'9
-'3 "6 "4
-'2
-'6
-"4 '2
-"3
-'3
-"11 '2
-"6
-'9
 Bedroom 1 Height: 8' 7"
-352.64 SF Walls 205.44 SF Ceiling
-558.08 SF Walls & Ceiling 205.44 SF Floor
-22.83 SY Flooring 38.60 LF Floor Perimeter
-58.27 LF Ceil. Perimeter
+3' 2" 3' 2' 6" 4' 1" 3'3"
+352.64 SF Walls 205.44 SF Ceiling 2' 11"4' 3" "11 "8 3 3 "6 "42 "3
+558.08 SF Walls & Ceiling 205.44 SF Floor "49 "69
+22.83 SY Flooring 38.60 LF Floor Perimeter "86 "116 6
+17' 2" 58.27 LF Ceil. Perimeter "51 "5 "42 "112
 Door 3' X 7' 6" Opens into BATHROOM_1
 Door 3' X 7' 6" Opens into HALLWAY_2
 Door 2' 4" X 7' 6" Opens into Exterior
 Door 6' X 7' 6" Opens into Exterior
 Door 2' 4" X 7' 6" Opens into Exterior
-6' 7"
-CClloosseett 11 ((11)) BBaatthhttuubb ((11))
-HHaallllwwaayy 22
-"5
-'5
-'5
 Subroom: Closet 1 (1) Height: 8' 7"
 176.35 SF Walls 32.92 SF Ceiling
-209.26 SF Walls & Ceiling 32.92 SF Floor
-3.66 SY Flooring 20.17 LF Floor Perimeter
+209.26 SF Walls & Ceiling 32.92 SF Floor "5
+5
+3.66 SY Flooring 20.17 LF Floor Perimeter 5
 23.17 LF Ceil. Perimeter
 3' 2" 3' 6"
-8"
 Door 3' X 7' 6" Opens into BEDROOM_1
 CAT SEL ACT DESCRIPTION
 CALC QTY REMOVE REPLACE TAX TOTAL
@@ -1231,6 +919,7 @@ CALC QTY REMOVE REPLACE TAX TOTAL
 11 11.00EA 0.00+ 3.87 = 4.04 46.61
 150. CPS BX< + Provide box, packing paper & tape - small size
 5 5.00EA 0.00+ 2.93 = 1.39 16.04
+BALANIS_CONTENTS 8/25/2025 Page: 21
 22
 West Coast Contents
 West Coast Contents
@@ -1255,44 +944,27 @@ Additional labor due to large/heavy contents.
 156. CLN AV + Clean the floor
 F 238.36SF 0.00+ 0.57 = 0.23 136.10
 Totals: Bedroom 1 46.56 803.22
-BBaatthhttuubb ((11)) BBaatthhrroooomm 11
-BALANIS_CONTENTS 8/25/2025 Page: 22
-"1
-'2
-"4
-"4
-'2
-"7
-'2
-"7
-7' 6"
-7' 3"
-"6
-'4
-"7
 Bathroom 1 Height: 8' 7"
+"6
+"12 "4
 155.22 SF Walls 36.25 SF Ceiling
-191.47 SF Walls & Ceiling 26.83 SF Floor
+191.47 SF Walls & Ceiling 26.83 SF Floor 4
+"72
 2.98 SY Flooring 14.79 LF Floor Perimeter
-4' 1" 3'
+4' 1" 3' "7 "4 "7
 24.50 LF Ceil. Perimeter
-4' 3"
 Window 2' 7" X 4' Opens into Exterior
 Door 3' X 7' 6" Opens into BEDROOM_1
-BBaatthhttuubb ((11))
-"6
-'4
-"7
-2' 9"
-2' 6"
-'5
 Subroom: Bathtub (1) Height: 8' 7"
+"6
 106.51 SF Walls 12.50 SF Ceiling
 119.01 SF Walls & Ceiling 12.50 SF Floor
+5
 1.39 SY Flooring 15.00 LF Floor Perimeter
 15.00 LF Ceil. Perimeter
-2' 11"
+"7
 Missing Wall - Goes to neither Floor/Ceiling 4' X 6' Opens into BATHROOM_1
+BALANIS_CONTENTS 8/25/2025 Page: 22
 23
 West Coast Contents
 West Coast Contents
@@ -1393,147 +1065,40 @@ Total 110,042.60 100.00%
 BALANIS_CONTENTS 8/25/2025 Page: 26
 27
 Main
-GGaarraaggee
+"681
+"
+GGaarraaggee 02
+91
+23' 11" 24' 11" "42"12
+23' 3" 16' 5"
+17' 2"
+"117 "117 "114
 OOffffiiccee BBaatthh
-LLaauunnddrryy RRoooomm EEnnttrryy//FFooyyeerr FFaammiillyy RRoooomm OOffffiiccee BBeeddrroooomm 22
-GGuuOOeeffssffttii ccBBeeaa CCtthhlloosseett ((11)) HHaallllwwaayy CClloosseett 22 ((22))
-CClloosseett 22 ((11BB))aatthhrroooomm 22
-HHaallllwwaayy 11 CCaabbiinneett1177 ((BB11))
-HHWWaalllliiwwnneeaa yyCC CCeellllllooaassrreett 11 ((CC11ll))oosseett BB11aa tt((hh11tt))uubbBB aa((tt11hh))rroooomm 11 HHaallllwwaayy 22
-2' 1" DDiinniinngg RRoooomm KKiittcchheenn BBeeddrroooomm 11
-LLiivviinngg RRoooomm
-MMaasstteerr CClloosseett TTooiilleett ((11)) PPaannttrryy 16' 4" 5' 5" 4' 5"
-MMaasstteerr BBeeddrroooomm MMaasstteerr BBaatthh
+LLaauunnddrryy RRoooomm "67
+EEnnttrryy//FFooyyeerr FFaammiillyy RRoooomm 5' 2" OOffffiiccee BBeeddrroooomm 22 "641 "62 "941 "62 21
+5' 6" 1' 11"
+1' 11" 6' 1"
+GGuuOOeeffssffttii ccBBeeaa CCtthhlloosseett ((11)) HHaallllwwaayy CClloosseett 22 ((22)) "73 "56 "4 "95
+6' 7" 2' 11" "3
+23' 3" CClloosseett 22 ((11BB))aatthhrroooomm 22 "15
+HHaallllwwaayy 11 CCaabbiinneett1177 ((BB11)) "55 "25 "953
+2' 6" 4' 9"
+28' 9" 4' 5" HHWWaalllliiwwnneeaa yyCC CCeellllllooaassrreett 11 ((CC11ll))oosseett BB11aa tt((hh11tt))uubbBB aa((tt11hh))7rr' oo3"oomm 11 54 "62 " "952
+11' 2" ' 1 HHaallllwwaayy 22 15' 4" 4' 2"" "46 " 2 4
+"0141
+"64"29
+DDiinniinngg RRoooomm KKiittcchheenn BBeeddrroooomm 11 "532 91 "431 21
+LLiivviinngg RRoooomm "921
+"118
+"34
+4' 10" 5' 4' 1 PP0" 4' aa6" nnttrryy MMaasstteerr CClloosseett TTooiilleett ((11)) "54 "011 "014 "118 "016 "37
+44' 3" 5' 5" 4' 5" 6'
+45' 6" 5' 7" 11' 3" 5' 9" 4'
+4' 5""
+"35
+MMaasstteerr BBeeddrroooomm MMaasstteerr BBaatthh "361 "16 "1151 "82 "52 "921 "431
+7" '
+2'
+22' 11" 13'
 Main
 BALANIS_CONTENTS 8/25/2025 Page: 27
-"11
-'8
-"2 '9
-"3
-'4
-11' 2"
-"6 '2
-"6 '2
-5' 2"
-"11
-'7
-"7
-'3
-1' 10"
-"1 '6
-7'
-2'
-7"
-4'
-6"
-13'
-1'
-9"
-"8 '2 3' 8" "5 '2
-2'
-6' 9"
-"3
-'5
-5' 9" '2
-2' 11"
-4' 9"
-"1 '2 "11
-'4 "6
-'2
-2'
-"7
-'91
-2' 6"
-"4
-'2
-4' 10" 4' 6" "01 '4 6'
-5' 7"
-"01 '1
-5' 6"
-"6 '41
-"3
-8' 5"
-1' 11" 6' 1"
-"6 '7
-22'
-21' 2"
-"6
-'81 '02
-"9
-'21
-"4
-'31
-4'
-15' 9"
-4'
-5"
-4'
-9"
-"11 '51
-16' 5"
-18' 11"
-"5 '4
-"11
-'7
-"5 '6
-"9 '41
-4' 10"
-"5
-'32
-'91
-"1
-'2
-"4 '5
-"5 '4
-"9 '5
-4'
-2"
-3' 10"
-'21
-11' 3"
-22' 11"
-43' 1"
-"3 '61
-"11 '8
-1' 11"
-27' 10"
-"01 '6 "3 '7
-4' 10"
-17' 2"
-6' 7"
-10' 2"
-5' 7"
-5' 2"
-'21
-23' 11"
-23' 3"
-5'
-"9
-'21
-3' 2"
-"4
-'6
-28' 9"
-"4
-'31
-"2 '5
-"01
-'41
-"9 '52
-"1
-'5
-51' 1"
-2' 6"
-7' 3"
-15' 4"
-44' 3"
-45' 6"
-'54
-"5 '5 "9
-'53
-7' 10"
-"6
-'4
-24' 11"
-23' 3"
-4' 5"
