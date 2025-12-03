@@ -366,8 +366,12 @@ def _extract_recap_by_category(payload: Dict[str, Any]) -> Optional[Dict[str, An
 
 
 def _infer_estimate_label(parsed: ParsedEstimate) -> str:
-    case_md = parsed.payload.get("case_metadata") if isinstance(parsed.payload, dict) else {}
-    estimate_name = (case_md or {}).get("estimate_name") if isinstance(case_md, dict) else None
+    payload = parsed.payload if isinstance(parsed.payload, dict) else {}
+    estimate_name = payload.get("estimate_name") if isinstance(payload, dict) else None
+    if not estimate_name:
+        case_md = payload.get("case_metadata") if isinstance(payload, dict) else {}
+        if isinstance(case_md, dict):
+            estimate_name = case_md.get("estimate_name")
     if estimate_name:
         return str(estimate_name)
     return Path(parsed.filename).stem

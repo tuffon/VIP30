@@ -15,6 +15,7 @@ from rq.job import Job
 
 from redis import Redis
 from src.bid_comp import BidComp
+from src.bid_comp.identity import ensure_estimate_identity
 from src.llm import OpenAIChatAdapter
 
 # Configure worker logging early so RQ shows our logs
@@ -153,19 +154,36 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
             carrier_payload = _parse_full(carrier_path)
             contractor_payload = _parse_full(contractor_path)
 
+            bid_a_name = ensure_estimate_identity(carrier_payload, Path(carrier_key).name)
+            bid_b_name = ensure_estimate_identity(contractor_payload, Path(contractor_key).name)
+
             # recaps derived from full JSON; used for summary rows and checks
             recap_a = _extract_recap(carrier_payload)
             recap_b = _extract_recap(contractor_payload)
-            recap_bundle = {"carrier": recap_a, "contractor": recap_b}
+            recap_bundle = {
+                "estimates": [
+                    {"estimate_name": bid_a_name, "recap": recap_a},
+                    {"estimate_name": bid_b_name, "recap": recap_b},
+                ],
+                "carrier": recap_a,
+                "contractor": recap_b,
+            }
 
             # full-context input for BidComp: full JSON, not recap-only
-            bid_context = {"carrier": carrier_payload, "contractor": contractor_payload}
+            bid_context = {
+                "estimates": [
+                    {"role": "BID_A", "estimate_name": bid_a_name, "payload": carrier_payload},
+                    {"role": "BID_B", "estimate_name": bid_b_name, "payload": contractor_payload},
+                ],
+                "carrier": carrier_payload,
+                "contractor": contractor_payload,
+            }
 
             # Persist JSON payloads alongside XLS output for debugging
             json_prefix = f"results/{job_id}"
             try:
-                carrier_json_key = f"{json_prefix}/carrier-context.json"
-                contractor_json_key = f"{json_prefix}/contractor-context.json"
+                carrier_json_key = f"{json_prefix}/bid-a-context.json"
+                contractor_json_key = f"{json_prefix}/bid-b-context.json"
                 s3.put_object(
                     Bucket=bucket,
                     Key=carrier_json_key,

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -11,7 +11,10 @@ from typing import Any, Dict, Optional
 class PromptTemplate:
     id: str
     description: str
-    content: str  # uses str.format(**context)
+    content: Optional[str] = None  # uses str.format(**context)
+    system: Optional[str] = None
+    user: Optional[str] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
 
 class TemplateRegistry:
@@ -34,11 +37,16 @@ class TemplateRegistry:
             try:
                 with p.open("r", encoding="utf-8") as f:
                     obj = json.load(f)
-                self.register(PromptTemplate(
-                    id=obj["id"],
-                    description=obj.get("description", ""),
-                    content=obj["content"],
-                ))
+                self.register(
+                    PromptTemplate(
+                        id=obj["id"],
+                        description=obj.get("description", ""),
+                        content=obj.get("content"),
+                        system=obj.get("system"),
+                        user=obj.get("user"),
+                        metadata=obj.get("metadata") or {},
+                    )
+                )
             except Exception:
                 continue
 
@@ -102,7 +110,11 @@ def default_registry() -> TemplateRegistry:
             "- Keep language professional and actionable.\n"
         ),
     ))
-    # Optional directory
+    # Built-in JSON prompts packaged with the repo
+    builtin_dir = Path(__file__).resolve().parent.parent / "prompts"
+    reg.load_from_dir(str(builtin_dir))
+
+    # Optional directory via env override
     prompt_dir = os.getenv("PROMPT_DIR")
     if prompt_dir:
         reg.load_from_dir(prompt_dir)

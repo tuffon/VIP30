@@ -26,6 +26,7 @@ from __future__ import annotations
 import os
 import re
 import json
+from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Dict, Any, List, Optional, Tuple
 
@@ -213,6 +214,11 @@ class StateFarmParser:
 
         if self.debug:
             payload["validations"] = {"coverage": {"sum_rcv_across_coverages": round(sum_rcv, 2)}}
+
+        est_name = case_md_aligned.get("estimate_name") or Path(self.input_file).stem
+        payload["estimate_name"] = est_name
+        if isinstance(payload.get("case_metadata"), dict) and not payload["case_metadata"].get("estimate_name"):
+            payload["case_metadata"]["estimate_name"] = est_name
 
         # --- WRITE OUTPUTS: JSON + .out ---
         if self.output_path:

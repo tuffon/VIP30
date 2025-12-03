@@ -1,137 +1,144 @@
 from __future__ import annotations
 
 from io import BytesIO
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
-import pandas as pd
+from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
 from openpyxl.utils import get_column_letter
 
 
 def export_xlsx(
-    rows: List[Dict[str, Any]],
-    carrier_total: float,
-    contractor_total: float,
-    structure_text: str,
-    delta_abs_alert: float,
-    delta_pct_alert: float,
+    *,
+    pair,
+    narrative,
+    category_rows: List[Dict[str, Any]],
+    recap_rows: List[Dict[str, Any]],
 ) -> bytes:
-    """
-    Export a simplified workbook modelled after the training example:
+    wb = Workbook()
+    ws_summary = wb.active
+    ws_summary.title = "Narrative Summary"
+    header_font = Font(bold=True)
 
-    - Sheet 'Summary '  : high-level categories with carrier/contractor totals, delta, and LLM notes.
-    - Sheet 'Updated Bid Comp ' : recap-style categories with totals and deltas.
+    ws_summary["A1"] = "Bid Comparison Summary"
+    ws_summary["A1"].font = Font(bold=True, size=14)
 
-    The LLM narratives generated in BidComp (NARRATIVE field on SECTION rows)
-    flow into the 'Notes' column on the Summary sheet.
-    """
-    df = pd.DataFrame(rows)
+    ws_summary["A3"] = "Bid A"
+    ws_summary["B3"] = pair.bid_a.estimate_name
+    ws_summary["C3"] = pair.bid_a.totals.grand_total
+    ws_summary["A4"] = "Bid B"
+    ws_summary["B4"] = pair.bid_b.estimate_name
+    ws_summary["C4"] = pair.bid_b.totals.grand_total
+    for cell_ref in ("C3", "C4"):
+        cell = ws_summary[cell_ref]
+        if isinstance(cell.value, (int, float)):
+            cell.number_format = "$#,##0.00"
 
-    # SECTION-level summaries (with optional LLM narratives)
-    sec_df = df[df.get("TYPE") == "SECTION"].copy() if "TYPE" in df.columns else pd.DataFrame()
-    if not sec_df.empty and "Δ ($)" in sec_df.columns:
-        sec_df["__abs_delta__"] = sec_df["Δ ($)"].apply(lambda x: abs(x) if isinstance(x, (int, float)) else 0.0)
-        sec_df = sec_df.sort_values("__abs_delta__", ascending=False)
+    ws_summary["A6"] = "Executive Summary"
+    ws_summary["A6"].font = header_font
+    ws_summary.merge_cells(start_row=6, start_column=2, end_row=6, end_column=5)
+    exec_cell = ws_summary.cell(row=6, column=2, value=narrative.executive_summary)
+    exec_cell.alignment = Alignment(wrap_text=True, vertical="top")
 
-    # RECAP-level summaries for the "Updated Bid Comp" sheet
-    recap_df = df[df.get("TYPE") == "RECAP"].copy() if "TYPE" in df.columns else pd.DataFrame()
-    if not recap_df.empty and "Δ ($)" in recap_df.columns:
-        recap_df["__abs_delta__"] = recap_df["Δ ($)"].apply(lambda x: abs(x) if isinstance(x, (int, float)) else 0.0)
-        recap_df = recap_df.sort_values("__abs_delta__", ascending=False)
+    current_row = 8
+    ws_summary.cell(row=current_row, column=1, value="Largest Deltas").font = header_font
+    current_row += 1
+    delta_headers = ["Driver", f"{pair.bid_a.estimate_name} ($)", f"{pair.bid_b.estimate_name} ($)", "Delta ($)", "Insight"]
+    for col_idx, header in enumerate(delta_headers, start=1):
+        ws_summary.cell(row=current_row, column=col_idx, value=header).font = header_font
+    current_row += 1
+    for entry in narrative.largest_deltas:
+        ws_summary.cell(row=current_row, column=1, value=entry.get("title") or entry.get("category"))
+        ws_summary.cell(row=current_row, column=2, value=entry.get("bid_a_total"))
+        ws_summary.cell(row=current_row, column=3, value=entry.get("bid_b_total"))
+        ws_summary.cell(row=current_row, column=4, value=entry.get("delta"))
+        ws_summary.cell(row=current_row, column=5, value=entry.get("insight"))
+        current_row += 1
+    for col_idx in (2, 3, 4):
+        col_letter = get_column_letter(col_idx)
+        for cell in ws_summary[col_letter]:
+            if isinstance(cell.value, (int, float)):
+                cell.number_format = "$#,##0.00"
 
-    bio = BytesIO()
-    with pd.ExcelWriter(bio, engine="openpyxl") as writer:
-        wb = writer.book
+    current_row += 1
+    ws_summary.cell(row=current_row, column=1, value="Contextual Drivers").font = header_font
+    current_row += 1
+    for note in narrative.contextual_drivers:
+        ws_summary.cell(row=current_row, column=2, value=f"- {note}").alignment = Alignment(wrap_text=True, vertical="top")
+        current_row += 1
 
-        # Remove any default sheet created by openpyxl so we control ordering
-        if wb.worksheets:
-            wb.remove(wb.worksheets[0])
+    current_row += 1
+    ws_summary.cell(row=current_row, column=1, value="Follow-up Actions").font = header_font
+    current_row += 1
+    for action in narrative.follow_up_actions:
+        ws_summary.cell(row=current_row, column=2, value=f"- {action}").alignment = Alignment(wrap_text=True, vertical="top")
+        current_row += 1
 
-        # ----- Sheet 1: Summary -----
-        ws_summary = wb.create_sheet("Summary ")
-        header_font = Font(bold=True)
+    _autosize(ws_summary)
 
-        # Header modelled after training file
-        summary_headers = ["Trade/Category", "Carrier", "Contractor", "Difference", "Notes"]
-        ws_summary.append(summary_headers)
-        for col_idx in range(1, len(summary_headers) + 1):
-            ws_summary.cell(row=1, column=col_idx).font = header_font
-
-        # Optional top-level totals row
-        delta_total = (contractor_total or 0.0) - (carrier_total or 0.0)
-        ws_summary.append(
+    # Sheet 2: category matrix
+    ws_categories = wb.create_sheet("Verisk Categories")
+    cat_headers = [
+        "Category",
+        f"{pair.bid_a.estimate_name} ($)",
+        f"{pair.bid_b.estimate_name} ($)",
+        "Delta ($)",
+        "Delta (% of Bid A)",
+    ]
+    ws_categories.append(cat_headers)
+    for col_idx in range(1, len(cat_headers) + 1):
+        ws_categories.cell(row=1, column=col_idx).font = header_font
+    for row in category_rows:
+        ws_categories.append(
             [
-                "TOTAL",
-                carrier_total,
-                contractor_total,
-                delta_total,
-                structure_text or "",
+                row["category"],
+                row.get("bid_a_total"),
+                row.get("bid_b_total"),
+                row.get("delta"),
+                row.get("delta_pct"),
             ]
         )
+    for col_idx in (2, 3, 4):
+        col_letter = get_column_letter(col_idx)
+        for cell in ws_categories[col_letter]:
+            if isinstance(cell.value, (int, float)):
+                cell.number_format = "$#,##0.00"
+    pct_column = get_column_letter(5)
+    for cell in ws_categories[pct_column]:
+        if isinstance(cell.value, (int, float)):
+            cell.number_format = "0.00%"
+    ws_categories.freeze_panes = "A2"
+    _autosize(ws_categories)
 
-        # Data rows from section summaries
-        if not sec_df.empty:
-            for _, r in sec_df.iterrows():
-                ws_summary.append(
-                    [
-                        r.get("NAME") or r.get("CANONICAL GROUP"),
-                        r.get("CARRIER TOTAL ($)"),
-                        r.get("CONTRACTOR TOTAL ($)"),
-                        r.get("Δ ($)"),
-                        r.get("NARRATIVE") or r.get("COMMENTS"),
-                    ]
-                )
+    # Sheet 3: raw recap
+    ws_recap = wb.create_sheet("Original Recap")
+    recap_headers = ["Estimate", "Group", "Item", "Total ($)"]
+    ws_recap.append(recap_headers)
+    for col_idx in range(1, len(recap_headers) + 1):
+        ws_recap.cell(row=1, column=col_idx).font = header_font
+    for entry in recap_rows:
+        ws_recap.append(
+            [
+                entry.get("estimate"),
+                entry.get("group"),
+                entry.get("item"),
+                entry.get("total"),
+            ]
+        )
+    total_col = get_column_letter(4)
+    for cell in ws_recap[total_col]:
+        if isinstance(cell.value, (int, float)):
+            cell.number_format = "$#,##0.00"
+    ws_recap.freeze_panes = "A2"
+    _autosize(ws_recap)
 
-        # Number formatting for currency columns (Carrier, Contractor, Difference)
-        for col_idx in (2, 3, 4):
-            col_letter = get_column_letter(col_idx)
-            for cell in ws_summary[col_letter]:
-                if isinstance(cell.value, (int, float)):
-                    cell.number_format = "$#,##0.00"
-
-        # Wrap text in Notes column
-        notes_col_letter = get_column_letter(5)
-        for cell in ws_summary[notes_col_letter]:
-            cell.alignment = Alignment(wrap_text=True, vertical="top")
-
-        # Autosize columns on Summary sheet
-        for col in ws_summary.columns:
-            max_len = max((len(str(c.value)) for c in col if c.value is not None), default=0)
-            ws_summary.column_dimensions[col[0].column_letter].width = min(max(10, max_len + 2), 80)
-
-        # Freeze header row
-        ws_summary.freeze_panes = "A2"
-
-        # ----- Sheet 2: Updated Bid Comp (recap-style) -----
-        if not recap_df.empty:
-            ws_recap = wb.create_sheet("Updated Bid Comp ")
-            recap_headers = ["Carriers O&P Items", "Carrier", "Contractor", "DELTA ", "Notes", None]
-            ws_recap.append(recap_headers)
-            for col_idx in range(1, len(recap_headers) + 1):
-                ws_recap.cell(row=1, column=col_idx).font = header_font
-
-            for _, r in recap_df.iterrows():
-                ws_recap.append(
-                    [
-                        r.get("NAME"),
-                        r.get("CARRIER TOTAL ($)"),
-                        r.get("CONTRACTOR TOTAL ($)"),
-                        r.get("Δ ($)"),
-                        None,
-                        None,
-                    ]
-                )
-
-            # Currency formatting for recap sheet
-            for col_idx in (2, 3, 4):
-                col_letter = get_column_letter(col_idx)
-                for cell in ws_recap[col_letter]:
-                    if isinstance(cell.value, (int, float)):
-                        cell.number_format = "$#,##0.00"
-
-            # Autosize columns
-            for col in ws_recap.columns:
-                max_len = max((len(str(c.value)) for c in col if c.value is not None), default=0)
-                ws_recap.column_dimensions[col[0].column_letter].width = min(max(10, max_len + 2), 80)
-
+    bio = BytesIO()
+    wb.save(bio)
     return bio.getvalue()
+
+
+def _autosize(ws) -> None:
+    for column_cells in ws.columns:
+        letter = column_cells[0].column_letter
+        max_len = max((len(str(cell.value)) for cell in column_cells if cell.value is not None), default=0)
+        ws.column_dimensions[letter].width = min(max(12, max_len + 2), 80)

@@ -158,6 +158,9 @@ class XactimateRoughDraftParser:
             "coverage": end.get("coverage"),
             "recaps_and_summaries": recaps,
         }
+        est_name = case_md.get("estimate_name") or Path(self.input_file).stem
+        payload["estimate_name"] = est_name
+        payload["case_metadata"]["estimate_name"] = payload["case_metadata"].get("estimate_name") or est_name
         if self.debug:
             payload["validations"] = {
                 "per_section": per_section_validations,
