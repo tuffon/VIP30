@@ -207,7 +207,7 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                         llm = OpenAIChatAdapter(model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"))
                     except Exception:
                         llm = None
-                xlsx_bytes = BidComp(matcher_mode="hybrid", llm_adapter=llm).run(bid_context, job_id)
+                xlsx_bytes = BidComp(llm_adapter=llm).run(bid_context, job_id)
                 xlsx_tmp = tempfile.mktemp(suffix=".xlsx")
                 with open(xlsx_tmp, "wb") as xf:
                     xf.write(xlsx_bytes)
