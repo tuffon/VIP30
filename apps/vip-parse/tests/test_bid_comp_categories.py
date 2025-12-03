@@ -70,6 +70,8 @@ def test_category_mapping_and_fallback_narrative() -> None:
     narrative = comp._generate_narrative(pair, top_deltas)
     assert "LLM" in narrative.contextual_drivers[0]
     assert narrative.largest_deltas
+    assert comp.last_narrative_debug["status"] == "fallback"
+    assert "raw_response_preview" in comp.last_narrative_debug
 
 
 def test_run_generates_three_tabs_with_llm() -> None:
@@ -100,4 +102,5 @@ def test_run_generates_three_tabs_with_llm() -> None:
     categories_sheet = wb["Verisk Categories"]
     # header + all categories
     assert categories_sheet.max_row == len(VERISK_CATEGORY_ORDER) + 1
+    assert comp.last_narrative_debug == {"status": "ok"}
 

@@ -159,8 +159,12 @@ class BidComp:
     def __init__(self, llm_adapter: Optional[LLMAdapterBase] = None, top_delta_count: int = 6) -> None:
         self.llm_adapter = llm_adapter
         self.top_delta_count = max(1, int(top_delta_count))
+        self.last_narrative_debug: Optional[Dict[str, Any]] = None
+        self.last_narrative_artifact: Optional[Dict[str, Any]] = None
 
     def run(self, bid_context: dict, job_id: str) -> bytes:
+        self.last_narrative_debug = None
+        self.last_narrative_artifact = None
         pair = self._build_pair(bid_context)
         category_rows = self._build_category_table(pair)
         top_deltas = self._top_deltas(category_rows)
@@ -376,16 +380,27 @@ class BidComp:
             raw = self.llm_adapter.generate("bid_comp_summary_v1", context)
         except Exception as exc:  # noqa: BLE001
             logger.warning("narrative prompt failed: %s", exc)
-            return self._fallback_narrative(top_deltas, reason=str(exc))
+            return self._fallback_narrative(top_deltas, reason=str(exc), raw_response="", context=context)
 
         try:
             payload = json.loads(raw)
         except Exception:
-            logger.warning("narrative result was not JSON; using fallback")
-            return self._fallback_narrative(top_deltas, raw_response=raw)
+            logger.warning(
+                "narrative parse failed: bid_a=%s bid_b=%s preview=%s",
+                pair.bid_a.estimate_name,
+                pair.bid_b.estimate_name,
+                self._preview(raw),
+            )
+            return self._fallback_narrative(top_deltas, reason="parse_error", raw_response=raw, context=context)
 
         if not isinstance(payload, dict):
-            return self._fallback_narrative(top_deltas, raw_response=raw)
+            logger.warning(
+                "narrative payload invalid: bid_a=%s bid_b=%s preview=%s",
+                pair.bid_a.estimate_name,
+                pair.bid_b.estimate_name,
+                self._preview(raw),
+            )
+            return self._fallback_narrative(top_deltas, reason="invalid_payload", raw_response=raw, context=context)
 
         exec_summary = str(payload.get("executive_summary") or "").strip()
         contextual = [str(x).strip() for x in (payload.get("contextual_drivers") or []) if str(x).strip()]
@@ -418,6 +433,8 @@ class BidComp:
                 for row in top_deltas[:3]
             ]
 
+        self.last_narrative_debug = {"status": "ok"}
+        self.last_narrative_artifact = None
         return NarrativeResult(
             executive_summary=exec_summary or "Summary unavailable.",
             largest_deltas=largest,
@@ -432,6 +449,7 @@ class BidComp:
         top_deltas: List[Dict[str, Any]],
         reason: Optional[str] = None,
         raw_response: str = "",
+        context: Optional[Dict[str, Any]] = None,
     ) -> NarrativeResult:
         if not top_deltas:
             summary = "Unable to generate narrative; no delta data available."
@@ -454,7 +472,20 @@ class BidComp:
                 for row in top_deltas[:3]
             ]
 
+        preview = (raw_response or "")[:2000]
         context_note = f"Narrative fallback: {reason}" if reason else "Narrative fallback invoked."
+        self.last_narrative_debug = {
+            "status": "fallback",
+            "reason": reason or "unknown",
+            "raw_response_preview": preview,
+        }
+        if context and raw_response:
+            self.last_narrative_artifact = {
+                "context": context,
+                "response": raw_response,
+            }
+        else:
+            self.last_narrative_artifact = None
         return NarrativeResult(
             executive_summary=summary,
             largest_deltas=largest,
@@ -463,6 +494,10 @@ class BidComp:
             raw_response=raw_response,
             parsed=False,
         )
+
+    def _preview(self, raw: str, limit: int = 2000) -> str:
+        text = raw or ""
+        return text[:limit]
 
     # ---------- Recap flattening ----------
     def _flatten_original_recaps(self, pair: BidPair) -> List[Dict[str, Any]]:

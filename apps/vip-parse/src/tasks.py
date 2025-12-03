@@ -207,7 +207,8 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                         llm = OpenAIChatAdapter(model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"))
                     except Exception:
                         llm = None
-                xlsx_bytes = BidComp(llm_adapter=llm).run(bid_context, job_id)
+                comp = BidComp(llm_adapter=llm)
+                xlsx_bytes = comp.run(bid_context, job_id)
                 xlsx_tmp = tempfile.mktemp(suffix=".xlsx")
                 with open(xlsx_tmp, "wb") as xf:
                     xf.write(xlsx_bytes)
@@ -226,6 +227,22 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                 },
                 "result_keys": {"xlsx": xlsx_key},
             }
+            narrative_debug = getattr(comp, "last_narrative_debug", None)
+            if narrative_debug:
+                result["narrative_debug"] = narrative_debug
+            narrative_artifact = getattr(comp, "last_narrative_artifact", None)
+            if narrative_artifact:
+                try:
+                    narrative_key = f"{json_prefix}/narrative.json"
+                    s3.put_object(
+                        Bucket=bucket,
+                        Key=narrative_key,
+                        Body=json.dumps(narrative_artifact, ensure_ascii=False, indent=2).encode("utf-8"),
+                        ContentType="application/json",
+                    )
+                    result["result_keys"]["narrative"] = narrative_key
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning("failed to upload narrative artifact: %s", exc)
 
             # Optional downstream API call
             ds_url = os.getenv("DOWNSTREAM_API_URL")
