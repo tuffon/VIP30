@@ -158,7 +158,10 @@ class XactimateRoughDraftParser:
             "coverage": end.get("coverage"),
             "recaps_and_summaries": recaps,
         }
-        est_name = case_md.get("estimate_name") or Path(self.input_file).stem
+        fallback_name = Path(self.input_file).name
+        if len(fallback_name) > 80:
+            fallback_name = fallback_name[:77] + "..."
+        est_name = case_md.get("estimate_name") or fallback_name
         payload["estimate_name"] = est_name
         payload["case_metadata"]["estimate_name"] = payload["case_metadata"].get("estimate_name") or est_name
         if self.debug:

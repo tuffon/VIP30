@@ -254,14 +254,14 @@ class BidComp:
                         "section_name": sec.get("section_name"),
                         "total": total if total is not None else raw_total,
                         "line_item_preview": [
-                            {
+            {
                                 "description": li.get("description"),
                                 "total": normalize_money(li.get("total")) or li.get("total"),
                             }
                             for li in (sec.get("line_items") or [])[:3]
                             if isinstance(li, dict) and li.get("type", "line_item") == "line_item"
                         ],
-                    }
+            }
                 )
         parsed_sections.sort(key=lambda s: s.get("total") or 0, reverse=True)
         parsed_sections = parsed_sections[:10]
@@ -297,7 +297,7 @@ class BidComp:
                     "bid_b_total": b_val,
                     "delta": delta,
                     "delta_pct": delta_pct,
-                }
+        }
             )
         return rows
 
@@ -367,13 +367,11 @@ class BidComp:
             return self._fallback_narrative(top_deltas, reason="LLM disabled")
 
         context = {
-            "BID_A_NAME": pair.bid_a.estimate_name,
-            "BID_B_NAME": pair.bid_b.estimate_name,
-            "BID_A_SUMMARY_JSON": json.dumps(pair.bid_a.summary_snapshot, ensure_ascii=False, indent=2),
-            "BID_B_SUMMARY_JSON": json.dumps(pair.bid_b.summary_snapshot, ensure_ascii=False, indent=2),
-            "TOP_DELTAS_JSON": json.dumps(top_deltas, ensure_ascii=False, indent=2),
-            "CATEGORY_LIST": "\n".join(f"- {cat}" for cat in VERISK_CATEGORY_ORDER),
-            "OUTPUT_TEMPLATE": NARRATIVE_OUTPUT_TEMPLATE,
+            "bid_a_name": pair.bid_a.estimate_name,
+            "bid_b_name": pair.bid_b.estimate_name,
+            "bid_a_json": json.dumps(pair.bid_a.payload, ensure_ascii=False),
+            "bid_b_json": json.dumps(pair.bid_b.payload, ensure_ascii=False),
+            "category_table_json": json.dumps(top_deltas, ensure_ascii=False),
         }
 
         try:
@@ -422,7 +420,7 @@ class BidComp:
 
         if not largest:
             largest = [
-                {
+                    {
                     "title": row["category"],
                     "category": row["category"],
                     "bid_a_total": row["bid_a_total"],

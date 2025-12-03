@@ -3,6 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict
 
+MAX_FALLBACK_LEN = 80
+
 
 def ensure_estimate_identity(payload: Dict[str, Any] | None, fallback: str | None = None) -> str:
     """
@@ -33,8 +35,16 @@ def ensure_estimate_identity(payload: Dict[str, Any] | None, fallback: str | Non
 def _sanitize_name(raw: str | None) -> str:
     if not raw:
         return "Estimate"
-    stem = Path(str(raw)).stem.strip()
-    return stem or "Estimate"
+    name = Path(str(raw)).name.strip()
+    return _truncate(name or "Estimate", MAX_FALLBACK_LEN)
+
+
+def _truncate(value: str, max_len: int) -> str:
+    if max_len <= 3 or len(value) <= max_len:
+        return value if len(value) <= max_len else value[:max_len]
+    if len(value) <= max_len:
+        return value
+    return value[: max_len - 3] + "..."
 
 
 __all__ = ["ensure_estimate_identity"]

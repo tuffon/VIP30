@@ -47,7 +47,8 @@ class FakeAdapter(LLMAdapterBase):
 
     def generate(self, template_id: str, context: dict) -> str:  # type: ignore[override]
         assert template_id == "bid_comp_summary_v1"
-        assert "BID_A_SUMMARY_JSON" in context
+        assert "bid_a_json" in context
+        assert "bid_b_json" in context
         return self.response
 
 
