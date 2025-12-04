@@ -1,29 +1,9 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useCallback, useId, useMemo, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useId, useMemo, useState } from "react";
+import { useSession } from "next-auth/react";
 
-type RequestInfo = {
-  url: string;
-  method: string;
-  fields: Array<{ name: string; value: string }>;
-  files: Array<{ field: string; name: string; size: number }>;
-  response?: {
-    ok: boolean;
-    status: number;
-    statusText: string;
-    error?: string;
-  };
-};
-
-type JsonPreview = {
-  filename: string;
-  payload: Record<string, unknown>;
-};
-
-type RecapPreview = {
-  filename: string;
-  recap: Record<string, unknown> | null;
-};
+type JobPhase = "idle" | "uploading" | "queued" | "processing" | "ready" | "failed";
 
 type UploadDropzoneProps = {
   title: string;
@@ -32,488 +12,331 @@ type UploadDropzoneProps = {
   onFileSelect: (file: File | null) => void;
 };
 
+type JobResult = {
+  status: string;
+  download_urls?: { xlsx?: string };
+  meta?: { elapsed_ms?: number };
+  narrative_debug?: Record<string, unknown>;
+  notify_email?: string;
+};
+
+const phaseOrder: Record<JobPhase, number> = {
+  idle: 0,
+  uploading: 0,
+  queued: 1,
+  processing: 1,
+  ready: 2,
+  failed: -1,
+};
+
+const timeline = [
+  { id: "upload", label: "Upload PDFs", description: "Secure carrier + contractor uploads" },
+  { id: "processing", label: "Parsing & AI", description: "Xactimate sections + narrative summary" },
+  { id: "ready", label: "Delivery", description: "Download XLSX + notify stakeholders" },
+];
+
 function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzoneProps) {
   const reactId = useId();
-  const id = useMemo(() => `${title.toLowerCase().replace(/\s+/g, "-")}-${reactId.replace(/:/g, "")}`,[title, reactId]);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
+  const id = useMemo(
+    () => `${title.toLowerCase().replace(/\s+/g, "-")}-${reactId.replace(/:/g, "")}`,
+    [title, reactId],
+  );
   const handleFileChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const nextFile = event.target.files?.[0] ?? null;
       onFileSelect(nextFile);
     },
-    [onFileSelect]
+    [onFileSelect],
   );
 
   const hasFile = Boolean(file);
-  const borderClass = hasFile ? "border-green-400 bg-green-50" : "border-gray-300 bg-white";
 
   return (
     <label
       htmlFor={id}
-      className={`flex h-60 w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition hover:border-blue-500 hover:bg-blue-50 ${borderClass}`}
+      className={`flex h-56 w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition ${
+        hasFile ? "border-emerald-200 bg-emerald-50" : "border-slate-200 bg-white"
+      }`}
     >
       <input
-        ref={inputRef}
         id={id}
         type="file"
         accept="application/pdf"
         className="hidden"
-        onChange={(e) => {
-          // eslint-disable-next-line no-console
-          console.log(`[UploadDropzone] ${title} selected:`, e.target.files?.[0]?.name);
-          handleFileChange(e);
-        }}
+        onChange={handleFileChange}
       />
-      <span className={`inline-flex h-12 w-12 items-center justify-center rounded-full ${hasFile ? "bg-green-200 text-green-700" : "bg-blue-100 text-blue-600"}`}>
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        >
+      <span
+        className={`inline-flex h-12 w-12 items-center justify-center rounded-full ${
+          hasFile ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-500"
+        }`}
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M12 16V4" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M6 9l6-5 6 5" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M4 20h16" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </span>
-      <span className="mt-4 text-base font-semibold text-gray-900">{title}</span>
-      <span className="mt-2 text-sm text-gray-600">{description}</span>
-      <span className="mt-4 text-sm font-medium text-blue-600">Drag and drop or click to upload</span>
+      <span className="mt-4 text-base font-semibold">{title}</span>
+      <span className="mt-2 text-sm text-slate-500">{description}</span>
+      <span className="mt-4 text-sm font-medium text-brand-primary">Click or drag to upload</span>
       {file ? (
-        <span className="mt-3 w-full truncate text-xs text-green-600">Selected: {file.name}</span>
+        <span className="mt-3 w-full truncate text-xs text-emerald-600">Selected: {file.name}</span>
       ) : (
-        <span className="mt-3 text-xs text-gray-400">No file selected</span>
+        <span className="mt-3 text-xs text-slate-400">PDF up to 30MB</span>
       )}
     </label>
   );
 }
 
 export default function BidCompPage() {
+  const { data: session } = useSession();
   const [carrierFile, setCarrierFile] = useState<File | null>(null);
   const [contractorFile, setContractorFile] = useState<File | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [phase, setPhase] = useState<JobPhase>("idle");
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<any>(null);
-  const [requestInfo, setRequestInfo] = useState<RequestInfo | null>(null);
-  // removed debug ping/echo
   const [jobId, setJobId] = useState<string | null>(null);
   const [jobStatus, setJobStatus] = useState<string | null>(null);
-
+  const [result, setResult] = useState<JobResult | null>(null);
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const [shouldEmail, setShouldEmail] = useState(false);
+  const [notifyEmail, setNotifyEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
 
-  // removed debug ping/echo handlers
+  useEffect(() => {
+    if (session?.user?.email) {
+      setNotifyEmail(session.user.email);
+      setShouldEmail(true);
+    }
+  }, [session]);
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (!carrierFile || !contractorFile) {
-        setError("Please select both PDF files before running the comparison.");
+        setError("Please select both PDFs to continue.");
         return;
       }
 
-      setIsSubmitting(true);
+      const base = apiBase.replace(/\/$/, "");
+      const uploadEndpoint = (filename: string) =>
+        `${base}/render/upload-url?filename=${encodeURIComponent(filename)}`;
+
+      setPhase("uploading");
       setError(null);
       setResult(null);
-      setRequestInfo(null);
       setJobId(null);
       setJobStatus(null);
-
-      // 1) Create presigned upload URLs
-      const base = apiBase.replace(/\/$/, "");
-      async function createUploadUrl(filename: string): Promise<{ upload_url: string; key: string }> {
-        const resp = await fetch(`${base}/render/upload-url?filename=${encodeURIComponent(filename)}`, { method: "POST" });
-        if (!resp.ok) throw new Error(`Failed to create upload URL: ${resp.status}`);
-        return resp.json();
-      }
-
-      setRequestInfo({
-        url: `${base}/render/bid-comp/keys`,
-        method: "POST",
-        fields: [],
-        files: [
-          { field: "carrier", name: carrierFile.name, size: carrierFile.size },
-          { field: "contractor", name: contractorFile.name, size: contractorFile.size },
-        ],
-      });
-
-      const carrierUrl = await createUploadUrl(carrierFile.name);
-      const contractorUrl = await createUploadUrl(contractorFile.name);
-
-      // 2) Upload PDFs directly to R2 using PUT
-      const putHeaders: HeadersInit = { "Content-Type": "application/pdf" };
-      const put1 = fetch(carrierUrl.upload_url, { method: "PUT", body: carrierFile, headers: putHeaders });
-      const put2 = fetch(contractorUrl.upload_url, { method: "PUT", body: contractorFile, headers: putHeaders });
-      const [r1, r2] = await Promise.all([put1, put2]);
-      if (!r1.ok || !r2.ok) throw new Error(`Upload failed: ${r1.status}/${r2.status}`);
-
-      // 3) Enqueue job by keys
-      const endpoint = `${base}/render/bid-comp/keys`;
-      setRequestInfo({
-        url: endpoint,
-        method: "POST",
-        fields: [{ name: "carrier_key", value: carrierUrl.key }, { name: "contractor_key", value: contractorUrl.key }],
-        files: [],
-      });
+      setDownloadUrl(null);
+      setIsSubmitting(true);
 
       try {
-        const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ carrier_key: carrierUrl.key, contractor_key: contractorUrl.key }) });
-
-        const responseSummary = {
-          ok: response.ok,
-          status: response.status,
-          statusText: response.statusText || (response.ok ? "OK" : "Error"),
+        const createUrl = async (file: File) => {
+          const resp = await fetch(uploadEndpoint(file.name), { method: "POST" });
+          if (!resp.ok) throw new Error(`Failed to create upload URL (${resp.status})`);
+          return resp.json() as Promise<{ upload_url: string; key: string }>;
         };
 
-        if (!response.ok) {
-          const text = await response.text();
-          setRequestInfo((prev) =>
-            prev
-              ? {
-                  ...prev,
-                  response: {
-                    ...responseSummary,
-                    error: text || `Request failed with status ${response.status}`,
-                  },
-                }
-              : prev
-          );
-          throw new Error(text || `Request failed with status ${response.status}`);
+        const [carrierUrl, contractorUrl] = await Promise.all([
+          createUrl(carrierFile),
+          createUrl(contractorFile),
+        ]);
+
+        const commonHeaders: HeadersInit = { "Content-Type": "application/pdf" };
+        const uploadCarrier = fetch(carrierUrl.upload_url, {
+          method: "PUT",
+          body: carrierFile,
+          headers: commonHeaders,
+        });
+        const uploadContractor = fetch(contractorUrl.upload_url, {
+          method: "PUT",
+          body: contractorFile,
+          headers: commonHeaders,
+        });
+        const [carrierResp, contractorResp] = await Promise.all([uploadCarrier, uploadContractor]);
+        if (!carrierResp.ok || !contractorResp.ok) {
+          throw new Error("Upload failed. Please verify your network connection.");
         }
 
-        // eslint-disable-next-line no-console
-        console.log("[POST] /render/bid-comp/keys status:", response.status);
-        const data = await response.json();
-        // eslint-disable-next-line no-console
-        console.log("[POST] response json:", data);
-        setRequestInfo((prev) =>
-          prev
-            ? {
-                ...prev,
-                response: {
-                  ...responseSummary,
-                },
-              }
-            : prev
-        );
-
-        const jid: string | undefined = data?.job_id;
-        if (!jid) {
-          throw new Error("Server did not return a job_id");
+        const payload: Record<string, unknown> = {
+          carrier_key: carrierUrl.key,
+          contractor_key: contractorUrl.key,
+          carrier_filename: carrierFile.name,
+          contractor_filename: contractorFile.name,
+        };
+        if (shouldEmail && notifyEmail) {
+          payload.notify_email = notifyEmail;
         }
-        setJobId(jid);
-        setJobStatus(data?.status || "queued");
 
-        // Poll job status for up to ~10 minutes
-        const statusUrl = `${base}/render/bid-comp/${jid}`;
-        // eslint-disable-next-line no-console
-        console.log("[Poll] starting:", statusUrl);
-        for (let i = 0; i < 300; i++) {
-          try {
-            // eslint-disable-next-line no-console
-            console.log(`[Poll] iter ${i}`);
-            const sResp = await fetch(statusUrl);
-            const s = await sResp.json();
-            // eslint-disable-next-line no-console
-            console.log(`[Poll] iter ${i} status:`, s?.status, s);
-            setJobStatus(s?.status ?? null);
-            if (s?.status === "finished") {
-              setResult(s);
-              // eslint-disable-next-line no-console
-              console.log("[Poll] finished");
-              break;
-            }
-            if (s?.status === "failed") {
-              // eslint-disable-next-line no-console
-              console.error("[Poll] failed:", s?.error);
-              throw new Error(s?.error || "Job failed");
-            }
-          } catch (pollErr) {
-            // eslint-disable-next-line no-console
-            console.warn(`[Poll] iter ${i} error:`, pollErr);
+        const enqueueResp = await fetch(`${base}/render/bid-comp/keys`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!enqueueResp.ok) {
+          throw new Error("Unable to start the bid comp job.");
+        }
+        const job = await enqueueResp.json();
+        if (!job?.job_id) throw new Error("Server did not return a job id.");
+        setJobId(job.job_id);
+        setJobStatus(job.status || "queued");
+        setPhase("queued");
+
+        const statusUrl = `${base}/render/bid-comp/${job.job_id}`;
+        for (let attempt = 0; attempt < 300; attempt++) {
+          const resp = await fetch(statusUrl);
+          const statusJson = await resp.json();
+          const nextStatus = statusJson?.status ?? null;
+          setJobStatus(nextStatus);
+          if (statusJson?.download_urls?.xlsx) {
+            setDownloadUrl(statusJson.download_urls.xlsx);
           }
-          await new Promise((r) => setTimeout(r, 2000));
+          if (nextStatus === "finished") {
+            setPhase("ready");
+            setResult(statusJson);
+            break;
+          }
+          if (nextStatus === "failed") {
+            setPhase("failed");
+            throw new Error(statusJson?.error || "Job failed");
+          }
+          setPhase("processing");
+          await new Promise((resolve) => setTimeout(resolve, 2000));
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Unexpected error";
-        setError(message);
-        setRequestInfo((prev) =>
-          prev
-            ? {
-                ...prev,
-                response: {
-                  ok: false,
-                  status: prev.response?.status ?? 0,
-                  statusText: prev.response?.statusText ?? "Request Failed",
-                  error: message,
-                },
-              }
-            : prev
-        );
+        setPhase("failed");
+        setError(err instanceof Error ? err.message : "Unexpected error");
       } finally {
         setIsSubmitting(false);
       }
     },
-    [apiBase, carrierFile, contractorFile]
+    [apiBase, carrierFile, contractorFile, notifyEmail, shouldEmail],
   );
 
-  const openAiText = result?.openai_result?.response_text as string | undefined;
-  const requestStatus = requestInfo?.response;
-  const openAiRequest = result?.openai_request_preview;
-  const hasOpenAiResponse = Boolean(result?.openai_result);
-  const jsonPreviews: JsonPreview[] = useMemo(() => {
-    if (!result) return [];
-    const previews: JsonPreview[] = [];
-    if (result.carrier_estimate) {
-      previews.push({
-        filename: result.carrier_estimate.filename,
-        payload: result.carrier_estimate.payload,
-      });
-    }
-    if (result.contractor_estimate) {
-      previews.push({
-        filename: result.contractor_estimate.filename,
-        payload: result.contractor_estimate.payload,
-      });
-    }
-    return previews;
-  }, [result]);
-
-  const recapPreviews: RecapPreview[] = useMemo(() => {
-    if (!result) return [];
-    const extractRecap = (payload: Record<string, unknown>): Record<string, unknown> | null => {
-      const recapsAndSummaries = payload?.recaps_and_summaries as Record<string, unknown> | undefined;
-      const directRecap = payload?.recap_by_category as Record<string, unknown> | undefined;
-      if (recapsAndSummaries && typeof recapsAndSummaries === "object") {
-        const nested = recapsAndSummaries.recap_by_category as Record<string, unknown> | undefined;
-        if (nested && typeof nested === "object") {
-          return nested;
-        }
-      }
-      if (directRecap && typeof directRecap === "object") {
-        return directRecap;
-      }
-      return null;
-    };
-
-    const previews: RecapPreview[] = [];
-    if (result.carrier_estimate?.payload) {
-      previews.push({
-        filename: result.carrier_estimate.filename,
-        recap: extractRecap(result.carrier_estimate.payload),
-      });
-    }
-    if (result.contractor_estimate?.payload) {
-      previews.push({
-        filename: result.contractor_estimate.filename,
-        recap: extractRecap(result.contractor_estimate.payload),
-      });
-    }
-    return previews;
-  }, [result]);
-
   return (
-    <div className="space-y-10">
-      <header className="max-w-3xl space-y-4">
-        <h1 className="text-3xl font-semibold text-gray-900">Bid Comparison</h1>
-        <p className="text-base text-gray-600">
-          Upload the scope documents to generate a side-by-side cost comparison. The analysis runs
-          through the parser and OpenAI to create a recap-by-category summary.
+    <div className="space-y-10 text-slate-900">
+      <header className="space-y-3">
+        <p className="text-sm uppercase tracking-[0.3em] text-slate-500">Bid Comp</p>
+        <h1 className="text-3xl font-semibold text-slate-900">
+          Carrier vs. contractor in one shareable report.
+        </h1>
+        <p className="text-slate-500">
+          Upload two PDFs, let ScopeVista parse the scope, and we’ll return an XLSX + email-ready summary
+          that explains the deltas.
         </p>
       </header>
 
-      <form className="space-y-8" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-8">
         <section className="grid gap-6 md:grid-cols-2">
           <UploadDropzone
             title="Carrier Estimate"
-            description="Attach the carrier or benchmark estimate (PDF only)."
+            description="Attach the benchmark carrier estimate (PDF)."
             file={carrierFile}
             onFileSelect={setCarrierFile}
           />
           <UploadDropzone
             title="Contractor Bid"
-            description="Upload the contractor or internal bid (PDF only)."
+            description="Attach the contractor or in-house bid (PDF)."
             file={contractorFile}
             onFileSelect={setContractorFile}
           />
         </section>
 
-        <div className="flex flex-wrap items-center gap-4">
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="rounded-full bg-blue-600 px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {isSubmitting ? "Running..." : "Instant Bid Comp"}
-          </button>
-          <span className="text-xs text-gray-400">API base: {apiBase}</span>
-          {isSubmitting && <span className="text-xs text-blue-600">Uploading & processing…</span>}
-          {requestStatus && (
-            <span
-              className={`rounded-full px-3 py-1 text-xs font-semibold ${requestStatus.ok ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"}`}
-            >
-              {requestStatus.ok ? "Success" : "Failed"}
-            </span>
-          )}
-          {jobId && (
-            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">
-              Job {jobId.slice(0, 8)}… {jobStatus ?? ""}
-            </span>
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <label className="flex items-center gap-3 text-sm text-slate-600">
+            <input
+              type="checkbox"
+              checked={shouldEmail}
+              onChange={(event) => setShouldEmail(event.target.checked)}
+              className="h-4 w-4 rounded border-slate-300"
+            />
+            Email me when the report is ready (includes download and marketing tips)
+          </label>
+          {shouldEmail && (
+            <div className="mt-3">
+              <input
+                type="email"
+                value={notifyEmail}
+                onChange={(event) => setNotifyEmail(event.target.value)}
+                placeholder="you@firm.com"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none"
+                required
+              />
+            </div>
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 text-xs" />
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:opacity-60"
+        >
+          {isSubmitting ? "Processing…" : "Generate Bid Comp"}
+        </button>
       </form>
 
       {error && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-          {error}
-        </div>
+        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">{error}</div>
       )}
 
-      {requestInfo && (
-        <section className="space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900">API Request Details</h2>
-          <div className="rounded-lg border border-gray-200 bg-white p-4 text-xs text-gray-800">
-            <div className="space-y-2">
-              <div>
-                <span className="font-medium">Method:</span> {requestInfo.method}
-              </div>
-              <div>
-                <span className="font-medium">URL:</span> {requestInfo.url}
-              </div>
-              <div>
-                <span className="font-medium">Fields:</span>
-                <ul className="mt-1 list-disc space-y-1 pl-5">
-                  {requestInfo.fields.map((field) => (
-                    <li key={field.name}>
-                      {field.name} = {field.value}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <span className="font-medium">Files:</span>
-                <ul className="mt-1 list-disc space-y-1 pl-5">
-                  {requestInfo.files.map((fileMeta) => (
-                    <li key={fileMeta.field}>
-                      {fileMeta.field}: {fileMeta.name} ({(fileMeta.size / 1024).toFixed(1)} KB)
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {requestInfo.response && (
-                <div>
-                  <span className="font-medium">Response:</span> {requestInfo.response.status} {requestInfo.response.statusText}
-                  {requestInfo.response.error && (
-                    <span className="text-red-600"> — {requestInfo.response.error}</span>
-                  )}
-                </div>
-              )}
-              {!requestInfo.response && (
-                <div>
-                  <span className="font-medium">Response:</span> <span className="text-blue-500">Pending…</span>
-                </div>
-              )}
-            </div>
+      {jobId && (
+        <section className="space-y-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-sm font-semibold text-slate-900">Job {jobId.slice(0, 8)}…</span>
+            <span className="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600">
+              {jobStatus ?? "starting"}
+            </span>
           </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {timeline.map((step, idx) => {
+              const activeIndex = phaseOrder[phase] ?? 0;
+              const isComplete = idx < activeIndex;
+              const isCurrent = idx === activeIndex && phase !== "ready";
+              return (
+                <div key={step.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                  <p className="text-sm font-semibold text-slate-900">
+                    {step.label}{" "}
+                    {isComplete && <span className="text-emerald-500">✓</span>}
+                    {isCurrent && !isComplete && <span className="text-amber-500">•</span>}
+                  </p>
+                  <p className="text-xs text-slate-500">{step.description}</p>
+                </div>
+              );
+            })}
+          </div>
+          {shouldEmail && notifyEmail && (
+            <p className="text-xs text-slate-500">
+              We’ll send the download link to <span className="font-semibold text-slate-900">{notifyEmail}</span> as
+              soon as the XLSX is ready.
+            </p>
+          )}
         </section>
       )}
 
-      {result?.recap_by_category && (
-        <section className="space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900">Job Result</h2>
+      {(downloadUrl || result) && (
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="flex flex-wrap items-center gap-4">
+            <p className="text-lg font-semibold text-slate-900">Latest output</p>
+            {downloadUrl && (
+              <a
+                href={downloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-slate-900 px-5 py-2 text-xs font-semibold text-white transition hover:bg-slate-800"
+              >
+                Download XLSX
+              </a>
+            )}
+          </div>
           {result?.meta && (
-            <div className="rounded-lg border border-gray-200 bg-white p-4 text-sm text-gray-700">
-              <p className="font-medium">Meta</p>
-              <pre className="mt-2 max-h-64 overflow-auto rounded bg-gray-900 p-4 text-xs text-white">{JSON.stringify(result.meta, null, 2)}</pre>
-            </div>
+            <p className="mt-2 text-sm text-slate-500">
+              Runtime: {(result.meta.elapsed_ms ?? 0) / 1000}s · Status: {result.status}
+            </p>
           )}
-          <div className="rounded-lg border border-gray-200 bg-white p-4">
-            <p className="text-sm font-medium text-gray-900">recap_by_category</p>
-            <pre className="mt-3 max-h-96 overflow-auto rounded bg-gray-900 p-4 text-xs text-white">{JSON.stringify(result.recap_by_category, null, 2)}</pre>
-          </div>
-        </section>
-      )}
-
-      {result && !result.recap_by_category && (
-        <section className="space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900">Latest Result</h2>
-          <div className="rounded-lg border border-gray-200 bg-white p-4 text-sm text-gray-700">
-            <p className="font-medium">Estimate Labels</p>
-            <ul className="mt-2 list-disc space-y-1 pl-5">
-              <li>
-                <span className="font-semibold">Left:</span> {result.left_label}
-              </li>
-              <li>
-                <span className="font-semibold">Right:</span> {result.right_label}
-              </li>
-              <li>
-                <span className="font-semibold">Row Header:</span> {result.row_label_header}
-              </li>
-            </ul>
-          </div>
-
-          {jsonPreviews.length > 0 && (
-            <div className="rounded-lg border border-gray-200 bg-white p-4">
-              <p className="text-sm font-medium text-gray-900">Parsed Estimate JSON</p>
-              <div className="mt-3 space-y-4">
-                {jsonPreviews.map((preview) => (
-                  <details key={preview.filename} className="overflow-hidden rounded border border-gray-200" open>
-                    <summary className="cursor-pointer bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700">
-                      {preview.filename}
-                    </summary>
-                    <pre className="max-h-72 overflow-auto bg-gray-900 p-4 text-xs text-white">
-                      {JSON.stringify(preview.payload, null, 2)}
-                    </pre>
-                  </details>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {recapPreviews.length > 0 && (
-            <div className="rounded-lg border border-gray-200 bg-white p-4">
-              <p className="text-sm font-medium text-gray-900">recap_by_category Context</p>
-              <div className="mt-3 space-y-4">
-                {recapPreviews.map((preview) => (
-                  <details key={`${preview.filename}-recap`} className="overflow-hidden rounded border border-gray-200" open>
-                    <summary className="cursor-pointer bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700">
-                      {preview.filename}
-                    </summary>
-                    <pre className="max-h-72 overflow-auto bg-gray-900 p-4 text-xs text-white">
-                      {preview.recap ? JSON.stringify(preview.recap, null, 2) : "{\n  \"recap_by_category\": null\n}"}
-                    </pre>
-                  </details>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {openAiText && (
-            <div className="rounded-lg border border-gray-200 bg-white p-4">
-              <p className="text-sm font-medium text-gray-900">OpenAI CSV Output</p>
-              <pre className="mt-3 max-h-64 overflow-auto rounded bg-gray-900 p-4 text-xs text-white">
-                {openAiText}
-              </pre>
-            </div>
-          )}
-
-          {!hasOpenAiResponse && openAiRequest && (
-            <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-800">
-              <p className="font-semibold">OpenAI request not executed</p>
-              <p className="mt-1">Add your <code className="rounded bg-yellow-100 px-1 py-0.5">OPENAI_API_KEY</code> to run the completion. Preview below:</p>
-            </div>
-          )}
-
-          {openAiRequest && (
-            <div className="rounded-lg border border-gray-200 bg-white p-4">
-              <p className="text-sm font-medium text-gray-900">OpenAI Request Preview</p>
-              <pre className="mt-3 max-h-64 overflow-auto rounded bg-gray-900 p-4 text-xs text-white">
-                {JSON.stringify(openAiRequest, null, 2)}
-              </pre>
+          {result?.narrative_debug && (
+            <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-4 text-xs text-slate-600">
+              <p className="font-semibold text-slate-900">Narrative</p>
+              <pre className="mt-2 max-h-40 overflow-auto">{JSON.stringify(result.narrative_debug, null, 2)}</pre>
             </div>
           )}
         </section>
@@ -521,4 +344,3 @@ export default function BidCompPage() {
     </div>
   );
 }
-

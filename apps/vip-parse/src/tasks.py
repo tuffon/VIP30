@@ -16,6 +16,7 @@ from rq.job import Job
 from redis import Redis
 from src.bid_comp import BidComp
 from src.bid_comp.identity import ensure_estimate_identity
+from src.integrations.sendgrid_client import SendGridClient
 from src.llm import OpenAIChatAdapter
 
 # Configure worker logging early so RQ shows our logs
@@ -26,6 +27,7 @@ logging.basicConfig(
     datefmt="%Y-%m-%dT%H:%M:%S",
 )
 logger = logging.getLogger("vip-parse.worker")
+email_client = SendGridClient()
 
 
 # global concurrency cap inside worker process
@@ -118,7 +120,15 @@ def _extract_recap(payload: Dict[str, Any]) -> Dict[str, Any]:
     return rb if isinstance(rb, dict) else {}
 
 
-def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, template: str | None = None) -> Dict[str, Any]:
+def run_bid_comp_keys(
+    job_id: str,
+    carrier_key: str,
+    contractor_key: str,
+    template: str | None = None,
+    carrier_filename: str | None = None,
+    contractor_filename: str | None = None,
+    notify_email: str | None = None,
+) -> Dict[str, Any]:
     t0 = time.time()
     with _SEM:
         logger.info("job start (r2 keys): job_id=%s", job_id)
@@ -154,8 +164,14 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
             carrier_payload = _parse_full(carrier_path)
             contractor_payload = _parse_full(contractor_path)
 
-            bid_a_name = ensure_estimate_identity(carrier_payload, Path(carrier_key).name)
-            bid_b_name = ensure_estimate_identity(contractor_payload, Path(contractor_key).name)
+            bid_a_name = ensure_estimate_identity(
+                carrier_payload,
+                carrier_filename or Path(carrier_key).name,
+            )
+            bid_b_name = ensure_estimate_identity(
+                contractor_payload,
+                contractor_filename or Path(contractor_key).name,
+            )
 
             # recaps derived from full JSON; used for summary rows and checks
             recap_a = _extract_recap(carrier_payload)
@@ -227,6 +243,8 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                 },
                 "result_keys": {"xlsx": xlsx_key},
             }
+            if notify_email:
+                result["notify_email"] = notify_email
             narrative_debug = getattr(comp, "last_narrative_debug", None)
             if narrative_debug:
                 result["narrative_debug"] = narrative_debug
@@ -266,6 +284,25 @@ def run_bid_comp_keys(job_id: str, carrier_key: str, contractor_key: str, templa
                 except Exception as e:  # noqa: BLE001
                     logger.warning("downstream api call failed: %s", e)
                     result["api"] = {"error": str(e)}
+
+            # Email notification once we have a presigned link
+            if notify_email:
+                try:
+                    expire = int(os.getenv("EMAIL_DOWNLOAD_EXPIRE_SEC", "86400"))
+                    download_url = s3.generate_presigned_url(
+                        "get_object",
+                        Params={"Bucket": bucket, "Key": xlsx_key},
+                        ExpiresIn=expire,
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning("Failed to presign download for email: %s", exc)
+                    download_url = None
+                if download_url:
+                    email_client.send_bidcomp_ready_email(
+                        to_email=notify_email,
+                        download_url=download_url,
+                        summary=f"{bid_a_name} vs {bid_b_name}",
+                    )
 
             logger.info("job done (r2 keys): job_id=%s", job_id)
             return result

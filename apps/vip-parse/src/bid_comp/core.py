@@ -373,12 +373,36 @@ class BidComp:
             "bid_b_json": json.dumps(pair.bid_b.payload, ensure_ascii=False),
             "category_table_json": json.dumps(top_deltas, ensure_ascii=False),
         }
+        missing_keys = [k for k, v in context.items() if not v]
+        if missing_keys:
+            logger.warning(
+                "narrative context incomplete (missing=%s) for estimates (%s, %s)",
+                missing_keys,
+                pair.bid_a.estimate_name,
+                pair.bid_b.estimate_name,
+            )
+            return self._fallback_narrative(
+                top_deltas,
+                reason=f"missing_context:{','.join(missing_keys)}",
+                raw_response="",
+                context=context,
+            )
 
         try:
             raw = self.llm_adapter.generate("bid_comp_summary_v1", context)
         except Exception as exc:  # noqa: BLE001
-            logger.warning("narrative prompt failed: %s", exc)
-            return self._fallback_narrative(top_deltas, reason=str(exc), raw_response="", context=context)
+            logger.warning(
+                "narrative prompt failed for (%s, %s): %s",
+                pair.bid_a.estimate_name,
+                pair.bid_b.estimate_name,
+                exc,
+            )
+            return self._fallback_narrative(
+                top_deltas,
+                reason=str(exc),
+                raw_response="",
+                context=context,
+            )
 
         try:
             payload = json.loads(raw)
@@ -477,13 +501,14 @@ class BidComp:
             "reason": reason or "unknown",
             "raw_response_preview": preview,
         }
-        if context and raw_response:
+        if context is not None:
             self.last_narrative_artifact = {
                 "context": context,
                 "response": raw_response,
+                "reason": reason,
             }
         else:
-            self.last_narrative_artifact = None
+            self.last_narrative_artifact = {"response": raw_response, "reason": reason}
         return NarrativeResult(
             executive_summary=summary,
             largest_deltas=largest,

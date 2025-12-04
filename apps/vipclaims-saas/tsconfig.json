@@ -23,6 +23,8 @@
     "redux",
     "components",
     "next-env.d.ts",
+    "next-auth.d.ts",
+    "vitest.setup.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": [

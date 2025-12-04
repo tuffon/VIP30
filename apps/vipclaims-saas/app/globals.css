@@ -2,4 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0f172a;
+  background-color: #f8fafc;
+}
 
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.panel {
+  @apply rounded-3xl border border-slate-100 bg-white p-8 shadow-xl;
+}
