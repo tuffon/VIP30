@@ -38,7 +38,7 @@ services:
     plan: standard
     env: python
     rootDir: apps/vip-parse
-    autoDeploy: false
+    autoDeploy: true
     buildCommand: |
       pip install -r requirements-worker.txt
     startCommand: |
