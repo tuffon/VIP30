@@ -129,3 +129,24 @@ Estimate B carries higher framing scope.
     assert categories_sheet.max_row == len(VERISK_CATEGORY_ORDER) + 1
     assert comp.last_narrative_debug["status"] == "ok"
 
+
+def test_comparison_name_falls_back_to_original_filename() -> None:
+    payload_a = _make_payload("Carrier Estimate", framing=200, roofing=75, electrical=50, overhead=40, profit=40, tax=10)
+    payload_b = _make_payload("", framing=220, roofing=60, electrical=55, overhead=44, profit=44, tax=11)
+    payload_b["estimate_name"] = None
+    payload_b["case_metadata"]["estimate_name"] = None
+    payload_b["original_filename"] = "contractor_bid.pdf"
+
+    comp = BidComp(llm_adapter=None)
+    pair = comp._build_pair(
+        {
+            "carrier": payload_a,
+            "contractor": {
+                "payload": payload_b,
+                "source_filename": "contractor_uploaded.pdf",
+            },
+        }
+    )  # type: ignore[arg-type]
+
+    assert pair.comparison.estimate_name == "contractor_bid.pdf"
+

@@ -624,6 +624,15 @@ class BidComp:
                     val = case_md.get(key)
                     if isinstance(val, str):
                         candidates.append(val)
+            if isinstance(payload.get("estimate_metadata"), dict):
+                display_name = payload["estimate_metadata"].get("display_name")
+                if isinstance(display_name, str):
+                    candidates.append(display_name)
+            metadata = payload.get("metadata")
+            if isinstance(metadata, dict):
+                file_name = metadata.get("file_name") or metadata.get("original_filename")
+                if isinstance(file_name, str):
+                    candidates.append(file_name)
             for key in (
                 "original_filename",
                 "source_filename",
