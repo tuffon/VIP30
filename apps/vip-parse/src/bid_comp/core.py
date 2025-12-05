@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional
 
 from .export_xlsx import export_xlsx
 from .identity import ensure_estimate_identity
+from .markdown import MarkdownBlock, parse_markdown
 from .normalize import normalize_label, normalize_money
 from ..llm.adapter import LLMAdapterBase
 
@@ -101,23 +102,18 @@ CATEGORY_KEYWORDS: List[tuple[str, str]] = [
 
 NARRATIVE_OUTPUT_TEMPLATE = json.dumps(
     {
-        "executive_summary": "Two to three concise sentences summarizing the bid comparison.",
-        "largest_deltas": [
-            {
-                "title": "Category driver",
-                "category": "Category from provided list",
-                "primary_total": 0,
-                "comparison_total": 0,
-                "delta": 0,
-                "insight": "Why the delta exists (scope, quantity, fees, etc.).",
-            }
-        ],
-        "contextual_drivers": [
-            "Short bullet on broader drivers or missing information."
-        ],
-        "follow_up_actions": [
-            "Specific follow-up question or action item."
-        ],
+        "markdown": "# Executive Summary\n"
+        "Provide 2-3 sentences comparing the overall scope and cost differences.\n\n"
+        "## Key Cost Drivers\n"
+        "- Bullet per major driver naming the category, the amounts for each estimate, and why they differ.\n\n"
+        "## Scope Observations\n"
+        "- Call out major gaps, missing allowances, or assumptions.\n\n"
+        "## Suggested Follow-ups\n"
+        "- Bullet list of follow-up questions or reconciliation steps.\n",
+        "metadata": {
+            "confidence": "high|medium|low",
+            "notes": "Optional clarifications or caveats.",
+        },
     },
     indent=2,
 )
@@ -150,10 +146,9 @@ class EstimatePair:
 
 @dataclass
 class NarrativeResult:
-    executive_summary: str
-    largest_deltas: List[Dict[str, Any]]
-    contextual_drivers: List[str]
-    follow_up_actions: List[str]
+    markdown: str
+    blocks: List[MarkdownBlock]
+    delta_rows: List[Dict[str, Any]]
     raw_response: str = ""
     parsed: bool = False
 
@@ -392,8 +387,22 @@ class BidComp:
         rows = sorted(category_rows, key=lambda r: abs(r.get("delta") or 0), reverse=True)
         return rows[: self.top_delta_count]
 
+    def _build_delta_rows(self, top_deltas: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        rows: List[Dict[str, Any]] = []
+        for row in top_deltas:
+            rows.append(
+                {
+                    "category": row.get("category"),
+                    "primary_total": row.get("primary_total"),
+                    "comparison_total": row.get("comparison_total"),
+                    "delta": row.get("delta"),
+                }
+            )
+        return rows
+
     # ---------- Narrative ----------
     def _generate_narrative(self, pair: EstimatePair, top_deltas: List[Dict[str, Any]]) -> NarrativeResult:
+        delta_rows = self._build_delta_rows(top_deltas)
         if not self.llm_adapter:
             return self._fallback_narrative(top_deltas, reason="LLM disabled")
 
@@ -435,64 +444,58 @@ class BidComp:
                 context=context,
             )
 
+        markdown_text = ""
+        metadata: Dict[str, Any] = {}
+        payload: Optional[Dict[str, Any]] = None
         try:
-            payload = json.loads(raw)
+            payload_candidate = json.loads(raw)
+            if isinstance(payload_candidate, dict):
+                payload = payload_candidate
         except Exception:
+            payload = None
+
+        if payload:
+            candidate = payload.get("markdown") or payload.get("narrative") or payload.get("content")
+            if isinstance(candidate, str):
+                markdown_text = candidate.strip()
+            metadata_value = payload.get("metadata")
+            if isinstance(metadata_value, dict):
+                metadata = metadata_value
+        else:
+            markdown_text = raw.strip()
+
+        if not markdown_text:
             logger.warning(
-                "narrative parse failed: primary=%s comparison=%s preview=%s",
+                "narrative markdown missing: primary=%s comparison=%s preview=%s",
                 pair.primary.estimate_name,
                 pair.comparison.estimate_name,
                 self._preview(raw),
             )
-            return self._fallback_narrative(top_deltas, reason="parse_error", raw_response=raw, context=context)
-
-        if not isinstance(payload, dict):
-            logger.warning(
-                "narrative payload invalid: primary=%s comparison=%s preview=%s",
-                pair.primary.estimate_name,
-                pair.comparison.estimate_name,
-                self._preview(raw),
-            )
-            return self._fallback_narrative(top_deltas, reason="invalid_payload", raw_response=raw, context=context)
-
-        exec_summary = str(payload.get("executive_summary") or "").strip()
-        contextual = [str(x).strip() for x in (payload.get("contextual_drivers") or []) if str(x).strip()]
-        follow_up = [str(x).strip() for x in (payload.get("follow_up_actions") or []) if str(x).strip()]
-        largest: List[Dict[str, Any]] = []
-        for entry in payload.get("largest_deltas") or []:
-            if not isinstance(entry, dict):
-                continue
-            largest.append(
-                {
-                    "title": entry.get("title") or entry.get("category") or "",
-                    "category": entry.get("category") or entry.get("title") or "",
-                    "primary_total": normalize_money(entry.get("primary_total")),
-                    "comparison_total": normalize_money(entry.get("comparison_total")),
-                    "delta": normalize_money(entry.get("delta")),
-                    "insight": entry.get("insight"),
-                }
+            return self._fallback_narrative(
+                top_deltas,
+                reason="empty_markdown",
+                raw_response=raw,
+                context=context,
             )
 
-        if not largest:
-            largest = [
-                    {
-                    "title": row["category"],
-                    "category": row["category"],
-                    "primary_total": row["primary_total"],
-                    "comparison_total": row["comparison_total"],
-                    "delta": row["delta"],
-                    "insight": "See delta table.",
-                }
-                for row in top_deltas[:3]
-            ]
-
-        self.last_narrative_debug = {"status": "ok"}
-        self.last_narrative_artifact = None
+        blocks = parse_markdown(markdown_text)
+        self.last_narrative_debug = {
+            "status": "ok",
+            "format": "markdown",
+            "block_count": len(blocks),
+        }
+        if metadata:
+            self.last_narrative_debug["metadata"] = metadata
+        self.last_narrative_artifact = {
+            "context": context,
+            "response": raw,
+            "markdown": markdown_text,
+            "metadata": metadata,
+        }
         return NarrativeResult(
-            executive_summary=exec_summary or "Summary unavailable.",
-            largest_deltas=largest,
-            contextual_drivers=contextual or ["No additional context supplied."],
-            follow_up_actions=follow_up or ["No follow-up actions supplied."],
+            markdown=markdown_text,
+            blocks=blocks,
+            delta_rows=delta_rows,
             raw_response=raw,
             parsed=True,
         )
@@ -504,29 +507,29 @@ class BidComp:
         raw_response: str = "",
         context: Optional[Dict[str, Any]] = None,
     ) -> NarrativeResult:
-        if not top_deltas:
-            summary = "Unable to generate narrative; no delta data available."
-            largest: List[Dict[str, Any]] = []
+        delta_rows = self._build_delta_rows(top_deltas)
+        lines: List[str] = ["# Bid Comparison Narrative"]
+        fallback_note = f"Narrative fallback: {reason}" if reason else "Narrative fallback invoked."
+        lines.append(f"_{fallback_note}_")
+        if delta_rows:
+            lines.append("\n## Key Cost Drivers")
+            for row in delta_rows[:3]:
+                primary_val = row.get("primary_total")
+                comparison_val = row.get("comparison_total")
+                delta_val = row.get("delta")
+                lines.append(
+                    f"- **{row.get('category', 'Category')}**: "
+                    f"Primary {self._format_currency(primary_val)} vs "
+                    f"Comparison {self._format_currency(comparison_val)} "
+                    f"(Δ {self._format_currency(delta_val)})."
+                )
         else:
-            biggest = top_deltas[0]
-            summary = (
-                f"Largest delta in {biggest['category']} ({biggest['delta']:+,.0f}). "
-                "LLM narrative is unavailable; review category table below."
-            )
-            largest = [
-                {
-                    "title": row["category"],
-                    "category": row["category"],
-                    "primary_total": row["primary_total"],
-                    "comparison_total": row["comparison_total"],
-                    "delta": row["delta"],
-                    "insight": "LLM narrative unavailable.",
-                }
-                for row in top_deltas[:3]
-            ]
-
+            lines.append("\nNo delta data was available to summarize.")
+        lines.append("\n## Suggested Follow-ups")
+        lines.append("- Review supporting estimate sections manually.")
+        markdown_text = "\n".join(lines)
+        blocks = parse_markdown(markdown_text)
         preview = (raw_response or "")[:2000]
-        context_note = f"Narrative fallback: {reason}" if reason else "Narrative fallback invoked."
         self.last_narrative_debug = {
             "status": "fallback",
             "reason": reason or "unknown",
@@ -541,10 +544,9 @@ class BidComp:
         else:
             self.last_narrative_artifact = {"response": raw_response, "reason": reason}
         return NarrativeResult(
-            executive_summary=summary,
-            largest_deltas=largest,
-            contextual_drivers=[context_note],
-            follow_up_actions=["Review supporting estimate sections manually."],
+            markdown=markdown_text,
+            blocks=blocks,
+            delta_rows=delta_rows,
             raw_response=raw_response,
             parsed=False,
         )
@@ -552,6 +554,17 @@ class BidComp:
     def _preview(self, raw: str, limit: int = 2000) -> str:
         text = raw or ""
         return text[:limit]
+
+    def _format_currency(self, value: Optional[float]) -> str:
+        if value is None:
+            return "N/A"
+        try:
+            amount = float(value)
+        except (TypeError, ValueError):
+            return str(value)
+        if abs(amount) >= 1000:
+            return f"${amount:,.0f}"
+        return f"${amount:,.2f}"
 
     # ---------- Recap flattening ----------
     def _flatten_original_recaps(self, pair: EstimatePair) -> List[Dict[str, Any]]:

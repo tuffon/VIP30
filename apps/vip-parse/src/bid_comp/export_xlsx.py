@@ -7,6 +7,8 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
 from openpyxl.utils import get_column_letter
 
+from .markdown import MarkdownBlock
+
 
 def export_xlsx(
     *,
@@ -34,51 +36,34 @@ def export_xlsx(
         if isinstance(cell.value, (int, float)):
             cell.number_format = "$#,##0.00"
 
-    ws_summary["A6"] = "Executive Summary"
+    ws_summary["A6"] = "Narrative"
     ws_summary["A6"].font = header_font
-    ws_summary.merge_cells(start_row=6, start_column=2, end_row=6, end_column=5)
-    exec_cell = ws_summary.cell(row=6, column=2, value=narrative.executive_summary)
-    exec_cell.alignment = Alignment(wrap_text=True, vertical="top")
+    current_row = _render_markdown(ws_summary, narrative.blocks, start_row=7)
 
-    current_row = 8
-    ws_summary.cell(row=current_row, column=1, value="Largest Deltas").font = header_font
-    current_row += 1
-    delta_headers = [
-        "Driver",
-        f"{pair.primary.estimate_name} ($)",
-        f"{pair.comparison.estimate_name} ($)",
-        "Delta ($)",
-        "Insight",
-    ]
-    for col_idx, header in enumerate(delta_headers, start=1):
-        ws_summary.cell(row=current_row, column=col_idx, value=header).font = header_font
-    current_row += 1
-    for entry in narrative.largest_deltas:
-        ws_summary.cell(row=current_row, column=1, value=entry.get("title") or entry.get("category"))
-        ws_summary.cell(row=current_row, column=2, value=entry.get("primary_total"))
-        ws_summary.cell(row=current_row, column=3, value=entry.get("comparison_total"))
-        ws_summary.cell(row=current_row, column=4, value=entry.get("delta"))
-        ws_summary.cell(row=current_row, column=5, value=entry.get("insight"))
+    if narrative.delta_rows:
         current_row += 1
-    for col_idx in (2, 3, 4):
-        col_letter = get_column_letter(col_idx)
-        for cell in ws_summary[col_letter]:
-            if isinstance(cell.value, (int, float)):
-                cell.number_format = "$#,##0.00"
-
-    current_row += 1
-    ws_summary.cell(row=current_row, column=1, value="Contextual Drivers").font = header_font
-    current_row += 1
-    for note in narrative.contextual_drivers:
-        ws_summary.cell(row=current_row, column=2, value=f"- {note}").alignment = Alignment(wrap_text=True, vertical="top")
+        ws_summary.cell(row=current_row, column=1, value="Key Category Deltas").font = header_font
         current_row += 1
-
-    current_row += 1
-    ws_summary.cell(row=current_row, column=1, value="Follow-up Actions").font = header_font
-    current_row += 1
-    for action in narrative.follow_up_actions:
-        ws_summary.cell(row=current_row, column=2, value=f"- {action}").alignment = Alignment(wrap_text=True, vertical="top")
+        delta_headers = [
+            "Category",
+            f"{pair.primary.estimate_name} ($)",
+            f"{pair.comparison.estimate_name} ($)",
+            "Delta ($)",
+        ]
+        for col_idx, header in enumerate(delta_headers, start=1):
+            ws_summary.cell(row=current_row, column=col_idx, value=header).font = header_font
         current_row += 1
+        for entry in narrative.delta_rows:
+            ws_summary.cell(row=current_row, column=1, value=entry.get("category"))
+            ws_summary.cell(row=current_row, column=2, value=entry.get("primary_total"))
+            ws_summary.cell(row=current_row, column=3, value=entry.get("comparison_total"))
+            ws_summary.cell(row=current_row, column=4, value=entry.get("delta"))
+            current_row += 1
+        for col_idx in (2, 3, 4):
+            col_letter = get_column_letter(col_idx)
+            for cell in ws_summary[col_letter]:
+                if isinstance(cell.value, (int, float)):
+                    cell.number_format = "$#,##0.00"
 
     _autosize(ws_summary)
 
@@ -148,3 +133,40 @@ def _autosize(ws) -> None:
         letter = column_cells[0].column_letter
         max_len = max((len(str(cell.value)) for cell in column_cells if cell.value is not None), default=0)
         ws.column_dimensions[letter].width = min(max(12, max_len + 2), 80)
+
+
+def _render_markdown(ws, blocks: List[MarkdownBlock], start_row: int) -> int:
+    row = start_row
+    for block in blocks:
+        if block.kind == "blank":
+            row += 1
+            continue
+        if block.kind == "heading":
+            ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
+            cell = ws.cell(row=row, column=1, value=block.text)
+            font_size = max(12, 20 - (block.level * 2))
+            cell.font = Font(bold=True, size=font_size)
+            cell.alignment = Alignment(vertical="top")
+            row += 1
+            continue
+        if block.kind == "paragraph":
+            ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
+            cell = ws.cell(row=row, column=1, value=block.text)
+            cell.alignment = Alignment(wrap_text=True, vertical="top")
+            row += 1
+            continue
+        if block.kind in {"bullet", "numbered"}:
+            prefix = "•" if block.kind == "bullet" else f"{block.ordinal}." if block.ordinal is not None else "1."
+            indent = "    " * max(0, block.level - 1)
+            ws.cell(row=row, column=1, value=f"{indent}{prefix}")
+            ws.merge_cells(start_row=row, start_column=2, end_row=row, end_column=5)
+            text_cell = ws.cell(row=row, column=2, value=block.text)
+            text_cell.alignment = Alignment(wrap_text=True, vertical="top")
+            row += 1
+            continue
+        # Fallback: treat any other block as paragraph text
+        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
+        cell = ws.cell(row=row, column=1, value=block.text)
+        cell.alignment = Alignment(wrap_text=True, vertical="top")
+        row += 1
+    return row
