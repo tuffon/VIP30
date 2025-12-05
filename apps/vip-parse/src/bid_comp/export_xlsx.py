@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from io import BytesIO
-from typing import Dict, List
+from typing import Any, Dict, List
 
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
@@ -35,9 +35,23 @@ def export_xlsx(
         if isinstance(cell.value, (int, float)):
             cell.number_format = "$#,##0.00"
 
-    ws_summary["A6"] = "Narrative"
-    ws_summary["A6"].font = header_font
-    current_row = _render_markdown(ws_summary, narrative.blocks, start_row=7)
+    sections = narrative.sections or {}
+    overview_text = _resolve_overview_text(narrative)
+    scope_items = _ensure_string_list(sections.get("scope_observations"))
+    followup_items = _ensure_string_list(sections.get("suggested_followups"))
+    driver_rows = _ensure_driver_rows(sections.get("key_cost_drivers"), narrative)
+
+    current_row = 6
+    current_row = _write_text_section(ws_summary, current_row, "Overview of Estimates", overview_text, header_font)
+    current_row = _write_key_driver_section(
+        ws_summary,
+        current_row,
+        pair,
+        driver_rows,
+        header_font,
+    )
+    current_row = _write_list_section(ws_summary, current_row, "Scope Observations", scope_items, header_font)
+    current_row = _write_list_section(ws_summary, current_row, "Suggested Follow-ups", followup_items, header_font)
 
     if narrative.delta_rows:
         current_row += 1
@@ -133,38 +147,164 @@ def _autosize(ws) -> None:
         max_len = max((len(str(cell.value)) for cell in column_cells if cell.value is not None), default=0)
         ws.column_dimensions[letter].width = min(max(12, max_len + 2), 80)
 
+def _write_text_section(ws, start_row: int, title: str, body: str, header_font: Font) -> int:
+    ws.cell(row=start_row, column=1, value=title).font = header_font
+    body_row = start_row + 1
+    ws.merge_cells(start_row=body_row, start_column=1, end_row=body_row, end_column=5)
+    body_cell = ws.cell(row=body_row, column=1, value=body or "No narrative available.")
+    body_cell.alignment = Alignment(wrap_text=True, vertical="top")
+    return body_row + 2
 
-def _render_markdown(ws, blocks: List[MarkdownBlock], start_row: int) -> int:
-    row = start_row
-    for block in blocks:
-        if block.kind == "blank":
-            row += 1
-            continue
-        if block.kind == "heading":
-            ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
-            cell = ws.cell(row=row, column=1, value=block.text)
-            font_size = max(12, 20 - (block.level * 2))
-            cell.font = Font(bold=True, size=font_size)
-            cell.alignment = Alignment(vertical="top")
-            row += 1
-            continue
-        if block.kind == "paragraph":
-            ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
-            cell = ws.cell(row=row, column=1, value=block.text)
-            cell.alignment = Alignment(wrap_text=True, vertical="top")
-            row += 1
-            continue
-        if block.kind in {"bullet", "numbered"}:
-            prefix = "•" if block.kind == "bullet" else f"{block.ordinal}." if block.ordinal is not None else "1."
-            indent = "    " * max(0, block.level - 1)
-            ws.cell(row=row, column=1, value=f"{indent}{prefix}")
-            ws.merge_cells(start_row=row, start_column=2, end_row=row, end_column=5)
-            text_cell = ws.cell(row=row, column=2, value=block.text)
-            text_cell.alignment = Alignment(wrap_text=True, vertical="top")
-            row += 1
-            continue
+
+def _write_list_section(ws, start_row: int, title: str, items: List[str], header_font: Font) -> int:
+    ws.cell(row=start_row, column=1, value=title).font = header_font
+    row = start_row + 1
+    if not items:
         ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
-        cell = ws.cell(row=row, column=1, value=block.text)
+        cell = ws.cell(row=row, column=1, value="No items provided.")
         cell.alignment = Alignment(wrap_text=True, vertical="top")
+        return row + 2
+    for item in items:
+        ws.cell(row=row, column=1, value="•")
+        ws.merge_cells(start_row=row, start_column=2, end_row=row, end_column=5)
+        text_cell = ws.cell(row=row, column=2, value=item)
+        text_cell.alignment = Alignment(wrap_text=True, vertical="top")
         row += 1
-    return row
+    return row + 1
+
+
+def _write_key_driver_section(ws, start_row: int, pair, drivers: List[Dict[str, Any]], header_font: Font) -> int:
+    ws.cell(row=start_row, column=1, value="Key Cost Drivers").font = header_font
+    row = start_row + 1
+    headers = [
+        "Category",
+        f"{pair.primary.estimate_name} ($)",
+        f"{pair.comparison.estimate_name} ($)",
+        "Delta ($)",
+        "Narrative",
+    ]
+    for col_idx, header in enumerate(headers, start=1):
+        ws.cell(row=row, column=col_idx, value=header).font = header_font
+    row += 1
+    if not drivers:
+        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
+        cell = ws.cell(row=row, column=1, value="No driver data provided.")
+        cell.alignment = Alignment(wrap_text=True, vertical="top")
+        return row + 2
+    for driver in drivers:
+        primary_val = driver.get("primary_total")
+        comparison_val = driver.get("comparison_total")
+        delta_val = driver.get("delta_total")
+        if delta_val is None and isinstance(primary_val, (int, float)) and isinstance(comparison_val, (int, float)):
+            delta_val = round((comparison_val or 0) - (primary_val or 0), 2)
+        ws.cell(row=row, column=1, value=driver.get("category"))
+        primary_cell = ws.cell(row=row, column=2, value=primary_val)
+        comparison_cell = ws.cell(row=row, column=3, value=comparison_val)
+        delta_cell = ws.cell(row=row, column=4, value=delta_val)
+        narrative_cell = ws.cell(row=row, column=5, value=driver.get("narrative") or "")
+        for cell in (primary_cell, comparison_cell, delta_cell):
+            if isinstance(cell.value, (int, float)):
+                cell.number_format = "$#,##0.00"
+        narrative_cell.alignment = Alignment(wrap_text=True, vertical="top")
+        row += 1
+    return row + 1
+
+
+def _ensure_string_list(value) -> List[str]:
+    if not isinstance(value, list):
+        return []
+    items: List[str] = []
+    for entry in value:
+        if isinstance(entry, str):
+            text = entry.strip()
+            if text:
+                items.append(text)
+    return items
+
+
+def _ensure_driver_rows(section_rows, narrative) -> List[Dict[str, Any]]:
+    normalized: List[Dict[str, Any]] = []
+    if isinstance(section_rows, list):
+        for entry in section_rows:
+            normalized_entry = _normalize_driver_entry(entry)
+            if normalized_entry:
+                normalized.append(normalized_entry)
+    if normalized:
+        return normalized
+    if getattr(narrative, "key_drivers", None):
+        return [_normalize_driver_entry(entry) or entry for entry in narrative.key_drivers]
+    drivers: List[Dict[str, Any]] = []
+    for row in (narrative.delta_rows or []):
+        drivers.append(
+            {
+                "category": row.get("category"),
+                "primary_total": row.get("primary_total"),
+                "comparison_total": row.get("comparison_total"),
+                "delta_total": row.get("delta"),
+                "narrative": "",
+            }
+        )
+    return drivers
+
+
+def _resolve_overview_text(narrative) -> str:
+    sections = narrative.sections or {}
+    overview = (sections.get("overview_of_estimates") or "").strip()
+    if overview:
+        return overview
+    return _extract_first_paragraph(narrative.blocks) or "No narrative available."
+
+
+def _extract_first_paragraph(blocks: List[MarkdownBlock]) -> str:
+    for block in blocks:
+        if block.kind in {"paragraph", "heading"} and block.text:
+            return block.text
+    return ""
+
+
+def _normalize_driver_entry(entry: Any) -> Dict[str, Any] | None:
+    if not isinstance(entry, dict):
+        return None
+
+    def _pick_number(*keys):
+        for key in keys:
+            if key in entry:
+                value = entry.get(key)
+                coerced = _coerce_number(value)
+                if coerced is not None:
+                    return coerced
+        return None
+
+    category = str(entry.get("category") or "").strip() or "Category"
+    primary_total = _pick_number("total1", "primary_total", "estimate_a_total", "left_total")
+    comparison_total = _pick_number("total2", "comparison_total", "estimate_b_total", "right_total")
+    delta_val = _pick_number("delta", "delta_total")
+    if delta_val is None and isinstance(primary_total, (int, float)) and isinstance(comparison_total, (int, float)):
+        delta_val = round(comparison_total - primary_total, 2)
+    narrative_text = str(entry.get("narrative") or entry.get("explanation") or "").strip()
+    return {
+        "category": category,
+        "primary_total": primary_total,
+        "comparison_total": comparison_total,
+        "delta_total": delta_val,
+        "narrative": narrative_text,
+    }
+
+
+def _coerce_number(value: Any) -> float | None:
+    if value is None or value == "":
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        cleaned = value.replace(",", "").strip()
+        if not cleaned:
+            return None
+        try:
+            return float(cleaned)
+        except ValueError:
+            return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
