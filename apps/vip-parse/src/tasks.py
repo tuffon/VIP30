@@ -164,13 +164,20 @@ def run_bid_comp_keys(
             carrier_payload = _parse_full(carrier_path)
             contractor_payload = _parse_full(contractor_path)
 
-            bid_a_name = ensure_estimate_identity(
+            carrier_original = carrier_filename or Path(carrier_key).name
+            contractor_original = contractor_filename or Path(contractor_key).name
+            if isinstance(carrier_payload, dict):
+                carrier_payload.setdefault("original_filename", carrier_original)
+            if isinstance(contractor_payload, dict):
+                contractor_payload.setdefault("original_filename", contractor_original)
+
+            primary_name = ensure_estimate_identity(
                 carrier_payload,
-                carrier_filename or Path(carrier_key).name,
+                carrier_original,
             )
-            bid_b_name = ensure_estimate_identity(
+            comparison_name = ensure_estimate_identity(
                 contractor_payload,
-                contractor_filename or Path(contractor_key).name,
+                contractor_original,
             )
 
             # recaps derived from full JSON; used for summary rows and checks
@@ -178,8 +185,8 @@ def run_bid_comp_keys(
             recap_b = _extract_recap(contractor_payload)
             recap_bundle = {
                 "estimates": [
-                    {"estimate_name": bid_a_name, "recap": recap_a},
-                    {"estimate_name": bid_b_name, "recap": recap_b},
+                    {"estimate_name": primary_name, "recap": recap_a},
+                    {"estimate_name": comparison_name, "recap": recap_b},
                 ],
                 "carrier": recap_a,
                 "contractor": recap_b,
@@ -188,18 +195,30 @@ def run_bid_comp_keys(
             # full-context input for BidComp: full JSON, not recap-only
             bid_context = {
                 "estimates": [
-                    {"role": "BID_A", "estimate_name": bid_a_name, "payload": carrier_payload},
-                    {"role": "BID_B", "estimate_name": bid_b_name, "payload": contractor_payload},
+                    {
+                        "position": "primary",
+                        "estimate_name": primary_name,
+                        "payload": carrier_payload,
+                        "source_filename": carrier_original,
+                    },
+                    {
+                        "position": "comparison",
+                        "estimate_name": comparison_name,
+                        "payload": contractor_payload,
+                        "source_filename": contractor_original,
+                    },
                 ],
                 "carrier": carrier_payload,
                 "contractor": contractor_payload,
+                "carrier_source_filename": carrier_original,
+                "contractor_source_filename": contractor_original,
             }
 
             # Persist JSON payloads alongside XLS output for debugging
             json_prefix = f"results/{job_id}"
             try:
-                carrier_json_key = f"{json_prefix}/bid-a-context.json"
-                contractor_json_key = f"{json_prefix}/bid-b-context.json"
+                carrier_json_key = f"{json_prefix}/primary-estimate.json"
+                contractor_json_key = f"{json_prefix}/comparison-estimate.json"
                 s3.put_object(
                     Bucket=bucket,
                     Key=carrier_json_key,
@@ -236,13 +255,13 @@ def run_bid_comp_keys(
                 except Exception:
                     pass
 
-            result: Dict[str, Any] = {
-                "recap_by_category": recap_bundle,
-                "meta": {
-                    "elapsed_ms": int((time.time() - t0) * 1000),
-                },
-                "result_keys": {"xlsx": xlsx_key},
-            }
+                result: Dict[str, Any] = {
+                    "recap_by_category": recap_bundle,
+                    "meta": {
+                        "elapsed_ms": int((time.time() - t0) * 1000),
+                    },
+                    "result_keys": {"xlsx": xlsx_key},
+                }
             if notify_email:
                 result["notify_email"] = notify_email
             narrative_debug = getattr(comp, "last_narrative_debug", None)
@@ -301,7 +320,7 @@ def run_bid_comp_keys(
                     email_client.send_bidcomp_ready_email(
                         to_email=notify_email,
                         download_url=download_url,
-                        summary=f"{bid_a_name} vs {bid_b_name}",
+                        summary=f"{primary_name} vs {comparison_name}",
                     )
 
             logger.info("job done (r2 keys): job_id=%s", job_id)

@@ -47,8 +47,8 @@ class FakeAdapter(LLMAdapterBase):
 
     def generate(self, template_id: str, context: dict) -> str:  # type: ignore[override]
         assert template_id == "bid_comp_summary_v1"
-        assert "bid_a_json" in context
-        assert "bid_b_json" in context
+        assert "primary_json" in context
+        assert "comparison_json" in context
         return self.response
 
 
@@ -60,12 +60,12 @@ def test_category_mapping_and_fallback_narrative() -> None:
     pair = comp._build_pair({"carrier": payload_a, "contractor": payload_b})  # type: ignore[arg-type]
     categories = comp._build_category_table(pair)
     framing_row = next(row for row in categories if row["category"] == "Framing / Structural")
-    assert framing_row["bid_a_total"] == 400.0
-    assert framing_row["bid_b_total"] == 650.0
+    assert framing_row["primary_total"] == 400.0
+    assert framing_row["comparison_total"] == 650.0
 
     overhead_row = next(row for row in categories if row["category"] == "Overhead & Profit")
-    assert overhead_row["bid_a_total"] == 160.0
-    assert overhead_row["bid_b_total"] == 240.0
+    assert overhead_row["primary_total"] == 160.0
+    assert overhead_row["comparison_total"] == 240.0
 
     top_deltas = comp._top_deltas(categories)
     narrative = comp._generate_narrative(pair, top_deltas)
@@ -80,26 +80,26 @@ def test_run_generates_three_tabs_with_llm() -> None:
     payload_b = _make_payload("Estimate B", framing=450, roofing=180, electrical=90, overhead=90, profit=90, tax=15)
 
     fake_response = {
-        "executive_summary": "Bid B carries higher framing scope.",
+        "executive_summary": "Estimate B carries higher framing scope.",
         "largest_deltas": [
             {
                 "title": "Framing",
                 "category": "Framing / Structural",
-                "bid_a_total": 300,
-                "bid_b_total": 450,
+                "primary_total": 300,
+                "comparison_total": 450,
                 "delta": 150,
-                "insight": "Bid B adds additional structural reinforcement.",
+                "insight": "Estimate B adds additional structural reinforcement.",
             }
         ],
-        "contextual_drivers": ["Bid B includes extra electrical allowances."],
-        "follow_up_actions": ["Confirm framing drawings for Bid A."],
+        "contextual_drivers": ["Estimate B includes extra electrical allowances."],
+        "follow_up_actions": ["Confirm framing drawings for Estimate A."],
     }
     comp = BidComp(llm_adapter=FakeAdapter(fake_response))
     xlsx = comp.run({"carrier": payload_a, "contractor": payload_b}, job_id="job-1")
     wb = load_workbook(BytesIO(xlsx))
     assert wb.sheetnames == ["Narrative Summary", "Verisk Categories", "Original Recap"]
     summary = wb["Narrative Summary"]
-    assert summary["B6"].value.startswith("Bid B") or "framing" in summary["B6"].value.lower()
+    assert "framing" in (summary["B6"].value or "").lower()
     categories_sheet = wb["Verisk Categories"]
     # header + all categories
     assert categories_sheet.max_row == len(VERISK_CATEGORY_ORDER) + 1

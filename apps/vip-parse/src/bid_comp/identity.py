@@ -6,7 +6,10 @@ from typing import Any, Dict
 MAX_FALLBACK_LEN = 80
 
 
-def ensure_estimate_identity(payload: Dict[str, Any] | None, fallback: str | None = None) -> str:
+def ensure_estimate_identity(
+    payload: Dict[str, Any] | None,
+    fallback: str | None = None,
+) -> str:
     """
     Ensure the parsed payload exposes an estimate_name at the root and within case_metadata.
     Returns the resolved estimate_name so callers can label downstream artifacts consistently.
@@ -20,10 +23,19 @@ def ensure_estimate_identity(payload: Dict[str, Any] | None, fallback: str | Non
             estimate_name = raw_name.strip()
         else:
             case_md = payload.get("case_metadata")
+            case_name = None
             if isinstance(case_md, dict):
-                case_name = case_md.get("estimate_name")
+                case_name = case_md.get("estimate_name") or case_md.get("file_name")
                 if isinstance(case_name, str) and case_name.strip():
                     estimate_name = case_name.strip()
+            if not case_name:
+                for key in ("file_name", "source_filename", "original_filename", "uploaded_filename"):
+                    candidate = payload.get(key)
+                    if isinstance(candidate, str) and candidate.strip():
+                        estimate_name = _sanitize_name(candidate)
+                        break
+                else:
+                    estimate_name = _sanitize_name(estimate_name)
         payload["estimate_name"] = estimate_name
         case_md = payload.get("case_metadata")
         if isinstance(case_md, dict) and not case_md.get("estimate_name"):

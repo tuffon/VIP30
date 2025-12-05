@@ -41,6 +41,8 @@ VERISK_CATEGORY_ORDER: List[str] = [
 ]
 
 CATEGORY_FALLBACK = "Other / Unclassified"
+PRIMARY_FALLBACK_NAME = "Estimate 1"
+COMPARISON_FALLBACK_NAME = "Estimate 2"
 
 CATEGORY_KEYWORDS: List[tuple[str, str]] = [
     ("CLEAN", "Cleaning / Restoration"),
@@ -104,8 +106,8 @@ NARRATIVE_OUTPUT_TEMPLATE = json.dumps(
             {
                 "title": "Category driver",
                 "category": "Category from provided list",
-                "bid_a_total": 0,
-                "bid_b_total": 0,
+                "primary_total": 0,
+                "comparison_total": 0,
                 "delta": 0,
                 "insight": "Why the delta exists (scope, quantity, fees, etc.).",
             }
@@ -130,19 +132,20 @@ class EstimateTotals:
 
 
 @dataclass
-class BidEstimate:
-    role: str
+class EstimateArtifact:
+    position: str
     estimate_name: str
     payload: Dict[str, Any]
     recap: Dict[str, Any]
     totals: EstimateTotals
     summary_snapshot: Dict[str, Any] = field(default_factory=dict)
+    source_filename: Optional[str] = None
 
 
 @dataclass
-class BidPair:
-    bid_a: BidEstimate
-    bid_b: BidEstimate
+class EstimatePair:
+    primary: EstimateArtifact
+    comparison: EstimateArtifact
 
 
 @dataclass
@@ -173,7 +176,7 @@ class BidComp:
         return export_xlsx(pair=pair, narrative=narrative, category_rows=category_rows, recap_rows=recap_rows)
 
     # ---------- Pair + estimate helpers ----------
-    def _build_pair(self, bid_context: dict) -> BidPair:
+    def _build_pair(self, bid_context: dict) -> EstimatePair:
         if not isinstance(bid_context, dict):
             raise ValueError("bid_context must be a dict")
 
@@ -181,18 +184,21 @@ class BidComp:
         if isinstance(estimates_raw, list) and len(estimates_raw) >= 2:
             left_raw = estimates_raw[0]
             right_raw = estimates_raw[1]
-            left_payload = self._resolve_payload(left_raw)
-            right_payload = self._resolve_payload(right_raw)
+            left_payload, left_source = self._resolve_entry(left_raw)
+            right_payload, right_source = self._resolve_entry(right_raw)
         else:
-            left_payload = self._resolve_payload(bid_context.get("carrier"))
-            right_payload = self._resolve_payload(bid_context.get("contractor"))
+            left_payload, left_source = self._resolve_entry(bid_context.get("carrier"))
+            right_payload, right_source = self._resolve_entry(bid_context.get("contractor"))
 
         if not left_payload or not right_payload:
             raise ValueError("bid_context must include two estimate payloads")
 
-        bid_a = self._build_estimate(left_payload, fallback_role="Bid A")
-        bid_b = self._build_estimate(right_payload, fallback_role="Bid B")
-        return BidPair(bid_a=bid_a, bid_b=bid_b)
+        carrier_source = left_source or bid_context.get("carrier_source_filename")
+        contractor_source = right_source or bid_context.get("contractor_source_filename")
+
+        primary = self._build_estimate(left_payload, position="primary", source_filename=carrier_source)
+        comparison = self._build_estimate(right_payload, position="comparison", source_filename=contractor_source)
+        return EstimatePair(primary=primary, comparison=comparison)
 
     def _resolve_payload(self, value: Any) -> Optional[Dict[str, Any]]:
         if isinstance(value, dict) and "payload" in value and isinstance(value["payload"], dict):
@@ -200,19 +206,44 @@ class BidComp:
         if isinstance(value, dict):
             return value
         return None
+    
+    def _resolve_entry(self, value: Any) -> tuple[Optional[Dict[str, Any]], Optional[str]]:
+        payload = self._resolve_payload(value)
+        source_filename: Optional[str] = None
+        if isinstance(value, dict):
+            for key in ("source_filename", "original_filename", "filename"):
+                candidate = value.get(key)
+                if isinstance(candidate, str) and candidate.strip():
+                    source_filename = candidate.strip()
+                    break
+        if not source_filename and isinstance(payload, dict):
+            for key in ("original_filename", "source_filename", "file_name"):
+                candidate = payload.get(key)
+                if isinstance(candidate, str) and candidate.strip():
+                    source_filename = candidate.strip()
+                    break
+        return payload, source_filename
 
-    def _build_estimate(self, payload: Dict[str, Any], fallback_role: str) -> BidEstimate:
-        estimate_name = ensure_estimate_identity(payload, fallback_role)
+    def _build_estimate(
+        self,
+        payload: Dict[str, Any],
+        *,
+        position: str,
+        source_filename: Optional[str],
+    ) -> EstimateArtifact:
+        fallback_label = PRIMARY_FALLBACK_NAME if position == "primary" else COMPARISON_FALLBACK_NAME
+        estimate_name = ensure_estimate_identity(payload, source_filename or fallback_label)
         recap = self._extract_recap_from_context(payload)
         totals = self._extract_totals(payload, recap)
         summary_snapshot = self._build_summary_snapshot(payload, recap)
-        return BidEstimate(
-            role=fallback_role,
+        return EstimateArtifact(
+            position=position,
             estimate_name=estimate_name,
             payload=payload,
             recap=recap,
             totals=totals,
             summary_snapshot=summary_snapshot,
+            source_filename=source_filename,
         )
 
     def _extract_recap_from_context(self, payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -281,20 +312,20 @@ class BidComp:
         }
 
     # ---------- Category table ----------
-    def _build_category_table(self, pair: BidPair) -> List[Dict[str, Any]]:
-        bid_a_totals = self._aggregate_categories(pair.bid_a.recap)
-        bid_b_totals = self._aggregate_categories(pair.bid_b.recap)
+    def _build_category_table(self, pair: EstimatePair) -> List[Dict[str, Any]]:
+        primary_totals = self._aggregate_categories(pair.primary.recap)
+        comparison_totals = self._aggregate_categories(pair.comparison.recap)
         rows: List[Dict[str, Any]] = []
         for category in VERISK_CATEGORY_ORDER:
-            a_val = bid_a_totals.get(category, 0.0)
-            b_val = bid_b_totals.get(category, 0.0)
+            a_val = primary_totals.get(category, 0.0)
+            b_val = comparison_totals.get(category, 0.0)
             delta = round((b_val or 0.0) - (a_val or 0.0), 2)
             delta_pct = (delta / a_val) if a_val else None
             rows.append(
                 {
                     "category": category,
-                    "bid_a_total": a_val,
-                    "bid_b_total": b_val,
+                    "primary_total": a_val,
+                    "comparison_total": b_val,
                     "delta": delta,
                     "delta_pct": delta_pct,
         }
@@ -362,15 +393,15 @@ class BidComp:
         return rows[: self.top_delta_count]
 
     # ---------- Narrative ----------
-    def _generate_narrative(self, pair: BidPair, top_deltas: List[Dict[str, Any]]) -> NarrativeResult:
+    def _generate_narrative(self, pair: EstimatePair, top_deltas: List[Dict[str, Any]]) -> NarrativeResult:
         if not self.llm_adapter:
             return self._fallback_narrative(top_deltas, reason="LLM disabled")
 
         context = {
-            "bid_a_name": pair.bid_a.estimate_name,
-            "bid_b_name": pair.bid_b.estimate_name,
-            "bid_a_json": json.dumps(pair.bid_a.payload, ensure_ascii=False),
-            "bid_b_json": json.dumps(pair.bid_b.payload, ensure_ascii=False),
+            "primary_name": pair.primary.estimate_name,
+            "comparison_name": pair.comparison.estimate_name,
+            "primary_json": json.dumps(pair.primary.payload, ensure_ascii=False),
+            "comparison_json": json.dumps(pair.comparison.payload, ensure_ascii=False),
             "category_table_json": json.dumps(top_deltas, ensure_ascii=False),
         }
         missing_keys = [k for k, v in context.items() if not v]
@@ -378,8 +409,8 @@ class BidComp:
             logger.warning(
                 "narrative context incomplete (missing=%s) for estimates (%s, %s)",
                 missing_keys,
-                pair.bid_a.estimate_name,
-                pair.bid_b.estimate_name,
+                pair.primary.estimate_name,
+                pair.comparison.estimate_name,
             )
             return self._fallback_narrative(
                 top_deltas,
@@ -393,8 +424,8 @@ class BidComp:
         except Exception as exc:  # noqa: BLE001
             logger.warning(
                 "narrative prompt failed for (%s, %s): %s",
-                pair.bid_a.estimate_name,
-                pair.bid_b.estimate_name,
+                pair.primary.estimate_name,
+                pair.comparison.estimate_name,
                 exc,
             )
             return self._fallback_narrative(
@@ -408,18 +439,18 @@ class BidComp:
             payload = json.loads(raw)
         except Exception:
             logger.warning(
-                "narrative parse failed: bid_a=%s bid_b=%s preview=%s",
-                pair.bid_a.estimate_name,
-                pair.bid_b.estimate_name,
+                "narrative parse failed: primary=%s comparison=%s preview=%s",
+                pair.primary.estimate_name,
+                pair.comparison.estimate_name,
                 self._preview(raw),
             )
             return self._fallback_narrative(top_deltas, reason="parse_error", raw_response=raw, context=context)
 
         if not isinstance(payload, dict):
             logger.warning(
-                "narrative payload invalid: bid_a=%s bid_b=%s preview=%s",
-                pair.bid_a.estimate_name,
-                pair.bid_b.estimate_name,
+                "narrative payload invalid: primary=%s comparison=%s preview=%s",
+                pair.primary.estimate_name,
+                pair.comparison.estimate_name,
                 self._preview(raw),
             )
             return self._fallback_narrative(top_deltas, reason="invalid_payload", raw_response=raw, context=context)
@@ -435,8 +466,8 @@ class BidComp:
                 {
                     "title": entry.get("title") or entry.get("category") or "",
                     "category": entry.get("category") or entry.get("title") or "",
-                    "bid_a_total": normalize_money(entry.get("bid_a_total")),
-                    "bid_b_total": normalize_money(entry.get("bid_b_total")),
+                    "primary_total": normalize_money(entry.get("primary_total")),
+                    "comparison_total": normalize_money(entry.get("comparison_total")),
                     "delta": normalize_money(entry.get("delta")),
                     "insight": entry.get("insight"),
                 }
@@ -447,8 +478,8 @@ class BidComp:
                     {
                     "title": row["category"],
                     "category": row["category"],
-                    "bid_a_total": row["bid_a_total"],
-                    "bid_b_total": row["bid_b_total"],
+                    "primary_total": row["primary_total"],
+                    "comparison_total": row["comparison_total"],
                     "delta": row["delta"],
                     "insight": "See delta table.",
                 }
@@ -486,8 +517,8 @@ class BidComp:
                 {
                     "title": row["category"],
                     "category": row["category"],
-                    "bid_a_total": row["bid_a_total"],
-                    "bid_b_total": row["bid_b_total"],
+                    "primary_total": row["primary_total"],
+                    "comparison_total": row["comparison_total"],
                     "delta": row["delta"],
                     "insight": "LLM narrative unavailable.",
                 }
@@ -523,9 +554,9 @@ class BidComp:
         return text[:limit]
 
     # ---------- Recap flattening ----------
-    def _flatten_original_recaps(self, pair: BidPair) -> List[Dict[str, Any]]:
+    def _flatten_original_recaps(self, pair: EstimatePair) -> List[Dict[str, Any]]:
         rows: List[Dict[str, Any]] = []
-        for estimate in (pair.bid_a, pair.bid_b):
+        for estimate in (pair.primary, pair.comparison):
             recap = estimate.recap
             for group_label, items in recap.items():
                 if group_label == "subtotals":

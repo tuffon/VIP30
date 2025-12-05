@@ -23,13 +23,13 @@ def export_xlsx(
     ws_summary["A1"] = "Bid Comparison Summary"
     ws_summary["A1"].font = Font(bold=True, size=14)
 
-    ws_summary["A3"] = "Bid A"
-    ws_summary["B3"] = pair.bid_a.estimate_name
-    ws_summary["C3"] = pair.bid_a.totals.grand_total
-    ws_summary["A4"] = "Bid B"
-    ws_summary["B4"] = pair.bid_b.estimate_name
-    ws_summary["C4"] = pair.bid_b.totals.grand_total
-    for cell_ref in ("C3", "C4"):
+    ws_summary["A3"] = "Estimate"
+    ws_summary["B3"] = "Grand Total ($)"
+    ws_summary["A4"] = pair.primary.estimate_name
+    ws_summary["B4"] = pair.primary.totals.grand_total
+    ws_summary["A5"] = pair.comparison.estimate_name
+    ws_summary["B5"] = pair.comparison.totals.grand_total
+    for cell_ref in ("B4", "B5"):
         cell = ws_summary[cell_ref]
         if isinstance(cell.value, (int, float)):
             cell.number_format = "$#,##0.00"
@@ -43,14 +43,20 @@ def export_xlsx(
     current_row = 8
     ws_summary.cell(row=current_row, column=1, value="Largest Deltas").font = header_font
     current_row += 1
-    delta_headers = ["Driver", f"{pair.bid_a.estimate_name} ($)", f"{pair.bid_b.estimate_name} ($)", "Delta ($)", "Insight"]
+    delta_headers = [
+        "Driver",
+        f"{pair.primary.estimate_name} ($)",
+        f"{pair.comparison.estimate_name} ($)",
+        "Delta ($)",
+        "Insight",
+    ]
     for col_idx, header in enumerate(delta_headers, start=1):
         ws_summary.cell(row=current_row, column=col_idx, value=header).font = header_font
     current_row += 1
     for entry in narrative.largest_deltas:
         ws_summary.cell(row=current_row, column=1, value=entry.get("title") or entry.get("category"))
-        ws_summary.cell(row=current_row, column=2, value=entry.get("bid_a_total"))
-        ws_summary.cell(row=current_row, column=3, value=entry.get("bid_b_total"))
+        ws_summary.cell(row=current_row, column=2, value=entry.get("primary_total"))
+        ws_summary.cell(row=current_row, column=3, value=entry.get("comparison_total"))
         ws_summary.cell(row=current_row, column=4, value=entry.get("delta"))
         ws_summary.cell(row=current_row, column=5, value=entry.get("insight"))
         current_row += 1
@@ -80,10 +86,10 @@ def export_xlsx(
     ws_categories = wb.create_sheet("Verisk Categories")
     cat_headers = [
         "Category",
-        f"{pair.bid_a.estimate_name} ($)",
-        f"{pair.bid_b.estimate_name} ($)",
+        f"{pair.primary.estimate_name} ($)",
+        f"{pair.comparison.estimate_name} ($)",
         "Delta ($)",
-        "Delta (% of Bid A)",
+        f"Delta (% of {pair.primary.estimate_name})",
     ]
     ws_categories.append(cat_headers)
     for col_idx in range(1, len(cat_headers) + 1):
@@ -92,8 +98,8 @@ def export_xlsx(
         ws_categories.append(
             [
                 row["category"],
-                row.get("bid_a_total"),
-                row.get("bid_b_total"),
+                row.get("primary_total"),
+                row.get("comparison_total"),
                 row.get("delta"),
                 row.get("delta_pct"),
             ]
