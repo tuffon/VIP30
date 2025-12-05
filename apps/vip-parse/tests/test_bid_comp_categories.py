@@ -42,8 +42,10 @@ def _make_payload(name: str, framing: float, roofing: float, electrical: float, 
 
 
 class FakeAdapter(LLMAdapterBase):
-    def __init__(self, markdown: str) -> None:
+    def __init__(self, markdown: str, sections: dict | None = None) -> None:
         payload = {"markdown": markdown, "metadata": {"confidence": "high"}}
+        if sections is not None:
+            payload["sections"] = sections
         self.response = json.dumps(payload)
 
     def generate(self, template_id: str, context: dict) -> str:  # type: ignore[override]
@@ -73,6 +75,8 @@ def test_category_mapping_and_fallback_narrative() -> None:
     narrative = comp._generate_narrative(pair, top_deltas)
     assert narrative.delta_rows
     assert narrative.blocks
+    assert "Narrative fallback" in narrative.sections["overview_of_estimates"]
+    assert narrative.key_drivers
     assert comp.last_narrative_debug["status"] == "fallback"
     assert "raw_response_preview" in comp.last_narrative_debug
 
@@ -81,24 +85,45 @@ def test_run_generates_three_tabs_with_llm() -> None:
     payload_a = _make_payload("Estimate A", framing=300, roofing=200, electrical=50, overhead=60, profit=60, tax=10)
     payload_b = _make_payload("Estimate B", framing=450, roofing=180, electrical=90, overhead=90, profit=90, tax=15)
 
-    fake_markdown = """# Executive Summary
+    fake_markdown = """# Overview of Estimates
 Estimate B carries higher framing scope.
 
 ## Key Cost Drivers
-- **Framing / Structural**: 300 vs 450.
+- **Framing / Structural**: 300 vs 450 — Estimate B replaces the entire deck.
 
 ## Scope Observations
 - Estimate B includes extra electrical allowances.
 
 ## Suggested Follow-ups
-1. Confirm framing drawings for Estimate A.
+- Confirm framing drawings for Estimate A.
 """
-    comp = BidComp(llm_adapter=FakeAdapter(fake_markdown))
+    sections = {
+        "overview_of_estimates": "Estimate B carries higher framing scope.",
+        "key_cost_drivers": [
+            {
+                "category": "Framing / Structural",
+                "primary_total": 300,
+                "comparison_total": 450,
+                "delta_total": 150,
+                "narrative": "Estimate B replaces the entire deck.",
+            }
+        ],
+        "scope_observations": ["Estimate B includes extra electrical allowances."],
+        "suggested_followups": ["Confirm framing drawings for Estimate A."],
+    }
+    comp = BidComp(llm_adapter=FakeAdapter(fake_markdown, sections))
     xlsx = comp.run({"carrier": payload_a, "contractor": payload_b}, job_id="job-1")
     wb = load_workbook(BytesIO(xlsx))
     assert wb.sheetnames == ["Narrative Summary", "Verisk Categories", "Original Recap"]
     summary = wb["Narrative Summary"]
-    assert "Narrative" == summary["A6"].value
+    assert summary["A6"].value == "Overview of Estimates"
+    assert "framing scope" in (summary["A7"].value or "")
+    assert summary["A9"].value == "Key Cost Drivers"
+    assert summary["A10"].value == "Category"
+    assert summary["A11"].value == "Framing / Structural"
+    assert summary["E11"].value == "Estimate B replaces the entire deck."
+    assert summary["A13"].value == "Scope Observations"
+    assert summary["B14"].value == "Estimate B includes extra electrical allowances."
     categories_sheet = wb["Verisk Categories"]
     # header + all categories
     assert categories_sheet.max_row == len(VERISK_CATEGORY_ORDER) + 1

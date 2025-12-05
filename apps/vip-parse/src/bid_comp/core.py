@@ -102,8 +102,8 @@ CATEGORY_KEYWORDS: List[tuple[str, str]] = [
 
 NARRATIVE_OUTPUT_TEMPLATE = json.dumps(
     {
-        "markdown": "# Executive Summary\n"
-        "Provide 2-3 sentences comparing the overall scope and cost differences.\n\n"
+        "markdown": "# Overview of Estimates\n"
+        "Provide 2-3 sentences comparing the intent, scope, and magnitude of both estimates.\n\n"
         "## Key Cost Drivers\n"
         "- Bullet per major driver naming the category, the amounts for each estimate, and why they differ.\n\n"
         "## Scope Observations\n"
@@ -117,6 +117,13 @@ NARRATIVE_OUTPUT_TEMPLATE = json.dumps(
     },
     indent=2,
 )
+
+EXPECTED_NARRATIVE_HEADERS: List[str] = [
+    "# Overview of Estimates",
+    "## Key Cost Drivers",
+    "## Scope Observations",
+    "## Suggested Follow-ups",
+]
 
 
 @dataclass
@@ -149,6 +156,8 @@ class NarrativeResult:
     markdown: str
     blocks: List[MarkdownBlock]
     delta_rows: List[Dict[str, Any]]
+    sections: Dict[str, Any] = field(default_factory=dict)
+    key_drivers: List[Dict[str, Any]] = field(default_factory=list)
     raw_response: str = ""
     parsed: bool = False
 
@@ -404,7 +413,7 @@ class BidComp:
     def _generate_narrative(self, pair: EstimatePair, top_deltas: List[Dict[str, Any]]) -> NarrativeResult:
         delta_rows = self._build_delta_rows(top_deltas)
         if not self.llm_adapter:
-            return self._fallback_narrative(top_deltas, reason="LLM disabled")
+            return self._fallback_narrative(top_deltas, reason="LLM disabled", pair=pair)
 
         context = {
             "primary_name": pair.primary.estimate_name,
@@ -426,6 +435,7 @@ class BidComp:
                 reason=f"missing_context:{','.join(missing_keys)}",
                 raw_response="",
                 context=context,
+                pair=pair,
             )
 
         try:
@@ -442,27 +452,45 @@ class BidComp:
                 reason=str(exc),
                 raw_response="",
                 context=context,
+                pair=pair,
             )
 
         markdown_text = ""
         metadata: Dict[str, Any] = {}
         payload: Optional[Dict[str, Any]] = None
+        parse_issues: List[str] = []
         try:
             payload_candidate = json.loads(raw)
             if isinstance(payload_candidate, dict):
                 payload = payload_candidate
-        except Exception:
+            else:
+                parse_issues.append("non_dict_payload")
+        except Exception as exc:  # noqa: BLE001
+            parse_issues.append(f"json_error:{exc.__class__.__name__}")
             payload = None
+
+        sections_payload = payload.get("sections") if payload else None
+        normalized_sections, driver_rows = self._normalize_sections(sections_payload)
+        if not driver_rows:
+            driver_rows = self._drivers_from_deltas(top_deltas)
 
         if payload:
             candidate = payload.get("markdown") or payload.get("narrative") or payload.get("content")
             if isinstance(candidate, str):
                 markdown_text = candidate.strip()
+            else:
+                parse_issues.append("missing_markdown_field")
             metadata_value = payload.get("metadata")
             if isinstance(metadata_value, dict):
                 metadata = metadata_value
+            elif metadata_value is not None:
+                parse_issues.append("invalid_metadata_type")
         else:
             markdown_text = raw.strip()
+
+        sections_have_content = self._sections_have_content(normalized_sections, driver_rows)
+        if not markdown_text and sections_have_content:
+            markdown_text = self._render_structured_markdown(pair, normalized_sections, driver_rows)
 
         if not markdown_text:
             logger.warning(
@@ -471,19 +499,35 @@ class BidComp:
                 pair.comparison.estimate_name,
                 self._preview(raw),
             )
+            reason = "empty_markdown"
+            if parse_issues:
+                reason = f"{reason} ({';'.join(parse_issues)})"
             return self._fallback_narrative(
                 top_deltas,
-                reason="empty_markdown",
+                reason=reason,
                 raw_response=raw,
                 context=context,
+                pair=pair,
             )
 
         blocks = parse_markdown(markdown_text)
+        missing_sections = self._missing_narrative_sections(markdown_text, EXPECTED_NARRATIVE_HEADERS)
         self.last_narrative_debug = {
             "status": "ok",
             "format": "markdown",
             "block_count": len(blocks),
         }
+        if parse_issues:
+            self.last_narrative_debug["parse_issues"] = parse_issues
+        if missing_sections:
+            self.last_narrative_debug["missing_sections"] = missing_sections
+        if sections_have_content:
+            self.last_narrative_debug["sections"] = {
+                "overview": bool(normalized_sections.get("overview_of_estimates")),
+                "scope_observations": len(normalized_sections.get("scope_observations") or []),
+                "suggested_followups": len(normalized_sections.get("suggested_followups") or []),
+                "drivers": len(driver_rows),
+            }
         if metadata:
             self.last_narrative_debug["metadata"] = metadata
         self.last_narrative_artifact = {
@@ -496,6 +540,8 @@ class BidComp:
             markdown=markdown_text,
             blocks=blocks,
             delta_rows=delta_rows,
+            sections=normalized_sections,
+            key_drivers=driver_rows,
             raw_response=raw,
             parsed=True,
         )
@@ -506,28 +552,22 @@ class BidComp:
         reason: Optional[str] = None,
         raw_response: str = "",
         context: Optional[Dict[str, Any]] = None,
+        pair: Optional[EstimatePair] = None,
     ) -> NarrativeResult:
         delta_rows = self._build_delta_rows(top_deltas)
-        lines: List[str] = ["# Bid Comparison Narrative"]
-        fallback_note = f"Narrative fallback: {reason}" if reason else "Narrative fallback invoked."
-        lines.append(f"_{fallback_note}_")
-        if delta_rows:
-            lines.append("\n## Key Cost Drivers")
-            for row in delta_rows[:3]:
-                primary_val = row.get("primary_total")
-                comparison_val = row.get("comparison_total")
-                delta_val = row.get("delta")
-                lines.append(
-                    f"- **{row.get('category', 'Category')}**: "
-                    f"Primary {self._format_currency(primary_val)} vs "
-                    f"Comparison {self._format_currency(comparison_val)} "
-                    f"(Δ {self._format_currency(delta_val)})."
-                )
-        else:
-            lines.append("\nNo delta data was available to summarize.")
-        lines.append("\n## Suggested Follow-ups")
-        lines.append("- Review supporting estimate sections manually.")
-        markdown_text = "\n".join(lines)
+        driver_rows = self._drivers_from_deltas(top_deltas)
+        overview_text = self._build_fallback_overview(pair, reason)
+        scope_observations = [
+            "Automated comparison unavailable; review supporting sections manually.",
+        ]
+        suggested_followups = ["Review supporting estimate sections manually."]
+        sections = {
+            "overview_of_estimates": overview_text,
+            "key_cost_drivers": driver_rows,
+            "scope_observations": scope_observations,
+            "suggested_followups": suggested_followups,
+        }
+        markdown_text = self._render_structured_markdown(pair, sections, driver_rows)
         blocks = parse_markdown(markdown_text)
         preview = (raw_response or "")[:2000]
         self.last_narrative_debug = {
@@ -547,9 +587,160 @@ class BidComp:
             markdown=markdown_text,
             blocks=blocks,
             delta_rows=delta_rows,
+            sections=sections,
+            key_drivers=driver_rows,
             raw_response=raw_response,
             parsed=False,
         )
+
+    def _missing_narrative_sections(self, markdown_text: str, expected_headers: List[str]) -> List[str]:
+        lowered = (markdown_text or "").lower()
+        missing: List[str] = []
+        for header in expected_headers:
+            if header.lower() not in lowered:
+                missing.append(header)
+        return missing
+
+    def _normalize_sections(self, sections: Any) -> tuple[Dict[str, Any], List[Dict[str, Any]]]:
+        normalized: Dict[str, Any] = {
+            "overview_of_estimates": "",
+            "scope_observations": [],
+            "suggested_followups": [],
+        }
+        drivers: List[Dict[str, Any]] = []
+        if isinstance(sections, dict):
+            overview = sections.get("overview_of_estimates")
+            if isinstance(overview, str):
+                normalized["overview_of_estimates"] = overview.strip()
+            normalized["scope_observations"] = self._coerce_str_list(sections.get("scope_observations"))
+            normalized["suggested_followups"] = self._coerce_str_list(sections.get("suggested_followups"))
+            raw_drivers = sections.get("key_cost_drivers")
+            if isinstance(raw_drivers, list):
+                for entry in raw_drivers:
+                    if not isinstance(entry, dict):
+                        continue
+                    raw_category = entry.get("category")
+                    if isinstance(raw_category, str):
+                        category = raw_category.strip() or "Unspecified"
+                    elif raw_category is None:
+                        category = "Unspecified"
+                    else:
+                        category = str(raw_category).strip() or "Unspecified"
+                    drivers.append(
+                        {
+                            "category": category,
+                            "primary_total": normalize_money(entry.get("primary_total")),
+                            "comparison_total": normalize_money(entry.get("comparison_total")),
+                            "delta_total": normalize_money(entry.get("delta_total")),
+                            "narrative": (entry.get("narrative") or "").strip()
+                            if isinstance(entry.get("narrative"), str)
+                            else "",
+                        }
+                    )
+        normalized["key_cost_drivers"] = drivers
+        return normalized, drivers
+
+    def _coerce_str_list(self, value: Any) -> List[str]:
+        if not isinstance(value, list):
+            return []
+        items: List[str] = []
+        for entry in value:
+            if isinstance(entry, str):
+                text = entry.strip()
+                if text:
+                    items.append(text)
+        return items
+
+    def _drivers_from_deltas(self, top_deltas: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        drivers: List[Dict[str, Any]] = []
+        for row in top_deltas:
+            drivers.append(
+                {
+                    "category": row.get("category") or "Category",
+                    "primary_total": row.get("primary_total"),
+                    "comparison_total": row.get("comparison_total"),
+                    "delta_total": row.get("delta"),
+                    "narrative": "",
+                }
+            )
+        return drivers
+
+    def _sections_have_content(self, sections: Dict[str, Any], drivers: List[Dict[str, Any]]) -> bool:
+        if not sections:
+            return bool(drivers)
+        if sections.get("overview_of_estimates"):
+            return True
+        if sections.get("scope_observations"):
+            return True
+        if sections.get("suggested_followups"):
+            return True
+        return bool(drivers)
+
+    def _render_structured_markdown(
+        self,
+        pair: Optional[EstimatePair],
+        sections: Dict[str, Any],
+        drivers: List[Dict[str, Any]],
+    ) -> str:
+        lines: List[str] = []
+        lines.append("# Overview of Estimates")
+        overview_text = (sections.get("overview_of_estimates") or "").strip()
+        if overview_text:
+            lines.append(overview_text)
+        else:
+            lines.append("Summary unavailable.")
+        lines.append("")
+        lines.append("## Key Cost Drivers")
+        if drivers:
+            for driver in drivers:
+                lines.append(f"- {self._format_driver_bullet(pair, driver)}")
+        else:
+            lines.append("- No driver details were provided.")
+        lines.append("")
+        lines.append("## Scope Observations")
+        scope_items = sections.get("scope_observations") or []
+        if scope_items:
+            for item in scope_items:
+                lines.append(f"- {item}")
+        else:
+            lines.append("- No scope observations provided.")
+        lines.append("")
+        lines.append("## Suggested Follow-ups")
+        followups = sections.get("suggested_followups") or []
+        if followups:
+            for item in followups:
+                lines.append(f"- {item}")
+        else:
+            lines.append("- No follow-up questions were supplied.")
+        return "\n".join(lines)
+
+    def _format_driver_bullet(self, pair: Optional[EstimatePair], driver: Dict[str, Any]) -> str:
+        primary_name = pair.primary.estimate_name if pair else PRIMARY_FALLBACK_NAME
+        comparison_name = pair.comparison.estimate_name if pair else COMPARISON_FALLBACK_NAME
+        category = driver.get("category") or "Category"
+        primary_val = self._format_currency(driver.get("primary_total"))
+        comparison_val = self._format_currency(driver.get("comparison_total"))
+        delta_val = self._format_currency(driver.get("delta_total"))
+        bullet = (
+            f"**{category}**: {primary_name} {primary_val} vs "
+            f"{comparison_name} {comparison_val} (Δ {delta_val})"
+        )
+        narrative = (driver.get("narrative") or "").strip()
+        if narrative:
+            bullet = f"{bullet} — {narrative}"
+        return bullet
+
+    def _build_fallback_overview(self, pair: Optional[EstimatePair], reason: Optional[str]) -> str:
+        note = f"Narrative fallback: {reason}" if reason else "Narrative fallback invoked."
+        if pair:
+            primary_total = self._format_currency(pair.primary.totals.grand_total)
+            comparison_total = self._format_currency(pair.comparison.totals.grand_total)
+            return (
+                f"{note} {pair.primary.estimate_name} totals {primary_total} "
+                f"versus {pair.comparison.estimate_name} {comparison_total}. "
+                "Review key category deltas below."
+            )
+        return f"{note} Review key category deltas below."
 
     def _preview(self, raw: str, limit: int = 2000) -> str:
         text = raw or ""
