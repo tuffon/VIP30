@@ -168,8 +168,14 @@ def run_bid_comp_keys(
             contractor_original = contractor_filename or Path(contractor_key).name
             if isinstance(carrier_payload, dict):
                 carrier_payload.setdefault("original_filename", carrier_original)
+                case_meta = carrier_payload.get("case_metadata")
+                if isinstance(case_meta, dict):
+                    case_meta.setdefault("original_filename", carrier_original)
             if isinstance(contractor_payload, dict):
                 contractor_payload.setdefault("original_filename", contractor_original)
+                case_meta = contractor_payload.get("case_metadata")
+                if isinstance(case_meta, dict):
+                    case_meta.setdefault("original_filename", contractor_original)
 
             primary_name = ensure_estimate_identity(
                 carrier_payload,

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 MAX_FALLBACK_LEN = 80
 
@@ -23,19 +23,28 @@ def ensure_estimate_identity(
             estimate_name = raw_name.strip()
         else:
             case_md = payload.get("case_metadata")
-            case_name = None
+            case_name: Optional[str] = None
             if isinstance(case_md, dict):
                 case_name = case_md.get("estimate_name") or case_md.get("file_name")
+                line_item_totals = case_md.get("line_item_totals")
+                if not case_name and isinstance(line_item_totals, dict):
+                    case_name = line_item_totals.get("estimate") or line_item_totals.get("name")
                 if isinstance(case_name, str) and case_name.strip():
                     estimate_name = case_name.strip()
             if not case_name:
-                for key in ("file_name", "source_filename", "original_filename", "uploaded_filename"):
+                candidate_keys = (
+                    "file_name",
+                    "source_filename",
+                    "original_filename",
+                    "uploaded_filename",
+                )
+                for key in candidate_keys:
                     candidate = payload.get(key)
                     if isinstance(candidate, str) and candidate.strip():
                         estimate_name = _sanitize_name(candidate)
                         break
                 else:
-                    estimate_name = _sanitize_name(estimate_name)
+                    estimate_name = fallback_name
         payload["estimate_name"] = estimate_name
         case_md = payload.get("case_metadata")
         if isinstance(case_md, dict) and not case_md.get("estimate_name"):
