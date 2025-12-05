@@ -658,28 +658,57 @@ class BidComp:
             raw_drivers = sections.get("key_cost_drivers")
             if isinstance(raw_drivers, list):
                 for entry in raw_drivers:
-                    if not isinstance(entry, dict):
-                        continue
-                    raw_category = entry.get("category")
-                    if isinstance(raw_category, str):
-                        category = raw_category.strip() or "Unspecified"
-                    elif raw_category is None:
-                        category = "Unspecified"
-                    else:
-                        category = str(raw_category).strip() or "Unspecified"
-                    drivers.append(
-                        {
-                            "category": category,
-                            "primary_total": normalize_money(entry.get("primary_total")),
-                            "comparison_total": normalize_money(entry.get("comparison_total")),
-                            "delta_total": normalize_money(entry.get("delta_total")),
-                            "narrative": (entry.get("narrative") or "").strip()
-                            if isinstance(entry.get("narrative"), str)
-                            else "",
-                        }
-                    )
+                    normalized_driver = self._normalize_driver_entry(entry)
+                    if normalized_driver:
+                        drivers.append(normalized_driver)
         normalized["key_cost_drivers"] = drivers
         return normalized, drivers
+
+    def _normalize_driver_entry(self, entry: Any) -> Optional[Dict[str, Any]]:
+        if not isinstance(entry, dict):
+            return None
+
+        raw_category = entry.get("category")
+        if isinstance(raw_category, str):
+            category = raw_category.strip() or "Unspecified"
+        elif raw_category is None:
+            category = "Unspecified"
+        else:
+            category = str(raw_category).strip() or "Unspecified"
+
+        primary_total = self._extract_driver_amount(entry, "primary_total", "total1", "estimate_a_total", "left_total")
+        comparison_total = self._extract_driver_amount(
+            entry,
+            "comparison_total",
+            "total2",
+            "estimate_b_total",
+            "right_total",
+        )
+        delta_total = self._extract_driver_amount(entry, "delta_total", "delta")
+        if delta_total is None and primary_total is not None and comparison_total is not None:
+            delta_total = round(comparison_total - primary_total, 2)
+
+        narrative = entry.get("narrative") or entry.get("explanation") or ""
+        if isinstance(narrative, str):
+            narrative_text = narrative.strip()
+        else:
+            narrative_text = str(narrative).strip() if narrative is not None else ""
+
+        return {
+            "category": category,
+            "primary_total": primary_total,
+            "comparison_total": comparison_total,
+            "delta_total": delta_total,
+            "narrative": narrative_text,
+        }
+
+    def _extract_driver_amount(self, entry: Dict[str, Any], *keys: str) -> Optional[float]:
+        for key in keys:
+            if key in entry:
+                amount = normalize_money(entry.get(key))
+                if amount is not None:
+                    return amount
+        return None
 
     def _coerce_str_list(self, value: Any) -> List[str]:
         if not isinstance(value, list):
