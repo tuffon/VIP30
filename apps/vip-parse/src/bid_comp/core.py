@@ -236,7 +236,8 @@ class BidComp:
         source_filename: Optional[str],
     ) -> EstimateArtifact:
         fallback_label = PRIMARY_FALLBACK_NAME if position == "primary" else COMPARISON_FALLBACK_NAME
-        estimate_name = ensure_estimate_identity(payload, source_filename or fallback_label)
+        preferred_label = self._preferred_label(payload, source_filename, fallback_label)
+        estimate_name = ensure_estimate_identity(payload, preferred_label)
         recap = self._extract_recap_from_context(payload)
         totals = self._extract_totals(payload, recap)
         summary_snapshot = self._build_summary_snapshot(payload, recap)
@@ -600,6 +601,46 @@ class BidComp:
             if header.lower() not in lowered:
                 missing.append(header)
         return missing
+
+    def _preferred_label(
+        self,
+        payload: Optional[Dict[str, Any]],
+        source_filename: Optional[str],
+        fallback_label: str,
+    ) -> str:
+        candidates: List[str] = []
+        if isinstance(payload, dict):
+            raw_name = payload.get("estimate_name")
+            if isinstance(raw_name, str):
+                candidates.append(raw_name)
+            case_md = payload.get("case_metadata")
+            if isinstance(case_md, dict):
+                for key in (
+                    "estimate_name",
+                    "file_name",
+                    "original_filename",
+                    "uploaded_filename",
+                ):
+                    val = case_md.get(key)
+                    if isinstance(val, str):
+                        candidates.append(val)
+            for key in (
+                "original_filename",
+                "source_filename",
+                "uploaded_filename",
+            ):
+                val = payload.get(key)
+                if isinstance(val, str):
+                    candidates.append(val)
+        if isinstance(source_filename, str):
+            candidates.append(source_filename)
+        candidates.append(fallback_label)
+        for candidate in candidates:
+            if isinstance(candidate, str):
+                cleaned = candidate.strip()
+                if cleaned:
+                    return cleaned
+        return fallback_label
 
     def _normalize_sections(self, sections: Any) -> tuple[Dict[str, Any], List[Dict[str, Any]]]:
         normalized: Dict[str, Any] = {
