@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from src.bid_comp.core import _coerce_structured_llm_output
+from src.bid_comp.export_xlsx import _extract_first_paragraph
 
 
 def test_coerce_structured_llm_output_handles_single_quotes() -> None:
@@ -28,3 +29,11 @@ def test_coerce_structured_llm_output_handles_preamble_text() -> None:
     assert payload["markdown"] == "# Title"
     assert not any(tag.startswith("snippet_error") for tag in issues)
     assert stage == "snippet"
+
+
+def test_extract_first_paragraph_skips_heading() -> None:
+    blocks = [
+        type("Block", (), {"kind": "heading", "text": "# Overview"})(),
+        type("Block", (), {"kind": "paragraph", "text": "Summary paragraph."})(),
+    ]
+    assert _extract_first_paragraph(blocks) == "Summary paragraph."

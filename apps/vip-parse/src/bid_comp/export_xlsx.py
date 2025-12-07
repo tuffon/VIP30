@@ -272,14 +272,21 @@ def _resolve_overview_text(narrative) -> str:
     overview = (sections.get("overview_of_estimates") or "").strip()
     if overview:
         return overview
-    return _extract_first_paragraph(narrative.blocks) or "No narrative available."
+    overview_text = _extract_first_paragraph(narrative.blocks)
+    if not overview_text:
+        logger.warning("narrative overview missing: falling back to default")
+    return overview_text or "No narrative available."
 
 
 def _extract_first_paragraph(blocks: List[MarkdownBlock]) -> str:
+    first_heading: Optional[str] = None
     for block in blocks:
-        if block.kind in {"paragraph", "heading"} and block.text:
+        if block.kind == "heading" and block.text and not first_heading:
+            first_heading = block.text
+            continue
+        if block.kind == "paragraph" and block.text:
             return block.text
-    return ""
+    return first_heading or ""
 
 
 def _normalize_driver_entry(entry: Any) -> Dict[str, Any] | None:
