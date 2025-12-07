@@ -204,7 +204,12 @@ def _extract_json_snippet(candidate: str) -> Optional[str]:
     return None
 
 
-def _coerce_structured_llm_output(raw: str) -> tuple[Optional[Dict[str, Any]], List[str]]:
+def _looks_like_json_blob(value: str) -> bool:
+    stripped = (value or "").strip()
+    return bool(stripped.startswith("{") and stripped.endswith("}"))
+
+
+def _coerce_structured_llm_output(raw: str) -> tuple[Optional[Dict[str, Any]], List[str], Optional[str]]:
     """
     Attempt to coerce an LLM response into a dict even if it uses Python-style quoting,
     code fences, or has additional commentary wrapped around the JSON object.
@@ -218,7 +223,7 @@ def _coerce_structured_llm_output(raw: str) -> tuple[Optional[Dict[str, Any]], L
         issues.append(f"json_error:{exc.__class__.__name__}")
     else:
         if isinstance(obj, dict):
-            return obj, issues
+            return obj, issues, "json"
         issues.append("json_error:non_dict")
 
     try:
@@ -227,7 +232,7 @@ def _coerce_structured_llm_output(raw: str) -> tuple[Optional[Dict[str, Any]], L
         issues.append(f"literal_error:{exc.__class__.__name__}")
     else:
         if isinstance(literal_obj, dict):
-            return literal_obj, issues
+            return literal_obj, issues, "literal"
         issues.append("literal_error:non_dict")
 
     snippet = _extract_json_snippet(candidate)
@@ -238,10 +243,10 @@ def _coerce_structured_llm_output(raw: str) -> tuple[Optional[Dict[str, Any]], L
             issues.append(f"snippet_error:{exc.__class__.__name__}")
         else:
             if isinstance(obj, dict):
-                return obj, issues
+                return obj, issues, "snippet"
             issues.append("snippet_error:non_dict")
 
-    return None, issues
+    return None, issues, None
 
 
 class BidComp:
@@ -623,7 +628,13 @@ class BidComp:
 
         markdown_text = ""
         metadata: Dict[str, Any] = {}
-        payload, parse_issues = _coerce_structured_llm_output(raw)
+        payload, parse_issues, parse_stage = _coerce_structured_llm_output(raw)
+        self._log(
+            logging.INFO,
+            "narrative llm parse",
+            stage=parse_stage or "raw",
+            issues=",".join(parse_issues) if parse_issues else "none",
+        )
 
         sections_payload = payload.get("sections") if payload else None
         normalized_sections, driver_rows = self._normalize_sections(sections_payload)
@@ -647,6 +658,13 @@ class BidComp:
         sections_have_content = self._sections_have_content(normalized_sections, driver_rows)
         if not markdown_text and sections_have_content:
             markdown_text = self._render_structured_markdown(pair, normalized_sections, driver_rows)
+        elif _looks_like_json_blob(markdown_text):
+            self._log(
+                logging.WARNING,
+                "narrative markdown looks like json blob",
+                primary=pair.primary.estimate_name,
+                comparison=pair.comparison.estimate_name,
+            )
 
         if not markdown_text:
             self._log(

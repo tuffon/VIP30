@@ -78,14 +78,13 @@ def _identity_snapshot(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _log_identity(job_id: str, role: str, original: str, resolved: str, payload: Dict[str, Any]) -> None:
-    snapshot = _identity_snapshot(payload)
     logger.info(
-        "identity snapshot: job_id=%s role=%s original=%s estimate_name=%s details=%s",
+        "identity: job=%s role=%s original=%s estimate=%s fallback=%s",
         job_id,
         role,
         original,
         resolved,
-        json.dumps(snapshot, ensure_ascii=False) if snapshot else "{}",
+        json.dumps(_identity_snapshot(payload), ensure_ascii=False),
     )
 
 
