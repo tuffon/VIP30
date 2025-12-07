@@ -175,9 +175,39 @@ def _strip_code_fences(text: str) -> str:
     return stripped
 
 
+def _extract_json_snippet(candidate: str) -> Optional[str]:
+    start = candidate.find("{")
+    if start == -1:
+        return None
+    depth = 0
+    in_string = False
+    escape = False
+    for idx in range(start, len(candidate)):
+        ch = candidate[idx]
+        if in_string:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == '"':
+                in_string = False
+            continue
+        if ch == '"':
+            in_string = True
+            continue
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return candidate[start : idx + 1]
+    return None
+
+
 def _coerce_structured_llm_output(raw: str) -> tuple[Optional[Dict[str, Any]], List[str]]:
     """
-    Attempt to coerce an LLM response into a dict even if it uses Python-style quoting or code fences.
+    Attempt to coerce an LLM response into a dict even if it uses Python-style quoting,
+    code fences, or has additional commentary wrapped around the JSON object.
     """
     issues: List[str] = []
     candidate = _strip_code_fences(raw)
@@ -199,6 +229,17 @@ def _coerce_structured_llm_output(raw: str) -> tuple[Optional[Dict[str, Any]], L
         if isinstance(literal_obj, dict):
             return literal_obj, issues
         issues.append("literal_error:non_dict")
+
+    snippet = _extract_json_snippet(candidate)
+    if snippet:
+        try:
+            obj = json.loads(snippet)
+        except Exception as exc:  # noqa: BLE001
+            issues.append(f"snippet_error:{exc.__class__.__name__}")
+        else:
+            if isinstance(obj, dict):
+                return obj, issues
+            issues.append("snippet_error:non_dict")
 
     return None, issues
 

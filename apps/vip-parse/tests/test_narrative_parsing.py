@@ -17,3 +17,11 @@ def test_coerce_structured_llm_output_handles_code_fence() -> None:
     assert payload is not None
     assert payload["markdown"] == "# Title"
     assert issues == []
+
+
+def test_coerce_structured_llm_output_handles_preamble_text() -> None:
+    raw = "Here you go:\n{\n  \"markdown\": \"# Title\",\n  \"sections\": {}\n}\nThanks!"
+    payload, issues = _coerce_structured_llm_output(raw)
+    assert payload is not None
+    assert payload["markdown"] == "# Title"
+    assert not any(tag.startswith("snippet_error") for tag in issues)
