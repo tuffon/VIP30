@@ -1,44 +1,27 @@
-_FORMULA_PREFIXES = ("=", "+", "-", "@")
-_INVALID_DISPLAY_CHARS = re.compile(r"[\x00-\x1f\x7f]")
+from __future__ import annotations
 
-
-def _sanitize_display_name(value: Optional[str]) -> str:
-    if not value:
-        return ""
-    text = str(value).strip()
-    if not text:
-        return ""
-    text = text.replace("\r", " ").replace("\n", " ").replace("\t", " ")
-    text = _INVALID_DISPLAY_CHARS.sub(" ", text)
-    text = re.sub(r"\s+", " ", text).strip()
-    if not text:
-        return ""
-    if text[0] in _FORMULA_PREFIXES:
-        text = f"SAFE {text}"
-    if len(text) > MAX_DISPLAY_NAME_LEN:
-        text = text[:MAX_DISPLAY_NAME_LEN].rstrip()
-    return text
+import gc
+import httpx
 import json
+import logging
 import os
 import re
+import subprocess
+import sys
 import tempfile
 import threading
 import time
-import logging
 from pathlib import Path
-import subprocess
-import sys
-import gc
-import httpx
-from src.utils.s3_client import get_s3, get_bucket
 from typing import Any, Dict, Optional
-from rq.job import Job
 
 from redis import Redis
+from rq.job import Job
+
 from src.bid_comp import BidComp
 from src.bid_comp.identity import ensure_estimate_identity
 from src.integrations.sendgrid_client import SendGridClient
 from src.llm import OpenAIChatAdapter
+from src.utils.s3_client import get_s3, get_bucket
 
 # Configure worker logging early so RQ shows our logs
 _worker_log_level = os.getenv("LOG_LEVEL", "INFO").upper()
