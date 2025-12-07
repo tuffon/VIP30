@@ -1,5 +1,26 @@
+_FORMULA_PREFIXES = ("=", "+", "-", "@")
+_INVALID_DISPLAY_CHARS = re.compile(r"[\x00-\x1f\x7f]")
+
+
+def _sanitize_display_name(value: Optional[str]) -> str:
+    if not value:
+        return ""
+    text = str(value).strip()
+    if not text:
+        return ""
+    text = text.replace("\r", " ").replace("\n", " ").replace("\t", " ")
+    text = _INVALID_DISPLAY_CHARS.sub(" ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text:
+        return ""
+    if text[0] in _FORMULA_PREFIXES:
+        text = f"SAFE {text}"
+    if len(text) > MAX_DISPLAY_NAME_LEN:
+        text = text[:MAX_DISPLAY_NAME_LEN].rstrip()
+    return text
 import json
 import os
+import re
 import tempfile
 import threading
 import time
@@ -32,6 +53,28 @@ email_client = SendGridClient()
 
 # global concurrency cap inside worker process
 _SEM = threading.Semaphore(int(os.getenv("PARSE_CONCURRENCY", "1")))
+MAX_DISPLAY_NAME_LEN = 120
+
+_FORMULA_PREFIXES = ("=", "+", "-", "@")
+_INVALID_DISPLAY_CHARS = re.compile(r"[\x00-\x1f\x7f]")
+
+
+def _sanitize_display_name(value: Optional[str]) -> str:
+    if not value:
+        return ""
+    text = str(value).strip()
+    if not text:
+        return ""
+    text = text.replace("\r", " ").replace("\n", " ").replace("\t", " ")
+    text = _INVALID_DISPLAY_CHARS.sub(" ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text:
+        return ""
+    if text[0] in _FORMULA_PREFIXES:
+        text = f"SAFE {text}"
+    if len(text) > MAX_DISPLAY_NAME_LEN:
+        text = text[:MAX_DISPLAY_NAME_LEN].rstrip()
+    return text
 
 
 def _identity_snapshot(payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -84,17 +127,20 @@ def _ensure_preferred_estimate_name(
 ) -> None:
     if not isinstance(payload, dict):
         return
-    parser_basename = Path(parser_filename).name
+    parser_basename = _sanitize_display_name(Path(parser_filename).name)
     current = (payload.get("estimate_name") or "").strip()
-    if current and current != parser_basename:
+    current_clean = _sanitize_display_name(current)
+    if current_clean and parser_basename and current_clean != parser_basename:
         return
-    target = (preferred_name or "").strip()
+    target = _sanitize_display_name(preferred_name)
     if not target:
         return
     payload["estimate_name"] = target
     case_md = payload.get("case_metadata")
     if isinstance(case_md, dict):
         case_md["estimate_name"] = target
+    elif target:
+        payload["case_metadata"] = {"estimate_name": target}
 
 
 def _write_temp_pdf(data: bytes) -> str:

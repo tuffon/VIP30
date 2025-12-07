@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import json
 import logging
 from dataclasses import dataclass, field
@@ -160,6 +161,46 @@ class NarrativeResult:
     key_drivers: List[Dict[str, Any]] = field(default_factory=list)
     raw_response: str = ""
     parsed: bool = False
+
+
+def _strip_code_fences(text: str) -> str:
+    stripped = text.strip()
+    if stripped.startswith("```") and stripped.endswith("```"):
+        lines = stripped.splitlines()
+        if lines and lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].startswith("```"):
+            lines = lines[:-1]
+        stripped = "\n".join(lines).strip()
+    return stripped
+
+
+def _coerce_structured_llm_output(raw: str) -> tuple[Optional[Dict[str, Any]], List[str]]:
+    """
+    Attempt to coerce an LLM response into a dict even if it uses Python-style quoting or code fences.
+    """
+    issues: List[str] = []
+    candidate = _strip_code_fences(raw)
+
+    try:
+        obj = json.loads(candidate)
+    except json.JSONDecodeError as exc:
+        issues.append(f"json_error:{exc.__class__.__name__}")
+    else:
+        if isinstance(obj, dict):
+            return obj, issues
+        issues.append("json_error:non_dict")
+
+    try:
+        literal_obj = ast.literal_eval(candidate)
+    except Exception as exc:  # noqa: BLE001
+        issues.append(f"literal_error:{exc.__class__.__name__}")
+    else:
+        if isinstance(literal_obj, dict):
+            return literal_obj, issues
+        issues.append("literal_error:non_dict")
+
+    return None, issues
 
 
 class BidComp:
@@ -541,17 +582,7 @@ class BidComp:
 
         markdown_text = ""
         metadata: Dict[str, Any] = {}
-        payload: Optional[Dict[str, Any]] = None
-        parse_issues: List[str] = []
-        try:
-            payload_candidate = json.loads(raw)
-            if isinstance(payload_candidate, dict):
-                payload = payload_candidate
-            else:
-                parse_issues.append("non_dict_payload")
-        except Exception as exc:  # noqa: BLE001
-            parse_issues.append(f"json_error:{exc.__class__.__name__}")
-            payload = None
+        payload, parse_issues = _coerce_structured_llm_output(raw)
 
         sections_payload = payload.get("sections") if payload else None
         normalized_sections, driver_rows = self._normalize_sections(sections_payload)
