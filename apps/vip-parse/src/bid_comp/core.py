@@ -168,16 +168,49 @@ class BidComp:
         self.top_delta_count = max(1, int(top_delta_count))
         self.last_narrative_debug: Optional[Dict[str, Any]] = None
         self.last_narrative_artifact: Optional[Dict[str, Any]] = None
+        self._current_job_id: Optional[str] = None
 
     def run(self, bid_context: dict, job_id: str) -> bytes:
         self.last_narrative_debug = None
         self.last_narrative_artifact = None
-        pair = self._build_pair(bid_context)
-        category_rows = self._build_category_table(pair)
-        top_deltas = self._top_deltas(category_rows)
-        narrative = self._generate_narrative(pair, top_deltas)
-        recap_rows = self._flatten_original_recaps(pair)
-        return export_xlsx(pair=pair, narrative=narrative, category_rows=category_rows, recap_rows=recap_rows)
+        self._current_job_id = job_id
+        self._log(logging.INFO, "run start", top_delta_target=self.top_delta_count)
+        try:
+            pair = self._build_pair(bid_context)
+            self._log(
+                logging.INFO,
+                "pair resolved",
+                primary_name=pair.primary.estimate_name,
+                comparison_name=pair.comparison.estimate_name,
+                primary_source=pair.primary.source_filename or "n/a",
+                comparison_source=pair.comparison.source_filename or "n/a",
+            )
+            category_rows = self._build_category_table(pair)
+            self._log(logging.INFO, "category table ready", rows=len(category_rows))
+            top_deltas = self._top_deltas(category_rows)
+            top_delta_label = top_deltas[0].get("category") if top_deltas else None
+            self._log(
+                logging.INFO,
+                "top deltas computed",
+                count=len(top_deltas),
+                top_category=top_delta_label or "none",
+            )
+            narrative = self._generate_narrative(pair, top_deltas)
+            markdown_len = len(narrative.markdown or "")
+            self._log(
+                logging.INFO,
+                "narrative ready",
+                parsed=narrative.parsed,
+                markdown_chars=markdown_len,
+                driver_count=len(narrative.key_drivers or []),
+            )
+            recap_rows = self._flatten_original_recaps(pair)
+            self._log(logging.INFO, "recap rows flattened", rows=len(recap_rows))
+            xlsx_bytes = export_xlsx(pair=pair, narrative=narrative, category_rows=category_rows, recap_rows=recap_rows)
+            self._log(logging.INFO, "export complete", xlsx_bytes=len(xlsx_bytes))
+            return xlsx_bytes
+        finally:
+            self._current_job_id = None
 
     # ---------- Pair + estimate helpers ----------
     def _build_pair(self, bid_context: dict) -> EstimatePair:
@@ -237,10 +270,23 @@ class BidComp:
     ) -> EstimateArtifact:
         fallback_label = PRIMARY_FALLBACK_NAME if position == "primary" else COMPARISON_FALLBACK_NAME
         preferred_label = self._preferred_label(payload, source_filename, fallback_label)
+        preexisting_name = payload.get("estimate_name") if isinstance(payload, dict) else None
+        preexisting_clean = preexisting_name.strip() if isinstance(preexisting_name, str) else ""
         estimate_name = ensure_estimate_identity(payload, preferred_label)
         recap = self._extract_recap_from_context(payload)
         totals = self._extract_totals(payload, recap)
         summary_snapshot = self._build_summary_snapshot(payload, recap)
+        self._log(
+            logging.INFO,
+            "estimate artifact ready",
+            position=position,
+            estimate_name=estimate_name,
+            preferred_label=preferred_label,
+            source_filename=source_filename or "n/a",
+            fallback_used=bool(estimate_name == fallback_label and estimate_name != preexisting_clean),
+            recap_groups=len(recap),
+            identity=self._summarize_identity(payload),
+        )
         return EstimateArtifact(
             position=position,
             estimate_name=estimate_name,
@@ -412,8 +458,15 @@ class BidComp:
 
     # ---------- Narrative ----------
     def _generate_narrative(self, pair: EstimatePair, top_deltas: List[Dict[str, Any]]) -> NarrativeResult:
+        self._log(
+            logging.INFO,
+            "narrative stage start",
+            llm_enabled=bool(self.llm_adapter),
+            top_delta_count=len(top_deltas),
+        )
         delta_rows = self._build_delta_rows(top_deltas)
         if not self.llm_adapter:
+            self._log(logging.INFO, "narrative fallback triggered", reason="llm_disabled")
             return self._fallback_narrative(top_deltas, reason="LLM disabled", pair=pair)
 
         context = {
@@ -425,6 +478,13 @@ class BidComp:
         }
         missing_keys = [k for k, v in context.items() if not v]
         if missing_keys:
+            self._log(
+                logging.WARNING,
+                "narrative context incomplete",
+                missing_keys=",".join(missing_keys),
+                primary=pair.primary.estimate_name,
+                comparison=pair.comparison.estimate_name,
+            )
             logger.warning(
                 "narrative context incomplete (missing=%s) for estimates (%s, %s)",
                 missing_keys,
@@ -440,8 +500,31 @@ class BidComp:
             )
 
         try:
+            context_bytes = sum(len(context.get(key) or "") for key in ("primary_json", "comparison_json", "category_table_json"))
+            self._log(
+                logging.INFO,
+                "narrative llm request",
+                template="bid_comp_summary_v1",
+                primary=pair.primary.estimate_name,
+                comparison=pair.comparison.estimate_name,
+                driver_count=len(top_deltas),
+                context_bytes=context_bytes,
+            )
             raw = self.llm_adapter.generate("bid_comp_summary_v1", context)
+            self._log(
+                logging.INFO,
+                "narrative llm response",
+                chars=len(raw or ""),
+                preview=self._preview(raw, 200),
+            )
         except Exception as exc:  # noqa: BLE001
+            self._log(
+                logging.WARNING,
+                "narrative llm error",
+                error=str(exc),
+                primary=pair.primary.estimate_name,
+                comparison=pair.comparison.estimate_name,
+            )
             logger.warning(
                 "narrative prompt failed for (%s, %s): %s",
                 pair.primary.estimate_name,
@@ -494,6 +577,12 @@ class BidComp:
             markdown_text = self._render_structured_markdown(pair, normalized_sections, driver_rows)
 
         if not markdown_text:
+            self._log(
+                logging.WARNING,
+                "narrative markdown missing",
+                primary=pair.primary.estimate_name,
+                comparison=pair.comparison.estimate_name,
+            )
             logger.warning(
                 "narrative markdown missing: primary=%s comparison=%s preview=%s",
                 pair.primary.estimate_name,
@@ -537,6 +626,12 @@ class BidComp:
             "markdown": markdown_text,
             "metadata": metadata,
         }
+        self._log(
+            logging.INFO,
+            "narrative parsed",
+            blocks=len(blocks),
+            missing_sections=len(missing_sections),
+        )
         return NarrativeResult(
             markdown=markdown_text,
             blocks=blocks,
@@ -557,6 +652,12 @@ class BidComp:
     ) -> NarrativeResult:
         delta_rows = self._build_delta_rows(top_deltas)
         driver_rows = self._drivers_from_deltas(top_deltas)
+        self._log(
+            logging.WARNING,
+            "narrative fallback rendering",
+            reason=reason or "unknown",
+            driver_count=len(driver_rows),
+        )
         overview_text = self._build_fallback_overview(pair, reason)
         scope_observations = [
             "Automated comparison unavailable; review supporting sections manually.",
@@ -872,6 +973,45 @@ class BidComp:
                         }
                     )
         return rows
+
+    def _summarize_identity(self, payload: Dict[str, Any]) -> str:
+        if not isinstance(payload, dict):
+            return "{}"
+        case_md = payload.get("case_metadata")
+        if not isinstance(case_md, dict):
+            case_md = {}
+        metadata = payload.get("metadata")
+        if not isinstance(metadata, dict):
+            metadata = {}
+        summary = {
+            "payload.estimate_name": payload.get("estimate_name"),
+            "payload.original_filename": payload.get("original_filename"),
+            "case_metadata.estimate_name": case_md.get("estimate_name"),
+            "case_metadata.file_name": case_md.get("file_name"),
+            "case_metadata.original_filename": case_md.get("original_filename"),
+            "metadata.file_name": metadata.get("file_name"),
+            "metadata.original_filename": metadata.get("original_filename"),
+        }
+        compact = {k: v for k, v in summary.items() if v}
+        try:
+            return json.dumps(compact, ensure_ascii=False)
+        except Exception:
+            return str(compact)
+
+    def _log(self, level: int, message: str, **fields: Any) -> None:
+        prefix = f"[job={self._current_job_id or 'n/a'}] {message}"
+        if fields:
+            formatted = []
+            for key, value in fields.items():
+                if value is None:
+                    continue
+                text = str(value)
+                if len(text) > 400:
+                    text = f"{text[:397]}..."
+                formatted.append(f"{key}={text}")
+            if formatted:
+                prefix = f"{prefix} " + " ".join(formatted)
+        logger.log(level, prefix)
 
 
 __all__ = ["BidComp"]

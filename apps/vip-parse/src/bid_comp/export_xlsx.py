@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from io import BytesIO
 from typing import Any, Dict, List
 
@@ -9,6 +10,8 @@ from openpyxl.utils import get_column_letter
 
 from .markdown import MarkdownBlock
 
+logger = logging.getLogger("vip-parse.bid-comp.xlsx")
+
 def export_xlsx(
     *,
     pair,
@@ -16,6 +19,13 @@ def export_xlsx(
     category_rows: List[Dict[str, Any]],
     recap_rows: List[Dict[str, Any]],
 ) -> bytes:
+    logger.info(
+        "xlsx export start: primary=%s comparison=%s category_rows=%d recap_rows=%d",
+        pair.primary.estimate_name,
+        pair.comparison.estimate_name,
+        len(category_rows),
+        len(recap_rows),
+    )
     wb = Workbook()
     ws_summary = wb.active
     ws_summary.title = "Narrative Summary"
@@ -79,6 +89,12 @@ def export_xlsx(
                     cell.number_format = "$#,##0.00"
 
     _autosize(ws_summary)
+    logger.info(
+        "xlsx summary sheet complete: primary_total=%s comparison_total=%s rows=%d",
+        pair.primary.totals.grand_total,
+        pair.comparison.totals.grand_total,
+        current_row,
+    )
 
     # Sheet 2: category matrix
     ws_categories = wb.create_sheet("Verisk Categories")
@@ -113,6 +129,7 @@ def export_xlsx(
             cell.number_format = "0.00%"
     ws_categories.freeze_panes = "A2"
     _autosize(ws_categories)
+    logger.info("xlsx category sheet complete: rows=%d", len(category_rows))
 
     # Sheet 3: raw recap
     ws_recap = wb.create_sheet("Original Recap")
@@ -135,10 +152,13 @@ def export_xlsx(
             cell.number_format = "$#,##0.00"
     ws_recap.freeze_panes = "A2"
     _autosize(ws_recap)
+    logger.info("xlsx recap sheet complete: rows=%d", len(recap_rows))
 
     bio = BytesIO()
     wb.save(bio)
-    return bio.getvalue()
+    data = bio.getvalue()
+    logger.info("xlsx export complete: bytes=%d sheets=%d", len(data), len(wb.sheetnames))
+    return data
 
 
 def _autosize(ws) -> None:

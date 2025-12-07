@@ -34,6 +34,35 @@ email_client = SendGridClient()
 _SEM = threading.Semaphore(int(os.getenv("PARSE_CONCURRENCY", "1")))
 
 
+def _identity_snapshot(payload: Dict[str, Any]) -> Dict[str, Any]:
+    if not isinstance(payload, dict):
+        return {}
+    case_md = payload.get("case_metadata")
+    snapshot = {
+        "payload.estimate_name": payload.get("estimate_name"),
+        "payload.original_filename": payload.get("original_filename"),
+        "case_metadata.estimate_name": (case_md or {}).get("estimate_name") if isinstance(case_md, dict) else None,
+        "case_metadata.file_name": (case_md or {}).get("file_name") if isinstance(case_md, dict) else None,
+        "case_metadata.original_filename": (case_md or {}).get("original_filename") if isinstance(case_md, dict) else None,
+        "metadata.file_name": (payload.get("metadata") or {}).get("file_name")
+        if isinstance(payload.get("metadata"), dict)
+        else None,
+    }
+    return {k: v for k, v in snapshot.items() if v}
+
+
+def _log_identity(job_id: str, role: str, original: str, resolved: str, payload: Dict[str, Any]) -> None:
+    snapshot = _identity_snapshot(payload)
+    logger.info(
+        "identity snapshot: job_id=%s role=%s original=%s estimate_name=%s details=%s",
+        job_id,
+        role,
+        original,
+        resolved,
+        json.dumps(snapshot, ensure_ascii=False) if snapshot else "{}",
+    )
+
+
 def _write_temp_pdf(data: bytes) -> str:
     fd, path = tempfile.mkstemp(suffix=".pdf")
     try:
@@ -132,6 +161,14 @@ def run_bid_comp_keys(
     t0 = time.time()
     with _SEM:
         logger.info("job start (r2 keys): job_id=%s", job_id)
+        logger.info(
+            "job context (r2 keys): job_id=%s carrier_key=%s contractor_key=%s carrier_filename=%s contractor_filename=%s",
+            job_id,
+            carrier_key,
+            contractor_key,
+            carrier_filename,
+            contractor_filename,
+        )
         s3 = get_s3()
         bucket = get_bucket()
 
@@ -140,6 +177,12 @@ def run_bid_comp_keys(
         contractor_path = tempfile.mktemp(suffix=".pdf")
         s3.download_file(bucket, carrier_key, carrier_path)
         s3.download_file(bucket, contractor_key, contractor_path)
+        logger.info(
+            "job download complete: job_id=%s carrier_tmp=%s contractor_tmp=%s",
+            job_id,
+            carrier_path,
+            contractor_path,
+        )
 
         try:
             def _parse_full(pdf_path: str) -> Dict[str, Any]:
@@ -164,8 +207,21 @@ def run_bid_comp_keys(
             carrier_payload = _parse_full(carrier_path)
             contractor_payload = _parse_full(contractor_path)
 
+            logger.info(
+                "job payload parsed: job_id=%s carrier_has_name=%s contractor_has_name=%s",
+                job_id,
+                bool(isinstance(carrier_payload, dict) and carrier_payload.get("estimate_name")),
+                bool(isinstance(contractor_payload, dict) and contractor_payload.get("estimate_name")),
+            )
+
             carrier_original = carrier_filename or Path(carrier_key).name
             contractor_original = contractor_filename or Path(contractor_key).name
+            logger.info(
+                "job originals resolved: job_id=%s carrier_original=%s contractor_original=%s",
+                job_id,
+                carrier_original,
+                contractor_original,
+            )
             if isinstance(carrier_payload, dict):
                 carrier_payload.setdefault("original_filename", carrier_original)
                 case_meta = carrier_payload.get("case_metadata")
@@ -185,10 +241,18 @@ def run_bid_comp_keys(
                 contractor_payload,
                 contractor_original,
             )
+            _log_identity(job_id, "carrier", carrier_original, primary_name, carrier_payload)
+            _log_identity(job_id, "contractor", contractor_original, comparison_name, contractor_payload)
 
             # recaps derived from full JSON; used for summary rows and checks
             recap_a = _extract_recap(carrier_payload)
             recap_b = _extract_recap(contractor_payload)
+            logger.info(
+                "job recap snapshot: job_id=%s carrier_groups=%d contractor_groups=%d",
+                job_id,
+                len(recap_a or {}),
+                len(recap_b or {}),
+            )
             recap_bundle = {
                 "estimates": [
                     {"estimate_name": primary_name, "recap": recap_a},
@@ -219,6 +283,14 @@ def run_bid_comp_keys(
                 "carrier_source_filename": carrier_original,
                 "contractor_source_filename": contractor_original,
             }
+            logger.info(
+                "job bid-context ready: job_id=%s primary=%s comparison=%s primary_src=%s comparison_src=%s",
+                job_id,
+                primary_name,
+                comparison_name,
+                carrier_original,
+                contractor_original,
+            )
 
             # Persist JSON payloads alongside XLS output for debugging
             json_prefix = f"results/{job_id}"
@@ -249,12 +321,25 @@ def run_bid_comp_keys(
                     except Exception:
                         llm = None
                 comp = BidComp(llm_adapter=llm)
+                logger.info("job bid-comp run starting: job_id=%s", job_id)
                 xlsx_bytes = comp.run(bid_context, job_id)
+                logger.info(
+                    "job bid-comp run finished: job_id=%s xlsx_bytes=%d llm_enabled=%s",
+                    job_id,
+                    len(xlsx_bytes),
+                    bool(llm),
+                )
                 xlsx_tmp = tempfile.mktemp(suffix=".xlsx")
                 with open(xlsx_tmp, "wb") as xf:
                     xf.write(xlsx_bytes)
                 xlsx_key = f"results/{job_id}/bid-comp.xlsx"
                 s3.upload_file(xlsx_tmp, bucket, xlsx_key)
+                logger.info(
+                    "job xlsx uploaded: job_id=%s key=%s size_bytes=%d",
+                    job_id,
+                    xlsx_key,
+                    len(xlsx_bytes),
+                )
             finally:
                 try:
                     os.remove(xlsx_tmp)
