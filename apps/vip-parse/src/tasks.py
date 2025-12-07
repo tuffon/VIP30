@@ -10,7 +10,7 @@ import sys
 import gc
 import httpx
 from src.utils.s3_client import get_s3, get_bucket
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from rq.job import Job
 
 from redis import Redis
@@ -61,6 +61,40 @@ def _log_identity(job_id: str, role: str, original: str, resolved: str, payload:
         resolved,
         json.dumps(snapshot, ensure_ascii=False) if snapshot else "{}",
     )
+
+
+def _ensure_original_metadata(payload: Dict[str, Any], original_filename: str) -> None:
+    if not isinstance(payload, dict):
+        return
+    if original_filename and not payload.get("original_filename"):
+        payload["original_filename"] = original_filename
+    case_md = payload.get("case_metadata")
+    if isinstance(case_md, dict):
+        if original_filename and not case_md.get("original_filename"):
+            case_md["original_filename"] = original_filename
+    elif original_filename:
+        payload["case_metadata"] = {"original_filename": original_filename}
+
+
+def _ensure_preferred_estimate_name(
+    payload: Dict[str, Any],
+    *,
+    preferred_name: Optional[str],
+    parser_filename: str,
+) -> None:
+    if not isinstance(payload, dict):
+        return
+    parser_basename = Path(parser_filename).name
+    current = (payload.get("estimate_name") or "").strip()
+    if current and current != parser_basename:
+        return
+    target = (preferred_name or "").strip()
+    if not target:
+        return
+    payload["estimate_name"] = target
+    case_md = payload.get("case_metadata")
+    if isinstance(case_md, dict):
+        case_md["estimate_name"] = target
 
 
 def _write_temp_pdf(data: bytes) -> str:
@@ -206,6 +240,8 @@ def run_bid_comp_keys(
 
             carrier_payload = _parse_full(carrier_path)
             contractor_payload = _parse_full(contractor_path)
+            carrier_parser_name = Path(carrier_path).name
+            contractor_parser_name = Path(contractor_path).name
 
             logger.info(
                 "job payload parsed: job_id=%s carrier_has_name=%s contractor_has_name=%s",
@@ -222,16 +258,18 @@ def run_bid_comp_keys(
                 carrier_original,
                 contractor_original,
             )
-            if isinstance(carrier_payload, dict):
-                carrier_payload.setdefault("original_filename", carrier_original)
-                case_meta = carrier_payload.get("case_metadata")
-                if isinstance(case_meta, dict):
-                    case_meta.setdefault("original_filename", carrier_original)
-            if isinstance(contractor_payload, dict):
-                contractor_payload.setdefault("original_filename", contractor_original)
-                case_meta = contractor_payload.get("case_metadata")
-                if isinstance(case_meta, dict):
-                    case_meta.setdefault("original_filename", contractor_original)
+            _ensure_original_metadata(carrier_payload, carrier_original)
+            _ensure_original_metadata(contractor_payload, contractor_original)
+            _ensure_preferred_estimate_name(
+                carrier_payload,
+                preferred_name=carrier_original,
+                parser_filename=carrier_parser_name,
+            )
+            _ensure_preferred_estimate_name(
+                contractor_payload,
+                preferred_name=contractor_original,
+                parser_filename=contractor_parser_name,
+            )
 
             primary_name = ensure_estimate_identity(
                 carrier_payload,

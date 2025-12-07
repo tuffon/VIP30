@@ -57,7 +57,9 @@ def _sanitize_name(raw: str | None) -> str:
     if not raw:
         return "Estimate"
     name = Path(str(raw)).name.strip()
-    return _truncate(name or "Estimate", MAX_FALLBACK_LEN)
+    if not name:
+        return "Estimate"
+    return _truncate(name, MAX_FALLBACK_LEN)
 
 
 def _truncate(value: str, max_len: int) -> str:
