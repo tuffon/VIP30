@@ -9,6 +9,7 @@ import subprocess
 import sys
 import gc
 import httpx
+from src.utils.filename import sanitize_display_name
 from src.utils.s3_client import get_s3, get_bucket
 from typing import Any, Dict
 from rq.job import Job
@@ -164,8 +165,30 @@ def run_bid_comp_keys(
             carrier_payload = _parse_full(carrier_path)
             contractor_payload = _parse_full(contractor_path)
 
-            carrier_original = carrier_filename or Path(carrier_key).name
-            contractor_original = contractor_filename or Path(contractor_key).name
+            def _resolve_original(role: str, provided: str | None, key: str) -> str:
+                cleaned = (provided or "").strip()
+                if cleaned:
+                    return cleaned
+                fallback = Path(key).name
+                logger.warning(
+                    "job %s: %s filename missing; falling back to key basename",
+                    job_id,
+                    role,
+                    extra={
+                        "role": role,
+                        "job_id": job_id,
+                        "key": key,
+                        "fallback_filename": fallback,
+                    },
+                )
+                return fallback
+
+            carrier_original = sanitize_display_name(
+                _resolve_original("carrier", carrier_filename, carrier_key),
+            )
+            contractor_original = sanitize_display_name(
+                _resolve_original("contractor", contractor_filename, contractor_key),
+            )
             if isinstance(carrier_payload, dict):
                 carrier_payload.setdefault("original_filename", carrier_original)
                 case_meta = carrier_payload.get("case_metadata")

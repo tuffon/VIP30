@@ -34,8 +34,15 @@ def enqueue_bid_comp_keys(payload: Dict[str, Any]) -> Dict[str, Any]:
         raise HTTPException(status_code=503, detail="Redis not configured")
     carrier_key = payload.get("carrier_key")
     contractor_key = payload.get("contractor_key")
+    carrier_filename = (payload.get("carrier_filename") or "").strip()
+    contractor_filename = (payload.get("contractor_filename") or "").strip()
     if not carrier_key or not contractor_key:
         raise HTTPException(status_code=400, detail="carrier_key and contractor_key are required")
+    if not carrier_filename or not contractor_filename:
+        raise HTTPException(
+            status_code=400,
+            detail="carrier_filename and contractor_filename must be provided as non-empty strings",
+        )
     job_id = str(uuid.uuid4())
     job = _q.enqueue(
         "src.tasks.run_bid_comp_keys",
@@ -43,8 +50,8 @@ def enqueue_bid_comp_keys(payload: Dict[str, Any]) -> Dict[str, Any]:
         carrier_key,
         contractor_key,
         payload.get("template"),
-        payload.get("carrier_filename"),
-        payload.get("contractor_filename"),
+        carrier_filename,
+        contractor_filename,
         payload.get("notify_email"),
         job_timeout=600,
         result_ttl=86400,

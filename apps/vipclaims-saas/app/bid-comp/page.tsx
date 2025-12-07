@@ -119,6 +119,13 @@ export default function BidCompPage() {
       }
 
       const base = apiBase.replace(/\/$/, "");
+      const normalizeName = (file: File, role: "carrier" | "contractor") => {
+        const trimmed = (file.name || "").trim();
+        if (!trimmed) {
+          throw new Error(`The ${role} file is missing a filename. Please rename it before uploading.`);
+        }
+        return trimmed;
+      };
       const uploadEndpoint = (filename: string) =>
         `${base}/render/upload-url?filename=${encodeURIComponent(filename)}`;
 
@@ -131,15 +138,20 @@ export default function BidCompPage() {
       setIsSubmitting(true);
 
       try {
-        const createUrl = async (file: File) => {
-          const resp = await fetch(uploadEndpoint(file.name), { method: "POST" });
+        const createUrl = async (file: File, role: "carrier" | "contractor") => {
+          const filename = normalizeName(file, role);
+          const resp = await fetch(uploadEndpoint(filename), { method: "POST" });
           if (!resp.ok) throw new Error(`Failed to create upload URL (${resp.status})`);
-          return resp.json() as Promise<{ upload_url: string; key: string }>;
+          return resp.json().then((data) => ({ ...data, filename })) as Promise<{
+            upload_url: string;
+            key: string;
+            filename: string;
+          }>;
         };
 
         const [carrierUrl, contractorUrl] = await Promise.all([
-          createUrl(carrierFile),
-          createUrl(contractorFile),
+          createUrl(carrierFile, "carrier"),
+          createUrl(contractorFile, "contractor"),
         ]);
 
         const commonHeaders: HeadersInit = { "Content-Type": "application/pdf" };
@@ -161,8 +173,8 @@ export default function BidCompPage() {
         const payload: Record<string, unknown> = {
           carrier_key: carrierUrl.key,
           contractor_key: contractorUrl.key,
-          carrier_filename: carrierFile.name,
-          contractor_filename: contractorFile.name,
+          carrier_filename: carrierUrl.filename,
+          contractor_filename: contractorUrl.filename,
         };
         if (shouldEmail && notifyEmail) {
           payload.notify_email = notifyEmail;
