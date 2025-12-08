@@ -50,18 +50,55 @@ def export_xlsx(
     scope_items = _ensure_string_list(sections.get("scope_observations"))
     followup_items = _ensure_string_list(sections.get("suggested_followups"))
     driver_rows = _ensure_driver_rows(sections.get("key_cost_drivers"), narrative)
+    driver_source = (
+        "sections"
+        if sections.get("key_cost_drivers")
+        else "narrative"
+        if getattr(narrative, "key_drivers", None)
+        else "delta_rows"
+    )
+    sample_preview = ""
+    for entry in driver_rows:
+        text = (entry.get("narrative") or "").strip()
+        if text:
+            sample_preview = text[:120]
+            break
+    if driver_rows and not sample_preview:
+        logger.warning("xlsx driver rows missing narrative text despite %d entries", len(driver_rows))
+    logger.info(
+        "xlsx driver rows: source=%s count=%d sample=%s",
+        driver_source,
+        len(driver_rows),
+        sample_preview or "<empty>",
+    )
 
     current_row = 6
-    current_row = _write_text_section(ws_summary, current_row, "Overview of Estimates", overview_text, header_font)
-    current_row = _write_key_driver_section(
-        ws_summary,
-        current_row,
-        pair,
-        driver_rows,
-        header_font,
-    )
-    current_row = _write_list_section(ws_summary, current_row, "Scope Observations", scope_items, header_font)
-    current_row = _write_list_section(ws_summary, current_row, "Suggested Follow-ups", followup_items, header_font)
+    try:
+        current_row = _write_text_section(ws_summary, current_row, "Overview of Estimates", overview_text, header_font)
+    except Exception:  # noqa: BLE001
+        logger.exception("xlsx summary section write failed: overview")
+        raise
+    try:
+        current_row = _write_key_driver_section(
+            ws_summary,
+            current_row,
+            pair,
+            driver_rows,
+            header_font,
+        )
+    except Exception:  # noqa: BLE001
+        logger.exception("xlsx summary section write failed: key cost drivers")
+        raise
+    try:
+        current_row = _write_list_section(ws_summary, current_row, "Scope Observations", scope_items, header_font)
+    except Exception:  # noqa: BLE001
+        logger.exception("xlsx summary section write failed: scope observations")
+        raise
+    try:
+        current_row = _write_list_section(ws_summary, current_row, "Suggested Follow-ups", followup_items, header_font)
+    except Exception:  # noqa: BLE001
+        logger.exception("xlsx summary section write failed: suggested follow-ups")
+        raise
 
     if narrative.delta_rows:
         current_row += 1
@@ -171,7 +208,10 @@ def _write_text_section(ws, start_row: int, title: str, body: str, header_font: 
     ws.cell(row=start_row, column=1, value=title).font = header_font
     body_row = start_row + 1
     ws.merge_cells(start_row=body_row, start_column=1, end_row=body_row, end_column=5)
-    body_cell = ws.cell(row=body_row, column=1, value=body or "No narrative available.")
+    resolved_body = body or "No narrative available."
+    if not body:
+        logger.warning("xlsx narrative text missing for section '%s'; using fallback", title)
+    body_cell = ws.cell(row=body_row, column=1, value=resolved_body)
     body_cell.alignment = Alignment(wrap_text=True, vertical="top")
     return body_row + 2
 
@@ -207,6 +247,11 @@ def _write_key_driver_section(ws, start_row: int, pair, drivers: List[Dict[str, 
         ws.cell(row=row, column=col_idx, value=header).font = header_font
     row += 1
     if not drivers:
+        logger.warning(
+            "xlsx driver rows empty: primary=%s comparison=%s",
+            pair.primary.estimate_name,
+            pair.comparison.estimate_name,
+        )
         ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
         cell = ws.cell(row=row, column=1, value="No driver data provided.")
         cell.alignment = Alignment(wrap_text=True, vertical="top")
@@ -249,10 +294,15 @@ def _ensure_driver_rows(section_rows, narrative) -> List[Dict[str, Any]]:
             normalized_entry = _normalize_driver_entry(entry)
             if normalized_entry:
                 normalized.append(normalized_entry)
+        if section_rows and not normalized:
+            logger.warning("xlsx driver rows dropped after normalization: %d entries", len(section_rows))
     if normalized:
         return normalized
     if getattr(narrative, "key_drivers", None):
-        return [_normalize_driver_entry(entry) or entry for entry in narrative.key_drivers]
+        fallback_rows = [_normalize_driver_entry(entry) or entry for entry in narrative.key_drivers]
+        if not fallback_rows:
+            logger.warning("xlsx driver fallback (narrative.key_drivers) produced 0 entries")
+        return fallback_rows
     drivers: List[Dict[str, Any]] = []
     for row in (narrative.delta_rows or []):
         drivers.append(
@@ -264,6 +314,8 @@ def _ensure_driver_rows(section_rows, narrative) -> List[Dict[str, Any]]:
                 "narrative": "",
             }
         )
+    if not drivers:
+        logger.warning("xlsx driver fallback (delta_rows) produced 0 entries")
     return drivers
 
 
