@@ -1,10 +1,10 @@
 "use server";
 
 import NextAuth from "next-auth/next";
-import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-const authOptions: NextAuthOptions = {
+// Keep untyped to work across next-auth v4/v5 type changes while we pin the runtime.
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
