@@ -40,7 +40,7 @@ services:
     autoDeploy: true
     rootDir: .
     buildCommand: |
-      pnpm install --frozen-lockfile
+      pnpm install --no-frozen-lockfile
       pnpm --filter vipclaims-saas... --filter @vip/shared... build
     startCommand: |
       pnpm --filter vipclaims-saas... start -- --port $PORT
