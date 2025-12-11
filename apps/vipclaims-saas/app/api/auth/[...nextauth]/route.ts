@@ -11,9 +11,6 @@ const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
   callbacks: {
     // Use broad types to stay compatible across next-auth versions in Render.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
