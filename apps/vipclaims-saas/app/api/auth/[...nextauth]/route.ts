@@ -15,7 +15,8 @@ const authOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async session({ session, token }) {
+    // Use broad types to stay compatible across next-auth versions in Render.
+    async session({ session, token }: { session: any; token: any }) {
       if (session.user && token.sub) {
         session.user.id = token.sub;
       }
