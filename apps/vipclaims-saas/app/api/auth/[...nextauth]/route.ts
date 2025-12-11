@@ -16,6 +16,7 @@ const authOptions = {
   },
   callbacks: {
     // Use broad types to stay compatible across next-auth versions in Render.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async session({ session, token }: { session: any; token: any }) {
       if (session.user && token.sub) {
         session.user.id = token.sub;
