@@ -33,6 +33,29 @@ services:
       - key: PRESIGN_EXPIRE_SEC
         value: "900"
 
+  - type: web
+    name: vip30-frontend
+    plan: starter
+    env: node
+    autoDeploy: true
+    rootDir: .
+    buildCommand: |
+      pnpm install --frozen-lockfile
+      pnpm --filter vipclaims-saas... --filter @vip/shared... build
+    startCommand: |
+      pnpm --filter vipclaims-saas... start -- --port $PORT
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NEXTAUTH_URL
+        sync: false
+      - key: NEXTAUTH_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_API_BASE_URL
+        sync: false
+      - key: PORT
+        value: "3000"
+
   - type: worker
     name: vip30-worker
     plan: standard
