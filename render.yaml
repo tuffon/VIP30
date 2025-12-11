@@ -43,7 +43,7 @@ services:
       pnpm install --no-frozen-lockfile
       pnpm --filter vipclaims-saas... --filter @vip/shared... build
     startCommand: |
-      pnpm --filter vipclaims-saas... start -- --port $PORT
+      pnpm --filter vipclaims-saas... exec next start --port $PORT
     envVars:
       - key: NODE_VERSION
         value: "20"
