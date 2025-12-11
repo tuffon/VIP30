@@ -56,12 +56,33 @@ class OpenAIChatAdapter(LLMAdapterBase):
             "messages": messages,
             "temperature": 0.2,
         }
+        prompt_bytes = len(json.dumps(body, ensure_ascii=False))
         start = time.perf_counter()
+        resp = None
         try:
             with httpx.Client(timeout=60) as client:
                 resp = client.post("https://api.openai.com/v1/chat/completions", headers=headers, json=body)
                 resp.raise_for_status()
                 data = resp.json()
+        except httpx.HTTPStatusError as exc:
+            elapsed_ms = int((time.perf_counter() - start) * 1000)
+            body_preview = ""
+            try:
+                body_preview = (exc.response.text or "")[:1000]
+            except Exception:
+                body_preview = "<unavailable>"
+            logger.error(
+                "llm request failed: model=%s template=%s primary=%s comparison=%s elapsed_ms=%d status=%s body_preview=%s error=%s",
+                self.model,
+                template_id,
+                primary_name,
+                comparison_name,
+                elapsed_ms,
+                exc.response.status_code if exc.response is not None else "n/a",
+                body_preview,
+                exc,
+            )
+            raise
         except Exception as exc:
             elapsed_ms = int((time.perf_counter() - start) * 1000)
             logger.error(
@@ -80,16 +101,24 @@ class OpenAIChatAdapter(LLMAdapterBase):
             content = (data["choices"][0]["message"]["content"] or "").strip()
         except Exception:
             content = ""
+        response_preview = ""
+        if resp is not None:
+            try:
+                response_preview = (resp.text or "")[:1000]
+            except Exception:
+                response_preview = "<unavailable>"
         logger.info(
-            "llm request complete: model=%s template=%s primary=%s comparison=%s elapsed_ms=%d prompt_tokens=%s completion_tokens=%s preview=%s",
+            "llm request complete: model=%s template=%s primary=%s comparison=%s elapsed_ms=%d prompt_bytes=%d prompt_tokens=%s completion_tokens=%s preview=%s response_preview=%s",
             self.model,
             template_id,
             primary_name,
             comparison_name,
             elapsed_ms,
+            prompt_bytes,
             usage.get("prompt_tokens"),
             usage.get("completion_tokens"),
             content[:200],
+            response_preview,
         )
         return content
 

@@ -6,6 +6,7 @@ import json
 import logging
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -58,6 +59,19 @@ def _sanitize_display_name(value: Optional[str]) -> str:
     if len(text) > MAX_DISPLAY_NAME_LEN:
         text = text[:MAX_DISPLAY_NAME_LEN].rstrip()
     return text
+
+
+def _safe_filename(value: Optional[str], fallback: str = "estimate.pdf") -> str:
+    """
+    Return a safe basename to store a downloaded estimate without leaking path separators.
+    """
+    if not value:
+        return fallback
+    base = Path(str(value)).name.strip()
+    if not base:
+        return fallback
+    base = re.sub(r"[\\/]+", "_", base)
+    return base
 
 
 def _identity_snapshot(payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -234,16 +248,20 @@ def run_bid_comp_keys(
         s3 = get_s3()
         bucket = get_bucket()
 
-        # Download to temp
-        carrier_path = tempfile.mktemp(suffix=".pdf")
-        contractor_path = tempfile.mktemp(suffix=".pdf")
-        s3.download_file(bucket, carrier_key, carrier_path)
-        s3.download_file(bucket, contractor_key, contractor_path)
+        work_dir = Path(tempfile.mkdtemp(prefix="bidcomp-input-"))
+        carrier_original = carrier_filename or Path(carrier_key).name
+        contractor_original = contractor_filename or Path(contractor_key).name
+        carrier_path = work_dir / _safe_filename(carrier_original, fallback="carrier.pdf")
+        contractor_path = work_dir / _safe_filename(contractor_original, fallback="contractor.pdf")
+        s3.download_file(bucket, carrier_key, str(carrier_path))
+        s3.download_file(bucket, contractor_key, str(contractor_path))
         logger.info(
-            "job download complete: job_id=%s carrier_tmp=%s contractor_tmp=%s",
+            "job download complete: job_id=%s carrier_tmp=%s contractor_tmp=%s carrier_original=%s contractor_original=%s",
             job_id,
             carrier_path,
             contractor_path,
+            carrier_original,
+            contractor_original,
         )
 
         try:
@@ -278,8 +296,6 @@ def run_bid_comp_keys(
                 bool(isinstance(contractor_payload, dict) and contractor_payload.get("estimate_name")),
             )
 
-            carrier_original = carrier_filename or Path(carrier_key).name
-            contractor_original = contractor_filename or Path(contractor_key).name
             logger.info(
                 "job originals resolved: job_id=%s carrier_original=%s contractor_original=%s",
                 job_id,
@@ -483,11 +499,10 @@ def run_bid_comp_keys(
             logger.info("job done (r2 keys): job_id=%s", job_id)
             return result
         finally:
-            for p in (carrier_path, contractor_path):
-                try:
-                    os.remove(p)
-                except OSError:
-                    pass
+            try:
+                shutil.rmtree(work_dir, ignore_errors=True)
+            except Exception:
+                pass
 
 
 
