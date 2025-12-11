@@ -1,12 +1,10 @@
 "use server";
 
-import NextAuth from "next-auth";
+import NextAuth from "next-auth/next";
+import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-// Derive the options type from the NextAuth function to avoid version-specific type names.
-type NextAuthConfig = Parameters<typeof NextAuth>[0];
-
-const authOptions: NextAuthConfig = {
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
