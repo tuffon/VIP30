@@ -645,6 +645,8 @@ class BidComp:
         if payload:
             markdown_for_extraction = payload.get("markdown") or ""
             driver_rows = self._enrich_drivers_from_markdown(driver_rows, markdown_for_extraction)
+            # Sync enriched drivers back to sections for xlsx export
+            normalized_sections["key_cost_drivers"] = driver_rows
 
         if payload:
             candidate = payload.get("markdown") or payload.get("narrative") or payload.get("content")
@@ -947,31 +949,44 @@ class BidComp:
         if not markdown or not drivers:
             return drivers
 
-        # Build a map of category -> narrative from markdown
-        # Pattern: - **Category**: ... — narrative text
-        # or: - **Category**: ... - narrative text
         import re
         narratives_from_md: Dict[str, str] = {}
 
-        # Match lines like: - **Category Name**: $X vs $Y (delta $Z) — narrative here
-        # The narrative comes after — or after the last ) if no —
-        pattern = r'-\s*\*\*([^*]+)\*\*[^—\n]*(?:—|--)\s*(.+?)(?:\n|$)'
-        for match in re.finditer(pattern, markdown, re.IGNORECASE):
+        # Pattern 1: Same-line narrative after em-dash
+        # - **Category**: $X vs $Y (delta $Z) — narrative here
+        pattern1 = r'-\s*\*\*([^*]+)\*\*[^—\n]*(?:—|--)\s*(.+?)(?:\n|$)'
+        for match in re.finditer(pattern1, markdown, re.IGNORECASE):
             category = match.group(1).strip()
             narrative = match.group(2).strip()
             if narrative:
                 narratives_from_md[category.lower()] = narrative
 
-        # Also try pattern without em-dash: narrative after closing paren
-        if not narratives_from_md:
-            pattern2 = r'-\s*\*\*([^*]+)\*\*[^)]*\)\s*[.;,]?\s*(.{20,}?)(?:\n|$)'
-            for match in re.finditer(pattern2, markdown, re.IGNORECASE):
-                category = match.group(1).strip()
-                narrative = match.group(2).strip()
-                if narrative and not narrative.startswith('-'):
-                    narratives_from_md[category.lower()] = narrative
+        # Pattern 2: Sub-bullet narrative on next line (LLM commonly uses this)
+        # - **Category**: $X vs $Y (delta: $Z)
+        #   - Narrative text here
+        pattern2 = r'-\s*\*\*([^*]+)\*\*[^\n]*\n\s+-\s+([^*\n-].+?)(?:\n|$)'
+        for match in re.finditer(pattern2, markdown):
+            category = match.group(1).strip()
+            narrative = match.group(2).strip()
+            if narrative and category.lower() not in narratives_from_md:
+                narratives_from_md[category.lower()] = narrative
+
+        # Pattern 3: Indented text (not a bullet) on next line
+        # - **Category**: $X vs $Y (delta: $Z)
+        #   Narrative text here
+        pattern3 = r'-\s*\*\*([^*]+)\*\*[^\n]*\)\n\s{2,}([A-Z][^*\n-].{15,}?)(?:\n|$)'
+        for match in re.finditer(pattern3, markdown):
+            category = match.group(1).strip()
+            narrative = match.group(2).strip()
+            if narrative and category.lower() not in narratives_from_md:
+                narratives_from_md[category.lower()] = narrative
 
         if not narratives_from_md:
+            self._log(
+                logging.DEBUG,
+                "narrative markdown extraction found no matches",
+                markdown_preview=markdown[:500] if markdown else "",
+            )
             return drivers
 
         # Enrich drivers that have empty narratives
