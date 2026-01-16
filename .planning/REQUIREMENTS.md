@@ -36,16 +36,16 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ENV-01 | — | Pending |
-| ENV-02 | — | Pending |
-| OUT-01 | — | Pending |
-| OUT-02 | — | Pending |
+| ENV-01 | Phase 1 | Pending |
+| ENV-02 | Phase 1 | Pending |
+| OUT-01 | Phase 2 | Pending |
+| OUT-02 | Phase 2 | Pending |
 
 **Coverage:**
 - v1 requirements: 4 total
-- Mapped to phases: 0
-- Unmapped: 4 ⚠️
+- Mapped to phases: 4
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-01-15*
-*Last updated: 2026-01-15 after initial definition*
+*Last updated: 2026-01-15 after roadmap creation*
