@@ -211,32 +211,46 @@ def _write_text_section(ws, start_row: int, title: str, body: str, header_font: 
     if not body:
         logger.warning("xlsx narrative text missing for section '%s'; using fallback", title)
 
-    # Parse structured overview content (lines starting with **Label**:)
-    lines = resolved_body.split('\n')
+    # Split on double newlines first (paragraph breaks), then single newlines
+    # This preserves intentional paragraph structure from LLM output
+    paragraphs = resolved_body.split('\n\n')
     structured_lines = []
-    for line in lines:
-        stripped = line.strip()
-        if stripped.startswith('- **') or stripped.startswith('**'):
+
+    for para in paragraphs:
+        para = para.strip()
+        if not para:
+            continue
+        # Check if this paragraph starts with a bold label
+        if para.startswith('**'):
             # Extract label and value from **Label**: Value format
-            stripped = stripped.lstrip('- ')
-            if '**:' in stripped:
-                parts = stripped.split('**:', 1)
+            if '**:' in para:
+                parts = para.split('**:', 1)
                 label = parts[0].replace('**', '').strip()
                 value = parts[1].strip() if len(parts) > 1 else ''
                 structured_lines.append((label, value))
-            elif stripped.startswith('**') and stripped.count('**') >= 2:
+            elif para.count('**') >= 2:
                 # Format: **Label** Value or **Label**: Value
-                end_bold = stripped.find('**', 2)
+                end_bold = para.find('**', 2)
                 if end_bold > 0:
-                    label = stripped[2:end_bold].strip()
-                    rest = stripped[end_bold+2:].lstrip(':').strip()
+                    label = para[2:end_bold].strip()
+                    rest = para[end_bold+2:].lstrip(':').strip()
                     structured_lines.append((label, rest))
                 else:
-                    structured_lines.append((None, stripped))
+                    structured_lines.append((None, para))
             else:
-                structured_lines.append((None, stripped))
-        elif stripped:
-            structured_lines.append((None, stripped))
+                structured_lines.append((None, para))
+        elif para.startswith('- **'):
+            # Bullet with bold label
+            para = para.lstrip('- ')
+            if '**:' in para:
+                parts = para.split('**:', 1)
+                label = parts[0].replace('**', '').strip()
+                value = parts[1].strip() if len(parts) > 1 else ''
+                structured_lines.append((label, value))
+            else:
+                structured_lines.append((None, para))
+        else:
+            structured_lines.append((None, para))
 
     if structured_lines and any(label for label, _ in structured_lines):
         # Write as structured rows with bold labels
