@@ -60,7 +60,8 @@ class OpenAIChatAdapter(LLMAdapterBase):
         start = time.perf_counter()
         resp = None
         try:
-            with httpx.Client(timeout=60) as client:
+            # Large estimate payloads (100k+ tokens) can take 2-3 minutes to process
+            with httpx.Client(timeout=180) as client:
                 resp = client.post("https://api.openai.com/v1/chat/completions", headers=headers, json=body)
                 resp.raise_for_status()
                 data = resp.json()
