@@ -647,6 +647,16 @@ class BidComp:
             driver_rows = self._enrich_drivers_from_markdown(driver_rows, markdown_for_extraction)
             # Sync enriched drivers back to sections for xlsx export
             normalized_sections["key_cost_drivers"] = driver_rows
+            # Extract overview from markdown if JSON sections.overview_of_estimates is empty
+            if not normalized_sections.get("overview_of_estimates"):
+                extracted_overview = self._extract_overview_from_markdown(markdown_for_extraction)
+                if extracted_overview:
+                    normalized_sections["overview_of_estimates"] = extracted_overview
+                    self._log(
+                        logging.INFO,
+                        "narrative overview extracted from markdown",
+                        chars=len(extracted_overview),
+                    )
 
         if payload:
             candidate = payload.get("markdown") or payload.get("narrative") or payload.get("content")
@@ -952,9 +962,11 @@ class BidComp:
         import re
         narratives_from_md: Dict[str, str] = {}
 
-        # Pattern 1: Same-line narrative after em-dash
+        # Pattern 1: Same-line narrative after em-dash, double-dash, or spaced hyphen
         # - **Category**: $X vs $Y (delta $Z) — narrative here
-        pattern1 = r'-\s*\*\*([^*]+)\*\*[^—\n]*(?:—|--)\s*(.+?)(?:\n|$)'
+        # - **Category**: $X vs $Y (delta: -$Z) - narrative here
+        # Also handles format: 253660.97 vs 1732.73 (delta: -251928.24) - narrative
+        pattern1 = r'-\s*\*\*([^*]+)\*\*[^—\n]*?(?:—|--|\)\s+-\s+|\)\s*-\s+)\s*(.+?)(?:\n|$)'
         for match in re.finditer(pattern1, markdown, re.IGNORECASE):
             category = match.group(1).strip()
             narrative = match.group(2).strip()
@@ -1008,6 +1020,45 @@ class BidComp:
             )
 
         return drivers
+
+    def _extract_overview_from_markdown(self, markdown: str) -> str:
+        """Extract the Overview of Estimates section from markdown text.
+
+        Returns all content between '# Overview of Estimates' and the next ## heading.
+        """
+        if not markdown:
+            return ""
+
+        import re
+
+        # Find the Overview section - match from "# Overview" to the next ## heading
+        # The overview content includes multiple paragraphs with **bold labels**
+        pattern = r'#\s*Overview\s+of\s+Estimates\s*\n+(.*?)(?=\n##|\Z)'
+        match = re.search(pattern, markdown, re.IGNORECASE | re.DOTALL)
+
+        if not match:
+            return ""
+
+        overview_content = match.group(1).strip()
+
+        # If empty, return nothing
+        if not overview_content:
+            return ""
+
+        # Clean up but preserve line breaks between paragraphs
+        # The content should have format:
+        # **Total Comparison**: ...
+        # **EstimateName1**: ...
+        # **EstimateName2**: ...
+        # **Key Takeaway**: ...
+        lines = []
+        for line in overview_content.split('\n'):
+            line = line.strip()
+            if line:
+                lines.append(line)
+
+        # Join with double newlines to preserve paragraph structure
+        return '\n\n'.join(lines)
 
     def _sections_have_content(self, sections: Dict[str, Any], drivers: List[Dict[str, Any]]) -> bool:
         if not sections:
