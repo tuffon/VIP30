@@ -641,6 +641,11 @@ class BidComp:
         if not driver_rows:
             driver_rows = self._drivers_from_deltas(top_deltas)
 
+        # Extract narratives from markdown if JSON fields are empty
+        if payload:
+            markdown_for_extraction = payload.get("markdown") or ""
+            driver_rows = self._enrich_drivers_from_markdown(driver_rows, markdown_for_extraction)
+
         if payload:
             candidate = payload.get("markdown") or payload.get("narrative") or payload.get("content")
             if isinstance(candidate, str):
@@ -933,6 +938,60 @@ class BidComp:
                     "narrative": "",
                 }
             )
+        return drivers
+
+    def _enrich_drivers_from_markdown(
+        self, drivers: List[Dict[str, Any]], markdown: str
+    ) -> List[Dict[str, Any]]:
+        """Extract narratives from markdown bullets if JSON narrative fields are empty."""
+        if not markdown or not drivers:
+            return drivers
+
+        # Build a map of category -> narrative from markdown
+        # Pattern: - **Category**: ... — narrative text
+        # or: - **Category**: ... - narrative text
+        import re
+        narratives_from_md: Dict[str, str] = {}
+
+        # Match lines like: - **Category Name**: $X vs $Y (delta $Z) — narrative here
+        # The narrative comes after — or after the last ) if no —
+        pattern = r'-\s*\*\*([^*]+)\*\*[^—\n]*(?:—|--)\s*(.+?)(?:\n|$)'
+        for match in re.finditer(pattern, markdown, re.IGNORECASE):
+            category = match.group(1).strip()
+            narrative = match.group(2).strip()
+            if narrative:
+                narratives_from_md[category.lower()] = narrative
+
+        # Also try pattern without em-dash: narrative after closing paren
+        if not narratives_from_md:
+            pattern2 = r'-\s*\*\*([^*]+)\*\*[^)]*\)\s*[.;,]?\s*(.{20,}?)(?:\n|$)'
+            for match in re.finditer(pattern2, markdown, re.IGNORECASE):
+                category = match.group(1).strip()
+                narrative = match.group(2).strip()
+                if narrative and not narrative.startswith('-'):
+                    narratives_from_md[category.lower()] = narrative
+
+        if not narratives_from_md:
+            return drivers
+
+        # Enrich drivers that have empty narratives
+        enriched_count = 0
+        for driver in drivers:
+            if driver.get("narrative"):
+                continue
+            category = (driver.get("category") or "").lower()
+            if category in narratives_from_md:
+                driver["narrative"] = narratives_from_md[category]
+                enriched_count += 1
+
+        if enriched_count:
+            self._log(
+                logging.INFO,
+                "narrative enriched from markdown",
+                enriched_count=enriched_count,
+                total_drivers=len(drivers),
+            )
+
         return drivers
 
     def _sections_have_content(self, sections: Dict[str, Any], drivers: List[Dict[str, Any]]) -> bool:
