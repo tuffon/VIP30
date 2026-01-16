@@ -334,6 +334,8 @@ def _ensure_string_list(value) -> List[str]:
 
 def _ensure_driver_rows(section_rows, narrative, pair=None) -> List[Dict[str, Any]]:
     normalized: List[Dict[str, Any]] = []
+    fallback_count = 0
+    llm_count = 0
     if isinstance(section_rows, list):
         for entry in section_rows:
             normalized_entry = _normalize_driver_entry(entry)
@@ -346,6 +348,10 @@ def _ensure_driver_rows(section_rows, narrative, pair=None) -> List[Dict[str, An
         for driver in normalized:
             if not driver.get("narrative"):
                 driver["narrative"] = _generate_fallback_narrative(driver, pair)
+                fallback_count += 1
+            else:
+                llm_count += 1
+        logger.info("xlsx driver narratives: llm=%d fallback=%d", llm_count, fallback_count)
         return normalized
     if getattr(narrative, "key_drivers", None):
         fallback_rows = [_normalize_driver_entry(entry) or entry for entry in narrative.key_drivers]
@@ -355,7 +361,12 @@ def _ensure_driver_rows(section_rows, narrative, pair=None) -> List[Dict[str, An
         for driver in fallback_rows:
             if not driver.get("narrative"):
                 driver["narrative"] = _generate_fallback_narrative(driver, pair)
+                fallback_count += 1
+            else:
+                llm_count += 1
+        logger.info("xlsx driver narratives (key_drivers path): llm=%d fallback=%d", llm_count, fallback_count)
         return fallback_rows
+    # Full fallback path - no LLM narratives at all
     drivers: List[Dict[str, Any]] = []
     for row in (narrative.delta_rows or []):
         driver = {
@@ -367,7 +378,9 @@ def _ensure_driver_rows(section_rows, narrative, pair=None) -> List[Dict[str, An
         }
         driver["narrative"] = _generate_fallback_narrative(driver, pair)
         drivers.append(driver)
-    if not drivers:
+    if drivers:
+        logger.warning("xlsx driver narratives: ALL FALLBACK (%d drivers) - LLM returned no narratives", len(drivers))
+    else:
         logger.warning("xlsx driver fallback (delta_rows) produced 0 entries")
     return drivers
 
