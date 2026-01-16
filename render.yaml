@@ -52,10 +52,7 @@ services:
       - key: NEXTAUTH_SECRET
         sync: false
       - key: NEXT_PUBLIC_API_BASE_URL
-        fromService:
-          name: vip30-web
-          type: web
-          property: hostport
+        value: "https://vip30-web.onrender.com"
       - key: PORT
         value: "3000"
 
