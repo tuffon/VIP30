@@ -49,7 +49,7 @@ def export_xlsx(
     overview_text = _resolve_overview_text(narrative)
     scope_items = _ensure_string_list(sections.get("scope_observations"))
     followup_items = _ensure_string_list(sections.get("suggested_followups"))
-    driver_rows = _ensure_driver_rows(sections.get("key_cost_drivers"), narrative)
+    driver_rows = _ensure_driver_rows(sections.get("key_cost_drivers"), narrative, pair)
     driver_source = (
         "sections"
         if sections.get("key_cost_drivers")
@@ -207,13 +207,58 @@ def _autosize(ws) -> None:
 def _write_text_section(ws, start_row: int, title: str, body: str, header_font: Font) -> int:
     ws.cell(row=start_row, column=1, value=title).font = header_font
     body_row = start_row + 1
-    ws.merge_cells(start_row=body_row, start_column=1, end_row=body_row, end_column=5)
     resolved_body = body or "No narrative available."
     if not body:
         logger.warning("xlsx narrative text missing for section '%s'; using fallback", title)
-    body_cell = ws.cell(row=body_row, column=1, value=resolved_body)
-    body_cell.alignment = Alignment(wrap_text=True, vertical="top")
-    return body_row + 2
+
+    # Parse structured overview content (lines starting with **Label**:)
+    lines = resolved_body.split('\n')
+    structured_lines = []
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith('- **') or stripped.startswith('**'):
+            # Extract label and value from **Label**: Value format
+            stripped = stripped.lstrip('- ')
+            if '**:' in stripped:
+                parts = stripped.split('**:', 1)
+                label = parts[0].replace('**', '').strip()
+                value = parts[1].strip() if len(parts) > 1 else ''
+                structured_lines.append((label, value))
+            elif stripped.startswith('**') and stripped.count('**') >= 2:
+                # Format: **Label** Value or **Label**: Value
+                end_bold = stripped.find('**', 2)
+                if end_bold > 0:
+                    label = stripped[2:end_bold].strip()
+                    rest = stripped[end_bold+2:].lstrip(':').strip()
+                    structured_lines.append((label, rest))
+                else:
+                    structured_lines.append((None, stripped))
+            else:
+                structured_lines.append((None, stripped))
+        elif stripped:
+            structured_lines.append((None, stripped))
+
+    if structured_lines and any(label for label, _ in structured_lines):
+        # Write as structured rows with bold labels
+        for label, value in structured_lines:
+            if label:
+                label_cell = ws.cell(row=body_row, column=1, value=f"{label}:")
+                label_cell.font = Font(bold=True)
+                ws.merge_cells(start_row=body_row, start_column=2, end_row=body_row, end_column=5)
+                value_cell = ws.cell(row=body_row, column=2, value=value)
+                value_cell.alignment = Alignment(wrap_text=True, vertical="top")
+            else:
+                ws.merge_cells(start_row=body_row, start_column=1, end_row=body_row, end_column=5)
+                text_cell = ws.cell(row=body_row, column=1, value=value)
+                text_cell.alignment = Alignment(wrap_text=True, vertical="top")
+            body_row += 1
+        return body_row + 1
+    else:
+        # Fallback to single merged cell for plain text
+        ws.merge_cells(start_row=body_row, start_column=1, end_row=body_row, end_column=5)
+        body_cell = ws.cell(row=body_row, column=1, value=resolved_body)
+        body_cell.alignment = Alignment(wrap_text=True, vertical="top")
+        return body_row + 2
 
 
 def _write_list_section(ws, start_row: int, title: str, items: List[str], header_font: Font) -> int:
@@ -287,7 +332,7 @@ def _ensure_string_list(value) -> List[str]:
     return items
 
 
-def _ensure_driver_rows(section_rows, narrative) -> List[Dict[str, Any]]:
+def _ensure_driver_rows(section_rows, narrative, pair=None) -> List[Dict[str, Any]]:
     normalized: List[Dict[str, Any]] = []
     if isinstance(section_rows, list):
         for entry in section_rows:
@@ -297,26 +342,74 @@ def _ensure_driver_rows(section_rows, narrative) -> List[Dict[str, Any]]:
         if section_rows and not normalized:
             logger.warning("xlsx driver rows dropped after normalization: %d entries", len(section_rows))
     if normalized:
+        # Ensure all drivers have narratives, generate fallback if missing
+        for driver in normalized:
+            if not driver.get("narrative"):
+                driver["narrative"] = _generate_fallback_narrative(driver, pair)
         return normalized
     if getattr(narrative, "key_drivers", None):
         fallback_rows = [_normalize_driver_entry(entry) or entry for entry in narrative.key_drivers]
         if not fallback_rows:
             logger.warning("xlsx driver fallback (narrative.key_drivers) produced 0 entries")
+        # Ensure all drivers have narratives
+        for driver in fallback_rows:
+            if not driver.get("narrative"):
+                driver["narrative"] = _generate_fallback_narrative(driver, pair)
         return fallback_rows
     drivers: List[Dict[str, Any]] = []
     for row in (narrative.delta_rows or []):
-        drivers.append(
-            {
-                "category": row.get("category"),
-                "primary_total": row.get("primary_total"),
-                "comparison_total": row.get("comparison_total"),
-                "delta_total": row.get("delta"),
-                "narrative": "",
-            }
-        )
+        driver = {
+            "category": row.get("category"),
+            "primary_total": row.get("primary_total"),
+            "comparison_total": row.get("comparison_total"),
+            "delta_total": row.get("delta"),
+            "narrative": "",
+        }
+        driver["narrative"] = _generate_fallback_narrative(driver, pair)
+        drivers.append(driver)
     if not drivers:
         logger.warning("xlsx driver fallback (delta_rows) produced 0 entries")
     return drivers
+
+
+def _generate_fallback_narrative(driver: Dict[str, Any], pair=None) -> str:
+    """Generate a basic narrative when LLM doesn't provide one."""
+    category = driver.get("category", "Category")
+    primary_total = driver.get("primary_total")
+    comparison_total = driver.get("comparison_total")
+    delta = driver.get("delta_total")
+
+    if delta is None and primary_total is not None and comparison_total is not None:
+        delta = comparison_total - primary_total
+
+    if delta is None:
+        return f"Review {category} line items for scope differences."
+
+    primary_name = pair.primary.estimate_name if pair else "Primary"
+    comparison_name = pair.comparison.estimate_name if pair else "Comparison"
+
+    abs_delta = abs(delta)
+    if abs_delta < 100:
+        return f"Minor variance in {category}; likely rounding or unit price differences."
+
+    if delta > 0:
+        # Comparison is higher
+        pct = (delta / primary_total * 100) if primary_total and primary_total > 0 else 0
+        if pct > 50:
+            return f"{comparison_name} includes significantly more {category} scope (+{pct:.0f}%); review for additional line items or quantities."
+        elif pct > 20:
+            return f"{comparison_name} higher in {category} (+{pct:.0f}%); check for quantity or unit price differences."
+        else:
+            return f"Moderate increase in {category} for {comparison_name}; may reflect scope additions or pricing variance."
+    else:
+        # Primary is higher
+        pct = (abs_delta / primary_total * 100) if primary_total and primary_total > 0 else 0
+        if pct > 50:
+            return f"{comparison_name} missing or reduced {category} scope (-{pct:.0f}%); verify if items were excluded."
+        elif pct > 20:
+            return f"{comparison_name} lower in {category} (-{pct:.0f}%); check for missing line items or reduced quantities."
+        else:
+            return f"Moderate decrease in {category} for {comparison_name}; may reflect scope reductions or pricing variance."
 
 
 def _resolve_overview_text(narrative) -> str:
