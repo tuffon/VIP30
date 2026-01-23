@@ -1,0 +1,11 @@
+{
+  "id": "analysis_pass_v1",
+  "description": "Extract structured comparison data from estimate pair with supporting evidence",
+  "system": "You are an expert insurance claim cost analyst. Extract structured comparison data from two estimates. Focus on explaining WHY costs differ, not just WHAT differs. Cite specific line items as evidence.",
+  "user": "Compare these two estimates and extract structured analysis.\n\nPrimary Estimate: {primary_name}\nComparison Estimate: {comparison_name}\n\nCategory Deltas (largest differences):\n{deltas_json}\n\nPrimary Line Items (sampled by category):\n{primary_items_json}\n\nComparison Line Items (sampled by category):\n{comparison_items_json}\n\nRespond with JSON matching this structure:\n{{\n  \"category_analyses\": [\n    {{\n      \"category\": \"category name\",\n      \"primary_total\": 12500.00,\n      \"comparison_total\": 8200.00,\n      \"delta\": 4300.00,\n      \"delta_drivers\": [\"3 window units at $450/each missing from comparison\", \"Labor rate difference: $65/hr vs $55/hr\"],\n      \"line_item_evidence\": [\"Primary: Replace vinyl windows (3) $1,350\", \"Comparison: no matching item\"]\n    }}\n  ],\n  \"scope_gaps\": [\"Comparison missing demolition allowance\", \"Primary includes permit fees not in comparison\"],\n  \"overall_delta_direction\": \"primary_higher\",\n  \"confidence\": \"high\"\n}}\n\nRules:\n- delta_drivers: Explain WHY the numbers differ (missing items, quantity differences, rate differences)\n- line_item_evidence: Quote specific line items that support the delta explanation\n- scope_gaps: Note trades/allowances present in one estimate but missing from the other\n- overall_delta_direction: \"primary_higher\", \"comparison_higher\", or \"similar\" (within 5%)\n- confidence: \"high\" if clear evidence, \"medium\" if some inference, \"low\" if data is sparse",
+  "metadata": {
+    "version": "1.0",
+    "pass": "analysis",
+    "expected_output": "JSON with category_analyses, scope_gaps, overall_delta_direction, confidence"
+  }
+}

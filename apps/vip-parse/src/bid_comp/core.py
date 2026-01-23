@@ -11,6 +11,12 @@ from .identity import ensure_estimate_identity
 from .markdown import MarkdownBlock, parse_markdown
 from .normalize import normalize_label, normalize_money
 from ..llm.adapter import LLMAdapterBase
+from ..pipeline import NarrativePipeline, PipelineCache, FinalNarrative, PipelineState
+
+try:
+    from redis import Redis
+except ImportError:
+    Redis = None  # type: ignore
 
 logger = logging.getLogger("vip-parse.bid-comp")
 
@@ -250,12 +256,28 @@ def _coerce_structured_llm_output(raw: str) -> tuple[Optional[Dict[str, Any]], L
 
 
 class BidComp:
-    def __init__(self, llm_adapter: Optional[LLMAdapterBase] = None, top_delta_count: int = 6) -> None:
+    def __init__(
+        self,
+        llm_adapter: Optional[LLMAdapterBase] = None,
+        top_delta_count: int = 6,
+        redis: Optional[Any] = None,  # Optional Redis for caching
+    ) -> None:
         self.llm_adapter = llm_adapter
         self.top_delta_count = max(1, int(top_delta_count))
         self.last_narrative_debug: Optional[Dict[str, Any]] = None
         self.last_narrative_artifact: Optional[Dict[str, Any]] = None
         self._current_job_id: Optional[str] = None
+
+        # Set up pipeline with optional caching
+        self._pipeline: Optional[NarrativePipeline] = None
+        self._cache: Optional[PipelineCache] = None
+        if llm_adapter:
+            if redis is not None:
+                self._cache = PipelineCache(redis)
+            self._pipeline = NarrativePipeline(
+                llm_adapter=llm_adapter,
+                cache=self._cache,
+            )
 
     def run(self, bid_context: dict, job_id: str) -> bytes:
         self.last_narrative_debug = None
@@ -549,13 +571,118 @@ class BidComp:
             logging.INFO,
             "narrative stage start",
             llm_enabled=bool(self.llm_adapter),
+            pipeline_enabled=bool(self._pipeline),
             top_delta_count=len(top_deltas),
         )
         delta_rows = self._build_delta_rows(top_deltas)
+
+        # Use pipeline if available
+        if self._pipeline:
+            return self._generate_narrative_via_pipeline(pair, top_deltas, delta_rows)
+
+        # Fallback to legacy path if no LLM adapter
         if not self.llm_adapter:
             self._log(logging.INFO, "narrative fallback triggered", reason="llm_disabled")
             return self._fallback_narrative(top_deltas, reason="LLM disabled", pair=pair)
 
+        # Legacy path (should not reach here if pipeline is initialized)
+        return self._generate_narrative_legacy(pair, top_deltas, delta_rows)
+
+    def _generate_narrative_via_pipeline(
+        self,
+        pair: EstimatePair,
+        top_deltas: List[Dict[str, Any]],
+        delta_rows: List[Dict[str, Any]],
+    ) -> NarrativeResult:
+        """Use NarrativePipeline for narrative generation."""
+        try:
+            state = self._pipeline.run(
+                pair=pair,
+                top_deltas=top_deltas,
+                primary_name=pair.primary.estimate_name,
+                comparison_name=pair.comparison.estimate_name,
+            )
+
+            # Convert PipelineState to NarrativeResult
+            return self._convert_pipeline_result(state, pair, delta_rows)
+        except Exception as exc:
+            self._log(logging.WARNING, "pipeline error", error=str(exc))
+            return self._fallback_narrative(top_deltas, reason=f"pipeline_error:{exc}", pair=pair)
+
+    def _convert_pipeline_result(
+        self,
+        state: PipelineState,
+        pair: EstimatePair,
+        delta_rows: List[Dict[str, Any]],
+    ) -> NarrativeResult:
+        """Convert PipelineState to NarrativeResult for existing export flow."""
+        final = state.final
+        if not final:
+            return self._fallback_narrative(
+                delta_rows, reason="pipeline_no_final", pair=pair
+            )
+
+        # Build key_drivers from FinalNarrative.key_drivers
+        key_drivers = [
+            {
+                "category": d.category,
+                "primary_total": None,  # Not in DriverNarrative
+                "comparison_total": None,
+                "delta_total": None,
+                "narrative": d.narrative,
+            }
+            for d in final.key_drivers
+        ]
+
+        # Build sections dict for export
+        sections = {
+            "overview_of_estimates": final.overview,
+            "key_cost_drivers": key_drivers,
+            "scope_observations": final.scope_observations,
+            "suggested_followups": final.suggested_followups,
+        }
+
+        # Build markdown from FinalNarrative
+        markdown_text = self._render_structured_markdown(pair, sections, key_drivers)
+
+        blocks = parse_markdown(markdown_text)
+
+        # Update debug/artifact tracking
+        self.last_narrative_debug = {
+            "status": "pipeline",
+            "passes_executed": state.passes_executed,
+            "pass_timings_ms": state.pass_timings_ms,
+            "quality_passed": state.quality_passed(),
+            "rewrites": final.rewrites_performed if hasattr(final, 'rewrites_performed') else 0,
+        }
+        if state.errors:
+            self.last_narrative_debug["errors"] = state.errors
+
+        self._log(
+            logging.INFO,
+            "narrative pipeline complete",
+            passes=",".join(state.passes_executed),
+            quality_passed=state.quality_passed(),
+            rewrites=final.rewrites_performed if hasattr(final, 'rewrites_performed') else 0,
+        )
+
+        return NarrativeResult(
+            markdown=markdown_text,
+            blocks=blocks,
+            delta_rows=delta_rows,
+            sections=sections,
+            key_drivers=key_drivers,
+            raw_response="",  # Pipeline doesn't expose raw
+            parsed=True,
+        )
+
+    def _generate_narrative_legacy(
+        self,
+        pair: EstimatePair,
+        top_deltas: List[Dict[str, Any]],
+        delta_rows: List[Dict[str, Any]],
+    ) -> NarrativeResult:
+        """Legacy narrative generation using direct LLM calls."""
         context = {
             "primary_name": pair.primary.estimate_name,
             "comparison_name": pair.comparison.estimate_name,

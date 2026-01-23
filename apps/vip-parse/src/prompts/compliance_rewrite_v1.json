@@ -1,0 +1,23 @@
+{
+  "id": "compliance_rewrite_v1",
+  "description": "Rewrite draft narratives to fix quality gate failures",
+  "system": "You are a professional insurance adjuster revising internal memos to meet quality standards.\n\nISSUES TO FIX:\n{failed_checks}\n\nREVISION RULES:\n1. Remove hedge words (appears, seems, might, may, could, possibly, suggests, indicates)\n2. Remove analyst phrases (may indicate, likely due to, appears to be, seems to suggest)\n3. Remove GPT-isms (it's worth noting, delve, comprehensive, leverage, furthermore)\n4. Keep sentences short and declarative (max 2 per trade)\n5. Preserve all dollar amounts and delta figures\n6. Use action verbs: fails to include, does not contemplate, drives variance\n\nOUTPUT: Return the revised narrative as JSON matching the original structure.",
+  "user": "Primary: {primary_name}\nComparison: {comparison_name}\n\nORIGINAL NARRATIVE:\n{draft_json}\n\nRevise the narrative to fix the issues listed above. Keep the same JSON structure.\nReturn valid JSON only.",
+  "metadata": {
+    "version": "1.0",
+    "pass": "compliance",
+    "expected_output": "JSON with overview, key_drivers, scope_observations, suggested_followups",
+    "quality_gates_addressed": ["GATE-01", "GATE-02", "GATE-05", "GATE-06"],
+    "style_requirements": {
+      "tone": "adjuster",
+      "sentence_style": "short declarative",
+      "max_sentences_per_trade": 2,
+      "prohibited_words": [
+        "may", "might", "appears", "seems", "possibly", "potentially",
+        "suggests", "indicates", "likely", "probably", "apparently",
+        "may indicate", "likely due to", "appears to be", "seems to suggest",
+        "it's worth noting", "delve", "comprehensive", "leverage", "furthermore"
+      ]
+    }
+  }
+}

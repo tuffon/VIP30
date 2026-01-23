@@ -8,6 +8,16 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report.
 
+## Current Milestone: v1.0 Professional Adjuster Narratives
+
+**Goal:** Produce bid comparison narratives that read like professional adjuster reports using a three-pass pipeline with quality gating.
+
+**Target features:**
+- Structured analysis pass extracts deltas with line-item detail
+- Style-controlled writer pass generates adjuster-tone narratives
+- Conditional compliance rewrite only when quality fails
+- Quality gate enforces measurable criteria
+
 ## Requirements
 
 ### Validated
@@ -21,10 +31,14 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 
 ### Active
 
-- [ ] Frontend uses environment variable for backend URL (not hardcoded localhost)
-- [ ] End-to-end flow works in production deployment
-- [ ] Output format is consistent and reliable
-- [ ] Narrative structure is clear and useful
+- [ ] Analysis pass: structured extraction of category deltas with supporting line items
+- [ ] Writer pass: style-controlled generation using adjuster tone reference
+- [ ] Quality gate: hedging threshold (≤3 soft qualifiers)
+- [ ] Quality gate: trade verbosity (≤2 sentences, avg ≤40 words)
+- [ ] Quality gate: valuation link (every trade ties to financial impact)
+- [ ] Quality gate: summary length (bullets ≤30 words, ≤6 total)
+- [ ] Quality gate: analyst tone detection (no "suggests", "appears", "may indicate")
+- [ ] Compliance rewrite: triggered only when quality checks fail
 
 ### Out of Scope
 
@@ -33,9 +47,15 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 
 ## Context
 
-Brownfield codebase with functional bid comparison locally. Turborepo monorepo with Next.js frontend (`apps/vipclaims-saas`), FastAPI backend (`apps/vip-parse`), and RQ worker for async processing. Deployed to Render with auto-deploy on push.
+Brownfield codebase with functional bid comparison. Turborepo monorepo with Next.js frontend (`apps/vipclaims-saas`), FastAPI backend (`apps/vip-parse`), and RQ worker for async processing. Deployed to Render with auto-deploy on push.
 
-Current blocker: frontend hardcoded to localhost prevents production testing. Once fixed, can validate full flow and identify output quality issues.
+**Adjuster tone reference** (v1.0 milestone):
+- Direct, no hedging — "Large Delta on Estimate cost to Mitigate" not "There appears to be a significant difference"
+- Industry shorthand — PWI, MEP, ELE, PNT, SF used naturally
+- Specific callouts — quantities, timeframes, unit numbers
+- Action items embedded — "Need MEP Plans and ELE estimate"
+- Comparative framing — "Farmers allowed for... Apex estimate includes..."
+- Replacement vocabulary — "fails to include", "does not contemplate", "drives the variance"
 
 ## Constraints
 
@@ -52,4 +72,4 @@ Current blocker: frontend hardcoded to localhost prevents production testing. On
 | XLSX output format | Industry standard, adjusters expect spreadsheets | — Pending |
 
 ---
-*Last updated: 2026-01-15 after initialization*
+*Last updated: 2026-01-18 after v1.0 milestone start*

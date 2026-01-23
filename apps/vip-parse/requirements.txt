@@ -14,3 +14,4 @@ pdfplumber>=0.10.0  # PDF text extraction for historical estimates
 rq>=1.15.1
 redis>=5.0.1
 lz4>=4.3.3
+textstat>=0.7.12  # Sentence/word counting for quality gates

@@ -1,25 +1,53 @@
 # Requirements: VIP30
 
-**Defined:** 2026-01-15
+**Defined:** 2026-01-18
 **Core Value:** Reliable end-to-end bid comparison that produces actionable output
 
 ## v1 Requirements
 
-Requirements for this milestone. Each maps to roadmap phases.
+Requirements for v1.0 Professional Adjuster Narratives. Each maps to roadmap phases.
 
-### Deployment
+### Pipeline Architecture
 
-- [ ] **ENV-01**: Frontend uses environment variable for backend API URL (not hardcoded localhost)
-- [ ] **ENV-02**: End-to-end bid comparison flow works in production deployment
+- [x] **PIPE-01**: Analysis pass extracts structured category deltas with supporting line items
+- [x] **PIPE-02**: Writer pass generates adjuster-tone narratives from analysis output
+- [x] **PIPE-03**: Compliance rewrite pass triggers only when quality gates fail
+- [x] **PIPE-04**: Pass-level caching via Redis avoids redundant LLM calls
 
-### Output
+### Style Control
 
-- [ ] **OUT-01**: XLSX output format is consistent and reliable
-- [ ] **OUT-02**: Narrative structure in comparison report is clear and useful
+- [x] **STYLE-01**: Writer pass includes 3-5 real adjuster memo examples (few-shot)
+- [x] **STYLE-02**: Terminology glossary injected into writer prompt (PWI, MEP, ELE, PNT, SF, O&P)
+
+### Quality Gates (Deterministic)
+
+- [x] **GATE-01**: Hedging threshold check (≤3 soft qualifiers per section)
+- [x] **GATE-02**: Trade verbosity check (≤2 sentences per trade, avg ≤40 words)
+- [x] **GATE-03**: Valuation link check (every trade ties to dollar amount or delta)
+- [x] **GATE-04**: Summary length check (bullets ≤30 words, ≤6 total bullets)
+
+### Quality Gates (Pattern-Based)
+
+- [x] **GATE-05**: Analyst tone detection (ban "suggests", "appears", "may indicate", "likely due to")
+- [x] **GATE-06**: Slop/GPT-ism detection (ban "it's worth noting", "delve", "comprehensive", etc.)
+
+### Data Contracts
+
+- [x] **DATA-01**: Pydantic models define pass outputs (AnalysisResult, DraftNarrative, FinalNarrative)
+- [x] **DATA-02**: Schema validation ensures pass outputs conform before forwarding
 
 ## v2 Requirements
 
-None — focused milestone.
+Deferred to future release. Tracked but not in current roadmap.
+
+### Style Control
+
+- **STYLE-03**: Comparative framing enforcement ("Carrier: X. Contractor: Y. Delta: Z.")
+- **STYLE-04**: Action item extraction (auto-generate "Need X" callouts)
+
+### Quality Gates (Semantic)
+
+- **GATE-07**: G-Eval tone scoring (LLM-as-judge with rubric, score ≥3.5/5)
 
 ## Out of Scope
 
@@ -27,8 +55,12 @@ Explicitly excluded. Documented to prevent scope creep.
 
 | Feature | Reason |
 |---------|--------|
-| Multi-tenant user management | Focus on core comparison first |
-| Additional document types beyond Xactimate | Scope to known format |
+| Fine-tuning | Premature optimization; few-shot sufficient for v1.0 |
+| Custom tokenizers | Standard tokenizers handle insurance abbreviations correctly |
+| BLEU/ROUGE metrics | No gold-standard reference; doesn't correlate with professional quality |
+| Unlimited rewrite loops | Diminishing returns after 2 iterations; latency/cost risk |
+| Grammar/spelling checks | Modern LLMs rarely produce errors; not the quality challenge |
+| Sentiment analysis | Adjuster memos are neutral; sentiment ≠ tone |
 
 ## Traceability
 
@@ -36,16 +68,26 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ENV-01 | Phase 1 | Pending |
-| ENV-02 | Phase 1 | Pending |
-| OUT-01 | Phase 2 | Pending |
-| OUT-02 | Phase 2 | Pending |
+| DATA-01 | 1 - Data Contracts | Complete |
+| DATA-02 | 1 - Data Contracts | Complete |
+| GATE-01 | 2 - Quality Gates (Deterministic) | Complete |
+| GATE-02 | 2 - Quality Gates (Deterministic) | Complete |
+| GATE-03 | 2 - Quality Gates (Deterministic) | Complete |
+| GATE-04 | 2 - Quality Gates (Deterministic) | Complete |
+| GATE-05 | 3 - Quality Gates (Pattern-Based) | Complete |
+| GATE-06 | 3 - Quality Gates (Pattern-Based) | Complete |
+| PIPE-01 | 4 - Analysis Pass | Complete |
+| PIPE-02 | 5 - Writer Pass | Complete |
+| STYLE-01 | 5 - Writer Pass | Complete |
+| STYLE-02 | 5 - Writer Pass | Complete |
+| PIPE-03 | 6 - Pipeline Orchestration | Complete |
+| PIPE-04 | 7 - Caching & Integration | Complete |
 
 **Coverage:**
-- v1 requirements: 4 total
-- Mapped to phases: 4
-- Unmapped: 0 ✓
+- v1 requirements: 14 total
+- Mapped to phases: 14
+- Unmapped: 0
 
 ---
-*Requirements defined: 2026-01-15*
-*Last updated: 2026-01-15 after roadmap creation*
+*Requirements defined: 2026-01-18*
+*Last updated: 2026-01-22 after Phase 7 complete — v1.0 milestone complete*
