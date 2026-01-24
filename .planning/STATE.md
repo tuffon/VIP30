@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-18)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v1.0 — Professional Adjuster Narratives
+**Current focus:** v1.0.1 — Narrative Regression Fixes
 
 ## Current Position
 
-Phase: 7 of 7 (Caching & Integration)
-Plan: 07-01 complete
-Status: Phase 7 complete, v1.0 roadmap COMPLETE
-Last activity: 2026-01-23 — Completed 07-01-PLAN.md (Caching & Integration)
+Phase: 8 of 8 (Narrative Regression Fixes)
+Plan: 08-01 COMPLETE
+Status: All phases complete, v1.0.1 ready
+Last activity: 2026-01-23 — Completed 08-01-PLAN.md (Narrative Regression Fixes)
 
 Progress: ██████████ 100%
 
@@ -27,13 +27,14 @@ Progress: ██████████ 100%
 | 5 | Writer Pass | Complete | 2026-01-21 | 2026-01-21 |
 | 6 | Pipeline Orchestration | Complete | 2026-01-21 | 2026-01-22 |
 | 7 | Caching & Integration | Complete | 2026-01-23 | 2026-01-23 |
+| 8 | Narrative Regression Fixes | Complete | 2026-01-23 | 2026-01-23 |
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 5 min
-- Total execution time: 34 min
+- Total execution time: 38 min
 
 **By Phase:**
 
@@ -46,9 +47,10 @@ Progress: ██████████ 100%
 | 5 | 1 | 4 min | 4 min |
 | 6 | 1 | 6 min | 6 min |
 | 7 | 1 | 7 min | 7 min |
+| 8 | 1 | 4 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-01 (4 min), 05-01 (4 min), 06-01 (6 min), 07-01 (7 min)
+- Last 5 plans: 05-01 (4 min), 06-01 (6 min), 07-01 (7 min), 08-01 (4 min)
 - Trend: stable
 
 ## Accumulated Context
@@ -109,9 +111,16 @@ Recent decisions affecting current work:
 - BidComp accepts optional redis parameter for caching
 - Legacy _generate_narrative_legacy preserved as fallback
 
+**From 08-01 execution:**
+- Case-insensitive category matching for key_driver numeric value lookup
+- top_deltas parameter added to _convert_pipeline_result for numeric values
+- Writer prompt requires exactly two sentences per driver narrative
+- Writer prompt requires 2-3 sentence overview with cause analysis
+- Estimate names enforced in comparative framing
+
 ### Pending Todos
 
-None - v1.0 roadmap complete.
+None - all phases complete.
 
 ### Blockers/Concerns
 
@@ -119,9 +128,17 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-23T00:22:00Z
-Stopped at: Completed 07-01-PLAN.md (Caching & Integration) - v1.0 COMPLETE
+Last session: 2026-01-23T23:08:00Z
+Stopped at: Completed 08-01-PLAN.md (Narrative Regression Fixes) - v1.0.1 COMPLETE
 Resume file: None
+
+## v1.0.1 Regression Fixes COMPLETE
+
+All regressions addressed:
+- REGR-01: Key drivers now have numeric values (populated from top_deltas)
+- REGR-02: Driver narratives require two sentences
+- REGR-03: Overview requires 2-3 sentences
+- REGR-04: Estimate names enforced in comparative framing
 
 ## v1.0 Milestone Complete
 
@@ -135,4 +152,4 @@ Production integration complete:
 - BidComp uses NarrativePipeline for narrative generation
 - Optional Redis caching reduces LLM costs on repeated comparisons
 - Legacy fallback preserved for edge cases
-- 47 pipeline tests + 29 new tests = 76+ tests covering the pipeline
+- 80+ tests covering the pipeline (47 original + 29 caching + 4 regression)

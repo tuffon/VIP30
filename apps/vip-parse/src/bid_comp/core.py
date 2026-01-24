@@ -604,7 +604,7 @@ class BidComp:
             )
 
             # Convert PipelineState to NarrativeResult
-            return self._convert_pipeline_result(state, pair, delta_rows)
+            return self._convert_pipeline_result(state, pair, delta_rows, top_deltas)
         except Exception as exc:
             self._log(logging.WARNING, "pipeline error", error=str(exc))
             return self._fallback_narrative(top_deltas, reason=f"pipeline_error:{exc}", pair=pair)
@@ -614,6 +614,7 @@ class BidComp:
         state: PipelineState,
         pair: EstimatePair,
         delta_rows: List[Dict[str, Any]],
+        top_deltas: List[Dict[str, Any]],
     ) -> NarrativeResult:
         """Convert PipelineState to NarrativeResult for existing export flow."""
         final = state.final
@@ -622,17 +623,22 @@ class BidComp:
                 delta_rows, reason="pipeline_no_final", pair=pair
             )
 
-        # Build key_drivers from FinalNarrative.key_drivers
-        key_drivers = [
-            {
+        # Build lookup dict from top_deltas by category for numeric values
+        delta_by_category = {
+            d.get("category", "").lower(): d for d in top_deltas
+        }
+
+        # Build key_drivers from FinalNarrative.key_drivers with numeric values from top_deltas
+        key_drivers = []
+        for d in final.key_drivers:
+            delta_data = delta_by_category.get(d.category.lower(), {})
+            key_drivers.append({
                 "category": d.category,
-                "primary_total": None,  # Not in DriverNarrative
-                "comparison_total": None,
-                "delta_total": None,
+                "primary_total": delta_data.get("primary_total"),
+                "comparison_total": delta_data.get("comparison_total"),
+                "delta_total": delta_data.get("delta"),
                 "narrative": d.narrative,
-            }
-            for d in final.key_drivers
-        ]
+            })
 
         # Build sections dict for export
         sections = {

@@ -36,6 +36,13 @@ Requirements for v1.0 Professional Adjuster Narratives. Each maps to roadmap pha
 - [x] **DATA-01**: Pydantic models define pass outputs (AnalysisResult, DraftNarrative, FinalNarrative)
 - [x] **DATA-02**: Schema validation ensures pass outputs conform before forwarding
 
+### Regression Fixes (v1.0.1)
+
+- [x] **REGR-01**: Key drivers display numeric values for Primary, Comparison, and Delta
+- [x] **REGR-02**: Driver narratives have two sentences (delta assessment + cause analysis)
+- [x] **REGR-03**: Overview has 2-3 sentences with delta direction, primary causes, and reasoning
+- [x] **REGR-04**: Estimate names prominently displayed and used in comparative framing
+
 ## v2 Requirements
 
 Deferred to future release. Tracked but not in current roadmap.
@@ -82,12 +89,17 @@ Which phases cover which requirements. Updated by create-roadmap.
 | STYLE-02 | 5 - Writer Pass | Complete |
 | PIPE-03 | 6 - Pipeline Orchestration | Complete |
 | PIPE-04 | 7 - Caching & Integration | Complete |
+| REGR-01 | 8 - Narrative Regression Fixes | Complete |
+| REGR-02 | 8 - Narrative Regression Fixes | Complete |
+| REGR-03 | 8 - Narrative Regression Fixes | Complete |
+| REGR-04 | 8 - Narrative Regression Fixes | Complete |
 
 **Coverage:**
-- v1 requirements: 14 total
-- Mapped to phases: 14
+- v1 requirements: 14 total (all complete)
+- v1.0.1 regression fixes: 4 total (all complete)
+- Mapped to phases: 18
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-18*
-*Last updated: 2026-01-22 after Phase 7 complete — v1.0 milestone complete*
+*Last updated: 2026-01-24 after Phase 8 complete — v1.0.1 regression fixes complete*

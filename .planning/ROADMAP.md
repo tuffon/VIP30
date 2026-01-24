@@ -2,7 +2,7 @@
 
 **Milestone:** v1.0 Professional Adjuster Narratives
 **Created:** 2026-01-18
-**Phases:** 7
+**Phases:** 8
 
 ## Overview
 
@@ -146,6 +146,30 @@ Complete the pipeline with pass-level caching and production integration.
 
 ---
 
+### Phase 8: Narrative Regression Fixes
+**Goal:** Fix regressions in narrative output where category delta values are missing and narrative quality needs improvement
+
+Addresses issues discovered during v1.0 testing:
+- Missing numeric values in key drivers (primary_total, comparison_total, delta)
+- Narrative structure needs two sentences (delta assessment + cause analysis)
+- Overview too brief (needs 2-3 sentences on delta, causes, reasoning)
+- Estimate ID names need consistent display
+
+**Requirements covered:**
+- REGR-01: Key drivers display numeric values for Primary, Comparison, and Delta
+- REGR-02: Driver narratives have two sentences (delta + cause)
+- REGR-03: Overview has 2-3 sentences with cause analysis
+- REGR-04: Estimate names prominently displayed
+
+**Success criteria:**
+- [ ] Key drivers show Primary value, Comparison value, and Delta (all numeric)
+- [ ] Each driver narrative has two sentences (delta assessment + cause assessment)
+- [ ] Overview is 2-3 sentences with delta direction, primary causes, and reasoning
+- [ ] Estimate names are prominently displayed and used in comparative framing
+- [ ] All existing tests continue to pass
+
+---
+
 ## Dependency Graph
 
 ```
@@ -160,6 +184,8 @@ Phase 5 (Writer Pass)
 Phase 6 (Pipeline Orchestration)
     ↓
 Phase 7 (Caching & Integration)
+    ↓
+Phase 8 (Narrative Regression Fixes)
 ```
 
 ## Requirement Coverage
@@ -180,8 +206,12 @@ Phase 7 (Caching & Integration)
 | STYLE-02 | 5 | Terminology glossary |
 | PIPE-03 | 6 | Conditional compliance rewrite |
 | PIPE-04 | 7 | Redis pass-level caching |
+| REGR-01 | 8 | Key drivers display numeric values |
+| REGR-02 | 8 | Driver narratives have two sentences |
+| REGR-03 | 8 | Overview has 2-3 sentences with cause analysis |
+| REGR-04 | 8 | Estimate names prominently displayed |
 
-**Coverage:** 14/14 requirements mapped (100%)
+**Coverage:** 18/18 requirements mapped (100%)
 
 ---
 
