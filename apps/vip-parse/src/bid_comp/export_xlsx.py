@@ -40,7 +40,17 @@ def export_xlsx(
     ws_summary["B4"] = pair.primary.totals.grand_total
     ws_summary["A5"] = pair.comparison.estimate_name
     ws_summary["B5"] = pair.comparison.totals.grand_total
-    for cell_ref in ("B4", "B5"):
+
+    # Add bold delta row
+    primary_total = pair.primary.totals.grand_total or 0
+    comparison_total = pair.comparison.totals.grand_total or 0
+    delta_total = comparison_total - primary_total
+    ws_summary["A6"] = "Delta"
+    ws_summary["A6"].font = Font(bold=True)
+    ws_summary["B6"] = delta_total
+    ws_summary["B6"].font = Font(bold=True)
+
+    for cell_ref in ("B4", "B5", "B6"):
         cell = ws_summary[cell_ref]
         if isinstance(cell.value, (int, float)):
             cell.number_format = "$#,##0.00"
@@ -72,7 +82,7 @@ def export_xlsx(
         sample_preview or "<empty>",
     )
 
-    current_row = 6
+    current_row = 8  # After header (1), blank (2), estimate header (3), primary (4), comparison (5), delta (6), blank (7)
     try:
         current_row = _write_text_section(ws_summary, current_row, "Overview of Estimates", overview_text, header_font)
     except Exception:  # noqa: BLE001
