@@ -18,6 +18,9 @@ type JobResult = {
   meta?: { elapsed_ms?: number };
   narrative_debug?: Record<string, unknown>;
   notify_email?: string;
+  error?: string;
+  error_code?: string;
+  error_details?: string;
 };
 
 const phaseOrder: Record<JobPhase, number> = {
@@ -94,6 +97,7 @@ export default function BidCompPage() {
   const [contractorFile, setContractorFile] = useState<File | null>(null);
   const [phase, setPhase] = useState<JobPhase>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [errorCode, setErrorCode] = useState<string | null>(null);
   const [jobId, setJobId] = useState<string | null>(null);
   const [jobStatus, setJobStatus] = useState<string | null>(null);
   const [result, setResult] = useState<JobResult | null>(null);
@@ -124,6 +128,7 @@ export default function BidCompPage() {
 
       setPhase("uploading");
       setError(null);
+      setErrorCode(null);
       setResult(null);
       setJobId(null);
       setJobStatus(null);
@@ -198,7 +203,8 @@ export default function BidCompPage() {
           }
           if (nextStatus === "failed") {
             setPhase("failed");
-            throw new Error(statusJson?.error || "Job failed");
+            setErrorCode(statusJson?.error_code || null);
+            throw new Error(statusJson?.error || "Job failed. Please try again.");
           }
           setPhase("processing");
           await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -276,7 +282,42 @@ export default function BidCompPage() {
       </form>
 
       {error && (
-        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">{error}</div>
+        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-5 shadow-sm">
+          <div className="flex items-start gap-3">
+            <span className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-600">
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4M12 16h.01" strokeLinecap="round" />
+              </svg>
+            </span>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-rose-800">
+                {errorCode === "WORKER_CRASHED" && "Processing Error"}
+                {errorCode === "TIMEOUT" && "Request Timed Out"}
+                {errorCode === "OUT_OF_MEMORY" && "File Too Large"}
+                {errorCode === "PARSE_ERROR" && "PDF Parse Error"}
+                {errorCode === "FILE_NOT_FOUND" && "File Not Found"}
+                {errorCode === "CONNECTION_ERROR" && "Connection Issue"}
+                {errorCode === "LLM_ERROR" && "AI Generation Error"}
+                {(!errorCode || errorCode === "UNKNOWN_ERROR") && "Something Went Wrong"}
+              </p>
+              <p className="mt-1 text-sm text-rose-700">{error}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setPhase("idle");
+                  setError(null);
+                  setErrorCode(null);
+                  setJobId(null);
+                  setJobStatus(null);
+                }}
+                className="mt-3 rounded-full bg-rose-100 px-4 py-1.5 text-xs font-semibold text-rose-700 transition hover:bg-rose-200"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {jobId && (
