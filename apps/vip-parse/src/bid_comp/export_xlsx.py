@@ -34,8 +34,11 @@ def export_xlsx(
     ws_summary["A1"] = "Bid Comparison Summary"
     ws_summary["A1"].font = Font(bold=True, size=14)
 
-    ws_summary["A3"] = "Estimate"
-    ws_summary["B3"] = "Grand Total ($)"
+    ws_summary["A3"] = "Role"
+    ws_summary["B3"] = "Estimate"
+    ws_summary["C3"] = "Grand Total ($)"
+    for cell_ref in ("A3", "B3", "C3"):
+        ws_summary[cell_ref].font = header_font
 
     # Get totals with fallback computation from category_rows if missing
     primary_total = pair.primary.totals.grand_total
@@ -70,18 +73,20 @@ def export_xlsx(
     comparison_total = comparison_total or 0
     delta_total = comparison_total - primary_total
 
-    ws_summary["A4"] = pair.primary.estimate_name
-    ws_summary["B4"] = primary_total
-    ws_summary["A5"] = pair.comparison.estimate_name
-    ws_summary["B5"] = comparison_total
+    ws_summary["A4"] = "Primary"
+    ws_summary["B4"] = pair.primary.estimate_name
+    ws_summary["C4"] = primary_total
+    ws_summary["A5"] = "Comparison"
+    ws_summary["B5"] = pair.comparison.estimate_name
+    ws_summary["C5"] = comparison_total
 
     # Add bold delta row
     ws_summary["A6"] = "Delta"
     ws_summary["A6"].font = Font(bold=True)
-    ws_summary["B6"] = delta_total
-    ws_summary["B6"].font = Font(bold=True)
+    ws_summary["C6"] = delta_total
+    ws_summary["C6"].font = Font(bold=True)
 
-    for cell_ref in ("B4", "B5", "B6"):
+    for cell_ref in ("C4", "C5", "C6"):
         cell = ws_summary[cell_ref]
         if isinstance(cell.value, (int, float)):
             cell.number_format = "$#,##0.00"
