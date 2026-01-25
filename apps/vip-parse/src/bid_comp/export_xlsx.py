@@ -325,12 +325,26 @@ def _write_key_driver_section(ws, start_row: int, pair, drivers: List[Dict[str, 
         cell = ws.cell(row=row, column=1, value="No driver data provided.")
         cell.alignment = Alignment(wrap_text=True, vertical="top")
         return row + 2
+    # Track totals for summary row
+    total_primary = 0.0
+    total_comparison = 0.0
+    total_delta = 0.0
+
     for driver in drivers:
         primary_val = driver.get("primary_total")
         comparison_val = driver.get("comparison_total")
         delta_val = driver.get("delta_total")
         if delta_val is None and isinstance(primary_val, (int, float)) and isinstance(comparison_val, (int, float)):
             delta_val = round((comparison_val or 0) - (primary_val or 0), 2)
+
+        # Accumulate totals
+        if isinstance(primary_val, (int, float)):
+            total_primary += primary_val
+        if isinstance(comparison_val, (int, float)):
+            total_comparison += comparison_val
+        if isinstance(delta_val, (int, float)):
+            total_delta += delta_val
+
         ws.cell(row=row, column=1, value=driver.get("category"))
         primary_cell = ws.cell(row=row, column=2, value=primary_val)
         comparison_cell = ws.cell(row=row, column=3, value=comparison_val)
@@ -341,6 +355,20 @@ def _write_key_driver_section(ws, start_row: int, pair, drivers: List[Dict[str, 
                 cell.number_format = "$#,##0.00"
         narrative_cell.alignment = Alignment(wrap_text=True, vertical="top")
         row += 1
+
+    # Add Grand Total row
+    ws.cell(row=row, column=1, value="Grand Total").font = header_font
+    total_primary_cell = ws.cell(row=row, column=2, value=total_primary)
+    total_primary_cell.font = header_font
+    total_primary_cell.number_format = "$#,##0.00"
+    total_comparison_cell = ws.cell(row=row, column=3, value=total_comparison)
+    total_comparison_cell.font = header_font
+    total_comparison_cell.number_format = "$#,##0.00"
+    total_delta_cell = ws.cell(row=row, column=4, value=total_delta)
+    total_delta_cell.font = header_font
+    total_delta_cell.number_format = "$#,##0.00"
+    row += 1
+
     return row + 1
 
 
