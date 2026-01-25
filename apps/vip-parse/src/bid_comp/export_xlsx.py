@@ -36,15 +36,46 @@ def export_xlsx(
 
     ws_summary["A3"] = "Estimate"
     ws_summary["B3"] = "Grand Total ($)"
+
+    # Get totals with fallback computation from category_rows if missing
+    primary_total = pair.primary.totals.grand_total
+    comparison_total = pair.comparison.totals.grand_total
+
+    # Log what we have
+    logger.info(
+        "xlsx totals: primary=%s (%s) comparison=%s (%s)",
+        primary_total,
+        type(primary_total).__name__,
+        comparison_total,
+        type(comparison_total).__name__,
+    )
+
+    # Fallback: compute from category_rows if grand_total is missing
+    if primary_total is None and category_rows:
+        primary_total = sum(
+            (r.get("primary_total") or 0) for r in category_rows
+            if isinstance(r.get("primary_total"), (int, float))
+        )
+        logger.warning("xlsx primary grand_total missing, computed from categories: %s", primary_total)
+
+    if comparison_total is None and category_rows:
+        comparison_total = sum(
+            (r.get("comparison_total") or 0) for r in category_rows
+            if isinstance(r.get("comparison_total"), (int, float))
+        )
+        logger.warning("xlsx comparison grand_total missing, computed from categories: %s", comparison_total)
+
+    # Ensure we have numbers, not None
+    primary_total = primary_total or 0
+    comparison_total = comparison_total or 0
+    delta_total = comparison_total - primary_total
+
     ws_summary["A4"] = pair.primary.estimate_name
-    ws_summary["B4"] = pair.primary.totals.grand_total
+    ws_summary["B4"] = primary_total
     ws_summary["A5"] = pair.comparison.estimate_name
-    ws_summary["B5"] = pair.comparison.totals.grand_total
+    ws_summary["B5"] = comparison_total
 
     # Add bold delta row
-    primary_total = pair.primary.totals.grand_total or 0
-    comparison_total = pair.comparison.totals.grand_total or 0
-    delta_total = comparison_total - primary_total
     ws_summary["A6"] = "Delta"
     ws_summary["A6"].font = Font(bold=True)
     ws_summary["B6"] = delta_total
