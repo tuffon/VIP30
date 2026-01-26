@@ -531,8 +531,9 @@ class TestNarrativePipelineErrorHandling:
         assert state.analysis.confidence == "high"
         # Writer pass has internal error handling - returns fallback narrative
         assert state.draft is not None
-        # Fallback overview contains "Analysis complete"
-        assert "Analysis complete" in state.draft.overview
+        # Fallback overview is now data-driven, contains estimate names and variance info
+        assert "Carrier" in state.draft.overview or "Contractor" in state.draft.overview
+        assert "variance" in state.draft.overview.lower() or "comparing" in state.draft.overview.lower()
         # Pipeline should still complete
         assert state.final is not None
 

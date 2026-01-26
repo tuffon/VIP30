@@ -155,7 +155,51 @@ def run_writer_pass(
             "writer pass failed: error=%s - returning minimal DraftNarrative",
             exc,
         )
-        return _build_fallback_narrative(analysis, str(exc))
+        # Try to salvage overview from raw response before falling back
+        extracted_overview = _extract_overview_from_raw(raw_response) if 'raw_response' in dir() else None
+        return _build_fallback_narrative(analysis, str(exc), primary_name, comparison_name, extracted_overview)
+
+
+def _repair_json(text: str) -> str:
+    """
+    Attempt to repair common JSON issues from LLM output.
+
+    Common issues:
+    - Missing comma between object properties
+    - Trailing commas
+    - Unescaped newlines in strings
+    """
+    import re
+
+    # Fix missing comma between "..." and "key": (common LLM error)
+    # Pattern: "...(end of string value)" followed by whitespace then "key":
+    text = re.sub(r'"\s*\n\s*"([a-z_]+)":', r'",\n  "\1":', text)
+
+    # Fix trailing commas before } or ]
+    text = re.sub(r',(\s*[}\]])', r'\1', text)
+
+    return text
+
+
+def _extract_overview_from_raw(raw_response: str) -> str | None:
+    """
+    Try to extract the overview field from raw response even if JSON is malformed.
+
+    Returns the overview string if found, None otherwise.
+    """
+    import re
+
+    # Look for "overview": "..." pattern
+    match = re.search(r'"overview"\s*:\s*"([^"]*(?:\\.[^"]*)*)"', raw_response, re.DOTALL)
+    if match:
+        overview = match.group(1)
+        # Unescape common escapes
+        overview = overview.replace('\\"', '"').replace('\\n', ' ').replace('\\t', ' ')
+        # Clean up whitespace
+        overview = ' '.join(overview.split())
+        if len(overview) > 50:  # Only use if substantive
+            return overview
+    return None
 
 
 def _parse_writer_response(raw_response: str) -> DraftNarrative:
@@ -163,6 +207,7 @@ def _parse_writer_response(raw_response: str) -> DraftNarrative:
     Parse LLM JSON response into DraftNarrative.
 
     Strips code fences and parses the JSON into a validated DraftNarrative.
+    Attempts JSON repair for common LLM output issues.
 
     Args:
         raw_response: Raw string response from LLM
@@ -180,11 +225,20 @@ def _parse_writer_response(raw_response: str) -> DraftNarrative:
             lines = lines[:-1]
         cleaned = "\n".join(lines).strip()
 
+    # Try parsing, with repair attempt on failure
+    data = None
     try:
         data = json.loads(cleaned)
-    except json.JSONDecodeError as exc:
-        logger.warning("writer pass JSON parse failed: %s", exc)
-        raise ValueError(f"JSON parse error: {exc}") from exc
+    except json.JSONDecodeError as first_exc:
+        logger.warning("writer pass JSON parse failed (attempt 1): %s", first_exc)
+        # Try repairing common issues
+        repaired = _repair_json(cleaned)
+        try:
+            data = json.loads(repaired)
+            logger.info("writer pass JSON repair succeeded")
+        except json.JSONDecodeError as exc:
+            logger.warning("writer pass JSON repair also failed: %s", exc)
+            raise ValueError(f"JSON parse error: {exc}") from exc
 
     if not isinstance(data, dict):
         logger.warning("writer pass response is not a dict")
@@ -232,7 +286,13 @@ def _parse_writer_response(raw_response: str) -> DraftNarrative:
     )
 
 
-def _build_fallback_narrative(analysis: AnalysisResult, reason: str) -> DraftNarrative:
+def _build_fallback_narrative(
+    analysis: AnalysisResult,
+    reason: str,
+    primary_name: str = "Primary",
+    comparison_name: str = "Comparison",
+    extracted_overview: str | None = None,
+) -> DraftNarrative:
     """
     Build a minimal DraftNarrative when parsing fails.
 
@@ -241,11 +301,14 @@ def _build_fallback_narrative(analysis: AnalysisResult, reason: str) -> DraftNar
     Args:
         analysis: AnalysisResult to extract basic info from
         reason: Reason for fallback (for logging)
+        primary_name: Name of the primary estimate
+        comparison_name: Name of the comparison estimate
+        extracted_overview: Overview extracted from raw response (if available)
 
     Returns:
         Minimal DraftNarrative with basic content
     """
-    logger.info("building fallback draft narrative: reason=%s", reason)
+    logger.info("building fallback draft narrative: reason=%s extracted_overview=%s", reason, bool(extracted_overview))
 
     # Build basic key drivers from analysis
     key_drivers: List[DriverNarrative] = []
@@ -256,9 +319,25 @@ def _build_fallback_narrative(analysis: AnalysisResult, reason: str) -> DraftNar
             narrative=cat_analysis.delta_drivers[0] if cat_analysis.delta_drivers else "See line item details.",
         ))
 
+    # Use extracted overview if available, otherwise build from analysis data
+    if extracted_overview:
+        overview = extracted_overview
+    else:
+        # Build a data-driven overview from the analysis
+        top_category = analysis.category_analyses[0] if analysis.category_analyses else None
+        if top_category:
+            delta_direction = "higher" if top_category.delta > 0 else "lower"
+            overview = (
+                f"Comparing {primary_name} and {comparison_name}, the largest variance is in "
+                f"{top_category.category} (${abs(top_category.delta):,.2f} {delta_direction} in comparison). "
+                f"Overall direction: {analysis.overall_delta_direction}. See key drivers below for details."
+            )
+        else:
+            overview = f"Comparison of {primary_name} and {comparison_name}. See key drivers below for details."
+
     return DraftNarrative(
-        overview="Analysis complete. See details below.",
+        overview=overview,
         key_drivers=key_drivers,
         scope_observations=analysis.scope_gaps,
-        suggested_followups=["Review individual category analyses for details."],
+        suggested_followups=[f"Review {primary_name} and {comparison_name} line items for specifics."],
     )
