@@ -1,7 +1,9 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useCallback, useEffect, useId, useMemo, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
+import { JobProgress } from "../../components/JobProgress";
 
 type JobPhase = "idle" | "uploading" | "queued" | "processing" | "ready" | "failed";
 
@@ -12,15 +14,10 @@ type UploadDropzoneProps = {
   onFileSelect: (file: File | null) => void;
 };
 
-type JobResult = {
-  status: string;
-  download_urls?: { xlsx?: string };
-  meta?: { elapsed_ms?: number };
-  narrative_debug?: Record<string, unknown>;
-  notify_email?: string;
-  error?: string;
-  error_code?: string;
-  error_details?: string;
+type MePayload = {
+  success?: boolean;
+  credit_balance?: number;
+  user?: { email?: string };
 };
 
 const phaseOrder: Record<JobPhase, number> = {
@@ -35,7 +32,7 @@ const phaseOrder: Record<JobPhase, number> = {
 const timeline = [
   { id: "upload", label: "Upload PDFs", description: "Secure carrier + contractor uploads" },
   { id: "processing", label: "Parsing & AI", description: "Xactimate sections + narrative summary" },
-  { id: "ready", label: "Delivery", description: "Download XLSX + notify stakeholders" },
+  { id: "ready", label: "Delivery", description: "Download XLSX and review history" },
 ];
 
 function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzoneProps) {
@@ -44,6 +41,7 @@ function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzo
     () => `${title.toLowerCase().replace(/\s+/g, "-")}-${reactId.replace(/:/g, "")}`,
     [title, reactId],
   );
+
   const handleFileChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const nextFile = event.target.files?.[0] ?? null;
@@ -61,13 +59,7 @@ function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzo
         hasFile ? "border-emerald-200 bg-emerald-50" : "border-slate-200 bg-white"
       }`}
     >
-      <input
-        id={id}
-        type="file"
-        accept="application/pdf"
-        className="hidden"
-        onChange={handleFileChange}
-      />
+      <input id={id} type="file" accept="application/pdf" className="hidden" onChange={handleFileChange} />
       <span
         className={`inline-flex h-12 w-12 items-center justify-center rounded-full ${
           hasFile ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-500"
@@ -92,27 +84,56 @@ function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzo
 }
 
 export default function BidCompPage() {
-  const { data: session } = useSession();
+  const router = useRouter();
   const [carrierFile, setCarrierFile] = useState<File | null>(null);
   const [contractorFile, setContractorFile] = useState<File | null>(null);
   const [phase, setPhase] = useState<JobPhase>("idle");
   const [error, setError] = useState<string | null>(null);
-  const [errorCode, setErrorCode] = useState<string | null>(null);
   const [jobId, setJobId] = useState<string | null>(null);
-  const [jobStatus, setJobStatus] = useState<string | null>(null);
-  const [result, setResult] = useState<JobResult | null>(null);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
-  const [shouldEmail, setShouldEmail] = useState(false);
-  const [notifyEmail, setNotifyEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [creditBalance, setCreditBalance] = useState<number | null>(null);
+  const [isCreditsLoading, setIsCreditsLoading] = useState(true);
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
 
   useEffect(() => {
-    if (session?.user?.email) {
-      setNotifyEmail(session.user.email);
-      setShouldEmail(true);
+    let active = true;
+
+    async function loadCredits() {
+      setIsCreditsLoading(true);
+      try {
+        const response = await fetch(`${apiBase.replace(/\/$/, "")}/auth/me`, {
+          credentials: "include",
+        });
+
+        if (!active) return;
+        if (response.status === 401) {
+          router.push(`/login?next=${encodeURIComponent("/bid-comp")}`);
+          return;
+        }
+        if (!response.ok) {
+          setCreditBalance(null);
+          return;
+        }
+
+        const payload = (await response.json()) as MePayload;
+        setCreditBalance(typeof payload.credit_balance === "number" ? payload.credit_balance : null);
+      } catch {
+        if (!active) return;
+        setCreditBalance(null);
+      } finally {
+        if (active) {
+          setIsCreditsLoading(false);
+        }
+      }
     }
-  }, [session]);
+
+    loadCredits();
+
+    return () => {
+      active = false;
+    };
+  }, [apiBase, router]);
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -122,16 +143,17 @@ export default function BidCompPage() {
         return;
       }
 
+      if ((creditBalance ?? 0) <= 0) {
+        setError("Insufficient credits. Please add credits to continue.");
+        return;
+      }
+
       const base = apiBase.replace(/\/$/, "");
-      const uploadEndpoint = (filename: string) =>
-        `${base}/render/upload-url?filename=${encodeURIComponent(filename)}`;
+      const uploadEndpoint = (filename: string) => `${base}/render/upload-url?filename=${encodeURIComponent(filename)}`;
 
       setPhase("uploading");
       setError(null);
-      setErrorCode(null);
-      setResult(null);
       setJobId(null);
-      setJobStatus(null);
       setDownloadUrl(null);
       setIsSubmitting(true);
 
@@ -142,73 +164,52 @@ export default function BidCompPage() {
           return resp.json() as Promise<{ upload_url: string; key: string }>;
         };
 
-        const [carrierUrl, contractorUrl] = await Promise.all([
-          createUrl(carrierFile),
-          createUrl(contractorFile),
-        ]);
+        const [carrierUrl, contractorUrl] = await Promise.all([createUrl(carrierFile), createUrl(contractorFile)]);
 
         const commonHeaders: HeadersInit = { "Content-Type": "application/pdf" };
-        const uploadCarrier = fetch(carrierUrl.upload_url, {
-          method: "PUT",
-          body: carrierFile,
-          headers: commonHeaders,
-        });
-        const uploadContractor = fetch(contractorUrl.upload_url, {
-          method: "PUT",
-          body: contractorFile,
-          headers: commonHeaders,
-        });
-        const [carrierResp, contractorResp] = await Promise.all([uploadCarrier, uploadContractor]);
+        const [carrierResp, contractorResp] = await Promise.all([
+          fetch(carrierUrl.upload_url, { method: "PUT", body: carrierFile, headers: commonHeaders }),
+          fetch(contractorUrl.upload_url, { method: "PUT", body: contractorFile, headers: commonHeaders }),
+        ]);
+
         if (!carrierResp.ok || !contractorResp.ok) {
           throw new Error("Upload failed. Please verify your network connection.");
         }
 
-        const payload: Record<string, unknown> = {
-          carrier_key: carrierUrl.key,
-          contractor_key: contractorUrl.key,
-          carrier_filename: carrierFile.name,
-          contractor_filename: contractorFile.name,
-        };
-        if (shouldEmail && notifyEmail) {
-          payload.notify_email = notifyEmail;
-        }
-
-        const enqueueResp = await fetch(`${base}/render/bid-comp/keys`, {
+        const enqueueResp = await fetch(`${base}/jobs`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
+          credentials: "include",
+          body: JSON.stringify({
+            carrier_key: carrierUrl.key,
+            contractor_key: contractorUrl.key,
+            carrier_filename: carrierFile.name,
+            contractor_filename: contractorFile.name,
+          }),
         });
+
+        if (enqueueResp.status === 401) {
+          router.push(`/login?next=${encodeURIComponent("/bid-comp")}`);
+          return;
+        }
+
+        if (enqueueResp.status === 402) {
+          setPhase("failed");
+          setError("Insufficient credits. Please add credits to continue.");
+          return;
+        }
+
         if (!enqueueResp.ok) {
           throw new Error("Unable to start the bid comp job.");
         }
-        const job = await enqueueResp.json();
-        if (!job?.job_id) throw new Error("Server did not return a job id.");
-        setJobId(job.job_id);
-        setJobStatus(job.status || "queued");
-        setPhase("queued");
 
-        const statusUrl = `${base}/render/bid-comp/${job.job_id}`;
-        for (let attempt = 0; attempt < 300; attempt++) {
-          const resp = await fetch(statusUrl);
-          const statusJson = await resp.json();
-          const nextStatus = statusJson?.status ?? null;
-          setJobStatus(nextStatus);
-          if (statusJson?.download_urls?.xlsx) {
-            setDownloadUrl(statusJson.download_urls.xlsx);
-          }
-          if (nextStatus === "finished") {
-            setPhase("ready");
-            setResult(statusJson);
-            break;
-          }
-          if (nextStatus === "failed") {
-            setPhase("failed");
-            setErrorCode(statusJson?.error_code || null);
-            throw new Error(statusJson?.error || "Job failed. Please try again.");
-          }
-          setPhase("processing");
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+        const job = (await enqueueResp.json()) as { job_id?: string };
+        if (!job.job_id) {
+          throw new Error("Server did not return a job id.");
         }
+
+        setJobId(job.job_id);
+        setPhase("queued");
       } catch (err) {
         setPhase("failed");
         setError(err instanceof Error ? err.message : "Unexpected error");
@@ -216,19 +217,18 @@ export default function BidCompPage() {
         setIsSubmitting(false);
       }
     },
-    [apiBase, carrierFile, contractorFile, notifyEmail, shouldEmail],
+    [apiBase, carrierFile, contractorFile, creditBalance, router],
   );
+
+  const submitDisabled = isSubmitting || isCreditsLoading || !carrierFile || !contractorFile || (creditBalance ?? 0) <= 0;
 
   return (
     <div className="space-y-10 text-slate-900">
       <header className="space-y-3">
         <p className="text-sm uppercase tracking-[0.3em] text-slate-500">Bid Comp</p>
-        <h1 className="text-3xl font-semibold text-slate-900">
-          Carrier vs. contractor in one shareable report.
-        </h1>
+        <h1 className="text-3xl font-semibold text-slate-900">Carrier vs. contractor in one shareable report.</h1>
         <p className="text-slate-500">
-          Upload two PDFs, let ScopeVista parse the scope, and we’ll return an XLSX + email-ready summary
-          that explains the deltas.
+          Upload two PDFs, parse the scope, and get an XLSX comparison with job tracking and history.
         </p>
       </header>
 
@@ -248,86 +248,79 @@ export default function BidCompPage() {
           />
         </section>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <label className="flex items-center gap-3 text-sm text-slate-600">
-            <input
-              type="checkbox"
-              checked={shouldEmail}
-              onChange={(event) => setShouldEmail(event.target.checked)}
-              className="h-4 w-4 rounded border-slate-300"
-            />
-            Email me when the report is ready (includes download and marketing tips)
-          </label>
-          {shouldEmail && (
-            <div className="mt-3">
-              <input
-                type="email"
-                value={notifyEmail}
-                onChange={(event) => setNotifyEmail(event.target.value)}
-                placeholder="you@firm.com"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none"
-                required
-              />
-            </div>
-          )}
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <p className="text-sm text-slate-600">
+            Available credits:{" "}
+            <span className="font-semibold text-slate-900">{isCreditsLoading ? "..." : (creditBalance ?? 0)}</span>
+          </p>
+          <button
+            type="submit"
+            disabled={submitDisabled}
+            className="rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isSubmitting ? "Processing..." : "Generate Bid Comp"}
+          </button>
         </div>
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:opacity-60"
-        >
-          {isSubmitting ? "Processing…" : "Generate Bid Comp"}
-        </button>
       </form>
 
-      {error && (
+      {error ? (
         <div className="rounded-2xl border border-rose-200 bg-rose-50 p-5 shadow-sm">
-          <div className="flex items-start gap-3">
-            <span className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-600">
-              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 8v4M12 16h.01" strokeLinecap="round" />
-              </svg>
-            </span>
-            <div className="flex-1">
-              <p className="text-sm font-semibold text-rose-800">
-                {errorCode === "WORKER_CRASHED" && "Processing Error"}
-                {errorCode === "TIMEOUT" && "Request Timed Out"}
-                {errorCode === "OUT_OF_MEMORY" && "File Too Large"}
-                {errorCode === "PARSE_ERROR" && "PDF Parse Error"}
-                {errorCode === "FILE_NOT_FOUND" && "File Not Found"}
-                {errorCode === "CONNECTION_ERROR" && "Connection Issue"}
-                {errorCode === "LLM_ERROR" && "AI Generation Error"}
-                {(!errorCode || errorCode === "UNKNOWN_ERROR") && "Something Went Wrong"}
-              </p>
-              <p className="mt-1 text-sm text-rose-700">{error}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setPhase("idle");
-                  setError(null);
-                  setErrorCode(null);
-                  setJobId(null);
-                  setJobStatus(null);
-                }}
-                className="mt-3 rounded-full bg-rose-100 px-4 py-1.5 text-xs font-semibold text-rose-700 transition hover:bg-rose-200"
-              >
-                Try Again
-              </button>
-            </div>
-          </div>
+          <p className="text-sm font-semibold text-rose-800">Something went wrong</p>
+          <p className="mt-1 text-sm text-rose-700">{error}</p>
         </div>
-      )}
+      ) : null}
 
-      {jobId && (
-        <section className="space-y-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-sm font-semibold text-slate-900">Job {jobId.slice(0, 8)}…</span>
-            <span className="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600">
-              {jobStatus ?? "starting"}
-            </span>
+      {jobId ? (
+        <JobProgress
+          jobId={jobId}
+          onComplete={(result) => {
+            setPhase("ready");
+            setDownloadUrl(result.download_url || null);
+            setError(null);
+          }}
+          onError={(message) => {
+            setPhase("failed");
+            setError(message);
+          }}
+          onRetry={async () => {
+            try {
+              const response = await fetch(`${apiBase.replace(/\/$/, "")}/jobs/${jobId}/retry`, {
+                method: "POST",
+                credentials: "include",
+              });
+              if (!response.ok) {
+                setError("Retry failed. Please try again.");
+                return;
+              }
+              const payload = (await response.json()) as { job_id: string };
+              setJobId(payload.job_id);
+              setPhase("queued");
+              setError(null);
+            } catch {
+              setError("Retry failed. Please try again.");
+            }
+          }}
+        />
+      ) : null}
+
+      {downloadUrl ? (
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="flex flex-wrap items-center gap-4">
+            <p className="text-lg font-semibold text-slate-900">Latest output</p>
+            <a
+              href={downloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-slate-900 px-5 py-2 text-xs font-semibold text-white transition hover:bg-slate-800"
+            >
+              Download XLSX
+            </a>
           </div>
+        </section>
+      ) : null}
+
+      {jobId ? (
+        <section className="space-y-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="grid gap-4 md:grid-cols-3">
             {timeline.map((step, idx) => {
               const activeIndex = phaseOrder[phase] ?? 0;
@@ -336,52 +329,16 @@ export default function BidCompPage() {
               return (
                 <div key={step.id} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
                   <p className="text-sm font-semibold text-slate-900">
-                    {step.label}{" "}
-                    {isComplete && <span className="text-emerald-500">✓</span>}
-                    {isCurrent && !isComplete && <span className="text-amber-500">•</span>}
+                    {step.label} {isComplete ? <span className="text-emerald-500">✓</span> : null}
+                    {isCurrent && !isComplete ? <span className="text-amber-500">•</span> : null}
                   </p>
                   <p className="text-xs text-slate-500">{step.description}</p>
                 </div>
               );
             })}
           </div>
-          {shouldEmail && notifyEmail && (
-            <p className="text-xs text-slate-500">
-              We’ll send the download link to <span className="font-semibold text-slate-900">{notifyEmail}</span> as
-              soon as the XLSX is ready.
-            </p>
-          )}
         </section>
-      )}
-
-      {(downloadUrl || result) && (
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="flex flex-wrap items-center gap-4">
-            <p className="text-lg font-semibold text-slate-900">Latest output</p>
-            {downloadUrl && (
-              <a
-                href={downloadUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-slate-900 px-5 py-2 text-xs font-semibold text-white transition hover:bg-slate-800"
-              >
-                Download XLSX
-              </a>
-            )}
-          </div>
-          {result?.meta && (
-            <p className="mt-2 text-sm text-slate-500">
-              Runtime: {(result.meta.elapsed_ms ?? 0) / 1000}s · Status: {result.status}
-            </p>
-          )}
-          {result?.narrative_debug && (
-            <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-4 text-xs text-slate-600">
-              <p className="font-semibold text-slate-900">Narrative</p>
-              <pre className="mt-2 max-h-40 overflow-auto">{JSON.stringify(result.narrative_debug, null, 2)}</pre>
-            </div>
-          )}
-        </section>
-      )}
+      ) : null}
     </div>
   );
 }
