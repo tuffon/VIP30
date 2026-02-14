@@ -2,19 +2,19 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-09)
+See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Planning next milestone
+**Current focus:** v1.1 MVP Launch — auth, credits, progress visibility
 
 ## Current Position
 
-Phase: Between milestones
-Plan: N/A
-Status: v1.0.1 shipped, ready to plan next milestone
-Last activity: 2026-02-09 — v1.0.1 milestone complete
+Phase: Not started (run /gsd:define-requirements or /gsd:create-roadmap)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-02-13 — Milestone v1.1 started
 
-Progress: Ready for next milestone
+Progress: Milestone initialized, ready for requirements
 
 ## Completed Milestones
 
@@ -36,9 +36,19 @@ Key decisions from v1.0.1:
 - Content-hash cache keys for Redis caching
 - Case-insensitive category matching
 
+### v1.1 Architecture Decisions (from discuss-milestone)
+
+- Workspace model from day one (1 user per workspace for MVP)
+- Credits belong to workspace, not user
+- Email OTP (one-time code) over click-only magic links
+- Ledger-style credits: credit_grants + credit_consumptions (not counter decrement)
+- Store login metadata: last_login_at, login_ip, login_method
+- Fixed job state machine: queued → parsing → analyzing → writing → completed | failed
+- PostgreSQL on Render for persistence
+
 ### Pending Todos
 
-None - milestone complete, ready for next milestone planning.
+None.
 
 ### Blockers/Concerns
 
@@ -46,13 +56,11 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-09
-Stopped at: v1.0.1 milestone complete
+Last session: 2026-02-13
+Stopped at: Milestone v1.1 initialized
 Resume file: None
 
 ## Next Steps
 
-1. `/gsd:discuss-milestone` — thinking partner, creates context file
-2. `/gsd:new-milestone` — update PROJECT.md with new goals
-3. `/gsd:define-requirements` — scope what to build
-4. `/gsd:create-roadmap` — plan how to build it
+1. `/gsd:define-requirements` — scope what to build with checkable requirements
+2. `/gsd:create-roadmap` — plan how to build it

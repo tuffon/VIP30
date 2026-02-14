@@ -8,6 +8,21 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
+## Current Milestone: v1.1 MVP Launch
+
+**Goal:** Production-ready customer validation loop with auth, credits, and progress visibility.
+
+**Target features:**
+- Database setup (PostgreSQL on Render)
+- Workspace model (users + credits belong to workspace, MVP = 1 user per workspace)
+- Email OTP auth (one-time code, store login metadata)
+- Credit system (ledger-style: credit_grants + credit_consumptions, only charge on success)
+- Job state machine (queued → parsing → analyzing → writing → completed | failed)
+- Clear failure handling (messaging, retry without double-charge)
+- Internal naming cleanup (vip_job → comparison_job, raw_upload → bid_input)
+- Rebrand to bid comparison tool
+- [Stretch] Narrative enhancement (more verbose with verbosity budget guardrail)
+
 ## Current State
 
 **Version:** v1.0.1 shipped 2026-02-09
@@ -47,11 +62,25 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 
 ### Active
 
-(None — planning next milestone)
+- [ ] PostgreSQL database on Render for persistence
+- [ ] Workspace model: users belong to workspace, credits belong to workspace
+- [ ] Email OTP authentication (one-time code, not magic links)
+- [ ] Login metadata: last_login_at, login_ip, login_method
+- [ ] credit_grants table: source, amount, timestamp
+- [ ] credit_consumptions table: job_id, amount, success, timestamp
+- [ ] Configurable default credits (5 early adopters, 3 later)
+- [ ] Credits only consumed on successful completion
+- [ ] Job state machine: queued, parsing, analyzing, writing, completed, failed
+- [ ] Job progress fields: current_state, percent/step_index, error_reason
+- [ ] Clear failure messaging with retry path
+- [ ] Internal naming: comparison_job, bid_input (not vip_job, raw_upload)
+- [ ] Frontend rebrand to bid comparison tool positioning
+- [ ] [Stretch] Narrative verbosity enhancement with budget guardrail
 
 ### Out of Scope
 
-- Multi-tenant user management — focus on core comparison first
+- OAuth login (Google/Facebook) — post-MVP, start with email OTP
+- Multi-user workspaces — MVP = 1 user per workspace, architecture supports expansion
 - Additional document types beyond Xactimate — scope to known format
 - Fine-tuning — premature optimization; few-shot sufficient
 - G-Eval tone scoring — deferred to v2
@@ -84,4 +113,4 @@ Brownfield codebase with functional bid comparison. Turborepo monorepo with Next
 | Case-insensitive category matching | Robust to LLM output variation | ✓ Good |
 
 ---
-*Last updated: 2026-02-09 after v1.0.1 milestone*
+*Last updated: 2026-02-13 after starting v1.1 MVP Launch milestone*
