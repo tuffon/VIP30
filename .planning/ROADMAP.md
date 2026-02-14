@@ -88,7 +88,7 @@ Plans:
 **Plans:** TBD
 
 Plans:
-- [ ] 04-01: Auth UI and credit display
+- [x] 04-01: Auth UI and credit display *(completed)*
 - [ ] 04-02: Job progress and history views
 - [ ] 04-03: Rebrand and naming cleanup
 
@@ -101,8 +101,8 @@ Plans:
 | 1. Database + Workspace Foundation | 1/1 | Done | 2026-02-13 |
 | 2. Auth + Workspace Creation | 2/2 | Done | 2026-02-14 |
 | 3. Jobs + Credits Integration | 2/2 | Done | 2026-02-14 |
-| 4. Frontend + Usage + Polish | 0/3 | Not started | - |
+| 4. Frontend + Usage + Polish | 1/3 | In progress | - |
 
 ---
 *Roadmap created: 2026-02-13*
-*Last updated: 2026-02-14 — Phase 3 completed*
+*Last updated: 2026-02-14 — Phase 4 plan 04-01 completed*

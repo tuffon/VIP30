@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { brand } from "../components/brand";
+import { CreditBalance } from "../components/CreditBalance";
 import { NavAuth } from "../components/NavAuth";
 import { AppProviders } from "../components/providers/AppProviders";
 
@@ -49,7 +50,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     );
                   })}
                 </nav>
-                <NavAuth />
+                <div className="flex items-center gap-4">
+                  <CreditBalance />
+                  <NavAuth />
+                </div>
               </div>
             </header>
             <main className={`flex-1 ${marketingMode ? "bg-slate-50" : "bg-white"}`}>
