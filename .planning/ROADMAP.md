@@ -14,8 +14,8 @@ Transform the existing bid comparison tool into a customer-ready MVP with user a
 - Integer phases (1, 2, 3, 4): Planned milestone work
 - Decimal phases (e.g., 2.1): Urgent insertions if needed
 
-- [ ] **Phase 1: Database + Workspace Foundation** - PostgreSQL with workspace/user/credit schema
-- [ ] **Phase 2: Auth + Workspace Creation** - Email OTP with automatic workspace setup
+- [x] **Phase 1: Database + Workspace Foundation** - PostgreSQL with workspace/user/credit schema
+- [x] **Phase 2: Auth + Workspace Creation** - Email OTP with automatic workspace setup
 - [ ] **Phase 3: Jobs + Credits Integration** - State machine with credit consumption on success
 - [ ] **Phase 4: Frontend + Usage + Polish** - Complete UX with history, progress, and rebrand
 
@@ -35,7 +35,7 @@ Transform the existing bid comparison tool into a customer-ready MVP with user a
 **Plans:** TBD
 
 Plans:
-- [ ] 01-01: PostgreSQL setup and SQLModel models *(planned)*
+- [x] 01-01: PostgreSQL setup and SQLModel models *(completed)*
 
 ### Phase 2: Auth + Workspace Creation
 **Goal:** Email OTP authentication that creates user + workspace + trial credits on first login
@@ -52,8 +52,8 @@ Plans:
 **Plans:** TBD
 
 Plans:
-- [ ] 02-01: OTP send/verify endpoints with rate limiting *(planned)*
-- [ ] 02-02: JWT sessions and workspace creation flow *(planned)*
+- [x] 02-01: OTP send/verify endpoints with rate limiting *(completed)*
+- [x] 02-02: JWT sessions and workspace creation flow *(completed)*
 
 ### Phase 3: Jobs + Credits Integration
 **Goal:** Job state machine with idempotent credit consumption on successful completion
@@ -98,11 +98,11 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Database + Workspace Foundation | 0/1 | Planned | - |
-| 2. Auth + Workspace Creation | 0/2 | Planned | - |
+| 1. Database + Workspace Foundation | 1/1 | Done | 2026-02-13 |
+| 2. Auth + Workspace Creation | 2/2 | Done | 2026-02-14 |
 | 3. Jobs + Credits Integration | 0/2 | Not started | - |
 | 4. Frontend + Usage + Polish | 0/3 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-13*
-*Last updated: 2026-02-13 — Phases 1, 2 planned*
+*Last updated: 2026-02-14 — Phase 2 completed*
