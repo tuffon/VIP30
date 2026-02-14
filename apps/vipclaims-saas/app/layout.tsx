@@ -12,7 +12,6 @@ const navLinks = [
   { href: "/#platform", label: "Platform" },
   { href: "/#features", label: "Features" },
   { href: "/#pricing", label: "Pricing" },
-  { href: "/bid-comp", label: "Bid Comp" },
   { href: "/pdf-to-esx", label: "PDF→ESX" },
 ];
 

@@ -1,0 +1,99 @@
+from datetime import datetime
+from typing import List, Optional
+
+from fastapi import APIRouter, Depends, Query
+from pydantic import BaseModel
+from sqlmodel import select
+from sqlmodel.ext.asyncio.session import AsyncSession
+
+from src.db.models import CreditConsumption, CreditGrant, User
+from src.dependencies.auth import require_auth
+from src.dependencies.database import get_db
+from src.services.credits import CreditService
+
+
+credits_router = APIRouter(prefix="/credits", tags=["credits"])
+
+
+class CreditTransactionItem(BaseModel):
+    id: str
+    type: str
+    amount: int
+    source: Optional[str] = None
+    job_id: Optional[str] = None
+    created_at: datetime
+    notes: Optional[str] = None
+
+
+class CreditsListResponse(BaseModel):
+    items: List[CreditTransactionItem]
+    total_count: int
+    page: int
+    per_page: int
+
+
+class CreditBalanceResponse(BaseModel):
+    balance: int
+
+
+@credits_router.get("", response_model=CreditsListResponse)
+async def list_credit_transactions(
+    page: int = Query(default=1, ge=1),
+    per_page: int = Query(default=20, ge=1, le=100),
+    current_user: User = Depends(require_auth),
+    db: AsyncSession = Depends(get_db),
+):
+    workspace_id = current_user.workspace_id
+
+    grants_stmt = select(CreditGrant).where(CreditGrant.workspace_id == workspace_id)
+    grants_result = await db.exec(grants_stmt)
+    grants = grants_result.all()
+
+    consumptions_stmt = select(CreditConsumption).where(CreditConsumption.workspace_id == workspace_id)
+    consumptions_result = await db.exec(consumptions_stmt)
+    consumptions = consumptions_result.all()
+
+    items: List[CreditTransactionItem] = [
+        CreditTransactionItem(
+            id=str(grant.id),
+            type="grant",
+            amount=grant.amount,
+            source=grant.source,
+            created_at=grant.created_at,
+            notes=grant.notes,
+        )
+        for grant in grants
+    ]
+    items.extend(
+        CreditTransactionItem(
+            id=str(consumption.id),
+            type="consumption",
+            amount=consumption.amount,
+            source="job_completion",
+            job_id=str(consumption.job_id),
+            created_at=consumption.created_at,
+        )
+        for consumption in consumptions
+    )
+
+    items.sort(key=lambda item: item.created_at, reverse=True)
+
+    total_count = len(items)
+    offset = (page - 1) * per_page
+    paginated_items = items[offset : offset + per_page]
+
+    return CreditsListResponse(
+        items=paginated_items,
+        total_count=total_count,
+        page=page,
+        per_page=per_page,
+    )
+
+
+@credits_router.get("/balance", response_model=CreditBalanceResponse)
+async def get_credit_balance(
+    current_user: User = Depends(require_auth),
+    db: AsyncSession = Depends(get_db),
+):
+    balance = await CreditService.get_balance(db, current_user.workspace_id)
+    return CreditBalanceResponse(balance=balance)

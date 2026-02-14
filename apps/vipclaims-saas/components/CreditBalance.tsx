@@ -3,8 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 type MeResponse = {
-  success?: boolean;
-  credit_balance?: number;
+  balance?: number;
 };
 
 export function CreditBalance() {
@@ -18,7 +17,7 @@ export function CreditBalance() {
 
     async function loadBalance() {
       try {
-        const response = await fetch(`${apiBase.replace(/\/$/, "")}/auth/me`, {
+        const response = await fetch(`${apiBase.replace(/\/$/, "")}/credits/balance`, {
           credentials: "include",
         });
 
@@ -38,7 +37,7 @@ export function CreditBalance() {
 
         const payload = (await response.json()) as MeResponse;
         setIsAuthed(true);
-        setBalance(typeof payload.credit_balance === "number" ? payload.credit_balance : null);
+        setBalance(typeof payload.balance === "number" ? payload.balance : null);
       } catch {
         if (!isMounted) return;
         setIsAuthed(false);

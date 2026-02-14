@@ -11,6 +11,7 @@ from .retriever import retrieve_cost_items
 from src.db import async_engine
 from src.routes.auth import auth_router
 from src.routes.bid_comp import router as bid_comp_router
+from src.routes.credits import credits_router
 from src.routes.jobs import jobs_router
 from src.routes.s3 import router as r2_router
 from src.routes.marketing import router as marketing_router
@@ -58,6 +59,7 @@ app.include_router(r2_router)
 app.include_router(marketing_router)
 app.include_router(auth_router)
 app.include_router(jobs_router)
+app.include_router(credits_router)
 
 @app.get("/")
 async def health_check():

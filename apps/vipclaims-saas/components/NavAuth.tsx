@@ -68,13 +68,22 @@ export function NavAuth() {
 
   return (
     <div className="flex items-center gap-3">
+      <Link href="/bid-comp" className="text-xs font-semibold text-slate-500 hover:text-slate-900">
+        Bid Comp
+      </Link>
+      <Link href="/jobs" className="text-xs font-semibold text-slate-500 hover:text-slate-900">
+        Jobs
+      </Link>
+      <Link href="/credits" className="text-xs font-semibold text-slate-500 hover:text-slate-900">
+        Credits
+      </Link>
       <span className="text-sm font-medium text-slate-600">{email}</span>
       <button
         type="button"
         onClick={handleLogout}
         className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100"
       >
-        Log out
+        Sign out
       </button>
     </div>
   );
