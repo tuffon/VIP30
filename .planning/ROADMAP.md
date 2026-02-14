@@ -16,7 +16,7 @@ Transform the existing bid comparison tool into a customer-ready MVP with user a
 
 - [x] **Phase 1: Database + Workspace Foundation** - PostgreSQL with workspace/user/credit schema
 - [x] **Phase 2: Auth + Workspace Creation** - Email OTP with automatic workspace setup
-- [ ] **Phase 3: Jobs + Credits Integration** - State machine with credit consumption on success
+- [x] **Phase 3: Jobs + Credits Integration** - State machine with credit consumption on success
 - [ ] **Phase 4: Frontend + Usage + Polish** - Complete UX with history, progress, and rebrand
 
 ## Phase Details
@@ -71,7 +71,7 @@ Plans:
 
 Plans:
 - [x] 03-01: ComparisonJob model and state machine *(completed)*
-- [ ] 03-02: Credit consumption integration with worker
+- [x] 03-02: Credit consumption integration with worker *(completed)*
 
 ### Phase 4: Frontend + Usage + Polish
 **Goal:** Complete user experience with auth UI, credit display, history, and rebrand
@@ -100,9 +100,9 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Database + Workspace Foundation | 1/1 | Done | 2026-02-13 |
 | 2. Auth + Workspace Creation | 2/2 | Done | 2026-02-14 |
-| 3. Jobs + Credits Integration | 1/2 | In progress | - |
+| 3. Jobs + Credits Integration | 2/2 | Done | 2026-02-14 |
 | 4. Frontend + Usage + Polish | 0/3 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-13*
-*Last updated: 2026-02-14 — Phase 3 plan 03-01 completed*
+*Last updated: 2026-02-14 — Phase 3 completed*

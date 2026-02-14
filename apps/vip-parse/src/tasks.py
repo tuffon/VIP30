@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import gc
 import httpx
 import json
@@ -12,6 +13,7 @@ import sys
 import tempfile
 import threading
 import time
+import uuid
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -20,8 +22,10 @@ from rq.job import Job
 
 from src.bid_comp import BidComp
 from src.bid_comp.identity import ensure_estimate_identity
+from src.db import async_session_maker
 from src.integrations.sendgrid_client import SendGridClient
 from src.llm import OpenAIChatAdapter
+from src.services.jobs import JobService
 from src.utils.s3_client import get_s3, get_bucket
 
 # Configure worker logging early so RQ shows our logs
@@ -225,6 +229,40 @@ def _extract_recap(payload: Dict[str, Any]) -> Dict[str, Any]:
     return rb if isinstance(rb, dict) else {}
 
 
+def _run_async(coro):
+    """Run async coroutine from sync worker context."""
+    loop = asyncio.new_event_loop()
+    try:
+        return loop.run_until_complete(coro)
+    finally:
+        loop.close()
+
+
+def _update_job_progress(
+    db_job_id: Optional[str],
+    state: Optional[str],
+    progress: int,
+    step: Optional[str] = None,
+) -> None:
+    if not db_job_id:
+        return
+
+    async def _update():
+        async with async_session_maker() as db:
+            job_uuid = uuid.UUID(db_job_id)
+            job = await JobService.get_job(db, job_uuid)
+            if not job:
+                return
+            if state and job.state != state and job.state not in JobService.TERMINAL_STATES:
+                await JobService.transition_state(db, job_uuid, state)
+            await JobService.update_progress(db, job_uuid, progress, step)
+
+    try:
+        _run_async(_update())
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Failed to update job progress for db_job_id=%s: %s", db_job_id, exc)
+
+
 def run_bid_comp_keys(
     job_id: str,
     carrier_key: str,
@@ -233,6 +271,7 @@ def run_bid_comp_keys(
     carrier_filename: str | None = None,
     contractor_filename: str | None = None,
     notify_email: str | None = None,
+    db_job_id: str | None = None,
 ) -> Dict[str, Any]:
     t0 = time.time()
     with _SEM:
@@ -263,6 +302,7 @@ def run_bid_comp_keys(
             carrier_original,
             contractor_original,
         )
+        _update_job_progress(db_job_id, JobService.PARSING, 15, "Downloading files")
 
         try:
             def _parse_full(pdf_path: str) -> Dict[str, Any]:
@@ -285,7 +325,10 @@ def run_bid_comp_keys(
                         pass
 
             carrier_payload = _parse_full(carrier_path)
+            _update_job_progress(db_job_id, JobService.PARSING, 30, "Parsing primary estimate")
+
             contractor_payload = _parse_full(contractor_path)
+            _update_job_progress(db_job_id, JobService.ANALYZING, 50, "Parsing comparison estimate")
             carrier_parser_name = Path(carrier_path).name
             contractor_parser_name = Path(contractor_path).name
 
@@ -373,6 +416,7 @@ def run_bid_comp_keys(
                 carrier_original,
                 contractor_original,
             )
+            _update_job_progress(db_job_id, JobService.ANALYZING, 60, "Analyzing estimates")
 
             # Persist JSON payloads alongside XLS output for debugging
             json_prefix = f"results/{job_id}"
@@ -405,6 +449,7 @@ def run_bid_comp_keys(
                 comp = BidComp(llm_adapter=llm)
                 logger.info("job bid-comp run starting: job_id=%s", job_id)
                 xlsx_bytes = comp.run(bid_context, job_id)
+                _update_job_progress(db_job_id, JobService.WRITING, 80, "Generating report")
                 logger.info(
                     "job bid-comp run finished: job_id=%s xlsx_bytes=%d llm_enabled=%s",
                     job_id,
@@ -416,6 +461,7 @@ def run_bid_comp_keys(
                     xf.write(xlsx_bytes)
                 xlsx_key = f"results/{job_id}/bid-comp.xlsx"
                 s3.upload_file(xlsx_tmp, bucket, xlsx_key)
+                _update_job_progress(db_job_id, JobService.WRITING, 95, "Uploading results")
                 logger.info(
                     "job xlsx uploaded: job_id=%s key=%s size_bytes=%d",
                     job_id,
@@ -496,8 +542,45 @@ def run_bid_comp_keys(
                         summary=f"{primary_name} vs {comparison_name}",
                     )
 
+            if db_job_id:
+                narrative_key = (result.get("result_keys") or {}).get("narrative")
+
+                async def _complete():
+                    async with async_session_maker() as db:
+                        await JobService.complete_job(
+                            db,
+                            uuid.UUID(db_job_id),
+                            result_s3_key=xlsx_key,
+                            narrative_s3_key=narrative_key,
+                        )
+
+                try:
+                    _run_async(_complete())
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning("Failed to mark job completed for db_job_id=%s: %s", db_job_id, exc)
+
             logger.info("job done (r2 keys): job_id=%s", job_id)
             return result
+        except Exception as exc:  # noqa: BLE001
+            if db_job_id:
+                async def _fail():
+                    async with async_session_maker() as db:
+                        await JobService.fail_job(
+                            db,
+                            uuid.UUID(db_job_id),
+                            error_code=exc.__class__.__name__,
+                            error_message=str(exc),
+                        )
+
+                try:
+                    _run_async(_fail())
+                except Exception as fail_exc:  # noqa: BLE001
+                    logger.warning(
+                        "Failed to mark job failed for db_job_id=%s: %s",
+                        db_job_id,
+                        fail_exc,
+                    )
+            raise
         finally:
             try:
                 shutil.rmtree(work_dir, ignore_errors=True)

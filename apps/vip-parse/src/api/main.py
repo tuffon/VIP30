@@ -4,9 +4,14 @@ import os
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from sqlalchemy import text
 
 from .retriever import retrieve_cost_items
+from src.db import async_engine
+from src.routes.auth import auth_router
 from src.routes.bid_comp import router as bid_comp_router
+from src.routes.jobs import jobs_router
 from src.routes.s3 import router as r2_router
 from src.routes.marketing import router as marketing_router
 
@@ -32,14 +37,18 @@ async def startup_event():
     logger.info("FastAPI application starting up (LOG_LEVEL=%s)", _log_level)
     logger.info("Startup ready")
 
-# CORS configuration
-# Default: wildcard origins allowed, no credentials (so browsers accept '*').
-_cors_origins = [o.strip() for o in os.getenv("CORS_ALLOW_ORIGINS", "*").split(",") if o.strip()]
-_cors_credentials = os.getenv("CORS_ALLOW_CREDENTIALS", "false").lower() in {"1", "true", "yes"}
+# CORS configuration for cookie-based auth.
+_cors_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "CORS_ORIGINS", "http://localhost:3000,https://vip30-frontend.onrender.com"
+    ).split(",")
+    if origin.strip()
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins,
-    allow_credentials=_cors_credentials,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -47,6 +56,8 @@ app.add_middleware(
 app.include_router(bid_comp_router)
 app.include_router(r2_router)
 app.include_router(marketing_router)
+app.include_router(auth_router)
+app.include_router(jobs_router)
 
 @app.get("/")
 async def health_check():
@@ -56,7 +67,15 @@ async def health_check():
 
 @app.get("/healthz")
 async def healthz():
-    return {"status": "ok"}
+    try:
+        async with async_engine.connect() as conn:
+            await conn.execute(text("SELECT 1"))
+        return {"status": "healthy", "database": "connected"}
+    except Exception as exc:  # noqa: BLE001
+        return JSONResponse(
+            status_code=503,
+            content={"status": "unhealthy", "database": str(exc)},
+        )
 
 
 @app.get("/debug")
