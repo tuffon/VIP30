@@ -1,425 +1,196 @@
-# Features Research: Professional Narrative Generation
+# Features Research: v1.1 MVP Launch
 
-**Researched:** 2026-01-18
-**Domain:** Multi-pass LLM pipeline for style-controlled document generation
-**Confidence:** HIGH for patterns, MEDIUM for specific implementations
+**Researched:** 2026-02-13
+**Domain:** Email OTP auth, credit-based billing, workspace model
+**Confidence:** HIGH (verified against industry standards and multiple sources)
 
-## Summary
+## Executive Summary
 
-Professional document generation systems achieve style control through a combination of few-shot prompting with curated examples, explicit style guides in system prompts, and iterative refinement loops. Quality evaluation has moved beyond traditional metrics (BLEU/ROUGE) toward LLM-as-a-judge approaches using custom rubrics (G-Eval). For the VIP30 adjuster narrative use case, the research supports a multi-pass architecture with deterministic quality gates that can be implemented without fine-tuning.
+Credit-based SaaS with email OTP authentication is a well-established pattern in 2025, with 67% of SaaS companies now using usage-based pricing and credits becoming the dominant pricing trend (126% YoY growth). The research validates the decisions already made (email OTP over magic links, ledger-style credits, charge on completion only) and provides specific implementation parameters. Key findings: 6-digit OTP codes with 5-10 minute expiry, graduated low-balance alerts at 25%/10%/5% remaining, and clear usage dashboards showing credit balance + consumption history are table stakes.
 
-**Primary recommendation:** Use few-shot prompting with 3-5 exemplar adjuster memos in the style pass, combined with rule-based validators for measurable criteria (hedging, word count, terminology) and G-Eval for subjective tone assessment.
+## Table Stakes (Must Have)
 
----
+### Email OTP Auth
 
-## Style Control Patterns
+| Feature | Expected Behavior | Complexity | Source Confidence |
+|---------|-------------------|------------|-------------------|
+| **6-digit numeric code** | Standard length balances usability (easy to type) with security (1M combinations). 8-digit adds entropy but reduces usability. | Low | HIGH |
+| **5-10 minute code expiry** | Industry standard. Shorter (30-60s) for high-security; 5-10 min for email delivery delays. | Low | HIGH |
+| **Single-use invalidation** | Code must be marked as used immediately after successful verification. Prevents replay attacks. | Low | HIGH |
+| **Rate limiting: code requests** | Max 3-5 OTP requests per email per 15 minutes. Prevents OTP flooding/abuse. | Medium | HIGH |
+| **Rate limiting: verification attempts** | Max 5 attempts per code. After exhaustion, require new code. Lock account temporarily after 3 failed codes. | Medium | HIGH |
+| **Specific error messages** | "Code expired" vs "Invalid code" vs "Too many attempts". Users need actionable feedback. | Low | HIGH |
+| **Hash stored codes** | Never store OTP in plain text. Use SHA256 or bcrypt. | Low | HIGH |
+| **Login metadata capture** | Store last_login_at, login_ip, login_method for security audit trail. | Low | HIGH |
 
-### Few-Shot vs Fine-Tuning Decision
+**Dependencies:** Database (PostgreSQL), email sending (already have via existing stack)
 
-| Approach | When to Use | VIP30 Fit |
-|----------|-------------|-----------|
-| Few-shot prompting | Rapid iteration, prototype/MVP, style can be demonstrated via examples | HIGH - start here |
-| Fine-tuning | High-stakes regulated output, deterministic requirements, scale justifies investment | MEDIUM - consider for v2.0 if few-shot insufficient |
-| RAG with style corpus | Dynamic style adaptation, multi-brand scenarios | LOW - single style target |
+### Credit System
 
-**Research finding:** "Few-shot learning requires careful selection of examples... this significantly increases the required time investment" but "For MVPs, prototypes, or internal tools that need to be deployed quickly... Prompt design allows you to go live without any retraining overhead."
+| Feature | Expected Behavior | Complexity | Source Confidence |
+|---------|-------------------|------------|-------------------|
+| **Credit balance display** | Show current balance prominently in UI. Users must always know their remaining credits. | Low | HIGH |
+| **Ledger-style tracking** | Separate credit_grants (additions) and credit_consumptions (deductions) tables. Immutable records. | Medium | HIGH |
+| **Charge on completion only** | Deduct credits only when job succeeds. Failed jobs = no charge. Already decided. | Medium | HIGH |
+| **Low balance alerts** | Graduated warnings at 25%, 10%, 5% remaining (or absolute thresholds like 2 credits, 1 credit). In-app notification minimum; email optional. | Medium | HIGH |
+| **Consumption visibility** | Users see what consumed their credits: job ID, timestamp, amount. | Medium | HIGH |
+| **Trial credits on signup** | Grant configurable default credits (5 for early adopters, 3 later). Single credit_grant record with source="signup_bonus". | Low | HIGH |
+| **Credit expiry (MVP: none)** | Many systems have credit expiry. For MVP, credits don't expire. Simpler implementation. | Low | MEDIUM |
 
-**VIP30 implication:** Few-shot with carefully curated adjuster memo examples is the correct starting point. Fine-tuning is premature optimization for v1.0.
+**Dependencies:** Database, workspace model (credits belong to workspace)
 
-### Few-Shot Example Selection
+### Workspace Model
 
-**Pattern: Demonstrate, Don't Describe**
-- "If you need a tone that's 'professional yet approachable', showing examples of content that strikes this balance is far more effective than trying to explain it in words."
-- Place examples after general instructions but before the specific task
-- The LLM learns word choice, sentence structure, formality, pacing from examples
+| Feature | Expected Behavior | Complexity | Source Confidence |
+|---------|-------------------|------------|-------------------|
+| **1 user per workspace (MVP)** | Simple model: user creates workspace on signup, workspace owns credits and jobs. Architecture supports future multi-user. | Low | HIGH |
+| **Workspace-scoped data** | All jobs belong to workspace. All credit grants/consumptions belong to workspace. User is "member of" workspace. | Medium | HIGH |
+| **workspace_id on all tables** | Standard multi-tenant pattern: every query includes workspace_id. Prevents data leakage. | Medium | HIGH |
+| **No workspace switching (MVP)** | User has one workspace. No UI for switching. Architecture allows it later. | Low | HIGH |
 
-**VIP30 application:**
-```
-STYLE EXAMPLES (adjuster memo excerpts):
+**Dependencies:** Database schema design
 
-Example 1: "Large Delta on Estimate cost to Mitigate. Farmers allowed for $2,340 in PWI. Apex estimate includes $8,450 for mitigation - drives the $6,110 variance. Need itemized breakdown."
+### Job State Machine
 
-Example 2: "Apex fails to include MEP allowance. Farmers estimate: $14,200 MEP per unit. Apex does not contemplate mechanical/electrical work. Delta: $14,200 x 4 units = $56,800."
+| Feature | Expected Behavior | Complexity | Source Confidence |
+|---------|-------------------|------------|-------------------|
+| **Defined states** | queued, parsing, analyzing, writing, completed, failed. Clear progression. | Low | HIGH |
+| **Progress indicator** | Show current state + percentage or step index. Users need to know job is progressing. | Medium | HIGH |
+| **Error reason capture** | On failure, store human-readable error_reason. Display to user. | Low | HIGH |
+| **Retry without double-charge** | Failed jobs can be retried. Since charge only on success, no refund logic needed. | Low | HIGH |
+| **Clear failure messaging** | "Parsing failed: could not extract data from PDF" not "Job failed". Actionable. | Low | HIGH |
 
-Example 3: "ELE scope mismatch. Carrier: panel upgrade + 12 circuits. Contractor: service upgrade only. Need ELE estimate clarification - possible scope exclusion."
-```
+**Dependencies:** Database, credit system (for charge-on-success integration)
 
-### Style Pattern Recognition
+### Usage Tracking
 
-**Key insight:** "Most teams treat brand voice as a 'vibe,' but for a language model, it is a set of statistically recognizable patterns."
+| Feature | Expected Behavior | Complexity | Source Confidence |
+|---------|-------------------|------------|-------------------|
+| **Job history list** | Show recent jobs with status, date, credit cost (if completed). | Medium | HIGH |
+| **Credit transaction history** | Show grants and consumptions with timestamps. Like a bank statement. | Medium | HIGH |
+| **Current balance** | Prominent display of remaining credits. | Low | HIGH |
 
-For adjuster memos, the recognizable patterns are:
-- **Sentence structure:** Short, declarative. No subordinate clauses hedging.
-- **Word choice:** Industry abbreviations (PWI, MEP, ELE, PNT, SF), action verbs ("fails to include", "does not contemplate", "drives the variance")
-- **Information density:** Numbers always present, tied to line items
-- **Comparative framing:** "Carrier: X. Contractor: Y. Delta: Z."
+**Dependencies:** Database, credit system
 
-### Terminology Handling
+## Differentiators (Nice to Have)
 
-**Pattern: Glossary Injection via RAG**
-- "LLMs can create inaccurate responses due to terminology confusion"
-- "Lexical Retrieval Augmented Generation (LRAG) integrates source-text specific glossaries into LLM systems"
+| Feature | Why It Helps | Complexity | Priority |
+|---------|--------------|------------|----------|
+| **Email notifications for low balance** | Proactive engagement, reduces surprise "no credits" moments. | Medium | P2 |
+| **Daily bonus credits** | Pattern from Lovable: monthly limit + daily bonuses encourages consistent usage. | Medium | P3 |
+| **Credit top-up before depletion** | Auto-purchase when balance hits threshold. Requires payment integration. | High | P3 |
+| **Usage analytics dashboard** | Show trends: jobs per week, credits consumed over time. | Medium | P3 |
+| **Session device binding** | OTP only valid if opened on same device/browser that requested it. Prevents interception. | Medium | P2 |
+| **Multi-channel OTP delivery** | Fallback to SMS if email fails. Requires SMS provider. | High | P3 |
+| **IP-based rate limiting** | Supplement email-based rate limiting with IP tracking. Prevents distributed abuse. | Medium | P2 |
 
-**VIP30 application:** Inject terminology glossary into system prompt:
-```
-TERMINOLOGY:
-- PWI: Preliminary Water Investigation (mitigation/drying)
-- MEP: Mechanical, Electrical, Plumbing
-- ELE: Electrical
-- PNT: Paint
-- SF: Square Feet
-- O&P: Overhead & Profit
-```
+## Anti-Features (Do NOT Build for MVP)
 
-This ensures consistent usage without custom tokenizers or fine-tuning.
+| Feature | Why Not Now |
+|---------|-------------|
+| **Magic links** | Already decided: email OTP preferred. Magic links have UX issues (tab switching, antivirus prefetch, device mismatch). Kinde's research supports OTP. |
+| **OAuth (Google/Facebook)** | Adds complexity, dependency on third parties. Email OTP sufficient for MVP validation. |
+| **Multi-user workspaces** | MVP is 1 user = 1 workspace. Architecture supports later. Don't build invitation flow, role permissions, or workspace switching. |
+| **Credit expiry** | Adds complexity, customer confusion, support burden. Credits don't expire for MVP. |
+| **Real-time credit deduction** | Pre-deduct on job start, refund on failure adds complexity. Charge-on-completion simpler and already decided. |
+| **Payment/billing integration** | MVP uses granted credits only. No Stripe, no credit card, no purchases. Validate product first. |
+| **8-digit OTP codes** | More secure but worse UX. 6-digit is industry standard and sufficient. |
+| **SMS OTP** | Email-only for MVP. SMS requires provider integration, phone number collection. |
+| **Passkeys/WebAuthn** | Future standard, but adds significant complexity. Email OTP is table stakes. |
+| **CAPTCHA on OTP requests** | Only needed if abuse becomes a problem. Start without, add if needed. |
+| **Workspace roles/permissions** | 1 user per workspace means no roles needed. Owner is implicit. |
+| **Credit transfer between workspaces** | No multi-user, no transfers. Way out of scope. |
+| **Advanced dunning/retry logic** | No payments = no failed payment recovery needed. |
 
----
-
-## Quality Evaluation Approaches
-
-### Metric Categories
-
-| Category | Metrics | Implementation |
-|----------|---------|----------------|
-| **Deterministic** | Word count, sentence count, character limits | Regex/string ops |
-| **Pattern-based** | Hedging words, banned phrases, terminology presence | Regex + word lists |
-| **Semantic** | Tone, coherence, actionability | LLM-as-a-judge (G-Eval) |
-
-### Hedging Detection (HIGH confidence)
-
-**Research finding:** Hedge detection is a well-established NLP task with 80-84% accuracy using lexicon-based approaches.
-
-**Hedge indicators for adjuster writing:**
-- Modal verbs: "could", "might", "may", "would"
-- Peacock expressions: "very likely", "I think", "perhaps"
-- Weasel words: "some believe", "it appears", "seems to"
-- Uncertainty markers: "possibly", "potentially", "probably"
-
-**Implementation pattern:**
-```python
-HEDGE_WORDS = [
-    "appears", "seems", "might", "may", "could", "possibly",
-    "potentially", "suggests", "indicates", "perhaps", "likely",
-    "probably", "apparently"
-]
-
-def count_hedges(text: str) -> int:
-    text_lower = text.lower()
-    return sum(1 for word in HEDGE_WORDS if word in text_lower)
-```
-
-**Quality gate:** Threshold of 3 or fewer hedge words per narrative section.
-
-### Conciseness Metrics (HIGH confidence)
-
-**Research finding:** "Conciseness refers to the ability of an LLM to be short and generate the least number of words without sacrificing accuracy."
-
-**ConCISE metric approach:**
-1. Compression ratio vs abstractive summary
-2. Compression ratio vs extractive summary
-3. Word-removal compression (how many non-essential words can be removed)
-
-**Simpler deterministic approach for VIP30:**
-- Sentence count per trade: max 2
-- Average words per sentence: max 40
-- Bullet length: max 30 words
-- Total summary bullets: max 6
-
-```python
-def check_verbosity(text: str) -> dict:
-    sentences = text.split('. ')
-    word_counts = [len(s.split()) for s in sentences]
-    return {
-        "sentence_count": len(sentences),
-        "avg_words_per_sentence": sum(word_counts) / len(word_counts) if word_counts else 0,
-        "max_words": max(word_counts) if word_counts else 0,
-        "passes": len(sentences) <= 2 and (sum(word_counts) / len(word_counts) if word_counts else 0) <= 40
-    }
-```
-
-### Slop/GPT-ism Detection (MEDIUM confidence)
-
-**Research finding:** "The Slop Score quantifies the frequency of 'GPT-isms'—overused phrases and tropes like 'tapestry,' 'delve,' or 'it's worth noting' that have become the hallmark of generic AI writing."
-
-**EQ-Bench Slop Score composition:**
-- 60% - Slop Words (unnaturally frequent in LLM output)
-- 25% - "Not-x-but-y" patterns
-- 15% - Slop Trigrams (3-word phrases overused by AI)
-
-**VIP30 application:** Create adjuster-specific slop list:
-```python
-ANALYST_SLOP = [
-    "it's worth noting", "delve", "tapestry", "landscape",
-    "it is important to", "in conclusion", "significantly",
-    "comprehensive", "holistic", "leverage", "synergy",
-    "at the end of the day", "moving forward"
-]
-```
-
-### Valuation Link Detection (MEDIUM confidence)
-
-**Custom requirement:** Every trade section must tie to financial impact.
-
-**Pattern:** Check for presence of dollar amounts or delta references:
-```python
-VALUATION_PATTERNS = [
-    r'\$[\d,]+',           # Dollar amounts
-    r'delta[:\s]+\$?[\d,]+',  # Explicit delta mentions
-    r'variance[:\s]+\$?[\d,]+',
-    r'difference[:\s]+\$?[\d,]+'
-]
-```
-
-### G-Eval for Subjective Quality (HIGH confidence)
-
-**Research finding:** "G-Eval is a framework that applies the LLM-as-a-Judge paradigm using a structured chain-of-thought (CoT) process to evaluate LLM outputs against any user-defined criteria."
-
-**G-Eval components:**
-1. Task Introduction
-2. Evaluation Criteria (custom rubric)
-3. Evaluation Steps (CoT reasoning)
-4. Scoring function (0-1 continuous)
-
-**VIP30 G-Eval rubric for tone:**
-```
-TASK: Evaluate whether this narrative matches professional adjuster memo style.
-
-CRITERIA:
-- Direct, declarative statements (not hedged or tentative)
-- Uses industry terminology naturally (not explained or defined)
-- Contains specific numbers tied to line items
-- Includes actionable callouts where appropriate
-- Uses comparative framing (Carrier vs Contractor)
-- Avoids "analyst" language (no "suggests", "appears", "may indicate")
-
-SCORING:
-5 - Perfect adjuster tone, indistinguishable from human memo
-4 - Strong adjuster tone with minor deviations
-3 - Acceptable but noticeable AI patterns
-2 - Clearly AI-generated, missing key style elements
-1 - Generic AI output, no domain adaptation
-```
-
----
-
-## Multi-Pass Pipeline Patterns
-
-### Self-Refine Architecture (HIGH confidence)
-
-**Research finding:** "Self-Refine successively refines the output in a FEEDBACK -> REFINE -> FEEDBACK loop... outperforms direct generation from strong generators like GPT-3.5 and even GPT-4 by at least 5% to more than 40% improvement."
-
-**Key limitation:** "State-of-the-art LMs show limited self-refinement gains (+1.8 percentage points or less) across five iterative attempts. In contrast, with guided feedback, models can achieve near-perfect performance (+80% gains)."
-
-**Implication:** Self-critique alone is insufficient. External validation signals are required.
-
-### VIP30 Pipeline Architecture
+## Feature Dependencies
 
 ```
-Pass 1: ANALYSIS (structured extraction)
-  Input: Raw comparison data
-  Output: JSON with category deltas, supporting line items, financial totals
-  Validation: Schema validation, completeness check
-
-Pass 2: WRITER (style-controlled generation)
-  Input: Structured analysis + style examples + terminology glossary
-  Output: Draft narrative in adjuster tone
-  Validation: Deterministic quality gates
-
-Pass 3: COMPLIANCE REWRITE (conditional)
-  Trigger: Only if Pass 2 fails quality gates
-  Input: Draft + specific failure reasons
-  Output: Corrected narrative
-  Validation: Re-run quality gates (max 2 iterations)
+Database (PostgreSQL)
+    |
+    +-- Workspace Model
+    |       |
+    |       +-- Credit System (credits belong to workspace)
+    |       |       |
+    |       |       +-- Job State Machine (charge on completion)
+    |       |       |
+    |       |       +-- Usage Tracking (shows credit history)
+    |       |
+    |       +-- Email OTP Auth (user belongs to workspace)
+    |
+    +-- Login Metadata (audit trail)
 ```
 
-### Quality Gate Sequence
+**Implementation order:**
+1. Database + schema (foundation)
+2. Workspace model (owns everything)
+3. Email OTP auth (user can log in)
+4. Credit system (grants on signup)
+5. Job state machine (integrates with credits)
+6. Usage tracking (displays everything)
 
-```
-Gate 1: Hedging Check (deterministic)
-  - Count hedge words
-  - FAIL if > 3 per section
-  - Feedback: "Remove hedging language: [specific words found]"
+## Specific Implementation Parameters
 
-Gate 2: Verbosity Check (deterministic)
-  - Sentence count, word averages
-  - FAIL if > 2 sentences or avg > 40 words per trade
-  - Feedback: "Reduce to 2 sentences max, under 40 words average"
+### Email OTP
 
-Gate 3: Valuation Link (deterministic)
-  - Check for dollar amounts or delta references
-  - FAIL if trade section lacks financial tie
-  - Feedback: "Add specific dollar amount or delta reference"
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Code length | 6 digits | Industry standard, balances security/UX |
+| Code expiry | 10 minutes | Accounts for email delivery delays |
+| Max verification attempts | 5 per code | Then require new code |
+| Max code requests | 5 per email per hour | Prevents flooding |
+| Lockout after | 3 failed codes | Temporary 15-minute lockout |
+| Code storage | SHA256 hash | Never plain text |
 
-Gate 4: Terminology Check (deterministic)
-  - Verify abbreviations used naturally
-  - WARN if industry terms explained/defined
-  - Feedback: "Use [term] directly without explanation"
+### Credit System
 
-Gate 5: Tone Assessment (G-Eval)
-  - LLM-as-judge with rubric
-  - FAIL if score < 3.5/5
-  - Feedback: Specific rubric failures
-```
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Default credits (early) | 5 | Configurable via env var |
+| Default credits (later) | 3 | Configurable via env var |
+| Cost per job | 1 credit | Simple, predictable |
+| Low balance alert | 2 credits remaining | Or 25% of initial grant |
+| Critical balance alert | 1 credit remaining | Final warning |
+| Credit expiry | Never (MVP) | Simplicity |
 
----
+### Workspace Model
 
-## Table Stakes vs Differentiators
-
-### Table Stakes (Must Have for Professional Quality)
-
-| Feature | Complexity | Dependencies | Why Required |
-|---------|------------|--------------|--------------|
-| **Few-shot style examples** | LOW | None | Sets baseline tone without fine-tuning |
-| **Terminology glossary injection** | LOW | None | Ensures consistent abbreviation usage |
-| **Hedging word detection** | LOW | Regex | Measurable quality gate per project spec |
-| **Sentence/word count limits** | LOW | String ops | Enforces brevity requirement |
-| **Valuation link check** | LOW | Regex | Every trade must tie to dollars |
-| **Multi-pass pipeline** | MEDIUM | Existing LLM adapter | Enables iterative refinement |
-| **Conditional rewrite trigger** | MEDIUM | Quality gates | Avoids unnecessary LLM calls |
-
-### Differentiators (What Makes Output Exceptional)
-
-| Feature | Complexity | Dependencies | Why Exceptional |
-|---------|------------|--------------|-----------------|
-| **G-Eval tone scoring** | MEDIUM | Additional LLM call | Catches subjective quality issues deterministic checks miss |
-| **Slop/GPT-ism detection** | MEDIUM | Custom word list | Eliminates AI-sounding phrases specific to LLM output |
-| **Comparative framing enforcement** | MEDIUM | Pattern matching | Forces "Carrier: X. Contractor: Y." structure |
-| **Action item extraction** | HIGH | Entity recognition | Auto-generates "Need X" callouts |
-| **Line item citation** | HIGH | Data linkage | Every claim references specific estimate line |
-
-### Feature Dependencies
-
-```
-                    ┌─────────────────────┐
-                    │ Few-shot examples   │
-                    │ (style baseline)    │
-                    └─────────┬───────────┘
-                              │
-              ┌───────────────┼───────────────┐
-              ▼               ▼               ▼
-    ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-    │ Hedging check   │ │ Verbosity check │ │ Valuation link  │
-    │ (gate 1)        │ │ (gate 2)        │ │ (gate 3)        │
-    └────────┬────────┘ └────────┬────────┘ └────────┬────────┘
-             │                   │                   │
-             └───────────────────┼───────────────────┘
-                                 ▼
-                    ┌─────────────────────┐
-                    │ Conditional rewrite │
-                    │ (pass 3 trigger)    │
-                    └─────────┬───────────┘
-                              │
-                              ▼
-                    ┌─────────────────────┐
-                    │ G-Eval tone scoring │
-                    │ (final validation)  │
-                    └─────────────────────┘
-```
-
----
-
-## Anti-Features (Deliberately Avoid)
-
-### Fine-Tuning for v1.0
-**Why avoid:** Premature optimization. Few-shot achieves similar results for style control without training infrastructure, model hosting, or data preparation overhead. Research indicates "prompt engineering allows you to go live without any retraining overhead."
-
-**Risk if built:** 2-4 weeks additional development, ongoing model maintenance, harder to iterate on style.
-
-### Custom Tokenizers
-**Why avoid:** Domain-specific tokenizers are for cases where industry terms are incorrectly split. Standard tokenizers handle insurance abbreviations (PWI, MEP, ELE) correctly since they are uppercase letter sequences.
-
-**Risk if built:** Complexity without benefit, incompatibility with hosted models.
-
-### Reference-Based Metrics (BLEU/ROUGE)
-**Why avoid:** "Traditional scorers like BLEU/ROUGE... semantic nuance in LLM outputs is not captured." No gold-standard reference exists for adjuster memos.
-
-**Risk if built:** False confidence in metrics that do not correlate with professional quality.
-
-### Self-Refinement Without External Signals
-**Why avoid:** Research shows "LLMs show limited self-refinement gains (+1.8 percentage points)" without guided feedback. Pure self-critique leads to "self-bias—LLMs systematically overrate their own generations."
-
-**Risk if built:** Wasted compute on iterations that do not improve quality.
-
-### Unlimited Rewrite Loops
-**Why avoid:** Diminishing returns after 2 iterations. "As model performance approaches its maximum potential, [iterative] strategy struggles to make further progress."
-
-**Risk if built:** Latency spikes, API cost explosion, potential infinite loops on edge cases.
-
-### Grammar/Spelling Focus
-**Why avoid:** Modern LLMs rarely produce grammatical errors. Grammar checking adds latency without addressing the actual quality challenge (tone, style, domain fit).
-
-**Risk if built:** Distraction from real quality problems.
-
-### Sentiment Analysis for Tone
-**Why avoid:** Sentiment (positive/negative/neutral) is not tone. Adjuster memos are neutral in sentiment but require specific stylistic patterns. Sentiment classifiers will not detect hedging, verbosity, or terminology issues.
-
-**Risk if built:** False positives on acceptable content, false negatives on problematic patterns.
-
----
-
-## Implementation Recommendations
-
-### Phase 1: Foundation (1-2 days)
-1. Create style example corpus (3-5 real adjuster memo excerpts)
-2. Build terminology glossary JSON
-3. Implement hedging word detector (regex)
-4. Implement verbosity checker (word/sentence counts)
-
-### Phase 2: Pipeline (2-3 days)
-5. Create analysis pass prompt template
-6. Create writer pass prompt template with few-shot examples
-7. Wire quality gates between passes
-8. Implement conditional rewrite trigger
-
-### Phase 3: Refinement (2-3 days)
-9. Build G-Eval rubric for tone assessment
-10. Implement slop/GPT-ism detector
-11. Add comparative framing validation
-12. Create compliance rewrite prompt with specific feedback injection
-
-### Metrics to Track
-- Pass rate at each quality gate
-- Rewrite trigger frequency
-- G-Eval score distribution
-- Latency per pass
-- Total API cost per comparison
-
----
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Users per workspace | 1 (MVP) | Architecture supports N |
+| Workspaces per user | 1 (MVP) | No switching UI needed |
+| Workspace creation | Auto on signup | User doesn't choose |
 
 ## Confidence Assessment
 
-| Area | Confidence | Reason |
-|------|------------|--------|
-| Few-shot for style control | HIGH | Multiple authoritative sources agree, pattern well-established |
-| Hedging detection | HIGH | Academic research with 80%+ accuracy, simple to implement |
-| Verbosity metrics | HIGH | Deterministic calculation, clearly defined |
-| G-Eval for LLM-as-judge | HIGH | Official documentation, widely adopted pattern |
-| Self-Refine limitations | HIGH | Recent research (2025) with clear findings |
-| Slop score approach | MEDIUM | Emerging pattern, less standardized |
-| Multi-pass pipeline | MEDIUM | Established pattern but implementation varies |
-| Terminology glossary via RAG | MEDIUM | Pattern documented but VIP30-specific application untested |
-
----
+| Area | Level | Reason |
+|------|-------|--------|
+| Email OTP parameters | HIGH | Multiple sources agree (Kinde, Prelude, Auth0, industry standards) |
+| Credit system patterns | HIGH | Well-documented in 2025 SaaS pricing literature (Orb, Metronome, m3ter) |
+| Workspace model | HIGH | Standard multi-tenant patterns (WorkOS, Logto, Frontegg) |
+| Job state machine | HIGH | Standard async job patterns, internal to this codebase |
+| Anti-features list | HIGH | Based on explicit project decisions + complexity analysis |
+| Trial credit amounts | MEDIUM | Varies widely by product; 3-5 is reasonable for testing |
 
 ## Sources
 
 ### Primary (HIGH confidence)
-- [SuperAnnotate: LLM Fine-Tuning in 2025](https://www.superannotate.com/blog/llm-fine-tuning) - few-shot vs fine-tuning decision framework
-- [Confident AI: G-Eval Guide](https://www.confident-ai.com/blog/g-eval-the-definitive-guide) - LLM-as-judge implementation
-- [Self-Refine Paper](https://selfrefine.info/) - iterative refinement patterns
-- [ArXiv: Hedge Detection](https://arxiv.org/html/2405.13319v1) - hedging language classification
-- [ArXiv: ConCISE Conciseness Metric](https://arxiv.org/html/2511.16846) - reference-free conciseness evaluation
+- [Kinde: Why OTPs beat magic links](https://kinde.com/blog/security/why-kinde-likes-otps-better-than-magic-links/)
+- [Prelude: Secure OTP Systems 2025](https://prelude.so/blog/secure-otp)
+- [MojoAuth: OTP Expiration Best Practices](https://mojoauth.com/ciam-qna/best-practices-otp-expiration-retry-policies)
+- [Unkey: Rate Limiting OTP Endpoints](https://www.unkey.com/blog/ratelimiting-otp)
+- [ColorWhistle: SaaS Credits System Guide 2026](https://colorwhistle.com/saas-credits-system-guide/)
+- [Orb: Trial Pricing Strategy Guide](https://www.withorb.com/blog/trial-pricing-strategy-guide)
+- [m3ter: Credit Models in SaaS Pricing](https://www.m3ter.com/guides/credit-models-in-saas-pricing)
+- [WorkOS: Multi-tenant Architecture Guide](https://workos.com/blog/developers-guide-saas-multi-tenant-architecture)
+- [Logto: Multi-tenant SaaS Guide](https://blog.logto.io/build-multi-tenant-saas-application)
+- [Flightcontrol: Multi-tenant Data Modeling](https://www.flightcontrol.dev/blog/ultimate-guide-to-multi-tenant-saas-data-modeling)
 
 ### Secondary (MEDIUM confidence)
-- [EQ-Bench: Slop Score](https://eqbench.com/slop-score.html) - GPT-ism detection methodology
-- [Latitude: Style Consistency with Examples](https://latitude-blog.ghost.io/blog/how-examples-improve-llm-style-consistency/) - few-shot prompting patterns
-- [IBM: Domain-Specific LLM](https://www.ibm.com/think/topics/domain-specific-llm) - terminology handling
-- [LLM Guard: Regex Output Scanners](https://github.com/protectai/llm-guard/blob/main/docs/output_scanners/regex.md) - deterministic validation patterns
-
-### Tertiary (LOW confidence, needs validation)
-- Insurance adjuster documentation conventions - based on project context, not external research
-- Specific threshold values (3 hedges, 40 words, etc.) - defined by project requirements, not industry standard
+- [Scalekit: OTP vs Magic Links](https://www.scalekit.com/blog/otp-vs-magic-links-passwordless-authentication)
+- [PricingSaaS: The Rise of SaaS Credit Models](https://newsletter.pricingsaas.com/p/how-to-use-credit-models-12-examples)
+- [Inflection.io: Trial Strategies](https://www.inflection.io/post/time-based-trial-or-free-credits-choosing-the-right-trial-strategy)
+- [Maxio: Consumption-Based Billing Guide](https://www.maxio.com/blog/consumption-based-billing)
+- [Metronome: State of Usage-Based Pricing 2025](https://metronome.com/state-of-usage-based-pricing-2025)
 
 ---
-
-*Research complete. Output ready for /gsd:define-requirements consumption.*
+*Research conducted for v1.1 MVP Launch milestone. Validates existing decisions and provides implementation parameters.*

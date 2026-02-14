@@ -1,555 +1,567 @@
-# Architecture Research: Multi-Pass LLM Pipeline
+# Architecture Research: v1.1 MVP Launch
 
-**Researched:** 2026-01-18
-**Domain:** LLM pipeline orchestration for bid comparison narratives
-**Confidence:** HIGH (patterns verified across multiple authoritative sources)
+**Researched:** 2026-02-13
+**Domain:** FastAPI auth/workspace/credits with RQ job processing
+**Confidence:** HIGH (patterns verified with official docs and production-proven implementations)
 
-## Summary
+## Executive Summary
 
-The three-pass LLM pipeline (Analysis -> Writer -> Compliance Rewrite) should follow a **Sequential Agent** pattern with **explicit data contracts** between passes. Each pass operates on typed, validated data structures using Pydantic models, enabling clear boundaries, testability, and graceful degradation.
+Adding auth, workspaces, and credits to the existing FastAPI/RQ architecture requires minimal disruption to the current job processing flow. The recommended approach uses PostgreSQL for persistence, stateless JWT sessions with HttpOnly cookies, a simple workspace-scoped data model (not multi-tenant schemas), and ledger-style credit tracking with idempotent consumption tied to job IDs.
 
-The current single-pass approach (sending 100k+ tokens in one prompt) creates timeout risk and monolithic failure modes. The multi-pass architecture reduces per-call token counts significantly (each pass receives only what it needs), enables caching of intermediate results, and allows conditional execution of the compliance rewrite pass.
+The critical integration point is the RQ worker: credit consumption must happen atomically with job completion, using the job_id as a natural idempotency key to prevent double-charging on retries.
 
-**Primary recommendation:** Build three isolated pass functions sharing state through Pydantic models stored in a `PipelineState` container. Integrate with existing RQ worker by wrapping the pipeline in the existing `run_bid_comp_keys` task.
+## Component Overview
 
-## Pipeline Structure
+### New Components
 
-### Pass Isolation: Separate Functions, Shared State Container
+| Component | Purpose | Location |
+|-----------|---------|----------|
+| **Auth Router** | Email OTP send/verify, JWT issue/refresh, logout | `src/routes/auth.py` |
+| **Auth Dependencies** | `get_current_user`, `require_auth`, workspace resolution | `src/dependencies/auth.py` |
+| **Database Models** | SQLAlchemy models for workspace/user/credit/job tables | `src/models/` |
+| **Database Session** | Async SQLAlchemy session factory, Alembic migrations | `src/db/` |
+| **Credit Service** | Grant/consume/balance operations with idempotency | `src/services/credits.py` |
+| **Job Service** | State machine transitions, progress tracking | `src/services/jobs.py` |
 
-Each pass is a pure function with typed inputs and outputs:
+### Modified Components
 
-```
-Pass 1 (Analysis)  : EstimatePair + TopDeltas  ->  AnalysisResult
-Pass 2 (Writer)    : AnalysisResult + StyleGuide ->  DraftNarrative
-Pass 3 (Compliance): DraftNarrative + QualityGates ->  FinalNarrative | DraftNarrative
-```
+| Existing Component | What Changes |
+|--------------------|--------------|
+| **`src/api/main.py`** | Add auth router, DB session middleware, CORS credentials |
+| **`src/routes/bid_comp.py`** | Require auth, create ComparisonJob record before enqueue, return job_id from DB |
+| **`src/tasks.py`** | Update job state transitions, consume credits on success only |
+| **Frontend API client** | Send cookies with credentials, handle 401 responses |
 
-**Pass isolation principle:** Each pass receives only the data it needs, not the full context. This:
-1. Reduces token count per LLM call (addressing the 100k+ token timeout issue)
-2. Enables independent testing of each pass
-3. Allows caching at pass boundaries
-4. Makes failure isolation straightforward
+## Data Model
 
-### Pipeline State Container
-
-A single `PipelineState` dataclass holds all intermediate results:
-
-```python
-@dataclass
-class PipelineState:
-    # Inputs (from BidComp._build_pair existing flow)
-    pair: EstimatePair
-    top_deltas: List[Dict[str, Any]]
-
-    # Pass 1 output
-    analysis: Optional[AnalysisResult] = None
-
-    # Pass 2 output
-    draft: Optional[DraftNarrative] = None
-
-    # Pass 3 output (or pass-through of draft if quality passed)
-    final: Optional[FinalNarrative] = None
-
-    # Quality gate results
-    quality_report: Optional[QualityReport] = None
-
-    # Pipeline metadata
-    passes_executed: List[str] = field(default_factory=list)
-    pass_timings_ms: Dict[str, int] = field(default_factory=dict)
-    errors: List[PassError] = field(default_factory=list)
-```
-
-### Component Diagram
+### Entity Relationships
 
 ```
-                            RQ Worker (existing)
-                                   |
-                                   v
-                    +---------------------------+
-                    |    run_bid_comp_keys      |
-                    |  (existing entry point)   |
-                    +---------------------------+
-                                   |
-         [EstimatePair, TopDeltas] |
-                                   v
-              +----------------------------------------+
-              |        NarrativePipeline               |
-              |  (new orchestrator, replaces          |
-              |   BidComp._generate_narrative)         |
-              +----------------------------------------+
-                      |           |           |
-                      v           v           v
-              +-----------+ +-----------+ +-----------+
-              | Analysis  | |  Writer   | |Compliance |
-              |   Pass    | |   Pass    | |  Rewrite  |
-              +-----------+ +-----------+ +-----------+
-                      |           |           |
-                      v           v           v
-              [AnalysisResult] [DraftNarr] [FinalNarr]
-                                           OR
-                                      [DraftNarr if quality OK]
+Workspace 1--* User              (MVP: 1 user per workspace)
+Workspace 1--* CreditGrant       (credits added to workspace)
+Workspace 1--* CreditConsumption (credits spent on jobs)
+Workspace 1--* ComparisonJob     (jobs belong to workspace)
+User 1--* ComparisonJob          (user who initiated job)
+ComparisonJob 1--0..1 CreditConsumption (job linked to consumption)
 ```
+
+### Key Tables
+
+#### workspaces
+```sql
+CREATE TABLE workspaces (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+#### users
+```sql
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    workspace_id UUID NOT NULL REFERENCES workspaces(id),
+    email VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    last_login_at TIMESTAMP WITH TIME ZONE,
+    last_login_ip INET,
+    login_method VARCHAR(50), -- 'email_otp'
+    UNIQUE(email)
+);
+CREATE INDEX idx_users_workspace ON users(workspace_id);
+```
+
+#### otp_codes (ephemeral, could use Redis instead)
+```sql
+CREATE TABLE otp_codes (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) NOT NULL,
+    code_hash VARCHAR(255) NOT NULL, -- bcrypt hash of 6-digit code
+    expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    used_at TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+CREATE INDEX idx_otp_email_expires ON otp_codes(email, expires_at);
+```
+
+#### credit_grants
+```sql
+CREATE TABLE credit_grants (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    workspace_id UUID NOT NULL REFERENCES workspaces(id),
+    amount INTEGER NOT NULL CHECK (amount > 0),
+    source VARCHAR(100) NOT NULL, -- 'signup_bonus', 'manual_grant', 'purchase'
+    granted_by UUID REFERENCES users(id), -- NULL for system grants
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    notes TEXT
+);
+CREATE INDEX idx_credit_grants_workspace ON credit_grants(workspace_id);
+```
+
+#### credit_consumptions
+```sql
+CREATE TABLE credit_consumptions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    workspace_id UUID NOT NULL REFERENCES workspaces(id),
+    job_id UUID NOT NULL UNIQUE, -- UNIQUE ensures idempotency
+    amount INTEGER NOT NULL CHECK (amount > 0),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+CREATE INDEX idx_credit_consumptions_workspace ON credit_consumptions(workspace_id);
+```
+
+**Idempotency note:** The `UNIQUE(job_id)` constraint on `credit_consumptions` prevents double-charging. If a worker crashes and retries, attempting to insert a second consumption for the same job_id will fail with a constraint violation, which we handle gracefully.
+
+#### comparison_jobs
+```sql
+CREATE TABLE comparison_jobs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    workspace_id UUID NOT NULL REFERENCES workspaces(id),
+    created_by UUID NOT NULL REFERENCES users(id),
+
+    -- State machine
+    state VARCHAR(50) NOT NULL DEFAULT 'queued',
+    -- Valid states: queued, parsing, analyzing, writing, completed, failed
+
+    -- Progress tracking
+    progress_percent INTEGER DEFAULT 0 CHECK (progress_percent BETWEEN 0 AND 100),
+    current_step VARCHAR(100), -- e.g., 'Parsing primary estimate'
+
+    -- Input metadata
+    primary_filename VARCHAR(255),
+    comparison_filename VARCHAR(255),
+    primary_s3_key VARCHAR(500),
+    comparison_s3_key VARCHAR(500),
+
+    -- Output
+    result_s3_key VARCHAR(500),
+    narrative_s3_key VARCHAR(500),
+
+    -- Failure handling
+    error_code VARCHAR(50),
+    error_message TEXT,
+    retry_count INTEGER DEFAULT 0,
+
+    -- RQ integration
+    rq_job_id VARCHAR(100), -- RQ's internal job ID for status queries
+
+    -- Timestamps
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    started_at TIMESTAMP WITH TIME ZONE,
+    completed_at TIMESTAMP WITH TIME ZONE,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+CREATE INDEX idx_jobs_workspace ON comparison_jobs(workspace_id);
+CREATE INDEX idx_jobs_state ON comparison_jobs(state);
+CREATE INDEX idx_jobs_rq ON comparison_jobs(rq_job_id);
+```
+
+### Credit Balance Calculation
+
+No stored balance field. Calculate on demand:
+
+```sql
+SELECT
+    COALESCE(SUM(g.amount), 0) - COALESCE(SUM(c.amount), 0) AS balance
+FROM workspaces w
+LEFT JOIN credit_grants g ON g.workspace_id = w.id
+LEFT JOIN credit_consumptions c ON c.workspace_id = w.id
+WHERE w.id = :workspace_id;
+```
+
+For performance at scale, consider a materialized view or denormalized `balance` column with triggers.
 
 ## Data Flow
 
-### Pass 1: Analysis Pass
+### Auth Flow (Email OTP)
 
-**Purpose:** Extract structured delta analysis with supporting line items. Produce analysis that can feed the writer without raw estimate JSON.
+```
+1. POST /auth/otp/send {email}
+   ├── Validate email format
+   ├── Generate 6-digit code
+   ├── Hash code, store in otp_codes (expires in 10 min)
+   ├── Send email via SendGrid
+   └── Return {success: true}
 
-**Input:**
-```python
-class AnalysisInput(BaseModel):
-    primary_name: str
-    comparison_name: str
-    primary_totals: Dict[str, float]  # category -> total
-    comparison_totals: Dict[str, float]
-    top_deltas: List[CategoryDelta]
-    # Focused line item context (NOT full 100k JSON)
-    primary_sample_items: Dict[str, List[LineItemSummary]]  # category -> items
-    comparison_sample_items: Dict[str, List[LineItemSummary]]
+2. POST /auth/otp/verify {email, code}
+   ├── Lookup unexpired otp_code for email
+   ├── Verify bcrypt hash matches
+   ├── Mark code as used
+   ├── Lookup or create User (and Workspace for new users)
+   ├── Grant default credits to new workspace (5 early, 3 later via env var)
+   ├── Update user.last_login_at, last_login_ip
+   ├── Create signed JWT with {sub: user_id, workspace_id, exp}
+   ├── Set HttpOnly cookie with JWT
+   └── Return {user, workspace}
+
+3. Protected routes: Depends(get_current_user)
+   ├── Extract JWT from cookie
+   ├── Verify signature and expiration
+   ├── Lookup user by ID
+   └── Return User object or raise 401
 ```
 
-**Output:**
-```python
-class AnalysisResult(BaseModel):
-    category_analyses: List[CategoryAnalysis]  # For each top delta
-    scope_gaps: List[str]  # Missing trades, allowances
-    overall_delta_direction: Literal["primary_higher", "comparison_higher", "similar"]
-    confidence: Literal["high", "medium", "low"]
+**Session storage decision:** Use stateless JWT in HttpOnly cookies. Existing Redis is for job queue and caching, not sessions. JWTs avoid Redis session lookup overhead and simplify horizontal scaling. Trade-off: no immediate revocation (acceptable for MVP, add blacklist later if needed).
 
-class CategoryAnalysis(BaseModel):
-    category: str
-    primary_total: float
-    comparison_total: float
-    delta: float
-    delta_drivers: List[str]  # "3 window units at $450/each missing"
-    line_item_evidence: List[str]  # Specific items cited
+### Job + Credit Flow
+
+```
+1. POST /render/bid-comp/keys {carrier_key, contractor_key}
+   ├── Depends(get_current_user) → user, workspace
+   ├── Check workspace credit balance >= 1
+   │   └── If insufficient: return 402 {error: "insufficient_credits"}
+   ├── Create ComparisonJob record (state='queued')
+   ├── Enqueue RQ task with job.id
+   └── Return {job_id: job.id, status: 'queued'}
+
+2. RQ Worker: run_bid_comp_keys(db_job_id, ...)
+   ├── Load ComparisonJob from DB
+   ├── Update state → 'parsing', progress → 10%
+   ├── Parse primary PDF
+   ├── Update progress → 30%
+   ├── Parse comparison PDF
+   ├── Update state → 'analyzing', progress → 50%
+   ├── Run BidComp analysis
+   ├── Update state → 'writing', progress → 70%
+   ├── Generate XLSX, upload to S3
+   ├── Update progress → 90%
+   │
+   ├── ON SUCCESS:
+   │   ├── Try: INSERT credit_consumption (workspace_id, job_id, amount=1)
+   │   │   └── If duplicate key (job_id exists): skip (already charged)
+   │   ├── Update job: state='completed', result_s3_key=..., completed_at=now()
+   │   └── Send notification email if requested
+   │
+   └── ON FAILURE:
+       ├── Update job: state='failed', error_code=..., error_message=...
+       └── Do NOT consume credits (job didn't complete)
+
+3. GET /render/bid-comp/{job_id}
+   ├── Depends(get_current_user) → verify user.workspace_id matches job.workspace_id
+   ├── Return job state, progress, result URLs if completed
+   └── Frontend polls until completed/failed
 ```
 
-**Token reduction:** Instead of 100k+ tokens (full JSON), this pass receives ~5-10k tokens (sampled line items per category).
+**Double-charge prevention:** The `UNIQUE(job_id)` constraint on `credit_consumptions` makes credit deduction idempotent. The worker can crash after charging but before marking complete; on retry, the INSERT fails harmlessly, and we proceed to mark complete.
 
-### Pass 2: Writer Pass
+### Retry Without Double-Charge
 
-**Purpose:** Generate adjuster-tone narratives from structured analysis. No access to raw data - only works from AnalysisResult.
-
-**Input:**
-```python
-class WriterInput(BaseModel):
-    analysis: AnalysisResult
-    style_guide: StyleGuide  # Tone reference from PROJECT.md
-    primary_name: str
-    comparison_name: str
+```
+User clicks "Retry" on failed job:
+1. POST /render/bid-comp/{job_id}/retry
+   ├── Verify job.state = 'failed'
+   ├── Verify job.workspace_id = current_user.workspace_id
+   ├── Check workspace credit balance >= 1 (retries cost credits)
+   ├── Create NEW ComparisonJob record (state='queued')
+   │   └── Copy input metadata from original job
+   │   └── Link: new_job.retry_of = original_job.id (optional tracking)
+   ├── Enqueue RQ task with new_job.id
+   └── Return {job_id: new_job.id, status: 'queued'}
 ```
 
-**Output:**
-```python
-class DraftNarrative(BaseModel):
-    overview: str  # 2-3 sentences
-    key_drivers: List[DriverNarrative]
-    scope_observations: List[str]
-    suggested_followups: List[str]
+**Rationale:** Retries create new jobs rather than re-running failed ones. This keeps job history clean, maintains audit trail, and the new job_id ensures separate credit consumption tracking.
 
-class DriverNarrative(BaseModel):
-    category: str
-    amounts: str  # "$12,500 vs $8,200"
-    narrative: str  # "Delta driven by..."
-```
+## Integration Points
 
-**Token count:** ~2-3k tokens input (analysis is already summarized).
-
-### Pass 3: Compliance Rewrite Pass (Conditional)
-
-**Purpose:** Check quality gates. If pass, return draft unchanged. If fail, rewrite to fix issues.
-
-**Input:**
-```python
-class ComplianceInput(BaseModel):
-    draft: DraftNarrative
-    quality_gates: QualityGates
-    failed_checks: List[str]  # From deterministic quality check
-```
-
-**Output:** Either `DraftNarrative` (if quality passed) or `FinalNarrative` (rewritten).
-
-## Conditional Execution
-
-### Quality Gate Implementation
-
-Quality checks are a mix of deterministic (measurable) and LLM-based (judgment):
-
-```python
-@dataclass
-class QualityGates:
-    # Deterministic checks (run before LLM compliance pass)
-    max_soft_qualifiers: int = 3  # "suggests", "appears", "may indicate"
-    max_sentences_per_trade: int = 2
-    max_avg_words_per_sentence: int = 40
-    max_bullet_words: int = 30
-    max_total_bullets: int = 6
-
-    # Patterns to detect
-    hedging_phrases: List[str] = field(default_factory=lambda: [
-        "suggests", "appears", "may indicate", "possibly", "seems to"
-    ])
-    analyst_phrases: List[str] = field(default_factory=lambda: [
-        "it appears", "this suggests", "may be due to"
-    ])
-
-    # LLM judgment (only if deterministic passes)
-    require_valuation_link: bool = True  # Every trade ties to $
-```
-
-### Conditional Flow
-
-```python
-def run_pipeline(state: PipelineState) -> PipelineState:
-    # Pass 1: Always runs
-    state.analysis = run_analysis_pass(state)
-    state.passes_executed.append("analysis")
-
-    # Pass 2: Always runs (needs analysis)
-    state.draft = run_writer_pass(state)
-    state.passes_executed.append("writer")
-
-    # Quality check: Deterministic first
-    quality_report = check_quality_deterministic(state.draft, state.quality_gates)
-    state.quality_report = quality_report
-
-    if quality_report.passed:
-        # Skip compliance rewrite - draft becomes final
-        state.final = state.draft
-        state.passes_executed.append("compliance_skipped")
-    else:
-        # Pass 3: Conditional - only on quality failure
-        state.final = run_compliance_pass(state, quality_report.failed_checks)
-        state.passes_executed.append("compliance_rewrite")
-
-    return state
-```
-
-### Quality Check Implementation
-
-```python
-def check_quality_deterministic(draft: DraftNarrative, gates: QualityGates) -> QualityReport:
-    failed_checks = []
-
-    # Hedging check
-    hedging_count = count_hedging_phrases(draft.overview, gates.hedging_phrases)
-    if hedging_count > gates.max_soft_qualifiers:
-        failed_checks.append(f"hedging:{hedging_count} (max {gates.max_soft_qualifiers})")
-
-    # Verbosity check per driver
-    for driver in draft.key_drivers:
-        sentences = count_sentences(driver.narrative)
-        if sentences > gates.max_sentences_per_trade:
-            failed_checks.append(f"verbose:{driver.category}:{sentences}s")
-
-    # Analyst tone check
-    for phrase in gates.analyst_phrases:
-        if phrase.lower() in draft.overview.lower():
-            failed_checks.append(f"analyst_tone:{phrase}")
-
-    # Bullet length check
-    for obs in draft.scope_observations:
-        if len(obs.split()) > gates.max_bullet_words:
-            failed_checks.append(f"bullet_length:{len(obs.split())}w")
-
-    return QualityReport(
-        passed=len(failed_checks) == 0,
-        failed_checks=failed_checks,
-        checked_at=datetime.utcnow()
-    )
-```
-
-## Integration with Existing System
-
-### Minimal Changes to Existing Code
-
-The pipeline integrates at a single point: replace `BidComp._generate_narrative` with pipeline call.
+### With Existing RQ Worker
 
 **Current flow:**
 ```python
-# BidComp.run() line ~285
-narrative = self._generate_narrative(pair, top_deltas)
+# src/routes/bid_comp.py
+job = _q.enqueue("src.tasks.run_bid_comp_keys", job_id, ...)
+return {"job_id": job.id, "status": "queued"}
 ```
 
 **New flow:**
 ```python
-# BidComp.run()
-pipeline = NarrativePipeline(self.llm_adapter, self.quality_gates)
-narrative = pipeline.run(pair, top_deltas)
+# src/routes/bid_comp.py
+async def enqueue_bid_comp_keys(
+    payload: BidCompRequest,
+    user: User = Depends(require_auth),
+    db: AsyncSession = Depends(get_db)
+):
+    # Check credits
+    balance = await credit_service.get_balance(db, user.workspace_id)
+    if balance < 1:
+        raise HTTPException(402, detail="insufficient_credits")
+
+    # Create DB job record
+    db_job = ComparisonJob(
+        workspace_id=user.workspace_id,
+        created_by=user.id,
+        state="queued",
+        primary_s3_key=payload.carrier_key,
+        comparison_s3_key=payload.contractor_key,
+        primary_filename=payload.carrier_filename,
+        comparison_filename=payload.contractor_filename,
+    )
+    db.add(db_job)
+    await db.commit()
+
+    # Enqueue RQ task
+    rq_job = _q.enqueue(
+        "src.tasks.run_bid_comp_keys",
+        str(db_job.id),  # Pass DB job ID, not RQ job ID
+        payload.carrier_key,
+        payload.contractor_key,
+        ...
+    )
+
+    # Store RQ job ID for reference
+    db_job.rq_job_id = rq_job.id
+    await db.commit()
+
+    return {"job_id": str(db_job.id), "status": "queued"}
 ```
 
-### RQ Worker Integration
-
-No changes to `tasks.py` entry point. The pipeline runs inside `BidComp.run()` which is already called by `run_bid_comp_keys`.
-
-```
-run_bid_comp_keys (unchanged)
-    -> BidComp(llm_adapter=...).run(bid_context, job_id)
-        -> NarrativePipeline.run(pair, top_deltas)  # NEW
-            -> analysis_pass()
-            -> writer_pass()
-            -> [conditional] compliance_pass()
-        -> export_xlsx(narrative, ...)  # unchanged
-```
-
-### Timeout Mitigation
-
-Current 180s timeout in `OpenAIChatAdapter` handles single large calls. With multi-pass:
-
-| Pass | Estimated Tokens | Expected Time | Timeout Risk |
-|------|-----------------|---------------|--------------|
-| Current (single) | 100k+ | 2-3 min | HIGH |
-| Analysis | 5-10k | 10-20s | LOW |
-| Writer | 2-3k | 5-10s | LOW |
-| Compliance | 2-3k | 5-10s | LOW |
-| **Total** | 10-15k | 20-40s | LOW |
-
-Per-pass timeout of 60s is safer than single 180s call.
-
-### Error Handling
-
-**Layered approach:**
-1. **Retry with backoff** for transient failures (429, 5xx, timeout)
-2. **Fallback** to previous pass output on pass failure
-3. **Circuit breaker** if multiple passes fail consecutively
-
+**Worker changes:**
 ```python
-class PassRunner:
-    def run_with_resilience(
-        self,
-        pass_fn: Callable,
-        state: PipelineState,
-        fallback: Optional[Any] = None
-    ) -> Any:
-        for attempt in range(self.max_retries):
+# src/tasks.py
+def run_bid_comp_keys(db_job_id: str, carrier_key: str, ...):
+    # Get DB session (sync, worker runs in separate process)
+    with get_sync_db_session() as db:
+        job = db.query(ComparisonJob).get(db_job_id)
+        if not job:
+            raise ValueError(f"Job {db_job_id} not found")
+
+        try:
+            job.state = "parsing"
+            job.started_at = datetime.utcnow()
+            db.commit()
+
+            # ... existing parsing logic ...
+
+            job.state = "analyzing"
+            job.progress_percent = 50
+            db.commit()
+
+            # ... existing analysis logic ...
+
+            job.state = "writing"
+            job.progress_percent = 70
+            db.commit()
+
+            # ... existing XLSX generation ...
+
+            # Consume credit (idempotent)
             try:
-                return pass_fn(state)
-            except RateLimitError:
-                time.sleep(self.backoff_seconds * (2 ** attempt))
-            except TimeoutError:
-                if attempt == self.max_retries - 1:
-                    self.circuit_breaker.record_failure()
-                    return fallback
-            except Exception as e:
-                logger.warning(f"Pass failed: {e}")
-                return fallback
-        return fallback
+                consumption = CreditConsumption(
+                    workspace_id=job.workspace_id,
+                    job_id=job.id,
+                    amount=1
+                )
+                db.add(consumption)
+                db.commit()
+            except IntegrityError:
+                db.rollback()  # Already charged, continue
+
+            job.state = "completed"
+            job.result_s3_key = xlsx_key
+            job.completed_at = datetime.utcnow()
+            job.progress_percent = 100
+            db.commit()
+
+        except Exception as e:
+            db.rollback()
+            job.state = "failed"
+            job.error_code, job.error_message = diagnose_failure(e)
+            db.commit()
+            raise
 ```
 
-**Fallback chain:**
-- Analysis fails -> Use delta-only analysis (no line item detail)
-- Writer fails -> Use template-based narrative
-- Compliance fails -> Return draft as-is (quality check logged but not blocking)
+### With Existing Redis
 
-## Caching Strategies
+**Keep Redis for:**
+- RQ job queue (unchanged)
+- LLM response caching (existing content-hash cache)
 
-### Pass-Level Result Caching
+**Do NOT use Redis for:**
+- Session storage (use stateless JWT)
+- OTP storage (use PostgreSQL for audit trail, or Redis with TTL if preferred)
 
-Cache keyed by content hash of inputs:
+**Rationale:** Redis is already overloaded with job queue duties. Adding session state increases operational complexity. JWT cookies are simpler and scale better.
+
+## Suggested Build Order
+
+### Phase 1: Database Foundation
+**Build:** PostgreSQL setup, SQLAlchemy models, Alembic migrations, DB session management
+
+**Why first:** Everything else depends on persistent storage. Cannot implement auth without user table, cannot implement credits without credit tables.
+
+**Deliverables:**
+- Render PostgreSQL instance configured
+- SQLAlchemy async engine and session factory
+- Alembic migration for all tables
+- Basic model classes with relationships
+
+### Phase 2: Auth System
+**Build:** OTP send/verify endpoints, JWT creation, auth dependencies, user/workspace creation
+
+**Why second:** Jobs and credits need user context. Frontend needs auth before it can show credit balance or job history.
+
+**Dependencies:** Phase 1 (users table, workspaces table)
+
+**Deliverables:**
+- `POST /auth/otp/send`
+- `POST /auth/otp/verify`
+- `POST /auth/logout`
+- `get_current_user` dependency
+- Automatic workspace+credit grant on first login
+
+### Phase 3: Credit System
+**Build:** Credit grant on signup, balance query endpoint, consumption service
+
+**Why third:** Must exist before jobs can charge credits, but simpler than job state machine.
+
+**Dependencies:** Phase 2 (workspace context from auth)
+
+**Deliverables:**
+- `GET /workspace/credits` (balance + grant history)
+- Credit service with `get_balance()`, `consume()` methods
+- Default grant on workspace creation (env-configurable amount)
+
+### Phase 4: Job State Machine
+**Build:** ComparisonJob model, state transitions in worker, progress tracking, API changes
+
+**Why fourth:** Most complex, depends on all previous phases.
+
+**Dependencies:** Phase 3 (credit check before enqueue, consumption on complete)
+
+**Deliverables:**
+- `POST /render/bid-comp/keys` with auth + credit check
+- `GET /render/bid-comp/{job_id}` with progress fields
+- Worker state transitions with DB updates
+- Idempotent credit consumption
+
+### Phase 5: Frontend Integration
+**Build:** Auth UI, credit display, job progress polling, retry flow
+
+**Why last:** Backend APIs must be stable before frontend integration.
+
+**Dependencies:** All backend phases
+
+## Middleware and Dependencies
+
+### Recommended Dependency Structure
 
 ```python
-def cache_key(pass_name: str, inputs: BaseModel) -> str:
-    content = inputs.model_dump_json(sort_keys=True)
-    return f"pipeline:{pass_name}:{hashlib.sha256(content.encode()).hexdigest()}"
-```
+# src/dependencies/database.py
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    async with async_session_maker() as session:
+        yield session
 
-**Cache storage:** Redis (already used by RQ worker).
-
-**TTL recommendations:**
-- Analysis pass: 1 hour (estimates don't change once parsed)
-- Writer pass: 30 min (style may be tweaked)
-- Compliance pass: No cache (depends on quality gates which may change)
-
-### What to Cache
-
-| Pass | Cache? | Rationale |
-|------|--------|-----------|
-| Analysis | YES | Same estimates always produce same analysis |
-| Writer | YES | Same analysis + style = same draft |
-| Compliance | NO | Quality gates may change; small and fast anyway |
-
-### Cache Implementation
-
-```python
-class PipelineCache:
-    def __init__(self, redis: Redis, ttl_seconds: int = 3600):
-        self.redis = redis
-        self.ttl = ttl_seconds
-
-    def get(self, key: str, model_cls: Type[BaseModel]) -> Optional[BaseModel]:
-        data = self.redis.get(key)
-        if data:
-            return model_cls.model_validate_json(data)
+# src/dependencies/auth.py
+async def get_current_user_optional(
+    request: Request,
+    db: AsyncSession = Depends(get_db)
+) -> Optional[User]:
+    token = request.cookies.get("access_token")
+    if not token:
+        return None
+    try:
+        payload = jwt.decode(token, settings.JWT_SECRET, algorithms=["HS256"])
+        user = await db.get(User, payload["sub"])
+        return user
+    except JWTError:
         return None
 
-    def set(self, key: str, result: BaseModel) -> None:
-        self.redis.setex(key, self.ttl, result.model_dump_json())
+async def require_auth(
+    user: Optional[User] = Depends(get_current_user_optional)
+) -> User:
+    if not user:
+        raise HTTPException(401, detail="Not authenticated")
+    return user
+
+# src/dependencies/workspace.py
+async def get_workspace(
+    user: User = Depends(require_auth),
+    db: AsyncSession = Depends(get_db)
+) -> Workspace:
+    workspace = await db.get(Workspace, user.workspace_id)
+    if not workspace:
+        raise HTTPException(500, detail="Workspace not found")
+    return workspace
 ```
 
-### Embedding Caching (Future)
+### CORS Update Required
 
-For analysis pass, cache embeddings of line item descriptions if semantic matching is added:
-- Store embeddings in Redis or Qdrant (already integrated)
-- Reuse across jobs for common line items
-- Significant cost reduction for repeated item types
+```python
+# src/api/main.py - update CORS for credentials
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://your-frontend.com"],  # Explicit origins required
+    allow_credentials=True,  # Required for cookies
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+```
 
-## Build Order
+**Note:** `allow_origins=["*"]` with `allow_credentials=True` is not allowed by browsers. Must specify explicit origins.
 
-### Phase 1: Data Contracts (Foundation)
+## Configuration
 
-**Build first.** All passes depend on these types.
+### New Environment Variables
 
-1. Define Pydantic models: `AnalysisResult`, `DraftNarrative`, `FinalNarrative`
-2. Define `PipelineState` container
-3. Define `QualityGates` and `QualityReport`
-4. Unit tests for model validation
+```bash
+# Database
+DATABASE_URL=postgresql+asyncpg://user:pass@host:5432/db
 
-**Why first:** Types are the contracts between components. Changing them later requires updating all passes.
+# Auth
+JWT_SECRET=<32+ character random string>
+JWT_EXPIRE_MINUTES=10080  # 7 days
+OTP_EXPIRE_MINUTES=10
 
-### Phase 2: Quality Gate (Deterministic Checks)
+# Credits
+DEFAULT_CREDITS_SIGNUP=5  # Early adopters
+# Change to 3 later
 
-**Build second.** Required for conditional execution logic.
-
-1. Implement `check_quality_deterministic()`
-2. All measurable checks: hedging count, word counts, phrase detection
-3. Tests with known-passing and known-failing narratives
-
-**Why second:** Quality gate determines whether Pass 3 runs. Must be solid before pipeline orchestration.
-
-### Phase 3: Analysis Pass
-
-**Build third.** First LLM integration, simplest prompt.
-
-1. Create analysis prompt template
-2. Implement `run_analysis_pass()`
-3. Add line item sampling logic (reduce 100k -> 10k tokens)
-4. Structured output parsing with Pydantic
-5. Integration test with real estimates
-
-**Why third:** Analysis is the foundation data for all downstream passes.
-
-### Phase 4: Writer Pass
-
-**Build fourth.** Depends on Analysis pass output.
-
-1. Create writer prompt template with adjuster tone examples
-2. Implement `run_writer_pass()`
-3. Map `AnalysisResult` -> writer prompt inputs
-4. Parse output into `DraftNarrative`
-5. Integration test: analysis -> writer
-
-**Why fourth:** Writer consumes analysis, so analysis must work first.
-
-### Phase 5: Pipeline Orchestration
-
-**Build fifth.** Wire passes together.
-
-1. Implement `NarrativePipeline` class
-2. Conditional execution logic (skip compliance if quality passes)
-3. Error handling and fallbacks per pass
-4. Timing and logging per pass
-5. Integration test: full pipeline end-to-end
-
-**Why fifth:** Orchestration needs all components ready.
-
-### Phase 6: Compliance Pass
-
-**Build sixth.** Last pass, only runs on quality failure.
-
-1. Create compliance rewrite prompt template
-2. Implement `run_compliance_pass()`
-3. Inject failed quality checks into prompt
-4. Parse rewritten output
-5. Integration test: quality fail -> compliance -> quality pass
-
-**Why sixth:** Compliance is optional (quality may pass), so other passes have higher priority.
-
-### Phase 7: Caching and Integration
-
-**Build last.** Optimizations after core works.
-
-1. Add Redis caching for Analysis and Writer passes
-2. Replace `BidComp._generate_narrative` with pipeline call
-3. End-to-end test through RQ worker
-4. Performance comparison: single-pass vs multi-pass
-
-**Why last:** Caching is an optimization, not a functional requirement.
-
-## Dependencies and Integration Points
-
-### Existing Components to Reuse
-
-| Component | Location | Reuse |
-|-----------|----------|-------|
-| `OpenAIChatAdapter` | `src/llm/adapter.py` | Direct reuse for all LLM calls |
-| `TemplateRegistry` | `src/llm/templates.py` | Add new prompt templates |
-| `EstimatePair` | `src/bid_comp/core.py` | Input to pipeline |
-| Redis connection | via `rq.job.Job` | Cache storage |
-| Logging | `vip-parse.bid-comp` logger | Extend with pass-level logs |
-
-### New Components to Create
-
-| Component | Purpose | Location |
-|-----------|---------|----------|
-| `PipelineState` | State container | `src/pipeline/state.py` |
-| Data contracts | Pydantic models | `src/pipeline/models.py` |
-| `NarrativePipeline` | Orchestrator | `src/pipeline/orchestrator.py` |
-| Pass functions | Individual passes | `src/pipeline/passes/` |
-| Quality checker | Deterministic checks | `src/pipeline/quality.py` |
-| Cache wrapper | Redis caching | `src/pipeline/cache.py` |
-
-### New Prompt Templates
-
-| Template ID | Purpose | System Prompt Focus |
-|-------------|---------|---------------------|
-| `analysis_pass_v1` | Extract deltas with evidence | "You are extracting structured comparison data" |
-| `writer_pass_v1` | Generate adjuster-tone | "You write like a senior adjuster..." |
-| `compliance_rewrite_v1` | Fix quality failures | "Rewrite to fix: {failed_checks}" |
+# Email (existing SendGrid, add templates)
+SENDGRID_OTP_TEMPLATE_ID=d-xxxxx
+```
 
 ## Confidence Assessment
 
 | Area | Confidence | Rationale |
 |------|------------|-----------|
-| Pipeline structure | HIGH | Sequential Agent pattern well-established; multiple sources confirm |
-| Pass isolation | HIGH | Standard practice; matches existing modular design in codebase |
-| Conditional execution | HIGH | Quality gates + skip pattern verified across evaluation frameworks |
-| Error handling | HIGH | Retry/fallback/circuit-breaker pattern extensively documented |
-| Caching strategy | MEDIUM | Redis caching straightforward; semantic caching more complex if added |
-| Token reduction | HIGH | Sampling line items vs full JSON is proven approach |
-| Build order | HIGH | Based on dependency analysis of codebase and pass relationships |
-| Integration point | HIGH | `_generate_narrative` is clear replacement target |
+| Auth flow (OTP + JWT) | HIGH | Pattern verified with FastAPI docs, Scalekit guide, production implementations |
+| Workspace model | HIGH | Simple foreign key relationship, not complex multi-tenancy |
+| Credit ledger | HIGH | Standard pattern from fintech implementations; INSERT idempotency via UNIQUE constraint is PostgreSQL-native |
+| Job state machine | HIGH | Extends existing RQ pattern; state field + DB updates are straightforward |
+| RQ integration | HIGH | Existing codebase already uses RQ; changes are additive |
+| Double-charge prevention | HIGH | `UNIQUE(job_id)` on credit_consumptions is bulletproof; matches Saga pattern for distributed transactions |
 
 ## Open Questions
 
-1. **LLM-based quality check for valuation links**: How to reliably detect if each trade narrative ties to financial impact? May need Pass 3 to always run with LLM judgment.
+1. **OTP storage: PostgreSQL vs Redis?**
+   - PostgreSQL: Better audit trail, simpler ops (one less Redis dependency concern)
+   - Redis: Native TTL expiration, faster
+   - **Recommendation:** Start with PostgreSQL for simplicity; migrate to Redis if volume requires it
 
-2. **Line item sampling strategy**: How many items per category is "enough" for analysis? Initial recommendation: top 5 by amount, but may need tuning.
+2. **Token refresh strategy**
+   - Sliding expiration (extend on each request) vs fixed expiration with refresh token
+   - **Recommendation:** Start with fixed 7-day expiration; add refresh tokens in v1.2 if session length becomes an issue
 
-3. **Style guide encoding**: Adjuster tone examples from PROJECT.md need to be formatted into writer prompt. Exact format TBD.
+3. **Job history retention**
+   - How long to keep completed/failed jobs in DB?
+   - **Recommendation:** Keep indefinitely for MVP; add archival/cleanup in v1.2
 
 ## Sources
 
 ### Primary (HIGH confidence)
-- [Multi-Step LLM Chains Best Practices - DeepChecks](https://www.deepchecks.com/orchestrating-multi-step-llm-chains-best-practices/)
-- [Retries, Fallbacks, Circuit Breakers - Portkey](https://portkey.ai/blog/retries-fallbacks-and-circuit-breakers-in-llm-apps/)
-- [Quality Gates in LLM Pipelines - DeepWiki](https://deepwiki.com/strangeloopcanon/llm-hayek-roth/6.2-quality-gates-and-testing)
-- [Pydantic for LLM Outputs](https://pydantic.dev/articles/llm-intro)
-- [LLM Orchestration Patterns - orq.ai](https://orq.ai/blog/llm-orchestration)
+- [FastAPI Security Documentation](https://fastapi.tiangolo.com/tutorial/security/)
+- [Scalekit FastAPI OTP Implementation Guide](https://www.scalekit.com/blog/fastapi-passwordless-magic-link-otp-implementation)
+- [MergeBoard Multi-tenancy with FastAPI SQLAlchemy PostgreSQL](https://mergeboard.com/blog/6-multitenancy-fastapi-sqlalchemy-postgresql/)
+- [RQ Documentation](https://python-rq.org/docs/)
 
 ### Secondary (MEDIUM confidence)
-- [Google ADK Multi-Agent Patterns](https://developers.googleblog.com/developers-guide-to-multi-agent-patterns-in-adk/)
-- [5 Patterns for Scalable LLM Integration](https://latitude-blog.ghost.io/blog/5-patterns-for-scalable-llm-service-integration/)
-- [Caching Strategies in LLM Services](https://www.rohan-paul.com/p/caching-strategies-in-llm-services)
+- [FastAPI Redis Session Management](https://blog.poespas.me/posts/2025/02/13/fastapi-session-management-realtime-web-applications/)
+- [idemptx Idempotency for FastAPI](https://medium.com/@riley.dev/a-simple-way-to-handle-idempotency-in-fastapi-using-idemptx-08d57f0faf88)
+- [Saga Pattern for Distributed Transactions](https://microservices.io/patterns/data/saga.html)
+- [Double-Entry Ledger Systems](https://medium.com/@altuntasfatih42/how-to-build-a-double-entry-ledger-f69edcea825d)
+- [SaaS Credits System Guide 2026](https://colorwhistle.com/saas-credits-system-guide/)
 
-### Codebase Analysis (HIGH confidence)
-- `apps/vip-parse/src/bid_comp/core.py` - Current narrative generation flow
-- `apps/vip-parse/src/llm/adapter.py` - LLM integration pattern
-- `apps/vip-parse/src/tasks.py` - RQ worker integration point
-- `apps/vip-parse/src/orchestrator/runners.py` - Existing DAG pattern (not used but informative)
-
----
-
-*Research completed: 2026-01-18*
-*Valid until: 30 days (stable patterns)*
+### Tertiary (verified against existing codebase)
+- Existing `src/routes/bid_comp.py` - current RQ enqueue pattern
+- Existing `src/tasks.py` - current worker implementation
+- Existing `src/api/main.py` - current FastAPI app structure

@@ -1,453 +1,394 @@
-# Pitfalls Research: Multi-Pass LLM Pipeline
+# Pitfalls Research: v1.1 MVP Launch
 
-**Researched:** 2026-01-18
-**Domain:** Three-pass LLM pipeline with quality gating for insurance claim narratives
-**Confidence:** HIGH (multiple sources, verified patterns)
+**Researched:** 2026-02-13
+**Domain:** Auth, Credits, Job State Machine for FastAPI/RQ/PostgreSQL
+**Confidence:** HIGH (verified with official docs, multiple sources)
 
-## Summary
+## Executive Summary
 
-Multi-pass LLM pipelines amplify costs, latency, and quality risks compared to single-pass approaches. The VIP30 three-pass design (analysis -> writer -> compliance rewrite) faces specific challenges: context explosion from serializing full estimate payloads, cascading quality drift between passes, over-correction from compliance rewrites, and unreliable quality gate thresholds.
-
-This research identifies six critical pitfall categories with prevention strategies mapped to implementation phases. The existing timeout issue (100k+ tokens causing 180-second timeouts) and generic AI-sounding narratives are directly addressed.
+The highest-risk pitfalls when adding auth and credits to an existing FastAPI/RQ application are: (1) **credit race conditions** that can result in double-charging or negative balances, (2) **OTP brute-force vulnerabilities** from inadequate rate limiting, and (3) **RQ job state inconsistencies** where jobs get stuck in limbo after worker crashes. These three areas require explicit mitigation patterns at architecture time, not as afterthoughts.
 
 ---
 
-## Token/Cost Pitfalls
+## Critical Pitfalls
 
-### Pitfall 1: Context Payload Explosion
+### 1. Credit System Race Conditions (Double-Charging)
 
-**What goes wrong:** Serializing full estimate payloads (`primary_json`, `comparison_json`) into each pass creates 3x token consumption. Current implementation already hits 100k+ tokens on large estimates causing timeouts.
-
-**Why it happens:** The existing `BidComp._generate_narrative()` method passes entire estimate payloads as JSON strings:
-```python
-context = {
-    "primary_json": json.dumps(pair.primary.payload, ensure_ascii=False),
-    "comparison_json": json.dumps(pair.comparison.payload, ensure_ascii=False),
-    ...
-}
-```
-With three passes, this becomes 3x the current token load.
+**What goes wrong:** Two concurrent requests check balance, both see sufficient credits, both debit. User ends up with negative balance or is charged twice for the same job. This is especially dangerous with async workers where job completion triggers credit deduction.
 
 **Warning signs:**
-- API calls exceeding 60 seconds (current timeout at 180s)
-- Token counts in logs showing 50k+ prompt tokens
-- Cost per comparison exceeding $0.50 on large estimates
+- Balance checks happen in application code (`if user.balance >= cost`)
+- Debit operations are separate from balance checks (not atomic)
+- No idempotency keys on credit operations
+- Users report negative balances or duplicate charges
 
-**Prevention strategy:**
-1. Analysis pass receives full payloads (unavoidable for extraction)
-2. Writer pass receives only analysis output (structured deltas, not raw estimates)
-3. Compliance pass receives only writer output (narrative text, not upstream data)
-4. Each pass outputs compressed, targeted data for the next
+**Prevention:**
+1. **Use PostgreSQL row-level locking** for balance updates:
+   ```sql
+   SELECT * FROM credit_grants WHERE workspace_id = $1 FOR UPDATE;
+   ```
+2. **Make credit operations atomic** - check and deduct in single transaction
+3. **Use idempotency keys** - every credit operation gets a unique key (e.g., `job_id + operation_type`), reject duplicates
+4. **Consider ledger-style credits** - immutable `credit_grants` and `credit_consumptions` tables, never update balances directly, calculate balance as `SUM(grants) - SUM(consumptions)`
+5. **Enforce at database level** - add CHECK constraint or trigger preventing negative effective balance
 
-**VIP30-specific:** Current `adapter.py` logs `prompt_bytes` and token counts. Add alerts when prompt_tokens > 50k.
+**Address in phase:** Database/Credits phase (early - before any credit operations)
 
-**Cost projection:** With proper data flow isolation, three passes should cost ~1.5-2x single pass (not 3x) because downstream passes process smaller contexts.
-
-**Phase mapping:** Phase 1 (Analysis Pass) must define output schema that minimizes downstream context.
+**Sources:**
+- [Modern Treasury: Designing Ledgers with Optimistic Locking](https://www.moderntreasury.com/journal/designing-ledgers-with-optimistic-locking)
+- [Antradar: Avoid Stripe Double Charges](http://www.antradar.com/blog-avoid-stripe-double-charges)
+- [pgledger: PostgreSQL Double-Entry Implementation](https://github.com/pgr0ss/pgledger)
 
 ---
 
-### Pitfall 2: Redundant Compliance Pass Invocation
+### 2. OTP Brute-Force via Rate Limit Bypass
 
-**What goes wrong:** Compliance rewrite runs on every comparison even when quality already passes, wasting tokens and adding latency.
-
-**Why it happens:** Without short-circuit logic, the pipeline defaults to running all passes. Industry data shows well-tuned routing can skip unnecessary passes 70-85% of the time.
+**What goes wrong:** Attackers bypass rate limiting using IP rotation, header manipulation (X-Forwarded-For), or session ID rotation. With 6-digit OTP and no effective rate limiting, brute force takes ~17 minutes at 1000 req/sec.
 
 **Warning signs:**
-- Compliance pass running when quality gates already pass
-- Latency consistently at 3x single-pass baseline
-- Cost scaling linearly with pass count instead of conditionally
+- Rate limiting only checks IP address
+- Rate limiting trusts X-Forwarded-For header from client
+- New OTP can be requested unlimited times
+- OTP validity window exceeds 10 minutes
+- No account lockout after failed attempts
 
-**Prevention strategy:**
-1. Quality gate runs immediately after writer pass
-2. Compliance pass only triggers on gate failure
-3. Log `pass_skipped=compliance` when quality passes
-4. Track skip rate - target >70% of jobs skip compliance
+**Prevention:**
+1. **Rate limit by user identifier, not IP** - use email/phone as the rate limit key
+2. **Limit OTP requests per user** - max 3 OTP sends per 15 minutes per email
+3. **Limit verification attempts per OTP** - max 5 attempts, then require new OTP
+4. **Short OTP validity** - 5-10 minutes maximum
+5. **Exponential backoff** - increase delay between allowed attempts
+6. **Never trust X-Forwarded-For for rate limiting** - use it for logging only
+7. **Add CAPTCHA after 2 failed attempts**
 
-**Phase mapping:** Phase 3 (Quality Gate) implements skip logic before compliance pass.
+**Address in phase:** Auth phase (implement during OTP endpoint design)
+
+**Sources:**
+- [CVE-2025-60424: Nagios Fusion OTP Bypass](https://zeropath.com/blog/cve-2025-60424-nagios-fusion-otp-bypass)
+- [OTP Brute-Force Via Rate Limit Bypass](https://systemweakness.com/brute-forcing-otp-via-bypassing-rate-limit-c5ee6b25c2a8)
+- [Rate Limit Bypass Techniques](https://medium.com/@rajatpatel08e/rate-limit-bypass-techniques-real-world-examples-and-how-to-defend-against-it-5fd0d82673db)
 
 ---
 
-### Pitfall 3: Prompt Bloat in System Instructions
+### 3. RQ Job Stuck in StartedJobRegistry (Zombie Jobs)
 
-**What goes wrong:** Lengthy system prompts for tone/style eat context window before user content arrives. Research shows poor serialization consumes 40-70% of tokens through formatting overhead.
-
-**Why it happens:** Complex adjuster-tone instructions and JSON schema examples inflate prompts. Each pass duplicates style guidance.
+**What goes wrong:** Worker crashes mid-job (OOM, SIGKILL, power failure). Job remains in `StartedJobRegistry` with status "started" indefinitely. Job never completes, never fails, never retries. User sees job "processing" forever.
 
 **Warning signs:**
-- System prompt exceeding 2000 tokens
-- Meaningful content pushed to context window edges ("lost in the middle" effect)
-- Quality degradation on longer estimates despite shorter working
+- Jobs with status "started" for hours/days
+- `rq info` shows workers that don't exist
+- Jobs disappear from monitoring but aren't in finished/failed registries
+- Worker restarts don't automatically recover stuck jobs
 
-**Prevention strategy:**
-1. System prompts under 1000 tokens per pass
-2. Inline style examples, not exhaustive rules
-3. Use JSON schema constraints in model, not verbose prose
-4. Move tone reference to fine-tuning consideration (future)
+**Prevention:**
+1. **Set explicit job timeouts** - `job_timeout` parameter on all jobs
+2. **Implement job TTL** - jobs expire and fail if not completed
+3. **Add periodic cleanup task** that runs `StartedJobRegistry.cleanup()`:
+   ```python
+   from rq.registry import StartedJobRegistry
+   registry = StartedJobRegistry('default', connection=redis)
+   registry.cleanup()  # Moves expired jobs to FailedJobRegistry
+   ```
+4. **Store job state in database** - don't rely solely on RQ registries; job table with `status`, `started_at`, `updated_at`
+5. **Heartbeat pattern** - jobs update `updated_at` periodically; separate process detects stale jobs
+6. **Configure worker properly**:
+   ```python
+   Worker(..., job_monitoring_interval=5)  # Check job health every 5 seconds
+   ```
 
-**VIP30-specific:** Current `templates.py` prompts need audit for bloat. Adjuster tone reference should be 5-10 bullet examples, not paragraph descriptions.
+**Address in phase:** Job State Machine phase (core infrastructure)
 
-**Phase mapping:** Phase 2 (Writer Pass) owns prompt efficiency for tone instructions.
+**Sources:**
+- [RQ Issue #787: Identifying & Clearing Zombie Workers](https://github.com/rq/rq/issues/787)
+- [RQ Issue #1553: Jobs Go Into Bad State](https://github.com/rq/rq/issues/1553)
+- [The Interrupted Asynchronous Task Problem with Python RQ](https://medium.com/picus-security-engineering/the-interrupted-asynchronous-task-problem-and-solution-with-python-rq-435f1a597631)
 
 ---
 
-## Quality Pitfalls
+### 4. JWT/Session Cookie Security Gaps
 
-### Pitfall 4: Cascading Quality Drift Between Passes
-
-**What goes wrong:** Each pass introduces small deviations that compound. Analysis extracts slightly wrong delta -> Writer amplifies error -> Compliance "fixes" by changing meaning.
-
-**Why it happens:** LLM nondeterminism means output varies even with same input. When Pass N's output becomes Pass N+1's input, errors cascade. Research identifies this as the primary multi-pass reliability challenge.
+**What goes wrong:** Storing JWT in localStorage enables XSS theft. Using cookies without proper flags enables CSRF. Mixing approaches without understanding tradeoffs creates security holes.
 
 **Warning signs:**
-- Final narrative contradicts raw data
-- Quality metrics oscillate (pass 2 passes, pass 3 fails quality check)
-- "Corrected" narratives lose accurate information from earlier passes
+- JWT stored in localStorage or sessionStorage
+- Cookies without `HttpOnly`, `Secure`, `SameSite` flags
+- No CSRF protection when using cookie-based auth
+- Same token used for API calls and cookie refresh
 
-**Prevention strategy:**
-1. Analysis pass outputs structured data with explicit confidence flags
-2. Writer pass receives delta data AND original source values for grounding
-3. Each pass validates against known quantities (grand totals, delta values)
-4. Add assertion: writer output delta values must match analysis output
+**Prevention:**
+1. **Use HttpOnly cookies for refresh tokens** - cannot be accessed by JavaScript
+2. **Short-lived access tokens (15-30 min)** - stored in memory only, not persisted
+3. **Set all cookie security flags**:
+   ```python
+   response.set_cookie(
+       key="refresh_token",
+       value=token,
+       httponly=True,
+       secure=True,  # HTTPS only
+       samesite="lax",  # or "strict"
+       max_age=604800  # 7 days
+   )
+   ```
+4. **Implement CSRF protection** - double-submit cookie pattern:
+   - Set non-HttpOnly CSRF cookie
+   - Require CSRF token in request header
+   - Compare header value to cookie value
+5. **Bind session to browser** - include fingerprint in token, reject on mismatch
 
-**VIP30-specific:** The `_drivers_from_deltas()` already produces structured data. Ensure this anchors all downstream passes.
+**Address in phase:** Auth phase (session management design)
 
-**Phase mapping:** All phases. Architecture decision: downstream passes receive source values for validation.
+**Sources:**
+- [FastAPI Security Design Guide 2025](https://blog.greeden.me/en/2025/10/14/a-beginners-guide-to-serious-security-design-with-fastapi-authentication-authorization-jwt-oauth2-cookie-sessions-rbac-scopes-csrf-protection-and-real-world-pitfalls/)
+- [FastAPI JWT HttpOnly Cookie](https://www.fastapitutorial.com/blog/fastapi-jwt-httponly-cookie/)
+- [JWT in Cookies - FastAPI JWT Auth](https://indominusbyte.github.io/fastapi-jwt-auth/usage/jwt-in-cookies/)
 
 ---
 
-### Pitfall 5: Compliance Over-Correction
+## Medium-Risk Pitfalls
 
-**What goes wrong:** Compliance rewrite changes content meaning while fixing style. "Farmers allowed $12,000 for roofing" becomes "The estimate includes roofing allowances" - losing specificity.
+### 5. Database Connection Pool Exhaustion
 
-**Why it happens:** LLMs overcorrect when given style instructions. Research shows precision-recall tradeoff: prompts tuned for catching issues miss real content, prompts tuned for filtering false positives miss real issues.
+**What goes wrong:** Each request creates new database connection. Under load, connections exceed PostgreSQL's `max_connections` (default 100). New requests block or fail.
 
 **Warning signs:**
-- Specific dollar amounts replaced with vague language
-- Industry shorthand (PWI, MEP) removed or expanded incorrectly
-- Post-compliance narratives longer but less informative
-- Quality gate passes but output is generic
+- "too many connections" errors under load
+- Slow response times that worsen with traffic
+- Connection count grows but never shrinks
+- Memory usage correlates with request volume
 
-**Prevention strategy:**
-1. Compliance prompt explicitly preserves: dollar amounts, category names, delta values, industry abbreviations
-2. Use minimal-edit approach: "Fix only the specific issue flagged"
-3. Compliance receives quality gate failure reason, not blanket "improve this"
-4. Add post-compliance assertion: key quantities unchanged
+**Prevention:**
+1. **Use connection pooling** - SQLAlchemy's pool or PgBouncer
+2. **Configure pool size appropriately**:
+   ```python
+   engine = create_async_engine(
+       DATABASE_URL,
+       pool_size=10,
+       max_overflow=20,
+       pool_pre_ping=True,  # Validate connections
+       pool_recycle=3600    # Refresh hourly
+   )
+   ```
+3. **Use dependency injection with yield** - ensures connection cleanup:
+   ```python
+   async def get_db():
+       async with AsyncSession(engine) as session:
+           yield session
+   ```
+4. **Never create engine per-request** - create once at startup
+5. **Monitor connection counts** - alert when approaching limit
 
-**VIP30-specific:** Current AI-sounding output suggests over-smoothing. Compliance pass must be surgical, not wholesale rewrite.
+**Address in phase:** Database phase (infrastructure setup)
 
-**Research insight:** The PoCO approach (intentional overcorrection followed by precision pass) inverts this - consider if applicable.
-
-**Phase mapping:** Phase 4 (Compliance Rewrite) must implement minimal-edit strategy.
+**Sources:**
+- [Handling PostgreSQL Connection Limits in FastAPI](https://medium.com/@rameshkannanyt0078/handling-postgresql-connection-limits-in-fastapi-efficiently-379ff44bdac5)
+- [FastAPI Production Deployment Best Practices (Render)](https://render.com/articles/fastapi-production-deployment-best-practices)
 
 ---
 
-### Pitfall 6: AI Tone Leakage
+### 6. Charging Credits Before Job Completion
 
-**What goes wrong:** Narratives sound like AI, not adjusters. "There appears to be a significant difference" instead of "Large Delta on Estimate cost to Mitigate."
-
-**Why it happens:** LLMs default to hedged, formal language. Without strong style anchoring, outputs drift toward generic assistant voice. Current PROJECT.md already identifies this as the core problem.
+**What goes wrong:** Credits deducted when job starts. Job fails. User lost credits but got nothing. Refund logic is complex and error-prone.
 
 **Warning signs:**
-- "suggests", "appears", "may indicate", "potentially" in output
-- Passive voice dominates
-- Missing industry abbreviations
-- Explanatory tone instead of declarative
+- Credit deduction happens in API endpoint before enqueuing
+- No mechanism to refund failed jobs
+- Users complain about lost credits on failures
 
-**Prevention strategy:**
-1. Writer pass receives 5-10 real adjuster examples (few-shot)
-2. Quality gate explicitly checks for banned phrases
-3. System prompt uses adjuster vocabulary in instructions themselves
-4. Consider voice extraction: analyze real adjuster samples to build style profile
+**Prevention:**
+1. **Reserve, don't charge** - mark credits as "pending" when job starts
+2. **Charge on success only** - create `credit_consumption` record only when job completes successfully
+3. **Use idempotent completion handler**:
+   ```python
+   def on_job_success(job_id):
+       # Idempotency: only charge if not already charged
+       if not credit_consumption_exists(job_id):
+           create_credit_consumption(job_id, amount)
+   ```
+4. **Failed jobs release reservation** - clear pending state, credits return to available
+5. **Store job cost with job record** - know what to charge at completion time
 
-**VIP30-specific:** PROJECT.md adjuster tone reference is the source material. Quality gate criterion "analyst tone detection" directly addresses this.
+**Address in phase:** Credits + Job State Machine phases (integration point)
 
-**Phase mapping:** Phase 2 (Writer Pass) owns tone, Phase 3 (Quality Gate) enforces it.
+**Sources:**
+- [Best Practices for Retry Pattern](https://harish-bhattbhatt.medium.com/best-practices-for-retry-pattern-f29d47cd5117)
+- [Building Resilient Task Queues with ARQ Retries](https://davidmuraya.com/blog/fastapi-arq-retries/)
 
 ---
 
-## Performance Pitfalls
+### 7. Tenant Isolation Leaks in Workspace Model
 
-### Pitfall 7: Latency Stacking
-
-**What goes wrong:** Three sequential API calls create 3x latency floor. Current 100k+ token requests already hit 60+ seconds; three passes could mean 3+ minute waits.
-
-**Why it happens:** Multi-pass pipelines are inherently sequential - Pass 2 needs Pass 1 output. Unlike independent requests that can parallelize, passes must wait.
+**What goes wrong:** Query forgets `WHERE workspace_id = ?`. User sees data from another workspace. Or worse, can modify it.
 
 **Warning signs:**
-- Total job duration > 120 seconds consistently
-- User-perceived timeout (frontend polling gives up)
-- Worker timeouts killing jobs mid-pipeline
+- Queries don't consistently filter by workspace
+- API endpoints accept workspace_id as parameter (trust client)
+- No automated tests for tenant isolation
+- Debug endpoints expose raw queries
 
-**Prevention strategy:**
-1. Optimize each pass independently before combining
-2. Analysis pass targets structured output (faster than prose)
-3. Compliance pass conditional (skip 70%+ of jobs)
-4. Consider streaming for user feedback during long jobs
-5. Timeout per pass (60s each) not just total
+**Prevention:**
+1. **Derive workspace_id from session** - never from request params
+2. **Use scoped query helpers**:
+   ```python
+   def get_jobs(db: Session, workspace_id: UUID):
+       return db.query(Job).filter(Job.workspace_id == workspace_id).all()
+   ```
+3. **Consider Row-Level Security** (PostgreSQL):
+   ```sql
+   CREATE POLICY workspace_isolation ON jobs
+   USING (workspace_id = current_setting('app.current_workspace_id')::uuid);
+   ```
+4. **Automated tenant isolation tests** - every query tested with multiple workspaces
+5. **Never expose internal IDs in URLs** - use workspace-scoped slugs
 
-**VIP30-specific:** Current 180-second timeout in `adapter.py` must become per-pass budget. Consider increasing frontend polling patience.
+**Address in phase:** Workspace/Database phase (schema + query layer design)
 
-**Async execution insight:** Research shows async patterns reduced RAG latency from 6-8 seconds to 2-3 seconds. Apply to independent operations (quality gate checks can run in parallel).
-
-**Phase mapping:** Architecture phase (before Phase 1). Per-pass timeout strategy.
+**Sources:**
+- [WorkOS: Developer's Guide to Multi-Tenant Architecture](https://workos.com/blog/developers-guide-saas-multi-tenant-architecture)
+- [Multi-Tenant Database Architecture Patterns](https://www.bytebase.com/blog/multi-tenant-database-architecture-patterns-explained/)
 
 ---
 
-### Pitfall 8: Context Window Exhaustion on Large Estimates
+### 8. Optimistic Locking Misunderstandings
 
-**What goes wrong:** Large Xactimate estimates exceed model context limits even for single pass. Multi-pass makes this worse if each pass re-ingests full data.
-
-**Why it happens:** Estimates with 200+ line items serialize to 100k+ characters. Model attention degrades at context edges ("lost in the middle" problem confirmed by research).
+**What goes wrong:** Developer expects SQLAlchemy `version_id_col` to work across HTTP requests (like Hibernate). It doesn't - it's transaction-scoped only. Concurrent updates still overwrite each other.
 
 **Warning signs:**
-- Missing categories in output despite presence in input
-- Quality varies by estimate size (large = worse)
-- Specific items mentioned early/late in estimate but not middle
+- Using `version_id_col` but conflicts aren't detected
+- No explicit version number in API responses
+- Updates don't include version in request body
+- `StaleDataError` never raised in production
 
-**Prevention strategy:**
-1. Pre-summarize large sections before LLM call
-2. Analysis pass extracts then discards raw data
-3. Chunk large estimates, aggregate results
-4. Consider hierarchical summarization: sections -> categories -> totals
+**Prevention:**
+1. **Understand scope** - SQLAlchemy versioning is in-transaction only
+2. **Implement application-level optimistic locking**:
+   ```python
+   # Include version in response
+   {"id": 123, "name": "Job", "version": 5}
 
-**VIP30-specific:** The `_build_summary_snapshot()` method already creates 10-item previews. Extend this pattern for LLM context.
+   # Require version in update
+   def update_job(job_id, updates, expected_version):
+       result = db.execute(
+           update(Job)
+           .where(Job.id == job_id, Job.version == expected_version)
+           .values(**updates, version=expected_version + 1)
+       )
+       if result.rowcount == 0:
+           raise ConflictError("Job was modified by another request")
+   ```
+3. **Handle conflicts gracefully** - return 409 Conflict, not 500
+4. **Log conflicts** - high rates indicate design problem
 
-**Research insight:** 400k+ characters triggers "expensive processing mode" with 50x latency increase. Stay well under.
+**Address in phase:** Database phase (update patterns)
 
-**Phase mapping:** Phase 1 (Analysis Pass) must handle estimate size gracefully.
+**Sources:**
+- [SQLAlchemy Versioning Documentation](https://docs.sqlalchemy.org/en/21/orm/versioning.html)
+- [SQLAlchemy Database Locks Using FastAPI](https://medium.com/@mojimich2015/sqlalchemy-database-locks-using-fastapi-a-simple-guide-3e7dcd552d87)
 
 ---
 
-### Pitfall 9: Worker Timeout vs Pipeline Duration
+### 9. Missing Database Migration Strategy
 
-**What goes wrong:** RQ worker timeout kills job partway through pipeline, leaving incomplete state.
-
-**Why it happens:** Worker timeout configured for single-pass latency. Three passes exceed budget.
+**What goes wrong:** First deployment works. Second deployment fails because schema changed. Or migrations run on application startup and block/fail under load.
 
 **Warning signs:**
-- Jobs marked failed with timeout error
-- Partial results in storage
-- Inconsistent failure rates based on estimate size
+- Using `create_all()` instead of migrations
+- Migrations run automatically on startup
+- No migration testing before deploy
+- Long-running migrations lock tables
 
-**Prevention strategy:**
-1. Set worker timeout to accommodate full pipeline (300s minimum)
-2. Implement checkpoint/resume: save state between passes
-3. Quality gate runs before longest pass (compliance) to fail fast
-4. Consider separate queues with different timeout budgets
+**Prevention:**
+1. **Use Alembic from day one** - never `create_all()` in production
+2. **Run migrations separately from application startup**:
+   ```bash
+   # Deploy process
+   alembic upgrade head  # Run first, separately
+   # Then restart application
+   ```
+3. **Test migrations on production-like data** - some migrations are slow
+4. **Design for backwards compatibility**:
+   - Add columns as nullable or with defaults
+   - Deploy new code that handles both schemas
+   - Run migration
+   - Deploy code that requires new schema
+5. **Set statement timeouts** - migrations shouldn't hold locks forever
 
-**VIP30-specific:** Check Render worker configuration. Current RQ setup may need adjustment.
+**Address in phase:** Database phase (infrastructure setup)
 
-**Phase mapping:** Architecture decision before Phase 1. Worker configuration.
-
----
-
-## Evaluation Pitfalls
-
-### Pitfall 10: Quality Gate Threshold Calibration
-
-**What goes wrong:** Thresholds too strict = constant compliance rewrites (cost). Too loose = bad output passes (quality). Fixed thresholds don't adapt to content variation.
-
-**Why it happens:** Quality metrics are heuristic. "3 soft qualifiers" may be appropriate for simple estimate, too many for complex. Binary pass/fail creates boundary instability.
-
-**Warning signs:**
-- Compliance pass triggered >50% of jobs (threshold too strict)
-- User complaints despite quality gate passing (threshold too loose)
-- Quality scores cluster at threshold boundary (calibration off)
-
-**Prevention strategy:**
-1. Use pass bands not single thresholds to avoid flakiness
-2. Track distribution of scores, not just pass/fail
-3. Calibrate thresholds against human-rated samples
-4. Consider multiple violation = failure, not single
-
-**VIP30-specific quality gates:**
-- Hedging threshold (<=3 soft qualifiers): Consider 2-4 band
-- Trade verbosity (<=2 sentences, avg <=40 words): May need per-trade adjustment
-- Valuation link: Binary check, hard to miscalibrate
-- Summary length (bullets <=30 words, <=6 total): Clear bounds
-- Analyst tone: Pattern match on banned phrases
-
-**Research insight:** Binary outputs produce more stable evaluations than numeric scoring.
-
-**Phase mapping:** Phase 3 (Quality Gate) owns calibration. Requires baseline samples.
+**Sources:**
+- [SQL Migrations in PostgreSQL (Miro Engineering)](https://medium.com/miro-engineering/sql-migrations-in-postgresql-part-1-bc38ec1cbe75)
+- [PostgreSQL Migration Playbook](https://www.percona.com/blog/best-practices-for-postgresql-migration/)
 
 ---
 
-### Pitfall 11: LLM-as-Judge Self-Enhancement Bias
+## Low-Risk / Edge Cases
 
-**What goes wrong:** Using same model to generate and judge creates bias. Model rates own output 5-7% higher than equivalent external content.
+### 10. OTP Email Delivery Timing
+- **Issue:** User requests OTP, email takes 5 minutes, OTP expires before arrival
+- **Mitigation:** Use reliable email provider (SendGrid, Resend), 10-minute OTP validity, allow resend after 60 seconds
 
-**Why it happens:** Model has implicit preferences that align with its own generation patterns. Judges tend toward self-favoring assessments.
+### 11. Redis Connection Loss Mid-Job
+- **Issue:** Worker loses Redis connection, can't update job status
+- **Mitigation:** Job timeout + cleanup process, reconnection logic with backoff
 
-**Warning signs:**
-- Quality gate passes more often than human review suggests it should
-- Pattern of "good enough" output that doesn't match user expectations
-- Compliance pass rarely triggers despite visible quality issues
+### 12. Clock Skew in Distributed Workers
+- **Issue:** Worker A thinks token expired, Worker B thinks it's valid
+- **Mitigation:** Use NTP, add small tolerance (30 seconds) to expiry checks
 
-**Prevention strategy:**
-1. Use different model for evaluation than generation (if budget allows)
-2. Rely on deterministic checks where possible (word count, phrase detection)
-3. Periodic human audit of passed outputs
-4. Track user feedback as ground truth
+### 13. Sequence Sync After Migration
+- **Issue:** PostgreSQL sequences not updated after data migration, next insert fails
+- **Mitigation:** Run `SELECT setval()` after any data migration
+- **Source:** [Moving Tables Across PostgreSQL Instances](https://ananthakumaran.in/2025/11/02/moving-tables-across-postgres-instances.html)
 
-**VIP30-specific:** Hedge detection and banned phrase lists are deterministic - prefer these over LLM judgment. Valuation link may need LLM evaluation.
+### 14. Job Retry Causes Duplicate Work
+- **Issue:** Job partially completed, retried, creates duplicate outputs
+- **Mitigation:** Idempotency keys, check-before-write pattern, transactional consistency
 
-**Phase mapping:** Phase 3 (Quality Gate). Implement deterministic checks first.
-
----
-
-### Pitfall 12: False Negative Quality Gates (Missed Problems)
-
-**What goes wrong:** Quality gate passes output that has real problems. User sees bad narrative despite "passing" quality check.
-
-**Why it happens:** Metrics don't cover all quality dimensions. Hedging check passes but tone is wrong. Word count passes but content is wrong.
-
-**Warning signs:**
-- User complaints on jobs that passed quality gates
-- Specific failure modes not captured by existing checks
-- Gap between automated metrics and human assessment
-
-**Prevention strategy:**
-1. Start with comprehensive metric set, prune over time
-2. Add new checks when failure patterns emerge
-3. Maintain "golden set" of known-good/known-bad samples for regression
-4. Quality gate failure reasons logged for pattern analysis
-
-**VIP30-specific:** Current known issue is "AI-sounding narratives" - ensure analyst tone detection catches this specifically.
-
-**Phase mapping:** Phase 3 (Quality Gate) with iteration based on production feedback.
+### 15. Forgot to Run ANALYZE After Migration
+- **Issue:** Query planner uses stale statistics, queries slow after migration
+- **Mitigation:** Always run `ANALYZE` after bulk data operations
+- **Source:** [PostgreSQL Migration Best Practices](https://www.percona.com/blog/best-practices-for-postgresql-migration/)
 
 ---
 
-## Implementation Pitfalls
+## Checklist for v1.1
 
-### Pitfall 13: Generic Fallback Narrative Masking Failures
+### Auth Phase
+- [ ] OTP rate limiting by email (not IP)
+- [ ] Max 3 OTP sends per 15 minutes per email
+- [ ] Max 5 verification attempts per OTP
+- [ ] OTP expires in 10 minutes
+- [ ] HttpOnly + Secure + SameSite cookies
+- [ ] CSRF protection implemented
+- [ ] Session binding (fingerprint or similar)
 
-**What goes wrong:** When LLM fails, system returns generic narrative that looks like output but provides no value. Users can't distinguish failure from success.
+### Database Phase
+- [ ] Connection pooling configured (pool_size, max_overflow)
+- [ ] Alembic initialized, no create_all() in production
+- [ ] All tables have workspace_id column
+- [ ] Foreign key from jobs to workspace
+- [ ] Row-level security OR strict query scoping
 
-**Why it happens:** Fallback logic prioritizes "returning something" over transparency. Current `_fallback_narrative()` returns template text.
+### Credits Phase
+- [ ] Ledger-style tables (credit_grants, credit_consumptions)
+- [ ] Idempotency keys on all credit operations
+- [ ] Atomic balance check + deduction (single transaction)
+- [ ] Credits charged on success only (not on queue)
+- [ ] Balance calculated from ledger, not stored as mutable field
 
-**Warning signs:**
-- Same narrative text appearing across different comparisons
-- "Review manually" or similar in output
-- Missing expected sections (cost drivers, observations)
-- User confusion about whether comparison worked
+### Job State Machine Phase
+- [ ] Job table with status, started_at, updated_at, completed_at
+- [ ] Job timeout configured for all job types
+- [ ] Cleanup task for stuck jobs (StartedJobRegistry.cleanup())
+- [ ] Heartbeat pattern for long-running jobs
+- [ ] Idempotent job completion handler
+- [ ] Failed jobs have retry path (if applicable)
 
-**Prevention strategy:**
-1. Fallback narratives clearly marked as incomplete
-2. Include what succeeded vs failed
-3. Consider failing loudly instead of silent degradation
-4. Track fallback rate as KPI - target <5%
-
-**VIP30-specific:** Current fallback includes "Narrative fallback: {reason}" but this may not surface to user clearly. Consider explicit error state.
-
-**Phase mapping:** Error handling across all phases. Explicit failure signaling.
-
----
-
-### Pitfall 14: Template/Prompt Drift
-
-**What goes wrong:** Prompts edited over time without tracking. Changes improve one case, break another. No regression testing.
-
-**Why it happens:** Prompt engineering is iterative. Without version control and evaluation sets, changes are blind.
-
-**Warning signs:**
-- "It used to work better"
-- Different results from same input over time
-- No clear record of prompt changes
-
-**Prevention strategy:**
-1. Version prompts explicitly (current `bid_comp_summary_v1` is good start)
-2. Maintain evaluation set: input estimates + expected output characteristics
-3. Run evaluation set before deploying prompt changes
-4. Log prompt version with each generation for debugging
-
-**VIP30-specific:** Current `TemplateRegistry` pattern supports versioning. Enforce version bumps on prompt changes.
-
-**Phase mapping:** All phases. Testing infrastructure.
-
----
-
-### Pitfall 15: Pass Coupling Through Implicit Contracts
-
-**What goes wrong:** Pass 2 depends on Pass 1 output format, but format isn't enforced. Model drift or prompt change breaks downstream parsing.
-
-**Why it happens:** LLM output is non-deterministic. Same prompt can produce different structures. Downstream passes assume structure that isn't guaranteed.
-
-**Warning signs:**
-- JSON parse errors between passes
-- "KeyError" or missing field exceptions
-- Inconsistent behavior based on input content
-
-**Prevention strategy:**
-1. Define explicit schema for each pass output
-2. Validate output against schema before forwarding
-3. Use structured output features (JSON mode, function calling)
-4. Fallback/retry logic when structure validation fails
-
-**VIP30-specific:** Current `_coerce_structured_llm_output()` handles some cases. Extend with explicit schema validation per pass.
-
-**Phase mapping:** All phases. Schema definition in architecture.
-
----
-
-## Prevention Strategies Summary
-
-### Architectural Decisions (Before Phase 1)
-
-| Decision | Purpose | Implementation |
-|----------|---------|----------------|
-| Per-pass timeout budget | Prevent pipeline timeout | 60s per pass, 240s total worker |
-| Context isolation | Prevent token explosion | Each pass receives only what it needs |
-| Schema contracts | Prevent pass coupling | JSON schema per pass output |
-| Checkpoint capability | Enable resume on failure | State saved after each pass |
-
-### Phase 1: Analysis Pass
-
-| Pitfall | Prevention |
-|---------|------------|
-| Context explosion | Output compact schema, not raw estimates |
-| Large estimate handling | Pre-summarize, chunk, or sample |
-| Schema drift | Validate output structure |
-
-### Phase 2: Writer Pass
-
-| Pitfall | Prevention |
-|---------|------------|
-| AI tone leakage | Few-shot adjuster examples in prompt |
-| Prompt bloat | <1000 token system prompt |
-| Quality drift | Include delta values for grounding |
-
-### Phase 3: Quality Gate
-
-| Pitfall | Prevention |
-|---------|------------|
-| Threshold calibration | Pass bands, not single values |
-| Self-enhancement bias | Deterministic checks where possible |
-| False negatives | Comprehensive metric set, audit |
-| Over-triggering | Target >70% compliance skip rate |
-
-### Phase 4: Compliance Rewrite
-
-| Pitfall | Prevention |
-|---------|------------|
-| Over-correction | Minimal-edit approach with preserved values |
-| Redundant invocation | Only trigger on gate failure |
-| Meaning loss | Post-compliance assertion on key values |
-
----
-
-## Phase Mapping Reference
-
-| Phase | Primary Pitfalls | Key Decisions |
-|-------|------------------|---------------|
-| Architecture | 7, 9, 15 | Timeout budget, schema contracts |
-| Phase 1: Analysis | 1, 4, 8 | Output schema, context compression |
-| Phase 2: Writer | 3, 6, 4 | Prompt efficiency, tone anchoring |
-| Phase 3: Quality Gate | 10, 11, 12, 2 | Deterministic checks, skip logic |
-| Phase 4: Compliance | 5, 2 | Minimal-edit, value preservation |
-| All Phases | 13, 14 | Error handling, prompt versioning |
+### Integration Phase
+- [ ] Credit reservation on job start
+- [ ] Credit consumption on job success
+- [ ] Credit release on job failure
+- [ ] Tenant isolation test for every query
+- [ ] Concurrent request test for credit operations
 
 ---
 
@@ -455,38 +396,14 @@ With three passes, this becomes 3x the current token load.
 
 | Area | Confidence | Reason |
 |------|------------|--------|
-| Token/Cost pitfalls | HIGH | Direct industry research, verified patterns |
-| Quality drift | HIGH | Multiple sources confirm cascading effect |
-| Over-correction | HIGH | Research literature on LLM overcorrection |
-| Latency | HIGH | Sequential processing math + timeout data |
-| Quality gate calibration | MEDIUM | Domain-specific thresholds need tuning |
-| Self-enhancement bias | MEDIUM | Research shows 5-7% effect, magnitude varies |
+| Credit race conditions | HIGH | Multiple official sources, well-documented pattern |
+| OTP security | HIGH | CVE-2025-60424 + multiple security research sources |
+| RQ job states | HIGH | Official RQ docs + GitHub issues with confirmed behavior |
+| Session management | HIGH | FastAPI official docs + multiple production guides |
+| Connection pooling | HIGH | SQLAlchemy docs + Render-specific guidance |
+| Tenant isolation | MEDIUM | Pattern well-known but PostgreSQL RLS specifics need validation |
+| Migration strategy | HIGH | Alembic docs + production experience widely documented |
+| Optimistic locking | MEDIUM | SQLAlchemy docs clear, but cross-request pattern is app-specific |
 
----
-
-## Sources
-
-### Primary (HIGH confidence)
-- [Kore.ai LLM Drift, Prompt Drift & Cascading](https://www.kore.ai/blog/llm-drift-prompt-drift-cascading) - cascading degradation patterns
-- [RouteLLM Framework](https://lmsys.org/blog/2024-07-01-routellm/) - routing cost savings 45-85%
-- [MLOps Community Prompt Bloat Impact](https://mlops.community/the-impact-of-prompt-bloat-on-llm-output-quality/) - prompt compression strategies
-- [Evidently AI LLM-as-Judge](https://www.evidentlyai.com/llm-guide/llm-as-a-judge) - evaluation reliability
-
-### Secondary (MEDIUM confidence)
-- [arXiv LLM Overcorrection](https://arxiv.org/html/2509.20811v1) - PoCO approach for precision-recall
-- [Medium Context Window Analysis](https://medium.com/@adityakamat007/understanding-llm-context-windows-why-400k-tokens-doesnt-mean-what-you-think-918704d04085) - 400k character threshold
-- [Braintrust Evaluation Metrics](https://www.braintrust.dev/articles/llm-evaluation-metrics-guide) - quality gate thresholds
-- [Scale Blog Voice Preservation](https://scale.com/blog/using-llms-while-preserving-your-voice) - tone consistency
-
-### Tertiary (Project-specific)
-- VIP30 `apps/vip-parse/src/llm/adapter.py` - current implementation patterns
-- VIP30 `apps/vip-parse/src/bid_comp/core.py` - existing fallback and context handling
-- VIP30 `.planning/PROJECT.md` - adjuster tone reference and requirements
-
----
-
-## Metadata
-
-**Research date:** 2026-01-18
-**Valid until:** 60 days (patterns stable, thresholds may need tuning)
-**Updates needed when:** Quality gate metrics established, production feedback available
+**Research date:** 2026-02-13
+**Valid until:** 2026-03-15 (patterns stable, security advisories may update)
