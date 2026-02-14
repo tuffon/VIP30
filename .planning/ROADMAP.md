@@ -35,7 +35,7 @@ Transform the existing bid comparison tool into a customer-ready MVP with user a
 **Plans:** TBD
 
 Plans:
-- [ ] 01-01: PostgreSQL setup and SQLModel models
+- [ ] 01-01: PostgreSQL setup and SQLModel models *(planned)*
 
 ### Phase 2: Auth + Workspace Creation
 **Goal:** Email OTP authentication that creates user + workspace + trial credits on first login
@@ -52,8 +52,8 @@ Plans:
 **Plans:** TBD
 
 Plans:
-- [ ] 02-01: OTP send/verify endpoints with rate limiting
-- [ ] 02-02: JWT sessions and workspace creation flow
+- [ ] 02-01: OTP send/verify endpoints with rate limiting *(planned)*
+- [ ] 02-02: JWT sessions and workspace creation flow *(planned)*
 
 ### Phase 3: Jobs + Credits Integration
 **Goal:** Job state machine with idempotent credit consumption on successful completion
@@ -98,11 +98,11 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Database + Workspace Foundation | 0/1 | Not started | - |
-| 2. Auth + Workspace Creation | 0/2 | Not started | - |
+| 1. Database + Workspace Foundation | 0/1 | Planned | - |
+| 2. Auth + Workspace Creation | 0/2 | Planned | - |
 | 3. Jobs + Credits Integration | 0/2 | Not started | - |
 | 4. Frontend + Usage + Polish | 0/3 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-13*
-*Last updated: 2026-02-13*
+*Last updated: 2026-02-13 — Phases 1, 2 planned*
