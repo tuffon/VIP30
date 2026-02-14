@@ -120,56 +120,56 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DB-01 | TBD | Pending |
-| DB-02 | TBD | Pending |
-| DB-03 | TBD | Pending |
-| DB-04 | TBD | Pending |
-| DB-05 | TBD | Pending |
-| DB-06 | TBD | Pending |
-| WS-01 | TBD | Pending |
-| WS-02 | TBD | Pending |
-| WS-03 | TBD | Pending |
-| WS-04 | TBD | Pending |
-| WS-05 | TBD | Pending |
-| AUTH-01 | TBD | Pending |
-| AUTH-02 | TBD | Pending |
-| AUTH-03 | TBD | Pending |
-| AUTH-04 | TBD | Pending |
-| AUTH-05 | TBD | Pending |
-| AUTH-06 | TBD | Pending |
-| AUTH-07 | TBD | Pending |
-| AUTH-08 | TBD | Pending |
-| CRED-01 | TBD | Pending |
-| CRED-02 | TBD | Pending |
-| CRED-03 | TBD | Pending |
-| CRED-04 | TBD | Pending |
-| CRED-05 | TBD | Pending |
-| CRED-06 | TBD | Pending |
-| JOB-01 | TBD | Pending |
-| JOB-02 | TBD | Pending |
-| JOB-03 | TBD | Pending |
-| JOB-04 | TBD | Pending |
-| JOB-05 | TBD | Pending |
-| JOB-06 | TBD | Pending |
-| USE-01 | TBD | Pending |
-| USE-02 | TBD | Pending |
-| USE-03 | TBD | Pending |
-| USE-04 | TBD | Pending |
-| FE-01 | TBD | Pending |
-| FE-02 | TBD | Pending |
-| FE-03 | TBD | Pending |
-| FE-04 | TBD | Pending |
-| FE-05 | TBD | Pending |
-| FE-06 | TBD | Pending |
-| NAME-01 | TBD | Pending |
-| NAME-02 | TBD | Pending |
-| NAME-03 | TBD | Pending |
+| DB-01 | Phase 1 | Pending |
+| DB-02 | Phase 1 | Pending |
+| DB-03 | Phase 1 | Pending |
+| DB-04 | Phase 1 | Pending |
+| DB-05 | Phase 1 | Pending |
+| DB-06 | Phase 1 | Pending |
+| WS-01 | Phase 2 | Pending |
+| WS-02 | Phase 1 | Pending |
+| WS-03 | Phase 1 | Pending |
+| WS-04 | Phase 1 | Pending |
+| WS-05 | Phase 1 | Pending |
+| AUTH-01 | Phase 2 | Pending |
+| AUTH-02 | Phase 2 | Pending |
+| AUTH-03 | Phase 2 | Pending |
+| AUTH-04 | Phase 2 | Pending |
+| AUTH-05 | Phase 2 | Pending |
+| AUTH-06 | Phase 2 | Pending |
+| AUTH-07 | Phase 2 | Pending |
+| AUTH-08 | Phase 2 | Pending |
+| CRED-01 | Phase 4 | Pending |
+| CRED-02 | Phase 3 | Pending |
+| CRED-03 | Phase 3 | Pending |
+| CRED-04 | Phase 2 | Pending |
+| CRED-05 | Phase 3 | Pending |
+| CRED-06 | Phase 3 | Pending |
+| JOB-01 | Phase 3 | Pending |
+| JOB-02 | Phase 3 | Pending |
+| JOB-03 | Phase 3 | Pending |
+| JOB-04 | Phase 3 | Pending |
+| JOB-05 | Phase 3 | Pending |
+| JOB-06 | Phase 3 | Pending |
+| USE-01 | Phase 4 | Pending |
+| USE-02 | Phase 4 | Pending |
+| USE-03 | Phase 4 | Pending |
+| USE-04 | Phase 4 | Pending |
+| FE-01 | Phase 4 | Pending |
+| FE-02 | Phase 4 | Pending |
+| FE-03 | Phase 4 | Pending |
+| FE-04 | Phase 4 | Pending |
+| FE-05 | Phase 4 | Pending |
+| FE-06 | Phase 4 | Pending |
+| NAME-01 | Phase 4 | Pending |
+| NAME-02 | Phase 4 | Pending |
+| NAME-03 | Phase 4 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 39 total
-- Mapped to phases: 0 (pending create-roadmap)
-- Unmapped: 39
+- Mapped to phases: 39
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-02-13*
-*Last updated: 2026-02-13 after initial definition*
+*Last updated: 2026-02-13 after roadmap creation*
