@@ -70,7 +70,7 @@ Plans:
 **Plans:** TBD
 
 Plans:
-- [ ] 03-01: ComparisonJob model and state machine
+- [x] 03-01: ComparisonJob model and state machine *(completed)*
 - [ ] 03-02: Credit consumption integration with worker
 
 ### Phase 4: Frontend + Usage + Polish
@@ -100,9 +100,9 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Database + Workspace Foundation | 1/1 | Done | 2026-02-13 |
 | 2. Auth + Workspace Creation | 2/2 | Done | 2026-02-14 |
-| 3. Jobs + Credits Integration | 0/2 | Not started | - |
+| 3. Jobs + Credits Integration | 1/2 | In progress | - |
 | 4. Frontend + Usage + Polish | 0/3 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-13*
-*Last updated: 2026-02-14 — Phase 2 completed*
+*Last updated: 2026-02-14 — Phase 3 plan 03-01 completed*
