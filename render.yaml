@@ -7,6 +7,7 @@ services:
     healthCheckPath: /healthz
     buildCommand: |
       pip install -r requirements-web.txt
+      alembic upgrade head
     startCommand: |
       export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 1 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
     envVars:
@@ -32,6 +33,10 @@ services:
         value: "auto"
       - key: PRESIGN_EXPIRE_SEC
         value: "900"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vip30-db
+          property: connectionString
 
   - type: web
     name: vip30-frontend
@@ -97,9 +102,19 @@ services:
         value: ""
       - key: S3_REGION
         value: "auto"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vip30-db
+          property: connectionString
 
   - type: redis
     name: vip30-redis
     plan: free
     ipAllowList: []
+
+databases:
+  - name: vip30-db
+    plan: free
+    databaseName: vip30
+    user: vip30
 
