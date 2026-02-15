@@ -2,39 +2,27 @@
 
 ## What This Is
 
-A SaaS application for insurance adjusters to compare Xactimate bid estimates. Users upload two PDF estimates, the system parses them, compares line items, and generates an XLSX report with professional adjuster-tone narrative analysis explaining the differences.
+A SaaS application for insurance adjusters to compare Xactimate bid estimates. Users upload two PDF estimates, the system parses them, compares line items, and generates an XLSX report with professional adjuster-tone narrative analysis explaining the differences. Now includes user authentication, credit-based usage tracking, and job progress visibility.
 
 ## Core Value
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
-## Current Milestone: v1.1 MVP Launch
-
-**Goal:** Production-ready customer validation loop with auth, credits, and progress visibility.
-
-**Target features:**
-- Database setup (PostgreSQL on Render)
-- Workspace model (users + credits belong to workspace, MVP = 1 user per workspace)
-- Email OTP auth (one-time code, store login metadata)
-- Credit system (ledger-style: credit_grants + credit_consumptions, only charge on success)
-- Job state machine (queued → parsing → analyzing → writing → completed | failed)
-- Clear failure handling (messaging, retry without double-charge)
-- Internal naming cleanup (vip_job → comparison_job, raw_upload → bid_input)
-- Rebrand to bid comparison tool
-- [Stretch] Narrative enhancement (more verbose with verbosity budget guardrail)
-
 ## Current State
 
-**Version:** v1.0.1 shipped 2026-02-09
+**Version:** v1.1 shipped 2026-02-14
 
-**Shipped features:**
-- Three-pass LLM pipeline (Analysis → Writer → Compliance rewrite)
-- 6 deterministic quality gates (hedging, verbosity, valuation links, summary length, analyst tone, GPT-isms)
-- Adjuster tone control via few-shot examples + terminology glossary
-- Pass-level Redis caching with content-hash keys
-- Production integration in BidComp with legacy fallback
+**Shipped features (v1.1):**
+- PostgreSQL database with workspace-scoped schema
+- Email OTP authentication with rate limiting and JWT cookies
+- Automatic workspace + trial credits creation on signup
+- Job state machine (queued → parsing → analyzing → writing → completed|failed)
+- Ledger-style credit system with idempotent consumption
+- Real-time job progress polling in frontend
+- Job and credit history with pagination
+- Complete auth UI (/login, /login/verify)
 
-**Tech stack:** Turborepo monorepo, Next.js frontend, FastAPI backend, RQ worker, Redis caching
+**Tech stack:** Turborepo monorepo, Next.js 14 frontend, FastAPI backend, RQ worker, Redis caching, PostgreSQL on Render
 
 ## Requirements
 
@@ -46,36 +34,30 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ XLSX report generation with comparison data — existing
 - ✓ LLM-powered narrative generation for bid differences — existing
 - ✓ Frontend upload flow with job polling — existing
-- ✓ Analysis pass: structured extraction of category deltas with supporting line items — v1.0.1
-- ✓ Writer pass: style-controlled generation using adjuster tone reference — v1.0.1
-- ✓ Quality gate: hedging threshold (≤3 soft qualifiers) — v1.0.1
-- ✓ Quality gate: trade verbosity (≤2 sentences, avg ≤40 words) — v1.0.1
-- ✓ Quality gate: valuation link (every trade ties to financial impact) — v1.0.1
-- ✓ Quality gate: summary length (bullets ≤30 words, ≤6 total) — v1.0.1
-- ✓ Quality gate: analyst tone detection (no "suggests", "appears", "may indicate") — v1.0.1
+- ✓ Analysis pass: structured extraction of category deltas — v1.0.1
+- ✓ Writer pass: style-controlled generation with adjuster tone — v1.0.1
+- ✓ Quality gates: hedging, verbosity, valuation links, summary length, analyst tone — v1.0.1
 - ✓ Compliance rewrite: triggered only when quality checks fail — v1.0.1
 - ✓ Pass-level Redis caching to avoid redundant LLM calls — v1.0.1
-- ✓ Key drivers display numeric values (Primary, Comparison, Delta) — v1.0.1
-- ✓ Driver narratives have two sentences (delta + cause) — v1.0.1
-- ✓ Overview has 2-3 sentences with cause analysis — v1.0.1
-- ✓ Estimate names used in comparative framing — v1.0.1
+- ✓ PostgreSQL database on Render for persistence — v1.1
+- ✓ Workspace model: users + credits belong to workspace — v1.1
+- ✓ Email OTP authentication with rate limiting — v1.1
+- ✓ Login metadata stored (last_login_at, login_ip, login_method) — v1.1
+- ✓ Ledger-style credit system (grants + consumptions) — v1.1
+- ✓ Credits consumed only on successful job completion — v1.1
+- ✓ Trial credits granted on signup (default 5) — v1.1
+- ✓ Job state machine with progress tracking — v1.1
+- ✓ Clear failure messaging with retry path — v1.1
+- ✓ Frontend auth UI and credit balance display — v1.1
+- ✓ Job progress shown with real-time polling — v1.1
+- ✓ Job and credit history with pagination — v1.1
+- ✓ UI rebrand to bid comparison terminology — v1.1
 
 ### Active
 
-- [ ] PostgreSQL database on Render for persistence
-- [ ] Workspace model: users belong to workspace, credits belong to workspace
-- [ ] Email OTP authentication (one-time code, not magic links)
-- [ ] Login metadata: last_login_at, login_ip, login_method
-- [ ] credit_grants table: source, amount, timestamp
-- [ ] credit_consumptions table: job_id, amount, success, timestamp
-- [ ] Configurable default credits (5 early adopters, 3 later)
-- [ ] Credits only consumed on successful completion
-- [ ] Job state machine: queued, parsing, analyzing, writing, completed, failed
-- [ ] Job progress fields: current_state, percent/step_index, error_reason
-- [ ] Clear failure messaging with retry path
-- [ ] Internal naming: comparison_job, bid_input (not vip_job, raw_upload)
-- [ ] Frontend rebrand to bid comparison tool positioning
-- [ ] [Stretch] Narrative verbosity enhancement with budget guardrail
+- [ ] Date-range filtering for job/credit history (deferred from v1.1)
+- [ ] Internal naming cleanup: vip_job → comparison_job, raw_upload → bid_input (partial)
+- [ ] Narrative verbosity enhancement with budget guardrail (stretch goal)
 
 ### Out of Scope
 
@@ -84,18 +66,21 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - Additional document types beyond Xactimate — scope to known format
 - Fine-tuning — premature optimization; few-shot sufficient
 - G-Eval tone scoring — deferred to v2
+- Low balance alerts — v2 feature
+- Session device binding — v2 security enhancement
 
 ## Context
 
 Brownfield codebase with functional bid comparison. Turborepo monorepo with Next.js frontend (`apps/vipclaims-saas`), FastAPI backend (`apps/vip-parse`), and RQ worker for async processing. Deployed to Render with auto-deploy on push.
 
-**v1.0.1 shipped:** Professional adjuster narratives via three-pass LLM pipeline with quality gating. 2,591 LOC Python in pipeline module.
+**v1.1 shipped:** Full auth, credits, and job tracking. 9,319 LOC Python, 1,907 LOC TypeScript.
 
 ## Constraints
 
-- **Deployment:** Render.com — frontend, API, worker, Redis all managed there
+- **Deployment:** Render.com — frontend, API, worker, Redis, PostgreSQL all managed there
 - **Storage:** Cloudflare R2 via S3-compatible API
 - **LLM:** OpenAI API (gpt-4o-mini default)
+- **Auth:** Email OTP only (no OAuth for MVP)
 
 ## Key Decisions
 
@@ -106,11 +91,22 @@ Brownfield codebase with functional bid comparison. Turborepo monorepo with Next
 | XLSX output format | Industry standard, adjusters expect spreadsheets | ✓ Good |
 | Three-pass LLM pipeline | Separation of concerns, token reduction, style control | ✓ Good |
 | Pydantic v2 data contracts | Type safety, validation, serialization | ✓ Good |
-| textstat for NLP metrics | Accurate sentence/word counting | ✓ Good |
-| Whole-word regex for single terms | Avoids false positives in pattern matching | ✓ Good |
-| Max 2 compliance rewrite iterations | Prevents infinite loops, acceptable quality | ✓ Good |
 | Content-hash cache keys | Deterministic, input-based caching | ✓ Good |
-| Case-insensitive category matching | Robust to LLM output variation | ✓ Good |
+| Workspace model from day one | Supports future multi-user, credits scoped correctly | ✓ Good |
+| Email OTP over magic links | Research showed better UX, clearer error handling | ✓ Good |
+| Ledger-style credits | Immutable audit trail, simple balance calculation | ✓ Good |
+| JWT in HttpOnly cookie | Secure, works across subdomains, no localStorage | ✓ Good |
+| Job state machine | Clear progress tracking, idempotent credit consumption | ✓ Good |
+| Idempotent credit consumption | UNIQUE job_id constraint prevents double-charge | ✓ Good |
+
+## Tech Debt
+
+| Item | Severity | Notes |
+|------|----------|-------|
+| `POST /render/upload-url` unauthenticated | Low | Works, but any client can request URLs |
+| `datetime.utcnow()` deprecated | Low | Python 3.12+ compatibility warning |
+| JWT_SECRET has default value | Low | Should enforce in production |
+| Internal naming inconsistency | Low | Legacy code uses vip_job, new code uses ComparisonJob |
 
 ---
-*Last updated: 2026-02-13 after starting v1.1 MVP Launch milestone*
+*Last updated: 2026-02-14 after v1.1 milestone*

@@ -2,45 +2,33 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-13)
+See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Milestone wrap-up and verification
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 4 of 4 (Frontend + Usage + Polish)
-Plan: Complete
-Status: Phase complete
-Last activity: 2026-02-14 — Phase 4 completed (04-01, 04-02, 04-03)
+Phase: —
+Plan: —
+Status: Milestone v1.1 complete, ready to plan next milestone
+Last activity: 2026-02-14 — v1.1 MVP Launch shipped
 
-Progress: ██████████ 100%
+Progress: ██████████ 100% (v1.1)
 
 ## Completed Milestones
 
 | Version | Name | Phases | Shipped |
 |---------|------|--------|---------|
+| v1.1 | MVP Launch | 1-4 | 2026-02-14 |
 | v1.0.1 | Professional Adjuster Narratives | 1-8 | 2026-02-09 |
 
 ## Performance Metrics
 
-**Velocity:**
-- Total plans completed: 8 (this milestone)
-- Average duration: —
-- Total execution time: —
-
-**By Phase:**
-
-| Phase | Plans | Total | Avg/Plan |
-|-------|-------|-------|----------|
-| 1 | 1/1 | — | — |
-| 2 | 2/2 | — | — |
-| 3 | 2/2 | — | — |
-| 4 | 3/3 | — | — |
-
-**Recent Trend:**
-- Last 5 plans: 03-01, 03-02, 04-01, 04-02, 04-03
-- Trend: Milestone complete
+**v1.1 Velocity:**
+- Total plans completed: 8
+- Phases: 4
+- Timeline: 2 days
 
 ## Accumulated Context
 
@@ -48,18 +36,25 @@ Progress: ██████████ 100%
 
 Decisions logged in PROJECT.md Key Decisions table.
 
-v1.1 architecture decisions (from discuss-milestone):
+v1.1 architecture decisions:
 - Workspace model from day one (1 user per workspace for MVP)
 - Credits belong to workspace, not user
-- Email OTP (one-time code) over click-only magic links
+- Email OTP over magic links
 - Ledger-style credits: credit_grants + credit_consumptions
 - Fixed job state machine: queued → parsing → analyzing → writing → completed|failed
-- PostgreSQL on Render for persistence
+- JWT in HttpOnly cookie
 
-### Pending Todos
+### Tech Debt (from v1.1)
 
-- Unrelated existing syntax issue in `apps/vip-parse/src/orchestrator/runners.py`:
-  `from __future__ import annotations` is not at top of file.
+- POST /render/upload-url is unauthenticated
+- datetime.utcnow() deprecated in Python 3.12+
+- JWT_SECRET has default value
+- Internal naming partial (vip_job vs ComparisonJob)
+
+### Deferred Requirements
+
+- USE-04: Date-range filtering for history
+- NAME-01/NAME-02: Full internal naming cleanup
 
 ### Blockers/Concerns
 
@@ -68,9 +63,12 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-14
-Stopped at: Phase 4 completed
-Resume file: .planning/plans/04-03-SUMMARY.md
+Stopped at: v1.1 milestone complete
+Resume file: —
 
 ## Next Steps
 
-1. Run manual checkpoint verification for 04-01/04-02/04-03 in local environment
+1. `/gsd:discuss-milestone` — thinking partner for what's next
+2. `/gsd:new-milestone` — update PROJECT.md with new goals
+3. `/gsd:define-requirements` — scope what to build
+4. `/gsd:create-roadmap` — plan how to build it
