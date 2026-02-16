@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "python src/main.py",
+    "dev": "uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload",
+    "dev:worker": "python -m rq worker bidcomp",
+    "dev:stack": "bash -lc 'trap \"kill 0\" EXIT; uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload & if [ -n \"$REDIS_URL\" ]; then python -m rq worker bidcomp; else echo \"REDIS_URL not set; starting API only (UI smoke-test mode)\"; wait; fi'",
     "build": "echo \"python project - no build step\"",
     "lint": "echo \"no js lint for python app\"",
     "test": "pytest -q",

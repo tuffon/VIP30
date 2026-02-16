@@ -18,6 +18,7 @@ __pycache__/
 # Virtual environments
 venv/
 .venv/
+.venv-wsl/
 ENV/
 
 # Environment variable definitions
@@ -34,6 +35,10 @@ embeddings/qdrant_api_key
 # IDE / editor settings
 .vscode/
 .idea/
+
+# Local AI/tooling workspace files
+.codex/
+AGENTS.md
 
 # Jupyter notebooks checkpoints
 .ipynb_checkpoints/ 
