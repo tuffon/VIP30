@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { AuthLayout } from "../../../components/AuthLayout";
@@ -12,7 +12,7 @@ const errorMessages: Record<string, string> = {
   too_many_attempts: "Too many attempts. Please request a new code.",
 };
 
-export default function VerifyPage() {
+function VerifyForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
@@ -146,5 +146,23 @@ export default function VerifyPage() {
         </button>
       </div>
     </AuthLayout>
+  );
+}
+
+function VerifyLoading() {
+  return (
+    <AuthLayout title="Verify your code" subtitle="Loading...">
+      <div className="flex justify-center py-8">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-slate-900" />
+      </div>
+    </AuthLayout>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={<VerifyLoading />}>
+      <VerifyForm />
+    </Suspense>
   );
 }
