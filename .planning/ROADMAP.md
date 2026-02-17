@@ -32,7 +32,7 @@
   5. Every analytical claim tracks data provenance — granularity field prevents fabricated evidence
 **Research**: Likely (line-item matching algorithm, O&P/depreciation extraction depth from Xactimate PDFs)
 **Research topics**: Line-item matching strategy (fuzzy vs activity codes), O&P parameter extraction from PDF output, OpenAI Structured Outputs migration
-**Plans**: TBD
+**Plans**: 09-01 (models + analyzers, Wave 1), 09-02 (integration + structured outputs, Wave 2)
 
 ### Phase 10: Rules Engine & Intelligence
 **Goal**: Automated emphasis, alerting, pattern detection, and diagnostic follow-ups
@@ -76,7 +76,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
-| 9. Data Foundation & Methodology | 0/TBD | Not started | - |
+| 9. Data Foundation & Methodology | 0/2 | Planned | - |
 | 10. Rules Engine & Intelligence | 0/TBD | Not started | - |
 | 11. Narrative Quality & Quality Gates | 0/TBD | Not started | - |
 | 12. Output Modes & Enhanced XLSX | 0/TBD | Not started | - |
