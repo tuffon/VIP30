@@ -30,10 +30,10 @@ v1.2 transforms VIP30 from a functional MVP to a launch-ready product. The landi
   6. Design conveys enterprise B2B insurance tech (restrained colors, strong typography, generous whitespace, grid alignment)
   7. Real product UI screenshots are visual focal point (no stock imagery)
 **Research**: Unlikely (internal frontend work)
-**Plans**: TBD
+**Plans**: 1
 
 Plans:
-- [ ] 05-01: TBD
+- [ ] 05-01: Hero, Features, Navigation, Design (3 tasks)
 
 ### Phase 6: Proof Artifacts & Trust Footer
 **Goal**: Build trust with screenshots, sample output, and legal/security footer
@@ -47,10 +47,11 @@ Plans:
   5. Footer includes Security overview (encryption, data handling)
   6. Footer includes company contact info
 **Research**: Unlikely (static content)
-**Plans**: TBD
+**Plans**: 2
 
 Plans:
-- [ ] 06-01: TBD
+- [ ] 06-01: Footer & Legal Pages (3 tasks, has checkpoint)
+- [ ] 06-02: Screenshots & Sample Download (3 tasks, has checkpoint)
 
 ### Phase 7: App Logged-In Experience
 **Goal**: Polish app UX with user dropdown, session persistence, and credits display
@@ -87,7 +88,7 @@ Phases 5-8 (v1.2), continuing from v1.1's Phases 1-4.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 5. Landing Page Redesign | 0/? | Not started | - |
-| 6. Proof Artifacts & Trust | 0/? | Not started | - |
+| 5. Landing Page Redesign | 0/1 | Planned | - |
+| 6. Proof Artifacts & Trust | 0/2 | Planned | - |
 | 7. App Logged-In Experience | 0/? | Not started | - |
 | 8. Observability | 0/? | Not started | - |
