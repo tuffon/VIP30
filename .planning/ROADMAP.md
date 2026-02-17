@@ -14,6 +14,7 @@
   - Plans: 10-01 (models + engine, Wave 1), 10-02 (pipeline integration, Wave 2)
 - [ ] **Phase 11: Narrative Quality & Quality Gates** - Evidence-based narratives, neutral tone, expanded quality gate system
 - [ ] **Phase 12: Output Modes & Enhanced XLSX** - Four audience modes, multi-sheet XLSX, conditional formatting, audit trail
+  - Plans: 12-01 (mode model + filter + XLSX rewrite, Wave 1), 12-02 (full stack wiring + frontend, Wave 2)
 
 ## Phase Details
 
@@ -71,7 +72,7 @@
   4. XLSX has conditional formatting, multi-sheet structure, and self-contained executive summary sheet
   5. Output includes audit trail metadata (comparison parameters, timestamps, input file hashes)
 **Research**: Unlikely (openpyxl conditional formatting documented, internal wiring)
-**Plans**: TBD
+**Plans**: 12-01 (mode model + filter + XLSX rewrite, Wave 1), 12-02 (full stack wiring + frontend, Wave 2)
 
 ## Progress
 
@@ -80,7 +81,7 @@
 | 9. Data Foundation & Methodology | 2/2 | Completed | 2026-02-17 |
 | 10. Rules Engine & Intelligence | 0/2 | Planned | - |
 | 11. Narrative Quality & Quality Gates | 0/2 | Planned | - |
-| 12. Output Modes & Enhanced XLSX | 0/TBD | Not started | - |
+| 12. Output Modes & Enhanced XLSX | 0/2 | Planned | - |
 
 ---
-*Last updated: 2026-02-17 — Phase 11 planned (2 plans in 2 waves)*
+*Last updated: 2026-02-17 — Phase 12 planned (2 plans in 2 waves)*
