@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Planning next milestone
+**Current focus:** v1.2 Launch Ready — marketing, UX, observability
 
 ## Current Position
 
-Phase: —
+Phase: Not started (run /gsd:define-requirements)
 Plan: —
-Status: Milestone v1.1 complete, ready to plan next milestone
-Last activity: 2026-02-14 — v1.1 MVP Launch shipped
+Status: Defining requirements
+Last activity: 2026-02-17 — Milestone v1.2 started
 
-Progress: ██████████ 100% (v1.1)
+Progress: ░░░░░░░░░░ 0% (v1.2)
 
 ## Completed Milestones
 
@@ -68,7 +68,7 @@ Resume file: —
 
 ## Next Steps
 
-1. `/gsd:discuss-milestone` — thinking partner for what's next
-2. `/gsd:new-milestone` — update PROJECT.md with new goals
-3. `/gsd:define-requirements` — scope what to build
-4. `/gsd:create-roadmap` — plan how to build it
+1. `/gsd:define-requirements` — scope what to build
+2. `/gsd:create-roadmap` — plan how to build it
+3. `/gsd:plan-phase` — create execution plans
+4. `/gsd:execute-phase` — build it

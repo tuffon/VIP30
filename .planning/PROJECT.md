@@ -8,6 +8,15 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
+## Current Milestone: v1.2 Launch Ready
+
+**Goal:** Marketing polish, app UX improvements, and production observability for customer acquisition.
+
+**Target features:**
+- Landing page overhaul (concrete hero, buyer-language labels, proof artifacts, pricing restructure, trust footer)
+- App logged-in experience (user dropdown, persistent sessions, credits display)
+- Observability (structured logging, health check endpoints)
+
 ## Current State
 
 **Version:** v1.1 shipped 2026-02-14
@@ -55,9 +64,29 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 
 ### Active
 
-- [ ] Date-range filtering for job/credit history (deferred from v1.1)
-- [ ] Internal naming cleanup: vip_job → comparison_job, raw_upload → bid_input (partial)
-- [ ] Narrative verbosity enhancement with budget guardrail (stretch goal)
+**Landing Page:**
+- [ ] Concrete hero: "Turn two estimate PDFs into a carrier vs contractor comparison in minutes"
+- [ ] Buyer-language feature labels (deltas, mismatch flags, narrative citations)
+- [ ] Proof artifacts: screenshots, sample XLSX download, demo video placeholder
+- [ ] Pricing restructure: usage tiers, Team/Enterprise options
+- [ ] Remove PDF→ESX from nav (move to roadmap card)
+- [ ] Trust footer: Privacy, Terms, Security overview, contact info
+- [ ] Clean Verisk language → "industry-standard categories"
+- [ ] CTA consistency: "Generate Bid Comp" + "Book demo" sitewide
+
+**App Experience:**
+- [ ] User dropdown with settings placeholder (top-right nav)
+- [ ] Persistent sessions via localStorage (stay logged in until logout)
+- [ ] Fix credits display in Bid Comp UI
+- [ ] Clear logged-in vs logged-out state handling
+
+**Observability:**
+- [ ] Structured logging with request IDs
+- [ ] Health check endpoints for Render
+
+**Deferred:**
+- [ ] Date-range filtering for job/credit history (from v1.1)
+- [ ] Internal naming cleanup (low priority)
 
 ### Out of Scope
 
@@ -109,4 +138,4 @@ Brownfield codebase with functional bid comparison. Turborepo monorepo with Next
 | Internal naming inconsistency | Low | Legacy code uses vip_job, new code uses ComparisonJob |
 
 ---
-*Last updated: 2026-02-14 after v1.1 milestone*
+*Last updated: 2026-02-17 after starting v1.2 milestone*
