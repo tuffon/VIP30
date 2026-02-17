@@ -15,7 +15,8 @@
       "Bash(git merge:*)",
       "Bash(pip index:*)",
       "Bash(ls -la .planning/phases/*/)",
-      "WebFetch(domain:deepmind.google)"
+      "WebFetch(domain:deepmind.google)",
+      "Bash(wc:*)"
     ]
   }
 }
