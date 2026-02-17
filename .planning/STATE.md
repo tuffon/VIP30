@@ -5,18 +5,18 @@
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 9 — Data Foundation & Methodology (execute next)
+**Current focus:** Phase 12 — Output Modes & Enhanced XLSX (execute next)
 
 ## Current Position
 
-Phase: 9 of 12 (Data Foundation & Methodology)
-Plan: 2 plans in 2 waves (01: models+analyzers, 02: integration+structured-outputs)
+Phase: 12 of 12 (Output Modes & Enhanced XLSX)
+Plan: 2 plans in 2 waves (01: mode model + filter + XLSX rewrite, 02: full stack wiring + frontend)
 Status: Planned, ready to execute
-Last activity: 2026-02-17 — Phase 10 planned (2 plans, 2 waves)
+Last activity: 2026-02-17 — Phase 11 completed (plans 11-01 and 11-02)
 
-Phase 10 also planned: 2 plans in 2 waves (01: models+engine, 02: pipeline-integration)
+Phase 12 also planned: 2 plans in 2 waves (01: mode model+filter+xlsx rewrite, 02: full stack wiring+frontend)
 
-Progress: ░░░░░░░░░░ 0% (v2.0)
+Progress: ████████░░ 75% (v2.0)
 
 ## Completed Milestones
 

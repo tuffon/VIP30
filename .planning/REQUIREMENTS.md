@@ -9,27 +9,27 @@ Requirements for v2.0 release. Each maps to roadmap phases.
 
 ### Data Foundation
 
-- [ ] **DATA-01**: System compares estimates at line-item level, matching items by Xactimate activity codes or description similarity
-- [ ] **DATA-02**: System detects O&P structure in each estimate (general O&P, per-line O&P, inclusion/exclusion)
-- [ ] **DATA-03**: System detects depreciation methodology in each estimate (ACV vs RCV, percentage vs amount)
-- [ ] **DATA-04**: System produces scope alignment matrix showing items present in one estimate but absent from the other
-- [ ] **DATA-05**: System calculates total delta with breakdown sorted by absolute magnitude
-- [ ] **DATA-06**: System produces consistent analytical findings for identical inputs (deterministic pre-LLM analysis, cached LLM results)
-- [ ] **DATA-07**: System tracks data provenance — every analytical claim links to specific parsed data, with granularity field preventing fabricated evidence
+- [x] **DATA-01**: System compares estimates at line-item level, matching items by Xactimate activity codes or description similarity
+- [x] **DATA-02**: System detects O&P structure in each estimate (general O&P, per-line O&P, inclusion/exclusion)
+- [x] **DATA-03**: System detects depreciation methodology in each estimate (ACV vs RCV, percentage vs amount)
+- [x] **DATA-04**: System produces scope alignment matrix showing items present in one estimate but absent from the other
+- [x] **DATA-05**: System calculates total delta with breakdown sorted by absolute magnitude
+- [x] **DATA-06**: System produces consistent analytical findings for identical inputs (deterministic pre-LLM analysis, cached LLM results)
+- [x] **DATA-07**: System tracks data provenance — every analytical claim links to specific parsed data, with granularity field preventing fabricated evidence
 
 ### Narrative Quality
 
-- [ ] **NARR-01**: All narratives use quantified differences (dollar amounts and percentages) instead of qualitative language
-- [ ] **NARR-02**: All narratives use neutral, observation-based language that withstands litigation scrutiny (zero hedge words, zero judgment adjectives)
-- [ ] **NARR-03**: Every factual claim in narrative output traces to specific line items, quantities, or calculations in source data
+- [x] **NARR-01**: All narratives use quantified differences (dollar amounts and percentages) instead of qualitative language
+- [x] **NARR-02**: All narratives use neutral, observation-based language that withstands litigation scrutiny (zero hedge words, zero judgment adjectives)
+- [x] **NARR-03**: Every factual claim in narrative output traces to specific line items, quantities, or calculations in source data
 
 ### Intelligence Layer
 
-- [ ] **INTL-01**: System produces methodology analysis block comparing O&P treatment, depreciation approach, unit pricing source, and locality factors
-- [ ] **INTL-02**: System produces ranked impact table with categories sorted by delta magnitude and percentage of total variance
-- [ ] **INTL-03**: Rules engine flags top variance drivers (top 20%), scope gaps, missing O&P, depreciation mismatches, and large unspecified categories with max 3 severity tiers
-- [ ] **INTL-04**: System detects structural patterns (partial vs full restoration, systematic pricing differences, code compliance omissions)
-- [ ] **INTL-05**: System generates diagnostic follow-ups tied to detected variances (actionable next steps, not recommendations)
+- [x] **INTL-01**: System produces methodology analysis block comparing O&P treatment, depreciation approach, unit pricing source, and locality factors
+- [x] **INTL-02**: System produces ranked impact table with categories sorted by delta magnitude and percentage of total variance
+- [x] **INTL-03**: Rules engine flags top variance drivers (top 20%), scope gaps, missing O&P, depreciation mismatches, and large unspecified categories with max 3 severity tiers
+- [x] **INTL-04**: System detects structural patterns (partial vs full restoration, systematic pricing differences, code compliance omissions)
+- [x] **INTL-05**: System generates diagnostic follow-ups tied to detected variances (actionable next steps, not recommendations)
 
 ### Output Modes
 
@@ -47,11 +47,11 @@ Requirements for v2.0 release. Each maps to roadmap phases.
 
 ### Quality Gates
 
-- [ ] **GATE-01**: Expanded hedge word detection including insurance-litigation-specific terms
-- [ ] **GATE-02**: Judgment language detection (evaluative adjectives: excessive, inadequate, inflated, etc.)
-- [ ] **GATE-03**: Quantification enforcement — every narrative sentence referencing a delta includes dollar amount and percentage
-- [ ] **GATE-04**: Evidence grounding check — narrative claims cannot exceed specificity of parsed input data
-- [ ] **GATE-05**: Methodology neutrality check — no comparative adjectives or standard-referencing in methodology section
+- [x] **GATE-01**: Expanded hedge word detection including insurance-litigation-specific terms
+- [x] **GATE-02**: Judgment language detection (evaluative adjectives: excessive, inadequate, inflated, etc.)
+- [x] **GATE-03**: Quantification enforcement — every narrative sentence referencing a delta includes dollar amount and percentage
+- [x] **GATE-04**: Evidence grounding check — narrative claims cannot exceed specificity of parsed input data
+- [x] **GATE-05**: Methodology neutrality check — no comparative adjectives or standard-referencing in methodology section
 
 ## v2.1+ Requirements
 
@@ -85,26 +85,26 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 9 | Pending |
-| DATA-02 | Phase 9 | Pending |
-| DATA-03 | Phase 9 | Pending |
-| DATA-04 | Phase 9 | Pending |
-| DATA-05 | Phase 9 | Pending |
-| DATA-06 | Phase 9 | Pending |
-| DATA-07 | Phase 9 | Pending |
-| INTL-01 | Phase 9 | Pending |
-| INTL-02 | Phase 10 | Pending |
-| INTL-03 | Phase 10 | Pending |
-| INTL-04 | Phase 10 | Pending |
-| INTL-05 | Phase 10 | Pending |
-| NARR-01 | Phase 11 | Pending |
-| NARR-02 | Phase 11 | Pending |
-| NARR-03 | Phase 11 | Pending |
-| GATE-01 | Phase 11 | Pending |
-| GATE-02 | Phase 11 | Pending |
-| GATE-03 | Phase 11 | Pending |
-| GATE-04 | Phase 11 | Pending |
-| GATE-05 | Phase 11 | Pending |
+| DATA-01 | Phase 9 | Completed |
+| DATA-02 | Phase 9 | Completed |
+| DATA-03 | Phase 9 | Completed |
+| DATA-04 | Phase 9 | Completed |
+| DATA-05 | Phase 9 | Completed |
+| DATA-06 | Phase 9 | Completed |
+| DATA-07 | Phase 9 | Completed |
+| INTL-01 | Phase 9 | Completed |
+| INTL-02 | Phase 10 | Completed |
+| INTL-03 | Phase 10 | Completed |
+| INTL-04 | Phase 10 | Completed |
+| INTL-05 | Phase 10 | Completed |
+| NARR-01 | Phase 11 | Completed |
+| NARR-02 | Phase 11 | Completed |
+| NARR-03 | Phase 11 | Completed |
+| GATE-01 | Phase 11 | Completed |
+| GATE-02 | Phase 11 | Completed |
+| GATE-03 | Phase 11 | Completed |
+| GATE-04 | Phase 11 | Completed |
+| GATE-05 | Phase 11 | Completed |
 | MODE-01 | Phase 12 | Pending |
 | MODE-02 | Phase 12 | Pending |
 | MODE-03 | Phase 12 | Pending |

@@ -26,6 +26,8 @@ from src.bid_comp.identity import ensure_estimate_identity
 from src.db import async_session_maker
 from src.integrations.sendgrid_client import SendGridClient
 from src.llm import OpenAIChatAdapter
+from src.methodology.analyzer import MethodologyAnalyzer
+from src.rules.engine import RulesEngine
 from src.services.jobs import JobService
 from src.utils.s3_client import get_s3, get_bucket
 
@@ -425,6 +427,41 @@ def run_bid_comp_keys(
                 "contractor": recap_b,
             }
 
+            methodology_result = None
+            _update_job_progress(db_job_id, JobService.ANALYZING, 62, "Running methodology analysis")
+            try:
+                analyzer = MethodologyAnalyzer()
+                methodology_result = analyzer.analyze(
+                    primary_payload=carrier_payload,
+                    comparison_payload=contractor_payload,
+                )
+                logger.info(
+                    "methodology analysis complete: job_id=%s op_differs=%s depr_differs=%s granularity=%s",
+                    job_id,
+                    methodology_result.op_treatment_differs,
+                    methodology_result.depreciation_approach_differs,
+                    methodology_result.data_granularity.value,
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("methodology analysis failed (non-fatal): job_id=%s error=%s", job_id, exc)
+
+            signal_bundle = None
+            if methodology_result is not None:
+                _update_job_progress(db_job_id, JobService.ANALYZING, 66, "Running intelligence rules")
+                try:
+                    rules_engine = RulesEngine()
+                    signal_bundle = rules_engine.evaluate(methodology_result)
+                    logger.info(
+                        "rules engine complete: job_id=%s flags=%d alerts=%d patterns=%d followups=%d",
+                        job_id,
+                        len(signal_bundle.emphasis_flags),
+                        len(signal_bundle.alert_tags),
+                        len(signal_bundle.structural_patterns),
+                        len(signal_bundle.diagnostic_followups),
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning("rules engine failed (non-fatal): job_id=%s error=%s", job_id, exc)
+
             # full-context input for BidComp: full JSON, not recap-only
             bid_context = {
                 "estimates": [
@@ -445,6 +482,8 @@ def run_bid_comp_keys(
                 "contractor": contractor_payload,
                 "carrier_source_filename": carrier_original,
                 "contractor_source_filename": contractor_original,
+                "methodology": methodology_result,
+                "signals": signal_bundle,
             }
             logger.info(
                 "job bid-context ready: job_id=%s primary=%s comparison=%s primary_src=%s comparison_src=%s",
@@ -454,7 +493,7 @@ def run_bid_comp_keys(
                 carrier_original,
                 contractor_original,
             )
-            _update_job_progress(db_job_id, JobService.ANALYZING, 65, "Analyzing estimate deltas")
+            _update_job_progress(db_job_id, JobService.ANALYZING, 68, "Analyzing estimate deltas")
 
             # Persist JSON payloads alongside XLS output for debugging
             json_prefix = f"results/{job_id}"
@@ -486,7 +525,7 @@ def run_bid_comp_keys(
                         llm = None
                 comp = BidComp(llm_adapter=llm)
                 logger.info("job bid-comp run starting: job_id=%s", job_id)
-                _update_job_progress(db_job_id, JobService.WRITING, 75, "Generating narratives")
+                _update_job_progress(db_job_id, JobService.WRITING, 78, "Generating narratives")
                 xlsx_bytes = comp.run(bid_context, job_id)
                 _update_job_progress(db_job_id, JobService.WRITING, 88, "Generating XLSX report")
                 logger.info(

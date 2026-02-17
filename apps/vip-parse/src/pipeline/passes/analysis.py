@@ -15,8 +15,10 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
-from ..models import AnalysisResult, CategoryAnalysis
+from ..models import AnalysisResult, CategoryAnalysis, LLMAnalysisResult
 from ...llm.adapter import LLMAdapterBase
+from ...methodology.models import MethodologyResult
+from ...rules.models import SignalBundle
 
 
 logger = logging.getLogger("vip-parse.pipeline.analysis")
@@ -247,7 +249,9 @@ def build_analysis_input(
 def run_analysis_pass(
     pair: Any,  # EstimatePair - using Any to avoid circular import
     top_deltas: List[Dict[str, Any]],
-    llm_adapter: LLMAdapterBase
+    llm_adapter: LLMAdapterBase,
+    methodology: Optional[MethodologyResult] = None,
+    signals: Optional[SignalBundle] = None,
 ) -> AnalysisResult:
     """
     Run the Analysis pass to extract structured comparison data.
@@ -285,13 +289,50 @@ def run_analysis_pass(
         "primary_items_json": json.dumps(analysis_input.primary_sample_items, indent=2),
         "comparison_items_json": json.dumps(analysis_input.comparison_sample_items, indent=2),
     }
+    if methodology is not None:
+        context["deltas_json"] = f"{context['deltas_json']}\n\nMethodology Context (pre-analyzed, do not contradict):\n{_build_methodology_context(methodology)}"
+        context["_system_append"] = (
+            "The Methodology Context section contains pre-analyzed facts. "
+            "Reference these directly. Do NOT contradict or re-derive methodology findings. "
+            "If data_granularity is 'category', do NOT reference specific line items."
+        )
+    if signals is not None:
+        context["deltas_json"] = f"{context['deltas_json']}\n\nRanked Impact Context (pre-analyzed, do not contradict):\n{_build_ranked_impact_context(signals, analysis_input.primary_name, analysis_input.comparison_name)}"
+        append = (
+            "The Ranked Impact Context contains pre-analyzed variance rankings. "
+            "Use these rankings to prioritize your analysis. Focus detailed analysis on CRITICAL and NOTABLE categories. "
+            "Do NOT re-rank or contradict the impact ordering."
+        )
+        context["_system_append"] = f"{context.get('_system_append','')}\n{append}".strip()
 
     try:
-        # Call LLM with analysis template
-        raw_response = llm_adapter.generate("analysis_pass_v1", context)
-
-        # Parse response into AnalysisResult
-        result = _parse_analysis_response(raw_response, analysis_input)
+        # Prefer Structured Outputs for deterministic schema compliance.
+        try:
+            llm_result = llm_adapter.generate_structured(
+                "analysis_pass_v1",
+                context,
+                response_model=LLMAnalysisResult,
+            )
+            result = AnalysisResult(
+                category_analyses=[
+                    CategoryAnalysis(
+                        category=ca.category,
+                        primary_total=float(ca.primary_amount),
+                        comparison_total=float(ca.comparison_amount),
+                        delta=float(ca.delta),
+                        delta_drivers=list(ca.delta_drivers),
+                        line_item_evidence=list(ca.line_item_evidence),
+                    )
+                    for ca in llm_result.category_analyses
+                ],
+                scope_gaps=list(llm_result.scope_gaps),
+                overall_delta_direction=llm_result.overall_delta_direction,
+                confidence=llm_result.confidence,
+            )
+        except Exception as structured_exc:  # noqa: BLE001
+            logger.warning("analysis structured output failed, falling back: %s", structured_exc)
+            raw_response = llm_adapter.generate("analysis_pass_v1", context)
+            result = _parse_analysis_response(raw_response, analysis_input)
 
         logger.info(
             "analysis pass complete: categories=%d scope_gaps=%d confidence=%s",
@@ -373,6 +414,54 @@ def _parse_analysis_response(raw_response: str, analysis_input: AnalysisInput) -
         overall_delta_direction=direction,
         confidence=confidence,
     )
+
+
+def _build_methodology_context(methodology: MethodologyResult) -> str:
+    primary_price_list = methodology.primary_depreciation.price_list or "n/a"
+    comparison_price_list = methodology.comparison_depreciation.price_list or "n/a"
+    lines = [
+        (
+            f"- O&P treatment: {methodology.primary_op.structure_type.value} vs "
+            f"{methodology.comparison_op.structure_type.value}. Differs: {methodology.op_treatment_differs}"
+        ),
+        (
+            f"- Depreciation: Primary ACV={methodology.primary_depreciation.is_acv}, "
+            f"Comparison ACV={methodology.comparison_depreciation.is_acv}. "
+            f"Differs: {methodology.depreciation_approach_differs}"
+        ),
+        (
+            f"- Price lists: {primary_price_list} vs {comparison_price_list}. "
+            f"Differs: {methodology.price_list_differs}"
+        ),
+        (
+            f"- Scope alignment: {len(methodology.scope_alignment.primary_only)} items unique to primary, "
+            f"{len(methodology.scope_alignment.comparison_only)} items unique to comparison"
+        ),
+        f"- Data granularity: {methodology.data_granularity.value}",
+    ]
+    return "\n".join(lines)
+
+
+def _build_ranked_impact_context(signals: SignalBundle, primary_name: str, comparison_name: str) -> str:
+    rows = []
+    for row in signals.ranked_impact.rows[:5]:
+        labels = f" [{', '.join(row.flags)}]" if row.flags else ""
+        rows.append(
+            f"{row.rank}. {row.category}: ${row.delta:,.2f} ({row.pct_of_total_variance:.1f}% of total variance){labels}"
+        )
+    flag_lines = [f"- [{f.severity.value}] {f.category}: {f.reason}" for f in signals.emphasis_flags]
+    direction = "higher" if signals.ranked_impact.total_delta > 0 else "lower"
+    lines = [
+        "Top variance categories by impact:",
+        *(rows or ["- none"]),
+        "",
+        "Emphasis flags:",
+        *(flag_lines or ["- none"]),
+        "",
+        f"Total variance: ${signals.ranked_impact.total_abs_variance:,.2f}",
+        f"Direction: {primary_name} is ${abs(signals.ranked_impact.total_delta):,.2f} {direction} than {comparison_name}",
+    ]
+    return "\n".join(lines)
 
 
 def _build_fallback_result(analysis_input: AnalysisInput, reason: str) -> AnalysisResult:

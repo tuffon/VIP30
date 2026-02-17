@@ -68,6 +68,26 @@ class AnalysisResult(BaseModel):
     )
 
 
+class LLMCategoryAnalysis(BaseModel):
+    """Structured-output response model for a single category analysis."""
+
+    category: str
+    primary_amount: float
+    comparison_amount: float
+    delta: float
+    delta_drivers: List[str]
+    line_item_evidence: List[str]
+
+
+class LLMAnalysisResult(BaseModel):
+    """Structured-output response model for analysis pass."""
+
+    category_analyses: List[LLMCategoryAnalysis]
+    scope_gaps: List[str]
+    overall_delta_direction: Literal["primary_higher", "comparison_higher", "similar"]
+    confidence: Literal["high", "medium", "low"]
+
+
 class DriverNarrative(BaseModel):
     """
     Narrative explanation for a single cost driver.

@@ -12,12 +12,13 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
 from ..models import AnalysisResult, DraftNarrative, DriverNarrative
 from ...llm.adapter import LLMAdapterBase
+from ...rules.models import SignalBundle
 
 
 logger = logging.getLogger("vip-parse.pipeline.writer")
@@ -94,7 +95,9 @@ def run_writer_pass(
     analysis: AnalysisResult,
     primary_name: str,
     comparison_name: str,
-    llm_adapter: LLMAdapterBase
+    llm_adapter: LLMAdapterBase,
+    signals: SignalBundle | None = None,
+    data_granularity: Optional[str] = None,
 ) -> DraftNarrative:
     """
     Run the Writer pass to generate adjuster-tone narratives.
@@ -133,13 +136,38 @@ def run_writer_pass(
         "overall_delta_direction": writer_input.overall_delta_direction,
         "confidence": writer_input.confidence,
     }
+    template_id = "writer_pass_v1"
+    if data_granularity:
+        template_id = "writer_pass_v2"
+        context["data_granularity"] = data_granularity
+        evidence_descriptions = {
+            "line_item": "Specific line items, unit prices, quantities, and materials available",
+            "category": "Category names and totals only — no line-item details",
+            "coverage": "Coverage types and totals only",
+            "estimate_total": "Grand totals only",
+        }
+        context["available_evidence"] = evidence_descriptions.get(data_granularity, "Unknown")
+    if signals is not None:
+        context["category_analyses_json"] = (
+            f"{context['category_analyses_json']}\n\nAlert Tags (must be mentioned in narrative):\n"
+            f"{_build_alert_context(signals)}\n\n"
+            f"Structural Patterns (weave into analysis narrative):\n{_build_pattern_context(signals)}\n\n"
+            f"Diagnostic Follow-Ups (include as next steps section):\n{_build_followup_context(signals)}"
+        )
+        context["_system_append"] = (
+            "Alert Tags must appear in the narrative — each alert represents a verified analytical finding. "
+            "Structural Patterns should be referenced when explaining why deltas exist. "
+            "Diagnostic Follow-Ups go in the suggested_followups field and should use the provided actions."
+        )
 
     try:
         # Call LLM with writer template
-        raw_response = llm_adapter.generate("writer_pass_v1", context)
+        raw_response = llm_adapter.generate(template_id, context)
 
         # Parse response into DraftNarrative
         result = _parse_writer_response(raw_response)
+        if signals is not None:
+            result.suggested_followups = _merge_followups(result.suggested_followups, signals)
 
         logger.info(
             "writer pass complete: overview_len=%d key_drivers=%d scope_observations=%d followups=%d",
@@ -158,6 +186,46 @@ def run_writer_pass(
         # Try to salvage overview from raw response before falling back
         extracted_overview = _extract_overview_from_raw(raw_response) if 'raw_response' in dir() else None
         return _build_fallback_narrative(analysis, str(exc), primary_name, comparison_name, extracted_overview)
+
+
+def _build_alert_context(signals: SignalBundle) -> str:
+    lines = []
+    for alert in signals.alert_tags:
+        amt = f" (${alert.affected_amount:,.2f})" if alert.affected_amount is not None else ""
+        lines.append(f"- [{alert.severity.value}] {alert.title}: {alert.detail}{amt}")
+    return "\n".join(lines) if lines else "- none"
+
+
+def _build_pattern_context(signals: SignalBundle) -> str:
+    lines = []
+    for pattern in signals.structural_patterns:
+        evidence = "; ".join(pattern.evidence[:3]) if pattern.evidence else "n/a"
+        lines.append(f"- {pattern.pattern_type.value}: {pattern.description}\n  Evidence: {evidence}")
+    return "\n".join(lines) if lines else "- none"
+
+
+def _build_followup_context(signals: SignalBundle) -> str:
+    lines = [
+        f"- [{f.priority.value}] {f.action} (triggered by: {f.trigger})"
+        for f in signals.diagnostic_followups
+    ]
+    return "\n".join(lines) if lines else "- none"
+
+
+def _merge_followups(existing: List[str], signals: SignalBundle) -> List[str]:
+    out: List[str] = []
+    seen: set[str] = set()
+    for followup in signals.diagnostic_followups:
+        key = " ".join(followup.action.lower().split())
+        if key not in seen:
+            seen.add(key)
+            out.append(followup.action)
+    for item in existing:
+        key = " ".join(str(item).lower().split())
+        if key not in seen:
+            seen.add(key)
+            out.append(str(item))
+    return out
 
 
 def _repair_json(text: str) -> str:

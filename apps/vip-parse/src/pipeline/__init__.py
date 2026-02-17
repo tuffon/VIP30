@@ -38,13 +38,12 @@ from .passes import (
     sample_line_items,
 )
 from .quality import (
-    AnalystToneChecker,
+    EvidenceGroundingChecker,
     HedgingChecker,
+    JudgmentLanguageChecker,
+    MethodologyNeutralityChecker,
+    QuantificationChecker,
     QualityEvaluator,
-    SlopChecker,
-    SummaryLengthChecker,
-    ValuationLinkChecker,
-    VerbosityChecker,
 )
 from .state import PipelineState
 
@@ -76,11 +75,10 @@ __all__ = [
     "QualityReport",
     # Quality gate checkers
     "HedgingChecker",
-    "VerbosityChecker",
-    "ValuationLinkChecker",
-    "SummaryLengthChecker",
-    "AnalystToneChecker",
-    "SlopChecker",
+    "JudgmentLanguageChecker",
+    "QuantificationChecker",
+    "EvidenceGroundingChecker",
+    "MethodologyNeutralityChecker",
     "QualityEvaluator",
     # State container
     "PipelineState",

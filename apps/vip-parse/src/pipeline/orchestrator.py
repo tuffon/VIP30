@@ -27,6 +27,8 @@ from .passes import run_analysis_pass, run_writer_pass, run_compliance_pass, Wri
 from .quality import QualityEvaluator
 from .state import PipelineState
 from ..llm.adapter import LLMAdapterBase
+from ..methodology.models import MethodologyResult
+from ..rules.models import SignalBundle
 
 
 logger = logging.getLogger("vip-parse.pipeline")
@@ -97,7 +99,9 @@ class NarrativePipeline:
         pair: Any,  # EstimatePair - use Any to avoid circular import
         top_deltas: List[Dict[str, Any]],
         primary_name: str,
-        comparison_name: str
+        comparison_name: str,
+        methodology: Optional[MethodologyResult] = None,
+        signals: Optional[SignalBundle] = None,
     ) -> PipelineState:
         """
         Execute the full pipeline and return PipelineState with results.
@@ -111,7 +115,7 @@ class NarrativePipeline:
         Returns:
             PipelineState containing all intermediate and final results
         """
-        state = PipelineState(pair=pair, top_deltas=top_deltas)
+        state = PipelineState(pair=pair, top_deltas=top_deltas, methodology=methodology, signals=signals)
 
         self.logger.info(
             "pipeline start: primary=%s comparison=%s deltas=%d",
@@ -210,7 +214,13 @@ class NarrativePipeline:
                 return state
 
         try:
-            result = run_analysis_pass(state.pair, state.top_deltas, self.llm_adapter)
+            result = run_analysis_pass(
+                state.pair,
+                state.top_deltas,
+                self.llm_adapter,
+                methodology=state.methodology,
+                signals=state.signals,
+            )
             state.analysis = result
             state.add_timing("analysis", _now_ms() - start_ms)
             state.mark_pass_executed("analysis")
@@ -313,11 +323,15 @@ class NarrativePipeline:
                 return state
 
         try:
+            data_granularity = self._extract_data_granularity(state)
+            methodology_text = self._build_methodology_text(state)
             result = run_writer_pass(
                 state.analysis,
                 primary_name,
                 comparison_name,
-                self.llm_adapter
+                self.llm_adapter,
+                signals=state.signals,
+                data_granularity=data_granularity,
             )
             state.draft = result
             state.add_timing("writer", _now_ms() - start_ms)
@@ -358,7 +372,11 @@ class NarrativePipeline:
         """
         start_ms = _now_ms()
         try:
-            report = self.evaluator.evaluate(state.draft)
+            report = self.evaluator.evaluate(
+                state.draft,
+                data_granularity=self._extract_data_granularity_enum(state),
+                methodology_text=self._build_methodology_text(state),
+            )
             state.quality_report = report
             state.add_timing("quality_check", _now_ms() - start_ms)
             state.mark_pass_executed("quality_check")
@@ -413,12 +431,14 @@ class NarrativePipeline:
 
             start_ms = _now_ms()
             try:
+                data_granularity = self._extract_data_granularity(state)
                 rewritten = run_compliance_pass(
                     state.draft,
                     state.quality_report,
                     primary_name,
                     comparison_name,
-                    self.llm_adapter
+                    self.llm_adapter,
+                    data_granularity=data_granularity,
                 )
                 state.draft = rewritten
                 state.add_timing(f"compliance_rewrite_{iteration}", _now_ms() - start_ms)
@@ -473,7 +493,11 @@ class NarrativePipeline:
         """
         start_ms = _now_ms()
         try:
-            report = self.evaluator.evaluate(state.draft)
+            report = self.evaluator.evaluate(
+                state.draft,
+                data_granularity=self._extract_data_granularity_enum(state),
+                methodology_text=self._build_methodology_text(state),
+            )
             state.quality_report = report
             state.add_timing(f"quality_check_after_rewrite_{iteration}", _now_ms() - start_ms)
             self.logger.info(
@@ -524,6 +548,28 @@ class NarrativePipeline:
         )
 
         return state
+
+    def _extract_data_granularity(self, state: PipelineState) -> Optional[str]:
+        if state.methodology and getattr(state.methodology, "data_granularity", None):
+            granularity = state.methodology.data_granularity
+            return granularity.value if hasattr(granularity, "value") else str(granularity)
+        return None
+
+    def _extract_data_granularity_enum(self, state: PipelineState):
+        if state.methodology:
+            return getattr(state.methodology, "data_granularity", None)
+        return None
+
+    def _build_methodology_text(self, state: PipelineState) -> Optional[str]:
+        if not state.methodology:
+            return None
+        m = state.methodology
+        return (
+            f"O&P treatment: {m.primary_op.structure_type.value} vs {m.comparison_op.structure_type.value}; "
+            f"depreciation differs={m.depreciation_approach_differs}; "
+            f"price list differs={m.price_list_differs}; "
+            f"granularity={m.data_granularity.value}"
+        )
 
     def _finalize_with_error(
         self,

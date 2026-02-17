@@ -11,7 +11,9 @@ from .identity import ensure_estimate_identity
 from .markdown import MarkdownBlock, parse_markdown
 from .normalize import normalize_label, normalize_money
 from ..llm.adapter import LLMAdapterBase
+from ..methodology.models import MethodologyResult
 from ..pipeline import NarrativePipeline, PipelineCache, FinalNarrative, PipelineState
+from ..rules.models import SignalBundle
 
 try:
     from redis import Redis
@@ -297,6 +299,12 @@ class BidComp:
             category_rows = self._build_category_table(pair)
             self._log(logging.INFO, "category table ready", rows=len(category_rows))
             top_deltas = self._top_deltas(category_rows)
+            methodology = bid_context.get("methodology") if isinstance(bid_context, dict) else None
+            if not isinstance(methodology, MethodologyResult):
+                methodology = None
+            signals = bid_context.get("signals") if isinstance(bid_context, dict) else None
+            if not isinstance(signals, SignalBundle):
+                signals = None
             top_delta_label = top_deltas[0].get("category") if top_deltas else None
             self._log(
                 logging.INFO,
@@ -304,7 +312,7 @@ class BidComp:
                 count=len(top_deltas),
                 top_category=top_delta_label or "none",
             )
-            narrative = self._generate_narrative(pair, top_deltas)
+            narrative = self._generate_narrative(pair, top_deltas, methodology=methodology, signals=signals)
             markdown_len = len(narrative.markdown or "")
             self._log(
                 logging.INFO,
@@ -566,7 +574,13 @@ class BidComp:
         return rows
 
     # ---------- Narrative ----------
-    def _generate_narrative(self, pair: EstimatePair, top_deltas: List[Dict[str, Any]]) -> NarrativeResult:
+    def _generate_narrative(
+        self,
+        pair: EstimatePair,
+        top_deltas: List[Dict[str, Any]],
+        methodology: Optional[MethodologyResult] = None,
+        signals: Optional[SignalBundle] = None,
+    ) -> NarrativeResult:
         self._log(
             logging.INFO,
             "narrative stage start",
@@ -578,7 +592,13 @@ class BidComp:
 
         # Use pipeline if available
         if self._pipeline:
-            return self._generate_narrative_via_pipeline(pair, top_deltas, delta_rows)
+            return self._generate_narrative_via_pipeline(
+                pair,
+                top_deltas,
+                delta_rows,
+                methodology=methodology,
+                signals=signals,
+            )
 
         # Fallback to legacy path if no LLM adapter
         if not self.llm_adapter:
@@ -593,6 +613,8 @@ class BidComp:
         pair: EstimatePair,
         top_deltas: List[Dict[str, Any]],
         delta_rows: List[Dict[str, Any]],
+        methodology: Optional[MethodologyResult] = None,
+        signals: Optional[SignalBundle] = None,
     ) -> NarrativeResult:
         """Use NarrativePipeline for narrative generation."""
         try:
@@ -601,6 +623,8 @@ class BidComp:
                 top_deltas=top_deltas,
                 primary_name=pair.primary.estimate_name,
                 comparison_name=pair.comparison.estimate_name,
+                methodology=methodology,
+                signals=signals,
             )
 
             # Convert PipelineState to NarrativeResult

@@ -11,6 +11,9 @@ from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, Field
 
+from src.methodology.models import MethodologyResult
+from src.rules.models import SignalBundle
+
 from .models import (
     AnalysisResult,
     DraftNarrative,
@@ -39,6 +42,14 @@ class PipelineState(BaseModel):
     top_deltas: List[Dict[str, Any]] = Field(
         default_factory=list,
         description="Category deltas from bid_comp analysis"
+    )
+    methodology: Optional[MethodologyResult] = Field(
+        default=None,
+        description="Pre-LLM methodology comparison (O&P, depreciation, pricing)"
+    )
+    signals: Optional[SignalBundle] = Field(
+        default=None,
+        description="Pre-LLM intelligence signals (emphasis, alerts, patterns, follow-ups)"
     )
 
     # Pass 1 output

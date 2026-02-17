@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -77,7 +77,8 @@ def run_compliance_pass(
     quality_report: QualityReport,
     primary_name: str,
     comparison_name: str,
-    llm_adapter: LLMAdapterBase
+    llm_adapter: LLMAdapterBase,
+    data_granularity: Optional[str] = None,
 ) -> DraftNarrative:
     """
     Run the Compliance pass to rewrite draft narratives that fail quality gates.
@@ -130,10 +131,14 @@ def run_compliance_pass(
         "failed_checks": "\n".join(f"- {check}" for check in compliance_input.failed_checks),
         "draft_json": json.dumps(draft_dict, indent=2),
     }
+    template_id = "compliance_rewrite_v1"
+    if data_granularity is not None:
+        template_id = "compliance_rewrite_v2"
+        context["data_granularity"] = data_granularity
 
     try:
         # Call LLM with compliance rewrite template
-        raw_response = llm_adapter.generate("compliance_rewrite_v1", context)
+        raw_response = llm_adapter.generate(template_id, context)
 
         # Parse response into DraftNarrative
         result = _parse_compliance_response(raw_response)
