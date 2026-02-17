@@ -12,9 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 Phase: 12 of 12 (Output Modes & Enhanced XLSX)
 Plan: 2 plans in 2 waves (01: mode model + filter + XLSX rewrite, 02: full stack wiring + frontend)
 Status: Planned, ready to execute
-Last activity: 2026-02-17 — Phase 11 completed (plans 11-01 and 11-02)
-
-Phase 12 also planned: 2 plans in 2 waves (01: mode model+filter+xlsx rewrite, 02: full stack wiring+frontend)
+Last activity: 2026-02-17 — Phases 9, 10, 11 completed; Phase 12 planned
 
 Progress: ████████░░ 75% (v2.0)
 
@@ -60,5 +58,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-17
-Stopped at: Phases 9 and 10 planned, ready to execute Phase 9
+Stopped at: Phases 9-11 executed, Phase 12 planned, ready to execute Phase 12
 Resume file: —
