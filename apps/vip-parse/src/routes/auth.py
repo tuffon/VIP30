@@ -106,7 +106,7 @@ async def verify_otp(
         value=access_token,
         httponly=True,
         secure=True,
-        samesite="lax",
+        samesite="none",  # Required for cross-site requests (frontend/backend on different subdomains)
         max_age=60 * 60 * 24 * 7,
     )
 
@@ -125,7 +125,7 @@ async def logout(response: Response):
         key="access_token",
         httponly=True,
         secure=True,
-        samesite="lax",
+        samesite="none",
     )
     return {"success": True, "message": "Logged out successfully"}
 
