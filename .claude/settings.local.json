@@ -6,7 +6,14 @@
       "Bash(git tag -a v1.0.1 -m \"$\\(cat <<''EOF''\nv1.0.1 Professional Adjuster Narratives\n\nDelivered: Three-pass LLM pipeline with quality gating that produces professional adjuster-tone narratives from bid comparison data.\n\nKey accomplishments:\n- Three-pass LLM pipeline \\(Analysis → Writer → Compliance\\)\n- 6 deterministic quality gates\n- Adjuster tone control via few-shot examples\n- Pass-level Redis caching\n- Production integration in BidComp\n- Regression fixes for numeric values and narrative structure\n\nSee .planning/MILESTONES.md for full details.\nEOF\n\\)\")",
       "Bash(git push:*)",
       "WebSearch",
-      "WebFetch(domain:pypi.org)"
+      "WebFetch(domain:pypi.org)",
+      "Bash(git tag:*)",
+      "Bash(git tag -a v1.1 -m \"$\\(cat <<''EOF''\nv1.1 MVP Launch\n\nDelivered: Production-ready customer validation loop with email OTP auth, credit-based usage tracking, job state machine, and complete frontend experience.\n\nKey accomplishments:\n- PostgreSQL database with workspace-scoped schema\n- Email OTP authentication with rate limiting and JWT cookies\n- Job state machine with progress tracking\n- Ledger-style credit system with idempotent consumption\n- Complete frontend auth flow and history UI\n\nSee .planning/MILESTONES.md for full details.\nEOF\n\\)\")",
+      "Bash(git checkout:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git merge:*)",
+      "Bash(pip index:*)"
     ]
   }
 }

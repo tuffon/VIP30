@@ -6,24 +6,18 @@ import { useSession } from "next-auth/react";
 import { brand } from "../components/brand";
 import { LandingSignupForm } from "../components/LandingSignupForm";
 
-const stats = [
-  { label: "Avg. time saved per file", value: "3.1 hrs" },
-  { label: "Contracts reconciled in 30 days", value: ">$12M" },
-  { label: "LLM narratives generated", value: "1,400+" },
-];
-
 const features = [
   {
-    title: "Frictionless uploads",
-    description: "Secure carrier + contractor uploads with instant cloud parsing.",
+    title: "Side-by-side deltas",
+    description: "See exactly where carrier and contractor estimates diverge, line by line.",
   },
   {
-    title: "Narratives you can send",
-    description: "Bid-ready summaries, clarity on deltas, and owner-friendly insights.",
+    title: "Mismatch flags",
+    description: "Automatically highlight significant variances that need attention.",
   },
   {
-    title: "Category intelligence",
-    description: "Verisk-aligned categories with delta spotlighting and download links.",
+    title: "Narrative citations",
+    description: "Professional narratives explain each delta with industry-appropriate language.",
   },
 ];
 
@@ -32,90 +26,133 @@ export default function HomePage() {
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
 
   return (
-    <div className="space-y-24 text-slate-900">
-      <section id="hero" className="space-y-10">
-        <div className="panel space-y-6">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-500">Introducing {brand.name}</p>
-          <h1 className="text-4xl font-semibold leading-tight md:text-5xl text-slate-900">
-            Compare bids, explain deltas, and email the report in minutes.
-          </h1>
-          <p className="text-lg text-slate-600 md:max-w-2xl">
-            ScopeVista brings uploads, parsing, AI narrative, and delivery under one roof. Launch a bid comp,
-            share the XLSX, and keep your stakeholders in sync without spreadsheets.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/bid-comp"
-              className="rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
-            >
-              Launch Bid Comp
-            </Link>
-            <a
-              href="#platform"
-              className="rounded-full border border-slate-200 px-8 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-            >
-              See how it works
-            </a>
+    <div className="space-y-28 text-slate-900">
+      <section id="hero" className="space-y-12 py-8 md:py-14">
+        <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="space-y-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">{brand.tagline}</p>
+            <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-6xl">
+              Turn two Xactimate estimate PDFs into a carrier vs contractor comparison in minutes
+            </h1>
+            <p className="max-w-2xl text-lg leading-relaxed text-slate-600">
+              Built for insurance adjusters who need clear variance reporting fast. Upload one carrier estimate and
+              one contractor estimate, then download a ready-to-share report with deltas and narrative explanations.
+              ScopeVista currently supports Xactimate estimate PDFs only.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/bid-comp"
+                className="rounded-full bg-[#0b1623] px-8 py-3 text-sm font-semibold text-white transition hover:bg-[#13263b]"
+              >
+                Generate Bid Comp
+              </Link>
+              <Link
+                href="mailto:hello@scopevista.app"
+                className="rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-100"
+              >
+                Book demo
+              </Link>
+            </div>
           </div>
-          <div className="grid gap-6 pt-6 sm:grid-cols-3">
-            {stats.map((stat) => (
-              <div key={stat.label} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                <p className="text-2xl font-semibold text-slate-900">{stat.value}</p>
-                <p className="text-sm text-slate-500">{stat.label}</p>
+          <div className="panel p-0">
+            <div className="border-b border-slate-200 px-6 py-4">
+              <p className="text-sm font-semibold text-slate-900">Carrier vs Contractor Delta Summary</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-500">Xactimate comparison preview</p>
+            </div>
+            <div className="space-y-4 p-6">
+              <div className="grid grid-cols-[1.2fr_1fr_1fr_1fr] gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <span>Category</span>
+                <span>Carrier</span>
+                <span>Contractor</span>
+                <span>Delta</span>
               </div>
-            ))}
+              {[
+                ["Mitigation (PWI)", "$2,340", "$8,450", "+$6,110"],
+                ["Electrical (ELE)", "$4,800", "$1,200", "-$3,600"],
+                ["Paint (PNT)", "$2,775", "$735", "-$2,040"],
+              ].map((row) => (
+                <div
+                  key={row[0]}
+                  className="grid grid-cols-[1.2fr_1fr_1fr_1fr] gap-2 rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm"
+                >
+                  <span className="font-medium text-slate-900">{row[0]}</span>
+                  <span className="text-slate-700">{row[1]}</span>
+                  <span className="text-slate-700">{row[2]}</span>
+                  <span className="font-semibold text-[#0f3a5f]">{row[3]}</span>
+                </div>
+              ))}
+              <p className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-relaxed text-slate-700">
+                Narrative citation: Carrier includes full MEP scope. Contractor does not contemplate mechanical or
+                electrical allowance in two units. Variance driven by scope, not rate.
+              </p>
+            </div>
           </div>
         </div>
         <LandingSignupForm apiBase={apiBase} defaultEmail={session?.user?.email ?? ""} />
       </section>
 
-      <section id="platform" className="space-y-6">
-        <h2 className="text-3xl font-semibold">A platform adjusters actually want to open.</h2>
+      <section id="platform" className="space-y-7">
+        <h2 className="text-3xl font-semibold leading-tight text-slate-900 md:text-4xl">
+          Enterprise-ready comparison output for claims teams.
+        </h2>
+        <p className="max-w-3xl text-base leading-relaxed text-slate-600">
+          Every report is structured for claim file review, supervisor sign-off, and stakeholder communication. You get
+          consistent category framing, clear scope deltas, and concise narrative context.
+        </p>
         <div className="grid gap-6 md:grid-cols-3">
           {features.map((feature) => (
-            <div key={feature.title} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
+            <div key={feature.title} className="rounded-2xl border border-slate-200 bg-white p-6">
               <p className="text-base font-semibold text-slate-900">{feature.title}</p>
-              <p className="mt-2 text-sm text-slate-500">{feature.description}</p>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">{feature.description}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section id="features" className="space-y-8">
-        <div className="panel space-y-4">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-500">Workflow</p>
-          <h3 className="text-2xl font-semibold text-slate-900">How ScopeVista gets you from PDF to narrative</h3>
-          <ol className="space-y-4 text-slate-600">
+        <div className="panel space-y-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">Workflow</p>
+          <h3 className="text-2xl font-semibold text-slate-900 md:text-3xl">
+            Purpose-built for Xactimate estimate comparison
+          </h3>
+          <ol className="space-y-4 text-slate-700">
             <li>
-              <span className="font-semibold text-slate-900">1. Upload & authenticate.</span> Drop carrier and
-              contractor PDFs, sign in with Google, and keep moving.
+              <span className="font-semibold text-slate-900">1. Upload two Xactimate PDFs.</span> Start with a carrier
+              estimate and a contractor estimate for the same loss.
             </li>
             <li>
-              <span className="font-semibold text-slate-900">2. Automated parsing + AI summary.</span> We structure
-              the Verisk categories, call the LLM once, and snapshot the context for QA.
+              <span className="font-semibold text-slate-900">2. AI analyzes the differences.</span> The system performs
+              line-by-line comparison, computes deltas, and flags mismatched scope.
             </li>
             <li>
-              <span className="font-semibold text-slate-900">3. Delivery + marketing touch.</span> As soon as the XLSX
-              drops, you get a download button, in-app toast, and branded email.
+              <span className="font-semibold text-slate-900">3. Download your bid comp.</span> Export an XLSX report
+              with structured deltas and narratives ready to share.
             </li>
           </ol>
         </div>
       </section>
 
-      <section id="pricing" className="space-y-4">
-        <h3 className="text-3xl font-semibold">Simple pricing, no seat minimums.</h3>
-        <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-sm">
-          <p className="text-lg font-semibold text-slate-900">$79 per active user / month</p>
-          <p className="mt-2 text-sm text-slate-500">
-            Unlimited bid comps, AI narratives, download links, and marketing emails. Pay only for users who submit at
-            least one job that month.
+      <section id="pricing" className="space-y-5">
+        <h3 className="text-3xl font-semibold text-slate-900">Built for active claim operations.</h3>
+        <div className="rounded-3xl border border-slate-200 bg-white p-7">
+          <p className="text-lg font-semibold text-slate-900">Start with 5 free credits to evaluate fit.</p>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600">
+            Process real files, review deltas, and validate narrative quality with your team before scaling usage.
           </p>
-          <Link
-            href="mailto:hello@scopevista.app"
-            className="mt-4 inline-flex rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-          >
-            Talk to sales
-          </Link>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              href="/bid-comp"
+              className="rounded-full bg-[#0b1623] px-8 py-3 text-sm font-semibold text-white transition hover:bg-[#13263b]"
+            >
+              Generate Bid Comp
+            </Link>
+            <Link
+              href="mailto:hello@scopevista.app"
+              className="rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-100"
+            >
+              Book demo
+            </Link>
+          </div>
         </div>
       </section>
     </div>

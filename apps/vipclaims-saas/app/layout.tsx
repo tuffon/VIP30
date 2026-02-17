@@ -2,17 +2,22 @@
 
 import "./globals.css";
 import Link from "next/link";
+import { IBM_Plex_Sans } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { brand } from "../components/brand";
 import { CreditBalance } from "../components/CreditBalance";
 import { NavAuth } from "../components/NavAuth";
 import { AppProviders } from "../components/providers/AppProviders";
 
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 const navLinks = [
   { href: "/#platform", label: "Platform" },
   { href: "/#features", label: "Features" },
   { href: "/#pricing", label: "Pricing" },
-  { href: "/pdf-to-esx", label: "PDF→ESX" },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -21,13 +26,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body className="bg-white text-slate-900 antialiased">
+      <body className={`${ibmPlexSans.className} bg-[#f4f6f8] text-slate-900 antialiased`}>
         <AppProviders>
           <div className="flex min-h-screen flex-col">
-            <header className="border-b border-slate-100 bg-white/90 backdrop-blur">
+            <header className="border-b border-slate-200 bg-white/90 backdrop-blur">
               <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
                 <Link href="/" className="flex items-center gap-3 text-lg font-semibold text-slate-900">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-base font-bold text-white">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#0b1623] text-base font-bold text-white">
                     SV
                   </span>
                   <span>{brand.name}</span>
@@ -55,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </div>
               </div>
             </header>
-            <main className={`flex-1 ${marketingMode ? "bg-slate-50" : "bg-white"}`}>
+            <main className={`flex-1 ${marketingMode ? "bg-[#f4f6f8]" : "bg-white"}`}>
               <div className={`mx-auto w-full max-w-6xl px-6 ${marketingMode ? "py-16" : "py-10"}`}>
                 {children}
               </div>

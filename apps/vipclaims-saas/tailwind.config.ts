@@ -5,13 +5,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["IBM Plex Sans", "ui-sans-serif", "sans-serif"],
       },
       colors: {
         brand: {
-          primary: "#2563EB",
-          accent: "#A855F7",
-          dark: "#020617",
+          primary: "#0F3A5F",
+          accent: "#2E5E8A",
+          dark: "#0B1623",
         },
       },
     },

@@ -1,10 +1,10 @@
 export const brand = {
   name: "ScopeVista",
-  tagline: "Bid comparisons without the spreadsheet fatigue.",
+  tagline: "Xactimate bid comparisons that adjusters actually want to read.",
   colors: {
-    primary: "#2563EB",
-    accent: "#A855F7",
-    dark: "#020617",
+    primary: "#0F3A5F",
+    accent: "#2E5E8A",
+    dark: "#0B1623",
   },
 };
 
