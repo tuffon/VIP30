@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 5 — Landing Page Redesign
+**Current focus:** v1.2 Complete — Ready to ship
 
 ## Current Position
 
-Phase: 5 of 8 (Landing Page Redesign)
-Plan: 05-01-PLAN.md (3 tasks)
-Status: Ready to execute
-Last activity: 2026-02-17 — All v1.2 phases planned (5-8)
+Phase: 8 of 8 (All phases complete)
+Plan: All plans executed
+Status: v1.2 milestone complete
+Last activity: 2026-02-17 — All v1.2 phases executed (5-8)
 
-Progress: ░░░░░░░░░░ 0% (v1.2)
+Progress: ██████████ 100% (v1.2)
 
 ## Completed Milestones
 
@@ -68,7 +68,6 @@ Resume file: —
 
 ## Next Steps
 
-1. `/gsd:execute-phase 5` — execute Landing Page Redesign (3 tasks)
-2. `/gsd:execute-phase 6` — execute Proof Artifacts & Trust (6 tasks, 2 plans)
-3. `/gsd:execute-phase 7` — execute App Logged-In Experience (6 tasks, 2 plans)
-4. `/gsd:execute-phase 8` — execute Observability (4 tasks)
+1. `/gsd:verify-work` — UAT verification of v1.2 features
+2. `/gsd:complete-milestone` — Archive v1.2 and prepare for next version
+3. Deploy to production

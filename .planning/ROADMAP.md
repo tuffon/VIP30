@@ -10,10 +10,10 @@ v1.2 transforms VIP30 from a functional MVP to a launch-ready product. The landi
 - Phases 1-4: v1.1 MVP Launch (shipped)
 - Phases 5-8: v1.2 Launch Ready (current)
 
-- [ ] **Phase 5: Landing Page Redesign** - Enterprise B2B aesthetic with concrete Xactimate messaging
-- [ ] **Phase 6: Proof Artifacts & Trust Footer** - Screenshots, sample output, legal/security footer
-- [ ] **Phase 7: App Logged-In Experience** - User dropdown, session persistence, credits display
-- [ ] **Phase 8: Observability** - Structured logging and health checks
+- [x] **Phase 5: Landing Page Redesign** - Enterprise B2B aesthetic with concrete Xactimate messaging
+- [x] **Phase 6: Proof Artifacts & Trust Footer** - Screenshots, sample output, legal/security footer
+- [x] **Phase 7: App Logged-In Experience** - User dropdown, session persistence, credits display
+- [x] **Phase 8: Observability** - Structured logging and health checks
 
 ## Phase Details
 
@@ -33,7 +33,7 @@ v1.2 transforms VIP30 from a functional MVP to a launch-ready product. The landi
 **Plans**: 1
 
 Plans:
-- [ ] 05-01: Hero, Features, Navigation, Design (3 tasks)
+- [x] 05-01: Hero, Features, Navigation, Design (3 tasks)
 
 ### Phase 6: Proof Artifacts & Trust Footer
 **Goal**: Build trust with screenshots, sample output, and legal/security footer
@@ -50,8 +50,8 @@ Plans:
 **Plans**: 2
 
 Plans:
-- [ ] 06-01: Footer & Legal Pages (3 tasks, has checkpoint)
-- [ ] 06-02: Screenshots & Sample Download (3 tasks, has checkpoint)
+- [x] 06-01: Footer & Legal Pages (3 tasks)
+- [x] 06-02: Screenshots & Sample Download (3 tasks)
 
 ### Phase 7: App Logged-In Experience
 **Goal**: Polish app UX with user dropdown, session persistence, and credits display
@@ -66,8 +66,8 @@ Plans:
 **Plans**: 2
 
 Plans:
-- [ ] 07-01: UserDropdown & Session Persistence (4 tasks, has checkpoint)
-- [ ] 07-02: Credit Balance in Bid Comp (2 tasks, has checkpoint)
+- [x] 07-01: UserDropdown & Session Persistence (4 tasks)
+- [x] 07-02: Credit Balance in Bid Comp (2 tasks)
 
 ### Phase 8: Observability
 **Goal**: Production monitoring with structured logging and health checks
@@ -80,7 +80,7 @@ Plans:
 **Plans**: 1
 
 Plans:
-- [ ] 08-01: Structured Logging & Health Check (4 tasks)
+- [x] 08-01: Structured Logging & Health Check (4 tasks)
 
 ## Progress
 
@@ -89,7 +89,7 @@ Phases 5-8 (v1.2), continuing from v1.1's Phases 1-4.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 5. Landing Page Redesign | 0/1 | Planned | - |
-| 6. Proof Artifacts & Trust | 0/2 | Planned | - |
-| 7. App Logged-In Experience | 0/2 | Planned | - |
-| 8. Observability | 0/1 | Planned | - |
+| 5. Landing Page Redesign | 1/1 | Complete | 2026-02-17 |
+| 6. Proof Artifacts & Trust | 2/2 | Complete | 2026-02-17 |
+| 7. App Logged-In Experience | 2/2 | Complete | 2026-02-17 |
+| 8. Observability | 1/1 | Complete | 2026-02-17 |
