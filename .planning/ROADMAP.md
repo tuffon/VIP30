@@ -9,7 +9,7 @@
 
 ## Phases
 
-- [ ] **Phase 9: Data Foundation & Methodology** - Line-item comparison, O&P/depreciation detection, scope alignment, data provenance
+- [x] **Phase 9: Data Foundation & Methodology** - Line-item comparison, O&P/depreciation detection, scope alignment, data provenance
 - [ ] **Phase 10: Rules Engine & Intelligence** - Emphasis flags, alert tags, ranked impact, pattern detection, diagnostic follow-ups
   - Plans: 10-01 (models + engine, Wave 1), 10-02 (pipeline integration, Wave 2)
 - [ ] **Phase 11: Narrative Quality & Quality Gates** - Evidence-based narratives, neutral tone, expanded quality gate system
@@ -57,8 +57,8 @@
   2. Zero hedge words or judgment adjectives appear in any output
   3. Every factual claim in narrative traces to specific line items, quantities, or calculations in source data
   4. Five quality gates operational: hedge detection, judgment language, quantification enforcement, evidence grounding, methodology neutrality
-**Research**: Unlikely (extending existing quality gate system, prompt engineering)
-**Plans**: TBD
+**Research**: Done (11-RESEARCH.md — gate designs, word lists, patterns)
+**Plans**: 11-01 (word lists + gate checkers, Wave 1), 11-02 (prompts + pipeline integration, Wave 2)
 
 ### Phase 12: Output Modes & Enhanced XLSX
 **Goal**: Four audience-specific output modes with enhanced multi-sheet XLSX and audit trail
@@ -77,10 +77,10 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
-| 9. Data Foundation & Methodology | 0/2 | Planned | - |
+| 9. Data Foundation & Methodology | 2/2 | Completed | 2026-02-17 |
 | 10. Rules Engine & Intelligence | 0/2 | Planned | - |
-| 11. Narrative Quality & Quality Gates | 0/TBD | Not started | - |
+| 11. Narrative Quality & Quality Gates | 0/2 | Planned | - |
 | 12. Output Modes & Enhanced XLSX | 0/TBD | Not started | - |
 
 ---
-*Last updated: 2026-02-17 — Phase 10 planned*
+*Last updated: 2026-02-17 — Phase 11 planned (2 plans in 2 waves)*
