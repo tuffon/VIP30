@@ -1,583 +1,422 @@
 from __future__ import annotations
 
 import logging
+from datetime import datetime
 from io import BytesIO
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from openpyxl import Workbook
-from openpyxl.styles import Alignment, Font
+from openpyxl.formatting.rule import ColorScaleRule, DataBarRule
+from openpyxl.styles import Alignment, Border, Font, PatternFill, Side, numbers
 from openpyxl.utils import get_column_letter
 
-from .markdown import MarkdownBlock
+from src.pipeline.output_modes import ModeFilteredOutput, OutputMode, OutputModeFilter
 
 logger = logging.getLogger("vip-parse.bid-comp.xlsx")
+
+_THIN_BORDER = Border(
+    left=Side(style="thin", color="DDDDDD"),
+    right=Side(style="thin", color="DDDDDD"),
+    top=Side(style="thin", color="DDDDDD"),
+    bottom=Side(style="thin", color="DDDDDD"),
+)
+
+_SEVERITY_FILLS = {
+    "critical": PatternFill(fill_type="solid", fgColor="FF4444"),
+    "notable": PatternFill(fill_type="solid", fgColor="FFA500"),
+    "informational": PatternFill(fill_type="solid", fgColor="ADD8E6"),
+}
+
 
 def export_xlsx(
     *,
     pair,
     narrative,
     category_rows: List[Dict[str, Any]],
-    recap_rows: List[Dict[str, Any]],
+    recap_rows: Optional[List[Dict[str, Any]]] = None,
+    output_mode: Optional[OutputMode] = None,
+    methodology: Optional[Any] = None,
+    audit_metadata: Optional[Dict[str, Any]] = None,
+    signal_bundle: Optional[Any] = None,
 ) -> bytes:
-    logger.info(
-        "xlsx export start: primary=%s comparison=%s category_rows=%d recap_rows=%d",
-        pair.primary.estimate_name,
-        pair.comparison.estimate_name,
-        len(category_rows),
-        len(recap_rows),
-    )
+    mode = output_mode or OutputMode.INTERNAL
+    filtered = OutputModeFilter.apply(mode, narrative, methodology, signal_bundle)
+
     wb = Workbook()
-    ws_summary = wb.active
-    ws_summary.title = "Narrative Summary"
-    header_font = Font(bold=True)
+    ws_exec = wb.active
+    ws_exec.title = "Executive Summary"
 
-    ws_summary["A1"] = "Bid Comparison Summary"
-    ws_summary["A1"].font = Font(bold=True, size=14)
+    _write_executive_summary(ws_exec, pair, filtered, category_rows)
+    _write_ranked_impact(wb, pair, category_rows, signal_bundle)
 
-    ws_summary["A3"] = "Role"
-    ws_summary["B3"] = "Estimate"
-    ws_summary["C3"] = "Grand Total ($)"
-    for cell_ref in ("A3", "B3", "C3"):
-        ws_summary[cell_ref].font = header_font
+    if filtered.include_methodology_sheet:
+        _write_methodology_sheet(wb, methodology, filtered)
+    if filtered.include_scope_sheet:
+        _write_scope_alignment_sheet(wb, filtered)
+    if filtered.include_category_detail:
+        _write_category_detail_sheet(wb, pair, category_rows, recap_rows or [])
 
-    # Get totals with fallback computation from category_rows if missing
-    primary_total = pair.primary.totals.grand_total
-    comparison_total = pair.comparison.totals.grand_total
-
-    # Log what we have
-    logger.info(
-        "xlsx totals: primary=%s (%s) comparison=%s (%s)",
-        primary_total,
-        type(primary_total).__name__,
-        comparison_total,
-        type(comparison_total).__name__,
-    )
-
-    # Fallback: compute from category_rows if grand_total is missing
-    if primary_total is None and category_rows:
-        primary_total = sum(
-            (r.get("primary_total") or 0) for r in category_rows
-            if isinstance(r.get("primary_total"), (int, float))
-        )
-        logger.warning("xlsx primary grand_total missing, computed from categories: %s", primary_total)
-
-    if comparison_total is None and category_rows:
-        comparison_total = sum(
-            (r.get("comparison_total") or 0) for r in category_rows
-            if isinstance(r.get("comparison_total"), (int, float))
-        )
-        logger.warning("xlsx comparison grand_total missing, computed from categories: %s", comparison_total)
-
-    # Ensure we have numbers, not None
-    primary_total = primary_total or 0
-    comparison_total = comparison_total or 0
-    delta_total = comparison_total - primary_total
-
-    ws_summary["A4"] = "Primary"
-    ws_summary["B4"] = pair.primary.estimate_name
-    ws_summary["C4"] = primary_total
-    ws_summary["A5"] = "Comparison"
-    ws_summary["B5"] = pair.comparison.estimate_name
-    ws_summary["C5"] = comparison_total
-
-    # Add bold delta row
-    ws_summary["A6"] = "Delta"
-    ws_summary["A6"].font = Font(bold=True)
-    ws_summary["C6"] = delta_total
-    ws_summary["C6"].font = Font(bold=True)
-
-    for cell_ref in ("C4", "C5", "C6"):
-        cell = ws_summary[cell_ref]
-        if isinstance(cell.value, (int, float)):
-            cell.number_format = "$#,##0.00"
-
-    sections = narrative.sections or {}
-    overview_text = _resolve_overview_text(narrative)
-    scope_items = _ensure_string_list(sections.get("scope_observations"))
-    followup_items = _ensure_string_list(sections.get("suggested_followups"))
-    driver_rows = _ensure_driver_rows(sections.get("key_cost_drivers"), narrative, pair)
-    driver_source = (
-        "sections"
-        if sections.get("key_cost_drivers")
-        else "narrative"
-        if getattr(narrative, "key_drivers", None)
-        else "delta_rows"
-    )
-    sample_preview = ""
-    for entry in driver_rows:
-        text = (entry.get("narrative") or "").strip()
-        if text:
-            sample_preview = text[:120]
-            break
-    if driver_rows and not sample_preview:
-        logger.warning("xlsx driver rows missing narrative text despite %d entries", len(driver_rows))
-    logger.info(
-        "xlsx driver rows: source=%s count=%d sample=%s",
-        driver_source,
-        len(driver_rows),
-        sample_preview or "<empty>",
-    )
-
-    current_row = 8  # After header (1), blank (2), estimate header (3), primary (4), comparison (5), delta (6), blank (7)
-    try:
-        current_row = _write_text_section(ws_summary, current_row, "Overview of Estimates", overview_text, header_font)
-    except Exception:  # noqa: BLE001
-        logger.exception("xlsx summary section write failed: overview")
-        raise
-    try:
-        current_row = _write_key_driver_section(
-            ws_summary,
-            current_row,
-            pair,
-            driver_rows,
-            header_font,
-        )
-    except Exception:  # noqa: BLE001
-        logger.exception("xlsx summary section write failed: key cost drivers")
-        raise
-    try:
-        current_row = _write_list_section(ws_summary, current_row, "Scope Observations", scope_items, header_font)
-    except Exception:  # noqa: BLE001
-        logger.exception("xlsx summary section write failed: scope observations")
-        raise
-    try:
-        current_row = _write_list_section(ws_summary, current_row, "Suggested Follow-ups", followup_items, header_font)
-    except Exception:  # noqa: BLE001
-        logger.exception("xlsx summary section write failed: suggested follow-ups")
-        raise
-
-    if narrative.delta_rows:
-        current_row += 1
-        ws_summary.cell(row=current_row, column=1, value="Key Category Deltas").font = header_font
-        current_row += 1
-        delta_headers = [
-            "Category",
-            f"{pair.primary.estimate_name} ($)",
-            f"{pair.comparison.estimate_name} ($)",
-            "Delta ($)",
-        ]
-        for col_idx, header in enumerate(delta_headers, start=1):
-            ws_summary.cell(row=current_row, column=col_idx, value=header).font = header_font
-        current_row += 1
-        for entry in narrative.delta_rows:
-            ws_summary.cell(row=current_row, column=1, value=entry.get("category"))
-            ws_summary.cell(row=current_row, column=2, value=entry.get("primary_total"))
-            ws_summary.cell(row=current_row, column=3, value=entry.get("comparison_total"))
-            ws_summary.cell(row=current_row, column=4, value=entry.get("delta"))
-            current_row += 1
-        for col_idx in (2, 3, 4):
-            col_letter = get_column_letter(col_idx)
-            for cell in ws_summary[col_letter]:
-                if isinstance(cell.value, (int, float)):
-                    cell.number_format = "$#,##0.00"
-
-    _autosize(ws_summary)
-    logger.info(
-        "xlsx summary sheet complete: primary_total=%s comparison_total=%s rows=%d",
-        pair.primary.totals.grand_total,
-        pair.comparison.totals.grand_total,
-        current_row,
-    )
-
-    # Sheet 2: category matrix
-    ws_categories = wb.create_sheet("Verisk Categories")
-    cat_headers = [
-        "Category",
-        f"{pair.primary.estimate_name} ($)",
-        f"{pair.comparison.estimate_name} ($)",
-        "Delta ($)",
-        f"Delta (% of {pair.primary.estimate_name})",
-    ]
-    ws_categories.append(cat_headers)
-    for col_idx in range(1, len(cat_headers) + 1):
-        ws_categories.cell(row=1, column=col_idx).font = header_font
-    for row in category_rows:
-        ws_categories.append(
-            [
-                row["category"],
-                row.get("primary_total"),
-                row.get("comparison_total"),
-                row.get("delta"),
-                row.get("delta_pct"),
-            ]
-        )
-    for col_idx in (2, 3, 4):
-        col_letter = get_column_letter(col_idx)
-        for cell in ws_categories[col_letter]:
-            if isinstance(cell.value, (int, float)):
-                cell.number_format = "$#,##0.00"
-    pct_column = get_column_letter(5)
-    for cell in ws_categories[pct_column]:
-        if isinstance(cell.value, (int, float)):
-            cell.number_format = "0.00%"
-    ws_categories.freeze_panes = "A2"
-    _autosize(ws_categories)
-    logger.info("xlsx category sheet complete: rows=%d", len(category_rows))
-
-    # Sheet 3: raw recap
-    ws_recap = wb.create_sheet("Original Recap")
-    recap_headers = ["Estimate", "Group", "Item", "Total ($)"]
-    ws_recap.append(recap_headers)
-    for col_idx in range(1, len(recap_headers) + 1):
-        ws_recap.cell(row=1, column=col_idx).font = header_font
-    for entry in recap_rows:
-        ws_recap.append(
-            [
-                entry.get("estimate"),
-                entry.get("group"),
-                entry.get("item"),
-                entry.get("total"),
-            ]
-        )
-    total_col = get_column_letter(4)
-    for cell in ws_recap[total_col]:
-        if isinstance(cell.value, (int, float)):
-            cell.number_format = "$#,##0.00"
-    ws_recap.freeze_panes = "A2"
-    _autosize(ws_recap)
-    logger.info("xlsx recap sheet complete: rows=%d", len(recap_rows))
+    _write_audit_trail_sheet(wb, audit_metadata or {}, mode)
 
     bio = BytesIO()
     wb.save(bio)
-    data = bio.getvalue()
-    logger.info("xlsx export complete: bytes=%d sheets=%d", len(data), len(wb.sheetnames))
-    return data
+    payload = bio.getvalue()
+    logger.info("xlsx export complete mode=%s bytes=%d sheets=%d", mode.value, len(payload), len(wb.sheetnames))
+    return payload
 
 
-def _autosize(ws) -> None:
-    for column_cells in ws.columns:
-        letter = column_cells[0].column_letter
-        max_len = max((len(str(cell.value)) for cell in column_cells if cell.value is not None), default=0)
-        ws.column_dimensions[letter].width = min(max(12, max_len + 2), 80)
+def _write_executive_summary(ws, pair, filtered: ModeFilteredOutput, category_rows: List[Dict[str, Any]]) -> None:
+    title = ws["A1"]
+    title.value = "Bid Comparison — Executive Summary"
+    title.font = Font(bold=True, size=14)
 
-def _write_text_section(ws, start_row: int, title: str, body: str, header_font: Font) -> int:
-    ws.cell(row=start_row, column=1, value=title).font = header_font
-    body_row = start_row + 1
-    resolved_body = body or "No narrative available."
-    if not body:
-        logger.warning("xlsx narrative text missing for section '%s'; using fallback", title)
+    primary_total, comparison_total, delta_total = _totals(category_rows)
 
-    # Split on double newlines first (paragraph breaks), then single newlines
-    # This preserves intentional paragraph structure from LLM output
-    paragraphs = resolved_body.split('\n\n')
-    structured_lines = []
+    ws["A3"] = "Primary Estimate"
+    ws["B3"] = pair.primary.estimate_name
+    ws["A4"] = "Comparison Estimate"
+    ws["B4"] = pair.comparison.estimate_name
+    ws["A5"] = "Primary Total"
+    ws["B5"] = primary_total
+    ws["A6"] = "Comparison Total"
+    ws["B6"] = comparison_total
+    ws["A7"] = "Total Delta"
+    ws["B7"] = delta_total
 
-    for para in paragraphs:
-        para = para.strip()
-        if not para:
-            continue
-        # Check if this paragraph starts with a bold label
-        if para.startswith('**'):
-            # Extract label and value from **Label**: Value format
-            if '**:' in para:
-                parts = para.split('**:', 1)
-                label = parts[0].replace('**', '').strip()
-                value = parts[1].strip() if len(parts) > 1 else ''
-                structured_lines.append((label, value))
-            elif para.count('**') >= 2:
-                # Format: **Label** Value or **Label**: Value
-                end_bold = para.find('**', 2)
-                if end_bold > 0:
-                    label = para[2:end_bold].strip()
-                    rest = para[end_bold+2:].lstrip(':').strip()
-                    structured_lines.append((label, rest))
-                else:
-                    structured_lines.append((None, para))
-            else:
-                structured_lines.append((None, para))
-        elif para.startswith('- **'):
-            # Bullet with bold label
-            para = para.lstrip('- ')
-            if '**:' in para:
-                parts = para.split('**:', 1)
-                label = parts[0].replace('**', '').strip()
-                value = parts[1].strip() if len(parts) > 1 else ''
-                structured_lines.append((label, value))
-            else:
-                structured_lines.append((None, para))
-        else:
-            structured_lines.append((None, para))
+    for row in range(3, 8):
+        ws[f"A{row}"].font = Font(bold=True)
+        ws[f"A{row}"].border = _THIN_BORDER
+        ws[f"B{row}"].border = _THIN_BORDER
+    for row in (5, 6, 7):
+        ws[f"B{row}"].number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
 
-    if structured_lines and any(label for label, _ in structured_lines):
-        # Write as structured rows with bold labels
-        for label, value in structured_lines:
-            if label:
-                label_cell = ws.cell(row=body_row, column=1, value=f"{label}:")
-                label_cell.font = Font(bold=True)
-                ws.merge_cells(start_row=body_row, start_column=2, end_row=body_row, end_column=5)
-                value_cell = ws.cell(row=body_row, column=2, value=value)
-                value_cell.alignment = Alignment(wrap_text=True, vertical="top")
-            else:
-                ws.merge_cells(start_row=body_row, start_column=1, end_row=body_row, end_column=5)
-                text_cell = ws.cell(row=body_row, column=1, value=value)
-                text_cell.alignment = Alignment(wrap_text=True, vertical="top")
-            body_row += 1
-        return body_row + 1
-    else:
-        # Fallback to single merged cell for plain text
-        ws.merge_cells(start_row=body_row, start_column=1, end_row=body_row, end_column=5)
-        body_cell = ws.cell(row=body_row, column=1, value=resolved_body)
-        body_cell.alignment = Alignment(wrap_text=True, vertical="top")
-        return body_row + 2
+    start_row = 9
+    ws[f"A{start_row}"] = "Top Drivers"
+    ws[f"A{start_row}"].font = Font(bold=True)
+    start_row += 1
 
+    headers = ["Category", "Primary ($)", "Comparison ($)", "Delta ($)", "% of Total"]
+    for idx, header in enumerate(headers, start=1):
+        cell = ws.cell(row=start_row, column=idx, value=header)
+        cell.font = Font(bold=True)
+        cell.border = _THIN_BORDER
 
-def _write_list_section(ws, start_row: int, title: str, items: List[str], header_font: Font) -> int:
-    ws.cell(row=start_row, column=1, value=title).font = header_font
+    ranked = _ranked_rows(category_rows)
+    driver_rows = _resolve_driver_rows(filtered, ranked)
     row = start_row + 1
-    if not items:
-        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
-        cell = ws.cell(row=row, column=1, value="No items provided.")
-        cell.alignment = Alignment(wrap_text=True, vertical="top")
-        return row + 2
-    for item in items:
-        ws.cell(row=row, column=1, value="•")
-        ws.merge_cells(start_row=row, start_column=2, end_row=row, end_column=5)
-        text_cell = ws.cell(row=row, column=2, value=item)
-        text_cell.alignment = Alignment(wrap_text=True, vertical="top")
+    for entry in driver_rows:
+        ws.cell(row=row, column=1, value=entry.get("category"))
+        ws.cell(row=row, column=2, value=entry.get("primary_total"))
+        ws.cell(row=row, column=3, value=entry.get("comparison_total"))
+        ws.cell(row=row, column=4, value=entry.get("delta"))
+        ws.cell(row=row, column=5, value=entry.get("pct_of_total_variance") / 100 if entry.get("pct_of_total_variance") is not None else None)
+        for col in range(1, 6):
+            ws.cell(row=row, column=col).border = _THIN_BORDER
+        for col in (2, 3, 4):
+            ws.cell(row=row, column=col).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
+        ws.cell(row=row, column=5).number_format = "0.0%"
         row += 1
-    return row + 1
+
+    row += 1
+    ws.cell(row=row, column=1, value="Structural Flags").font = Font(bold=True)
+    row += 1
+    if filtered.structural_flags:
+        for flag in filtered.structural_flags:
+            ws.cell(row=row, column=1, value=f"- {flag}")
+            ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
+            ws.cell(row=row, column=1).alignment = Alignment(wrap_text=True)
+            row += 1
+    else:
+        ws.cell(row=row, column=1, value="No structural flags")
+        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
+        row += 1
+
+    row += 1
+    ws.cell(row=row, column=1, value="Methodology Summary").font = Font(bold=True)
+    row += 1
+    ws.cell(row=row, column=1, value=filtered.methodology_summary or "Methodology analysis not available")
+    ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
+    ws.cell(row=row, column=1).alignment = Alignment(wrap_text=True)
+
+    ws.freeze_panes = "A2"
+    _autosize(ws)
 
 
-def _write_key_driver_section(ws, start_row: int, pair, drivers: List[Dict[str, Any]], header_font: Font) -> int:
-    ws.cell(row=start_row, column=1, value="Key Cost Drivers").font = header_font
-    row = start_row + 1
+def _write_ranked_impact(wb: Workbook, pair, category_rows: List[Dict[str, Any]], signal_bundle: Optional[Any]) -> None:
+    ws = wb.create_sheet("Ranked Impact")
+    headers = ["Rank", "Category", "Primary ($)", "Comparison ($)", "Delta ($)", "% of Total Variance", "Severity"]
+    ws.append(headers)
+    for cell in ws[1]:
+        cell.font = Font(bold=True)
+        cell.border = _THIN_BORDER
+
+    ranked = _ranked_rows(category_rows)
+    severity_by_category = _severity_by_category(signal_bundle)
+
+    for idx, row in enumerate(ranked, start=1):
+        severity = severity_by_category.get(row["category"], "")
+        ws.append([
+            idx,
+            row["category"],
+            row["primary_total"],
+            row["comparison_total"],
+            row["delta"],
+            row["pct_of_total_variance"] / 100,
+            severity,
+        ])
+
+    max_row = ws.max_row
+    for r in range(2, max_row + 1):
+        for c in range(1, 8):
+            ws.cell(row=r, column=c).border = _THIN_BORDER
+        for c in (3, 4, 5):
+            ws.cell(row=r, column=c).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
+        ws.cell(row=r, column=6).number_format = "0.0%"
+
+        sev = str(ws.cell(row=r, column=7).value or "").lower()
+        fill = _SEVERITY_FILLS.get(sev)
+        if fill is not None:
+            ws.cell(row=r, column=7).fill = fill
+
+    if max_row >= 2:
+        ws.conditional_formatting.add(
+            f"E2:E{max_row}",
+            ColorScaleRule(
+                start_type="num",
+                start_value=-1,
+                start_color="CC0000",
+                mid_type="num",
+                mid_value=0,
+                mid_color="FFFFFF",
+                end_type="num",
+                end_value=1,
+                end_color="00AA00",
+            ),
+        )
+
+    ws.freeze_panes = "A2"
+    _autosize(ws)
+
+
+def _write_methodology_sheet(wb: Workbook, methodology: Optional[Any], filtered: ModeFilteredOutput) -> None:
+    ws = wb.create_sheet("Methodology")
+    ws["A1"] = "Methodology Comparison"
+    ws["A1"].font = Font(bold=True, size=14)
+
+    row = 3
+    rows = [
+        ("Summary", filtered.methodology_summary or "Methodology analysis not available"),
+    ]
+
+    if methodology is not None:
+        rows.extend(
+            [
+                ("Primary O&P", methodology.primary_op.structure_type.value),
+                ("Comparison O&P", methodology.comparison_op.structure_type.value),
+                ("Depreciation Differs", str(methodology.depreciation_approach_differs)),
+                ("Price List Differs", str(methodology.price_list_differs)),
+                ("Locality Factors", methodology.locality_factors or "n/a"),
+                ("Data Granularity", methodology.data_granularity.value),
+            ]
+        )
+
+    for label, value in rows:
+        ws.cell(row=row, column=1, value=label).font = Font(bold=True)
+        ws.cell(row=row, column=2, value=value)
+        ws.cell(row=row, column=1).border = _THIN_BORDER
+        ws.cell(row=row, column=2).border = _THIN_BORDER
+        ws.cell(row=row, column=2).alignment = Alignment(wrap_text=True, vertical="top")
+        row += 1
+
+    ws.freeze_panes = "A2"
+    _autosize(ws)
+
+
+def _write_scope_alignment_sheet(wb: Workbook, filtered: ModeFilteredOutput) -> None:
+    ws = wb.create_sheet("Scope Alignment")
+    ws["A1"] = "Scope Alignment"
+    ws["A1"].font = Font(bold=True, size=14)
+
+    ws["A3"] = "Scope Observations"
+    ws["A3"].font = Font(bold=True)
+
+    row = 4
+    if filtered.scope_observations:
+        for item in filtered.scope_observations:
+            ws.cell(row=row, column=1, value=f"- {item}")
+            ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
+            ws.cell(row=row, column=1).alignment = Alignment(wrap_text=True)
+            row += 1
+    else:
+        ws.cell(row=row, column=1, value="No scope observations")
+        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
+
+    ws.freeze_panes = "A2"
+    _autosize(ws)
+
+
+def _write_category_detail_sheet(
+    wb: Workbook,
+    pair,
+    category_rows: List[Dict[str, Any]],
+    recap_rows: List[Dict[str, Any]],
+) -> None:
+    ws = wb.create_sheet("Category Detail")
     headers = [
         "Category",
         f"{pair.primary.estimate_name} ($)",
         f"{pair.comparison.estimate_name} ($)",
         "Delta ($)",
-        "Narrative",
+        "Delta (% of Primary)",
     ]
-    for col_idx, header in enumerate(headers, start=1):
-        ws.cell(row=row, column=col_idx, value=header).font = header_font
-    row += 1
-    if not drivers:
-        logger.warning(
-            "xlsx driver rows empty: primary=%s comparison=%s",
-            pair.primary.estimate_name,
-            pair.comparison.estimate_name,
+    ws.append(headers)
+    for cell in ws[1]:
+        cell.font = Font(bold=True)
+        cell.border = _THIN_BORDER
+
+    for row in category_rows:
+        ws.append([
+            row.get("category"),
+            row.get("primary_total"),
+            row.get("comparison_total"),
+            row.get("delta"),
+            row.get("delta_pct"),
+        ])
+
+    max_row = ws.max_row
+    for r in range(2, max_row + 1):
+        for c in range(1, 6):
+            ws.cell(row=r, column=c).border = _THIN_BORDER
+        for c in (2, 3, 4):
+            ws.cell(row=r, column=c).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
+        ws.cell(row=r, column=5).number_format = "0.00%"
+
+    if max_row >= 2:
+        ws.conditional_formatting.add(
+            f"D2:D{max_row}",
+            ColorScaleRule(
+                start_type="num",
+                start_value=-1,
+                start_color="CC0000",
+                mid_type="num",
+                mid_value=0,
+                mid_color="FFFFFF",
+                end_type="num",
+                end_value=1,
+                end_color="00AA00",
+            ),
         )
-        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=5)
-        cell = ws.cell(row=row, column=1, value="No driver data provided.")
-        cell.alignment = Alignment(wrap_text=True, vertical="top")
-        return row + 2
-    # Track totals for summary row
-    total_primary = 0.0
-    total_comparison = 0.0
-    total_delta = 0.0
+        ws.conditional_formatting.add(
+            f"D2:D{max_row}",
+            DataBarRule(
+                start_type="num",
+                start_value=0,
+                end_type="max",
+                end_value=0,
+                color="638EC6",
+                showValue=True,
+            ),
+        )
 
-    for driver in drivers:
-        primary_val = driver.get("primary_total")
-        comparison_val = driver.get("comparison_total")
-        delta_val = driver.get("delta_total")
-        if delta_val is None and isinstance(primary_val, (int, float)) and isinstance(comparison_val, (int, float)):
-            delta_val = round((comparison_val or 0) - (primary_val or 0), 2)
+    if recap_rows:
+        spacer = ws.max_row + 2
+        ws.cell(row=spacer, column=1, value="Recap Detail (raw)").font = Font(bold=True)
+        ws.cell(row=spacer + 1, column=1, value="Estimate").font = Font(bold=True)
+        ws.cell(row=spacer + 1, column=2, value="Group").font = Font(bold=True)
+        ws.cell(row=spacer + 1, column=3, value="Item").font = Font(bold=True)
+        ws.cell(row=spacer + 1, column=4, value="Total ($)").font = Font(bold=True)
+        row = spacer + 2
+        for entry in recap_rows[:500]:
+            ws.cell(row=row, column=1, value=entry.get("estimate"))
+            ws.cell(row=row, column=2, value=entry.get("group"))
+            ws.cell(row=row, column=3, value=entry.get("item"))
+            ws.cell(row=row, column=4, value=entry.get("total"))
+            ws.cell(row=row, column=4).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
+            row += 1
 
-        # Accumulate totals
-        if isinstance(primary_val, (int, float)):
-            total_primary += primary_val
-        if isinstance(comparison_val, (int, float)):
-            total_comparison += comparison_val
-        if isinstance(delta_val, (int, float)):
-            total_delta += delta_val
+    ws.freeze_panes = "A2"
+    _autosize(ws)
 
-        ws.cell(row=row, column=1, value=driver.get("category"))
-        primary_cell = ws.cell(row=row, column=2, value=primary_val)
-        comparison_cell = ws.cell(row=row, column=3, value=comparison_val)
-        delta_cell = ws.cell(row=row, column=4, value=delta_val)
-        narrative_cell = ws.cell(row=row, column=5, value=driver.get("narrative") or "")
-        for cell in (primary_cell, comparison_cell, delta_cell):
-            if isinstance(cell.value, (int, float)):
-                cell.number_format = "$#,##0.00"
-        narrative_cell.alignment = Alignment(wrap_text=True, vertical="top")
+
+def _write_audit_trail_sheet(wb: Workbook, audit_metadata: Dict[str, Any], mode: OutputMode) -> None:
+    ws = wb.create_sheet("Audit Trail")
+    ws["A1"] = "Audit Trail"
+    ws["A1"].font = Font(bold=True, size=14)
+
+    rows = [
+        ("Pipeline Version", "v2.0"),
+        ("Output Mode", mode.value),
+        ("Analysis Timestamp", audit_metadata.get("analysis_timestamp") or datetime.utcnow().isoformat()),
+        ("Primary Filename", audit_metadata.get("primary_filename") or "n/a"),
+        ("Comparison Filename", audit_metadata.get("comparison_filename") or "n/a"),
+        ("Primary SHA-256", audit_metadata.get("primary_hash") or "n/a"),
+        ("Comparison SHA-256", audit_metadata.get("comparison_hash") or "n/a"),
+    ]
+
+    row = 3
+    for label, value in rows:
+        ws.cell(row=row, column=1, value=label).font = Font(bold=True)
+        ws.cell(row=row, column=1).border = _THIN_BORDER
+        ws.cell(row=row, column=2, value=value)
+        ws.cell(row=row, column=2).border = _THIN_BORDER
         row += 1
 
-    # Add Grand Total row
-    ws.cell(row=row, column=1, value="Grand Total").font = header_font
-    total_primary_cell = ws.cell(row=row, column=2, value=total_primary)
-    total_primary_cell.font = header_font
-    total_primary_cell.number_format = "$#,##0.00"
-    total_comparison_cell = ws.cell(row=row, column=3, value=total_comparison)
-    total_comparison_cell.font = header_font
-    total_comparison_cell.number_format = "$#,##0.00"
-    total_delta_cell = ws.cell(row=row, column=4, value=total_delta)
-    total_delta_cell.font = header_font
-    total_delta_cell.number_format = "$#,##0.00"
-    row += 1
-
-    return row + 1
+    ws.freeze_panes = "A2"
+    _autosize(ws)
 
 
-def _ensure_string_list(value) -> List[str]:
-    if not isinstance(value, list):
-        return []
-    items: List[str] = []
-    for entry in value:
-        if isinstance(entry, str):
-            text = entry.strip()
-            if text:
-                items.append(text)
-    return items
+def _ranked_rows(category_rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    ranked: List[Dict[str, Any]] = []
+    total_abs = sum(abs(float(r.get("delta") or 0.0)) for r in category_rows) or 1.0
+    for row in category_rows:
+        delta = float(row.get("delta") or 0.0)
+        ranked.append(
+            {
+                "category": row.get("category") or "Unknown",
+                "primary_total": float(row.get("primary_total") or 0.0),
+                "comparison_total": float(row.get("comparison_total") or 0.0),
+                "delta": delta,
+                "abs_delta": abs(delta),
+                "pct_of_total_variance": round(abs(delta) / total_abs * 100.0, 2),
+            }
+        )
+    ranked.sort(key=lambda r: (-r["abs_delta"], str(r["category"]).lower()))
+    return ranked
 
 
-def _ensure_driver_rows(section_rows, narrative, pair=None) -> List[Dict[str, Any]]:
-    normalized: List[Dict[str, Any]] = []
-    fallback_count = 0
-    llm_count = 0
-    if isinstance(section_rows, list):
-        for entry in section_rows:
-            normalized_entry = _normalize_driver_entry(entry)
-            if normalized_entry:
-                normalized.append(normalized_entry)
-        if section_rows and not normalized:
-            logger.warning("xlsx driver rows dropped after normalization: %d entries", len(section_rows))
-    if normalized:
-        # Ensure all drivers have narratives, generate fallback if missing
-        for driver in normalized:
-            if not driver.get("narrative"):
-                driver["narrative"] = _generate_fallback_narrative(driver, pair)
-                fallback_count += 1
-            else:
-                llm_count += 1
-        logger.info("xlsx driver narratives: llm=%d fallback=%d", llm_count, fallback_count)
-        return normalized
-    if getattr(narrative, "key_drivers", None):
-        fallback_rows = [_normalize_driver_entry(entry) or entry for entry in narrative.key_drivers]
-        if not fallback_rows:
-            logger.warning("xlsx driver fallback (narrative.key_drivers) produced 0 entries")
-        # Ensure all drivers have narratives
-        for driver in fallback_rows:
-            if not driver.get("narrative"):
-                driver["narrative"] = _generate_fallback_narrative(driver, pair)
-                fallback_count += 1
-            else:
-                llm_count += 1
-        logger.info("xlsx driver narratives (key_drivers path): llm=%d fallback=%d", llm_count, fallback_count)
-        return fallback_rows
-    # Full fallback path - no LLM narratives at all
-    drivers: List[Dict[str, Any]] = []
-    for row in (narrative.delta_rows or []):
-        driver = {
-            "category": row.get("category"),
-            "primary_total": row.get("primary_total"),
-            "comparison_total": row.get("comparison_total"),
-            "delta_total": row.get("delta"),
-            "narrative": "",
-        }
-        driver["narrative"] = _generate_fallback_narrative(driver, pair)
-        drivers.append(driver)
-    if drivers:
-        logger.warning("xlsx driver narratives: ALL FALLBACK (%d drivers) - LLM returned no narratives", len(drivers))
-    else:
-        logger.warning("xlsx driver fallback (delta_rows) produced 0 entries")
-    return drivers
+def _resolve_driver_rows(filtered: ModeFilteredOutput, ranked_rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    by_category = {str(r["category"]): r for r in ranked_rows}
+    out: List[Dict[str, Any]] = []
+    for driver in filtered.top_drivers:
+        category = str(driver.get("category") or "")
+        if category and category in by_category:
+            out.append(by_category[category])
+    if not out:
+        out = ranked_rows[:3]
+    return out
 
 
-def _generate_fallback_narrative(driver: Dict[str, Any], pair=None) -> str:
-    """Generate a basic narrative when LLM doesn't provide one."""
-    category = driver.get("category", "Category")
-    primary_total = driver.get("primary_total")
-    comparison_total = driver.get("comparison_total")
-    delta = driver.get("delta_total")
-
-    if delta is None and primary_total is not None and comparison_total is not None:
-        delta = comparison_total - primary_total
-
-    if delta is None:
-        return f"Review {category} line items for scope differences."
-
-    primary_name = pair.primary.estimate_name if pair else "Primary"
-    comparison_name = pair.comparison.estimate_name if pair else "Comparison"
-
-    abs_delta = abs(delta)
-    if abs_delta < 100:
-        return f"Minor variance in {category}; likely rounding or unit price differences."
-
-    if delta > 0:
-        # Comparison is higher
-        pct = (delta / primary_total * 100) if primary_total and primary_total > 0 else 0
-        if pct > 50:
-            return f"{comparison_name} includes significantly more {category} scope (+{pct:.0f}%); review for additional line items or quantities."
-        elif pct > 20:
-            return f"{comparison_name} higher in {category} (+{pct:.0f}%); check for quantity or unit price differences."
-        else:
-            return f"Moderate increase in {category} for {comparison_name}; may reflect scope additions or pricing variance."
-    else:
-        # Primary is higher
-        pct = (abs_delta / primary_total * 100) if primary_total and primary_total > 0 else 0
-        if pct > 50:
-            return f"{comparison_name} missing or reduced {category} scope (-{pct:.0f}%); verify if items were excluded."
-        elif pct > 20:
-            return f"{comparison_name} lower in {category} (-{pct:.0f}%); check for missing line items or reduced quantities."
-        else:
-            return f"Moderate decrease in {category} for {comparison_name}; may reflect scope reductions or pricing variance."
+def _totals(category_rows: List[Dict[str, Any]]) -> tuple[float, float, float]:
+    primary_total = round(sum(float(r.get("primary_total") or 0.0) for r in category_rows), 2)
+    comparison_total = round(sum(float(r.get("comparison_total") or 0.0) for r in category_rows), 2)
+    delta_total = round(comparison_total - primary_total, 2)
+    return primary_total, comparison_total, delta_total
 
 
-def _resolve_overview_text(narrative) -> str:
-    sections = narrative.sections or {}
-    overview = (sections.get("overview_of_estimates") or "").strip()
-    if overview:
-        return overview
-    overview_text = _extract_first_paragraph(narrative.blocks)
-    if not overview_text:
-        logger.warning("narrative overview missing: falling back to default")
-    return overview_text or "No narrative available."
+def _severity_by_category(signal_bundle: Optional[Any]) -> Dict[str, str]:
+    if signal_bundle is None:
+        return {}
+    out: Dict[str, str] = {}
+    for flag in getattr(signal_bundle, "emphasis_flags", []) or []:
+        category = getattr(flag, "category", None)
+        severity = getattr(getattr(flag, "severity", None), "value", None)
+        if category and severity:
+            out[str(category)] = str(severity)
+    return out
 
 
-def _extract_first_paragraph(blocks: List[MarkdownBlock]) -> str:
-    first_heading: Optional[str] = None
-    for block in blocks:
-        if block.kind == "heading" and block.text and not first_heading:
-            first_heading = block.text
-            continue
-        if block.kind == "paragraph" and block.text:
-            return block.text
-    return first_heading or ""
-
-
-def _normalize_driver_entry(entry: Any) -> Dict[str, Any] | None:
-    if not isinstance(entry, dict):
-        return None
-
-    def _pick_number(*keys):
-        for key in keys:
-            if key in entry:
-                value = entry.get(key)
-                coerced = _coerce_number(value)
-                if coerced is not None:
-                    return coerced
-        return None
-
-    category = str(entry.get("category") or "").strip() or "Category"
-    primary_total = _pick_number("total1", "primary_total", "estimate_a_total", "left_total")
-    comparison_total = _pick_number("total2", "comparison_total", "estimate_b_total", "right_total")
-    delta_val = _pick_number("delta", "delta_total")
-    if delta_val is None and isinstance(primary_total, (int, float)) and isinstance(comparison_total, (int, float)):
-        delta_val = round(comparison_total - primary_total, 2)
-    narrative_text = str(entry.get("narrative") or entry.get("explanation") or "").strip()
-    return {
-        "category": category,
-        "primary_total": primary_total,
-        "comparison_total": comparison_total,
-        "delta_total": delta_val,
-        "narrative": narrative_text,
-    }
-
-
-def _coerce_number(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    if isinstance(value, (int, float)):
-        return float(value)
-    if isinstance(value, str):
-        cleaned = value.replace(",", "").strip()
-        if not cleaned:
-            return None
-        try:
-            return float(cleaned)
-        except ValueError:
-            return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
+def _autosize(ws) -> None:
+    for column_cells in ws.columns:
+        letter = get_column_letter(column_cells[0].column)
+        max_len = max((len(str(cell.value)) for cell in column_cells if cell.value is not None), default=0)
+        ws.column_dimensions[letter].width = min(max(12, max_len + 2), 80)
