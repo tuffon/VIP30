@@ -14,10 +14,8 @@ type UploadDropzoneProps = {
   onFileSelect: (file: File | null) => void;
 };
 
-type MePayload = {
-  success?: boolean;
-  credit_balance?: number;
-  user?: { email?: string };
+type BalancePayload = {
+  balance?: number;
 };
 
 const phaseOrder: Record<JobPhase, number> = {
@@ -102,7 +100,7 @@ export default function BidCompPage() {
     async function loadCredits() {
       setIsCreditsLoading(true);
       try {
-        const response = await fetch(`${apiBase.replace(/\/$/, "")}/auth/me`, {
+        const response = await fetch(`${apiBase.replace(/\/$/, "")}/credits/balance`, {
           credentials: "include",
         });
 
@@ -116,8 +114,8 @@ export default function BidCompPage() {
           return;
         }
 
-        const payload = (await response.json()) as MePayload;
-        setCreditBalance(typeof payload.credit_balance === "number" ? payload.credit_balance : null);
+        const payload = (await response.json()) as BalancePayload;
+        setCreditBalance(typeof payload.balance === "number" ? payload.balance : null);
       } catch {
         if (!active) return;
         setCreditBalance(null);
@@ -221,6 +219,14 @@ export default function BidCompPage() {
   );
 
   const submitDisabled = isSubmitting || isCreditsLoading || !carrierFile || !contractorFile || (creditBalance ?? 0) <= 0;
+  const currentBalance = creditBalance ?? 0;
+  const isZeroCredits = !isCreditsLoading && currentBalance <= 0;
+  const isLowCredits = !isCreditsLoading && currentBalance > 0 && currentBalance <= 2;
+  const creditCardTone = isZeroCredits
+    ? "border-rose-200 bg-rose-50 text-rose-700"
+    : isLowCredits
+      ? "border-amber-200 bg-amber-50 text-amber-700"
+      : "border-emerald-200 bg-emerald-50 text-emerald-700";
 
   return (
     <div className="space-y-10 text-slate-900">
@@ -248,10 +254,27 @@ export default function BidCompPage() {
           />
         </section>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-slate-600">
-            Available credits:{" "}
-            <span className="font-semibold text-slate-900">{isCreditsLoading ? "..." : (creditBalance ?? 0)}</span>
+        <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className={`flex flex-wrap items-center justify-between gap-4 rounded-xl border p-4 ${creditCardTone}`}>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide">Credits</p>
+              <p className="text-2xl font-bold">{isCreditsLoading ? "..." : currentBalance}</p>
+            </div>
+            {isLowCredits ? (
+              <span className="rounded-full border border-amber-300 bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+                Low balance
+              </span>
+            ) : null}
+            {isZeroCredits ? (
+              <span className="rounded-full border border-rose-300 bg-rose-100 px-3 py-1 text-xs font-semibold text-rose-800">
+                No credits
+              </span>
+            ) : null}
+          </div>
+          <p className={`text-sm ${isZeroCredits ? "text-rose-700" : "text-slate-600"}`}>
+            {isZeroCredits
+              ? "You need credits to generate comparisons. Contact us to add more."
+              : "Each comparison uses 1 credit."}
           </p>
           <button
             type="submit"

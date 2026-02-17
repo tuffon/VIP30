@@ -1,12 +1,25 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
+import { clearPersistedSession, getPersistedSession, isSessionValid, persistSession } from "../lib/auth";
+import { UserDropdown } from "./UserDropdown";
+
+type MePayload = {
+  user?: { email?: string };
+};
+
 export function NavAuth() {
+  const router = useRouter();
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
-  const [isLoading, setIsLoading] = useState(true);
-  const [email, setEmail] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState<string | null>(() => {
+    const persisted = getPersistedSession();
+    if (!persisted) return null;
+    return isSessionValid(persisted) ? persisted.email : null;
+  });
 
   useEffect(() => {
     let isMounted = true;
@@ -18,11 +31,18 @@ export function NavAuth() {
 
         if (!response.ok) {
           setEmail(null);
+          clearPersistedSession();
           return;
         }
 
-        const payload = (await response.json()) as { user?: { email?: string } };
-        setEmail(payload.user?.email || null);
+        const payload = (await response.json()) as MePayload;
+        const resolvedEmail = payload.user?.email || null;
+        setEmail(resolvedEmail);
+        if (resolvedEmail) {
+          persistSession(resolvedEmail);
+        } else {
+          clearPersistedSession();
+        }
       } catch {
         if (!isMounted) return;
         setEmail(null);
@@ -33,6 +53,7 @@ export function NavAuth() {
       }
     }
 
+    setIsLoading(true);
     loadUser();
 
     return () => {
@@ -41,6 +62,7 @@ export function NavAuth() {
   }, [apiBase]);
 
   async function handleLogout() {
+    clearPersistedSession();
     try {
       await fetch(`${apiBase.replace(/\/$/, "")}/auth/logout`, {
         method: "POST",
@@ -48,10 +70,12 @@ export function NavAuth() {
       });
     } finally {
       setEmail(null);
+      router.push("/");
+      router.refresh();
     }
   }
 
-  if (isLoading) {
+  if (isLoading && !email) {
     return <span className="text-sm text-slate-400">Loading…</span>;
   }
 
@@ -59,7 +83,7 @@ export function NavAuth() {
     return (
       <Link
         href="/login"
-        className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+        className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
       >
         Log in
       </Link>
@@ -77,14 +101,7 @@ export function NavAuth() {
       <Link href="/credits" className="text-xs font-semibold text-slate-500 hover:text-slate-900">
         Credits
       </Link>
-      <span className="text-sm font-medium text-slate-600">{email}</span>
-      <button
-        type="button"
-        onClick={handleLogout}
-        className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-100"
-      >
-        Sign out
-      </button>
+      <UserDropdown email={email} onSignOut={handleLogout} />
     </div>
   );
 }
