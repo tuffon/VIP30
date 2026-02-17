@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useId, useMemo, useStat
 import { useRouter } from "next/navigation";
 
 import { JobProgress } from "../../components/JobProgress";
+import { emitCreditBalanceChanged } from "../../lib/credits";
 
 type JobPhase = "idle" | "uploading" | "queued" | "processing" | "ready" | "failed";
 
@@ -94,44 +95,58 @@ export default function BidCompPage() {
   const [isCreditsLoading, setIsCreditsLoading] = useState(true);
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
 
-  useEffect(() => {
-    let active = true;
-
-    async function loadCredits() {
-      setIsCreditsLoading(true);
+  const loadCredits = useCallback(
+    async (options?: { silent?: boolean }) => {
+      if (!options?.silent) {
+        setIsCreditsLoading(true);
+      }
       try {
         const response = await fetch(`${apiBase.replace(/\/$/, "")}/credits/balance`, {
           credentials: "include",
         });
-
-        if (!active) return;
         if (response.status === 401) {
           router.push(`/login?next=${encodeURIComponent("/bid-comp")}`);
-          return;
+          return null;
         }
         if (!response.ok) {
           setCreditBalance(null);
-          return;
+          return null;
         }
 
         const payload = (await response.json()) as BalancePayload;
-        setCreditBalance(typeof payload.balance === "number" ? payload.balance : null);
+        const nextBalance = typeof payload.balance === "number" ? payload.balance : null;
+        setCreditBalance(nextBalance);
+        emitCreditBalanceChanged({ balance: nextBalance, source: "bid-comp-load" });
+        return nextBalance;
       } catch {
-        if (!active) return;
         setCreditBalance(null);
+        return null;
       } finally {
-        if (active) {
+        if (!options?.silent) {
           setIsCreditsLoading(false);
         }
       }
-    }
+    },
+    [apiBase, router],
+  );
 
-    loadCredits();
+  useEffect(() => {
+    void loadCredits();
+
+    const refresh = () => {
+      void loadCredits({ silent: true });
+    };
+
+    const intervalId = setInterval(refresh, 10000);
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
 
     return () => {
-      active = false;
+      clearInterval(intervalId);
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
     };
-  }, [apiBase, router]);
+  }, [loadCredits]);
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -300,10 +315,12 @@ export default function BidCompPage() {
             setPhase("ready");
             setDownloadUrl(result.download_url || null);
             setError(null);
+            void loadCredits({ silent: true });
           }}
           onError={(message) => {
             setPhase("failed");
             setError(message);
+            void loadCredits({ silent: true });
           }}
           onRetry={async () => {
             try {
