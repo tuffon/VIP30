@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+from src.bid_comp import BidComp
 from src.bid_comp.core import _coerce_structured_llm_output
-from src.bid_comp.export_xlsx import _extract_first_paragraph
 
 
 def test_coerce_structured_llm_output_handles_single_quotes() -> None:
@@ -31,9 +31,16 @@ def test_coerce_structured_llm_output_handles_preamble_text() -> None:
     assert stage == "snippet"
 
 
-def test_extract_first_paragraph_skips_heading() -> None:
-    blocks = [
-        type("Block", (), {"kind": "heading", "text": "# Overview"})(),
-        type("Block", (), {"kind": "paragraph", "text": "Summary paragraph."})(),
-    ]
-    assert _extract_first_paragraph(blocks) == "Summary paragraph."
+def test_extract_overview_from_markdown_collects_section_until_next_heading() -> None:
+    markdown = """# Overview of Estimates
+**Total Comparison**: Primary is $10,000 higher.
+
+**Key Takeaway**: Flooring drives 60% of variance.
+
+## Key Cost Drivers
+- Flooring: $18,000 vs $12,000
+"""
+    overview = BidComp()._extract_overview_from_markdown(markdown)
+    assert "**Total Comparison**: Primary is $10,000 higher." in overview
+    assert "**Key Takeaway**: Flooring drives 60% of variance." in overview
+    assert "## Key Cost Drivers" not in overview

@@ -101,7 +101,12 @@ class MockLLMAdapter:
 class AlwaysPassEvaluator(QualityEvaluator):
     """Mock evaluator that always passes quality checks."""
 
-    def evaluate(self, draft: DraftNarrative) -> QualityReport:
+    def evaluate(
+        self,
+        draft: DraftNarrative,
+        data_granularity=None,
+        methodology_text=None,
+    ) -> QualityReport:
         from src.pipeline import QualityCheckResult
         return QualityReport(
             passed=True,
@@ -115,7 +120,12 @@ class AlwaysPassEvaluator(QualityEvaluator):
 class AlwaysFailEvaluator(QualityEvaluator):
     """Mock evaluator that always fails quality checks."""
 
-    def evaluate(self, draft: DraftNarrative) -> QualityReport:
+    def evaluate(
+        self,
+        draft: DraftNarrative,
+        data_granularity=None,
+        methodology_text=None,
+    ) -> QualityReport:
         from src.pipeline import QualityCheckResult
         return QualityReport(
             passed=False,
@@ -134,7 +144,12 @@ class FailThenPassEvaluator(QualityEvaluator):
         self.fail_count = fail_count
         self.call_count = 0
 
-    def evaluate(self, draft: DraftNarrative) -> QualityReport:
+    def evaluate(
+        self,
+        draft: DraftNarrative,
+        data_granularity=None,
+        methodology_text=None,
+    ) -> QualityReport:
         from src.pipeline import QualityCheckResult
         self.call_count += 1
         if self.call_count <= self.fail_count:

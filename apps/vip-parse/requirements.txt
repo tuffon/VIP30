@@ -14,6 +14,7 @@ networkx>=3.2.0  # DAG execution for orchestrator
 pdfplumber>=0.10.0  # PDF text extraction for historical estimates
 rq>=1.15.1
 redis>=5.0.1
+fakeredis>=2.24.1  # Test dependency for cache/pipeline tests
 lz4>=4.3.3
 textstat==0.7.12  # Pinned: Python 3.13 compatible (no pkg_resources)
 sqlmodel>=0.0.22

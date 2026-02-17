@@ -261,9 +261,11 @@ class TestBidCompWithCache:
         bid_comp.run(sample_bid_context, job_id="test-job-4")
         second_call_count = len(adapter.calls)
 
-        # Second call should have fewer LLM calls due to cache
-        # (analysis and writer cached, so no new LLM calls)
-        assert second_call_count == first_call_count  # No new calls
+        # Analysis/writer should be cached; compliance rewrites are not cached.
+        second_call_templates = [name for name, _ in adapter.calls[first_call_count:]]
+        assert "analysis_pass_v1" not in second_call_templates
+        assert "writer_pass_v1" not in second_call_templates
+        assert all(name == "compliance_rewrite_v1" for name in second_call_templates)
 
         # Verify cache entries exist
         keys = fake_redis.keys("pipeline:*")

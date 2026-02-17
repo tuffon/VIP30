@@ -6,7 +6,6 @@ from io import BytesIO
 from openpyxl import load_workbook
 
 from src.bid_comp import BidComp
-from src.bid_comp.core import VERISK_CATEGORY_ORDER
 from src.llm.adapter import LLMAdapterBase
 
 
@@ -114,20 +113,18 @@ Estimate B carries higher framing scope.
     comp = BidComp(llm_adapter=FakeAdapter(fake_markdown, sections))
     xlsx = comp.run({"carrier": payload_a, "contractor": payload_b}, job_id="job-1")
     wb = load_workbook(BytesIO(xlsx))
-    assert wb.sheetnames == ["Narrative Summary", "Verisk Categories", "Original Recap"]
-    summary = wb["Narrative Summary"]
-    assert summary["A6"].value == "Overview of Estimates"
-    assert "framing scope" in (summary["A7"].value or "")
-    assert summary["A9"].value == "Key Cost Drivers"
-    assert summary["A10"].value == "Category"
-    assert summary["A11"].value == "Framing / Structural"
-    assert summary["E11"].value == "Estimate B replaces the entire deck."
-    assert summary["A13"].value == "Scope Observations"
-    assert summary["B14"].value == "Estimate B includes extra electrical allowances."
-    categories_sheet = wb["Verisk Categories"]
-    # header + all categories
-    assert categories_sheet.max_row == len(VERISK_CATEGORY_ORDER) + 1
-    assert comp.last_narrative_debug["status"] == "ok"
+    assert wb.sheetnames == [
+        "Executive Summary",
+        "Ranked Impact",
+        "Methodology",
+        "Scope Alignment",
+        "Category Detail",
+        "Audit Trail",
+    ]
+    summary = wb["Executive Summary"]
+    assert summary["A1"].value == "Bid Comparison — Executive Summary"
+    assert summary["A9"].value == "Top Drivers"
+    assert comp.last_narrative_debug["status"] == "pipeline"
 
 
 def test_comparison_name_falls_back_to_original_filename() -> None:
