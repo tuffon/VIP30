@@ -33,17 +33,17 @@ Requirements for v2.0 release. Each maps to roadmap phases.
 
 ### Output Modes
 
-- [ ] **MODE-01**: System supports 4 output modes (Executive, Carrier Negotiation, Litigation, Internal Estimator) from the same underlying analysis
-- [ ] **MODE-02**: Executive mode produces 1-page compressed view with total delta, top 3 drivers, and structural flags
-- [ ] **MODE-03**: All modes share identical analytical findings — modes filter content and adjust tone, never change conclusions
-- [ ] **MODE-04**: Litigation mode enforces strictest neutral tone with zero hedge words and full evidence citations
+- [x] **MODE-01**: System supports 4 output modes (Executive, Carrier Negotiation, Litigation, Internal Estimator) from the same underlying analysis
+- [x] **MODE-02**: Executive mode produces 1-page compressed view with total delta, top 3 drivers, and structural flags
+- [x] **MODE-03**: All modes share identical analytical findings — modes filter content and adjust tone, never change conclusions
+- [x] **MODE-04**: Litigation mode enforces strictest neutral tone with zero hedge words and full evidence citations
 
 ### Visual Hierarchy
 
-- [ ] **XLSX-01**: Enhanced XLSX with conditional formatting (color scales for variance, data bars for impact, colored fills for flags)
-- [ ] **XLSX-02**: Multi-sheet structure: Executive Summary, Ranked Impact, Methodology, Scope Alignment, Category Detail
-- [ ] **XLSX-03**: Executive Summary sheet is self-contained — decision-maker can act from sheet 1 alone
-- [ ] **XLSX-04**: Output includes audit trail metadata (comparison parameters, data extraction timestamps, input file hashes)
+- [x] **XLSX-01**: Enhanced XLSX with conditional formatting (color scales for variance, data bars for impact, colored fills for flags)
+- [x] **XLSX-02**: Multi-sheet structure: Executive Summary, Ranked Impact, Methodology, Scope Alignment, Category Detail
+- [x] **XLSX-03**: Executive Summary sheet is self-contained — decision-maker can act from sheet 1 alone
+- [x] **XLSX-04**: Output includes audit trail metadata (comparison parameters, data extraction timestamps, input file hashes)
 
 ### Quality Gates
 
@@ -105,14 +105,14 @@ Which phases cover which requirements. Updated by create-roadmap.
 | GATE-03 | Phase 11 | Completed |
 | GATE-04 | Phase 11 | Completed |
 | GATE-05 | Phase 11 | Completed |
-| MODE-01 | Phase 12 | Pending |
-| MODE-02 | Phase 12 | Pending |
-| MODE-03 | Phase 12 | Pending |
-| MODE-04 | Phase 12 | Pending |
-| XLSX-01 | Phase 12 | Pending |
-| XLSX-02 | Phase 12 | Pending |
-| XLSX-03 | Phase 12 | Pending |
-| XLSX-04 | Phase 12 | Pending |
+| MODE-01 | Phase 12 | Completed |
+| MODE-02 | Phase 12 | Completed |
+| MODE-03 | Phase 12 | Completed |
+| MODE-04 | Phase 12 | Completed |
+| XLSX-01 | Phase 12 | Completed |
+| XLSX-02 | Phase 12 | Completed |
+| XLSX-03 | Phase 12 | Completed |
+| XLSX-04 | Phase 12 | Completed |
 
 **Coverage:**
 - v2.0 requirements: 28 total
@@ -121,4 +121,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-02-17*
-*Last updated: 2026-02-17 after roadmap creation*
+*Last updated: 2026-02-17 after Phase 12 completion*

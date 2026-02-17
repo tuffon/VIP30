@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 12 — Output Modes & Enhanced XLSX (execute next)
+**Current focus:** v2.0 complete — ready for next milestone planning
 
 ## Current Position
 
 Phase: 12 of 12 (Output Modes & Enhanced XLSX)
 Plan: 2 plans in 2 waves (01: mode model + filter + XLSX rewrite, 02: full stack wiring + frontend)
-Status: Planned, ready to execute
-Last activity: 2026-02-17 — Phases 9, 10, 11 completed; Phase 12 planned
+Status: Completed
+Last activity: 2026-02-17 — Phase 12 completed (plans 12-01 and 12-02)
 
-Progress: ████████░░ 75% (v2.0)
+Progress: ██████████ 100% (v2.0)
 
 ## Completed Milestones
 
@@ -58,5 +58,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-17
-Stopped at: Phases 9-11 executed, Phase 12 planned, ready to execute Phase 12
+Stopped at: v2.0 completed (Phases 9-12 executed)
 Resume file: —
