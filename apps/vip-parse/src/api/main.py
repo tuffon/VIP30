@@ -1,5 +1,4 @@
 from typing import List, Dict
-import logging
 import os
 
 from fastapi import FastAPI, HTTPException, Query
@@ -7,7 +6,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
 
+from .logging_config import configure_logging, get_logger
+from .middleware import RequestIDMiddleware
 from .retriever import retrieve_cost_items
+
+_log_level = configure_logging()
+logger = get_logger("vip-parse.api")
+
 from src.db import async_engine
 from src.routes.auth import auth_router
 from src.routes.bid_comp import router as bid_comp_router
@@ -16,27 +21,13 @@ from src.routes.jobs import jobs_router
 from src.routes.s3 import router as r2_router
 from src.routes.marketing import router as marketing_router
 
-_log_level = os.getenv("LOG_LEVEL", "INFO").upper()
-logging.basicConfig(
-    level=getattr(logging, _log_level, logging.INFO),
-    format="%(asctime)s %(levelname)-8s %(name)s :: %(message)s",
-    datefmt="%Y-%m-%dT%H:%M:%S",
-)
-logger = logging.getLogger("vip-parse.api")
-
-# Quiet Uvicorn access logs (health checks generate lots of noise)
-try:
-    logging.getLogger("uvicorn.access").disabled = True
-except Exception:
-    pass
-
 app = FastAPI(title="Costbook Retrieval API", version="1.0.0")
 
 @app.on_event("startup")
 async def startup_event():
     """Initialize the application on startup."""
-    logger.info("FastAPI application starting up (LOG_LEVEL=%s)", _log_level)
-    logger.info("Startup ready")
+    logger.info("api_starting", extra={"log_level": _log_level})
+    logger.info("startup_ready")
 
 # CORS configuration for cookie-based auth.
 _cors_origins = [
@@ -53,6 +44,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(RequestIDMiddleware)
 
 app.include_router(bid_comp_router)
 app.include_router(r2_router)
@@ -67,6 +59,19 @@ async def health_check():
     return {"status": "healthy", "message": "Costbook API is running"}
 
 
+@app.get("/health")
+async def health():
+    try:
+        async with async_engine.connect() as conn:
+            await conn.execute(text("SELECT 1"))
+        return {"status": "healthy", "database": "connected"}
+    except Exception as exc:  # noqa: BLE001
+        return JSONResponse(
+            status_code=503,
+            content={"status": "unhealthy", "error": str(exc)},
+        )
+
+
 @app.get("/healthz")
 async def healthz():
     try:
@@ -76,7 +81,7 @@ async def healthz():
     except Exception as exc:  # noqa: BLE001
         return JSONResponse(
             status_code=503,
-            content={"status": "unhealthy", "database": str(exc)},
+            content={"status": "unhealthy", "error": str(exc)},
         )
 
 
