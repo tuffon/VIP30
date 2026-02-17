@@ -10,7 +10,7 @@ boto3==1.35.24
 pandas==2.2.3
 openpyxl==3.1.5
 rapidfuzz==3.9.7
-textstat==0.7.4
+textstat>=0.7.12
 pydantic==2.10.6
 openai==1.12.0
 sqlmodel>=0.0.22
