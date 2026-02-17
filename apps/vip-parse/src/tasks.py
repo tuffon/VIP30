@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+from concurrent.futures import TimeoutError as FutureTimeoutError
 import gc
 import httpx
 import json
@@ -41,6 +42,10 @@ email_client = SendGridClient()
 
 # global concurrency cap inside worker process
 _SEM = threading.Semaphore(int(os.getenv("PARSE_CONCURRENCY", "1")))
+_ASYNC_LOOP: asyncio.AbstractEventLoop | None = None
+_ASYNC_LOOP_THREAD: threading.Thread | None = None
+_ASYNC_LOOP_LOCK = threading.Lock()
+_ASYNC_OP_TIMEOUT_SEC = int(os.getenv("WORKER_ASYNC_OP_TIMEOUT_SEC", "20"))
 MAX_DISPLAY_NAME_LEN = 120
 
 _FORMULA_PREFIXES = ("=", "+", "-", "@")
@@ -229,13 +234,44 @@ def _extract_recap(payload: Dict[str, Any]) -> Dict[str, Any]:
     return rb if isinstance(rb, dict) else {}
 
 
+def _run_loop_forever(loop: asyncio.AbstractEventLoop) -> None:
+    asyncio.set_event_loop(loop)
+    loop.run_forever()
+
+
+def _get_async_loop() -> asyncio.AbstractEventLoop:
+    global _ASYNC_LOOP, _ASYNC_LOOP_THREAD
+    with _ASYNC_LOOP_LOCK:
+        if _ASYNC_LOOP and not _ASYNC_LOOP.is_closed():
+            return _ASYNC_LOOP
+
+        loop = asyncio.new_event_loop()
+        thread = threading.Thread(
+            target=_run_loop_forever,
+            args=(loop,),
+            daemon=True,
+            name="vip-parse-worker-async-loop",
+        )
+        thread.start()
+        _ASYNC_LOOP = loop
+        _ASYNC_LOOP_THREAD = thread
+        return loop
+
+
 def _run_async(coro):
-    """Run async coroutine from sync worker context."""
-    loop = asyncio.new_event_loop()
+    """
+    Run async coroutine from sync worker context on a single persistent event loop.
+    This avoids cross-loop asyncpg/sqlalchemy pool errors when called repeatedly.
+    """
+    loop = _get_async_loop()
+    future = asyncio.run_coroutine_threadsafe(coro, loop)
     try:
-        return loop.run_until_complete(coro)
-    finally:
-        loop.close()
+        return future.result(timeout=_ASYNC_OP_TIMEOUT_SEC)
+    except FutureTimeoutError:
+        future.cancel()
+        raise TimeoutError(
+            f"async worker operation timed out after {_ASYNC_OP_TIMEOUT_SEC}s"
+        ) from None
 
 
 def _update_job_progress(
@@ -302,7 +338,7 @@ def run_bid_comp_keys(
             carrier_original,
             contractor_original,
         )
-        _update_job_progress(db_job_id, JobService.PARSING, 15, "Downloading files")
+        _update_job_progress(db_job_id, JobService.PARSING, 15, "Downloaded files")
 
         try:
             def _parse_full(pdf_path: str) -> Dict[str, Any]:
@@ -324,11 +360,13 @@ def run_bid_comp_keys(
                     except OSError:
                         pass
 
+            _update_job_progress(db_job_id, JobService.PARSING, 20, "Parsing primary estimate")
             carrier_payload = _parse_full(carrier_path)
-            _update_job_progress(db_job_id, JobService.PARSING, 30, "Parsing primary estimate")
+            _update_job_progress(db_job_id, JobService.PARSING, 35, "Primary estimate parsed")
 
+            _update_job_progress(db_job_id, JobService.PARSING, 40, "Parsing comparison estimate")
             contractor_payload = _parse_full(contractor_path)
-            _update_job_progress(db_job_id, JobService.ANALYZING, 50, "Parsing comparison estimate")
+            _update_job_progress(db_job_id, JobService.ANALYZING, 55, "Comparison estimate parsed")
             carrier_parser_name = Path(carrier_path).name
             contractor_parser_name = Path(contractor_path).name
 
@@ -416,7 +454,7 @@ def run_bid_comp_keys(
                 carrier_original,
                 contractor_original,
             )
-            _update_job_progress(db_job_id, JobService.ANALYZING, 60, "Analyzing estimates")
+            _update_job_progress(db_job_id, JobService.ANALYZING, 65, "Analyzing estimate deltas")
 
             # Persist JSON payloads alongside XLS output for debugging
             json_prefix = f"results/{job_id}"
@@ -448,8 +486,9 @@ def run_bid_comp_keys(
                         llm = None
                 comp = BidComp(llm_adapter=llm)
                 logger.info("job bid-comp run starting: job_id=%s", job_id)
+                _update_job_progress(db_job_id, JobService.WRITING, 75, "Generating narratives")
                 xlsx_bytes = comp.run(bid_context, job_id)
-                _update_job_progress(db_job_id, JobService.WRITING, 80, "Generating report")
+                _update_job_progress(db_job_id, JobService.WRITING, 88, "Generating XLSX report")
                 logger.info(
                     "job bid-comp run finished: job_id=%s xlsx_bytes=%d llm_enabled=%s",
                     job_id,
@@ -461,7 +500,7 @@ def run_bid_comp_keys(
                     xf.write(xlsx_bytes)
                 xlsx_key = f"results/{job_id}/bid-comp.xlsx"
                 s3.upload_file(xlsx_tmp, bucket, xlsx_key)
-                _update_job_progress(db_job_id, JobService.WRITING, 95, "Uploading results")
+                _update_job_progress(db_job_id, JobService.WRITING, 96, "Uploading final results")
                 logger.info(
                     "job xlsx uploaded: job_id=%s key=%s size_bytes=%d",
                     job_id,
