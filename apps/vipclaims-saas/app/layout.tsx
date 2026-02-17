@@ -6,6 +6,7 @@ import { IBM_Plex_Sans } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { brand } from "../components/brand";
 import { CreditBalance } from "../components/CreditBalance";
+import { Footer } from "../components/Footer";
 import { NavAuth } from "../components/NavAuth";
 import { AppProviders } from "../components/providers/AppProviders";
 
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {children}
               </div>
             </main>
+            <Footer />
           </div>
         </AppProviders>
       </body>

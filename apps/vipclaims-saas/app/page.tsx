@@ -132,6 +132,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section id="proof" className="space-y-8">
+        <div className="space-y-3">
+          <h3 className="text-3xl font-semibold text-slate-900">See What You Get</h3>
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-600">
+            Real output structure from ScopeVista: category deltas, narrative explanations, and downloadable report
+            format your team can review immediately.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6">
+            <div className="flex h-56 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-center text-sm text-slate-600">
+              Screenshot placeholder: Delta table view
+            </div>
+            <p className="mt-3 text-sm text-slate-700">
+              Carrier vs contractor line-item deltas with category rollup and variance totals.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-6">
+            <div className="flex h-56 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-center text-sm text-slate-600">
+              Screenshot placeholder: Narrative section
+            </div>
+            <p className="mt-3 text-sm text-slate-700">
+              Narrative citations explaining major mismatches and recommended follow-ups.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex justify-center">
+          <Link
+            href="/samples/sample-bid-comp.xlsx"
+            className="rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-100"
+          >
+            Download Sample Report
+          </Link>
+        </div>
+      </section>
+
       <section id="pricing" className="space-y-5">
         <h3 className="text-3xl font-semibold text-slate-900">Built for active claim operations.</h3>
         <div className="rounded-3xl border border-slate-200 bg-white p-7">
