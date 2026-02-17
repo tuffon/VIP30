@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from redis import Redis
 from rq import Queue
 from sqlmodel import desc, func, select
@@ -30,6 +30,16 @@ class CreateJobRequest(BaseModel):
     contractor_key: str
     carrier_filename: Optional[str] = None
     contractor_filename: Optional[str] = None
+    output_mode: Optional[str] = "internal"
+
+    @field_validator("output_mode")
+    @classmethod
+    def _validate_output_mode(cls, value: Optional[str]) -> str:
+        mode = (value or "internal").strip().lower()
+        allowed = {"executive", "carrier", "litigation", "internal"}
+        if mode not in allowed:
+            raise ValueError(f"output_mode must be one of: {', '.join(sorted(allowed))}")
+        return mode
 
 
 class CreateJobResponse(BaseModel):
@@ -45,6 +55,7 @@ class JobStatusResponse(BaseModel):
     error_code: Optional[str] = None
     error_message: Optional[str] = None
     result_s3_key: Optional[str] = None
+    output_mode: Optional[str] = None
     download_url: Optional[str] = None
     created_at: datetime
     completed_at: Optional[datetime] = None
@@ -66,6 +77,7 @@ def _serialize_job(job: ComparisonJob, download_url: Optional[str] = None) -> Jo
         error_code=job.error_code,
         error_message=job.error_message,
         result_s3_key=job.result_s3_key,
+        output_mode=job.output_mode,
         download_url=download_url,
         created_at=job.created_at,
         completed_at=job.completed_at,
@@ -90,6 +102,7 @@ async def create_job(
             comparison_filename=payload.contractor_filename,
             primary_s3_key=payload.carrier_key,
             comparison_s3_key=payload.contractor_key,
+            output_mode=payload.output_mode or "internal",
         )
     except InsufficientCreditsError as exc:
         raise HTTPException(
@@ -107,6 +120,7 @@ async def create_job(
         payload.contractor_filename,
         None,
         str(job.id),
+        output_mode=payload.output_mode or "internal",
         job_timeout=600,
         result_ttl=86400,
         failure_ttl=86400,
@@ -168,6 +182,7 @@ async def retry_job(
             comparison_filename=original_job.comparison_filename,
             primary_s3_key=original_job.primary_s3_key,
             comparison_s3_key=original_job.comparison_s3_key,
+            output_mode=original_job.output_mode or "internal",
         )
     except InsufficientCreditsError as exc:
         raise HTTPException(
@@ -188,6 +203,7 @@ async def retry_job(
         original_job.comparison_filename,
         None,
         str(new_job.id),
+        output_mode=original_job.output_mode or "internal",
         job_timeout=600,
         result_ttl=86400,
         failure_ttl=86400,

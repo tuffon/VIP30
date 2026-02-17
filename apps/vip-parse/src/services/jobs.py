@@ -52,6 +52,7 @@ class JobService:
         comparison_filename: Optional[str] = None,
         primary_s3_key: Optional[str] = None,
         comparison_s3_key: Optional[str] = None,
+        output_mode: str = "internal",
     ) -> ComparisonJob:
         balance = await CreditService.get_balance(db, workspace_id)
         if balance < 1:
@@ -66,6 +67,7 @@ class JobService:
             comparison_filename=comparison_filename,
             primary_s3_key=primary_s3_key,
             comparison_s3_key=comparison_s3_key,
+            output_mode=output_mode,
         )
         db.add(job)
         await db.commit()

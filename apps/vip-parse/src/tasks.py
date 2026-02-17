@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 from concurrent.futures import TimeoutError as FutureTimeoutError
 import gc
+import hashlib
 import httpx
 import json
 import logging
@@ -310,6 +311,8 @@ def run_bid_comp_keys(
     contractor_filename: str | None = None,
     notify_email: str | None = None,
     db_job_id: str | None = None,
+    *,
+    output_mode: str = "internal",
 ) -> Dict[str, Any]:
     t0 = time.time()
     with _SEM:
@@ -332,6 +335,8 @@ def run_bid_comp_keys(
         contractor_path = work_dir / _safe_filename(contractor_original, fallback="contractor.pdf")
         s3.download_file(bucket, carrier_key, str(carrier_path))
         s3.download_file(bucket, contractor_key, str(contractor_path))
+        carrier_hash = hashlib.sha256(carrier_path.read_bytes()).hexdigest()
+        contractor_hash = hashlib.sha256(contractor_path.read_bytes()).hexdigest()
         logger.info(
             "job download complete: job_id=%s carrier_tmp=%s contractor_tmp=%s carrier_original=%s contractor_original=%s",
             job_id,
@@ -485,6 +490,14 @@ def run_bid_comp_keys(
                 "methodology": methodology_result,
                 "signals": signal_bundle,
             }
+            audit_metadata = {
+                "primary_hash": carrier_hash,
+                "comparison_hash": contractor_hash,
+                "primary_filename": carrier_original,
+                "comparison_filename": contractor_original,
+                "output_mode": output_mode,
+                "analysis_timestamp": datetime.utcnow().isoformat(),
+            }
             logger.info(
                 "job bid-context ready: job_id=%s primary=%s comparison=%s primary_src=%s comparison_src=%s",
                 job_id,
@@ -526,7 +539,12 @@ def run_bid_comp_keys(
                 comp = BidComp(llm_adapter=llm)
                 logger.info("job bid-comp run starting: job_id=%s", job_id)
                 _update_job_progress(db_job_id, JobService.WRITING, 78, "Generating narratives")
-                xlsx_bytes = comp.run(bid_context, job_id)
+                xlsx_bytes = comp.run(
+                    bid_context,
+                    job_id,
+                    output_mode=output_mode,
+                    audit_metadata=audit_metadata,
+                )
                 _update_job_progress(db_job_id, JobService.WRITING, 88, "Generating XLSX report")
                 logger.info(
                     "job bid-comp run finished: job_id=%s xlsx_bytes=%d llm_enabled=%s",

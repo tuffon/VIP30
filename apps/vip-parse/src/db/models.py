@@ -77,6 +77,7 @@ class ComparisonJob(SQLModel, table=True):
     comparison_filename: Optional[str] = Field(default=None, max_length=255)
     primary_s3_key: Optional[str] = Field(default=None, max_length=500)
     comparison_s3_key: Optional[str] = Field(default=None, max_length=500)
+    output_mode: Optional[str] = Field(default="internal", max_length=20)
 
     result_s3_key: Optional[str] = Field(default=None, max_length=500)
     narrative_s3_key: Optional[str] = Field(default=None, max_length=500)
