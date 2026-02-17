@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Between milestones — v1.2 shipped, v2 not started
+**Current focus:** v2.0 Analytical Intelligence — structured signal extraction and defensible framing
 
 ## Current Position
 
-Phase: —
+Phase: Not started (run /gsd:define-requirements or /gsd:research-project)
 Plan: —
-Status: Between milestones
-Last activity: 2026-02-17 — v1.2 shipped
+Status: Milestone initialized
+Last activity: 2026-02-17 — Started v2.0 Analytical Intelligence
 
-Progress: No active milestone
+Progress: █░░░░░░░░░ 0% (v2.0)
 
 ## Completed Milestones
 
@@ -42,6 +42,11 @@ Progress: No active milestone
 
 Decisions logged in PROJECT.md Key Decisions table.
 
+v2.0 architecture decisions:
+- Enhanced XLSX (not PDF) — stay with spreadsheets, add visual hierarchy via conditional formatting
+- Methodology first — nail defensibility layer before presentation polish
+- Output modes as content filtering, not separate templates
+
 v1.2 architecture decisions:
 - Session persistence uses localStorage as UI cache, cookies remain auth source of truth
 - python-json-logger for structured logging
@@ -63,11 +68,11 @@ v1.1 architecture decisions:
 - Internal naming partial (vip_job vs ComparisonJob)
 - DESIGN-05: Using placeholder screenshots (replace before launch)
 
-### Deferred Requirements
+### Deferred Requirements (v3+)
 
-- HERO-V2-01: Demo video walkthrough
-- PRICE-V2-01: Pricing page with tiers
-- APP-V2-01: Date-range filtering for history
+- Demo video walkthrough
+- Pricing page with tiers
+- Date-range filtering for history
 
 ### Blockers/Concerns
 
@@ -76,10 +81,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-17
-Stopped at: v1.2 milestone complete
+Stopped at: v2.0 milestone initialized
 Resume file: —
 
 ## Next Steps
 
-1. Deploy v1.2 to production
-2. `/gsd:new-milestone` when ready to start v2
+1. `/gsd:research-project` — Research prompt engineering tactics and report structure patterns
+2. `/gsd:define-requirements` — Define checkable requirements for v2.0
+3. `/gsd:create-roadmap` — Create phases for v2.0

@@ -8,6 +8,39 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
+## Current Milestone: v2.0 Analytical Intelligence
+
+**Goal:** Transform output from spreadsheet-heavy comparison to structured signal extraction with defensible framing — executive-ready, carrier-ready, litigation-ready reports.
+
+**Target features:**
+
+*Methodology & Data Foundation (priority 1):*
+- Data requirements audit (line item matching, unit cost comparison, O&P detection, depreciation logic)
+- Methodology analysis block (O&P inclusion, depreciation differences, unit pricing source, locality factors)
+- Scope completeness detection and structural methodology comparison
+
+*Intelligence Layer (priority 2):*
+- Emphasis rules engine (top 20% variance drivers, threshold-based flagging)
+- Auto-generated alert tags for O&P gaps, large "Other" buckets, scope imbalance
+- Partial vs full restoration pattern detection
+
+*Narrative Redesign (priority 3):*
+- Evidence-based reasoning (replace subjective language with quantified differences)
+- Neutral tone enforcement for litigation readiness
+- Diagnostic follow-ups tied to detected structural variances
+
+*Visual Hierarchy (priority 4):*
+- Executive snapshot panel (total delta, % variance, top 3 drivers, structural flags)
+- Ranked impact table (sorted by delta magnitude, % of total variance)
+- Scope alignment matrix (present in A/B, missing in each, O&P structure comparison)
+- Enhanced XLSX with conditional formatting, multi-sheet structure
+
+*Output Modes (priority 5):*
+- Executive mode (1-page compressed)
+- Carrier negotiation mode (ranked delta + methodology framing)
+- Litigation mode (neutral tone + evidence exhibits)
+- Internal estimator mode (deep line item diagnostic)
+
 ## Current State
 
 **Version:** v1.2 shipped 2026-02-17
@@ -61,12 +94,46 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ Job and credit history with pagination — v1.1
 - ✓ UI rebrand to bid comparison terminology — v1.1
 
-### Backlog (v2+)
+### Active (v2.0)
+
+**Methodology & Data:**
+- [ ] Line item matching logic improvements
+- [ ] Unit cost comparison extraction
+- [ ] Quantity variance detection
+- [ ] O&P detection and comparison logic
+- [ ] Depreciation comparison analysis
+- [ ] Scope completeness flags
+- [ ] Methodology analysis block (O&P inclusion, depreciation, unit pricing, locality)
+
+**Intelligence & Emphasis:**
+- [ ] Rules engine for meaningful emphasis (top 20% drivers, threshold flags)
+- [ ] Auto-generated alert tags (missing O&P, large Other buckets, scope imbalance)
+- [ ] Partial vs full restoration pattern detection
+- [ ] Category threshold rules and flag logic
+
+**Narrative Quality:**
+- [ ] Evidence-based reasoning (quantified differences, not adjectives)
+- [ ] Neutral tone enforcement (litigation-ready language)
+- [ ] Diagnostic follow-ups tied to structural variances
+- [ ] Scope observation samples with code/assembly differences
+
+**Visual Hierarchy:**
+- [ ] Executive snapshot panel (delta, variance %, top 3 drivers, structural flags)
+- [ ] Ranked impact table (sorted by magnitude, % of total variance)
+- [ ] Scope alignment matrix (present/missing in each estimate)
+- [ ] Enhanced XLSX with conditional formatting and multi-sheet structure
+
+**Output Modes:**
+- [ ] Executive mode (1-page compressed)
+- [ ] Carrier negotiation mode (ranked delta + methodology framing)
+- [ ] Litigation mode (neutral tone + evidence exhibits)
+- [ ] Internal estimator mode (deep line item diagnostic)
+
+### Backlog (v3+)
 
 **Landing Page:**
 - [ ] Demo video walkthrough (60 seconds)
 - [ ] Pricing page with usage tiers and Team/Enterprise options
-- [ ] Clean Verisk language → "industry-standard categories"
 
 **App Experience:**
 - [ ] Date-range filtering for job/credit history
@@ -96,6 +163,9 @@ Brownfield codebase with functional bid comparison. Turborepo monorepo with Next
 - **Storage:** Cloudflare R2 via S3-compatible API
 - **LLM:** OpenAI API (gpt-4o-mini default)
 - **Auth:** Email OTP only (no OAuth for MVP)
+- **Output format:** Enhanced XLSX — visual hierarchy via conditional formatting, multi-sheet structure (no PDF generation)
+- **Language:** Must avoid subjective/emotional language — withstand legal scrutiny
+- **Frontend-light:** Output intelligence lives in backend, frontend displays results
 
 ## Key Decisions
 
@@ -124,4 +194,4 @@ Brownfield codebase with functional bid comparison. Turborepo monorepo with Next
 | Internal naming inconsistency | Low | Legacy code uses vip_job, new code uses ComparisonJob |
 
 ---
-*Last updated: 2026-02-17 after shipping v1.2 milestone*
+*Last updated: 2026-02-17 after starting v2.0 milestone*
