@@ -11,6 +11,7 @@
 
 - [ ] **Phase 9: Data Foundation & Methodology** - Line-item comparison, O&P/depreciation detection, scope alignment, data provenance
 - [ ] **Phase 10: Rules Engine & Intelligence** - Emphasis flags, alert tags, ranked impact, pattern detection, diagnostic follow-ups
+  - Plans: 10-01 (models + engine, Wave 1), 10-02 (pipeline integration, Wave 2)
 - [ ] **Phase 11: Narrative Quality & Quality Gates** - Evidence-based narratives, neutral tone, expanded quality gate system
 - [ ] **Phase 12: Output Modes & Enhanced XLSX** - Four audience modes, multi-sheet XLSX, conditional formatting, audit trail
 
@@ -45,7 +46,7 @@
   4. Structural patterns detected (partial vs full restoration, systematic pricing differences)
   5. Diagnostic follow-ups generated for each flagged variance (actionable next steps, not recommendations)
 **Research**: Unlikely (pure Python rules engine, established patterns)
-**Plans**: TBD
+**Plans**: 10-01 (models + engine, Wave 1), 10-02 (pipeline integration, Wave 2)
 
 ### Phase 11: Narrative Quality & Quality Gates
 **Goal**: Evidence-based, neutral-tone narratives with expanded quality gate system
@@ -77,9 +78,9 @@
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
 | 9. Data Foundation & Methodology | 0/2 | Planned | - |
-| 10. Rules Engine & Intelligence | 0/TBD | Not started | - |
+| 10. Rules Engine & Intelligence | 0/2 | Planned | - |
 | 11. Narrative Quality & Quality Gates | 0/TBD | Not started | - |
 | 12. Output Modes & Enhanced XLSX | 0/TBD | Not started | - |
 
 ---
-*Last updated: 2026-02-17 — v2.0 roadmap created*
+*Last updated: 2026-02-17 — Phase 10 planned*
