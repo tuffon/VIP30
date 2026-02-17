@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v1.2 Launch Ready — marketing, UX, observability
+**Current focus:** Phase 5 — Landing Page Redesign
 
 ## Current Position
 
-Phase: Not started (run /gsd:define-requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-17 — Milestone v1.2 started
+Phase: 5 of 8 (Landing Page Redesign)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-02-17 — Roadmap created (4 phases, 24 requirements)
 
 Progress: ░░░░░░░░░░ 0% (v1.2)
 
@@ -68,7 +68,6 @@ Resume file: —
 
 ## Next Steps
 
-1. `/gsd:define-requirements` — scope what to build
-2. `/gsd:create-roadmap` — plan how to build it
-3. `/gsd:plan-phase` — create execution plans
-4. `/gsd:execute-phase` — build it
+1. `/gsd:plan-phase 5` — create execution plan for Landing Page Redesign
+2. `/gsd:execute-phase 5` — build it
+3. Continue through phases 6-8

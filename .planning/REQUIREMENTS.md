@@ -80,35 +80,35 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| HERO-01 | TBD | Pending |
-| HERO-02 | TBD | Pending |
-| HERO-03 | TBD | Pending |
-| HERO-04 | TBD | Pending |
-| PROOF-01 | TBD | Pending |
-| PROOF-02 | TBD | Pending |
-| PROOF-03 | TBD | Pending |
-| PROOF-04 | TBD | Pending |
-| PROOF-05 | TBD | Pending |
-| PROOF-06 | TBD | Pending |
-| NAV-01 | TBD | Pending |
-| DESIGN-01 | TBD | Pending |
-| DESIGN-02 | TBD | Pending |
-| DESIGN-03 | TBD | Pending |
-| DESIGN-04 | TBD | Pending |
-| DESIGN-05 | TBD | Pending |
-| DESIGN-06 | TBD | Pending |
-| DESIGN-07 | TBD | Pending |
-| APP-01 | TBD | Pending |
-| APP-02 | TBD | Pending |
-| APP-03 | TBD | Pending |
-| APP-04 | TBD | Pending |
-| OBS-01 | TBD | Pending |
-| OBS-02 | TBD | Pending |
+| HERO-01 | Phase 5 | Pending |
+| HERO-02 | Phase 5 | Pending |
+| HERO-03 | Phase 5 | Pending |
+| HERO-04 | Phase 5 | Pending |
+| NAV-01 | Phase 5 | Pending |
+| DESIGN-01 | Phase 5 | Pending |
+| DESIGN-02 | Phase 5 | Pending |
+| DESIGN-03 | Phase 5 | Pending |
+| DESIGN-04 | Phase 5 | Pending |
+| DESIGN-05 | Phase 5 | Pending |
+| DESIGN-06 | Phase 5 | Pending |
+| DESIGN-07 | Phase 5 | Pending |
+| PROOF-01 | Phase 6 | Pending |
+| PROOF-02 | Phase 6 | Pending |
+| PROOF-03 | Phase 6 | Pending |
+| PROOF-04 | Phase 6 | Pending |
+| PROOF-05 | Phase 6 | Pending |
+| PROOF-06 | Phase 6 | Pending |
+| APP-01 | Phase 7 | Pending |
+| APP-02 | Phase 7 | Pending |
+| APP-03 | Phase 7 | Pending |
+| APP-04 | Phase 7 | Pending |
+| OBS-01 | Phase 8 | Pending |
+| OBS-02 | Phase 8 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 24 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 24
+- Mapped to phases: 24
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-02-17*
