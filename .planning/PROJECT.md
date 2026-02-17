@@ -8,18 +8,17 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
-## Current Milestone: v1.2 Launch Ready
-
-**Goal:** Marketing polish, app UX improvements, and production observability for customer acquisition.
-
-**Target features:**
-- Landing page overhaul (concrete hero, buyer-language labels, proof artifacts, pricing restructure, trust footer)
-- App logged-in experience (user dropdown, persistent sessions, credits display)
-- Observability (structured logging, health check endpoints)
-
 ## Current State
 
-**Version:** v1.1 shipped 2026-02-14
+**Version:** v1.2 shipped 2026-02-17
+
+**Shipped features (v1.2):**
+- Enterprise B2B landing page with Xactimate-focused messaging
+- Trust footer with Privacy Policy, Terms of Service, and Security pages
+- User dropdown with session persistence via localStorage
+- Credit balance display in Bid Comp UI
+- Structured JSON logging with request IDs
+- Health endpoints for Render monitoring
 
 **Shipped features (v1.1):**
 - PostgreSQL database with workspace-scoped schema
@@ -62,31 +61,18 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ Job and credit history with pagination — v1.1
 - ✓ UI rebrand to bid comparison terminology — v1.1
 
-### Active
+### Backlog (v2+)
 
 **Landing Page:**
-- [ ] Concrete hero: "Turn two estimate PDFs into a carrier vs contractor comparison in minutes"
-- [ ] Buyer-language feature labels (deltas, mismatch flags, narrative citations)
-- [ ] Proof artifacts: screenshots, sample XLSX download, demo video placeholder
-- [ ] Pricing restructure: usage tiers, Team/Enterprise options
-- [ ] Remove PDF→ESX from nav (move to roadmap card)
-- [ ] Trust footer: Privacy, Terms, Security overview, contact info
+- [ ] Demo video walkthrough (60 seconds)
+- [ ] Pricing page with usage tiers and Team/Enterprise options
 - [ ] Clean Verisk language → "industry-standard categories"
-- [ ] CTA consistency: "Generate Bid Comp" + "Book demo" sitewide
 
 **App Experience:**
-- [ ] User dropdown with settings placeholder (top-right nav)
-- [ ] Persistent sessions via localStorage (stay logged in until logout)
-- [ ] Fix credits display in Bid Comp UI
-- [ ] Clear logged-in vs logged-out state handling
+- [ ] Date-range filtering for job/credit history
 
-**Observability:**
-- [ ] Structured logging with request IDs
-- [ ] Health check endpoints for Render
-
-**Deferred:**
-- [ ] Date-range filtering for job/credit history (from v1.1)
-- [ ] Internal naming cleanup (low priority)
+**Technical:**
+- [ ] Internal naming cleanup (vip_job → ComparisonJob)
 
 ### Out of Scope
 
@@ -102,7 +88,7 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 
 Brownfield codebase with functional bid comparison. Turborepo monorepo with Next.js frontend (`apps/vipclaims-saas`), FastAPI backend (`apps/vip-parse`), and RQ worker for async processing. Deployed to Render with auto-deploy on push.
 
-**v1.1 shipped:** Full auth, credits, and job tracking. 9,319 LOC Python, 1,907 LOC TypeScript.
+**v1.2 shipped:** Landing page redesign, trust elements, app polish, observability. 35,261 LOC Python, 2,932 LOC TypeScript.
 
 ## Constraints
 
@@ -138,4 +124,4 @@ Brownfield codebase with functional bid comparison. Turborepo monorepo with Next
 | Internal naming inconsistency | Low | Legacy code uses vip_job, new code uses ComparisonJob |
 
 ---
-*Last updated: 2026-02-17 after starting v1.2 milestone*
+*Last updated: 2026-02-17 after shipping v1.2 milestone*

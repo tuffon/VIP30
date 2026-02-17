@@ -1,5 +1,35 @@
 # Project Milestones: VIP30
 
+## v1.2 Launch Ready (Shipped: 2026-02-17)
+
+**Delivered:** Launch-ready product with enterprise B2B landing page, trust elements, polished app experience, and production observability.
+
+**Phases completed:** 5-8 (6 plans total)
+
+**Key accomplishments:**
+- Landing page redesigned with Xactimate-focused B2B messaging and enterprise aesthetic
+- Trust footer with Privacy Policy, Terms of Service, and Security pages
+- User dropdown component with session persistence via localStorage
+- Credit balance display with visual states in Bid Comp UI
+- Structured JSON logging with request ID middleware
+- Health endpoints for Render monitoring
+
+**Stats:**
+- 42 files created/modified
+- 2,932 lines TypeScript, 35,261 lines Python
+- 4 phases, 6 plans
+- 1 day from start to ship
+
+**Git range:** `5751cc9` → `c4e4fab`
+
+**Tech debt incurred:**
+- DESIGN-05: Using placeholder screenshots (replace before launch)
+- Build verification: Local `.next` permission issue needs CI/deploy verification
+
+**What's next:** v2 — pricing page, demo video, date filtering
+
+---
+
 ## v1.1 MVP Launch (Shipped: 2026-02-14)
 
 **Delivered:** Production-ready customer validation loop with email OTP auth, credit-based usage tracking, job state machine, and complete frontend experience.
