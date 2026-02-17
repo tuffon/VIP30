@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.0 Analytical Intelligence — structured signal extraction and defensible framing
+**Current focus:** Phase 9 — Data Foundation & Methodology
 
 ## Current Position
 
-Phase: Not started (run /gsd:define-requirements or /gsd:research-project)
-Plan: —
-Status: Milestone initialized
-Last activity: 2026-02-17 — Started v2.0 Analytical Intelligence
+Phase: 9 of 12 (Data Foundation & Methodology)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-02-17 — Roadmap created (4 phases, 28 requirements)
 
-Progress: █░░░░░░░░░ 0% (v2.0)
+Progress: ░░░░░░░░░░ 0% (v2.0)
 
 ## Completed Milestones
 
@@ -46,33 +46,10 @@ v2.0 architecture decisions:
 - Enhanced XLSX (not PDF) — stay with spreadsheets, add visual hierarchy via conditional formatting
 - Methodology first — nail defensibility layer before presentation polish
 - Output modes as content filtering, not separate templates
-
-v1.2 architecture decisions:
-- Session persistence uses localStorage as UI cache, cookies remain auth source of truth
-- python-json-logger for structured logging
-- Request ID middleware for distributed tracing
-
-v1.1 architecture decisions:
-- Workspace model from day one (1 user per workspace for MVP)
-- Credits belong to workspace, not user
-- Email OTP over magic links
-- Ledger-style credits: credit_grants + credit_consumptions
-- Fixed job state machine: queued → parsing → analyzing → writing → completed|failed
-- JWT in HttpOnly cookie
-
-### Tech Debt (from v1.1 + v1.2)
-
-- POST /render/upload-url is unauthenticated
-- datetime.utcnow() deprecated in Python 3.12+
-- JWT_SECRET has default value
-- Internal naming partial (vip_job vs ComparisonJob)
-- DESIGN-05: Using placeholder screenshots (replace before launch)
-
-### Deferred Requirements (v3+)
-
-- Demo video walkthrough
-- Pricing page with tiers
-- Date-range filtering for history
+- Pre-LLM enrichment (methodology + rules) → existing pipeline → post-LLM mode filtering
+- Custom Python rules engine (not third-party) — domain is ~20-50 rules
+- OpenAI Structured Outputs with Pydantic models — replace fragile JSON parsing
+- Objectivity > completeness > presentation — defensibility is non-negotiable
 
 ### Blockers/Concerns
 
@@ -81,11 +58,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-17
-Stopped at: v2.0 milestone initialized
+Stopped at: Roadmap created, ready to plan Phase 9
 Resume file: —
-
-## Next Steps
-
-1. `/gsd:research-project` — Research prompt engineering tactics and report structure patterns
-2. `/gsd:define-requirements` — Define checkable requirements for v2.0
-3. `/gsd:create-roadmap` — Create phases for v2.0

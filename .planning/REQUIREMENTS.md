@@ -85,40 +85,40 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | — | Pending |
-| DATA-02 | — | Pending |
-| DATA-03 | — | Pending |
-| DATA-04 | — | Pending |
-| DATA-05 | — | Pending |
-| DATA-06 | — | Pending |
-| DATA-07 | — | Pending |
-| NARR-01 | — | Pending |
-| NARR-02 | — | Pending |
-| NARR-03 | — | Pending |
-| INTL-01 | — | Pending |
-| INTL-02 | — | Pending |
-| INTL-03 | — | Pending |
-| INTL-04 | — | Pending |
-| INTL-05 | — | Pending |
-| MODE-01 | — | Pending |
-| MODE-02 | — | Pending |
-| MODE-03 | — | Pending |
-| MODE-04 | — | Pending |
-| XLSX-01 | — | Pending |
-| XLSX-02 | — | Pending |
-| XLSX-03 | — | Pending |
-| XLSX-04 | — | Pending |
-| GATE-01 | — | Pending |
-| GATE-02 | — | Pending |
-| GATE-03 | — | Pending |
-| GATE-04 | — | Pending |
-| GATE-05 | — | Pending |
+| DATA-01 | Phase 9 | Pending |
+| DATA-02 | Phase 9 | Pending |
+| DATA-03 | Phase 9 | Pending |
+| DATA-04 | Phase 9 | Pending |
+| DATA-05 | Phase 9 | Pending |
+| DATA-06 | Phase 9 | Pending |
+| DATA-07 | Phase 9 | Pending |
+| INTL-01 | Phase 9 | Pending |
+| INTL-02 | Phase 10 | Pending |
+| INTL-03 | Phase 10 | Pending |
+| INTL-04 | Phase 10 | Pending |
+| INTL-05 | Phase 10 | Pending |
+| NARR-01 | Phase 11 | Pending |
+| NARR-02 | Phase 11 | Pending |
+| NARR-03 | Phase 11 | Pending |
+| GATE-01 | Phase 11 | Pending |
+| GATE-02 | Phase 11 | Pending |
+| GATE-03 | Phase 11 | Pending |
+| GATE-04 | Phase 11 | Pending |
+| GATE-05 | Phase 11 | Pending |
+| MODE-01 | Phase 12 | Pending |
+| MODE-02 | Phase 12 | Pending |
+| MODE-03 | Phase 12 | Pending |
+| MODE-04 | Phase 12 | Pending |
+| XLSX-01 | Phase 12 | Pending |
+| XLSX-02 | Phase 12 | Pending |
+| XLSX-03 | Phase 12 | Pending |
+| XLSX-04 | Phase 12 | Pending |
 
 **Coverage:**
-- v2.0 requirements: 27 total
-- Mapped to phases: 0
-- Unmapped: 27 ⚠️
+- v2.0 requirements: 28 total
+- Mapped to phases: 28
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-02-17*
-*Last updated: 2026-02-17 after initial definition*
+*Last updated: 2026-02-17 after roadmap creation*
