@@ -63,10 +63,11 @@ Plans:
   3. Bid Comp UI displays actual credit balance from backend
   4. User sessions persist via localStorage until explicit logout
 **Research**: Unlikely (React state, localStorage patterns)
-**Plans**: TBD
+**Plans**: 2
 
 Plans:
-- [ ] 07-01: TBD
+- [ ] 07-01: UserDropdown & Session Persistence (4 tasks, has checkpoint)
+- [ ] 07-02: Credit Balance in Bid Comp (2 tasks, has checkpoint)
 
 ### Phase 8: Observability
 **Goal**: Production monitoring with structured logging and health checks
@@ -90,5 +91,5 @@ Phases 5-8 (v1.2), continuing from v1.1's Phases 1-4.
 |-------|----------------|--------|-----------|
 | 5. Landing Page Redesign | 0/1 | Planned | - |
 | 6. Proof Artifacts & Trust | 0/2 | Planned | - |
-| 7. App Logged-In Experience | 0/? | Not started | - |
+| 7. App Logged-In Experience | 0/2 | Planned | - |
 | 8. Observability | 0/? | Not started | - |
