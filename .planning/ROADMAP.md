@@ -77,10 +77,10 @@ Plans:
   1. API requests logged as structured JSON with request IDs
   2. /health endpoint returns service status for Render monitoring
 **Research**: Unlikely (Python logging, FastAPI patterns)
-**Plans**: TBD
+**Plans**: 1
 
 Plans:
-- [ ] 08-01: TBD
+- [ ] 08-01: Structured Logging & Health Check (4 tasks)
 
 ## Progress
 
@@ -92,4 +92,4 @@ Phases 5-8 (v1.2), continuing from v1.1's Phases 1-4.
 | 5. Landing Page Redesign | 0/1 | Planned | - |
 | 6. Proof Artifacts & Trust | 0/2 | Planned | - |
 | 7. App Logged-In Experience | 0/2 | Planned | - |
-| 8. Observability | 0/? | Not started | - |
+| 8. Observability | 0/1 | Planned | - |

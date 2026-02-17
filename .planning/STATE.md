@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-14)
 Phase: 5 of 8 (Landing Page Redesign)
 Plan: 05-01-PLAN.md (3 tasks)
 Status: Ready to execute
-Last activity: 2026-02-17 — Phases 5, 6 & 7 planned
+Last activity: 2026-02-17 — All v1.2 phases planned (5-8)
 
 Progress: ░░░░░░░░░░ 0% (v1.2)
 
@@ -71,4 +71,4 @@ Resume file: —
 1. `/gsd:execute-phase 5` — execute Landing Page Redesign (3 tasks)
 2. `/gsd:execute-phase 6` — execute Proof Artifacts & Trust (6 tasks, 2 plans)
 3. `/gsd:execute-phase 7` — execute App Logged-In Experience (6 tasks, 2 plans)
-4. `/gsd:plan-phase 8` — plan Observability
+4. `/gsd:execute-phase 8` — execute Observability (4 tasks)
