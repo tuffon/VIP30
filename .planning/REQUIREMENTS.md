@@ -1,0 +1,124 @@
+# Requirements: VIP30 v2.0 Analytical Intelligence
+
+**Defined:** 2026-02-17
+**Core Value:** Reliable end-to-end bid comparison that produces actionable output
+
+## v2.0 Requirements
+
+Requirements for v2.0 release. Each maps to roadmap phases.
+
+### Data Foundation
+
+- [ ] **DATA-01**: System compares estimates at line-item level, matching items by Xactimate activity codes or description similarity
+- [ ] **DATA-02**: System detects O&P structure in each estimate (general O&P, per-line O&P, inclusion/exclusion)
+- [ ] **DATA-03**: System detects depreciation methodology in each estimate (ACV vs RCV, percentage vs amount)
+- [ ] **DATA-04**: System produces scope alignment matrix showing items present in one estimate but absent from the other
+- [ ] **DATA-05**: System calculates total delta with breakdown sorted by absolute magnitude
+- [ ] **DATA-06**: System produces consistent analytical findings for identical inputs (deterministic pre-LLM analysis, cached LLM results)
+- [ ] **DATA-07**: System tracks data provenance — every analytical claim links to specific parsed data, with granularity field preventing fabricated evidence
+
+### Narrative Quality
+
+- [ ] **NARR-01**: All narratives use quantified differences (dollar amounts and percentages) instead of qualitative language
+- [ ] **NARR-02**: All narratives use neutral, observation-based language that withstands litigation scrutiny (zero hedge words, zero judgment adjectives)
+- [ ] **NARR-03**: Every factual claim in narrative output traces to specific line items, quantities, or calculations in source data
+
+### Intelligence Layer
+
+- [ ] **INTL-01**: System produces methodology analysis block comparing O&P treatment, depreciation approach, unit pricing source, and locality factors
+- [ ] **INTL-02**: System produces ranked impact table with categories sorted by delta magnitude and percentage of total variance
+- [ ] **INTL-03**: Rules engine flags top variance drivers (top 20%), scope gaps, missing O&P, depreciation mismatches, and large unspecified categories with max 3 severity tiers
+- [ ] **INTL-04**: System detects structural patterns (partial vs full restoration, systematic pricing differences, code compliance omissions)
+- [ ] **INTL-05**: System generates diagnostic follow-ups tied to detected variances (actionable next steps, not recommendations)
+
+### Output Modes
+
+- [ ] **MODE-01**: System supports 4 output modes (Executive, Carrier Negotiation, Litigation, Internal Estimator) from the same underlying analysis
+- [ ] **MODE-02**: Executive mode produces 1-page compressed view with total delta, top 3 drivers, and structural flags
+- [ ] **MODE-03**: All modes share identical analytical findings — modes filter content and adjust tone, never change conclusions
+- [ ] **MODE-04**: Litigation mode enforces strictest neutral tone with zero hedge words and full evidence citations
+
+### Visual Hierarchy
+
+- [ ] **XLSX-01**: Enhanced XLSX with conditional formatting (color scales for variance, data bars for impact, colored fills for flags)
+- [ ] **XLSX-02**: Multi-sheet structure: Executive Summary, Ranked Impact, Methodology, Scope Alignment, Category Detail
+- [ ] **XLSX-03**: Executive Summary sheet is self-contained — decision-maker can act from sheet 1 alone
+- [ ] **XLSX-04**: Output includes audit trail metadata (comparison parameters, data extraction timestamps, input file hashes)
+
+### Quality Gates
+
+- [ ] **GATE-01**: Expanded hedge word detection including insurance-litigation-specific terms
+- [ ] **GATE-02**: Judgment language detection (evaluative adjectives: excessive, inadequate, inflated, etc.)
+- [ ] **GATE-03**: Quantification enforcement — every narrative sentence referencing a delta includes dollar amount and percentage
+- [ ] **GATE-04**: Evidence grounding check — narrative claims cannot exceed specificity of parsed input data
+- [ ] **GATE-05**: Methodology neutrality check — no comparative adjectives or standard-referencing in methodology section
+
+## v2.1+ Requirements
+
+Deferred to future release. Tracked but not in current roadmap.
+
+### Configuration & Tuning
+
+- **DEFER-01**: User-configurable rule thresholds per claim type
+- **DEFER-02**: Category name normalization across Xactimate versions
+- **DEFER-03**: Template-driven litigation output (minimal LLM text) for maximum reproducibility
+- **DEFER-04**: Claim-size-aware rule sensitivity tiers (small/medium/large)
+
+## Out of Scope
+
+Explicitly excluded. Documented to prevent scope creep.
+
+| Feature | Reason |
+|---------|--------|
+| "Which estimate is better" verdicts (AF-1) | Makes tool an advocate, disqualifiable in litigation |
+| Recommendation language (AF-2) | Creates liability exposure |
+| Emotional terminology (AF-3) | Destroys neutrality |
+| Automated fraud indicators (AF-4) | Defamatory without investigation |
+| Confidence scores (AF-5) | False precision, indefensible methodology |
+| Side-picking output modes (AF-6) | Credibility collapses if discovered in litigation |
+| Editorializing narratives (AF-7) | Hallucination liability in legal contexts |
+| Settlement predictions (AF-8) | Dangerous without claims history data |
+
+## Traceability
+
+Which phases cover which requirements. Updated by create-roadmap.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| DATA-01 | — | Pending |
+| DATA-02 | — | Pending |
+| DATA-03 | — | Pending |
+| DATA-04 | — | Pending |
+| DATA-05 | — | Pending |
+| DATA-06 | — | Pending |
+| DATA-07 | — | Pending |
+| NARR-01 | — | Pending |
+| NARR-02 | — | Pending |
+| NARR-03 | — | Pending |
+| INTL-01 | — | Pending |
+| INTL-02 | — | Pending |
+| INTL-03 | — | Pending |
+| INTL-04 | — | Pending |
+| INTL-05 | — | Pending |
+| MODE-01 | — | Pending |
+| MODE-02 | — | Pending |
+| MODE-03 | — | Pending |
+| MODE-04 | — | Pending |
+| XLSX-01 | — | Pending |
+| XLSX-02 | — | Pending |
+| XLSX-03 | — | Pending |
+| XLSX-04 | — | Pending |
+| GATE-01 | — | Pending |
+| GATE-02 | — | Pending |
+| GATE-03 | — | Pending |
+| GATE-04 | — | Pending |
+| GATE-05 | — | Pending |
+
+**Coverage:**
+- v2.0 requirements: 27 total
+- Mapped to phases: 0
+- Unmapped: 27 ⚠️
+
+---
+*Requirements defined: 2026-02-17*
+*Last updated: 2026-02-17 after initial definition*
