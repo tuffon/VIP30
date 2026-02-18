@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: vip30-web
+    name: vip30-api
     plan: starter
     env: python
     rootDir: apps/vip-parse
@@ -59,7 +59,7 @@ services:
       - key: NEXTAUTH_SECRET
         sync: false
       - key: NEXT_PUBLIC_API_BASE_URL
-        value: "https://vip30-web.onrender.com"
+        value: "https://vip30-api.onrender.com"
       - key: PORT
         value: "3000"
 
