@@ -1,61 +1,55 @@
-# Requirements: VIP30 v2.0 Analytical Intelligence
+# Requirements: VIP30 v2.1 Repository Restructure
 
 **Defined:** 2026-02-17
 **Core Value:** Reliable end-to-end bid comparison that produces actionable output
 
-## v2.0 Requirements
+## v2.1 Requirements
 
-Requirements for v2.0 release. Each maps to roadmap phases.
+Requirements for v2.1 release. Repository restructure — clear directory names, split monolith Python into separate packages, rename Render services.
 
-### Data Foundation
+### Directory Restructure
 
-- [x] **DATA-01**: System compares estimates at line-item level, matching items by Xactimate activity codes or description similarity
-- [x] **DATA-02**: System detects O&P structure in each estimate (general O&P, per-line O&P, inclusion/exclusion)
-- [x] **DATA-03**: System detects depreciation methodology in each estimate (ACV vs RCV, percentage vs amount)
-- [x] **DATA-04**: System produces scope alignment matrix showing items present in one estimate but absent from the other
-- [x] **DATA-05**: System calculates total delta with breakdown sorted by absolute magnitude
-- [x] **DATA-06**: System produces consistent analytical findings for identical inputs (deterministic pre-LLM analysis, cached LLM results)
-- [x] **DATA-07**: System tracks data provenance — every analytical claim links to specific parsed data, with granularity field preventing fabricated evidence
+- [ ] **DIR-01**: `apps/vip-parse/` split into `apps/api/` (FastAPI server) and `apps/worker/` (RQ worker)
+- [ ] **DIR-02**: `apps/vipclaims-saas/` renamed to `apps/frontend/`
+- [ ] **DIR-03**: Parser extracted to `packages/parser/` as its own standalone package (parse/ directory — Xactimate PDF → JSON, zero business logic dependencies)
+- [ ] **DIR-04**: Shared Python business logic extracted to `packages/shared-python/` (pipeline, bid_comp, methodology, rules, llm, models)
+- [ ] **DIR-05**: Dead code removed — `src/preflight/` module (unused in main application, only referenced by its own test and CLI)
 
-### Narrative Quality
+### Package Structure
 
-- [x] **NARR-01**: All narratives use quantified differences (dollar amounts and percentages) instead of qualitative language
-- [x] **NARR-02**: All narratives use neutral, observation-based language that withstands litigation scrutiny (zero hedge words, zero judgment adjectives)
-- [x] **NARR-03**: Every factual claim in narrative output traces to specific line items, quantities, or calculations in source data
+- [ ] **PKG-01**: `packages/parser/` is a self-contained Python package with its own setup.py/pyproject.toml, installable independently
+- [ ] **PKG-02**: `packages/shared-python/` is a Python package importable by both `apps/api/` and `apps/worker/`
+- [ ] **PKG-03**: `apps/api/` depends on `packages/shared-python/` (not on `packages/parser/` directly — parser is a worker dependency)
+- [ ] **PKG-04**: `apps/worker/` depends on both `packages/parser/` and `packages/shared-python/`
+- [ ] **PKG-05**: Dependency direction is strictly: api → shared-python, worker → shared-python + parser. No circular dependencies.
 
-### Intelligence Layer
+### Import & Reference Cleanup
 
-- [x] **INTL-01**: System produces methodology analysis block comparing O&P treatment, depreciation approach, unit pricing source, and locality factors
-- [x] **INTL-02**: System produces ranked impact table with categories sorted by delta magnitude and percentage of total variance
-- [x] **INTL-03**: Rules engine flags top variance drivers (top 20%), scope gaps, missing O&P, depreciation mismatches, and large unspecified categories with max 3 severity tiers
-- [x] **INTL-04**: System detects structural patterns (partial vs full restoration, systematic pricing differences, code compliance omissions)
-- [x] **INTL-05**: System generates diagnostic follow-ups tied to detected variances (actionable next steps, not recommendations)
+- [ ] **IMP-01**: All Python imports updated for new package structure (no broken imports)
+- [ ] **IMP-02**: Turborepo/pnpm workspace config updated to include new package directories
+- [ ] **IMP-03**: Dockerfiles updated for new paths (api and worker each get their own or share updated Dockerfile)
+- [ ] **IMP-04**: Frontend package.json name updated from `vipclaims-saas` to `frontend`
 
-### Output Modes
+### Render Deployment
 
-- [x] **MODE-01**: System supports 4 output modes (Executive, Carrier Negotiation, Litigation, Internal Estimator) from the same underlying analysis
-- [x] **MODE-02**: Executive mode produces 1-page compressed view with total delta, top 3 drivers, and structural flags
-- [x] **MODE-03**: All modes share identical analytical findings — modes filter content and adjust tone, never change conclusions
-- [x] **MODE-04**: Litigation mode enforces strictest neutral tone with zero hedge words and full evidence citations
+- [ ] **REN-01**: render.yaml service `vip30-web` renamed to `vip30-api` with updated rootDir, build, and start commands
+- [ ] **REN-02**: render.yaml `vip30-frontend` updated with new rootDir/build/start commands for `apps/frontend/`
+- [ ] **REN-03**: render.yaml `vip30-worker` updated with new rootDir/build/start commands for `apps/worker/`
+- [ ] **REN-04**: `NEXT_PUBLIC_API_BASE_URL` in render.yaml updated from `vip30-web` to `vip30-api` URL
+- [ ] **REN-05**: All services deploy and function correctly after restructure (end-to-end verification)
 
-### Visual Hierarchy
+## Validated (v2.0)
 
-- [x] **XLSX-01**: Enhanced XLSX with conditional formatting (color scales for variance, data bars for impact, colored fills for flags)
-- [x] **XLSX-02**: Multi-sheet structure: Executive Summary, Ranked Impact, Methodology, Scope Alignment, Category Detail
-- [x] **XLSX-03**: Executive Summary sheet is self-contained — decision-maker can act from sheet 1 alone
-- [x] **XLSX-04**: Output includes audit trail metadata (comparison parameters, data extraction timestamps, input file hashes)
+All v2.0 requirements completed and shipped. See v2.0 milestone archive for details.
 
-### Quality Gates
+- [x] DATA-01 through DATA-07: Data foundation and methodology
+- [x] NARR-01 through NARR-03: Narrative quality
+- [x] INTL-01 through INTL-05: Intelligence layer
+- [x] MODE-01 through MODE-04: Output modes
+- [x] XLSX-01 through XLSX-04: Visual hierarchy
+- [x] GATE-01 through GATE-05: Quality gates
 
-- [x] **GATE-01**: Expanded hedge word detection including insurance-litigation-specific terms
-- [x] **GATE-02**: Judgment language detection (evaluative adjectives: excessive, inadequate, inflated, etc.)
-- [x] **GATE-03**: Quantification enforcement — every narrative sentence referencing a delta includes dollar amount and percentage
-- [x] **GATE-04**: Evidence grounding check — narrative claims cannot exceed specificity of parsed input data
-- [x] **GATE-05**: Methodology neutrality check — no comparative adjectives or standard-referencing in methodology section
-
-## v2.1+ Requirements
-
-Deferred to future release. Tracked but not in current roadmap.
+## Deferred (v3+)
 
 ### Configuration & Tuning
 
@@ -78,6 +72,7 @@ Explicitly excluded. Documented to prevent scope creep.
 | Side-picking output modes (AF-6) | Credibility collapses if discovered in litigation |
 | Editorializing narratives (AF-7) | Hallucination liability in legal contexts |
 | Settlement predictions (AF-8) | Dangerous without claims history data |
+| Refactoring internal code names (e.g., vip_job → ComparisonJob) | Not in scope for this milestone — structure only |
 
 ## Traceability
 
@@ -85,40 +80,31 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 9 | Completed |
-| DATA-02 | Phase 9 | Completed |
-| DATA-03 | Phase 9 | Completed |
-| DATA-04 | Phase 9 | Completed |
-| DATA-05 | Phase 9 | Completed |
-| DATA-06 | Phase 9 | Completed |
-| DATA-07 | Phase 9 | Completed |
-| INTL-01 | Phase 9 | Completed |
-| INTL-02 | Phase 10 | Completed |
-| INTL-03 | Phase 10 | Completed |
-| INTL-04 | Phase 10 | Completed |
-| INTL-05 | Phase 10 | Completed |
-| NARR-01 | Phase 11 | Completed |
-| NARR-02 | Phase 11 | Completed |
-| NARR-03 | Phase 11 | Completed |
-| GATE-01 | Phase 11 | Completed |
-| GATE-02 | Phase 11 | Completed |
-| GATE-03 | Phase 11 | Completed |
-| GATE-04 | Phase 11 | Completed |
-| GATE-05 | Phase 11 | Completed |
-| MODE-01 | Phase 12 | Completed |
-| MODE-02 | Phase 12 | Completed |
-| MODE-03 | Phase 12 | Completed |
-| MODE-04 | Phase 12 | Completed |
-| XLSX-01 | Phase 12 | Completed |
-| XLSX-02 | Phase 12 | Completed |
-| XLSX-03 | Phase 12 | Completed |
-| XLSX-04 | Phase 12 | Completed |
+| DIR-01 | — | Pending |
+| DIR-02 | — | Pending |
+| DIR-03 | — | Pending |
+| DIR-04 | — | Pending |
+| DIR-05 | — | Pending |
+| PKG-01 | — | Pending |
+| PKG-02 | — | Pending |
+| PKG-03 | — | Pending |
+| PKG-04 | — | Pending |
+| PKG-05 | — | Pending |
+| IMP-01 | — | Pending |
+| IMP-02 | — | Pending |
+| IMP-03 | — | Pending |
+| IMP-04 | — | Pending |
+| REN-01 | — | Pending |
+| REN-02 | — | Pending |
+| REN-03 | — | Pending |
+| REN-04 | — | Pending |
+| REN-05 | — | Pending |
 
 **Coverage:**
-- v2.0 requirements: 28 total
-- Mapped to phases: 28
-- Unmapped: 0 ✓
+- v2.1 requirements: 19 total
+- Mapped to phases: 0 (pending roadmap)
+- Unmapped: 19
 
 ---
 *Requirements defined: 2026-02-17*
-*Last updated: 2026-02-17 after Phase 12 completion*
+*Last updated: 2026-02-17*
