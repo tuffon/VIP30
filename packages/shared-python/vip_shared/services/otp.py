@@ -13,8 +13,6 @@ from vip_shared.db.models import OTPCode
 OTP_EXPIRE_MINUTES = int(os.environ.get("OTP_EXPIRE_MINUTES", "10"))
 OTP_MAX_REQUESTS_PER_HOUR = 5
 OTP_MAX_ATTEMPTS_PER_CODE = 5
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
-RESEND_FROM_EMAIL = os.environ.get("RESEND_FROM_EMAIL", "noreply@yourdomain.com")
 
 hasher = PasswordHash.recommended()
 
@@ -66,17 +64,28 @@ class OTPService:
 
     @staticmethod
     async def send_otp_email(email: str, code: str) -> bool:
-        if not RESEND_API_KEY:
-            print(f"[DEV] OTP for {email}: {code}")
-            return True
+        resend_api_key = os.environ.get("RESEND_API_KEY", "").strip()
+        resend_from_email = os.environ.get("RESEND_FROM_EMAIL", "").strip()
+        allow_console_fallback = os.environ.get("OTP_DEV_CONSOLE_FALLBACK", "false").lower() == "true"
+
+        if not resend_api_key:
+            if allow_console_fallback:
+                print(f"[DEV] OTP for {email}: {code}")
+                return True
+            print("Failed to send OTP email: RESEND_API_KEY is not configured")
+            return False
+
+        if not resend_from_email:
+            print("Failed to send OTP email: RESEND_FROM_EMAIL is not configured")
+            return False
 
         import resend
 
-        resend.api_key = RESEND_API_KEY
+        resend.api_key = resend_api_key
         try:
             resend.Emails.send(
                 {
-                    "from": RESEND_FROM_EMAIL,
+                    "from": resend_from_email,
                     "to": email,
                     "subject": "Your verification code",
                     "html": (

@@ -1,124 +1,127 @@
-services:
-  - type: web
-    name: vip30-api
-    plan: starter
-    env: python
-    rootDir: apps/vip-parse
-    healthCheckPath: /healthz
-    buildCommand: |
-      pip install -r requirements-web.txt
-    startCommand: |
-      python scripts/prestart_db.py && \
-      alembic upgrade head && \
-      export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && \
-      gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 1 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
-    envVars:
-      - key: REDIS_HOST
-        fromService:
-          name: vip30-redis
-          type: redis
-          property: host
-      - key: REDIS_PORT
-        fromService:
-          name: vip30-redis
-          type: redis
-          property: port
-      - key: S3_ENDPOINT
-        value: ""
-      - key: S3_ACCESS_KEY_ID
-        value: ""
-      - key: S3_SECRET_ACCESS_KEY
-        value: ""
-      - key: S3_BUCKET
-        value: ""
-      - key: S3_REGION
-        value: "auto"
-      - key: PRESIGN_EXPIRE_SEC
-        value: "900"
-      - key: DATABASE_URL
-        fromDatabase:
-          name: vip30-db
-          property: connectionString
+projects:
+  - name: VIP30
+    environments:
+      - name: Production
+        services:
+          - type: web
+            name: vip30-api
+            plan: starter
+            env: python
+            rootDir: apps/vip-parse
+            healthCheckPath: /healthz
+            buildCommand: |
+              pip install -r requirements-web.txt
+            startCommand: |
+              python scripts/prestart_db.py && \
+              alembic upgrade head && \
+              export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && \
+              gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 1 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
+            envVars:
+              - fromGroup: "VIP30 Secrets"
+              - key: REDIS_HOST
+                fromService:
+                  name: vip30-redis
+                  type: redis
+                  property: host
+              - key: REDIS_PORT
+                fromService:
+                  name: vip30-redis
+                  type: redis
+                  property: port
+              - key: S3_ENDPOINT
+                value: ""
+              - key: S3_ACCESS_KEY_ID
+                value: ""
+              - key: S3_SECRET_ACCESS_KEY
+                value: ""
+              - key: S3_BUCKET
+                value: ""
+              - key: S3_REGION
+                value: "auto"
+              - key: PRESIGN_EXPIRE_SEC
+                value: "900"
+              - key: DATABASE_URL
+                fromDatabase:
+                  name: vip30-db
+                  property: connectionString
 
-  - type: web
-    name: vip30-frontend
-    plan: starter
-    env: node
-    autoDeploy: true
-    rootDir: .
-    buildCommand: |
-      pnpm install --no-frozen-lockfile
-      pnpm --filter vipclaims-saas... --filter @vip/shared... build
-    startCommand: |
-      cd apps/vipclaims-saas && pnpm start
-    envVars:
-      - key: NODE_VERSION
-        value: "20"
-      - key: NEXTAUTH_URL
-        sync: false
-      - key: NEXTAUTH_SECRET
-        sync: false
-      - key: NEXT_PUBLIC_API_BASE_URL
-        value: "https://vip30-api.onrender.com"
-      - key: PORT
-        value: "3000"
+          - type: web
+            name: vip30-frontend
+            plan: starter
+            env: node
+            autoDeploy: true
+            rootDir: .
+            buildCommand: |
+              pnpm install --no-frozen-lockfile
+              pnpm --filter vipclaims-saas... --filter @vip/shared... build
+            startCommand: |
+              cd apps/vipclaims-saas && pnpm start
+            envVars:
+              - fromGroup: "VIP30 Secrets"
+              - key: NODE_VERSION
+                value: "20"
+              - key: NEXT_PUBLIC_API_BASE_URL
+                value: "https://vip30-api.onrender.com"
+              - key: PORT
+                value: "3000"
 
-  - type: worker
-    name: vip30-worker
-    plan: standard
-    env: python
-    rootDir: apps/vip-parse
-    autoDeploy: true
-    buildCommand: |
-      pip install -r requirements-worker.txt
-    startCommand: |
-      python scripts/prestart_db.py && \
-      alembic upgrade head && \
-      export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && \
-      export PYTHONPATH="$PYTHONPATH:$(pwd)" && \
-      echo "Boot $(date)" && \
-      python -c "import os,sys,redis; url=os.environ.get('REDIS_URL') or sys.exit('REDIS_URL not set'); safe=(url.split('@')[-1] if '@' in url else url); print(f'Preflight Redis: {safe}'); r=redis.Redis.from_url(url, socket_connect_timeout=5, socket_timeout=5); r.ping(); print('Redis OK'); sys.path.insert(0, os.getcwd()); print('PYTHONPATH:', sys.path); import importlib; m=importlib.import_module('src.tasks'); print('Import test:', m is not None)" && \
-      exec rq worker -u "$REDIS_URL" bidcomp
-    envVars:
-      - key: REDIS_HOST
-        fromService:
-          name: vip30-redis
-          type: redis
-          property: host
-      - key: REDIS_PORT
-        fromService:
-          name: vip30-redis
-          type: redis
-          property: port
-      - key: PARSE_CONCURRENCY
-        value: "1"
-      - key: PROMPT_DIR
-        value: "src/prompts"
-      - key: OPENAI_MODEL
-        value: "gpt-4o-mini"
-      - key: S3_ENDPOINT
-        value: ""
-      - key: S3_ACCESS_KEY_ID
-        value: ""
-      - key: S3_SECRET_ACCESS_KEY
-        value: ""
-      - key: S3_BUCKET
-        value: ""
-      - key: S3_REGION
-        value: "auto"
-      - key: DATABASE_URL
-        fromDatabase:
-          name: vip30-db
-          property: connectionString
+          - type: worker
+            name: vip30-worker
+            plan: standard
+            env: python
+            rootDir: apps/vip-parse
+            autoDeploy: true
+            buildCommand: |
+              pip install -r requirements-worker.txt
+            startCommand: |
+              python scripts/prestart_db.py && \
+              alembic upgrade head && \
+              export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && \
+              export PYTHONPATH="$PYTHONPATH:$(pwd)" && \
+              echo "Boot $(date)" && \
+              python -c "import os,sys,redis; url=os.environ.get('REDIS_URL') or sys.exit('REDIS_URL not set'); safe=(url.split('@')[-1] if '@' in url else url); print(f'Preflight Redis: {safe}'); r=redis.Redis.from_url(url, socket_connect_timeout=5, socket_timeout=5); r.ping(); print('Redis OK'); sys.path.insert(0, os.getcwd()); print('PYTHONPATH:', sys.path); import importlib; m=importlib.import_module('src.tasks'); print('Import test:', m is not None)" && \
+              exec rq worker -u "$REDIS_URL" bidcomp
+            envVars:
+              - fromGroup: "VIP30 Secrets"
+              - key: REDIS_HOST
+                fromService:
+                  name: vip30-redis
+                  type: redis
+                  property: host
+              - key: REDIS_PORT
+                fromService:
+                  name: vip30-redis
+                  type: redis
+                  property: port
+              - key: PARSE_CONCURRENCY
+                value: "1"
+              - key: PROMPT_DIR
+                value: "src/prompts"
+              - key: OPENAI_MODEL
+                value: "gpt-4o-mini"
+              - key: S3_ENDPOINT
+                value: ""
+              - key: S3_ACCESS_KEY_ID
+                value: ""
+              - key: S3_SECRET_ACCESS_KEY
+                value: ""
+              - key: S3_BUCKET
+                value: ""
+              - key: S3_REGION
+                value: "auto"
+              - key: DATABASE_URL
+                fromDatabase:
+                  name: vip30-db
+                  property: connectionString
 
-  - type: redis
-    name: vip30-redis
-    plan: free
-    ipAllowList: []
+          - type: redis
+            name: vip30-redis
+            plan: free
+            ipAllowList: []
 
-databases:
-  - name: vip30-db
-    plan: free
-    databaseName: vip30
-    user: vip30
+        databases:
+          - name: vip30-db
+            plan: free
+            databaseName: vip30
+            user: vip30
 

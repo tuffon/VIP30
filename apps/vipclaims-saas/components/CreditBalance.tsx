@@ -2,10 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+import { clearPersistedSession, getPersistedSession, isSessionValid } from "../lib/auth";
 import { onCreditBalanceChanged } from "../lib/credits";
 
-type MeResponse = {
-  balance?: number;
+type AuthMeResponse = {
+  credit_balance?: number;
 };
 
 export function CreditBalance() {
@@ -19,12 +20,22 @@ export function CreditBalance() {
       if (!options?.silent) {
         setIsLoading(true);
       }
+
+      const persisted = getPersistedSession();
+      if (!persisted || !isSessionValid(persisted)) {
+        setIsAuthed(false);
+        setBalance(null);
+        setIsLoading(false);
+        return;
+      }
+
       try {
-        const response = await fetch(`${apiBase.replace(/\/$/, "")}/credits/balance`, {
+        const response = await fetch(`${apiBase.replace(/\/$/, "")}/auth/me`, {
           credentials: "include",
         });
 
         if (response.status === 401) {
+          clearPersistedSession();
           setIsAuthed(false);
           setBalance(null);
           return;
@@ -36,9 +47,9 @@ export function CreditBalance() {
           return;
         }
 
-        const payload = (await response.json()) as MeResponse;
+        const payload = (await response.json()) as AuthMeResponse;
         setIsAuthed(true);
-        setBalance(typeof payload.balance === "number" ? payload.balance : null);
+        setBalance(typeof payload.credit_balance === "number" ? payload.credit_balance : null);
       } catch {
         setIsAuthed(false);
         setBalance(null);
