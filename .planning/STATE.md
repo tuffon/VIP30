@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.1 Repository Restructure — Phase 13
+**Current focus:** v2.2 Unified Output
 
 ## Current Position
 
-Phase: 13 of 15 (Package Extraction)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-02-17 — Roadmap created (3 phases)
+Phase: Not started (run /gsd:define-requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-02-17 — Milestone v2.2 started
 
-Progress: ░░░░░░░░░░ 0% (v2.1)
+Progress: ░░░░░░░░░░ 0% (v2.2)
 
 ## Completed Milestones
 
@@ -24,6 +24,12 @@ Progress: ░░░░░░░░░░ 0% (v2.1)
 | v1.2 | Launch Ready | 5-8 | 2026-02-17 |
 | v1.1 | MVP Launch | 1-4 | 2026-02-14 |
 | v1.0.1 | Professional Adjuster Narratives | 1-8 | 2026-02-09 |
+
+## Planned Milestones
+
+| Version | Name | Phases | Status |
+|---------|------|--------|--------|
+| v2.1 | Repository Restructure | 13-15 | Planned (not executed) |
 
 ## Performance Metrics
 
@@ -38,7 +44,17 @@ Progress: ░░░░░░░░░░ 0% (v2.1)
 
 Decisions logged in PROJECT.md Key Decisions table.
 
-v2.1 decisions:
+v2.2 decisions:
+- Replace 4 output modes with single unified 2-sheet report
+- Sheet 1: "Summary" (merged Executive Summary + Ranked Impact)
+- Sheet 2: "Analysis" (merged Methodology + Scope + Category Detail)
+- Drop audit trail sheet (developer telemetry, no user value)
+- LLM pipeline unchanged (fix output format only, same generation cost)
+- Remove mode selector from frontend, output_mode from API
+- Carrier mode was identical to Internal (no-op filter) — confirmed waste
+- Litigation mode was Internal minus suggested follow-ups — minimal value as separate mode
+
+v2.1 decisions (preserved):
 - Split backend into api/ + worker/ with shared Python package
 - Parser extracted as its own standalone package (packages/parser/)
 - Shared business logic in packages/shared-python/
@@ -53,5 +69,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-17
-Stopped at: v2.1 roadmap created, ready to plan Phase 13
+Stopped at: v2.2 milestone started, ready to define requirements
 Resume file: —
