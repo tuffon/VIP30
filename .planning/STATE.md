@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.2 Unified Output
+**Current focus:** v2.2 Unified Output — Phase 16
 
 ## Current Position
 
-Phase: Not started (run /gsd:define-requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-17 — Milestone v2.2 started
+Phase: 16 of 17 (Backend Output Unification)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-02-17 — Roadmap created (2 phases)
 
 Progress: ░░░░░░░░░░ 0% (v2.2)
 
@@ -49,18 +49,9 @@ v2.2 decisions:
 - Sheet 1: "Summary" (merged Executive Summary + Ranked Impact)
 - Sheet 2: "Analysis" (merged Methodology + Scope + Category Detail)
 - Drop audit trail sheet (developer telemetry, no user value)
-- LLM pipeline unchanged (fix output format only, same generation cost)
-- Remove mode selector from frontend, output_mode from API
-- Carrier mode was identical to Internal (no-op filter) — confirmed waste
-- Litigation mode was Internal minus suggested follow-ups — minimal value as separate mode
-
-v2.1 decisions (preserved):
-- Split backend into api/ + worker/ with shared Python package
-- Parser extracted as its own standalone package (packages/parser/)
-- Shared business logic in packages/shared-python/
-- Rename frontend from vipclaims-saas to frontend
-- Rename Render service vip30-web → vip30-api
-- Remove dead preflight module (unused in main app)
+- LLM pipeline unchanged (fix output format only)
+- Carrier mode was identical to Internal (confirmed no-op filter)
+- Litigation mode was Internal minus suggested follow-ups (minimal value)
 
 ### Blockers/Concerns
 
@@ -69,5 +60,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-17
-Stopped at: v2.2 milestone started, ready to define requirements
+Stopped at: v2.2 roadmap created, ready to plan Phase 16
 Resume file: —

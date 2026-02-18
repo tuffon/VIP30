@@ -79,13 +79,24 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated by create-roadmap) | | |
+| XLSX-01 | Phase 16 | Pending |
+| XLSX-02 | Phase 16 | Pending |
+| XLSX-03 | Phase 16 | Pending |
+| XLSX-04 | Phase 16 | Pending |
+| XLSX-05 | Phase 16 | Pending |
+| MODE-01 | Phase 16 | Pending |
+| MODE-02 | Phase 17 | Pending |
+| MODE-03 | Phase 17 | Pending |
+| MODE-04 | Phase 16 | Pending |
+| MODE-05 | Phase 16 | Pending |
+| PIPE-01 | Phase 16 | Pending |
+| PIPE-02 | Phase 16 | Pending |
 
 **Coverage:**
 - v2.2 requirements: 12 total
-- Mapped to phases: 0
-- Unmapped: 12 (awaiting roadmap)
+- Mapped to phases: 12
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-02-17*
-*Last updated: 2026-02-17 after v2.2 milestone creation*
+*Last updated: 2026-02-17 after roadmap creation*
