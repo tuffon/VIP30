@@ -80,7 +80,7 @@ def test_category_mapping_and_fallback_narrative() -> None:
     assert "raw_response_preview" in comp.last_narrative_debug
 
 
-def test_run_generates_three_tabs_with_llm() -> None:
+def test_run_generates_two_tabs_with_llm() -> None:
     payload_a = _make_payload("Estimate A", framing=300, roofing=200, electrical=50, overhead=60, profit=60, tax=10)
     payload_b = _make_payload("Estimate B", framing=450, roofing=180, electrical=90, overhead=90, profit=90, tax=15)
 
@@ -114,16 +114,12 @@ Estimate B carries higher framing scope.
     xlsx = comp.run({"carrier": payload_a, "contractor": payload_b}, job_id="job-1")
     wb = load_workbook(BytesIO(xlsx))
     assert wb.sheetnames == [
-        "Executive Summary",
-        "Ranked Impact",
-        "Methodology",
-        "Scope Alignment",
-        "Category Detail",
-        "Audit Trail",
+        "Summary",
+        "Analysis",
     ]
-    summary = wb["Executive Summary"]
-    assert summary["A1"].value == "Bid Comparison — Executive Summary"
-    assert summary["A9"].value == "Top Drivers"
+    summary = wb["Summary"]
+    assert summary["A1"].value == "Bid Comparison - Summary"
+    assert summary["A9"].value == "Top Cost Drivers"
     assert comp.last_narrative_debug["status"] == "pipeline"
 
 

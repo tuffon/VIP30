@@ -315,6 +315,7 @@ def run_bid_comp_keys(
     output_mode: str = "internal",
 ) -> Dict[str, Any]:
     t0 = time.time()
+    _ = output_mode  # Backward compatibility for queued jobs that still pass this kwarg.
     with _SEM:
         logger.info("job start (r2 keys): job_id=%s", job_id)
         logger.info(
@@ -490,14 +491,6 @@ def run_bid_comp_keys(
                 "methodology": methodology_result,
                 "signals": signal_bundle,
             }
-            audit_metadata = {
-                "primary_hash": carrier_hash,
-                "comparison_hash": contractor_hash,
-                "primary_filename": carrier_original,
-                "comparison_filename": contractor_original,
-                "output_mode": output_mode,
-                "analysis_timestamp": datetime.utcnow().isoformat(),
-            }
             logger.info(
                 "job bid-context ready: job_id=%s primary=%s comparison=%s primary_src=%s comparison_src=%s",
                 job_id,
@@ -542,8 +535,6 @@ def run_bid_comp_keys(
                 xlsx_bytes = comp.run(
                     bid_context,
                     job_id,
-                    output_mode=output_mode,
-                    audit_metadata=audit_metadata,
                 )
                 _update_job_progress(db_job_id, JobService.WRITING, 88, "Generating XLSX report")
                 logger.info(

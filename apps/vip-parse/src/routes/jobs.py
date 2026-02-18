@@ -102,7 +102,6 @@ async def create_job(
             comparison_filename=payload.contractor_filename,
             primary_s3_key=payload.carrier_key,
             comparison_s3_key=payload.contractor_key,
-            output_mode=payload.output_mode or "internal",
         )
     except InsufficientCreditsError as exc:
         raise HTTPException(
@@ -120,7 +119,6 @@ async def create_job(
         payload.contractor_filename,
         None,
         str(job.id),
-        output_mode=payload.output_mode or "internal",
         job_timeout=600,
         result_ttl=86400,
         failure_ttl=86400,
@@ -182,7 +180,6 @@ async def retry_job(
             comparison_filename=original_job.comparison_filename,
             primary_s3_key=original_job.primary_s3_key,
             comparison_s3_key=original_job.comparison_s3_key,
-            output_mode=original_job.output_mode or "internal",
         )
     except InsufficientCreditsError as exc:
         raise HTTPException(
@@ -203,7 +200,6 @@ async def retry_job(
         original_job.comparison_filename,
         None,
         str(new_job.id),
-        output_mode=original_job.output_mode or "internal",
         job_timeout=600,
         result_ttl=86400,
         failure_ttl=86400,

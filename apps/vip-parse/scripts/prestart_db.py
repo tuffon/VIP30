@@ -38,11 +38,28 @@ def main() -> None:
             print("prestart_db: widened alembic_version.version_num to VARCHAR(64)")
 
         # Defensive self-heal for environments where app code expects the column.
+        # Phase 16: keep historical data but stop forcing default mode on new rows.
         conn.execute(
             text(
                 """
                 ALTER TABLE IF EXISTS comparison_jobs
-                ADD COLUMN IF NOT EXISTS output_mode VARCHAR(20) NOT NULL DEFAULT 'internal'
+                ADD COLUMN IF NOT EXISTS output_mode VARCHAR(20)
+                """
+            )
+        )
+        conn.execute(
+            text(
+                """
+                ALTER TABLE IF EXISTS comparison_jobs
+                ALTER COLUMN output_mode DROP DEFAULT
+                """
+            )
+        )
+        conn.execute(
+            text(
+                """
+                ALTER TABLE IF EXISTS comparison_jobs
+                ALTER COLUMN output_mode DROP NOT NULL
                 """
             )
         )

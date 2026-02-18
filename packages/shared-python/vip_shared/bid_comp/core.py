@@ -10,7 +10,6 @@ from .export_xlsx import export_xlsx
 from .identity import ensure_estimate_identity
 from .markdown import MarkdownBlock, parse_markdown
 from .normalize import normalize_label, normalize_money
-from ..pipeline.output_modes import OutputMode
 from ..llm.adapter import LLMAdapterBase
 from ..methodology.models import MethodologyResult
 from ..pipeline import NarrativePipeline, PipelineCache, FinalNarrative, PipelineState
@@ -286,9 +285,6 @@ class BidComp:
         self,
         bid_context: dict,
         job_id: str,
-        *,
-        output_mode: str = "internal",
-        audit_metadata: Optional[Dict[str, Any]] = None,
     ) -> bytes:
         self.last_narrative_debug = None
         self.last_narrative_artifact = None
@@ -331,24 +327,12 @@ class BidComp:
             )
             recap_rows = self._flatten_original_recaps(pair)
             self._log(logging.INFO, "recap rows flattened", rows=len(recap_rows))
-            try:
-                mode = OutputMode(output_mode)
-            except ValueError:
-                self._log(
-                    logging.WARNING,
-                    "invalid output mode provided, defaulting to internal",
-                    output_mode=output_mode,
-                )
-                mode = OutputMode.INTERNAL
-
             xlsx_bytes = export_xlsx(
                 pair=pair,
                 narrative=narrative,
                 category_rows=category_rows,
                 recap_rows=recap_rows,
-                output_mode=mode,
                 methodology=methodology,
-                audit_metadata=audit_metadata,
                 signal_bundle=signals,
             )
             self._log(logging.INFO, "export complete", xlsx_bytes=len(xlsx_bytes))
