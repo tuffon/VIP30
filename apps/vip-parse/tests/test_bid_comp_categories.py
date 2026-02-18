@@ -123,6 +123,54 @@ Estimate B carries higher framing scope.
     assert comp.last_narrative_debug["status"] == "pipeline"
 
 
+def test_summary_observations_redacts_internal_llm_errors() -> None:
+    payload_a = _make_payload("Estimate A", framing=300, roofing=200, electrical=50, overhead=60, profit=60, tax=10)
+    payload_b = _make_payload("Estimate B", framing=450, roofing=180, electrical=90, overhead=90, profit=90, tax=15)
+
+    fake_markdown = """# Overview of Estimates
+Analysis unavailable: Client error '429 Too Many Requests' for url 'https://api.openai.com/v1/chat/completions'
+
+## Key Cost Drivers
+- **Framing / Structural**: 300 vs 450
+
+## Scope Observations
+- Analysis unavailable: Client error '429 Too Many Requests' for url 'https://api.openai.com/v1/chat/completions'
+
+## Suggested Follow-ups
+- Retry.
+"""
+    sections = {
+        "overview_of_estimates": "Analysis unavailable: Client error '429 Too Many Requests' for url 'https://api.openai.com/v1/chat/completions'",
+        "key_cost_drivers": [
+            {
+                "category": "Framing / Structural",
+                "primary_total": 300,
+                "comparison_total": 450,
+                "delta_total": 150,
+                "narrative": "Analysis unavailable: Client error '429 Too Many Requests' for url 'https://api.openai.com/v1/chat/completions'",
+            }
+        ],
+        "scope_observations": ["Analysis unavailable: Client error '429 Too Many Requests' for url 'https://api.openai.com/v1/chat/completions'"],
+        "suggested_followups": ["Retry."],
+    }
+
+    comp = BidComp(llm_adapter=FakeAdapter(fake_markdown, sections))
+    xlsx = comp.run({"carrier": payload_a, "contractor": payload_b}, job_id="job-2")
+    wb = load_workbook(BytesIO(xlsx))
+    summary = wb["Summary"]
+
+    all_values = [
+        str(cell.value)
+        for row in summary.iter_rows()
+        for cell in row
+        if cell.value is not None
+    ]
+    joined = "\n".join(all_values).lower()
+    assert "too many requests" not in joined
+    assert "chat/completions" not in joined
+    assert "automated narrative detail unavailable for this section." in joined
+
+
 def test_comparison_name_falls_back_to_original_filename() -> None:
     payload_a = _make_payload("Carrier Estimate", framing=200, roofing=75, electrical=50, overhead=40, profit=40, tax=10)
     payload_b = _make_payload("", framing=220, roofing=60, electrical=55, overhead=44, profit=44, tax=11)

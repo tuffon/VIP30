@@ -24,6 +24,24 @@ from ...rules.models import SignalBundle
 logger = logging.getLogger("vip-parse.pipeline.writer")
 
 
+def _sanitize_fallback_driver_text(text: str) -> str:
+    lowered = (text or "").strip().lower()
+    if not lowered:
+        return "See line item details."
+    markers = (
+        "analysis unavailable",
+        "too many requests",
+        "status code 429",
+        "openai",
+        "chat/completions",
+        "traceback",
+        "for more information check",
+    )
+    if any(marker in lowered for marker in markers):
+        return "Automated narrative detail unavailable for this section."
+    return text
+
+
 class WriterInput(BaseModel):
     """
     Input model for the Writer pass.
@@ -381,10 +399,11 @@ def _build_fallback_narrative(
     # Build basic key drivers from analysis
     key_drivers: List[DriverNarrative] = []
     for cat_analysis in analysis.category_analyses:
+        source_narrative = cat_analysis.delta_drivers[0] if cat_analysis.delta_drivers else "See line item details."
         key_drivers.append(DriverNarrative(
             category=cat_analysis.category,
             amounts=f"${cat_analysis.primary_total:,.2f} vs ${cat_analysis.comparison_total:,.2f}",
-            narrative=cat_analysis.delta_drivers[0] if cat_analysis.delta_drivers else "See line item details.",
+            narrative=_sanitize_fallback_driver_text(source_narrative),
         ))
 
     # Use extracted overview if available, otherwise build from analysis data

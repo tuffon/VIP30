@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import re
 from io import BytesIO
 from typing import Any, Dict, List, Optional
 
@@ -23,6 +24,19 @@ _SEVERITY_FILLS = {
     "notable": PatternFill(fill_type="solid", fgColor="FFA500"),
     "informational": PatternFill(fill_type="solid", fgColor="ADD8E6"),
 }
+
+_USER_SAFE_FALLBACK_TEXT = "Automated narrative detail unavailable for this section."
+_INTERNAL_ERROR_PATTERNS = (
+    r"\banalysis unavailable\b",
+    r"\btoo many requests\b",
+    r"\bstatus(?:\s*code)?\s*429\b",
+    r"\bhttp(?:x)?\b",
+    r"\bopenai\b",
+    r"\bchat/completions\b",
+    r"\btraceback\b",
+    r"\bexception\b",
+    r"\bfor more information check\b",
+)
 
 
 def export_xlsx(
@@ -147,6 +161,7 @@ def _write_analysis_sheet(
     ws.cell(row=row, column=1, value="Scope Alignment").font = Font(bold=True)
     row += 1
     scope_items = list(getattr(narrative, "scope_observations", []) or [])
+    scope_items = [item for item in (_sanitize_user_text(item) for item in scope_items) if item]
     if not scope_items:
         scope_items = ["No scope observations"]
     for item in scope_items:
@@ -156,6 +171,7 @@ def _write_analysis_sheet(
         row += 1
 
     followups = list(getattr(narrative, "suggested_followups", []) or [])
+    followups = [item for item in (_sanitize_user_text(item) for item in followups) if item]
     if followups:
         row += 1
         ws.cell(row=row, column=1, value="Suggested Follow-ups").font = Font(bold=True)
@@ -259,7 +275,7 @@ def _write_analysis_sheet(
 def _build_observations(narrative, signal_bundle: Optional[Any]) -> List[str]:
     observations: List[str] = []
 
-    overview = str(getattr(narrative, "overview", "") or "").strip()
+    overview = _sanitize_user_text(getattr(narrative, "overview", ""))
     if overview:
         observations.append(overview)
 
@@ -269,15 +285,18 @@ def _build_observations(narrative, signal_bundle: Optional[Any]) -> List[str]:
             text = str(getattr(item, "narrative") or "").strip()
         else:
             text = str((item or {}).get("narrative") or "").strip()
-        if text:
-            observations.append(text)
+        sanitized = _sanitize_user_text(text)
+        if sanitized:
+            observations.append(sanitized)
 
     if signal_bundle is not None:
         for alert in getattr(signal_bundle, "alert_tags", []) or []:
             severity = getattr(getattr(alert, "severity", None), "value", getattr(alert, "severity", ""))
             title = getattr(alert, "title", "")
             detail = getattr(alert, "detail", "")
-            observations.append(f"[{severity}] {title}: {detail}".strip())
+            sanitized = _sanitize_user_text(f"[{severity}] {title}: {detail}".strip())
+            if sanitized:
+                observations.append(sanitized)
 
     if not observations:
         return ["No key observations available"]
@@ -350,3 +369,14 @@ def _autosize(ws) -> None:
         letter = get_column_letter(column_cells[0].column)
         max_len = max((len(str(cell.value)) for cell in column_cells if cell.value is not None), default=0)
         ws.column_dimensions[letter].width = min(max(12, max_len + 2), 80)
+
+
+def _sanitize_user_text(value: Any) -> Optional[str]:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    lowered = text.lower()
+    for pattern in _INTERNAL_ERROR_PATTERNS:
+        if re.search(pattern, lowered):
+            return _USER_SAFE_FALLBACK_TEXT
+    return text
