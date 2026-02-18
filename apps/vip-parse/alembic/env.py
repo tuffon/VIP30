@@ -3,7 +3,7 @@ import sys
 from logging.config import fileConfig
 
 from alembic import context
-from sqlalchemy import engine_from_config, pool
+from sqlalchemy import engine_from_config, pool, text
 
 # Import models directly without triggering src/__init__.py (which imports tasks/pipeline)
 # This avoids the textstat import chain during migrations
@@ -59,10 +59,37 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
+        _ensure_alembic_version_column_capacity(connection)
         context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
+
+
+def _ensure_alembic_version_column_capacity(connection) -> None:
+    """
+    Backward-compatibility guard:
+    some environments have alembic_version.version_num as VARCHAR(32),
+    which breaks longer revision IDs.
+    """
+    try:
+        length_query = text(
+            """
+            SELECT character_maximum_length
+            FROM information_schema.columns
+            WHERE table_name = 'alembic_version'
+              AND column_name = 'version_num'
+              AND table_schema = current_schema()
+            """
+        )
+        max_len = connection.execute(length_query).scalar_one_or_none()
+        if isinstance(max_len, int) and max_len < 64:
+            connection.execute(
+                text("ALTER TABLE alembic_version ALTER COLUMN version_num TYPE VARCHAR(64)")
+            )
+    except Exception:
+        # Keep migrations best-effort across fresh databases or restricted metadata access.
+        pass
 
 
 if context.is_offline_mode():
