@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel
 from redis import Redis
 from rq import Queue
 from sqlmodel import desc, func, select
@@ -30,16 +30,6 @@ class CreateJobRequest(BaseModel):
     contractor_key: str
     carrier_filename: Optional[str] = None
     contractor_filename: Optional[str] = None
-    output_mode: Optional[str] = "internal"
-
-    @field_validator("output_mode")
-    @classmethod
-    def _validate_output_mode(cls, value: Optional[str]) -> str:
-        mode = (value or "internal").strip().lower()
-        allowed = {"executive", "carrier", "litigation", "internal"}
-        if mode not in allowed:
-            raise ValueError(f"output_mode must be one of: {', '.join(sorted(allowed))}")
-        return mode
 
 
 class CreateJobResponse(BaseModel):

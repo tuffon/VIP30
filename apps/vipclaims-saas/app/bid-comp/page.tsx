@@ -7,7 +7,6 @@ import { JobProgress } from "../../components/JobProgress";
 import { emitCreditBalanceChanged } from "../../lib/credits";
 
 type JobPhase = "idle" | "uploading" | "queued" | "processing" | "ready" | "failed";
-type OutputMode = "internal" | "executive" | "carrier" | "litigation";
 
 type UploadDropzoneProps = {
   title: string;
@@ -33,13 +32,6 @@ const timeline = [
   { id: "upload", label: "Upload PDFs", description: "Secure carrier + contractor uploads" },
   { id: "processing", label: "Parsing & AI", description: "Xactimate sections + narrative summary" },
   { id: "ready", label: "Delivery", description: "Download XLSX and review history" },
-];
-
-const outputModeOptions: Array<{ value: OutputMode; label: string; description: string }> = [
-  { value: "internal", label: "Internal", description: "Full detail, all sections" },
-  { value: "executive", label: "Executive", description: "1-page summary: total delta, top 3 drivers" },
-  { value: "carrier", label: "Carrier", description: "Negotiation-ready with methodology detail" },
-  { value: "litigation", label: "Litigation", description: "Neutral tone, full evidence citations" },
 ];
 
 function UploadDropzone({ title, description, file, onFileSelect }: UploadDropzoneProps) {
@@ -99,7 +91,6 @@ export default function BidCompPage() {
   const [jobId, setJobId] = useState<string | null>(null);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [outputMode, setOutputMode] = useState<OutputMode>("internal");
   const [creditBalance, setCreditBalance] = useState<number | null>(null);
   const [isCreditsLoading, setIsCreditsLoading] = useState(true);
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
@@ -207,7 +198,6 @@ export default function BidCompPage() {
             contractor_key: contractorUrl.key,
             carrier_filename: carrierFile.name,
             contractor_filename: contractorFile.name,
-            output_mode: outputMode,
           }),
         });
 
@@ -240,7 +230,7 @@ export default function BidCompPage() {
         setIsSubmitting(false);
       }
     },
-    [apiBase, carrierFile, contractorFile, creditBalance, outputMode, router],
+    [apiBase, carrierFile, contractorFile, creditBalance, router],
   );
 
   const submitDisabled = isSubmitting || isCreditsLoading || !carrierFile || !contractorFile || (creditBalance ?? 0) <= 0;
@@ -280,36 +270,6 @@ export default function BidCompPage() {
         </section>
 
         <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-slate-900">Output Mode</p>
-            <div className="grid gap-3 md:grid-cols-2">
-              {outputModeOptions.map((option) => {
-                const selected = outputMode === option.value;
-                return (
-                  <label
-                    key={option.value}
-                    className={`cursor-pointer rounded-xl border p-3 transition ${
-                      selected
-                        ? "border-brand-primary ring-1 ring-brand-primary bg-brand-primary/5"
-                        : "border-slate-200 bg-white hover:border-slate-300"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="output_mode"
-                      value={option.value}
-                      checked={selected}
-                      onChange={() => setOutputMode(option.value)}
-                      className="sr-only"
-                    />
-                    <p className="text-sm font-semibold text-slate-900">{option.label}</p>
-                    <p className="mt-1 text-xs text-slate-500">{option.description}</p>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-
           <div className={`flex flex-wrap items-center justify-between gap-4 rounded-xl border p-4 ${creditCardTone}`}>
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide">Credits</p>
