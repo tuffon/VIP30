@@ -8,6 +8,7 @@ services:
     buildCommand: |
       pip install -r requirements-web.txt
     startCommand: |
+      python scripts/prestart_db.py && \
       alembic upgrade head && \
       export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && \
       gunicorn src.main:app -k uvicorn.workers.UvicornWorker -w 1 -b 0.0.0.0:$PORT --timeout 120 --graceful-timeout 60
@@ -71,6 +72,8 @@ services:
     buildCommand: |
       pip install -r requirements-worker.txt
     startCommand: |
+      python scripts/prestart_db.py && \
+      alembic upgrade head && \
       export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && \
       export PYTHONPATH="$PYTHONPATH:$(pwd)" && \
       echo "Boot $(date)" && \

@@ -126,3 +126,20 @@ def test_render_web_start_command_runs_alembic_upgrade_head() -> None:
         re.IGNORECASE,
     )
     assert pattern.search(text), "vip30-web startCommand must run `alembic upgrade head`"
+
+
+def test_render_start_commands_run_prestart_db_bootstrap() -> None:
+    render_file = REPO_ROOT / "render.yaml"
+    assert render_file.exists(), "render.yaml not found at repo root"
+    text = render_file.read_text(encoding="utf-8")
+
+    web_pattern = re.compile(
+        r"name:\s*vip30-web[\s\S]*?startCommand:\s*\|[\s\S]*?python scripts/prestart_db\.py",
+        re.IGNORECASE,
+    )
+    worker_pattern = re.compile(
+        r"name:\s*vip30-worker[\s\S]*?startCommand:\s*\|[\s\S]*?python scripts/prestart_db\.py",
+        re.IGNORECASE,
+    )
+    assert web_pattern.search(text), "vip30-web startCommand must run prestart_db bootstrap"
+    assert worker_pattern.search(text), "vip30-worker startCommand must run prestart_db bootstrap"
