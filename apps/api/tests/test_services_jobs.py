@@ -171,6 +171,19 @@ def test_complete_consumes_credit_fail_does_not(monkeypatch):
     assert completed.result_s3_key == "s3://result"
     assert calls["count"] == 1
 
+    no_charge_job = _make_job(JobService.WRITING)
+    db.jobs[no_charge_job.id] = no_charge_job
+    completed_no_charge = asyncio.run(
+        JobService.complete_job(
+            db,
+            no_charge_job.id,
+            "s3://result-no-charge",
+            consume_credit=False,
+        )
+    )
+    assert completed_no_charge.state == JobService.COMPLETED
+    assert calls["count"] == 1
+
     failed = asyncio.run(JobService.fail_job(db, fail_job.id, "oops", "worker failed"))
     assert failed.state == JobService.FAILED
     assert calls["count"] == 1

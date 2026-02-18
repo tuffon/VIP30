@@ -34,10 +34,17 @@ class OpenAIChatAdapter(LLMAdapterBase):
         self.registry = registry or default_registry()
         self.rate_limit_retries = max(0, int(os.getenv("OPENAI_RATE_LIMIT_RETRIES", "2")))
         self.retry_base_seconds = max(0.1, float(os.getenv("OPENAI_RETRY_BASE_SECONDS", "1.5")))
+        self.total_calls = 0
+        self.successful_calls = 0
+        self.failed_calls = 0
+        self._disabled_reason: str | None = None
         if not self.api_key:
             raise RuntimeError("OPENAI_API_KEY not set")
 
     def generate(self, template_id: str, context: Dict[str, Any]) -> str:
+        if self._disabled_reason:
+            raise RuntimeError(f"LLM unavailable: {self._disabled_reason}")
+        self.total_calls += 1
         tmpl = self.registry.get(template_id)
         messages = self._build_messages(tmpl, context)
         primary_name = context.get("primary_name")
@@ -79,7 +86,7 @@ class OpenAIChatAdapter(LLMAdapterBase):
                     data = resp.json()
                 break
             except httpx.HTTPStatusError as exc:
-                if self._is_rate_limit_http_error(exc) and attempt < max_attempts:
+                if self._is_retryable_rate_limit_http_error(exc) and attempt < max_attempts:
                     delay = self._retry_delay_seconds(attempt, exc.response.headers.get("retry-after") if exc.response else None)
                     logger.warning(
                         "llm rate-limited, retrying: model=%s template=%s attempt=%d/%d delay_sec=%.2f status=%s",
@@ -109,9 +116,12 @@ class OpenAIChatAdapter(LLMAdapterBase):
                     body_preview,
                     exc,
                 )
+                self.failed_calls += 1
+                if self._is_insufficient_quota_http_error(exc):
+                    self._disabled_reason = "insufficient_quota"
                 raise
             except Exception as exc:
-                if self._is_rate_limit_exception(exc) and attempt < max_attempts:
+                if self._is_retryable_rate_limit_exception(exc) and attempt < max_attempts:
                     delay = self._retry_delay_seconds(attempt, None)
                     logger.warning(
                         "llm rate-limit-like failure, retrying: model=%s template=%s attempt=%d/%d delay_sec=%.2f error=%s",
@@ -134,6 +144,9 @@ class OpenAIChatAdapter(LLMAdapterBase):
                     elapsed_ms,
                     exc,
                 )
+                self.failed_calls += 1
+                if "insufficient_quota" in str(exc).lower():
+                    self._disabled_reason = "insufficient_quota"
                 raise
         if data is None:
             raise RuntimeError("LLM call failed without response payload")
@@ -149,6 +162,7 @@ class OpenAIChatAdapter(LLMAdapterBase):
                 response_preview = (resp.text or "")[:1000]
             except Exception:
                 response_preview = "<unavailable>"
+        self.successful_calls += 1
         logger.info(
             "llm request complete: model=%s template=%s primary=%s comparison=%s elapsed_ms=%d prompt_bytes=%d prompt_tokens=%s completion_tokens=%s preview=%s response_preview=%s",
             self.model,
@@ -165,6 +179,9 @@ class OpenAIChatAdapter(LLMAdapterBase):
         return content
 
     def generate_structured(self, template_id: str, context: Dict[str, Any], response_model: Type[T]) -> T:
+        if self._disabled_reason:
+            raise RuntimeError(f"LLM unavailable: {self._disabled_reason}")
+        self.total_calls += 1
         try:
             from openai import OpenAI
         except Exception as exc:  # noqa: BLE001
@@ -197,7 +214,7 @@ class OpenAIChatAdapter(LLMAdapterBase):
                 )
                 break
             except Exception as exc:  # noqa: BLE001
-                if self._is_rate_limit_exception(exc) and attempt < max_attempts:
+                if self._is_retryable_rate_limit_exception(exc) and attempt < max_attempts:
                     delay = self._retry_delay_seconds(attempt, getattr(exc, "retry_after", None))
                     logger.warning(
                         "llm structured rate-limited, retrying: model=%s template=%s attempt=%d/%d delay_sec=%.2f error=%s",
@@ -210,6 +227,9 @@ class OpenAIChatAdapter(LLMAdapterBase):
                     )
                     time.sleep(delay)
                     continue
+                self.failed_calls += 1
+                if "insufficient_quota" in str(exc).lower():
+                    self._disabled_reason = "insufficient_quota"
                 raise
         if completion is None:
             raise RuntimeError("Structured LLM call failed without completion payload")
@@ -220,6 +240,7 @@ class OpenAIChatAdapter(LLMAdapterBase):
         parsed = getattr(message, "parsed", None)
         if parsed is None:
             raise ValueError("Structured output missing parsed payload")
+        self.successful_calls += 1
         logger.info(
             "llm structured request complete: model=%s template=%s primary=%s comparison=%s elapsed_ms=%d",
             self.model,
@@ -241,6 +262,16 @@ class OpenAIChatAdapter(LLMAdapterBase):
             return min(retry_after_s, 30.0)
         return min(self.retry_base_seconds * (2 ** (attempt - 1)), 30.0)
 
+    def _is_insufficient_quota_http_error(self, exc: httpx.HTTPStatusError) -> bool:
+        if exc.response is None:
+            return False
+        body = ""
+        try:
+            body = (exc.response.text or "").lower()
+        except Exception:
+            body = ""
+        return "insufficient_quota" in body
+
     def _is_rate_limit_http_error(self, exc: httpx.HTTPStatusError) -> bool:
         if exc.response is None:
             return False
@@ -253,11 +284,26 @@ class OpenAIChatAdapter(LLMAdapterBase):
             body = ""
         return "rate limit" in body or "too many requests" in body
 
+    def _is_retryable_rate_limit_http_error(self, exc: httpx.HTTPStatusError) -> bool:
+        return self._is_rate_limit_http_error(exc) and not self._is_insufficient_quota_http_error(exc)
+
     def _is_rate_limit_exception(self, exc: Exception) -> bool:
         text = str(exc).lower()
         exc_name = exc.__class__.__name__.lower()
         markers = ("rate limit", "ratelimit", "too many requests", "status code 429", "http 429")
         return any(marker in text for marker in markers) or "ratelimit" in exc_name
+
+    def _is_retryable_rate_limit_exception(self, exc: Exception) -> bool:
+        text = str(exc).lower()
+        return self._is_rate_limit_exception(exc) and "insufficient_quota" not in text
+
+    def stats(self) -> Dict[str, Any]:
+        return {
+            "total_calls": self.total_calls,
+            "successful_calls": self.successful_calls,
+            "failed_calls": self.failed_calls,
+            "disabled_reason": self._disabled_reason,
+        }
 
     def _build_messages(self, tmpl: PromptTemplate, context: Dict[str, Any]) -> list[Dict[str, str]]:
         system_append = str(context.get("_system_append") or "").strip()

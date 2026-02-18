@@ -522,6 +522,10 @@ def run_bid_comp_keys(
                 logger.warning("failed to upload bid comp JSON artifacts: %s", exc)
 
             # Generate XLSX using deterministic BidComp; include LLM notes if OPENAI_API_KEY present
+            llm_stats: Dict[str, Any] = {"total_calls": 0, "successful_calls": 0, "failed_calls": 0, "disabled_reason": None}
+            llm_had_output = False
+            xlsx_tmp = ""
+            xlsx_key = f"results/{job_id}/bid-comp.xlsx"
             try:
                 llm = None
                 if os.getenv("OPENAI_API_KEY"):
@@ -537,11 +541,16 @@ def run_bid_comp_keys(
                     job_id,
                 )
                 _update_job_progress(db_job_id, JobService.WRITING, 88, "Generating XLSX report")
+                llm_stats = llm.stats() if llm else {"total_calls": 0, "successful_calls": 0, "failed_calls": 0, "disabled_reason": None}
+                llm_had_output = bool(llm_stats.get("successful_calls", 0) > 0)
                 logger.info(
-                    "job bid-comp run finished: job_id=%s xlsx_bytes=%d llm_enabled=%s",
+                    "job bid-comp run finished: job_id=%s xlsx_bytes=%d llm_enabled=%s llm_successful_calls=%s llm_failed_calls=%s llm_disabled_reason=%s",
                     job_id,
                     len(xlsx_bytes),
                     bool(llm),
+                    llm_stats.get("successful_calls"),
+                    llm_stats.get("failed_calls"),
+                    llm_stats.get("disabled_reason"),
                 )
                 xlsx_tmp = tempfile.mktemp(suffix=".xlsx")
                 with open(xlsx_tmp, "wb") as xf:
@@ -565,6 +574,9 @@ def run_bid_comp_keys(
                     "recap_by_category": recap_bundle,
                     "meta": {
                         "elapsed_ms": int((time.time() - t0) * 1000),
+                        "llm_successful_calls": llm_stats.get("successful_calls", 0),
+                        "llm_failed_calls": llm_stats.get("failed_calls", 0),
+                        "llm_disabled_reason": llm_stats.get("disabled_reason"),
                     },
                     "result_keys": {"xlsx": xlsx_key},
                 }
@@ -631,6 +643,11 @@ def run_bid_comp_keys(
 
             if db_job_id:
                 narrative_key = (result.get("result_keys") or {}).get("narrative")
+                if not llm_had_output:
+                    logger.warning(
+                        "job completed without successful LLM output; skipping credit charge: job_id=%s",
+                        job_id,
+                    )
 
                 async def _complete():
                     async with async_session_maker() as db:
@@ -639,6 +656,7 @@ def run_bid_comp_keys(
                             uuid.UUID(db_job_id),
                             result_s3_key=xlsx_key,
                             narrative_s3_key=narrative_key,
+                            consume_credit=llm_had_output,
                         )
 
                 try:

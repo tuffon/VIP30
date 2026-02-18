@@ -143,6 +143,7 @@ class JobService:
         job_id: uuid.UUID,
         result_s3_key: str,
         narrative_s3_key: Optional[str] = None,
+        consume_credit: bool = True,
     ) -> ComparisonJob:
         job = await JobService.transition_state(db, job_id, JobService.COMPLETED)
         job.completed_at = datetime.utcnow()
@@ -153,7 +154,8 @@ class JobService:
         await db.commit()
         await db.refresh(job)
 
-        await CreditService.consume_credit(db, workspace_id=job.workspace_id, job_id=job.id, amount=1)
+        if consume_credit:
+            await CreditService.consume_credit(db, workspace_id=job.workspace_id, job_id=job.id, amount=1)
         return job
 
     @staticmethod
