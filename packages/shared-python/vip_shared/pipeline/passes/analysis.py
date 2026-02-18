@@ -24,6 +24,18 @@ from ...rules.models import SignalBundle
 logger = logging.getLogger("vip-parse.pipeline.analysis")
 
 
+def _is_rate_limit_error(exc: Exception) -> bool:
+    text = str(exc).lower()
+    name = exc.__class__.__name__.lower()
+    return (
+        "too many requests" in text
+        or "rate limit" in text
+        or "status code 429" in text
+        or "http 429" in text
+        or "ratelimit" in name
+    )
+
+
 class AnalysisInput(BaseModel):
     """
     Input model for the Analysis pass.
@@ -331,6 +343,11 @@ def run_analysis_pass(
             )
         except Exception as structured_exc:  # noqa: BLE001
             logger.warning("analysis structured output failed, falling back: %s", structured_exc)
+            if _is_rate_limit_error(structured_exc):
+                return _build_fallback_result(
+                    analysis_input,
+                    "LLM service temporarily rate-limited during analysis pass",
+                )
             raw_response = llm_adapter.generate("analysis_pass_v1", context)
             result = _parse_analysis_response(raw_response, analysis_input)
 

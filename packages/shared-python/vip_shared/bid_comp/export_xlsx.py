@@ -26,6 +26,10 @@ _SEVERITY_FILLS = {
 }
 
 _USER_SAFE_FALLBACK_TEXT = "Automated narrative detail unavailable for this section."
+_RATE_LIMIT_SAFE_TEXT = (
+    "Narrative generation was temporarily rate-limited by the AI provider (HTTP 429). "
+    "Core financial comparison results remain available."
+)
 _INTERNAL_ERROR_PATTERNS = (
     r"\banalysis unavailable\b",
     r"\btoo many requests\b",
@@ -86,7 +90,16 @@ def _write_summary_sheet(ws, pair, narrative, category_rows: List[Dict[str, Any]
     for row in (5, 6, 7):
         ws[f"B{row}"].number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
 
-    start_row = 9
+    ws["A9"] = "Overall Summary"
+    ws["A9"].font = Font(bold=True)
+    ws["A10"] = _build_overall_summary(narrative)
+    ws.merge_cells(start_row=10, start_column=1, end_row=10, end_column=6)
+    ws["A10"].alignment = Alignment(wrap_text=True, vertical="top")
+    ws["A10"].border = _THIN_BORDER
+    for col in range(2, 7):
+        ws.cell(row=10, column=col).border = _THIN_BORDER
+
+    start_row = 12
     ws[f"A{start_row}"] = "Top Cost Drivers"
     ws[f"A{start_row}"].font = Font(bold=True)
 
@@ -303,6 +316,13 @@ def _build_observations(narrative, signal_bundle: Optional[Any]) -> List[str]:
     return observations
 
 
+def _build_overall_summary(narrative) -> str:
+    overview = _sanitize_user_text(getattr(narrative, "overview", ""))
+    if overview:
+        return overview
+    return "Comparison summary unavailable. Refer to top cost drivers and analysis details below."
+
+
 def _methodology_rows(methodology: Optional[Any]) -> List[tuple[str, str]]:
     if methodology is None:
         return [("Summary", "Methodology analysis not available")]
@@ -376,6 +396,8 @@ def _sanitize_user_text(value: Any) -> Optional[str]:
     if not text:
         return None
     lowered = text.lower()
+    if re.search(r"\btoo many requests\b|\bstatus(?:\s*code)?\s*429\b", lowered):
+        return _RATE_LIMIT_SAFE_TEXT
     for pattern in _INTERNAL_ERROR_PATTERNS:
         if re.search(pattern, lowered):
             return _USER_SAFE_FALLBACK_TEXT

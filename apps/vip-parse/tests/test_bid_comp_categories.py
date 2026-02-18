@@ -119,7 +119,10 @@ Estimate B carries higher framing scope.
     ]
     summary = wb["Summary"]
     assert summary["A1"].value == "Bid Comparison - Summary"
-    assert summary["A9"].value == "Top Cost Drivers"
+    assert summary["A9"].value == "Overall Summary"
+    assert isinstance(summary["A10"].value, str)
+    assert summary["A10"].value.strip() != ""
+    assert summary["A12"].value == "Top Cost Drivers"
     assert comp.last_narrative_debug["status"] == "pipeline"
 
 
@@ -168,7 +171,10 @@ Analysis unavailable: Client error '429 Too Many Requests' for url 'https://api.
     joined = "\n".join(all_values).lower()
     assert "too many requests" not in joined
     assert "chat/completions" not in joined
-    assert "automated narrative detail unavailable for this section." in joined
+    assert (
+        "narrative generation was temporarily rate-limited by the ai provider (http 429)." in joined
+        or "automated narrative detail unavailable for this section." in joined
+    )
 
 
 def test_comparison_name_falls_back_to_original_filename() -> None:

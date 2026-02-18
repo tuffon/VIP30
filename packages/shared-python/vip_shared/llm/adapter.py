@@ -4,7 +4,7 @@ import json
 import os
 import time
 import logging
-from typing import Any, Dict, Type, TypeVar
+from typing import Any, Dict, Optional, Type, TypeVar
 
 import httpx
 from pydantic import BaseModel
@@ -32,6 +32,8 @@ class OpenAIChatAdapter(LLMAdapterBase):
         self.model = model
         self.api_key = api_key or os.getenv("OPENAI_API_KEY") or ""
         self.registry = registry or default_registry()
+        self.rate_limit_retries = max(0, int(os.getenv("OPENAI_RATE_LIMIT_RETRIES", "2")))
+        self.retry_base_seconds = max(0.1, float(os.getenv("OPENAI_RETRY_BASE_SECONDS", "1.5")))
         if not self.api_key:
             raise RuntimeError("OPENAI_API_KEY not set")
 
@@ -66,43 +68,75 @@ class OpenAIChatAdapter(LLMAdapterBase):
         prompt_bytes = len(json.dumps(body, ensure_ascii=False))
         start = time.perf_counter()
         resp = None
-        try:
-            # Large estimate payloads (100k+ tokens) can take 2-3 minutes to process
-            with httpx.Client(timeout=180) as client:
-                resp = client.post("https://api.openai.com/v1/chat/completions", headers=headers, json=body)
-                resp.raise_for_status()
-                data = resp.json()
-        except httpx.HTTPStatusError as exc:
-            elapsed_ms = int((time.perf_counter() - start) * 1000)
-            body_preview = ""
+        data = None
+        max_attempts = self.rate_limit_retries + 1
+        for attempt in range(1, max_attempts + 1):
             try:
-                body_preview = (exc.response.text or "")[:1000]
-            except Exception:
-                body_preview = "<unavailable>"
-            logger.error(
-                "llm request failed: model=%s template=%s primary=%s comparison=%s elapsed_ms=%d status=%s body_preview=%s error=%s",
-                self.model,
-                template_id,
-                primary_name,
-                comparison_name,
-                elapsed_ms,
-                exc.response.status_code if exc.response is not None else "n/a",
-                body_preview,
-                exc,
-            )
-            raise
-        except Exception as exc:
-            elapsed_ms = int((time.perf_counter() - start) * 1000)
-            logger.error(
-                "llm request failed: model=%s template=%s primary=%s comparison=%s elapsed_ms=%d error=%s",
-                self.model,
-                template_id,
-                primary_name,
-                comparison_name,
-                elapsed_ms,
-                exc,
-            )
-            raise
+                # Large estimate payloads (100k+ tokens) can take 2-3 minutes to process
+                with httpx.Client(timeout=180) as client:
+                    resp = client.post("https://api.openai.com/v1/chat/completions", headers=headers, json=body)
+                    resp.raise_for_status()
+                    data = resp.json()
+                break
+            except httpx.HTTPStatusError as exc:
+                if self._is_rate_limit_http_error(exc) and attempt < max_attempts:
+                    delay = self._retry_delay_seconds(attempt, exc.response.headers.get("retry-after") if exc.response else None)
+                    logger.warning(
+                        "llm rate-limited, retrying: model=%s template=%s attempt=%d/%d delay_sec=%.2f status=%s",
+                        self.model,
+                        template_id,
+                        attempt,
+                        max_attempts,
+                        delay,
+                        exc.response.status_code if exc.response is not None else "n/a",
+                    )
+                    time.sleep(delay)
+                    continue
+                elapsed_ms = int((time.perf_counter() - start) * 1000)
+                body_preview = ""
+                try:
+                    body_preview = (exc.response.text or "")[:1000]
+                except Exception:
+                    body_preview = "<unavailable>"
+                logger.error(
+                    "llm request failed: model=%s template=%s primary=%s comparison=%s elapsed_ms=%d status=%s body_preview=%s error=%s",
+                    self.model,
+                    template_id,
+                    primary_name,
+                    comparison_name,
+                    elapsed_ms,
+                    exc.response.status_code if exc.response is not None else "n/a",
+                    body_preview,
+                    exc,
+                )
+                raise
+            except Exception as exc:
+                if self._is_rate_limit_exception(exc) and attempt < max_attempts:
+                    delay = self._retry_delay_seconds(attempt, None)
+                    logger.warning(
+                        "llm rate-limit-like failure, retrying: model=%s template=%s attempt=%d/%d delay_sec=%.2f error=%s",
+                        self.model,
+                        template_id,
+                        attempt,
+                        max_attempts,
+                        delay,
+                        exc,
+                    )
+                    time.sleep(delay)
+                    continue
+                elapsed_ms = int((time.perf_counter() - start) * 1000)
+                logger.error(
+                    "llm request failed: model=%s template=%s primary=%s comparison=%s elapsed_ms=%d error=%s",
+                    self.model,
+                    template_id,
+                    primary_name,
+                    comparison_name,
+                    elapsed_ms,
+                    exc,
+                )
+                raise
+        if data is None:
+            raise RuntimeError("LLM call failed without response payload")
         elapsed_ms = int((time.perf_counter() - start) * 1000)
         usage = data.get("usage") or {}
         try:
@@ -150,13 +184,35 @@ class OpenAIChatAdapter(LLMAdapterBase):
             response_model.__name__,
         )
         client = OpenAI(api_key=self.api_key)
-        completion = client.beta.chat.completions.parse(
-            model=self.model,
-            messages=messages,
-            response_format=response_model,
-            temperature=0.2,
-            timeout=180,
-        )
+        completion = None
+        max_attempts = self.rate_limit_retries + 1
+        for attempt in range(1, max_attempts + 1):
+            try:
+                completion = client.beta.chat.completions.parse(
+                    model=self.model,
+                    messages=messages,
+                    response_format=response_model,
+                    temperature=0.2,
+                    timeout=180,
+                )
+                break
+            except Exception as exc:  # noqa: BLE001
+                if self._is_rate_limit_exception(exc) and attempt < max_attempts:
+                    delay = self._retry_delay_seconds(attempt, getattr(exc, "retry_after", None))
+                    logger.warning(
+                        "llm structured rate-limited, retrying: model=%s template=%s attempt=%d/%d delay_sec=%.2f error=%s",
+                        self.model,
+                        template_id,
+                        attempt,
+                        max_attempts,
+                        delay,
+                        exc,
+                    )
+                    time.sleep(delay)
+                    continue
+                raise
+        if completion is None:
+            raise RuntimeError("Structured LLM call failed without completion payload")
         elapsed_ms = int((time.perf_counter() - start) * 1000)
         message = completion.choices[0].message
         if getattr(message, "refusal", None):
@@ -173,6 +229,35 @@ class OpenAIChatAdapter(LLMAdapterBase):
             elapsed_ms,
         )
         return parsed
+
+    def _retry_delay_seconds(self, attempt: int, retry_after: Optional[Any]) -> float:
+        retry_after_s: Optional[float] = None
+        if retry_after is not None:
+            try:
+                retry_after_s = float(str(retry_after).strip())
+            except Exception:
+                retry_after_s = None
+        if retry_after_s is not None and retry_after_s > 0:
+            return min(retry_after_s, 30.0)
+        return min(self.retry_base_seconds * (2 ** (attempt - 1)), 30.0)
+
+    def _is_rate_limit_http_error(self, exc: httpx.HTTPStatusError) -> bool:
+        if exc.response is None:
+            return False
+        if exc.response.status_code == 429:
+            return True
+        body = ""
+        try:
+            body = (exc.response.text or "").lower()
+        except Exception:
+            body = ""
+        return "rate limit" in body or "too many requests" in body
+
+    def _is_rate_limit_exception(self, exc: Exception) -> bool:
+        text = str(exc).lower()
+        exc_name = exc.__class__.__name__.lower()
+        markers = ("rate limit", "ratelimit", "too many requests", "status code 429", "http 429")
+        return any(marker in text for marker in markers) or "ratelimit" in exc_name
 
     def _build_messages(self, tmpl: PromptTemplate, context: Dict[str, Any]) -> list[Dict[str, str]]:
         system_append = str(context.get("_system_append") or "").strip()
