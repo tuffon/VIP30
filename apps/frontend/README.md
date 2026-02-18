@@ -13,7 +13,7 @@ This app powers the ScopeVista landing page, Google-authenticated console, and b
 ### Local development
 
 ```bash
-cd apps/vipclaims-saas
+cd apps/frontend
 pnpm install
 pnpm dev
 ```

@@ -33,7 +33,7 @@ source venv/bin/activate  # or venv\Scripts\activate on Windows
 2. **Install parser dependencies** (for local full-parse debug):
 
 ```bash
-cd apps/vip-parse
+cd apps/worker
 pip install pdfplumber==0.10.0 pypdfium2==4.30.0
 ```
 
@@ -53,7 +53,7 @@ QDRANT_API_KEY=xxxx
 5. **Run the Xactimate parser helper on a PDF**:
 
 ```bash
-cd apps/vip-parse
+cd apps/worker
 python src/worker_parse_helper.py "path/to/estimate.pdf" > out.json
 ```
 

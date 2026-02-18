@@ -1,4 +1,4 @@
-# Running vipclaims-saas in Docker
+# Running frontend in Docker
 
 ## Prerequisites
 - Docker Desktop 4.0+ (or any recent Docker Engine with Compose v2)
@@ -16,7 +16,7 @@ docker compose up vipclaims-web
 
 This command will:
 - Install workspace dependencies inside the container (using pnpm)
-- Start `pnpm --filter vipclaims-saas dev` on port 3000
+- Start `pnpm --filter frontend dev` on port 3000
 - Bind mount the repo so file changes on the host trigger hot reloads
 
 Access the app at <http://localhost:3000>.

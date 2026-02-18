@@ -7,7 +7,7 @@ projects:
             name: vip30-api
             plan: starter
             env: python
-            rootDir: apps/vip-parse
+            rootDir: apps/api
             healthCheckPath: /healthz
             buildCommand: |
               pip install -r requirements-web.txt
@@ -53,9 +53,9 @@ projects:
             rootDir: .
             buildCommand: |
               pnpm install --no-frozen-lockfile
-              pnpm --filter vipclaims-saas... --filter @vip/shared... build
+              pnpm --filter frontend... --filter @vip/shared... build
             startCommand: |
-              cd apps/vipclaims-saas && pnpm start
+              cd apps/frontend && pnpm start
             envVars:
               - fromGroup: "Production Secrets"
               - key: NODE_VERSION
@@ -69,7 +69,7 @@ projects:
             name: vip30-worker
             plan: standard
             env: python
-            rootDir: apps/vip-parse
+            rootDir: apps/worker
             autoDeploy: true
             buildCommand: |
               pip install -r requirements-worker.txt

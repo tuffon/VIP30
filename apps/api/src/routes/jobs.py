@@ -14,11 +14,11 @@ from vip_shared.db.models import ComparisonJob, User
 from src.dependencies.auth import require_auth
 from src.dependencies.database import get_db
 from vip_shared.services.jobs import InsufficientCreditsError, JobService
-from src.tasks import run_bid_comp_keys
 from vip_shared.utils.s3_client import get_bucket, get_s3
 
 
 jobs_router = APIRouter(prefix="/jobs", tags=["jobs"])
+WORKER_JOB_PATH = "src.tasks.run_bid_comp_keys"
 
 _redis_url = os.getenv("REDIS_URL")
 _r = Redis.from_url(_redis_url) if _redis_url else None
@@ -100,7 +100,7 @@ async def create_job(
         ) from exc
 
     rq_job = _q.enqueue(
-        run_bid_comp_keys,
+        WORKER_JOB_PATH,
         str(job.id),
         payload.carrier_key,
         payload.contractor_key,
@@ -181,7 +181,7 @@ async def retry_job(
         raise HTTPException(status_code=503, detail="Redis not configured")
 
     rq_job = _q.enqueue(
-        run_bid_comp_keys,
+        WORKER_JOB_PATH,
         str(new_job.id),
         original_job.primary_s3_key,
         original_job.comparison_s3_key,

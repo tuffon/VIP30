@@ -1,0 +1,31 @@
+setuptools>=70.0.0  # Required for pkg_resources (textstat dependency) on Python 3.13+
+pandas>=2.0.0
+openpyxl>=3.1.0
+qdrant-client>=1.7.0
+openai>=1.12.0
+python-multipart>=0.0.9
+tqdm>=4.66.0
+python-dotenv>=1.0.0 
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+gunicorn>=21.2.0 
+email-validator>=2.2.0
+networkx>=3.2.0  # DAG execution for orchestrator
+pdfplumber>=0.10.0  # PDF text extraction for historical estimates
+rq>=1.15.1
+redis>=5.0.1
+fakeredis>=2.24.1  # Test dependency for cache/pipeline tests
+lz4>=4.3.3
+textstat==0.7.12  # Pinned: Python 3.13 compatible (no pkg_resources)
+sqlmodel>=0.0.22
+alembic>=1.15.0
+asyncpg>=0.30.0
+psycopg2-binary>=2.9.9
+greenlet>=3.0.0
+pwdlib[argon2]>=0.3.0
+pyjwt>=2.11.0
+resend>=2.21.0
+
+-e ../../packages/parser
+
+-e ../../packages/shared-python

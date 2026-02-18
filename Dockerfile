@@ -11,8 +11,8 @@ WORKDIR /app
 
 # Copy workspace manifests to install dependencies
 COPY package.json pnpm-workspace.yaml turbo.json tsconfig.base.json ./
-COPY apps/vipclaims-saas/package.json apps/vipclaims-saas/
-COPY apps/vip-parse/package.json apps/vip-parse/
+COPY apps/frontend/package.json apps/frontend/
+COPY apps/api/package.json apps/api/
 COPY packages/shared/package.json packages/shared/
 
 RUN pnpm install --recursive --ignore-scripts
@@ -24,5 +24,5 @@ WORKDIR /app
 COPY docker/dev-entrypoint.sh docker/dev-entrypoint.sh
 RUN chmod +x docker/dev-entrypoint.sh
 
-CMD ["pnpm", "--filter", "vipclaims-saas", "dev", "--hostname", "0.0.0.0", "--port", "3000"]
+CMD ["pnpm", "--filter", "frontend", "dev", "--hostname", "0.0.0.0", "--port", "3000"]
 

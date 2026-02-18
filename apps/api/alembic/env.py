@@ -12,7 +12,7 @@ import importlib.util
 _here = Path(__file__).resolve()
 _candidate_paths = [
     # v2.1+ layout: repo/packages/shared-python/vip_shared/db/models.py
-    _here.parents[3] / "packages" / "shared-python" / "vip_shared" / "db" / "models.py",
+    _here.parents[4] / "packages" / "shared-python" / "vip_shared" / "db" / "models.py",
     # legacy fallback (pre-extraction)
     _here.parents[1] / "src" / "db" / "models.py",
 ]

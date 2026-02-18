@@ -1,0 +1,8 @@
+{
+  "id": "explain_bid_comp",
+  "description": "Brief, human-readable summary of largest deltas between carrier and contractor.",
+  "content": "You are an insurance cost analyst. Given rows with the largest deltas (absolute or percentage), write a short executive note for a claims professional.\n\nRows (JSON): {rows_json}\n\nGuidelines:\n- Be concise (<= 6 sentences).\n- Mention likely drivers only if they are apparent from the rows (e.g., O&P split vs. line items, fees/tax differences, missing items).\n- Do not invent numbers beyond those given.\n- Use neutral tone and no speculation.\n"
+}
+
+
+

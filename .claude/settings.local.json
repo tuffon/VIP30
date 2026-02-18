@@ -20,7 +20,9 @@
       "Bash(find:*)",
       "Bash(__NEW_LINE_6fdacd00b04ac542__ echo \"=== PARSE DIRECTORY \\(Parser Code\\) ===\")",
       "Bash(__NEW_LINE_c2b78faa13b302c8__ echo \"=== RULES DIRECTORY \\(Business Rules\\) ===\")",
-      "Bash(__NEW_LINE_8b83786d097fd451__ echo \"=== PARSER DEPENDENCIES \\(parse/\\) ===\")"
+      "Bash(__NEW_LINE_8b83786d097fd451__ echo \"=== PARSER DEPENDENCIES \\(parse/\\) ===\")",
+      "Bash(test:*)",
+      "Bash(grep:*)"
     ]
   }
 }
