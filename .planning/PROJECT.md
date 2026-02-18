@@ -2,69 +2,40 @@
 
 ## What This Is
 
-A SaaS application for insurance adjusters to compare Xactimate bid estimates. Users upload two PDF estimates, the system parses them, compares line items, and generates an XLSX report with professional adjuster-tone narrative analysis explaining the differences. Now includes user authentication, credit-based usage tracking, and job progress visibility.
+A SaaS application for insurance adjusters to compare Xactimate bid estimates. Users upload two PDF estimates, the system parses them, compares line items, and generates a unified 2-sheet XLSX report with professional adjuster-tone narrative analysis explaining the differences. Includes user authentication, credit-based usage tracking, and job progress visibility.
 
 ## Core Value
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
-## Current Milestone: v2.2 Unified Output
-
-**Goal:** Replace 4 output modes with a single unified 2-sheet report. Simpler UX, no mode selection required.
-
-**Target changes:**
-
-*XLSX output restructure:*
-- 6 sheets → 2 sheets: **Summary** + **Analysis**
-- Summary: total delta, top cost drivers, key observations (merges Executive Summary + Ranked Impact)
-- Analysis: methodology detail, scope alignment, full category-by-category side-by-side comparison (merges Methodology + Scope + Category Detail)
-- Audit trail sheet dropped (developer telemetry, no user value)
-
-*Output mode removal:*
-- Remove `OutputMode` enum and `OutputModeFilter` class
-- Remove mode selector radio buttons from frontend bid comp page
-- Remove `output_mode` parameter from API `CreateJobRequest`
-- Remove mode passthrough from worker/pipeline
-- Drop `output_mode` column usage on `ComparisonJob` model
-
-*LLM pipeline:*
-- Unchanged — same 3-pass generation, fix output format only
-
 ## Current State
 
-**Version:** v2.1 shipped 2026-02-18
+**Version:** v2.2 shipped 2026-02-18
+
+**Shipped features (v2.2):**
+- Unified 2-sheet XLSX output: "Summary" + "Analysis" (replaces 6 sheets and 4 modes)
+- OutputMode system removed (enum, filter class, pipeline passthrough, frontend selector)
+- Simplified UX: upload and submit, no mode selection
 
 **Shipped features (v2.1):**
 - Repository restructured: monolith split into `apps/api/`, `apps/worker/`, `apps/frontend/`
 - Standalone packages: `packages/parser/` (10 modules), `packages/shared-python/` (46 modules)
 - Render services properly named: vip30-api, vip30-frontend, vip30-worker
-- Dead preflight code removed
 
 **Shipped features (v2.0):**
 - Methodology analysis (O&P, depreciation, scope alignment, data provenance)
 - Rules engine with 3 severity tiers, 6 alert types, structural pattern detection
 - 5 quality gates (hedge, judgment, quantification, evidence grounding, methodology neutrality)
-- 4 output modes (executive, carrier, litigation, internal) — being replaced in v2.2
-- Enhanced multi-sheet XLSX with conditional formatting and audit trail — being simplified in v2.2
-- Frontend output mode selector — being removed in v2.2
 
 **Shipped features (v1.2):**
 - Enterprise B2B landing page with Xactimate-focused messaging
 - Trust footer with Privacy Policy, Terms of Service, and Security pages
-- User dropdown with session persistence via localStorage
-- Credit balance display in Bid Comp UI
-- Structured JSON logging with request IDs
-- Health endpoints for Render monitoring
+- User dropdown, credit balance display, structured logging, health endpoints
 
 **Shipped features (v1.1):**
 - PostgreSQL database with workspace-scoped schema
 - Email OTP authentication with rate limiting and JWT cookies
-- Automatic workspace + trial credits creation on signup
-- Job state machine (queued → parsing → analyzing → writing → completed|failed)
-- Ledger-style credit system with idempotent consumption
-- Real-time job progress polling in frontend
-- Job and credit history with pagination
-- Complete auth UI (/login, /login/verify)
+- Job state machine, ledger-style credits, real-time polling, history UI
 
 **Tech stack:** Turborepo monorepo, Next.js 14 frontend, FastAPI backend, RQ worker, Redis caching, PostgreSQL on Render
 
@@ -108,25 +79,15 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ Methodology analysis (O&P, depreciation, scope alignment, data provenance) — v2.0
 - ✓ Rules engine with severity tiers, alert tags, structural pattern detection — v2.0
 - ✓ 5 quality gates (hedge, judgment, quantification, evidence grounding, methodology neutrality) — v2.0
-- ⚠️ 4 output modes (executive, carrier, litigation, internal) — v2.0 — being replaced by unified output in v2.2
-- ⚠️ Enhanced multi-sheet XLSX with conditional formatting and audit trail — v2.0 — being simplified to 2 sheets in v2.2
-- ⚠️ Frontend output mode selector — v2.0 — being removed in v2.2
 - ✓ Monolith split into apps/api + apps/worker — v2.1
 - ✓ Standalone parser and shared-python packages — v2.1
 - ✓ Frontend renamed from vipclaims-saas — v2.1
 - ✓ Render services properly named and configured — v2.1
 - ✓ All Python imports resolve with new package structure — v2.1
-
-### Active (v2.2)
-
-**Unified Output:**
-- [ ] Merge Executive Summary + Ranked Impact into single "Summary" sheet
-- [ ] Merge Methodology + Scope + Category Detail into single "Analysis" sheet
-- [ ] Drop audit trail sheet
-- [ ] Remove OutputMode enum and OutputModeFilter class
-- [ ] Remove mode selector from frontend bid comp page
-- [ ] Remove output_mode from API request and job model
-- [ ] Remove mode passthrough from worker/pipeline
+- ✓ Unified 2-sheet XLSX output (Summary + Analysis) — v2.2
+- ✓ OutputMode system removed (enum, filter, pipeline, frontend) — v2.2
+- ✓ No mode selection in UX — v2.2
+- ✓ LLM pipeline unchanged, all content flows to output — v2.2
 
 ### Backlog (v3+)
 
@@ -143,9 +104,6 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - Multi-user workspaces — MVP = 1 user per workspace, architecture supports expansion
 - Additional document types beyond Xactimate — scope to known format
 - Fine-tuning — premature optimization; few-shot sufficient
-- G-Eval tone scoring — deferred to v2
-- Low balance alerts — v2 feature
-- Session device binding — v2 security enhancement
 
 ## Constraints
 
@@ -174,7 +132,7 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | Job state machine | Clear progress tracking, idempotent credit consumption | ✓ Good |
 | Idempotent credit consumption | UNIQUE job_id constraint prevents double-charge | ✓ Good |
 | Monolith → apps + packages split | Clearer boundaries, independent deployment possible | ✓ Good |
-| Unified 2-sheet output over 4 modes | Modes were presentation filters, not generation variants. Carrier=Internal, Litigation=Internal minus follow-ups. Simpler UX, same LLM cost. | — Pending |
+| Unified 2-sheet output over 4 modes | Modes were presentation filters, not generation variants. Simpler UX, same LLM cost. | ✓ Good |
 
 ## Tech Debt
 
@@ -183,6 +141,7 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | `POST /render/upload-url` unauthenticated | Low | Works, but any client can request URLs |
 | `datetime.utcnow()` deprecated | Low | Python 3.12+ compatibility warning |
 | JWT_SECRET has default value | Low | Should enforce in production |
+| `output_mode` DB column still exists | Low | Nullable, not written — preserves historical data |
 
 ---
-*Last updated: 2026-02-18 after v2.1 milestone completion*
+*Last updated: 2026-02-18 after v2.2 milestone completion*

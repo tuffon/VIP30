@@ -1,5 +1,31 @@
 # Project Milestones: VIP30
 
+## v2.2 Unified Output (Shipped: 2026-02-18)
+
+**Delivered:** Single unified 2-sheet XLSX report replacing 4 output modes. Simpler UX with no mode selection.
+
+**Phases completed:** 16-17 (executed directly)
+
+**Key accomplishments:**
+- XLSX restructured from 6 sheets to 2: "Summary" + "Analysis"
+- `OutputMode` enum, `OutputModeFilter` class, and `output_modes.py` deleted
+- Mode selector removed from frontend bid comp page
+- `output_mode` removed from API `CreateJobRequest`
+- Worker backward-compatible (ignores mode param from queued jobs)
+- DB column made nullable, historical values preserved
+
+**Stats:**
+- 11 files changed
+- 235 insertions, 450 deletions (net reduction)
+- 2 phases
+- Same day
+
+**Git range:** `1582e01` → `3264734`
+
+**What's next:** TBD — discuss next milestone
+
+---
+
 ## v2.1 Repository Restructure (Shipped: 2026-02-18)
 
 **Delivered:** Clean repository structure with monolith split into separate apps and packages, proper service naming on Render.
