@@ -30,16 +30,15 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 *LLM pipeline:*
 - Unchanged — same 3-pass generation, fix output format only
 
-## Planned: v2.1 Repository Restructure
-
-**Goal:** Clean up repository organization — clear directory names for API, worker, frontend, and shared code. Rename Render services to match.
-**Status:** Planned (Phase 13 plans created, not yet executed)
-
-See `.planning/ROADMAP.md` for v2.1 phases 13-15.
-
 ## Current State
 
-**Version:** v2.0 shipped 2026-02-17
+**Version:** v2.1 shipped 2026-02-18
+
+**Shipped features (v2.1):**
+- Repository restructured: monolith split into `apps/api/`, `apps/worker/`, `apps/frontend/`
+- Standalone packages: `packages/parser/` (10 modules), `packages/shared-python/` (46 modules)
+- Render services properly named: vip30-api, vip30-frontend, vip30-worker
+- Dead preflight code removed
 
 **Shipped features (v2.0):**
 - Methodology analysis (O&P, depreciation, scope alignment, data provenance)
@@ -69,6 +68,15 @@ See `.planning/ROADMAP.md` for v2.1 phases 13-15.
 
 **Tech stack:** Turborepo monorepo, Next.js 14 frontend, FastAPI backend, RQ worker, Redis caching, PostgreSQL on Render
 
+**Current structure:**
+- `apps/api/` — FastAPI server
+- `apps/worker/` — RQ worker
+- `apps/frontend/` — Next.js frontend
+- `packages/parser/` — Xactimate PDF parser
+- `packages/shared-python/` — Shared business logic (pipeline, bid_comp, rules, methodology, etc.)
+- `packages/shared/` — TypeScript shared code
+- Render: `vip30-api`, `vip30-frontend`, `vip30-worker`, `vip30-redis`, `vip30-db`
+
 ## Requirements
 
 ### Validated
@@ -97,6 +105,17 @@ See `.planning/ROADMAP.md` for v2.1 phases 13-15.
 - ✓ Job progress shown with real-time polling — v1.1
 - ✓ Job and credit history with pagination — v1.1
 - ✓ UI rebrand to bid comparison terminology — v1.1
+- ✓ Methodology analysis (O&P, depreciation, scope alignment, data provenance) — v2.0
+- ✓ Rules engine with severity tiers, alert tags, structural pattern detection — v2.0
+- ✓ 5 quality gates (hedge, judgment, quantification, evidence grounding, methodology neutrality) — v2.0
+- ⚠️ 4 output modes (executive, carrier, litigation, internal) — v2.0 — being replaced by unified output in v2.2
+- ⚠️ Enhanced multi-sheet XLSX with conditional formatting and audit trail — v2.0 — being simplified to 2 sheets in v2.2
+- ⚠️ Frontend output mode selector — v2.0 — being removed in v2.2
+- ✓ Monolith split into apps/api + apps/worker — v2.1
+- ✓ Standalone parser and shared-python packages — v2.1
+- ✓ Frontend renamed from vipclaims-saas — v2.1
+- ✓ Render services properly named and configured — v2.1
+- ✓ All Python imports resolve with new package structure — v2.1
 
 ### Active (v2.2)
 
@@ -109,27 +128,6 @@ See `.planning/ROADMAP.md` for v2.1 phases 13-15.
 - [ ] Remove output_mode from API request and job model
 - [ ] Remove mode passthrough from worker/pipeline
 
-### Planned (v2.1)
-
-**Repository Restructure:**
-- [ ] Split `apps/vip-parse/` into `apps/api/` and `apps/worker/`
-- [ ] Extract shared Python code to `packages/shared-python/`
-- [ ] Rename `apps/vipclaims-saas/` to `apps/frontend/`
-- [ ] Update all Python imports for new package structure
-- [ ] Update Turborepo/pnpm workspace config
-- [ ] Update Dockerfile for new paths
-- [ ] Update render.yaml (service names, rootDir, build/start commands)
-- [ ] Verify deployment works end-to-end after restructure
-
-### Validated (v2.0)
-
-- ✓ Methodology analysis (O&P, depreciation, scope alignment, data provenance) — v2.0
-- ✓ Rules engine with severity tiers, alert tags, structural pattern detection — v2.0
-- ✓ 5 quality gates (hedge, judgment, quantification, evidence grounding, methodology neutrality) — v2.0
-- ⚠️ 4 output modes (executive, carrier, litigation, internal) — v2.0 — being replaced by unified output in v2.2
-- ⚠️ Enhanced multi-sheet XLSX with conditional formatting and audit trail — v2.0 — being simplified to 2 sheets in v2.2
-- ⚠️ Frontend output mode selector — v2.0 — being removed in v2.2
-
 ### Backlog (v3+)
 
 **Landing Page:**
@@ -138,9 +136,6 @@ See `.planning/ROADMAP.md` for v2.1 phases 13-15.
 
 **App Experience:**
 - [ ] Date-range filtering for job/credit history
-
-**Technical:**
-- [ ] ~~Internal naming cleanup (vip_job → ComparisonJob)~~ — addressed in v2.1 restructure
 
 ### Out of Scope
 
@@ -151,18 +146,6 @@ See `.planning/ROADMAP.md` for v2.1 phases 13-15.
 - G-Eval tone scoring — deferred to v2
 - Low balance alerts — v2 feature
 - Session device binding — v2 security enhancement
-
-## Context
-
-Brownfield codebase with functional bid comparison. Turborepo monorepo with Next.js frontend (`apps/vipclaims-saas`), FastAPI backend (`apps/vip-parse`), and RQ worker for async processing. Deployed to Render with auto-deploy on push.
-
-**v2.0 shipped:** Methodology analysis, rules engine, quality gates, output modes, enhanced XLSX. Full analytical intelligence layer complete.
-
-**Current structure (to be restructured in v2.1):**
-- `apps/vip-parse/` — API + worker + all Python code (monolith)
-- `apps/vipclaims-saas/` — Next.js frontend
-- `packages/shared/` — TypeScript shared code
-- Render: `vip30-web` (API, misnamed), `vip30-frontend`, `vip30-worker`, `vip30-redis`, `vip30-db`
 
 ## Constraints
 
@@ -190,6 +173,7 @@ Brownfield codebase with functional bid comparison. Turborepo monorepo with Next
 | JWT in HttpOnly cookie | Secure, works across subdomains, no localStorage | ✓ Good |
 | Job state machine | Clear progress tracking, idempotent credit consumption | ✓ Good |
 | Idempotent credit consumption | UNIQUE job_id constraint prevents double-charge | ✓ Good |
+| Monolith → apps + packages split | Clearer boundaries, independent deployment possible | ✓ Good |
 | Unified 2-sheet output over 4 modes | Modes were presentation filters, not generation variants. Carrier=Internal, Litigation=Internal minus follow-ups. Simpler UX, same LLM cost. | — Pending |
 
 ## Tech Debt
@@ -199,7 +183,6 @@ Brownfield codebase with functional bid comparison. Turborepo monorepo with Next
 | `POST /render/upload-url` unauthenticated | Low | Works, but any client can request URLs |
 | `datetime.utcnow()` deprecated | Low | Python 3.12+ compatibility warning |
 | JWT_SECRET has default value | Low | Should enforce in production |
-| Internal naming inconsistency | Low | Legacy code uses vip_job, new code uses ComparisonJob |
 
 ---
-*Last updated: 2026-02-17 after starting v2.2 milestone*
+*Last updated: 2026-02-18 after v2.1 milestone completion*

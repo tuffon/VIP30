@@ -28,14 +28,14 @@ Requirements for v2.2 release. Replace 4 output modes with a single unified 2-sh
 - [ ] **PIPE-01**: LLM 3-pass pipeline unchanged (same generation, same cost)
 - [ ] **PIPE-02**: All generated content flows into the 2-sheet output (nothing hidden/filtered)
 
-## Validated (v2.1 — planned, not yet executed)
+## Validated (v2.1 — shipped 2026-02-18)
 
-v2.1 requirements preserved. See v2.1 roadmap (Phases 13-15) for details.
+See `.planning/milestones/v2.1-REQUIREMENTS.md` for full archive.
 
-- [ ] DIR-01 through DIR-05: Directory restructure
-- [ ] PKG-01 through PKG-05: Package structure
-- [ ] IMP-01 through IMP-04: Import & reference cleanup
-- [ ] REN-01 through REN-05: Render deployment
+- [x] DIR-01 through DIR-05: Directory restructure
+- [x] PKG-01 through PKG-05: Package structure
+- [x] IMP-01 through IMP-04: Import & reference cleanup
+- [x] REN-01 through REN-05: Render deployment
 
 ## Validated (v2.0)
 

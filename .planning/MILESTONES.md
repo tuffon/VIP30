@@ -1,5 +1,54 @@
 # Project Milestones: VIP30
 
+## v2.1 Repository Restructure (Shipped: 2026-02-18)
+
+**Delivered:** Clean repository structure with monolith split into separate apps and packages, proper service naming on Render.
+
+**Phases completed:** 13-15 (2 formal plans + direct execution)
+
+**Key accomplishments:**
+- Extracted `packages/parser/` as standalone Python package (10 modules, zero business logic deps)
+- Extracted `packages/shared-python/` with 46 modules (bid_comp, pipeline, rules, methodology, etc.)
+- Split `apps/vip-parse/` monolith into `apps/api/` (FastAPI) and `apps/worker/` (RQ)
+- Renamed `apps/vipclaims-saas/` to `apps/frontend/`
+- Updated render.yaml with correct service names (vip30-api, vip30-frontend, vip30-worker)
+- Removed dead preflight code
+
+**Stats:**
+- 191 files created/modified
+- 1,691 insertions, 1,391 deletions
+- 3 phases, 2 plans
+- 1 day from start to ship
+
+**Git range:** `ec35399` → `4a1f829`
+
+**What's next:** v2.2 — Unified 2-sheet output, remove output mode system
+
+---
+
+## v2.0 Analytical Intelligence (Shipped: 2026-02-17)
+
+**Delivered:** Full analytical intelligence layer with methodology analysis, rules engine, quality gates, and output modes.
+
+**Phases completed:** 9-12 (8 plans total)
+
+**Key accomplishments:**
+- Methodology analysis (O&P, depreciation, scope alignment, data provenance)
+- Rules engine with 3 severity tiers, 6 alert types, structural pattern detection
+- 5 quality gates (hedge, judgment, quantification, evidence grounding, methodology neutrality)
+- 4 output modes (executive, carrier, litigation, internal)
+- Enhanced multi-sheet XLSX with conditional formatting and audit trail
+
+**Stats:**
+- 4 phases, 8 plans
+- 1 day from start to ship
+
+**Git range:** `0e4ef27` → `2597518`
+
+**What's next:** v2.1 — Repository restructure
+
+---
+
 ## v1.2 Launch Ready (Shipped: 2026-02-17)
 
 **Delivered:** Launch-ready product with enterprise B2B landing page, trust elements, polished app experience, and production observability.

@@ -2,7 +2,7 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-17)
+See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
 **Current focus:** v2.2 Unified Output — Phase 16
@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 Phase: 16 of 17 (Backend Output Unification)
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-02-17 — Roadmap created (2 phases)
+Last activity: 2026-02-18 — v2.1 milestone archived
 
 Progress: ░░░░░░░░░░ 0% (v2.2)
 
@@ -20,23 +20,11 @@ Progress: ░░░░░░░░░░ 0% (v2.2)
 
 | Version | Name | Phases | Shipped |
 |---------|------|--------|---------|
+| v2.1 | Repository Restructure | 13-15 | 2026-02-18 |
 | v2.0 | Analytical Intelligence | 9-12 | 2026-02-17 |
 | v1.2 | Launch Ready | 5-8 | 2026-02-17 |
 | v1.1 | MVP Launch | 1-4 | 2026-02-14 |
 | v1.0.1 | Professional Adjuster Narratives | 1-8 | 2026-02-09 |
-
-## Planned Milestones
-
-| Version | Name | Phases | Status |
-|---------|------|--------|--------|
-| v2.1 | Repository Restructure | 13-15 | Planned (not executed) |
-
-## Performance Metrics
-
-**v2.0 Velocity:**
-- Total plans completed: 8
-- Phases: 4 (9-12)
-- Timeline: 1 day
 
 ## Accumulated Context
 
@@ -59,6 +47,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-17
-Stopped at: v2.2 roadmap created, ready to plan Phase 16
+Last session: 2026-02-18
+Stopped at: v2.1 archived, ready to plan/execute Phase 16
 Resume file: —
