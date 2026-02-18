@@ -1,42 +1,41 @@
-# Requirements: VIP30 v2.1 Repository Restructure
+# Requirements: VIP30 v2.2 Unified Output
 
 **Defined:** 2026-02-17
 **Core Value:** Reliable end-to-end bid comparison that produces actionable output
 
-## v2.1 Requirements
+## v2.2 Requirements
 
-Requirements for v2.1 release. Repository restructure — clear directory names, split monolith Python into separate packages, rename Render services.
+Requirements for v2.2 release. Replace 4 output modes with a single unified 2-sheet report. Simpler UX, no mode selection.
 
-### Directory Restructure
+### XLSX Output
 
-- [ ] **DIR-01**: `apps/vip-parse/` split into `apps/api/` (FastAPI server) and `apps/worker/` (RQ worker)
-- [ ] **DIR-02**: `apps/vipclaims-saas/` renamed to `apps/frontend/`
-- [ ] **DIR-03**: Parser extracted to `packages/parser/` as its own standalone package (parse/ directory — Xactimate PDF → JSON, zero business logic dependencies)
-- [ ] **DIR-04**: Shared Python business logic extracted to `packages/shared-python/` (pipeline, bid_comp, methodology, rules, llm, models)
-- [ ] **DIR-05**: Dead code removed — `src/preflight/` module (unused in main application, only referenced by its own test and CLI)
+- [ ] **XLSX-01**: Report produces exactly 2 sheets: "Summary" and "Analysis"
+- [ ] **XLSX-02**: Summary sheet contains total delta, top cost drivers, and key observations (merged from Executive Summary + Ranked Impact)
+- [ ] **XLSX-03**: Analysis sheet contains methodology detail, scope alignment, and full category-by-category side-by-side comparison (merged from Methodology + Scope + Category Detail)
+- [ ] **XLSX-04**: Audit trail sheet is removed
+- [ ] **XLSX-05**: Conditional formatting preserved on new merged sheets
 
-### Package Structure
+### Mode Removal
 
-- [ ] **PKG-01**: `packages/parser/` is a self-contained Python package with its own setup.py/pyproject.toml, installable independently
-- [ ] **PKG-02**: `packages/shared-python/` is a Python package importable by both `apps/api/` and `apps/worker/`
-- [ ] **PKG-03**: `apps/api/` depends on `packages/shared-python/` (not on `packages/parser/` directly — parser is a worker dependency)
-- [ ] **PKG-04**: `apps/worker/` depends on both `packages/parser/` and `packages/shared-python/`
-- [ ] **PKG-05**: Dependency direction is strictly: api → shared-python, worker → shared-python + parser. No circular dependencies.
+- [ ] **MODE-01**: `OutputMode` enum and `OutputModeFilter` class deleted
+- [ ] **MODE-02**: Frontend bid comp page has no mode selector — user uploads and submits
+- [ ] **MODE-03**: API `CreateJobRequest` has no `output_mode` parameter
+- [ ] **MODE-04**: Worker/pipeline passes no mode parameter — always produces unified output
+- [ ] **MODE-05**: `output_mode` column on `ComparisonJob` no longer written (historical values preserved)
 
-### Import & Reference Cleanup
+### Pipeline
 
-- [ ] **IMP-01**: All Python imports updated for new package structure (no broken imports)
-- [ ] **IMP-02**: Turborepo/pnpm workspace config updated to include new package directories
-- [ ] **IMP-03**: Dockerfiles updated for new paths (api and worker each get their own or share updated Dockerfile)
-- [ ] **IMP-04**: Frontend package.json name updated from `vipclaims-saas` to `frontend`
+- [ ] **PIPE-01**: LLM 3-pass pipeline unchanged (same generation, same cost)
+- [ ] **PIPE-02**: All generated content flows into the 2-sheet output (nothing hidden/filtered)
 
-### Render Deployment
+## Validated (v2.1 — planned, not yet executed)
 
-- [ ] **REN-01**: render.yaml service `vip30-web` renamed to `vip30-api` with updated rootDir, build, and start commands
-- [ ] **REN-02**: render.yaml `vip30-frontend` updated with new rootDir/build/start commands for `apps/frontend/`
-- [ ] **REN-03**: render.yaml `vip30-worker` updated with new rootDir/build/start commands for `apps/worker/`
-- [ ] **REN-04**: `NEXT_PUBLIC_API_BASE_URL` in render.yaml updated from `vip30-web` to `vip30-api` URL
-- [ ] **REN-05**: All services deploy and function correctly after restructure (end-to-end verification)
+v2.1 requirements preserved. See v2.1 roadmap (Phases 13-15) for details.
+
+- [ ] DIR-01 through DIR-05: Directory restructure
+- [ ] PKG-01 through PKG-05: Package structure
+- [ ] IMP-01 through IMP-04: Import & reference cleanup
+- [ ] REN-01 through REN-05: Render deployment
 
 ## Validated (v2.0)
 
@@ -45,8 +44,8 @@ All v2.0 requirements completed and shipped. See v2.0 milestone archive for deta
 - [x] DATA-01 through DATA-07: Data foundation and methodology
 - [x] NARR-01 through NARR-03: Narrative quality
 - [x] INTL-01 through INTL-05: Intelligence layer
-- [x] MODE-01 through MODE-04: Output modes
-- [x] XLSX-01 through XLSX-04: Visual hierarchy
+- [x] MODE-01 through MODE-04: Output modes (being replaced by v2.2)
+- [x] XLSX-01 through XLSX-04: Visual hierarchy (being restructured by v2.2)
 - [x] GATE-01 through GATE-05: Quality gates
 
 ## Deferred (v3+)
@@ -64,15 +63,15 @@ Explicitly excluded. Documented to prevent scope creep.
 
 | Feature | Reason |
 |---------|--------|
+| LLM pipeline changes | Fix output format only, generation stays the same |
+| New narrative content | No new LLM prompts or passes |
+| Line-item matching (TS-1) | v3+ feature, not related to output restructuring |
+| Database migration to drop output_mode column | Leave column, just stop writing new values |
 | "Which estimate is better" verdicts (AF-1) | Makes tool an advocate, disqualifiable in litigation |
 | Recommendation language (AF-2) | Creates liability exposure |
 | Emotional terminology (AF-3) | Destroys neutrality |
-| Automated fraud indicators (AF-4) | Defamatory without investigation |
 | Confidence scores (AF-5) | False precision, indefensible methodology |
-| Side-picking output modes (AF-6) | Credibility collapses if discovered in litigation |
 | Editorializing narratives (AF-7) | Hallucination liability in legal contexts |
-| Settlement predictions (AF-8) | Dangerous without claims history data |
-| Refactoring internal code names (e.g., vip_job → ComparisonJob) | Not in scope for this milestone — structure only |
 
 ## Traceability
 
@@ -80,31 +79,13 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DIR-01 | Phase 14 | Pending |
-| DIR-02 | Phase 14 | Pending |
-| DIR-03 | Phase 13 | Pending |
-| DIR-04 | Phase 13 | Pending |
-| DIR-05 | Phase 13 | Pending |
-| PKG-01 | Phase 13 | Pending |
-| PKG-02 | Phase 13 | Pending |
-| PKG-03 | Phase 14 | Pending |
-| PKG-04 | Phase 14 | Pending |
-| PKG-05 | Phase 13 | Pending |
-| IMP-01 | Phase 14 | Pending |
-| IMP-02 | Phase 14 | Pending |
-| IMP-03 | Phase 14 | Pending |
-| IMP-04 | Phase 14 | Pending |
-| REN-01 | Phase 15 | Pending |
-| REN-02 | Phase 15 | Pending |
-| REN-03 | Phase 15 | Pending |
-| REN-04 | Phase 15 | Pending |
-| REN-05 | Phase 15 | Pending |
+| (populated by create-roadmap) | | |
 
 **Coverage:**
-- v2.1 requirements: 19 total
-- Mapped to phases: 19
-- Unmapped: 0 ✓
+- v2.2 requirements: 12 total
+- Mapped to phases: 0
+- Unmapped: 12 (awaiting roadmap)
 
 ---
 *Requirements defined: 2026-02-17*
-*Last updated: 2026-02-17 after roadmap creation*
+*Last updated: 2026-02-17 after v2.2 milestone creation*
