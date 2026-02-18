@@ -19,11 +19,19 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    op.add_column(
-        "comparison_jobs",
-        sa.Column("output_mode", sa.String(length=20), nullable=False, server_default="internal"),
-    )
+    bind = op.get_bind()
+    inspector = sa.inspect(bind)
+    columns = {col["name"] for col in inspector.get_columns("comparison_jobs")}
+    if "output_mode" not in columns:
+        op.add_column(
+            "comparison_jobs",
+            sa.Column("output_mode", sa.String(length=20), nullable=False, server_default="internal"),
+        )
 
 
 def downgrade() -> None:
-    op.drop_column("comparison_jobs", "output_mode")
+    bind = op.get_bind()
+    inspector = sa.inspect(bind)
+    columns = {col["name"] for col in inspector.get_columns("comparison_jobs")}
+    if "output_mode" in columns:
+        op.drop_column("comparison_jobs", "output_mode")
