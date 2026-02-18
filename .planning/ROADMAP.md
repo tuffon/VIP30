@@ -31,6 +31,9 @@
   4. Parser package has zero dependencies on business logic (unidirectional: parser → JSON → business logic)
   5. Dependency direction is strictly enforced: no circular imports between packages
 **Research**: Unlikely (Python packaging, established patterns)
+**Plans**: 2 plans in 2 waves
+  - 13-01: Parser package extraction + preflight cleanup (Wave 1)
+  - 13-02: Shared-python package extraction + import updates (Wave 2)
 
 ### Phase 14: Directory Split & Config
 **Goal**: Split monolith into api/worker apps, rename frontend, update all imports and build configs
@@ -62,9 +65,9 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
-| 13. Package Extraction | 0/0 | Not started | - |
+| 13. Package Extraction | 0/2 | Not started | - |
 | 14. Directory Split & Config | 0/0 | Not started | - |
 | 15. Render Deployment | 0/0 | Not started | - |
 
 ---
-*Last updated: 2026-02-17 — v2.1 roadmap created*
+*Last updated: 2026-02-17 — Phase 13 planned*
