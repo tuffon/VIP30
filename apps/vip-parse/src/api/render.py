@@ -16,7 +16,7 @@ from fastapi import HTTPException, UploadFile, status
 import openai
 from pydantic import BaseModel, Field
 
-from parse.xactimate import XactimateRoughDraftParser
+from vip_parser.xactimate import XactimateRoughDraftParser
 
 
 load_dotenv()

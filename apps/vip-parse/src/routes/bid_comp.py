@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException, status
 from redis import Redis
 from rq import Queue
 from rq.job import Job, JobStatus
-from src.utils.s3_client import get_s3, get_bucket
+from vip_shared.utils.s3_client import get_s3, get_bucket
 
 
 router = APIRouter(prefix="/render/bid-comp", tags=["bid-comp"])

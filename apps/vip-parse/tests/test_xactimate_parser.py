@@ -6,8 +6,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from parse.xactimate.helpers import TableColumns, is_table_header, money_to_float
-from parse.xactimate.parser import XactimateRoughDraftParser
+from vip_parser.xactimate.helpers import TableColumns, is_table_header, money_to_float
+from vip_parser.xactimate.parser import XactimateRoughDraftParser
 
 
 def test_layout_a_header_detection():

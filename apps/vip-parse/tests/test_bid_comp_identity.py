@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src.bid_comp.identity import ensure_estimate_identity
+from vip_shared.bid_comp.identity import ensure_estimate_identity
 
 
 def test_existing_estimate_name_preserved() -> None:

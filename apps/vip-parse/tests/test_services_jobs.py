@@ -5,9 +5,9 @@ from datetime import datetime
 import pytest
 from sqlalchemy.exc import IntegrityError
 
-from src.db.models import ComparisonJob
-from src.services.credits import CreditAlreadyConsumedError, CreditService
-from src.services.jobs import (
+from vip_shared.db.models import ComparisonJob
+from vip_shared.services.credits import CreditAlreadyConsumedError, CreditService
+from vip_shared.services.jobs import (
     InsufficientCreditsError,
     InvalidStateTransitionError,
     JobService,

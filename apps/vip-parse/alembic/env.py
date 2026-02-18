@@ -8,7 +8,16 @@ from sqlalchemy import engine_from_config, pool, text
 # Import models directly without triggering src/__init__.py (which imports tasks/pipeline)
 # This avoids the textstat import chain during migrations
 import importlib.util
-_models_path = os.path.join(os.path.dirname(__file__), "..", "src", "db", "models.py")
+_models_path = os.path.join(
+    os.path.dirname(__file__),
+    "..",
+    "..",
+    "packages",
+    "shared-python",
+    "vip_shared",
+    "db",
+    "models.py",
+)
 _spec = importlib.util.spec_from_file_location("models", _models_path)
 _models = importlib.util.module_from_spec(_spec)
 sys.modules["_alembic_models"] = _models

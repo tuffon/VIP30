@@ -15,7 +15,7 @@ from typing import Any, Dict, List
 
 import pytest
 
-from src.pipeline import (
+from vip_shared.pipeline import (
     DraftNarrative,
     DriverNarrative,
     QualityCheckResult,
@@ -23,7 +23,7 @@ from src.pipeline import (
     run_compliance_pass,
     ComplianceInput,
 )
-from src.pipeline.passes.compliance import build_compliance_input, _parse_compliance_response
+from vip_shared.pipeline.passes.compliance import build_compliance_input, _parse_compliance_response
 
 
 # ---------------------------------------------------------------------------

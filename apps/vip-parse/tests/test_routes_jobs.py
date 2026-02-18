@@ -4,11 +4,11 @@ from datetime import datetime
 from fastapi.testclient import TestClient
 
 from src.api.main import app
-from src.db.models import ComparisonJob, User
+from vip_shared.db.models import ComparisonJob, User
 from src.dependencies.auth import require_auth
 from src.dependencies.database import get_db
 from src.routes import jobs as jobs_route
-from src.services.jobs import InsufficientCreditsError, JobService
+from vip_shared.services.jobs import InsufficientCreditsError, JobService
 
 
 class _Result:

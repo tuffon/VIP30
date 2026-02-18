@@ -1,4 +1,4 @@
-from src.bid_comp.normalize import normalize_money, normalize_label, normalize_group
+from vip_shared.bid_comp.normalize import normalize_money, normalize_label, normalize_group
 
 
 def test_normalize_money():

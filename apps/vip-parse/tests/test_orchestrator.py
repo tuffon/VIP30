@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional
 
 import pytest
 
-from src.pipeline import (
+from vip_shared.pipeline import (
     NarrativePipeline,
     PipelineState,
     AnalysisResult,
@@ -107,7 +107,7 @@ class AlwaysPassEvaluator(QualityEvaluator):
         data_granularity=None,
         methodology_text=None,
     ) -> QualityReport:
-        from src.pipeline import QualityCheckResult
+        from vip_shared.pipeline import QualityCheckResult
         return QualityReport(
             passed=True,
             checks=[
@@ -126,7 +126,7 @@ class AlwaysFailEvaluator(QualityEvaluator):
         data_granularity=None,
         methodology_text=None,
     ) -> QualityReport:
-        from src.pipeline import QualityCheckResult
+        from vip_shared.pipeline import QualityCheckResult
         return QualityReport(
             passed=False,
             checks=[
@@ -150,7 +150,7 @@ class FailThenPassEvaluator(QualityEvaluator):
         data_granularity=None,
         methodology_text=None,
     ) -> QualityReport:
-        from src.pipeline import QualityCheckResult
+        from vip_shared.pipeline import QualityCheckResult
         self.call_count += 1
         if self.call_count <= self.fail_count:
             return QualityReport(

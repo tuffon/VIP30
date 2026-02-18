@@ -4,9 +4,9 @@ from typing import Optional
 from fastapi import Depends, HTTPException, Request
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from src.db.models import User
+from vip_shared.db.models import User
 from src.dependencies.database import get_db
-from src.services.auth import AuthService
+from vip_shared.services.auth import AuthService
 
 
 async def get_current_user_optional(

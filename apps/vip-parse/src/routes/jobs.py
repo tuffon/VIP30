@@ -10,12 +10,12 @@ from rq import Queue
 from sqlmodel import desc, func, select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from src.db.models import ComparisonJob, User
+from vip_shared.db.models import ComparisonJob, User
 from src.dependencies.auth import require_auth
 from src.dependencies.database import get_db
-from src.services.jobs import InsufficientCreditsError, JobService
+from vip_shared.services.jobs import InsufficientCreditsError, JobService
 from src.tasks import run_bid_comp_keys
-from src.utils.s3_client import get_bucket, get_s3
+from vip_shared.utils.s3_client import get_bucket, get_s3
 
 
 jobs_router = APIRouter(prefix="/jobs", tags=["jobs"])

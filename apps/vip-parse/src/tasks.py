@@ -22,15 +22,15 @@ from typing import Any, Dict, Optional
 from redis import Redis
 from rq.job import Job
 
-from src.bid_comp import BidComp
-from src.bid_comp.identity import ensure_estimate_identity
-from src.db import async_session_maker
-from src.integrations.sendgrid_client import SendGridClient
-from src.llm import OpenAIChatAdapter
-from src.methodology.analyzer import MethodologyAnalyzer
-from src.rules.engine import RulesEngine
-from src.services.jobs import JobService
-from src.utils.s3_client import get_s3, get_bucket
+from vip_shared.bid_comp import BidComp
+from vip_shared.bid_comp.identity import ensure_estimate_identity
+from vip_shared.db import async_session_maker
+from vip_shared.integrations.sendgrid_client import SendGridClient
+from vip_shared.llm import OpenAIChatAdapter
+from vip_shared.methodology.analyzer import MethodologyAnalyzer
+from vip_shared.rules.engine import RulesEngine
+from vip_shared.services.jobs import JobService
+from vip_shared.utils.s3_client import get_s3, get_bucket
 
 # Configure worker logging early so RQ shows our logs
 _worker_log_level = os.getenv("LOG_LEVEL", "INFO").upper()
@@ -170,7 +170,7 @@ def _run_parser_recap_only(input_path: str, out_dir: Path) -> Dict[str, Any]:
     out_dir.mkdir(parents=True, exist_ok=True)
     logger.info("parser: start input=%s out_dir=%s", input_path, out_dir)
     # Lazy import heavy parser
-    from parse.xactimate import XactimateRoughDraftParser
+    from vip_parser.xactimate import XactimateRoughDraftParser
     parser = XactimateRoughDraftParser(input_path, str(out_dir), debug=False)
     t0 = time.time()
     # enforce fast recap path to reduce memory/CPU
@@ -204,7 +204,7 @@ def _run_parser_full(input_path: str, out_dir: Path) -> Dict[str, Any]:
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     logger.info("parser(full): start input=%s out_dir=%s", input_path, out_dir)
-    from parse.xactimate import XactimateRoughDraftParser
+    from vip_parser.xactimate import XactimateRoughDraftParser
 
     # Ensure full parse, not recap-only
     os.environ["FAST_RECAP_ONLY"] = "0"

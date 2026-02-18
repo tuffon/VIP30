@@ -3,7 +3,7 @@ from typing import Dict
 
 from fastapi import APIRouter, HTTPException
 
-from src.utils.s3_client import get_s3, get_bucket
+from vip_shared.utils.s3_client import get_s3, get_bucket
 
 
 router = APIRouter(prefix="/render", tags=["r2"], )

@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
 
-from parse.xactimate.visible_text import (
+from vip_parser.xactimate.visible_text import (
     VisibleTextConfig,
     extract_visible_lines,
     filter_visible_chars,

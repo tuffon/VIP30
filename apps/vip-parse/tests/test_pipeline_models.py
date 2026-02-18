@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 import pytest
 from pydantic import ValidationError
 
-from src.pipeline import (
+from vip_shared.pipeline import (
     AnalysisResult,
     CategoryAnalysis,
     DraftNarrative,

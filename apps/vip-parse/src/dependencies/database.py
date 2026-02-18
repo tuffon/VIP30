@@ -2,7 +2,7 @@ from typing import AsyncGenerator
 
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from src.db import async_session_maker
+from vip_shared.db import async_session_maker
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:

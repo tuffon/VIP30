@@ -22,7 +22,7 @@ def main(pdf_path: str) -> None:
     os.environ.setdefault("FAST_RECAP_ONLY", "0")
 
     # Lazy-import heavy parser here so the parent process doesn't retain it
-    from parse.xactimate import XactimateRoughDraftParser
+    from vip_parser.xactimate import XactimateRoughDraftParser
 
     out_dir_env = os.getenv("HELPER_OUTDIR")
     if out_dir_env:

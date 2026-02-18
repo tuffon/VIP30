@@ -5,8 +5,8 @@ from io import BytesIO
 
 from openpyxl import load_workbook
 
-from src.bid_comp import BidComp
-from src.llm.adapter import LLMAdapterBase
+from vip_shared.bid_comp import BidComp
+from vip_shared.llm.adapter import LLMAdapterBase
 
 
 def _make_payload(name: str, framing: float, roofing: float, electrical: float, overhead: float, profit: float, tax: float) -> dict:

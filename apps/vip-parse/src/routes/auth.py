@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, EmailStr
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from src.db.models import User, Workspace
+from vip_shared.db.models import User, Workspace
 from src.dependencies.auth import get_current_user
 from src.dependencies.database import get_db
-from src.services.auth import AuthService
-from src.services.credits import CreditService
-from src.services.otp import OTPService
+from vip_shared.services.auth import AuthService
+from vip_shared.services.credits import CreditService
+from vip_shared.services.otp import OTPService
 
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])

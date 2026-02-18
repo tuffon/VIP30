@@ -1,8 +1,8 @@
 """Unit tests for the current Phase 11 quality gate implementation."""
 
-from src.methodology.models import GranularityLevel
-from src.pipeline.models import DraftNarrative, DriverNarrative, QualityReport
-from src.pipeline.quality import (
+from vip_shared.methodology.models import GranularityLevel
+from vip_shared.pipeline.models import DraftNarrative, DriverNarrative, QualityReport
+from vip_shared.pipeline.quality import (
     EvidenceGroundingChecker,
     HedgingChecker,
     JudgmentLanguageChecker,
@@ -193,7 +193,7 @@ class TestQualityEvaluator:
 
 class TestImports:
     def test_import_from_pipeline(self):
-        from src.pipeline import (
+        from vip_shared.pipeline import (
             EvidenceGroundingChecker,
             HedgingChecker,
             JudgmentLanguageChecker,

@@ -15,7 +15,7 @@ from typing import Any, Dict, List
 
 import pytest
 
-from src.pipeline import (
+from vip_shared.pipeline import (
     AnalysisResult,
     CategoryAnalysis,
     DraftNarrative,
@@ -23,7 +23,7 @@ from src.pipeline import (
     run_writer_pass,
     WriterInput,
 )
-from src.pipeline.passes.writer import build_writer_input, _parse_writer_response
+from vip_shared.pipeline.passes.writer import build_writer_input, _parse_writer_response
 
 
 # ---------------------------------------------------------------------------

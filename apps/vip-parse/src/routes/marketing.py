@@ -6,7 +6,7 @@ from typing import Any, Dict, Optional
 from fastapi import APIRouter
 from pydantic import BaseModel, EmailStr
 
-from src.integrations.supabase import SupabaseMarketingClient
+from vip_shared.integrations.supabase import SupabaseMarketingClient
 
 
 router = APIRouter(prefix="/marketing", tags=["marketing"])

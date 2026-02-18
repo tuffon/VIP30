@@ -25,3 +25,7 @@ greenlet>=3.0.0
 pwdlib[argon2]>=0.3.0
 pyjwt>=2.11.0
 resend>=2.21.0
+
+-e ../../packages/parser
+
+-e ../../packages/shared-python

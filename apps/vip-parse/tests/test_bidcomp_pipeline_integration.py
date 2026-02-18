@@ -16,8 +16,8 @@ from dataclasses import dataclass, field
 import pytest
 import fakeredis
 
-from src.bid_comp import BidComp
-from src.bid_comp.core import EstimatePair, EstimateArtifact, EstimateTotals
+from vip_shared.bid_comp import BidComp
+from vip_shared.bid_comp.core import EstimatePair, EstimateArtifact, EstimateTotals
 
 
 # ---------------------------------------------------------------------------

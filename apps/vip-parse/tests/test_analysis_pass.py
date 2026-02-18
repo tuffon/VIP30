@@ -15,9 +15,9 @@ from typing import Any, Dict, List, Optional
 
 import pytest
 
-from src.pipeline import AnalysisResult, CategoryAnalysis
-from src.pipeline.passes import AnalysisInput, run_analysis_pass, sample_line_items
-from src.pipeline.passes.analysis import build_analysis_input, _parse_analysis_response
+from vip_shared.pipeline import AnalysisResult, CategoryAnalysis
+from vip_shared.pipeline.passes import AnalysisInput, run_analysis_pass, sample_line_items
+from vip_shared.pipeline.passes.analysis import build_analysis_input, _parse_analysis_response
 
 
 # ---------------------------------------------------------------------------

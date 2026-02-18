@@ -6,10 +6,10 @@ from pydantic import BaseModel
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from src.db.models import CreditConsumption, CreditGrant, User
+from vip_shared.db.models import CreditConsumption, CreditGrant, User
 from src.dependencies.auth import require_auth
 from src.dependencies.database import get_db
-from src.services.credits import CreditService
+from vip_shared.services.credits import CreditService
 
 
 credits_router = APIRouter(prefix="/credits", tags=["credits"])

@@ -13,8 +13,8 @@ from pydantic import BaseModel
 
 import fakeredis
 
-from src.pipeline import PipelineCache, cache_key
-from src.pipeline.models import AnalysisResult, CategoryAnalysis
+from vip_shared.pipeline import PipelineCache, cache_key
+from vip_shared.pipeline.models import AnalysisResult, CategoryAnalysis
 
 
 # ---------------------------------------------------------------------------

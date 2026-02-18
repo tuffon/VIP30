@@ -13,7 +13,7 @@ from .retriever import retrieve_cost_items
 _log_level = configure_logging()
 logger = get_logger("vip-parse.api")
 
-from src.db import async_engine
+from vip_shared.db import async_engine
 from src.routes.auth import auth_router
 from src.routes.bid_comp import router as bid_comp_router
 from src.routes.credits import credits_router
