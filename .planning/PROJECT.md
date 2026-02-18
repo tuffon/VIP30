@@ -8,42 +8,39 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
-## Current Milestone: v2.0 Analytical Intelligence
+## Current Milestone: v2.1 Repository Restructure
 
-**Goal:** Transform output from spreadsheet-heavy comparison to structured signal extraction with defensible framing — executive-ready, carrier-ready, litigation-ready reports.
+**Goal:** Clean up repository organization — clear directory names for API, worker, frontend, and shared code. Rename Render services to match.
 
-**Target features:**
+**Target changes:**
 
-*Methodology & Data Foundation (priority 1):*
-- Data requirements audit (line item matching, unit cost comparison, O&P detection, depreciation logic)
-- Methodology analysis block (O&P inclusion, depreciation differences, unit pricing source, locality factors)
-- Scope completeness detection and structural methodology comparison
+*Directory restructure:*
+- `apps/vip-parse/` → split into `apps/api/` (FastAPI) + `apps/worker/` (RQ) + `packages/shared-python/` (shared code)
+- `apps/vipclaims-saas/` → `apps/frontend/`
+- Shared Python code (models, pipeline, bid_comp, methodology, rules) extracted to `packages/shared-python/`
 
-*Intelligence Layer (priority 2):*
-- Emphasis rules engine (top 20% variance drivers, threshold-based flagging)
-- Auto-generated alert tags for O&P gaps, large "Other" buckets, scope imbalance
-- Partial vs full restoration pattern detection
+*Render service renaming:*
+- `vip30-web` → `vip30-api` (currently confusingly named — it's the API, not a web frontend)
+- `vip30-frontend` stays (already correct)
+- `vip30-worker` stays (already correct)
 
-*Narrative Redesign (priority 3):*
-- Evidence-based reasoning (replace subjective language with quantified differences)
-- Neutral tone enforcement for litigation readiness
-- Diagnostic follow-ups tied to detected structural variances
-
-*Visual Hierarchy (priority 4):*
-- Executive snapshot panel (total delta, % variance, top 3 drivers, structural flags)
-- Ranked impact table (sorted by delta magnitude, % of total variance)
-- Scope alignment matrix (present in A/B, missing in each, O&P structure comparison)
-- Enhanced XLSX with conditional formatting, multi-sheet structure
-
-*Output Modes (priority 5):*
-- Executive mode (1-page compressed)
-- Carrier negotiation mode (ranked delta + methodology framing)
-- Litigation mode (neutral tone + evidence exhibits)
-- Internal estimator mode (deep line item diagnostic)
+*Import and reference cleanup:*
+- All Python imports updated for new package structure
+- Turborepo/pnpm workspace config updated
+- Dockerfile updated for new paths
+- render.yaml updated with new rootDir and service names
 
 ## Current State
 
-**Version:** v1.2 shipped 2026-02-17
+**Version:** v2.0 shipped 2026-02-17
+
+**Shipped features (v2.0):**
+- Methodology analysis (O&P, depreciation, scope alignment, data provenance)
+- Rules engine with 3 severity tiers, 6 alert types, structural pattern detection
+- 5 quality gates (hedge, judgment, quantification, evidence grounding, methodology neutrality)
+- 4 output modes (executive, carrier, litigation, internal)
+- Enhanced multi-sheet XLSX with conditional formatting and audit trail
+- Frontend output mode selector
 
 **Shipped features (v1.2):**
 - Enterprise B2B landing page with Xactimate-focused messaging
@@ -94,40 +91,26 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ Job and credit history with pagination — v1.1
 - ✓ UI rebrand to bid comparison terminology — v1.1
 
-### Active (v2.0)
+### Active (v2.1)
 
-**Methodology & Data:**
-- [ ] Line item matching logic improvements
-- [ ] Unit cost comparison extraction
-- [ ] Quantity variance detection
-- [ ] O&P detection and comparison logic
-- [ ] Depreciation comparison analysis
-- [ ] Scope completeness flags
-- [ ] Methodology analysis block (O&P inclusion, depreciation, unit pricing, locality)
+**Repository Restructure:**
+- [ ] Split `apps/vip-parse/` into `apps/api/` and `apps/worker/`
+- [ ] Extract shared Python code to `packages/shared-python/`
+- [ ] Rename `apps/vipclaims-saas/` to `apps/frontend/`
+- [ ] Update all Python imports for new package structure
+- [ ] Update Turborepo/pnpm workspace config
+- [ ] Update Dockerfile for new paths
+- [ ] Update render.yaml (service names, rootDir, build/start commands)
+- [ ] Verify deployment works end-to-end after restructure
 
-**Intelligence & Emphasis:**
-- [ ] Rules engine for meaningful emphasis (top 20% drivers, threshold flags)
-- [ ] Auto-generated alert tags (missing O&P, large Other buckets, scope imbalance)
-- [ ] Partial vs full restoration pattern detection
-- [ ] Category threshold rules and flag logic
+### Validated (v2.0)
 
-**Narrative Quality:**
-- [ ] Evidence-based reasoning (quantified differences, not adjectives)
-- [ ] Neutral tone enforcement (litigation-ready language)
-- [ ] Diagnostic follow-ups tied to structural variances
-- [ ] Scope observation samples with code/assembly differences
-
-**Visual Hierarchy:**
-- [ ] Executive snapshot panel (delta, variance %, top 3 drivers, structural flags)
-- [ ] Ranked impact table (sorted by magnitude, % of total variance)
-- [ ] Scope alignment matrix (present/missing in each estimate)
-- [ ] Enhanced XLSX with conditional formatting and multi-sheet structure
-
-**Output Modes:**
-- [ ] Executive mode (1-page compressed)
-- [ ] Carrier negotiation mode (ranked delta + methodology framing)
-- [ ] Litigation mode (neutral tone + evidence exhibits)
-- [ ] Internal estimator mode (deep line item diagnostic)
+- ✓ Methodology analysis (O&P, depreciation, scope alignment, data provenance) — v2.0
+- ✓ Rules engine with severity tiers, alert tags, structural pattern detection — v2.0
+- ✓ 5 quality gates (hedge, judgment, quantification, evidence grounding, methodology neutrality) — v2.0
+- ✓ 4 output modes (executive, carrier, litigation, internal) — v2.0
+- ✓ Enhanced multi-sheet XLSX with conditional formatting and audit trail — v2.0
+- ✓ Frontend output mode selector — v2.0
 
 ### Backlog (v3+)
 
@@ -139,7 +122,7 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - [ ] Date-range filtering for job/credit history
 
 **Technical:**
-- [ ] Internal naming cleanup (vip_job → ComparisonJob)
+- [ ] ~~Internal naming cleanup (vip_job → ComparisonJob)~~ — addressed in v2.1 restructure
 
 ### Out of Scope
 
@@ -155,7 +138,13 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 
 Brownfield codebase with functional bid comparison. Turborepo monorepo with Next.js frontend (`apps/vipclaims-saas`), FastAPI backend (`apps/vip-parse`), and RQ worker for async processing. Deployed to Render with auto-deploy on push.
 
-**v1.2 shipped:** Landing page redesign, trust elements, app polish, observability. 35,261 LOC Python, 2,932 LOC TypeScript.
+**v2.0 shipped:** Methodology analysis, rules engine, quality gates, output modes, enhanced XLSX. Full analytical intelligence layer complete.
+
+**Current structure (to be restructured in v2.1):**
+- `apps/vip-parse/` — API + worker + all Python code (monolith)
+- `apps/vipclaims-saas/` — Next.js frontend
+- `packages/shared/` — TypeScript shared code
+- Render: `vip30-web` (API, misnamed), `vip30-frontend`, `vip30-worker`, `vip30-redis`, `vip30-db`
 
 ## Constraints
 
@@ -194,4 +183,4 @@ Brownfield codebase with functional bid comparison. Turborepo monorepo with Next
 | Internal naming inconsistency | Low | Legacy code uses vip_job, new code uses ComparisonJob |
 
 ---
-*Last updated: 2026-02-17 after starting v2.0 milestone*
+*Last updated: 2026-02-17 after starting v2.1 milestone*
