@@ -1,6 +1,7 @@
 import os
 import sys
 from logging.config import fileConfig
+from pathlib import Path
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool, text
@@ -8,16 +9,14 @@ from sqlalchemy import engine_from_config, pool, text
 # Import models directly without triggering src/__init__.py (which imports tasks/pipeline)
 # This avoids the textstat import chain during migrations
 import importlib.util
-_models_path = os.path.join(
-    os.path.dirname(__file__),
-    "..",
-    "..",
-    "packages",
-    "shared-python",
-    "vip_shared",
-    "db",
-    "models.py",
-)
+_here = Path(__file__).resolve()
+_candidate_paths = [
+    # v2.1+ layout: repo/packages/shared-python/vip_shared/db/models.py
+    _here.parents[3] / "packages" / "shared-python" / "vip_shared" / "db" / "models.py",
+    # legacy fallback (pre-extraction)
+    _here.parents[1] / "src" / "db" / "models.py",
+]
+_models_path = next((str(path) for path in _candidate_paths if path.exists()), str(_candidate_paths[0]))
 _spec = importlib.util.spec_from_file_location("models", _models_path)
 _models = importlib.util.module_from_spec(_spec)
 sys.modules["_alembic_models"] = _models
