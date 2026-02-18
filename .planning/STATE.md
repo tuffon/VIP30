@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.1 Repository Restructure
+**Current focus:** v2.1 Repository Restructure — Phase 13
 
 ## Current Position
 
-Phase: Not started (run /gsd:define-requirements or /gsd:create-roadmap)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-17 — Milestone v2.1 started
+Phase: 13 of 15 (Package Extraction)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-02-17 — Roadmap created (3 phases)
 
 Progress: ░░░░░░░░░░ 0% (v2.1)
 
@@ -32,16 +32,6 @@ Progress: ░░░░░░░░░░ 0% (v2.1)
 - Phases: 4 (9-12)
 - Timeline: 1 day
 
-**v1.2 Velocity:**
-- Total plans completed: 6
-- Phases: 4
-- Timeline: 1 day
-
-**v1.1 Velocity:**
-- Total plans completed: 8
-- Phases: 4
-- Timeline: 2 days
-
 ## Accumulated Context
 
 ### Decisions
@@ -50,9 +40,11 @@ Decisions logged in PROJECT.md Key Decisions table.
 
 v2.1 decisions:
 - Split backend into api/ + worker/ with shared Python package
+- Parser extracted as its own standalone package (packages/parser/)
+- Shared business logic in packages/shared-python/
 - Rename frontend from vipclaims-saas to frontend
 - Rename Render service vip30-web → vip30-api
-- Shared Python code lives in packages/shared-python/
+- Remove dead preflight module (unused in main app)
 
 ### Blockers/Concerns
 
@@ -61,5 +53,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-17
-Stopped at: Milestone v2.1 initialized, ready to define requirements
+Stopped at: v2.1 roadmap created, ready to plan Phase 13
 Resume file: —

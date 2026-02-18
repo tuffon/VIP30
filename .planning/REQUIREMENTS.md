@@ -80,31 +80,31 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DIR-01 | — | Pending |
-| DIR-02 | — | Pending |
-| DIR-03 | — | Pending |
-| DIR-04 | — | Pending |
-| DIR-05 | — | Pending |
-| PKG-01 | — | Pending |
-| PKG-02 | — | Pending |
-| PKG-03 | — | Pending |
-| PKG-04 | — | Pending |
-| PKG-05 | — | Pending |
-| IMP-01 | — | Pending |
-| IMP-02 | — | Pending |
-| IMP-03 | — | Pending |
-| IMP-04 | — | Pending |
-| REN-01 | — | Pending |
-| REN-02 | — | Pending |
-| REN-03 | — | Pending |
-| REN-04 | — | Pending |
-| REN-05 | — | Pending |
+| DIR-01 | Phase 14 | Pending |
+| DIR-02 | Phase 14 | Pending |
+| DIR-03 | Phase 13 | Pending |
+| DIR-04 | Phase 13 | Pending |
+| DIR-05 | Phase 13 | Pending |
+| PKG-01 | Phase 13 | Pending |
+| PKG-02 | Phase 13 | Pending |
+| PKG-03 | Phase 14 | Pending |
+| PKG-04 | Phase 14 | Pending |
+| PKG-05 | Phase 13 | Pending |
+| IMP-01 | Phase 14 | Pending |
+| IMP-02 | Phase 14 | Pending |
+| IMP-03 | Phase 14 | Pending |
+| IMP-04 | Phase 14 | Pending |
+| REN-01 | Phase 15 | Pending |
+| REN-02 | Phase 15 | Pending |
+| REN-03 | Phase 15 | Pending |
+| REN-04 | Phase 15 | Pending |
+| REN-05 | Phase 15 | Pending |
 
 **Coverage:**
 - v2.1 requirements: 19 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 19
+- Mapped to phases: 19
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-02-17*
-*Last updated: 2026-02-17*
+*Last updated: 2026-02-17 after roadmap creation*

@@ -6,82 +6,65 @@
 - ✅ **v1.1 MVP Launch** - Phases 1-4 (shipped 2026-02-14)
 - ✅ **v1.2 Launch Ready** - Phases 5-8 (shipped 2026-02-17)
 - ✅ **v2.0 Analytical Intelligence** - Phases 9-12 (shipped 2026-02-17)
+- 🚧 **v2.1 Repository Restructure** - Phases 13-15 (in progress)
 
 ## Phases
 
-- [x] **Phase 9: Data Foundation & Methodology** - Line-item comparison, O&P/depreciation detection, scope alignment, data provenance
-- [x] **Phase 10: Rules Engine & Intelligence** - Emphasis flags, alert tags, ranked impact, pattern detection, diagnostic follow-ups
-  - Plans: 10-01 (models + engine, Wave 1), 10-02 (pipeline integration, Wave 2)
-- [x] **Phase 11: Narrative Quality & Quality Gates** - Evidence-based narratives, neutral tone, expanded quality gate system
-- [x] **Phase 12: Output Modes & Enhanced XLSX** - Four audience modes, multi-sheet XLSX, conditional formatting, audit trail
-  - Plans: 12-01 (mode model + filter + XLSX rewrite, Wave 1), 12-02 (full stack wiring + frontend, Wave 2)
+- [ ] **Phase 13: Package Extraction** - Extract parser and shared-python as standalone packages, remove dead code
+- [ ] **Phase 14: Directory Split & Config** - Split api/worker, rename frontend, update all imports and build configs
+- [ ] **Phase 15: Render Deployment** - Update render.yaml service names and paths, end-to-end verification
 
 ## Phase Details
 
-### 🚧 v2.0 Analytical Intelligence
+### 🚧 v2.1 Repository Restructure
 
-**Milestone Goal:** Transform output from spreadsheet-heavy comparison to structured signal extraction with defensible framing — executive-ready, carrier-ready, litigation-ready reports.
+**Milestone Goal:** Clean up repository organization — clear directory names for API, worker, frontend, and shared code. Rename Render services to match.
 
-### Phase 9: Data Foundation & Methodology
-**Goal**: Reliable data extraction with methodology comparison and evidence provenance tracking
-**Depends on**: v1.2 (existing pipeline)
-**Requirements**: DATA-01, DATA-02, DATA-03, DATA-04, DATA-05, DATA-06, DATA-07, INTL-01
+### Phase 13: Package Extraction
+**Goal**: Extract parser and shared Python business logic into standalone packages, remove dead code
+**Depends on**: v2.0 (existing codebase)
+**Requirements**: DIR-03, DIR-04, DIR-05, PKG-01, PKG-02, PKG-05
 **Success Criteria** (what must be TRUE):
-  1. System matches line items between two estimates by Xactimate activity code or description similarity
-  2. O&P structure detected and compared between estimates (general O&P, per-line O&P, inclusion/exclusion)
-  3. Depreciation methodology detected and compared (ACV vs RCV, percentage vs amount)
-  4. Scope alignment matrix shows items present in one estimate but absent from the other
-  5. Every analytical claim tracks data provenance — granularity field prevents fabricated evidence
-**Research**: Likely (line-item matching algorithm, O&P/depreciation extraction depth from Xactimate PDFs)
-**Research topics**: Line-item matching strategy (fuzzy vs activity codes), O&P parameter extraction from PDF output, OpenAI Structured Outputs migration
-**Plans**: 09-01 (models + analyzers, Wave 1), 09-02 (integration + structured outputs, Wave 2)
+  1. `packages/parser/` exists as a standalone Python package with pyproject.toml, installable independently
+  2. `packages/shared-python/` exists as a Python package containing pipeline, bid_comp, methodology, rules, llm modules
+  3. `src/preflight/` dead code is removed
+  4. Parser package has zero dependencies on business logic (unidirectional: parser → JSON → business logic)
+  5. Dependency direction is strictly enforced: no circular imports between packages
+**Research**: Unlikely (Python packaging, established patterns)
 
-### Phase 10: Rules Engine & Intelligence
-**Goal**: Automated emphasis, alerting, pattern detection, and diagnostic follow-ups
-**Depends on**: Phase 9 (MethodologyResult + category data)
-**Requirements**: INTL-02, INTL-03, INTL-04, INTL-05
+### Phase 14: Directory Split & Config
+**Goal**: Split monolith into api/worker apps, rename frontend, update all imports and build configs
+**Depends on**: Phase 13 (packages must exist before apps can reference them)
+**Requirements**: DIR-01, DIR-02, PKG-03, PKG-04, IMP-01, IMP-02, IMP-03, IMP-04
 **Success Criteria** (what must be TRUE):
-  1. Ranked impact table produced with categories sorted by delta magnitude and % of total variance
-  2. Top variance drivers (top 20%) flagged with exactly 3 severity tiers (critical/notable/informational)
-  3. Alert tags fire for missing O&P, scope imbalance, depreciation mismatches, large unspecified categories
-  4. Structural patterns detected (partial vs full restoration, systematic pricing differences)
-  5. Diagnostic follow-ups generated for each flagged variance (actionable next steps, not recommendations)
-**Research**: Unlikely (pure Python rules engine, established patterns)
-**Plans**: 10-01 (models + engine, Wave 1), 10-02 (pipeline integration, Wave 2)
+  1. `apps/api/` contains only FastAPI server code, depends on shared-python (not parser directly)
+  2. `apps/worker/` contains only RQ worker code, depends on both shared-python and parser
+  3. `apps/frontend/` contains the Next.js app (renamed from vipclaims-saas)
+  4. All Python imports resolve correctly with no broken imports
+  5. Turborepo/pnpm workspace config includes new package directories
+  6. Dockerfiles updated for new paths
+  7. Frontend package.json name updated to `frontend`
+**Research**: Unlikely (file moves, import updates, config edits)
 
-### Phase 11: Narrative Quality & Quality Gates
-**Goal**: Evidence-based, neutral-tone narratives with expanded quality gate system
-**Depends on**: Phase 10 (SignalBundle feeds into LLM pipeline)
-**Requirements**: NARR-01, NARR-02, NARR-03, GATE-01, GATE-02, GATE-03, GATE-04, GATE-05
+### Phase 15: Render Deployment
+**Goal**: Update Render service configuration and verify end-to-end deployment
+**Depends on**: Phase 14 (all code must be in final locations)
+**Requirements**: REN-01, REN-02, REN-03, REN-04, REN-05
 **Success Criteria** (what must be TRUE):
-  1. All narratives contain dollar amounts and percentages for every referenced delta
-  2. Zero hedge words or judgment adjectives appear in any output
-  3. Every factual claim in narrative traces to specific line items, quantities, or calculations in source data
-  4. Five quality gates operational: hedge detection, judgment language, quantification enforcement, evidence grounding, methodology neutrality
-**Research**: Done (11-RESEARCH.md — gate designs, word lists, patterns)
-**Plans**: 11-01 (word lists + gate checkers, Wave 1), 11-02 (prompts + pipeline integration, Wave 2)
-
-### Phase 12: Output Modes & Enhanced XLSX
-**Goal**: Four audience-specific output modes with enhanced multi-sheet XLSX and audit trail
-**Depends on**: Phase 11 (full enriched PipelineState)
-**Requirements**: MODE-01, MODE-02, MODE-03, MODE-04, XLSX-01, XLSX-02, XLSX-03, XLSX-04
-**Success Criteria** (what must be TRUE):
-  1. User can select output mode (Executive/Carrier/Litigation/Internal) before job submission
-  2. Executive mode produces 1-page compressed view with total delta, top 3 drivers, and structural flags
-  3. All four modes produce identical analytical findings — modes filter content and adjust tone only
-  4. XLSX has conditional formatting, multi-sheet structure, and self-contained executive summary sheet
-  5. Output includes audit trail metadata (comparison parameters, timestamps, input file hashes)
-**Research**: Unlikely (openpyxl conditional formatting documented, internal wiring)
-**Plans**: 12-01 (mode model + filter + XLSX rewrite, Wave 1), 12-02 (full stack wiring + frontend, Wave 2)
+  1. render.yaml `vip30-web` renamed to `vip30-api` with correct rootDir, build, and start commands
+  2. render.yaml `vip30-frontend` updated for `apps/frontend/` paths
+  3. render.yaml `vip30-worker` updated for `apps/worker/` paths
+  4. `NEXT_PUBLIC_API_BASE_URL` references `vip30-api` URL
+  5. All services deploy and function correctly (upload → parse → compare → download works)
+**Research**: Unlikely (render.yaml edits, known deployment platform)
 
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
-| 9. Data Foundation & Methodology | 2/2 | Completed | 2026-02-17 |
-| 10. Rules Engine & Intelligence | 2/2 | Completed | 2026-02-17 |
-| 11. Narrative Quality & Quality Gates | 2/2 | Completed | 2026-02-17 |
-| 12. Output Modes & Enhanced XLSX | 2/2 | Completed | 2026-02-17 |
+| 13. Package Extraction | 0/0 | Not started | - |
+| 14. Directory Split & Config | 0/0 | Not started | - |
+| 15. Render Deployment | 0/0 | Not started | - |
 
 ---
-*Last updated: 2026-02-17 — Phase 12 completed*
+*Last updated: 2026-02-17 — v2.1 roadmap created*
