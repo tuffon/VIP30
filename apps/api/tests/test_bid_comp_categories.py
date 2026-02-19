@@ -197,3 +197,37 @@ def test_comparison_name_falls_back_to_original_filename() -> None:
 
     assert pair.comparison.estimate_name == "contractor_bid.pdf"
 
+
+
+def test_map_category_reduces_unclassified_for_common_recap_labels() -> None:
+    comp = BidComp(llm_adapter=None)
+
+    expectations = {
+        "LIGHT FIXTURES": "Electrical",
+        "LABOR ONLY": "Miscellaneous / General Requirements",
+        "SPECIALTY ITEMS": "Specialty Systems (low voltage, alarms, AV, solar)",
+        "AWNINGS & PATIO COVERS": "Siding / Exterior Finishes",
+        "ORNAMENTAL IRON": "Fencing / Gates",
+        "FIREPLACES": "HVAC / Mechanical",
+        "TILE": "Flooring",
+        "FINISH HARDWARE": "Doors / Windows / Glass",
+        "FIRE PROTECTION SYSTEMS": "Specialty Systems (low voltage, alarms, AV, solar)",
+        "HAZARDOUS MATERIAL REMEDIATION": "Cleaning / Restoration",
+    }
+
+    for raw, expected in expectations.items():
+        assert comp._map_category(raw) == expected
+
+
+def test_aggregate_categories_maps_group_label_when_item_name_missing() -> None:
+    comp = BidComp(llm_adapter=None)
+    recap = {
+        "Specialty Items": [{"total": "125.00"}],
+        "Awnings & Patio Covers": [{"total": "400.00"}],
+        "subtotals": [],
+    }
+
+    totals = comp._aggregate_categories(recap)
+    assert totals["Specialty Systems (low voltage, alarms, AV, solar)"] == 125.0
+    assert totals["Siding / Exterior Finishes"] == 400.0
+    assert totals["Other / Unclassified"] == 0.0
