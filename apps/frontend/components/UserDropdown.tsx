@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 type UserDropdownProps = {
   email: string;
+  isAdmin?: boolean;
   onSignOut: () => void;
 };
 
@@ -13,7 +14,7 @@ function truncateEmail(value: string) {
   return `${value.slice(0, 21)}...`;
 }
 
-export function UserDropdown({ email, onSignOut }: UserDropdownProps) {
+export function UserDropdown({ email, isAdmin = false, onSignOut }: UserDropdownProps) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -58,6 +59,15 @@ export function UserDropdown({ email, onSignOut }: UserDropdownProps) {
         >
           <p className="px-4 py-2 text-sm text-slate-600">{email}</p>
           <div className="my-1 border-t border-slate-100" />
+          {isAdmin ? (
+            <Link
+              href="/admin"
+              role="menuitem"
+              className="block px-4 py-2 text-sm text-slate-700 transition hover:bg-slate-50"
+            >
+              Admin Portal
+            </Link>
+          ) : null}
           <Link
             href="#"
             role="menuitem"

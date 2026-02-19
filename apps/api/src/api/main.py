@@ -20,6 +20,7 @@ from src.routes.credits import credits_router
 from src.routes.jobs import jobs_router
 from src.routes.s3 import router as r2_router
 from src.routes.marketing import router as marketing_router
+from src.routes.admin import admin_router
 
 app = FastAPI(title="Costbook Retrieval API", version="1.0.0")
 
@@ -52,6 +53,7 @@ app.include_router(marketing_router)
 app.include_router(auth_router)
 app.include_router(jobs_router)
 app.include_router(credits_router)
+app.include_router(admin_router)
 
 @app.get("/")
 async def health_check():

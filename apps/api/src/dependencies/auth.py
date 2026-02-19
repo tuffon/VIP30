@@ -38,4 +38,13 @@ async def get_current_user(user: Optional[User] = Depends(get_current_user_optio
     return user
 
 
+async def require_admin(user: User = Depends(get_current_user)) -> User:
+    if (user.role or "member") != "admin":
+        raise HTTPException(
+            status_code=403,
+            detail={"error": "forbidden", "message": "Admin access required"},
+        )
+    return user
+
+
 require_auth = get_current_user

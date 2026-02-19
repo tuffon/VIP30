@@ -30,6 +30,7 @@ class OTPVerifyRequest(BaseModel):
 class UserResponse(BaseModel):
     id: str
     email: str
+    role: str
 
 
 class WorkspaceResponse(BaseModel):
@@ -112,7 +113,7 @@ async def verify_otp(
 
     return OTPVerifyResponse(
         success=True,
-        user=UserResponse(id=str(user.id), email=user.email),
+        user=UserResponse(id=str(user.id), email=user.email, role=user.role or "member"),
         workspace=WorkspaceResponse(id=str(workspace.id), name=workspace.name),
         is_new_user=is_new_user,
         credit_balance=credit_balance,
@@ -141,7 +142,7 @@ async def get_me(user: User = Depends(get_current_user), db: AsyncSession = Depe
     credit_balance = await CreditService.get_balance(db, workspace.id)
     return OTPVerifyResponse(
         success=True,
-        user=UserResponse(id=str(user.id), email=user.email),
+        user=UserResponse(id=str(user.id), email=user.email, role=user.role or "member"),
         workspace=WorkspaceResponse(id=str(workspace.id), name=workspace.name),
         is_new_user=False,
         credit_balance=credit_balance,

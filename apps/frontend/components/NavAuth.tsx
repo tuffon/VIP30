@@ -8,7 +8,7 @@ import { clearPersistedSession, getPersistedSession, isSessionValid, persistSess
 import { UserDropdown } from "./UserDropdown";
 
 type MePayload = {
-  user?: { email?: string };
+  user?: { email?: string; role?: string };
 };
 
 export function NavAuth() {
@@ -20,6 +20,7 @@ export function NavAuth() {
     if (!persisted) return null;
     return isSessionValid(persisted) ? persisted.email : null;
   });
+  const [role, setRole] = useState<string>("member");
 
   useEffect(() => {
     let isMounted = true;
@@ -31,13 +32,16 @@ export function NavAuth() {
 
         if (!response.ok) {
           setEmail(null);
+          setRole("member");
           clearPersistedSession();
           return;
         }
 
         const payload = (await response.json()) as MePayload;
         const resolvedEmail = payload.user?.email || null;
+        const resolvedRole = payload.user?.role || "member";
         setEmail(resolvedEmail);
+        setRole(resolvedRole);
         if (resolvedEmail) {
           persistSession(resolvedEmail);
         } else {
@@ -46,6 +50,7 @@ export function NavAuth() {
       } catch {
         if (!isMounted) return;
         setEmail(null);
+        setRole("member");
       } finally {
         if (isMounted) {
           setIsLoading(false);
@@ -70,6 +75,7 @@ export function NavAuth() {
       });
     } finally {
       setEmail(null);
+      setRole("member");
       router.push("/");
       router.refresh();
     }
@@ -90,6 +96,8 @@ export function NavAuth() {
     );
   }
 
+  const isAdmin = role === "admin";
+
   return (
     <div className="flex items-center gap-3">
       <Link href="/bid-comp" className="text-xs font-semibold text-slate-500 hover:text-slate-900">
@@ -101,8 +109,12 @@ export function NavAuth() {
       <Link href="/credits" className="text-xs font-semibold text-slate-500 hover:text-slate-900">
         Credits
       </Link>
-      <UserDropdown email={email} onSignOut={handleLogout} />
+      {isAdmin ? (
+        <Link href="/admin" className="text-xs font-semibold text-slate-500 hover:text-slate-900">
+          Admin
+        </Link>
+      ) : null}
+      <UserDropdown email={email} isAdmin={isAdmin} onSignOut={handleLogout} />
     </div>
   );
 }
-

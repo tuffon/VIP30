@@ -21,6 +21,7 @@ class User(SQLModel, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     workspace_id: uuid.UUID = Field(foreign_key="workspaces.id", index=True, unique=True)
     email: str = Field(max_length=255, unique=True, index=True)
+    role: str = Field(default="member", max_length=20)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     last_login_at: Optional[datetime] = Field(default=None)
     last_login_ip: Optional[str] = Field(default=None, max_length=45)

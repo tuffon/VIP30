@@ -31,8 +31,6 @@ class CreditService:
         return grant
 
     @staticmethod
-
-    @staticmethod
     async def grant_manual(
         db: AsyncSession,
         workspace_id: uuid.UUID,

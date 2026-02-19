@@ -59,6 +59,7 @@ class AuthService:
         user = User(
             email=email,
             workspace_id=workspace.id,
+            role="member",
             last_login_at=datetime.utcnow(),
             last_login_ip=login_ip,
             login_method="email_otp",
