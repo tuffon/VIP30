@@ -3,6 +3,7 @@ import os
 import sys
 import tempfile
 import logging
+import contextlib
 from pathlib import Path
 
 
@@ -33,7 +34,9 @@ def main(pdf_path: str) -> None:
     try:
         parser = XactimateRoughDraftParser(pdf_path, str(out_dir), debug=False)
         try:
-            parser.run()
+            # Parser prints human-readable tables to stdout; redirect them so stdout stays pure JSON.
+            with contextlib.redirect_stdout(sys.stderr):
+                parser.run()
         except Exception:  # noqa: BLE001
             # Log full traceback to stderr so callers can see exact failure
             logging.exception("worker_parse_helper: parser.run() failed for %s", pdf_path)
@@ -45,14 +48,17 @@ def main(pdf_path: str) -> None:
 
         sections: list = []
         recap: dict = {}
+        output: dict = {}
 
         if json_file.exists():
             with json_file.open("r", encoding="utf-8") as f:
                 payload = json.load(f)
-            sections_raw = payload.get("sections")
-            if isinstance(sections_raw, list):
-                sections = sections_raw
-            recap = _extract_recap(payload)
+            if isinstance(payload, dict):
+                output = payload
+                sections_raw = payload.get("sections")
+                if isinstance(sections_raw, list):
+                    sections = sections_raw
+                recap = _extract_recap(payload)
 
         if not recap and recap_file.exists():
             with recap_file.open("r", encoding="utf-8") as f:
@@ -62,11 +68,13 @@ def main(pdf_path: str) -> None:
                 if isinstance(maybe_recap, dict):
                     recap = maybe_recap
 
-        output = {
-            "recap_by_category": recap or {},
-            "sections": sections,
-        }
-        print(json.dumps(output))
+        if not output:
+            output = {
+                "recap_by_category": recap or {},
+                "sections": sections,
+            }
+
+        print(json.dumps(output, ensure_ascii=False))
     finally:
         if not out_dir_env:
             try:

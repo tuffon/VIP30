@@ -49,6 +49,7 @@ _ASYNC_LOOP: asyncio.AbstractEventLoop | None = None
 _ASYNC_LOOP_THREAD: threading.Thread | None = None
 _ASYNC_LOOP_LOCK = threading.Lock()
 _ASYNC_OP_TIMEOUT_SEC = int(os.getenv("WORKER_ASYNC_OP_TIMEOUT_SEC", "20"))
+_PARSER_FULL_TIMEOUT_SEC = int(os.getenv("PARSER_FULL_TIMEOUT_SEC", "420"))
 MAX_DISPLAY_NAME_LEN = 120
 
 _FORMULA_PREFIXES = ("=", "+", "-", "@")
@@ -199,28 +200,65 @@ def _run_parser_recap_only(input_path: str, out_dir: Path) -> Dict[str, Any]:
 
 def _run_parser_full(input_path: str, out_dir: Path) -> Dict[str, Any]:
     """
-    Run full Xactimate parser (sections + recaps) with FAST_RECAP_ONLY disabled.
-    Returns the complete JSON payload written by the parser.
+    Run full Xactimate parser in a subprocess with timeout protection.
+    Returns the complete JSON payload.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
-    logger.info("parser(full): start input=%s out_dir=%s", input_path, out_dir)
-    from vip_parser.xactimate import XactimateRoughDraftParser
+    logger.info(
+        "parser(full): start input=%s out_dir=%s timeout_sec=%d",
+        input_path,
+        out_dir,
+        _PARSER_FULL_TIMEOUT_SEC,
+    )
 
-    # Ensure full parse, not recap-only
-    os.environ["FAST_RECAP_ONLY"] = "0"
-    parser = XactimateRoughDraftParser(input_path, str(out_dir), debug=False)
+    helper_path = Path(__file__).with_name("worker_parse_helper.py")
+    cmd = [sys.executable, str(helper_path), str(input_path)]
+    env = os.environ.copy()
+    env["FAST_RECAP_ONLY"] = "0"
+    env["HELPER_OUTDIR"] = str(out_dir)
+
     t0 = time.time()
-    parser.run()
+    try:
+        proc = subprocess.run(
+            cmd,
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=_PARSER_FULL_TIMEOUT_SEC,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as exc:
+        elapsed = int((time.time() - t0) * 1000)
+        raise TimeoutError(
+            f"parser(full) timed out after {_PARSER_FULL_TIMEOUT_SEC}s (elapsed_ms={elapsed})"
+        ) from exc
+
     elapsed = int((time.time() - t0) * 1000)
+    if proc.returncode != 0:
+        stderr_tail = (proc.stderr or "")[-2000:]
+        raise RuntimeError(
+            f"parser(full) subprocess failed rc={proc.returncode} elapsed_ms={elapsed} stderr_tail={stderr_tail}"
+        )
+
+    payload_line = ""
+    for line in reversed((proc.stdout or "").splitlines()):
+        if line.strip():
+            payload_line = line.strip()
+            break
+    if not payload_line:
+        raise RuntimeError("parser(full) subprocess returned empty stdout payload")
+
+    try:
+        payload = json.loads(payload_line)
+    except Exception as exc:  # noqa: BLE001
+        stdout_tail = (proc.stdout or "")[-2000:]
+        raise RuntimeError(f"parser(full) invalid JSON output: {stdout_tail}") from exc
+
     base = Path(out_dir) / Path(input_path).stem
     json_path = Path(f"{base}.json")
-    if not json_path.exists():
-        logger.error("parser(full): missing json output: %s", json_path)
-        raise FileNotFoundError(f"Expected full parser output missing: {json_path}")
-    size = json_path.stat().st_size
+    size = json_path.stat().st_size if json_path.exists() else 0
     logger.info("parser(full): done in %dms json=%s size=%d bytes", elapsed, json_path, size)
-    with json_path.open("r", encoding="utf-8") as f:
-        return json.load(f)
+    return payload if isinstance(payload, dict) else {}
 
 
 

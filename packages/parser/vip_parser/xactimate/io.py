@@ -6,6 +6,7 @@ import json
 import os
 from typing import Iterable, List, Optional
 import logging
+import time
 
 import pdfplumber
 
@@ -59,16 +60,35 @@ class ParserIO:
     def read_full_text_lines(self) -> List[str]:
         lines: List[str] = []
         log = logging.getLogger("vip-parse.worker")
+        page_warn_ms = int(os.getenv("PARSER_PAGE_WARN_MS", "15000"))
         with pdfplumber.open(self.input_file) as pdf:
             total = len(pdf.pages)
             for idx, page in enumerate(pdf.pages):
-                if idx % 5 == 0:
-                    log.info("pdf read: page %d/%d", idx + 1, total)
+                page_no = idx + 1
+                page_t0 = time.perf_counter()
+                log.info("pdf read: page %d/%d start", page_no, total)
                 page_lines = extract_visible_lines(
                     page,
                     config=self._visible_text_config,
-                    debug_page_number=idx + 1,
+                    debug_page_number=page_no,
                 )
+                elapsed_ms = int((time.perf_counter() - page_t0) * 1000)
+                if elapsed_ms >= page_warn_ms:
+                    log.warning(
+                        "pdf read: page %d/%d slow elapsed_ms=%d lines=%d",
+                        page_no,
+                        total,
+                        elapsed_ms,
+                        len(page_lines),
+                    )
+                else:
+                    log.info(
+                        "pdf read: page %d/%d done elapsed_ms=%d lines=%d",
+                        page_no,
+                        total,
+                        elapsed_ms,
+                        len(page_lines),
+                    )
                 lines.extend(page_lines)
         return lines
 
