@@ -31,6 +31,29 @@ class CreditService:
         return grant
 
     @staticmethod
+
+    @staticmethod
+    async def grant_manual(
+        db: AsyncSession,
+        workspace_id: uuid.UUID,
+        amount: int,
+        *,
+        source: str = "manual_test_grant",
+        notes: str | None = None,
+        granted_by: uuid.UUID | None = None,
+    ) -> CreditGrant:
+        grant = CreditGrant(
+            workspace_id=workspace_id,
+            amount=amount,
+            source=source,
+            granted_by=granted_by,
+            notes=notes,
+        )
+        db.add(grant)
+        await db.commit()
+        await db.refresh(grant)
+        return grant
+
     async def get_balance(db: AsyncSession, workspace_id: uuid.UUID) -> int:
         grants_stmt = select(func.coalesce(func.sum(CreditGrant.amount), 0)).where(
             CreditGrant.workspace_id == workspace_id
