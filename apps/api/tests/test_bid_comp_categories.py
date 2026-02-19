@@ -231,3 +231,20 @@ def test_aggregate_categories_maps_group_label_when_item_name_missing() -> None:
     assert totals["Specialty Systems (low voltage, alarms, AV, solar)"] == 125.0
     assert totals["Siding / Exterior Finishes"] == 400.0
     assert totals["Other / Unclassified"] == 0.0
+
+
+def test_map_category_uses_xactimate_codes_when_present() -> None:
+    comp = BidComp(llm_adapter=None)
+
+    expectations = {
+        "FRM Framing": "Framing / Structural",
+        "ELE Electrical": "Electrical",
+        "CLN Cleaning": "Cleaning / Restoration",
+        "RFG Roofing": "Roofing",
+        "PLU Plumbing": "Plumbing",
+        "WWP Wallpaper": "Painting",
+        "SOL Finish Flooring": "Flooring",
+    }
+
+    for raw, expected in expectations.items():
+        assert comp._map_category(raw) == expected

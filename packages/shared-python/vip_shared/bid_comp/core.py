@@ -54,6 +54,64 @@ CATEGORY_FALLBACK = "Other / Unclassified"
 PRIMARY_FALLBACK_NAME = "Estimate 1"
 COMPARISON_FALLBACK_NAME = "Estimate 2"
 
+# Source: Verisk/Xactware Help Center, "Commercial and Residential Category Codes"
+# https://xactware.helpdocs.io/article/j8s7xhwj7y-commercial-and-residential-category-codes
+XACTIMATE_CATEGORY_CODE_MAP: Dict[str, str] = {
+    "ADB": "Miscellaneous / General Requirements",
+    "APL": "Appliances / Equipment",
+    "BAS": "Miscellaneous / General Requirements",
+    "CAB": "Cabinetry / Millwork",
+    "CAR": "Cabinetry / Millwork",
+    "CLN": "Cleaning / Restoration",
+    "COM": "Contents / Packout / Storage",
+    "CON": "Masonry / Concrete / Foundation",
+    "DIA": "Miscellaneous / General Requirements",
+    "DMO": "Demolition",
+    "DRY": "Drywall / Insulation",
+    "ELE": "Electrical",
+    "ETC": "Specialty Systems (low voltage, alarms, AV, solar)",
+    "FEN": "Fencing / Gates",
+    "FIN": "Cabinetry / Millwork",
+    "FIR": "Doors / Windows / Glass",
+    "FPL": "HVAC / Mechanical",
+    "FRM": "Framing / Structural",
+    "GAS": "Framing / Structural",
+    "GEN": "Miscellaneous / General Requirements",
+    "GLS": "Doors / Windows / Glass",
+    "HVC": "HVAC / Mechanical",
+    "INS": "Drywall / Insulation",
+    "LIT": "Electrical",
+    "MAR": "Flooring",
+    "MEC": "Framing / Structural",
+    "MIT": "Miscellaneous / General Requirements",
+    "MLD": "Cabinetry / Millwork",
+    "MTL": "Miscellaneous / General Requirements",
+    "PAI": "Painting",
+    "PNT": "Painting",
+    "PLU": "Plumbing",
+    "POL": "Contents / Packout / Storage",
+    "RFG": "Roofing",
+    "RST": "Miscellaneous / General Requirements",
+    "SCA": "Miscellaneous / General Requirements",
+    "SEA": "Siding / Exterior Finishes",
+    "SID": "Siding / Exterior Finishes",
+    "SOL": "Flooring",
+    "SPR": "Specialty Systems (low voltage, alarms, AV, solar)",
+    "STL": "Framing / Structural",
+    "STU": "Siding / Exterior Finishes",
+    "TAR": "Miscellaneous / General Requirements",
+    "TIL": "Flooring",
+    "TRK": "Miscellaneous / General Requirements",
+    "TWN": "Cabinetry / Millwork",
+    "UPH": "Contents / Packout / Storage",
+    "VNT": "HVAC / Mechanical",
+    "WAT": "Cleaning / Restoration",
+    "WDR": "Doors / Windows / Glass",
+    "WEL": "Framing / Structural",
+    "WOO": "Cabinetry / Millwork",
+    "WWP": "Painting",
+}
+
 CATEGORY_KEYWORDS: List[tuple[str, str]] = [
     ("CLEAN", "Cleaning / Restoration"),
     ("RESTORATION", "Cleaning / Restoration"),
@@ -62,26 +120,37 @@ CATEGORY_KEYWORDS: List[tuple[str, str]] = [
     ("ASBESTOS", "Cleaning / Restoration"),
     ("MOLD", "Cleaning / Restoration"),
     ("SMOKE", "Cleaning / Restoration"),
+    ("WATER EXTRACTION", "Cleaning / Restoration"),
     ("CONTENT", "Contents / Packout / Storage"),
     ("PACK", "Contents / Packout / Storage"),
     ("STORAGE", "Contents / Packout / Storage"),
+    ("PERSONAL PROPERTY", "Contents / Packout / Storage"),
+    ("UPHOLSTERY", "Contents / Packout / Storage"),
     ("DEMOL", "Demolition"),
     ("FRAM", "Framing / Structural"),
     ("STRUCT", "Framing / Structural"),
+    ("STEEL", "Framing / Structural"),
+    ("WELD", "Framing / Structural"),
     ("DRYWALL", "Drywall / Insulation"),
     ("INSUL", "Drywall / Insulation"),
     ("PAINT", "Painting"),
+    ("WALLPAPER", "Painting"),
     ("FLOOR", "Flooring"),
     ("CARPET", "Flooring"),
     ("TILE", "Flooring"),
+    ("MARBLE", "Flooring"),
     ("DOOR", "Doors / Windows / Glass"),
     ("WINDOW", "Doors / Windows / Glass"),
     ("GLAZ", "Doors / Windows / Glass"),
     ("GLASS", "Doors / Windows / Glass"),
     ("HARDWARE", "Doors / Windows / Glass"),
+    ("WINDOW TREAT", "Doors / Windows / Glass"),
     ("CABINET", "Cabinetry / Millwork"),
     ("MILLWORK", "Cabinetry / Millwork"),
     ("TRIM", "Cabinetry / Millwork"),
+    ("CARPENTRY", "Cabinetry / Millwork"),
+    ("WOODWORK", "Cabinetry / Millwork"),
+    ("MOLDING", "Cabinetry / Millwork"),
     ("ELECT", "Electrical"),
     ("LIGHT FIXTURE", "Electrical"),
     ("LIGHTING", "Electrical"),
@@ -96,10 +165,12 @@ CATEGORY_KEYWORDS: List[tuple[str, str]] = [
     ("EXTERIOR", "Siding / Exterior Finishes"),
     ("AWNING", "Siding / Exterior Finishes"),
     ("PATIO COVER", "Siding / Exterior Finishes"),
+    ("SEAL", "Siding / Exterior Finishes"),
     ("MASON", "Masonry / Concrete / Foundation"),
     ("CONCRETE", "Masonry / Concrete / Foundation"),
     ("FOUNDATION", "Masonry / Concrete / Foundation"),
     ("STONE", "Masonry / Concrete / Foundation"),
+    ("ASPHALT", "Masonry / Concrete / Foundation"),
     ("FENCE", "Fencing / Gates"),
     ("ORNAMENTAL IRON", "Fencing / Gates"),
     ("IRONWORK", "Fencing / Gates"),
@@ -120,10 +191,20 @@ CATEGORY_KEYWORDS: List[tuple[str, str]] = [
     ("FIRE PROTECTION", "Specialty Systems (low voltage, alarms, AV, solar)"),
     ("SPRINKLER", "Specialty Systems (low voltage, alarms, AV, solar)"),
     ("SPECIALTY ITEM", "Specialty Systems (low voltage, alarms, AV, solar)"),
+    ("ELECTRONIC", "Specialty Systems (low voltage, alarms, AV, solar)"),
+    ("COMPUTER", "Specialty Systems (low voltage, alarms, AV, solar)"),
     ("MISC", "Miscellaneous / General Requirements"),
     ("GENERAL REQUIREMENT", "Miscellaneous / General Requirements"),
     ("LABOR ONLY", "Miscellaneous / General Requirements"),
     ("TEMP", "Miscellaneous / General Requirements"),
+    ("SCAFFOLD", "Miscellaneous / General Requirements"),
+    ("TRUCK", "Miscellaneous / General Requirements"),
+    ("HAUL", "Miscellaneous / General Requirements"),
+    ("RESET", "Miscellaneous / General Requirements"),
+    ("BASE SERVICE", "Miscellaneous / General Requirements"),
+    ("MATERIAL HANDLING", "Miscellaneous / General Requirements"),
+    ("DIAGNOS", "Miscellaneous / General Requirements"),
+    ("TEMPORARY REPAIR", "Miscellaneous / General Requirements"),
 ]
 
 NARRATIVE_OUTPUT_TEMPLATE = json.dumps(
@@ -564,6 +645,14 @@ class BidComp:
 
     def _map_category(self, raw_name: str) -> str:
         normalized = normalize_label(raw_name or "")
+        if not normalized:
+            return CATEGORY_FALLBACK
+
+        # Prefer explicit Xactimate category codes when present (e.g., "FRM Framing").
+        code = normalized.split(" ", 1)[0].strip("-:")
+        if code in XACTIMATE_CATEGORY_CODE_MAP:
+            return XACTIMATE_CATEGORY_CODE_MAP[code]
+
         for needle, mapped in CATEGORY_KEYWORDS:
             if needle in normalized:
                 return mapped
