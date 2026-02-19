@@ -19,10 +19,15 @@ _THIN_BORDER = Border(
     bottom=Side(style="thin", color="DDDDDD"),
 )
 
+_TITLE_FONT = Font(bold=True, size=16)
+_SECTION_HEADER_FONT = Font(bold=True, size=13)
+_TABLE_HEADER_FONT = Font(bold=True, size=11)
+_FIELD_LABEL_FONT = Font(bold=True, size=11)
+
 _SEVERITY_FILLS = {
-    "critical": PatternFill(fill_type="solid", fgColor="FF4444"),
-    "notable": PatternFill(fill_type="solid", fgColor="FFA500"),
-    "informational": PatternFill(fill_type="solid", fgColor="ADD8E6"),
+    "critical": PatternFill(fill_type="solid", fgColor="FFD966"),
+    "notable": PatternFill(fill_type="solid", fgColor="FFF2CC"),
+    "informational": PatternFill(fill_type="solid", fgColor="C6EFCE"),
 }
 
 _USER_SAFE_FALLBACK_TEXT = "Automated narrative detail unavailable for this section."
@@ -69,7 +74,7 @@ def export_xlsx(
 
 def _write_summary_sheet(ws, pair, narrative, category_rows: List[Dict[str, Any]], signal_bundle: Optional[Any]) -> None:
     ws["A1"] = "Bid Comparison - Summary"
-    ws["A1"].font = Font(bold=True, size=14)
+    ws["A1"].font = _TITLE_FONT
 
     primary_total, comparison_total, delta_total = _totals(category_rows)
 
@@ -84,14 +89,14 @@ def _write_summary_sheet(ws, pair, narrative, category_rows: List[Dict[str, Any]
     ws["A7"] = "Total Delta"
     ws["B7"] = delta_total
     for row in range(3, 8):
-        ws[f"A{row}"].font = Font(bold=True)
+        ws[f"A{row}"].font = _FIELD_LABEL_FONT
         ws[f"A{row}"].border = _THIN_BORDER
         ws[f"B{row}"].border = _THIN_BORDER
     for row in (5, 6, 7):
         ws[f"B{row}"].number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
 
     ws["A9"] = "Overall Summary"
-    ws["A9"].font = Font(bold=True)
+    ws["A9"].font = _SECTION_HEADER_FONT
     ws["A10"] = _build_overall_summary(narrative)
     ws.merge_cells(start_row=10, start_column=1, end_row=10, end_column=6)
     ws["A10"].alignment = Alignment(wrap_text=True, vertical="top")
@@ -101,13 +106,13 @@ def _write_summary_sheet(ws, pair, narrative, category_rows: List[Dict[str, Any]
 
     start_row = 12
     ws[f"A{start_row}"] = "Top Cost Drivers"
-    ws[f"A{start_row}"].font = Font(bold=True)
+    ws[f"A{start_row}"].font = _SECTION_HEADER_FONT
 
     headers = ["Category", "Primary ($)", "Comparison ($)", "Delta ($)", "% of Total Variance", "Severity"]
     header_row = start_row + 1
     for idx, header in enumerate(headers, start=1):
         cell = ws.cell(row=header_row, column=idx, value=header)
-        cell.font = Font(bold=True)
+        cell.font = _TABLE_HEADER_FONT
         cell.border = _THIN_BORDER
 
     ranked = _ranked_rows(category_rows)
@@ -156,14 +161,14 @@ def _write_analysis_sheet(
     signal_bundle: Optional[Any],
 ) -> None:
     ws["A1"] = "Bid Comparison - Analysis"
-    ws["A1"].font = Font(bold=True, size=14)
+    ws["A1"].font = _TITLE_FONT
     row = 3
 
-    ws.cell(row=row, column=1, value="Methodology Detail").font = Font(bold=True)
+    ws.cell(row=row, column=1, value="Methodology Detail").font = _SECTION_HEADER_FONT
     row += 1
     method_rows = _methodology_rows(methodology)
     for label, value in method_rows:
-        ws.cell(row=row, column=1, value=label).font = Font(bold=True)
+        ws.cell(row=row, column=1, value=label).font = _FIELD_LABEL_FONT
         ws.cell(row=row, column=2, value=value)
         ws.cell(row=row, column=1).border = _THIN_BORDER
         ws.cell(row=row, column=2).border = _THIN_BORDER
@@ -171,7 +176,7 @@ def _write_analysis_sheet(
         row += 1
 
     row += 1
-    ws.cell(row=row, column=1, value="Scope Alignment").font = Font(bold=True)
+    ws.cell(row=row, column=1, value="Scope Alignment").font = _SECTION_HEADER_FONT
     row += 1
     scope_items = list(getattr(narrative, "scope_observations", []) or [])
     scope_items = [item for item in (_sanitize_user_text(item) for item in scope_items) if item]
@@ -187,7 +192,7 @@ def _write_analysis_sheet(
     followups = [item for item in (_sanitize_user_text(item) for item in followups) if item]
     if followups:
         row += 1
-        ws.cell(row=row, column=1, value="Suggested Follow-ups").font = Font(bold=True)
+        ws.cell(row=row, column=1, value="Suggested Follow-ups").font = _SECTION_HEADER_FONT
         row += 1
         for item in followups:
             ws.cell(row=row, column=1, value=f"- {item}")
@@ -196,7 +201,7 @@ def _write_analysis_sheet(
             row += 1
 
     row += 1
-    ws.cell(row=row, column=1, value="Category-by-Category Comparison").font = Font(bold=True)
+    ws.cell(row=row, column=1, value="Category-by-Category Comparison").font = _SECTION_HEADER_FONT
     row += 1
     headers = [
         "Category",
@@ -209,7 +214,7 @@ def _write_analysis_sheet(
     table_header_row = row
     for idx, header in enumerate(headers, start=1):
         cell = ws.cell(row=table_header_row, column=idx, value=header)
-        cell.font = Font(bold=True)
+        cell.font = _TABLE_HEADER_FONT
         cell.border = _THIN_BORDER
 
     severity_by_category = _severity_by_category(signal_bundle)
@@ -240,13 +245,13 @@ def _write_analysis_sheet(
             ColorScaleRule(
                 start_type="num",
                 start_value=-1,
-                start_color="CC0000",
+                start_color="FFD966",
                 mid_type="num",
                 mid_value=0,
                 mid_color="FFFFFF",
                 end_type="num",
                 end_value=1,
-                end_color="00AA00",
+                end_color="C6EFCE",
             ),
         )
         ws.conditional_formatting.add(
@@ -263,12 +268,12 @@ def _write_analysis_sheet(
 
     if recap_rows:
         row += 2
-        ws.cell(row=row, column=1, value="Recap Detail (raw)").font = Font(bold=True)
+        ws.cell(row=row, column=1, value="Recap Detail (raw)").font = _SECTION_HEADER_FONT
         row += 1
         recap_headers = ["Estimate", "Group", "Item", "Total ($)"]
         for idx, header in enumerate(recap_headers, start=1):
             cell = ws.cell(row=row, column=idx, value=header)
-            cell.font = Font(bold=True)
+            cell.font = _TABLE_HEADER_FONT
             cell.border = _THIN_BORDER
         row += 1
         for entry in recap_rows[:500]:
