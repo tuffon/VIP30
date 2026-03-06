@@ -43,7 +43,7 @@ _MIN_COL_WIDTHS = {
     3: 16,
     4: 16,
     5: 16,
-    6: 14,
+    6: 35,
 }
 
 _USER_SAFE_FALLBACK_TEXT = "Automated narrative detail unavailable for this section."
@@ -134,32 +134,33 @@ def _write_summary_sheet(
     start_row = 12
     _style_section_header(ws, start_row, "Top Cost Drivers")
 
-    headers = ["Category", "Primary ($)", "Comparison ($)", "Delta ($)", "% of Total Variance", "Severity"]
+    headers = ["Category", "Primary ($)", "Comparison ($)", "Delta ($)", "% of Total Variance", "Notes"]
     header_row = start_row + 1
     for idx, header in enumerate(headers, start=1):
         cell = ws.cell(row=header_row, column=idx, value=header)
         _style_table_header_cell(cell)
 
     ranked = _ranked_rows(category_rows)
-    severity_by_category = _severity_by_category(signal_bundle)
+    narrative_map = _narrative_by_category(narrative)
     row = header_row + 1
     for entry in ranked[:6]:
-        severity = severity_by_category.get(str(entry.get("category") or ""), "")
+        cat_key = str(entry.get("category") or "").strip().lower()
+        driver_text = narrative_map.get(cat_key, "")
         ws.cell(row=row, column=1, value=entry.get("category"))
         ws.cell(row=row, column=2, value=entry.get("primary_total"))
         ws.cell(row=row, column=3, value=entry.get("comparison_total"))
         ws.cell(row=row, column=4, value=entry.get("delta"))
         pct = entry.get("pct_of_total_variance")
         ws.cell(row=row, column=5, value=(pct / 100) if pct is not None else None)
-        ws.cell(row=row, column=6, value=severity)
+        ws.cell(row=row, column=6, value=driver_text or None)
         for col in range(1, 7):
             ws.cell(row=row, column=col).border = _THIN_BORDER
         for col in (2, 3, 4):
             ws.cell(row=row, column=col).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
         ws.cell(row=row, column=5).number_format = "0.0%"
-        fill = _SEVERITY_FILLS.get(str(severity).lower())
-        if fill is not None:
-            ws.cell(row=row, column=6).fill = fill
+        if driver_text:
+            ws.cell(row=row, column=6).alignment = Alignment(wrap_text=True, vertical="top")
+            ws.cell(row=row, column=6).font = Font(italic=True, size=9, color="444444")
         row += 1
 
     observations_row = row + 1
@@ -417,6 +418,22 @@ def _severity_by_category(signal_bundle: Optional[Any]) -> Dict[str, str]:
         if category and severity:
             out[str(category)] = str(severity)
     return out
+
+
+def _narrative_by_category(narrative: Optional[Any]) -> Dict[str, str]:
+    result: Dict[str, str] = {}
+    for item in getattr(narrative, "key_drivers", []) or []:
+        if isinstance(item, dict):
+            cat = str(item.get("category") or "").strip().lower()
+            text = _sanitize_user_text(str(item.get("narrative") or "").strip())
+        elif hasattr(item, "narrative"):
+            cat = str(getattr(item, "category", "")).strip().lower()
+            text = _sanitize_user_text(str(getattr(item, "narrative", "")).strip())
+        else:
+            continue
+        if cat and text:
+            result[cat] = text
+    return result
 
 
 def _write_sheet_header(ws, title: str, pair, report_date: str) -> None:
