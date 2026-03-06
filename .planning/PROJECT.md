@@ -8,9 +8,17 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
+## Current Milestone: v2.3 Report Quality
+
+**Goal:** Fix broken narrative output and elevate the XLSX report to client-ready quality.
+
+**Target features:**
+- **LLM narrative fix**: Report generates but narrative sections are empty — regression from narrative flow changes, needs diagnosis and repair
+- **Professional XLSX polish**: Visual upgrade to make both Summary and Analysis sheets polished and client-shareable
+
 ## Current State
 
-**Version:** v2.2 shipped 2026-02-18
+**Version:** v2.3 in progress (v2.2 shipped 2026-02-18)
 
 **Shipped features (v2.2):**
 - Unified 2-sheet XLSX output: "Summary" + "Analysis" (replaces 6 sheets and 4 modes)
@@ -89,6 +97,11 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ No mode selection in UX — v2.2
 - ✓ LLM pipeline unchanged, all content flows to output — v2.2
 
+### Active (v2.3)
+
+- [ ] LLM narrative output populates correctly in XLSX report — v2.3
+- [ ] XLSX report (Summary + Analysis sheets) has professional, client-shareable visual quality — v2.3
+
 ### Backlog (v3+)
 
 **Landing Page:**
@@ -144,4 +157,4 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | `output_mode` DB column still exists | Low | Nullable, not written — preserves historical data |
 
 ---
-*Last updated: 2026-02-18 after v2.2 milestone completion*
+*Last updated: 2026-03-05 after v2.3 milestone started*
