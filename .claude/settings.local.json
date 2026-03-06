@@ -23,7 +23,14 @@
       "Bash(__NEW_LINE_8b83786d097fd451__ echo \"=== PARSER DEPENDENCIES \\(parse/\\) ===\")",
       "Bash(test:*)",
       "Bash(grep:*)",
-      "Skill(gsd:complete-milestone)"
+      "Skill(gsd:complete-milestone)",
+      "WebFetch(domain:xactware.helpdocs.io)",
+      "WebFetch(domain:documents.gaf.com)",
+      "WebFetch(domain:quizlet.com)",
+      "WebFetch(domain:disaster411.com)",
+      "WebFetch(domain:www.collegesidekick.com)",
+      "WebFetch(domain:www.topadjuster.com)",
+      "WebFetch(domain:topadjuster.com)"
     ]
   }
 }
