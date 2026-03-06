@@ -23,8 +23,8 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 ## Current Position
 
 Phase: 21 of 21 (Report Output Quality)
-Plan: TBD
-Status: Phase 20 complete — ready to plan/execute Phase 21
+Plan: 01 and 02 planned — Wave 1 (parallel)
+Status: Planned — ready for execution
 Last activity: 2026-03-06 — Phase 20 executed and verified: 20-01 prompt v2.2 upgrade completed; 20-02 Notes column + strict top-driver narrative contract completed.
 
 Progress: ██████████ 100%
