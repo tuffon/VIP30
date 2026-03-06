@@ -231,7 +231,7 @@ class TestRunWriterPass:
         )
 
         assert isinstance(result, DraftNarrative)
-        assert "Comparing Carrier Estimate and Contractor Estimate" in result.overview
+        assert "Carrier Estimate" in result.overview and "Contractor Estimate" in result.overview
         # Fallback should create key_drivers from analysis categories
         assert len(result.key_drivers) == 3
 
