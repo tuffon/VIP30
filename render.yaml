@@ -69,16 +69,15 @@ projects:
             name: vip30-worker
             plan: standard
             env: python
-            rootDir: .
+            rootDir: apps/worker
             autoDeploy: true
             buildFilter:
               paths:
                 - apps/worker/**
                 - packages/shared-python/**
             buildCommand: |
-              pip install -r apps/worker/requirements-worker.txt
+              pip install -r requirements-worker.txt
             startCommand: |
-              cd apps/worker && \
               python scripts/prestart_db.py && \
               alembic upgrade head && \
               export REDIS_URL="redis://$REDIS_HOST:$REDIS_PORT/0" && \
