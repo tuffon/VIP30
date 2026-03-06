@@ -65,66 +65,6 @@ def main() -> None:
         )
         print("prestart_db: ensured comparison_jobs.output_mode")
 
-        # Auth schema compatibility: OTP verify path reads these user fields.
-        conn.execute(
-            text(
-                """
-                ALTER TABLE IF EXISTS users
-                ADD COLUMN IF NOT EXISTS role VARCHAR(20)
-                """
-            )
-        )
-        conn.execute(
-            text(
-                """
-                ALTER TABLE IF EXISTS users
-                ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMP NULL
-                """
-            )
-        )
-        conn.execute(
-            text(
-                """
-                ALTER TABLE IF EXISTS users
-                ADD COLUMN IF NOT EXISTS last_login_ip VARCHAR(45) NULL
-                """
-            )
-        )
-        conn.execute(
-            text(
-                """
-                ALTER TABLE IF EXISTS users
-                ADD COLUMN IF NOT EXISTS login_method VARCHAR(50) NULL
-                """
-            )
-        )
-        conn.execute(
-            text(
-                """
-                UPDATE users
-                SET role = 'member'
-                WHERE role IS NULL OR role = ''
-                """
-            )
-        )
-        conn.execute(
-            text(
-                """
-                ALTER TABLE IF EXISTS users
-                ALTER COLUMN role SET DEFAULT 'member'
-                """
-            )
-        )
-        conn.execute(
-            text(
-                """
-                ALTER TABLE IF EXISTS users
-                ALTER COLUMN role SET NOT NULL
-                """
-            )
-        )
-        print("prestart_db: ensured users auth columns (role/login metadata)")
-
 
 if __name__ == "__main__":
     main()
