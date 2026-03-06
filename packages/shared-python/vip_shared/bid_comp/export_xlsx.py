@@ -46,6 +46,8 @@ _MIN_COL_WIDTHS = {
     6: 35,
 }
 
+_FOOTER_CATEGORIES = {"overhead & profit", "material sales tax", "permit fees"}
+
 _USER_SAFE_FALLBACK_TEXT = "Automated narrative detail unavailable for this section."
 _RATE_LIMIT_SAFE_TEXT = (
     "Narrative generation was temporarily rate-limited by the AI provider (HTTP 429). "
@@ -250,8 +252,15 @@ def _write_analysis_sheet(
         _style_table_header_cell(cell)
 
     narrative_map = _narrative_by_category(narrative)
+
+    # Split into trade rows and footer rows (O&P, tax, permits shown separately per Kalyvas layout)
+    trade_rows = [r for r in category_rows if str(r.get("category") or "").strip().lower() not in _FOOTER_CATEGORIES]
+    footer_rows = [r for r in category_rows if str(r.get("category") or "").strip().lower() in _FOOTER_CATEGORIES]
+
     row = table_header_row + 1
-    for item in category_rows:
+
+    # Trade category rows (with LLM narrative in Notes column)
+    for item in trade_rows:
         category = item.get("category")
         cat_key = str(category or "").strip().lower()
         driver_text = narrative_map.get(cat_key, "")
@@ -271,7 +280,60 @@ def _write_analysis_sheet(
             ws.cell(row=row, column=6).font = Font(italic=True, size=10, color="222222")
         row += 1
 
-    table_end_row = row - 1
+    table_end_row = row - 1  # last trade row — Delta conditional formatting applies up to here
+
+    # Subtotal row (trade categories only)
+    sub_primary = sum(r.get("primary_total") or 0 for r in trade_rows)
+    sub_comparison = sum(r.get("comparison_total") or 0 for r in trade_rows)
+    sub_delta = sum(r.get("delta") or 0 for r in trade_rows)
+    sub_delta_pct = (sub_delta / sub_primary) if sub_primary else None
+    ws.cell(row=row, column=1, value="Subtotal")
+    ws.cell(row=row, column=2, value=sub_primary)
+    ws.cell(row=row, column=3, value=sub_comparison)
+    ws.cell(row=row, column=4, value=sub_delta)
+    ws.cell(row=row, column=5, value=sub_delta_pct)
+    for col in range(1, 7):
+        ws.cell(row=row, column=col).border = _THIN_BORDER
+        ws.cell(row=row, column=col).font = Font(bold=True)
+        ws.cell(row=row, column=col).fill = PatternFill(fgColor="EEEEEE", fill_type="solid")
+    for col in (2, 3, 4):
+        ws.cell(row=row, column=col).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
+    ws.cell(row=row, column=5).number_format = "0.00%"
+    row += 1
+
+    # Footer rows: Overhead & Profit, Material Sales Tax, Permit Fees
+    for item in footer_rows:
+        category = item.get("category")
+        ws.cell(row=row, column=1, value=category)
+        ws.cell(row=row, column=2, value=item.get("primary_total"))
+        ws.cell(row=row, column=3, value=item.get("comparison_total"))
+        ws.cell(row=row, column=4, value=item.get("delta"))
+        ws.cell(row=row, column=5, value=item.get("delta_pct"))
+        for col in range(1, 7):
+            ws.cell(row=row, column=col).border = _THIN_BORDER
+        for col in (2, 3, 4):
+            ws.cell(row=row, column=col).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
+        ws.cell(row=row, column=5).number_format = "0.00%"
+        row += 1
+
+    # Total row (all categories combined)
+    total_primary = sum(r.get("primary_total") or 0 for r in category_rows)
+    total_comparison = sum(r.get("comparison_total") or 0 for r in category_rows)
+    total_delta = sum(r.get("delta") or 0 for r in category_rows)
+    total_delta_pct = (total_delta / total_primary) if total_primary else None
+    ws.cell(row=row, column=1, value="Total")
+    ws.cell(row=row, column=2, value=total_primary)
+    ws.cell(row=row, column=3, value=total_comparison)
+    ws.cell(row=row, column=4, value=total_delta)
+    ws.cell(row=row, column=5, value=total_delta_pct)
+    for col in range(1, 7):
+        ws.cell(row=row, column=col).border = _THIN_BORDER
+        ws.cell(row=row, column=col).font = Font(bold=True)
+        ws.cell(row=row, column=col).fill = PatternFill(fgColor="DDDDDD", fill_type="solid")
+    for col in (2, 3, 4):
+        ws.cell(row=row, column=col).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
+    ws.cell(row=row, column=5).number_format = "0.00%"
+    row += 1
     if table_end_row >= table_header_row + 1:
         ws.conditional_formatting.add(
             f"D{table_header_row + 1}:D{table_end_row}",
