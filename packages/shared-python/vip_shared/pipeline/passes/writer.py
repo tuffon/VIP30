@@ -484,12 +484,12 @@ def _build_fallback_narrative(
         if top_category:
             delta_direction = "higher" if top_category.delta > 0 else "lower"
             overview = (
-                f"Comparison of {primary_name} and {comparison_name}. "
-                f"Largest variance: {top_category.category} (${abs(top_category.delta):,.2f} {delta_direction} in comparison). "
-                f"Refer to cost driver analysis below."
+                f"Comparing {primary_name} and {comparison_name}, the largest variance is in "
+                f"{top_category.category} (${abs(top_category.delta):,.2f} {delta_direction} in comparison). "
+                f"Overall direction: {analysis.overall_delta_direction}. See key drivers below for details."
             )
         else:
-            overview = f"Comparison of {primary_name} and {comparison_name}. Refer to cost driver analysis below."
+            overview = f"Comparison of {primary_name} and {comparison_name}. See key drivers below for details."
 
     return DraftNarrative(
         overview=overview,
