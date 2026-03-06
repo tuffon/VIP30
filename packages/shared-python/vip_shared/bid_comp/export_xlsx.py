@@ -244,14 +244,11 @@ def _write_analysis_sheet(
         f"{pair.comparison.estimate_name} ($)",
         "Delta ($)",
         "Delta (% of Primary)",
-        "Notes",
     ]
     table_header_row = row
     for idx, header in enumerate(headers, start=1):
         cell = ws.cell(row=table_header_row, column=idx, value=header)
         _style_table_header_cell(cell)
-
-    narrative_map = _narrative_by_category(narrative)
 
     # Split into trade rows and footer rows (O&P, tax, permits shown separately per Kalyvas layout)
     trade_rows = [r for r in category_rows if str(r.get("category") or "").strip().lower() not in _FOOTER_CATEGORIES]
@@ -259,25 +256,19 @@ def _write_analysis_sheet(
 
     row = table_header_row + 1
 
-    # Trade category rows (with LLM narrative in Notes column)
+    # Trade category rows
     for item in trade_rows:
         category = item.get("category")
-        cat_key = str(category or "").strip().lower()
-        driver_text = narrative_map.get(cat_key, "")
         ws.cell(row=row, column=1, value=category)
         ws.cell(row=row, column=2, value=item.get("primary_total"))
         ws.cell(row=row, column=3, value=item.get("comparison_total"))
         ws.cell(row=row, column=4, value=item.get("delta"))
         ws.cell(row=row, column=5, value=item.get("delta_pct"))
-        ws.cell(row=row, column=6, value=driver_text or None)
-        for col in range(1, 7):
+        for col in range(1, 6):
             ws.cell(row=row, column=col).border = _THIN_BORDER
         for col in (2, 3, 4):
             ws.cell(row=row, column=col).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
         ws.cell(row=row, column=5).number_format = "0.00%"
-        if driver_text:
-            ws.cell(row=row, column=6).alignment = Alignment(wrap_text=True, vertical="top")
-            ws.cell(row=row, column=6).font = Font(italic=True, size=10, color="222222")
         row += 1
 
     table_end_row = row - 1  # last trade row — Delta conditional formatting applies up to here
@@ -292,7 +283,7 @@ def _write_analysis_sheet(
     ws.cell(row=row, column=3, value=sub_comparison)
     ws.cell(row=row, column=4, value=sub_delta)
     ws.cell(row=row, column=5, value=sub_delta_pct)
-    for col in range(1, 7):
+    for col in range(1, 6):
         ws.cell(row=row, column=col).border = _THIN_BORDER
         ws.cell(row=row, column=col).font = Font(bold=True)
         ws.cell(row=row, column=col).fill = PatternFill(fgColor="EEEEEE", fill_type="solid")
@@ -309,7 +300,7 @@ def _write_analysis_sheet(
         ws.cell(row=row, column=3, value=item.get("comparison_total"))
         ws.cell(row=row, column=4, value=item.get("delta"))
         ws.cell(row=row, column=5, value=item.get("delta_pct"))
-        for col in range(1, 7):
+        for col in range(1, 6):
             ws.cell(row=row, column=col).border = _THIN_BORDER
         for col in (2, 3, 4):
             ws.cell(row=row, column=col).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
@@ -326,7 +317,7 @@ def _write_analysis_sheet(
     ws.cell(row=row, column=3, value=total_comparison)
     ws.cell(row=row, column=4, value=total_delta)
     ws.cell(row=row, column=5, value=total_delta_pct)
-    for col in range(1, 7):
+    for col in range(1, 6):
         ws.cell(row=row, column=col).border = _THIN_BORDER
         ws.cell(row=row, column=col).font = Font(bold=True)
         ws.cell(row=row, column=col).fill = PatternFill(fgColor="DDDDDD", fill_type="solid")
