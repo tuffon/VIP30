@@ -1,4 +1,5 @@
 export const AUTH_STORAGE_KEY = "vip_auth_session";
+export const AUTH_SESSION_CHANGED_EVENT = "vip-auth-session-changed";
 const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 export type PersistedSession = {
@@ -10,10 +11,18 @@ function hasWindow() {
   return typeof window !== "undefined";
 }
 
-export function persistSession(email: string): void {
+function emitSessionChanged(): void {
+  if (!hasWindow()) return;
+  window.dispatchEvent(new Event(AUTH_SESSION_CHANGED_EVENT));
+}
+
+export function persistSession(email: string, notify = true): void {
   if (!hasWindow() || !email) return;
   const payload: PersistedSession = { email, timestamp: Date.now() };
   window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(payload));
+  if (notify) {
+    emitSessionChanged();
+  }
 }
 
 export function getPersistedSession(): PersistedSession | null {
@@ -32,9 +41,12 @@ export function getPersistedSession(): PersistedSession | null {
   }
 }
 
-export function clearPersistedSession(): void {
+export function clearPersistedSession(notify = true): void {
   if (!hasWindow()) return;
   window.localStorage.removeItem(AUTH_STORAGE_KEY);
+  if (notify) {
+    emitSessionChanged();
+  }
 }
 
 export function isSessionValid(session: Pick<PersistedSession, "timestamp">): boolean {

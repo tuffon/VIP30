@@ -5,6 +5,7 @@ import { FormEvent, Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { AuthLayout } from "../../../components/AuthLayout";
+import { persistSession } from "../../../lib/auth";
 
 const errorMessages: Record<string, string> = {
   invalid: "Invalid code. Please check and try again.",
@@ -44,7 +45,9 @@ function VerifyForm() {
       });
 
       if (response.ok) {
+        persistSession(email);
         router.push("/bid-comp");
+        router.refresh();
         return;
       }
 

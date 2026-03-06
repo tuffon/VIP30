@@ -2,9 +2,15 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { clearPersistedSession, getPersistedSession, isSessionValid, persistSession } from "../lib/auth";
+import {
+  AUTH_SESSION_CHANGED_EVENT,
+  clearPersistedSession,
+  getPersistedSession,
+  isSessionValid,
+  persistSession,
+} from "../lib/auth";
 import { UserDropdown } from "./UserDropdown";
 
 type MePayload = {
@@ -22,49 +28,59 @@ export function NavAuth() {
   });
   const [role, setRole] = useState<string>("member");
 
+  const loadUser = useCallback(async () => {
+    try {
+      const response = await fetch(`${apiBase.replace(/\/$/, "")}/auth/me`, { credentials: "include" });
+      if (!response.ok) {
+        setEmail(null);
+        setRole("member");
+        clearPersistedSession(false);
+        return;
+      }
+
+      const payload = (await response.json()) as MePayload;
+      const resolvedEmail = payload.user?.email || null;
+      const resolvedRole = payload.user?.role || "member";
+      setEmail(resolvedEmail);
+      setRole(resolvedRole);
+      if (resolvedEmail) {
+        persistSession(resolvedEmail, false);
+      } else {
+        clearPersistedSession(false);
+      }
+    } catch {
+      setEmail(null);
+      setRole("member");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [apiBase]);
+
   useEffect(() => {
     let isMounted = true;
 
-    async function loadUser() {
+    async function loadOnMount() {
       try {
-        const response = await fetch(`${apiBase.replace(/\/$/, "")}/auth/me`, { credentials: "include" });
         if (!isMounted) return;
-
-        if (!response.ok) {
-          setEmail(null);
-          setRole("member");
-          clearPersistedSession();
-          return;
-        }
-
-        const payload = (await response.json()) as MePayload;
-        const resolvedEmail = payload.user?.email || null;
-        const resolvedRole = payload.user?.role || "member";
-        setEmail(resolvedEmail);
-        setRole(resolvedRole);
-        if (resolvedEmail) {
-          persistSession(resolvedEmail);
-        } else {
-          clearPersistedSession();
-        }
+        await loadUser();
       } catch {
-        if (!isMounted) return;
-        setEmail(null);
-        setRole("member");
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
+        // no-op: loadUser handles state updates
       }
     }
 
+    const handleSessionChanged = () => {
+      void loadUser();
+    };
+
     setIsLoading(true);
-    loadUser();
+    void loadOnMount();
+    window.addEventListener(AUTH_SESSION_CHANGED_EVENT, handleSessionChanged);
 
     return () => {
       isMounted = false;
+      window.removeEventListener(AUTH_SESSION_CHANGED_EVENT, handleSessionChanged);
     };
-  }, [apiBase]);
+  }, [loadUser]);
 
   async function handleLogout() {
     clearPersistedSession();
