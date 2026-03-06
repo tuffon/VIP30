@@ -8,7 +8,7 @@
 - ✅ **v2.0 Analytical Intelligence** — Phases 9-12 (shipped 2026-02-17)
 - ✅ **v2.1 Repository Restructure** — Phases 13-15 (shipped 2026-02-18)
 - ✅ **v2.2 Unified Output** — Phases 16-17 (shipped 2026-02-18)
-- 🚧 **v2.3 Report Quality** — Phases 18-19 (in progress)
+- 🚧 **v2.3 Report Quality** — Phases 18-21 (in progress)
 
 ## Overview
 
@@ -18,6 +18,8 @@ Fix the narrative regression that causes output sections to be empty, then eleva
 
 - [x] **Phase 18: Narrative Pipeline Fix** — Diagnose and repair the LLM narrative regression (completed 2026-03-06)
 - [x] **Phase 19: XLSX Report Polish** — Professional visual upgrade for client-ready output (completed 2026-03-06)
+- [x] **Phase 20: Cost Driver Narrative Quality** — Fix prompts so key cost drivers have associated narrative text (completed 2026-03-06)
+- [ ] **Phase 21: Report Output Quality** — Notes legibility, summary depth, key observations integration, follow-up specificity, analysis layout per Kalyvas template
 
 ## Phase Details
 
@@ -53,12 +55,31 @@ Plans:
 Plans:
 - [x] 19-01: Visual polish — header, color palette, column widths, print setup
 
+### Phase 20: Cost Driver Narrative Quality
+**Goal**: Fix LLM prompts so key cost drivers have associated narrative text in report output
+**Depends on**: Phase 19
+**Plans**: TBD
+
+Plans:
+- [x] 20-01: Prompt v2.2 — restore approach table, fix narrative schema
+- [x] 20-02: Replace Severity with Notes column in Summary Top Cost Drivers table
+
+### Phase 21: Report Output Quality
+**Goal**: Elevate report readability and analytical depth — Notes legibility, richer overview summary, key observations integrated into summary, specific follow-ups, analysis section styled after Kalyvas template
+**Depends on**: Phase 20
+**Reference**: COMP-BID-Template-2025 Kalyvas.xlsx in project root (target layout for Analysis sheet category comparison)
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 21 to break down)
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 18. Narrative Pipeline Fix | v2.3 | 1/1 planned | Complete | 2026-03-06 |
 | 19. XLSX Report Polish | v2.3 | 1/1 planned | Complete | 2026-03-06 |
+| 20. Cost Driver Narrative Quality | v2.3 | 2/2 planned | Complete | 2026-03-06 |
+| 21. Report Output Quality | v2.3 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-03-05*
