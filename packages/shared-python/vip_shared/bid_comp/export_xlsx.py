@@ -400,11 +400,6 @@ def _build_observations(narrative, signal_bundle: Optional[Any]) -> List[str]:
 
 def _build_overall_summary(narrative) -> str:
     overview = _sanitize_user_text(getattr(narrative, "overview", ""))
-    scope_items = list(getattr(narrative, "scope_observations", []) or [])
-    scope_items = [_sanitize_user_text(item) for item in scope_items if _sanitize_user_text(item)]
-    if overview and scope_items:
-        synthesis = " ".join(scope_items[:3])
-        return f"{overview}\n\nKey scope differences: {synthesis}"
     if overview:
         return overview
     return "Comparison summary unavailable. Refer to top cost drivers and analysis details below."
