@@ -279,6 +279,7 @@ class NarrativePipeline:
             primary_name=primary_name,
             comparison_name=comparison_name,
             category_analyses=category_analyses_dicts,
+            top_cost_drivers=category_analyses_dicts[:6],
             scope_gaps=analysis.scope_gaps,
             overall_delta_direction=analysis.overall_delta_direction,
             confidence=analysis.confidence,

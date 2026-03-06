@@ -776,21 +776,23 @@ class BidComp:
                 delta_rows, reason="pipeline_no_final", pair=pair
             )
 
-        # Build lookup dict from top_deltas by category for numeric values
-        delta_by_category = {
-            d.get("category", "").lower(): d for d in top_deltas
+        # Align key drivers to top_deltas order so XLSX rows always map to the correct category.
+        driver_by_category = {
+            str(d.category or "").strip().lower(): d for d in final.key_drivers
         }
-
-        # Build key_drivers from FinalNarrative.key_drivers with numeric values from top_deltas
         key_drivers = []
-        for d in final.key_drivers:
-            delta_data = delta_by_category.get(d.category.lower(), {})
+        for idx, delta_data in enumerate(top_deltas):
+            category = str(delta_data.get("category") or "").strip()
+            matched = driver_by_category.get(category.lower())
+            if matched is None and idx < len(final.key_drivers):
+                # Contract fallback: tolerate label drift when model preserves ordering.
+                matched = final.key_drivers[idx]
             key_drivers.append({
-                "category": d.category,
+                "category": category,
                 "primary_total": delta_data.get("primary_total"),
                 "comparison_total": delta_data.get("comparison_total"),
                 "delta_total": delta_data.get("delta"),
-                "narrative": d.narrative,
+                "narrative": (matched.narrative if matched is not None else ""),
             })
 
         # Build sections dict for export

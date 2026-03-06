@@ -334,6 +334,7 @@ class TestRunWriterPass:
         assert template_id == "writer_pass_v1"
         assert "primary_name" in context
         assert "category_analyses_json" in context
+        assert "top_cost_drivers_json" in context
 
     def test_writer_pass_handles_response_with_code_fences(
         self,
@@ -373,9 +374,56 @@ class TestRunWriterPass:
         assert context["primary_name"] == "Carrier"
         assert context["comparison_name"] == "Contractor"
         assert "category_analyses_json" in context
+        assert "top_cost_drivers_json" in context
         assert "scope_gaps_json" in context
         assert context["overall_delta_direction"] == "primary_higher"
         assert context["confidence"] == "high"
+
+    def test_writer_pass_normalizes_key_drivers_to_top_cost_driver_order(
+        self,
+        sample_analysis_result: AnalysisResult,
+    ):
+        """LLM key_driver order/labels are normalized to the top cost driver contract."""
+        response = json.dumps({
+            "overview": "Primary estimate higher.",
+            "key_drivers": [
+                {
+                    "category": "electrical",
+                    "amounts": "$4,800 vs $1,200 (delta $3,600)",
+                    "narrative": "Electrical narrative."
+                },
+                {
+                    "category": "hvac / mechanical",
+                    "amounts": "$6,300 vs $5,100 (delta $1,200)",
+                    "narrative": "HVAC narrative."
+                },
+                {
+                    "category": "FLOORING",
+                    "amounts": "$4,590 vs $3,200 (delta $1,390)",
+                    "narrative": "Flooring narrative."
+                },
+            ],
+            "scope_observations": [],
+            "suggested_followups": [],
+        })
+        adapter = MockLLMAdapter(response)
+
+        result = run_writer_pass(
+            sample_analysis_result,
+            primary_name="Primary",
+            comparison_name="Comparison",
+            llm_adapter=adapter,
+        )
+
+        # Expected order follows WriterInput top_cost_drivers (analysis input order)
+        assert [d.category for d in result.key_drivers] == [
+            "HVAC / Mechanical",
+            "Flooring",
+            "Electrical",
+        ]
+        assert result.key_drivers[0].narrative == "HVAC narrative."
+        assert result.key_drivers[1].narrative == "Flooring narrative."
+        assert result.key_drivers[2].narrative == "Electrical narrative."
 
 
 # ---------------------------------------------------------------------------

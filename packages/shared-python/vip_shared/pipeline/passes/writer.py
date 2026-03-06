@@ -22,6 +22,7 @@ from ...rules.models import SignalBundle
 
 
 logger = logging.getLogger("vip-parse.pipeline.writer")
+_TOP_COST_DRIVER_LIMIT = 6
 
 
 def _sanitize_fallback_driver_text(text: str) -> str:
@@ -55,6 +56,10 @@ class WriterInput(BaseModel):
     category_analyses: List[Dict[str, Any]] = Field(
         default_factory=list,
         description="Serialized CategoryAnalysis list for prompt injection"
+    )
+    top_cost_drivers: List[Dict[str, Any]] = Field(
+        default_factory=list,
+        description="Ordered top cost drivers to narrate in key_drivers"
     )
     scope_gaps: List[str] = Field(
         default_factory=list,
@@ -98,11 +103,13 @@ def build_writer_input(
             "delta_drivers": cat_analysis.delta_drivers,
             "line_item_evidence": cat_analysis.line_item_evidence,
         })
+    top_cost_drivers = category_analyses_dicts[:_TOP_COST_DRIVER_LIMIT]
 
     return WriterInput(
         primary_name=primary_name,
         comparison_name=comparison_name,
         category_analyses=category_analyses_dicts,
+        top_cost_drivers=top_cost_drivers,
         scope_gaps=analysis.scope_gaps,
         overall_delta_direction=analysis.overall_delta_direction,
         confidence=analysis.confidence,
@@ -150,6 +157,7 @@ def run_writer_pass(
         "primary_name": writer_input.primary_name,
         "comparison_name": writer_input.comparison_name,
         "category_analyses_json": json.dumps(writer_input.category_analyses, indent=2),
+        "top_cost_drivers_json": json.dumps(writer_input.top_cost_drivers, indent=2),
         "scope_gaps_json": json.dumps(writer_input.scope_gaps, indent=2),
         "overall_delta_direction": writer_input.overall_delta_direction,
         "confidence": writer_input.confidence,
@@ -184,6 +192,12 @@ def run_writer_pass(
 
         # Parse response into DraftNarrative
         result = _parse_writer_response(raw_response)
+        result.key_drivers = _normalize_key_drivers_to_top_cost_drivers(
+            result.key_drivers,
+            writer_input.top_cost_drivers,
+            primary_name=writer_input.primary_name,
+            comparison_name=writer_input.comparison_name,
+        )
         if signals is not None:
             result.suggested_followups = _merge_followups(result.suggested_followups, signals)
 
@@ -212,6 +226,61 @@ def _build_alert_context(signals: SignalBundle) -> str:
         amt = f" (${alert.affected_amount:,.2f})" if alert.affected_amount is not None else ""
         lines.append(f"- [{alert.severity.value}] {alert.title}: {alert.detail}{amt}")
     return "\n".join(lines) if lines else "- none"
+
+
+def _norm_category(value: str) -> str:
+    return " ".join(str(value or "").strip().lower().split())
+
+
+def _format_amounts(primary_name: str, comparison_name: str, target: Dict[str, Any]) -> str:
+    primary = float(target.get("primary_total") or 0.0)
+    comparison = float(target.get("comparison_total") or 0.0)
+    delta = float(target.get("delta") or 0.0)
+    return f"{primary_name}: ${primary:,.2f}. {comparison_name}: ${comparison:,.2f}. Delta: ${delta:,.2f}"
+
+
+def _normalize_key_drivers_to_top_cost_drivers(
+    parsed_drivers: List[DriverNarrative],
+    top_cost_drivers: List[Dict[str, Any]],
+    *,
+    primary_name: str,
+    comparison_name: str,
+) -> List[DriverNarrative]:
+    if not top_cost_drivers:
+        return parsed_drivers
+
+    by_category: Dict[str, DriverNarrative] = {}
+    for driver in parsed_drivers:
+        key = _norm_category(driver.category)
+        if key and key not in by_category:
+            by_category[key] = driver
+
+    normalized: List[DriverNarrative] = []
+    for idx, target in enumerate(top_cost_drivers):
+        target_category = str(target.get("category") or "").strip()
+        if not target_category:
+            continue
+
+        driver = by_category.get(_norm_category(target_category))
+        if driver is None and idx < len(parsed_drivers):
+            # Some models omit category labels but preserve requested ordering.
+            driver = parsed_drivers[idx]
+
+        if driver is None or not str(driver.narrative or "").strip():
+            raise ValueError(f"writer output missing narrative for top cost driver '{target_category}'")
+
+        amounts = str(driver.amounts or "").strip() or _format_amounts(primary_name, comparison_name, target)
+        normalized.append(
+            DriverNarrative(
+                category=target_category,
+                amounts=amounts,
+                narrative=str(driver.narrative).strip(),
+            )
+        )
+
+    if not normalized:
+        raise ValueError("writer output missing normalized key drivers")
+    return normalized
 
 
 def _build_pattern_context(signals: SignalBundle) -> str:

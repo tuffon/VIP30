@@ -634,20 +634,17 @@ class TestKeyDriverNumericValues:
         top_deltas = bid_comp._top_deltas(category_rows)
         narrative = bid_comp._generate_narrative(pair, top_deltas)
 
-        # Find the unknown category driver
-        unknown_driver = None
-        for driver in narrative.key_drivers:
-            if "Unknown" in driver.get("category", ""):
-                unknown_driver = driver
-                break
+        # New contract behavior: key drivers are aligned to top_deltas categories.
+        assert narrative.key_drivers, "Expected at least one key driver"
+        assert all("Unknown Category XYZ" not in str(d.get("category", "")) for d in narrative.key_drivers)
+        assert len(narrative.key_drivers) == len(top_deltas)
 
-        assert unknown_driver is not None
-
-        # Values should be None when category doesn't match top_deltas
-        # (graceful degradation)
-        assert unknown_driver.get("category") == "Unknown Category XYZ"
-        # Note: These may be None because the category isn't in top_deltas
-        # The test validates graceful degradation - no exception thrown
+        for idx, driver in enumerate(narrative.key_drivers):
+            expected = top_deltas[idx]
+            assert driver.get("category") == expected.get("category")
+            assert driver.get("primary_total") == expected.get("primary_total")
+            assert driver.get("comparison_total") == expected.get("comparison_total")
+            assert driver.get("delta_total") == expected.get("delta")
 
     def test_key_drivers_full_pipeline_integration(
         self,
