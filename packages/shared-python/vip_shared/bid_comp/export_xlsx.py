@@ -160,18 +160,19 @@ def _write_summary_sheet(
         ws.cell(row=row, column=5).number_format = "0.0%"
         if driver_text:
             ws.cell(row=row, column=6).alignment = Alignment(wrap_text=True, vertical="top")
-            ws.cell(row=row, column=6).font = Font(italic=True, size=9, color="444444")
+            ws.cell(row=row, column=6).font = Font(italic=True, size=10, color="222222")
         row += 1
 
-    observations_row = row + 1
-    _style_section_header(ws, observations_row, "Key Observations")
-    observations_row += 1
     observations = _build_observations(narrative, signal_bundle)
-    for item in observations:
-        ws.cell(row=observations_row, column=1, value=f"- {item}")
-        ws.merge_cells(start_row=observations_row, start_column=1, end_row=observations_row, end_column=6)
-        ws.cell(row=observations_row, column=1).alignment = Alignment(wrap_text=True, vertical="top")
+    if observations:
+        observations_row = row + 1
+        _style_section_header(ws, observations_row, "Key Observations")
         observations_row += 1
+        for item in observations:
+            ws.cell(row=observations_row, column=1, value=f"- {item}")
+            ws.merge_cells(start_row=observations_row, start_column=1, end_row=observations_row, end_column=6)
+            ws.cell(row=observations_row, column=1).alignment = Alignment(wrap_text=True, vertical="top")
+            observations_row += 1
 
     _configure_print(ws)
     ws.freeze_panes = "A3"
@@ -241,32 +242,33 @@ def _write_analysis_sheet(
         f"{pair.comparison.estimate_name} ($)",
         "Delta ($)",
         "Delta (% of Primary)",
-        "Severity",
+        "Notes",
     ]
     table_header_row = row
     for idx, header in enumerate(headers, start=1):
         cell = ws.cell(row=table_header_row, column=idx, value=header)
         _style_table_header_cell(cell)
 
-    severity_by_category = _severity_by_category(signal_bundle)
+    narrative_map = _narrative_by_category(narrative)
     row = table_header_row + 1
     for item in category_rows:
         category = item.get("category")
-        severity = severity_by_category.get(str(category or ""), "")
+        cat_key = str(category or "").strip().lower()
+        driver_text = narrative_map.get(cat_key, "")
         ws.cell(row=row, column=1, value=category)
         ws.cell(row=row, column=2, value=item.get("primary_total"))
         ws.cell(row=row, column=3, value=item.get("comparison_total"))
         ws.cell(row=row, column=4, value=item.get("delta"))
         ws.cell(row=row, column=5, value=item.get("delta_pct"))
-        ws.cell(row=row, column=6, value=severity)
+        ws.cell(row=row, column=6, value=driver_text or None)
         for col in range(1, 7):
             ws.cell(row=row, column=col).border = _THIN_BORDER
         for col in (2, 3, 4):
             ws.cell(row=row, column=col).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
         ws.cell(row=row, column=5).number_format = "0.00%"
-        fill = _SEVERITY_FILLS.get(str(severity).lower())
-        if fill is not None:
-            ws.cell(row=row, column=6).fill = fill
+        if driver_text:
+            ws.cell(row=row, column=6).alignment = Alignment(wrap_text=True, vertical="top")
+            ws.cell(row=row, column=6).font = Font(italic=True, size=10, color="222222")
         row += 1
 
     table_end_row = row - 1
@@ -323,21 +325,6 @@ def _write_analysis_sheet(
 
 def _build_observations(narrative, signal_bundle: Optional[Any]) -> List[str]:
     observations: List[str] = []
-
-    overview = _sanitize_user_text(getattr(narrative, "overview", ""))
-    if overview:
-        observations.append(overview)
-
-    key_drivers = list(getattr(narrative, "key_drivers", []) or [])
-    for item in key_drivers[:3]:
-        if hasattr(item, "narrative"):
-            text = str(getattr(item, "narrative") or "").strip()
-        else:
-            text = str((item or {}).get("narrative") or "").strip()
-        sanitized = _sanitize_user_text(text)
-        if sanitized:
-            observations.append(sanitized)
-
     if signal_bundle is not None:
         for alert in getattr(signal_bundle, "alert_tags", []) or []:
             severity = getattr(getattr(alert, "severity", None), "value", getattr(alert, "severity", ""))
@@ -346,14 +333,16 @@ def _build_observations(narrative, signal_bundle: Optional[Any]) -> List[str]:
             sanitized = _sanitize_user_text(f"[{severity}] {title}: {detail}".strip())
             if sanitized:
                 observations.append(sanitized)
-
-    if not observations:
-        return ["No key observations available"]
     return observations
 
 
 def _build_overall_summary(narrative) -> str:
     overview = _sanitize_user_text(getattr(narrative, "overview", ""))
+    scope_items = list(getattr(narrative, "scope_observations", []) or [])
+    scope_items = [_sanitize_user_text(item) for item in scope_items if _sanitize_user_text(item)]
+    if overview and scope_items:
+        synthesis = " ".join(scope_items[:3])
+        return f"{overview}\n\nKey scope differences: {synthesis}"
     if overview:
         return overview
     return "Comparison summary unavailable. Refer to top cost drivers and analysis details below."
