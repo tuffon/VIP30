@@ -268,6 +268,18 @@ class NarrativeResult:
     raw_response: str = ""
     parsed: bool = False
 
+    @property
+    def overview(self) -> str:
+        return self.sections.get("overview_of_estimates", "") or ""
+
+    @property
+    def scope_observations(self) -> List[str]:
+        return list(self.sections.get("scope_observations") or [])
+
+    @property
+    def suggested_followups(self) -> List[str]:
+        return list(self.sections.get("suggested_followups") or [])
+
 
 def _strip_code_fences(text: str) -> str:
     stripped = text.strip()
@@ -1504,4 +1516,3 @@ class BidComp:
 
 
 __all__ = ["BidComp"]
-

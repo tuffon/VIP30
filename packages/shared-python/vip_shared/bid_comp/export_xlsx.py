@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import datetime
 import logging
 import re
 from io import BytesIO
 from typing import Any, Dict, List, Optional
 
 from openpyxl import Workbook
+from openpyxl.cell.cell import MergedCell
 from openpyxl.formatting.rule import ColorScaleRule, DataBarRule
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side, numbers
 from openpyxl.utils import get_column_letter
@@ -23,11 +25,25 @@ _TITLE_FONT = Font(bold=True, size=16)
 _SECTION_HEADER_FONT = Font(bold=True, size=13)
 _TABLE_HEADER_FONT = Font(bold=True, size=11)
 _FIELD_LABEL_FONT = Font(bold=True, size=11)
+_HEADER_FILL = PatternFill(fill_type="solid", fgColor="1F3864")
+_HEADER_FONT = Font(bold=True, size=16, color="FFFFFF")
+_SUBHEADER_FILL = PatternFill(fill_type="solid", fgColor="D6E4F7")
+_SUBHEADER_FONT = Font(size=10, color="1F3864")
+_SECTION_HEADER_FILL = PatternFill(fill_type="solid", fgColor="F2F2F2")
+_TABLE_HEADER_FILL = PatternFill(fill_type="solid", fgColor="D9E1F2")
 
 _SEVERITY_FILLS = {
-    "critical": PatternFill(fill_type="solid", fgColor="FFD966"),
-    "notable": PatternFill(fill_type="solid", fgColor="FFF2CC"),
-    "informational": PatternFill(fill_type="solid", fgColor="C6EFCE"),
+    "critical": PatternFill(fill_type="solid", fgColor="F4CCCC"),
+    "notable": PatternFill(fill_type="solid", fgColor="FFF3CD"),
+    "informational": PatternFill(fill_type="solid", fgColor="D4EDDA"),
+}
+_MIN_COL_WIDTHS = {
+    1: 38,
+    2: 16,
+    3: 16,
+    4: 16,
+    5: 16,
+    6: 14,
 }
 
 _USER_SAFE_FALLBACK_TEXT = "Automated narrative detail unavailable for this section."
@@ -61,9 +77,10 @@ def export_xlsx(
     ws_summary = wb.active
     ws_summary.title = "Summary"
     ws_analysis = wb.create_sheet("Analysis")
+    report_date = datetime.date.today().strftime("%B %d, %Y")
 
-    _write_summary_sheet(ws_summary, pair, narrative, category_rows, signal_bundle)
-    _write_analysis_sheet(ws_analysis, pair, narrative, category_rows, recap_rows or [], methodology, signal_bundle)
+    _write_summary_sheet(ws_summary, pair, narrative, category_rows, signal_bundle, report_date)
+    _write_analysis_sheet(ws_analysis, pair, narrative, category_rows, recap_rows or [], methodology, signal_bundle, report_date)
 
     bio = BytesIO()
     wb.save(bio)
@@ -72,9 +89,20 @@ def export_xlsx(
     return payload
 
 
-def _write_summary_sheet(ws, pair, narrative, category_rows: List[Dict[str, Any]], signal_bundle: Optional[Any]) -> None:
-    ws["A1"] = "Bid Comparison - Summary"
-    ws["A1"].font = _TITLE_FONT
+def _write_summary_sheet(
+    ws,
+    pair,
+    narrative,
+    category_rows: List[Dict[str, Any]],
+    signal_bundle: Optional[Any],
+    report_date: str,
+) -> None:
+    _write_sheet_header(
+        ws,
+        title="Bid Comparison Report",
+        pair=pair,
+        report_date=report_date,
+    )
 
     primary_total, comparison_total, delta_total = _totals(category_rows)
 
@@ -95,8 +123,7 @@ def _write_summary_sheet(ws, pair, narrative, category_rows: List[Dict[str, Any]
     for row in (5, 6, 7):
         ws[f"B{row}"].number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
 
-    ws["A9"] = "Overall Summary"
-    ws["A9"].font = _SECTION_HEADER_FONT
+    _style_section_header(ws, 9, "Overall Summary")
     ws["A10"] = _build_overall_summary(narrative)
     ws.merge_cells(start_row=10, start_column=1, end_row=10, end_column=6)
     ws["A10"].alignment = Alignment(wrap_text=True, vertical="top")
@@ -105,15 +132,13 @@ def _write_summary_sheet(ws, pair, narrative, category_rows: List[Dict[str, Any]
         ws.cell(row=10, column=col).border = _THIN_BORDER
 
     start_row = 12
-    ws[f"A{start_row}"] = "Top Cost Drivers"
-    ws[f"A{start_row}"].font = _SECTION_HEADER_FONT
+    _style_section_header(ws, start_row, "Top Cost Drivers")
 
     headers = ["Category", "Primary ($)", "Comparison ($)", "Delta ($)", "% of Total Variance", "Severity"]
     header_row = start_row + 1
     for idx, header in enumerate(headers, start=1):
         cell = ws.cell(row=header_row, column=idx, value=header)
-        cell.font = _TABLE_HEADER_FONT
-        cell.border = _THIN_BORDER
+        _style_table_header_cell(cell)
 
     ranked = _ranked_rows(category_rows)
     severity_by_category = _severity_by_category(signal_bundle)
@@ -138,7 +163,7 @@ def _write_summary_sheet(ws, pair, narrative, category_rows: List[Dict[str, Any]
         row += 1
 
     observations_row = row + 1
-    ws.cell(row=observations_row, column=1, value="Key Observations").font = Font(bold=True)
+    _style_section_header(ws, observations_row, "Key Observations")
     observations_row += 1
     observations = _build_observations(narrative, signal_bundle)
     for item in observations:
@@ -147,7 +172,8 @@ def _write_summary_sheet(ws, pair, narrative, category_rows: List[Dict[str, Any]
         ws.cell(row=observations_row, column=1).alignment = Alignment(wrap_text=True, vertical="top")
         observations_row += 1
 
-    ws.freeze_panes = "A2"
+    _configure_print(ws)
+    ws.freeze_panes = "A3"
     _autosize(ws)
 
 
@@ -159,12 +185,17 @@ def _write_analysis_sheet(
     recap_rows: List[Dict[str, Any]],
     methodology: Optional[Any],
     signal_bundle: Optional[Any],
+    report_date: str,
 ) -> None:
-    ws["A1"] = "Bid Comparison - Analysis"
-    ws["A1"].font = _TITLE_FONT
+    _write_sheet_header(
+        ws,
+        title="Bid Comparison - Analysis",
+        pair=pair,
+        report_date=report_date,
+    )
     row = 3
 
-    ws.cell(row=row, column=1, value="Methodology Detail").font = _SECTION_HEADER_FONT
+    _style_section_header(ws, row, "Methodology Detail")
     row += 1
     method_rows = _methodology_rows(methodology)
     for label, value in method_rows:
@@ -176,7 +207,7 @@ def _write_analysis_sheet(
         row += 1
 
     row += 1
-    ws.cell(row=row, column=1, value="Scope Alignment").font = _SECTION_HEADER_FONT
+    _style_section_header(ws, row, "Scope Alignment")
     row += 1
     scope_items = list(getattr(narrative, "scope_observations", []) or [])
     scope_items = [item for item in (_sanitize_user_text(item) for item in scope_items) if item]
@@ -192,7 +223,7 @@ def _write_analysis_sheet(
     followups = [item for item in (_sanitize_user_text(item) for item in followups) if item]
     if followups:
         row += 1
-        ws.cell(row=row, column=1, value="Suggested Follow-ups").font = _SECTION_HEADER_FONT
+        _style_section_header(ws, row, "Suggested Follow-ups")
         row += 1
         for item in followups:
             ws.cell(row=row, column=1, value=f"- {item}")
@@ -201,7 +232,7 @@ def _write_analysis_sheet(
             row += 1
 
     row += 1
-    ws.cell(row=row, column=1, value="Category-by-Category Comparison").font = _SECTION_HEADER_FONT
+    _style_section_header(ws, row, "Category-by-Category Comparison")
     row += 1
     headers = [
         "Category",
@@ -214,8 +245,7 @@ def _write_analysis_sheet(
     table_header_row = row
     for idx, header in enumerate(headers, start=1):
         cell = ws.cell(row=table_header_row, column=idx, value=header)
-        cell.font = _TABLE_HEADER_FONT
-        cell.border = _THIN_BORDER
+        _style_table_header_cell(cell)
 
     severity_by_category = _severity_by_category(signal_bundle)
     row = table_header_row + 1
@@ -245,13 +275,13 @@ def _write_analysis_sheet(
             ColorScaleRule(
                 start_type="num",
                 start_value=-1,
-                start_color="FFD966",
+                start_color="F4CCCC",
                 mid_type="num",
                 mid_value=0,
                 mid_color="FFFFFF",
                 end_type="num",
                 end_value=1,
-                end_color="C6EFCE",
+                end_color="D4EDDA",
             ),
         )
         ws.conditional_formatting.add(
@@ -268,13 +298,12 @@ def _write_analysis_sheet(
 
     if recap_rows:
         row += 2
-        ws.cell(row=row, column=1, value="Recap Detail (raw)").font = _SECTION_HEADER_FONT
+        _style_section_header(ws, row, "Recap Detail (raw)")
         row += 1
         recap_headers = ["Estimate", "Group", "Item", "Total ($)"]
         for idx, header in enumerate(recap_headers, start=1):
             cell = ws.cell(row=row, column=idx, value=header)
-            cell.font = _TABLE_HEADER_FONT
-            cell.border = _THIN_BORDER
+            _style_table_header_cell(cell)
         row += 1
         for entry in recap_rows[:500]:
             ws.cell(row=row, column=1, value=entry.get("estimate"))
@@ -286,7 +315,8 @@ def _write_analysis_sheet(
             ws.cell(row=row, column=4).number_format = numbers.FORMAT_CURRENCY_USD_SIMPLE
             row += 1
 
-    ws.freeze_panes = "A2"
+    _configure_print(ws)
+    ws.freeze_panes = "A3"
     _autosize(ws)
 
 
@@ -389,11 +419,74 @@ def _severity_by_category(signal_bundle: Optional[Any]) -> Dict[str, str]:
     return out
 
 
+def _write_sheet_header(ws, title: str, pair, report_date: str) -> None:
+    ws.merge_cells("A1:F1")
+    ws["A1"] = title
+    ws["A1"].font = _HEADER_FONT
+    ws["A1"].fill = _HEADER_FILL
+    ws["A1"].alignment = Alignment(horizontal="center", vertical="center")
+    ws.row_dimensions[1].height = 30
+    for col in range(2, 7):
+        ws.cell(row=1, column=col).fill = _HEADER_FILL
+
+    ws.merge_cells("A2:F2")
+    ws["A2"] = (
+        f"Report Date: {report_date}  |  "
+        f"Primary: {pair.primary.estimate_name}  |  "
+        f"Comparison: {pair.comparison.estimate_name}"
+    )
+    ws["A2"].font = _SUBHEADER_FONT
+    ws["A2"].fill = _SUBHEADER_FILL
+    ws["A2"].alignment = Alignment(horizontal="left", vertical="center")
+    ws.row_dimensions[2].height = 18
+    for col in range(2, 7):
+        ws.cell(row=2, column=col).fill = _SUBHEADER_FILL
+
+
+def _style_section_header(ws, row: int, title: str) -> None:
+    ws.cell(row=row, column=1, value=title).font = _SECTION_HEADER_FONT
+    ws.cell(row=row, column=1).fill = _SECTION_HEADER_FILL
+    ws.cell(row=row, column=1).border = _THIN_BORDER
+    for col in range(2, 7):
+        ws.cell(row=row, column=col).fill = _SECTION_HEADER_FILL
+        ws.cell(row=row, column=col).border = _THIN_BORDER
+
+
+def _style_table_header_cell(cell) -> None:
+    cell.font = _TABLE_HEADER_FONT
+    cell.border = _THIN_BORDER
+    cell.fill = _TABLE_HEADER_FILL
+    cell.alignment = Alignment(horizontal="center", vertical="center")
+
+
+def _configure_print(ws) -> None:
+    ws.page_setup.orientation = "landscape"
+    ws.page_setup.fitToPage = True
+    ws.page_setup.fitToWidth = 1
+    ws.page_setup.fitToHeight = 0
+    ws.page_setup.paperSize = ws.PAPERSIZE_LETTER
+    ws.page_margins.left = 0.5
+    ws.page_margins.right = 0.5
+    ws.page_margins.top = 0.75
+    ws.page_margins.bottom = 0.75
+    ws.page_margins.header = 0.3
+    ws.page_margins.footer = 0.3
+    ws.print_options.horizontalCentered = True
+
+
 def _autosize(ws) -> None:
-    for column_cells in ws.columns:
-        letter = get_column_letter(column_cells[0].column)
-        max_len = max((len(str(cell.value)) for cell in column_cells if cell.value is not None), default=0)
-        ws.column_dimensions[letter].width = min(max(12, max_len + 2), 80)
+    for col_idx, column_cells in enumerate(ws.columns, start=1):
+        letter = get_column_letter(col_idx)
+        max_len = max(
+            (
+                len(str(cell.value))
+                for cell in column_cells
+                if cell.value is not None and not isinstance(cell, MergedCell)
+            ),
+            default=0,
+        )
+        min_width = _MIN_COL_WIDTHS.get(col_idx, 12)
+        ws.column_dimensions[letter].width = min(max(min_width, max_len + 3), 90)
 
 
 def _sanitize_user_text(value: Any) -> Optional[str]:

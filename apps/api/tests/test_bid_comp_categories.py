@@ -118,11 +118,22 @@ Estimate B carries higher framing scope.
         "Analysis",
     ]
     summary = wb["Summary"]
-    assert summary["A1"].value == "Bid Comparison - Summary"
+    analysis = wb["Analysis"]
+    assert summary["A1"].value == "Bid Comparison Report"
+    assert summary["A2"].value is not None
+    assert "Report Date:" in str(summary["A2"].value)
+    assert "Primary: Estimate A" in str(summary["A2"].value)
+    assert "Comparison: Estimate B" in str(summary["A2"].value)
     assert summary["A9"].value == "Overall Summary"
     assert isinstance(summary["A10"].value, str)
     assert summary["A10"].value.strip() != ""
     assert summary["A12"].value == "Top Cost Drivers"
+    assert summary.page_setup.orientation == "landscape"
+    assert analysis.page_setup.orientation == "landscape"
+    assert float(analysis.column_dimensions["A"].width or 0.0) >= 38.0
+    assert float(analysis.column_dimensions["B"].width or 0.0) >= 16.0
+    assert float(analysis.column_dimensions["C"].width or 0.0) >= 16.0
+    assert float(analysis.column_dimensions["D"].width or 0.0) >= 16.0
     assert comp.last_narrative_debug["status"] == "pipeline"
 
 

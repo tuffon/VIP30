@@ -9,10 +9,12 @@ Tests cover:
 - BidComp fallback on pipeline error
 """
 
+import io
 import json
 from typing import Any, Dict, List, Optional
 from dataclasses import dataclass, field
 
+import openpyxl
 import pytest
 import fakeredis
 
@@ -379,6 +381,102 @@ class TestBidCompPipelineDetails:
         assert narrative.sections is not None
         assert "overview_of_estimates" in narrative.sections
         assert "key_cost_drivers" in narrative.sections
+
+
+# ---------------------------------------------------------------------------
+# TestNarrativeXLSXContent
+# ---------------------------------------------------------------------------
+
+
+class TestNarrativeXLSXContent:
+    """Tests that XLSX output actually contains narrative text."""
+
+    def test_xlsx_summary_sheet_overview_populated(
+        self,
+        mock_analysis_response: str,
+        mock_writer_response: str,
+        sample_bid_context: Dict[str, Any],
+    ):
+        """NARR-02: Summary sheet overview narrative is populated in the XLSX."""
+        adapter = MockLLMAdapter(
+            analysis_response=mock_analysis_response,
+            writer_response=mock_writer_response,
+        )
+        bid_comp = BidComp(llm_adapter=adapter)
+        xlsx_bytes = bid_comp.run(sample_bid_context, job_id="narr-content-test")
+
+        wb = openpyxl.load_workbook(io.BytesIO(xlsx_bytes))
+        ws = wb["Summary"]
+
+        all_text = " ".join(
+            str(cell.value or "")
+            for row in ws.iter_rows()
+            for cell in row
+            if cell.value
+        )
+
+        assert "Primary estimate higher" in all_text, (
+            f"Overview narrative not found in Summary sheet. "
+            f"Cell content preview: {all_text[:500]}"
+        )
+
+    def test_xlsx_narrative_result_overview_property(
+        self,
+        mock_analysis_response: str,
+        mock_writer_response: str,
+        sample_bid_context: Dict[str, Any],
+    ):
+        """NARR-01: NarrativeResult.overview property returns overview text."""
+        adapter = MockLLMAdapter(
+            analysis_response=mock_analysis_response,
+            writer_response=mock_writer_response,
+        )
+        bid_comp = BidComp(llm_adapter=adapter)
+
+        pair = bid_comp._build_pair(sample_bid_context)
+        category_rows = bid_comp._build_category_table(pair)
+        top_deltas = bid_comp._top_deltas(category_rows)
+        narrative = bid_comp._generate_narrative(pair, top_deltas)
+
+        assert narrative.overview, "narrative.overview must not be empty"
+        assert isinstance(narrative.overview, str)
+        assert len(narrative.overview) > 10
+
+    def test_xlsx_narrative_result_scope_observations_property(
+        self,
+        mock_analysis_response: str,
+        mock_writer_response: str,
+        sample_bid_context: Dict[str, Any],
+    ):
+        """NARR-03: NarrativeResult.scope_observations returns list."""
+        adapter = MockLLMAdapter(
+            analysis_response=mock_analysis_response,
+            writer_response=mock_writer_response,
+        )
+        bid_comp = BidComp(llm_adapter=adapter)
+
+        pair = bid_comp._build_pair(sample_bid_context)
+        category_rows = bid_comp._build_category_table(pair)
+        top_deltas = bid_comp._top_deltas(category_rows)
+        narrative = bid_comp._generate_narrative(pair, top_deltas)
+
+        assert isinstance(narrative.scope_observations, list)
+        assert len(narrative.scope_observations) > 0
+
+    def test_fallback_narrative_overview_property(
+        self,
+        sample_bid_context: Dict[str, Any],
+    ):
+        """Fallback NarrativeResult.overview property returns non-empty text."""
+        bid_comp = BidComp(llm_adapter=None)
+
+        pair = bid_comp._build_pair(sample_bid_context)
+        category_rows = bid_comp._build_category_table(pair)
+        top_deltas = bid_comp._top_deltas(category_rows)
+        narrative = bid_comp._generate_narrative(pair, top_deltas)
+
+        assert narrative.overview, "Fallback narrative.overview must not be empty"
+        assert isinstance(narrative.overview, str)
 
 
 # ---------------------------------------------------------------------------

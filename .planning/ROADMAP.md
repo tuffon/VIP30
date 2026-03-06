@@ -16,8 +16,8 @@ Fix the narrative regression that causes output sections to be empty, then eleva
 
 ## Phases
 
-- [ ] **Phase 18: Narrative Pipeline Fix** — Diagnose and repair the LLM narrative regression
-- [ ] **Phase 19: XLSX Report Polish** — Professional visual upgrade for client-ready output
+- [x] **Phase 18: Narrative Pipeline Fix** — Diagnose and repair the LLM narrative regression (completed 2026-03-06)
+- [x] **Phase 19: XLSX Report Polish** — Professional visual upgrade for client-ready output (completed 2026-03-06)
 
 ## Phase Details
 
@@ -35,7 +35,7 @@ Fix the narrative regression that causes output sections to be empty, then eleva
 **Plans**: TBD
 
 Plans:
-- [ ] 18-01: TBD
+- [x] 18-01: Fix NarrativeResult → export_xlsx type mismatch (add overlay properties)
 
 ### Phase 19: XLSX Report Polish
 **Goal**: Professional visual upgrade for both Summary and Analysis sheets — client-shareable output
@@ -51,14 +51,14 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 19-01: TBD
+- [x] 19-01: Visual polish — header, color palette, column widths, print setup
 
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 18. Narrative Pipeline Fix | v2.3 | 0/TBD | Not started | - |
-| 19. XLSX Report Polish | v2.3 | 0/TBD | Not started | - |
+| 18. Narrative Pipeline Fix | v2.3 | 1/1 planned | Complete | 2026-03-06 |
+| 19. XLSX Report Polish | v2.3 | 1/1 planned | Complete | 2026-03-06 |
 
 ---
 *Roadmap created: 2026-03-05*
