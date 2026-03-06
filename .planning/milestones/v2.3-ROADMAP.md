@@ -1,0 +1,64 @@
+# Roadmap: VIP30 v2.3 Report Quality
+
+## Milestones
+
+- ✅ **v1.0.1 Professional Adjuster Narratives** — Phases 1-8 (shipped 2026-02-09)
+- ✅ **v1.1 MVP Launch** — Phases 1-4 (shipped 2026-02-14)
+- ✅ **v1.2 Launch Ready** — Phases 5-8 (shipped 2026-02-17)
+- ✅ **v2.0 Analytical Intelligence** — Phases 9-12 (shipped 2026-02-17)
+- ✅ **v2.1 Repository Restructure** — Phases 13-15 (shipped 2026-02-18)
+- ✅ **v2.2 Unified Output** — Phases 16-17 (shipped 2026-02-18)
+- 🚧 **v2.3 Report Quality** — Phases 18-19 (in progress)
+
+## Overview
+
+Fix the narrative regression that causes output sections to be empty, then elevate the XLSX report to professional, client-shareable quality. Two focused phases: repair the pipeline, then polish the output.
+
+## Phases
+
+- [ ] **Phase 18: Narrative Pipeline Fix** — Diagnose and repair the LLM narrative regression
+- [ ] **Phase 19: XLSX Report Polish** — Professional visual upgrade for client-ready output
+
+## Phase Details
+
+### Phase 18: Narrative Pipeline Fix
+**Goal**: Diagnose and fix the regression causing narrative sections to not populate in the XLSX output
+**Depends on**: Existing codebase (v2.2)
+**Requirements**: NARR-01, NARR-02, NARR-03, NARR-04
+**Success Criteria** (what must be TRUE):
+  1. Running a job produces an XLSX where narrative text appears in the Analysis sheet for each category
+  2. The Summary sheet overview narrative section is populated
+  3. Key drivers section contains written context, not empty cells
+  4. No completed job has a blank narrative section
+**Research**: Likely (regression tracing — need to identify where narrative output drops in the pipeline)
+**Research topics**: Trace narrative output path through pipeline, compare pre/post v2.2 changes, identify where content stops flowing to XLSX cells
+**Plans**: TBD
+
+Plans:
+- [ ] 18-01: TBD
+
+### Phase 19: XLSX Report Polish
+**Goal**: Professional visual upgrade for both Summary and Analysis sheets — client-shareable output
+**Depends on**: Phase 18 (narrative must work before polishing presentation)
+**Requirements**: XLSX-01, XLSX-02, XLSX-03, XLSX-04, XLSX-05
+**Success Criteria** (what must be TRUE):
+  1. Report header cleanly displays title, report date, and job reference
+  2. Color palette is restrained and professional — appropriate for client distribution
+  3. All column widths sized to content — no truncated text
+  4. Layout is print-ready — no column overflow on standard paper sizes
+  5. Both Summary and Analysis sheets have consistent typography and clear visual hierarchy
+**Research**: Unlikely (openpyxl patterns established in codebase — extension of existing export code)
+**Plans**: TBD
+
+Plans:
+- [ ] 19-01: TBD
+
+## Progress
+
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|----------------|--------|-----------|
+| 18. Narrative Pipeline Fix | v2.3 | 0/TBD | Not started | - |
+| 19. XLSX Report Polish | v2.3 | 0/TBD | Not started | - |
+
+---
+*Roadmap created: 2026-03-05*
