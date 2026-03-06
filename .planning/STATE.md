@@ -49,6 +49,7 @@ Progress: ██████████ 100%
 - Phase 20 completed: prompts upgraded to v2.2 approach-first guidance; Summary Top Cost Drivers now uses Notes mapped to deterministic top-driver narrative contract.
 - Phase 21-01 completed: writer prompt upgraded to v2.3 — SUGGESTED FOLLOWUPS RULES with BAD/GOOD examples added to system prompt; overview schema corrected to 4-6 sentences with sentence-by-sentence CRITICAL RULES.
 - Phase 21-02 completed: summary synthesis and analysis notes layout improvements shipped.
+- Phase 22 added: Executive Summary Narrative — remove Notes column from Analysis category table; fix Overall Summary regression (raw data fields in output); rewrite as executive-grade narrative paragraph with scope observations woven in naturally.
 
 ### Decisions
 

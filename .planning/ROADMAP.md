@@ -8,7 +8,7 @@
 - ✅ **v2.0 Analytical Intelligence** — Phases 9-12 (shipped 2026-02-17)
 - ✅ **v2.1 Repository Restructure** — Phases 13-15 (shipped 2026-02-18)
 - ✅ **v2.2 Unified Output** — Phases 16-17 (shipped 2026-02-18)
-- 🚧 **v2.3 Report Quality** — Phases 18-21 (in progress)
+- 🚧 **v2.3 Report Quality** — Phases 18-22 (in progress)
 
 ## Overview
 
@@ -19,7 +19,8 @@ Fix the narrative regression that causes output sections to be empty, then eleva
 - [x] **Phase 18: Narrative Pipeline Fix** — Diagnose and repair the LLM narrative regression (completed 2026-03-06)
 - [x] **Phase 19: XLSX Report Polish** — Professional visual upgrade for client-ready output (completed 2026-03-06)
 - [x] **Phase 20: Cost Driver Narrative Quality** — Fix prompts so key cost drivers have associated narrative text (completed 2026-03-06)
-- [ ] **Phase 21: Report Output Quality** — Notes legibility, summary depth, key observations integration, follow-up specificity, analysis layout per Kalyvas template
+- [x] **Phase 21: Report Output Quality** — Notes legibility, summary depth, key observations integration, follow-up specificity, analysis layout per Kalyvas template
+- [ ] **Phase 22: Executive Summary Narrative** — Remove Notes column from Analysis category table; rewrite Overall Summary as an executive-grade narrative paragraph (not robotic/disjointed); weave scope observations in naturally
 
 ## Phase Details
 
@@ -70,7 +71,16 @@ Plans:
 **Reference**: COMP-BID-Template-2025 Kalyvas.xlsx in project root (target layout for Analysis sheet category comparison)
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 21 to break down)
+- [x] 21-01: Prompt v2.3 — fix overview schema, add SUGGESTED FOLLOWUPS RULES
+- [x] 21-02: XLSX display — Notes legibility, richer summary, Kalyvas-style Analysis table with O&P footer
+
+### Phase 22: Executive Summary Narrative
+**Goal**: The Overall Summary cell must read as a polished executive-facing paragraph — not robotic or disjointed. Remove Notes column from the Analysis category-by-category table entirely. Diagnose why the overview outputs raw data fields ("Overall direction: primary_higher") instead of LLM narrative, and fix the root cause (prompt or code). Scope observations must be woven into the paragraph naturally, not appended as "Key scope differences: ...".
+**Depends on**: Phase 21
+**Reference**: Output example showing regression — "Overall direction: primary_higher. See key drivers below for details." and clunky scope observations append.
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 22 to break down)
 
 ## Progress
 
@@ -79,7 +89,8 @@ Plans:
 | 18. Narrative Pipeline Fix | v2.3 | 1/1 planned | Complete | 2026-03-06 |
 | 19. XLSX Report Polish | v2.3 | 1/1 planned | Complete | 2026-03-06 |
 | 20. Cost Driver Narrative Quality | v2.3 | 2/2 planned | Complete | 2026-03-06 |
-| 21. Report Output Quality | v2.3 | 0/TBD | Not started | - |
+| 21. Report Output Quality | v2.3 | 2/2 planned | Complete | 2026-03-06 |
+| 22. Executive Summary Narrative | v2.3 | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-03-05*
