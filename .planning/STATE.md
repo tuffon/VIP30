@@ -1,8 +1,8 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.4
+milestone: v2.3
 milestone_name: report-quality
-status: in_progress
+status: complete
 last_updated: "2026-03-07T00:00:00.000Z"
 progress:
   total_phases: 22

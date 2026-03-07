@@ -8,7 +8,7 @@
 - ✅ **v2.0 Analytical Intelligence** — Phases 9-12 (shipped 2026-02-17)
 - ✅ **v2.1 Repository Restructure** — Phases 13-15 (shipped 2026-02-18)
 - ✅ **v2.2 Unified Output** — Phases 16-17 (shipped 2026-02-18)
-- 🚧 **v2.3 Report Quality** — Phases 18-22 (in progress)
+- ✅ **v2.3 Report Quality** — Phases 18-22 (shipped 2026-03-07)
 
 ## Overview
 
@@ -20,7 +20,7 @@ Fix the narrative regression that causes output sections to be empty, then eleva
 - [x] **Phase 19: XLSX Report Polish** — Professional visual upgrade for client-ready output (completed 2026-03-06)
 - [x] **Phase 20: Cost Driver Narrative Quality** — Fix prompts so key cost drivers have associated narrative text (completed 2026-03-06)
 - [x] **Phase 21: Report Output Quality** — Notes legibility, summary depth, key observations integration, follow-up specificity, analysis layout per Kalyvas template
-- [ ] **Phase 22: Executive Summary Narrative** — Remove Notes column from Analysis category table; rewrite Overall Summary as an executive-grade narrative paragraph (not robotic/disjointed); weave scope observations in naturally
+- [x] **Phase 22: Executive Summary Narrative** — Remove Notes column from Analysis category table; rewrite Overall Summary as an executive-grade narrative paragraph (not robotic/disjointed); weave scope observations in naturally (completed 2026-03-07)
 
 ## Phase Details
 
@@ -90,7 +90,7 @@ Plans:
 | 19. XLSX Report Polish | v2.3 | 1/1 planned | Complete | 2026-03-06 |
 | 20. Cost Driver Narrative Quality | v2.3 | 2/2 planned | Complete | 2026-03-06 |
 | 21. Report Output Quality | v2.3 | 2/2 planned | Complete | 2026-03-06 |
-| 22. Executive Summary Narrative | v2.3 | 0/TBD | Not started | - |
+| 22. Executive Summary Narrative | v2.3 | 2/2 planned | Complete | 2026-03-07 |
 
 ---
 *Roadmap created: 2026-03-05*
