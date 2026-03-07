@@ -8,17 +8,16 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
-## Current Milestone: v2.3 Report Quality
-
-**Goal:** Fix broken narrative output and elevate the XLSX report to client-ready quality.
-
-**Target features:**
-- **LLM narrative fix**: Report generates but narrative sections are empty — regression from narrative flow changes, needs diagnosis and repair
-- **Professional XLSX polish**: Visual upgrade to make both Summary and Analysis sheets polished and client-shareable
-
 ## Current State
 
-**Version:** v2.3 in progress (v2.2 shipped 2026-02-18)
+**Version:** v2.3 shipped 2026-03-07
+
+**Shipped features (v2.3):**
+- Narrative pipeline regression fixed (NarrativeResult type mismatch → empty XLSX sections)
+- Professional XLSX visual polish — header, restrained color palette, column widths, print-ready
+- Writer prompts v2.2 → v2.3 → v2.4: approach-first framing, SUGGESTED FOLLOWUPS RULES, APPROACH PAIR REQUIREMENT mandatory
+- Fixed `writer_pass_v2.json` brace escaping bug — LLM now called for all line-item jobs
+- Analysis sheet 5-column Kalyvas layout; Overall Summary returns LLM prose directly
 
 **Shipped features (v2.2):**
 - Unified 2-sheet XLSX output: "Summary" + "Analysis" (replaces 6 sheets and 4 modes)
@@ -97,10 +96,12 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ No mode selection in UX — v2.2
 - ✓ LLM pipeline unchanged, all content flows to output — v2.2
 
-### Active (v2.3)
+### Validated (v2.3)
 
-- [ ] LLM narrative output populates correctly in XLSX report — v2.3
-- [ ] XLSX report (Summary + Analysis sheets) has professional, client-shareable visual quality — v2.3
+- ✓ LLM narrative output populates correctly in XLSX report — v2.3
+- ✓ XLSX report (Summary + Analysis sheets) has professional, client-shareable visual quality — v2.3
+- ✓ Overall Summary is LLM-generated executive paragraph (not Python fallback) — v2.3
+- ✓ Analysis sheet uses clean 5-column Kalyvas layout — v2.3
 
 ### Backlog (v3+)
 
@@ -146,6 +147,9 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | Idempotent credit consumption | UNIQUE job_id constraint prevents double-charge | ✓ Good |
 | Monolith → apps + packages split | Clearer boundaries, independent deployment possible | ✓ Good |
 | Unified 2-sheet output over 4 modes | Modes were presentation filters, not generation variants. Simpler UX, same LLM cost. | ✓ Good |
+| Remove raw field lines from writer prompt | Overall Direction/Confidence fields caused LLM to echo enum values verbatim — removal cleaner than rephrasing | ✓ Good |
+| APPROACH PAIR REQUIREMENT as hard constraint in system prompt | Approach-pair table was present but framed as optional — mandatory block after table enforces behavior | ✓ Good |
+| writer_pass_v2 brace fix over prompt consolidation | Quick targeted fix; prompt files serve different audiences (v1=adjuster, v2=litigation) | ✓ Good |
 
 ## Tech Debt
 
@@ -157,4 +161,4 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | `output_mode` DB column still exists | Low | Nullable, not written — preserves historical data |
 
 ---
-*Last updated: 2026-03-05 after v2.3 milestone started*
+*Last updated: 2026-03-07 after v2.3 milestone*

@@ -1,5 +1,33 @@
 # Project Milestones: VIP30
 
+## v2.3 Report Quality (Shipped: 2026-03-07)
+
+**Delivered:** Professional XLSX report with LLM-generated executive overview — narrative pipeline fixed, prompt quality elevated, writer_pass_v2 LLM routing bug resolved, Analysis sheet cleaned to 5-column Kalyvas layout.
+
+**Phases completed:** 18-22 (8 plans total)
+
+**Key accomplishments:**
+
+- Fixed NarrativeResult → export_xlsx type mismatch that caused empty narrative sections in XLSX
+- Professional XLSX visual polish — restrained color palette, report header, auto-sized columns, print-ready
+- Writer prompt v2.2 — approach-first guidance, top-driver narrative contract, Notes in Summary Top Cost Drivers
+- Writer prompt v2.3 — SUGGESTED FOLLOWUPS RULES with BAD/GOOD examples, corrected 4-6 sentence overview schema
+- Discovered & fixed `writer_pass_v2.json` brace escaping bug — LLM was never called for line-item jobs (always fell back to Python-generated text)
+- Writer prompt v2.4 — APPROACH PAIR REQUIREMENT mandatory, anti-echo/anti-forward-reference rules, raw direction/confidence fields removed
+- Analysis sheet reverted to 5-column Kalyvas layout (Notes column removed), overall summary returns LLM prose directly
+
+**Stats:**
+
+- 15 files changed, 1,412 insertions, 65 deletions
+- 5 phases, 8 plans
+- 3 days from start to ship (2026-03-05 → 2026-03-07)
+
+**Git range:** `154d8f3` → `954b74b`
+
+**What's next:** TBD — discuss next milestone
+
+---
+
 ## v2.2 Unified Output (Shipped: 2026-02-18)
 
 **Delivered:** Single unified 2-sheet XLSX report replacing 4 output modes. Simpler UX with no mode selection.

@@ -18,14 +18,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 22 complete — milestone v2.4 report quality shipped
+**Current focus:** Milestone v2.3 complete — planning next milestone
 
 ## Current Position
 
-Phase: 22 of 22 (Executive Summary Narrative)
-Plan: 02 complete
-Status: Phase 22 complete — all plans verified complete
-Last activity: 2026-03-07 — 22-02 XLSX cleanup shipped: Notes column removed from Analysis sheet (5-column table), scope_observations synthetic append stripped from _build_overall_summary, LLM prose renders directly.
+Phase: 22 of 22 (Executive Summary Narrative) — COMPLETE
+Status: Milestone v2.3 archived. ROADMAP.md deleted. Ready to plan next milestone.
+Last activity: 2026-03-07 — v2.3 milestone complete and archived to milestones/. MILESTONES.md updated. PROJECT.md evolved. Git tag v2.3 created.
 
 Progress: ██████████ 100%
 
