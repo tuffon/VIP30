@@ -56,20 +56,20 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUDIT-01 | Phase 23 | Pending |
-| AUDIT-02 | Phase 23 | Pending |
-| AUDIT-03 | Phase 23 | Pending |
-| AUDIT-04 | Phase 23 | Pending |
-| AUDIT-05 | Phase 23 | Pending |
-| AUDIT-06 | Phase 23 | Pending |
-| GOLD-01 | Phase 24 | Pending |
-| GOLD-02 | Phase 24 | Pending |
-| GOLD-03 | Phase 24 | Pending |
-| GOLD-04 | Phase 24 | Pending |
-| HARNESS-01 | Phase 25 | Pending |
-| HARNESS-02 | Phase 25 | Pending |
-| HARNESS-03 | Phase 25 | Pending |
-| HARNESS-04 | Phase 25 | Pending |
+| AUDIT-01 | Phase 23: Parser Audit | Pending |
+| AUDIT-02 | Phase 23: Parser Audit | Pending |
+| AUDIT-03 | Phase 23: Parser Audit | Pending |
+| AUDIT-04 | Phase 23: Parser Audit | Pending |
+| AUDIT-05 | Phase 23: Parser Audit | Pending |
+| AUDIT-06 | Phase 23: Parser Audit | Pending |
+| GOLD-01 | Phase 24: Golden Masters | Pending |
+| GOLD-02 | Phase 24: Golden Masters | Pending |
+| GOLD-03 | Phase 24: Golden Masters | Pending |
+| GOLD-04 | Phase 24: Golden Masters | Pending |
+| HARNESS-01 | Phase 25: Coverage Harness | Pending |
+| HARNESS-02 | Phase 25: Coverage Harness | Pending |
+| HARNESS-03 | Phase 25: Coverage Harness | Pending |
+| HARNESS-04 | Phase 25: Coverage Harness | Pending |
 
 **Coverage:**
 - v1 requirements: 14 total
