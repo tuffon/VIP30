@@ -1,14 +1,14 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.3
-milestone_name: report-quality
-status: complete
+milestone: v2.4
+milestone_name: parser-coverage
+status: in_progress
 last_updated: "2026-03-07T00:00:00.000Z"
 progress:
-  total_phases: 22
+  total_phases: 25
   completed_phases: 22
-  total_plans: 7
-  completed_plans: 7
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # Project State
@@ -18,13 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Milestone v2.3 complete — planning next milestone
+**Current focus:** Milestone v2.4 parser-coverage — defining requirements
 
 ## Current Position
 
-Phase: 22 of 22 (Executive Summary Narrative) — COMPLETE
-Status: Milestone v2.3 archived. ROADMAP.md deleted. Ready to plan next milestone.
-Last activity: 2026-03-07 — v2.3 milestone complete and archived to milestones/. MILESTONES.md updated. PROJECT.md evolved. Git tag v2.3 created.
+Phase: 23 of 25 (next: parser-audit)
+Plan: Not started — run /gsd:define-requirements then /gsd:create-roadmap
+Status: Milestone v2.4 started — defining requirements
+Last activity: 2026-03-07 — Milestone v2.4 Parser Coverage initialized
 
 Progress: ██████████ 100%
 

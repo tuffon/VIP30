@@ -8,6 +8,17 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
+## Current Milestone: v2.4 Parser Coverage
+
+**Goal:** Measure how much content the Xactimate parser actually captures before making any changes — audit, create golden master expected outputs per document type, and build an automated coverage harness that surfaces gaps.
+
+**Target features:**
+- **Parser audit**: Run all examples from `./docs/` through the parser, compare JSON output against PDF content, map what's missed (sections, line items, amounts) per document type and entity profile
+- **Golden master files**: For each document type (rough draft, final draft, StateFarm, etc.), produce the perfect expected JSON output — human-verified before locking in as ground truth
+- **Coverage test harness**: Automated tests comparing parser output to golden masters, producing a structured gap report per document type
+
+**Explicitly out of scope:** No parser code changes this milestone — understand and measure the gaps first; fixes are v2.5.
+
 ## Current State
 
 **Version:** v2.3 shipped 2026-03-07
@@ -96,6 +107,13 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ No mode selection in UX — v2.2
 - ✓ LLM pipeline unchanged, all content flows to output — v2.2
 
+### Active (v2.4)
+
+- [ ] Parser audit complete for all document types in `./docs/` (rough draft, final draft, entity profiles)
+- [ ] Golden master JSON files produced and human-verified for each document type
+- [ ] Automated coverage harness runs all PDFs against golden masters and generates gap report
+- [ ] Gap report produced showing what's missing per doc type — input for v2.5 parser fixes
+
 ### Validated (v2.3)
 
 - ✓ LLM narrative output populates correctly in XLSX report — v2.3
@@ -161,4 +179,4 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | `output_mode` DB column still exists | Low | Nullable, not written — preserves historical data |
 
 ---
-*Last updated: 2026-03-07 after v2.3 milestone*
+*Last updated: 2026-03-07 after v2.4 milestone started*
