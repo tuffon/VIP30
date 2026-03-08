@@ -56,12 +56,12 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUDIT-01 | Phase 23: Parser Audit | Pending |
-| AUDIT-02 | Phase 23: Parser Audit | Pending |
-| AUDIT-03 | Phase 23: Parser Audit | Pending |
-| AUDIT-04 | Phase 23: Parser Audit | Pending |
-| AUDIT-05 | Phase 23: Parser Audit | Pending |
-| AUDIT-06 | Phase 23: Parser Audit | Pending |
+| AUDIT-01 | Phase 23: Parser Audit | Complete |
+| AUDIT-02 | Phase 23: Parser Audit | Complete |
+| AUDIT-03 | Phase 23: Parser Audit | Complete |
+| AUDIT-04 | Phase 23: Parser Audit | Complete |
+| AUDIT-05 | Phase 23: Parser Audit | Complete |
+| AUDIT-06 | Phase 23: Parser Audit | Complete |
 | GOLD-01 | Phase 24: Golden Masters | Pending |
 | GOLD-02 | Phase 24: Golden Masters | Pending |
 | GOLD-03 | Phase 24: Golden Masters | Pending |
