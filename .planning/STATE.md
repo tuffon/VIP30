@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.4
 milestone_name: parser-coverage
 status: in_progress
-last_updated: "2026-03-07T00:00:00.000Z"
+last_updated: "2026-03-08T07:39:40Z"
 progress:
   total_phases: 25
   completed_phases: 22
   total_plans: 6
-  completed_plans: 0
+  completed_plans: 1
 ---
 
 # Project State
@@ -23,11 +23,11 @@ See: .planning/PROJECT.md (updated 2026-03-07)
 ## Current Position
 
 Phase: 23 of 25 (parser-audit)
-Plan: Not started — ready to plan
-Status: Ready to plan — run /gsd:plan-phase 23
-Last activity: 2026-03-07 — v2.4 roadmap created (phases 23-25, 6 plans)
+Plan: 1 of 2 complete — ready for 23-02
+Status: In progress — 23-01 complete, 23-02 next
+Last activity: 2026-03-08 — Completed 23-01-PLAN.md (parser audit raw output capture)
 
-Progress: ░░░░░░░░░░ 0%
+Progress: █░░░░░░░░░ 17%
 
 ## Completed Milestones
 
@@ -52,6 +52,7 @@ Progress: ░░░░░░░░░░ 0%
 - Phase 22 added: Executive Summary Narrative — remove Notes column from Analysis category table; fix Overall Summary regression (raw data fields in output); rewrite as executive-grade narrative paragraph with scope observations woven in naturally.
 - Phase 22-01 completed: writer prompt upgraded to v2.4 — raw Overall Direction/Confidence fields removed from user prompt; anti-echo rule added; anti-forward-reference rule added; APPROACH PAIR REQUIREMENT added to system prompt; sentence 1 CRITICAL RULE strengthened to reference APPROACH EXAMPLES table. 23/23 tests pass.
 - Phase 22-02 completed: XLSX cleanup — Notes column removed from Analysis sheet category table (5-column layout); scope_observations synthetic append stripped from _build_overall_summary (LLM prose is now the direct output, no post-processing). 25/25 tests pass.
+- Phase 23-01 completed: audit runner created; all 6 PDFs parsed successfully; rough drafts yield 32/40 sections with 525/887 items; BSchacter contractor final yields 0 sections (gap finding); 3 StateFarm finals parsed; run_log.json documents all results.
 
 ### Decisions
 
@@ -59,15 +60,20 @@ Progress: ░░░░░░░░░░ 0%
 - [22-01] APPROACH PAIR REQUIREMENT placed as hard constraint in system prompt (not just user CRITICAL RULES) — approach-pair framing must be mandatory, not optional inspiration.
 - [22-02] Remove Notes column from Analysis sheet — Summary Top Cost Drivers table already covers notable drivers; Analysis is a data table, not a narrative supplement.
 - [22-02] Strip scope_observations append from _build_overall_summary — v2.4 prompt fix is the root-cause solution; mechanical suffix was a bandaid over poor LLM overview quality.
+- [23-01] 6 PDFs total (not 7) — plan text said 7 but DOCS dict has 6 entries and filesystem confirms 6; executed against actual 6.
+- [23-01] BSchacter contractor final: 0 sections is a gap finding, not a fix — parser designed for rough drafts, contractor finals use a different format; documenting gap, not fixing parser (v2.5 scope).
+- [23-01] Windows stdout encoding fix in script only — parser's ▶ symbol crashes cp1252 stdout; fixed by reconfiguring sys.stdout to UTF-8 in audit_all.py, keeping parser unchanged.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
+- BSchacter contractor final (standard Xactimate format) produces 0 sections — parser cannot extract line items from this format. Key gap for 23-02 to analyze.
+- StateFarm "Customer Copy Final Draft (3)" has only 32 items across 31 sections — suspiciously low, may indicate section-detection gaps for this format.
 
 ## Session Continuity
 
-Last session: 2026-03-07
-Stopped at: Phase 22-02 SUMMARY.md created and committed — Phase 22 complete
+Last session: 2026-03-08
+Stopped at: 23-01 SUMMARY.md created and committed — ready for 23-02
 Resume file: None
