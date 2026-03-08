@@ -62,10 +62,10 @@ Which phases cover which requirements. Updated by create-roadmap.
 | AUDIT-04 | Phase 23: Parser Audit | Complete |
 | AUDIT-05 | Phase 23: Parser Audit | Complete |
 | AUDIT-06 | Phase 23: Parser Audit | Complete |
-| GOLD-01 | Phase 24: Golden Masters | Pending |
-| GOLD-02 | Phase 24: Golden Masters | Pending |
-| GOLD-03 | Phase 24: Golden Masters | Pending |
-| GOLD-04 | Phase 24: Golden Masters | Pending |
+| GOLD-01 | Phase 24: Golden Masters | Complete |
+| GOLD-02 | Phase 24: Golden Masters | Complete |
+| GOLD-03 | Phase 24: Golden Masters | Complete |
+| GOLD-04 | Phase 24: Golden Masters | Complete |
 | HARNESS-01 | Phase 25: Coverage Harness | Pending |
 | HARNESS-02 | Phase 25: Coverage Harness | Pending |
 | HARNESS-03 | Phase 25: Coverage Harness | Pending |

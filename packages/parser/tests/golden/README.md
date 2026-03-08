@@ -28,13 +28,14 @@ as production-quality ground truth.
 |-----------|----------|
 | `rough-drafts/lachman.golden.json` | Lachman APEX 2 rough draft |
 | `rough-drafts/kalyvas.golden.json` | Kalyvas JVB V6 rough draft |
-| `final-drafts/bschacter.golden.json` | BSchacter contractor final (v2.5 scope) |
-| `final-drafts/statefarm/customer_copy.golden.json` | StateFarm Customer Copy (v2.5 scope) |
-| `final-drafts/statefarm/lachman_sf.golden.json` | StateFarm Lachman structural (v2.5 scope) |
-| `final-drafts/statefarm/kalyvas_sf.golden.json` | StateFarm Kalyvas preliminary (v2.5 scope) |
+| `final-drafts/bschacter.golden.json` | BSchacter contractor final |
+| `final-drafts/statefarm/customer_copy.golden.json` | StateFarm Customer Copy |
+| `final-drafts/statefarm/lachman_sf.golden.json` | StateFarm Lachman structural |
+| `final-drafts/statefarm/kalyvas_sf.golden.json` | StateFarm Kalyvas preliminary |
 
-Files marked "v2.5 scope" do not yet exist — they will be created once the
-corresponding document-type parsers are production-quality.
+All 6 golden master files exist. Final-draft files were constructed via PDF extraction
+since the parser has known gaps for those document types (see Phase 23 audit). They
+represent the ideal expected output — what v2.5 should produce when gaps are fixed.
 
 ---
 
