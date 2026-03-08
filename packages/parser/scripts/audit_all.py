@@ -20,6 +20,13 @@ import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
+# On Windows the default stdout encoding (cp1252) cannot represent the ▶
+# character used in the parser's delta table. Reconfigure to UTF-8 so
+# parser.run() does not raise UnicodeEncodeError on Windows.
+if sys.stdout.encoding and sys.stdout.encoding.lower() not in ("utf-8", "utf8"):
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+
 # ---------------------------------------------------------------------------
 # Path resolution
 # ---------------------------------------------------------------------------

@@ -1,0 +1,1964 @@
+{
+  "case_metadata": {
+    "claim_number": null,
+    "policy_number": null,
+    "loss_type": null,
+    "coverage": null,
+    "property_address": null,
+    "date_of_loss": null,
+    "date_received": null,
+    "date_inspected": null,
+    "date_entered": null,
+    "price_list": null,
+    "depreciate_material": null,
+    "depreciate_op": null,
+    "depreciate_non_material": null,
+    "depreciate_taxes": null,
+    "estimate_name": "Customer Copy Final Draft (3).pdf",
+    "depreciate_removal": null,
+    "region": null,
+    "building_type": null,
+    "line_item_totals": {
+      "estimate": "75-79D9-35K",
+      "material_sales_tax": "4,012.47",
+      "overhead_profit": "30,323.54",
+      "grand_total": "181,940.92"
+    },
+    "labor_minimums": {
+      "labor": "0.00",
+      "op_profit": "154.68",
+      "total": "928.01"
+    },
+    "additional_charges": null
+  },
+  "sections": [
+    {
+      "section_name": "Dwelling Roof",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [],
+      "section_totals": {
+        "tax": "0.00",
+        "op": null,
+        "total": "0.00",
+        "computed_total": "0.00",
+        "validation_delta": "0.00"
+      }
+    },
+    {
+      "section_name": "Swing Pavillion",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [],
+      "section_totals": {
+        "tax": "1,678.42",
+        "op": null,
+        "total": "10,070.44",
+        "computed_total": "0.00",
+        "validation_delta": "10,070.44"
+      }
+    },
+    {
+      "section_name": "Deck",
+      "metadata": {
+        "height": "3'",
+        "areas": {
+          "lf_floor_perimeter": "68.00"
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "line_item",
+          "line_number": 12,
+          "description": "4\" x 4\" x 8' - treated",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "64.29",
+          "notes": "lumber post - material only 13. Prime & paint deck - 1 280.00SF 2.31* 8.51 131.06 786.37 coat primer, 1 coat paint 14. Stain/finish deck handrail 68.00LF 11.35* 12.08 156.78 940.66 15. Deck lattice work - Vinyl 504.00SF 4.49* 106.77 473.96 2,843.69 (per SF)",
+          "tax": "10.72"
+        }
+      ],
+      "section_totals": {
+        "tax": "2,109.28",
+        "op": null,
+        "total": "12,655.48",
+        "computed_total": "64.29",
+        "validation_delta": "12,591.19"
+      }
+    },
+    {
+      "section_name": "Gazebo",
+      "metadata": {
+        "areas": {
+          "sf_walls_and_ceiling": "0.00",
+          "sf_walls": "0.00",
+          "sf_ceiling": "0.00",
+          "sf_floor": "0.00",
+          "lf_floor_perimeter": "0.00",
+          "lf_ceil_perimeter": "0.00"
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "line_item",
+          "line_number": 17,
+          "description": "Crane and operator - 14",
+          "qty": 8.0,
+          "unit": "HR",
+          "total": "1,728.00",
+          "notes": "ton capacity - 65' extension boom 18. Exterior - seal or prime 2,048.00SF 1.94* 70.04 808.62 4,851.78 then paint with one finish coat",
+          "tax": "288.00"
+        }
+      ],
+      "section_totals": {
+        "tax": "3,542.58",
+        "op": null,
+        "total": "21,255.56",
+        "computed_total": "1,728.00",
+        "validation_delta": "19,527.56"
+      }
+    },
+    {
+      "section_name": "Retaining Wall",
+      "metadata": {
+        "areas": {
+          "sf_walls_and_ceiling": "0.00",
+          "sf_walls": "0.00",
+          "sf_ceiling": "0.00",
+          "sf_floor": "0.00",
+          "lf_floor_perimeter": "0.00",
+          "lf_ceil_perimeter": "0.00"
+        }
+      },
+      "subrooms": [],
+      "line_items": [],
+      "section_totals": {
+        "tax": "154.10",
+        "op": null,
+        "total": "924.57",
+        "computed_total": "0.00",
+        "validation_delta": "924.57"
+      }
+    },
+    {
+      "section_name": "Trees, Shrubs and Landscaping",
+      "metadata": {
+        "areas": {
+          "sf_walls_and_ceiling": "0.00",
+          "sf_walls": "0.00",
+          "sf_ceiling": "0.00",
+          "sf_floor": "0.00",
+          "lf_floor_perimeter": "0.00",
+          "lf_ceil_perimeter": "0.00"
+        }
+      },
+      "subrooms": [],
+      "line_items": [],
+      "section_totals": {
+        "tax": "8,457.32",
+        "op": null,
+        "total": "50,743.85",
+        "computed_total": "0.00",
+        "validation_delta": "50,743.85"
+      }
+    },
+    {
+      "section_name": "Debris Removal",
+      "metadata": {
+        "areas": {
+          "sf_walls_and_ceiling": "0.00",
+          "sf_walls": "0.00",
+          "sf_ceiling": "0.00",
+          "sf_floor": "0.00",
+          "lf_floor_perimeter": "0.00",
+          "lf_ceil_perimeter": "0.00"
+        }
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "line_item",
+          "line_number": 275,
+          "description": "Temporary hand",
+          "qty": 1.0,
+          "unit": "MO",
+          "total": "296.40",
+          "tax": "49.40"
+        },
+        {
+          "type": "line_item",
+          "line_number": 276,
+          "description": "Temporary toilet (per",
+          "qty": 1.0,
+          "unit": "MO",
+          "total": "270.00",
+          "notes": "month) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "45.00"
+        }
+      ],
+      "section_totals": {
+        "tax": "217.44",
+        "op": null,
+        "total": "1,304.60",
+        "computed_total": "566.40",
+        "validation_delta": "738.20"
+      }
+    },
+    {
+      "section_name": "Main Level",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [],
+      "section_totals": {
+        "tax": "294.22",
+        "op": null,
+        "total": "1,765.29",
+        "computed_total": "0.00",
+        "validation_delta": "1,765.29"
+      }
+    },
+    {
+      "section_name": "Stairs",
+      "metadata": {
+        "height": "31' 9\"",
+        "areas": {
+          "sf_floor": "52.35"
+        },
+        "missing_walls": [
+          {
+            "dimensions": "3' 4\" X 31' 8 7/8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "9' 1\" X 31' 8 7/8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "9' 1\" X 31' 8 7/8\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Stairs1 (2)",
+          "metadata": {
+            "height": "25' 6\"",
+            "areas": {
+              "sf_floor": "11.11"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 4\" X 25' 5 7/8\"",
+                "opens_into": "STAIRS"
+              },
+              {
+                "dimensions": "3' 4\" X 25' 5 7/8\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 4\" X 25' 5 7/8\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 4\" X 25' 5 7/8\"",
+                "opens_into": "STAIRS2"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Stairs2 (3)",
+          "metadata": {
+            "height": "25' 6\"",
+            "areas": {
+              "sf_floor": "35.41"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 4\" X 25' 5 7/8\"",
+                "opens_into": "STAIRS1"
+              },
+              {
+                "dimensions": "6' X 25' 5 7/8\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 4\" X 25' 5 7/8\"",
+                "opens_into": "STAIRS3"
+              },
+              {
+                "dimensions": "6' X 25' 5 7/8\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Stairs3 (4)",
+          "metadata": {
+            "height": "21' 1\"",
+            "areas": {
+              "sf_floor": "11.11"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 4\" X 21' 1 7/16\"",
+                "opens_into": "STAIRS2"
+              },
+              {
+                "dimensions": "3' 4\" X 21' 1 7/16\"",
+                "opens_into": "STAIRS4"
+              },
+              {
+                "dimensions": "3' 4\" X 21' 1 7/16\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 4\" X 21' 1 7/16\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Stairs4 (5)",
+          "metadata": {
+            "height": "21' 1\"",
+            "areas": {
+              "sf_floor": "68.18"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 4\" X 21' 1 7/16\"",
+                "opens_into": "STAIRS3"
+              },
+              {
+                "dimensions": "11' 10\" X 21' 1 7/16\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 4\" X 21' 1 7/16\"",
+                "opens_into": "STAIRS5"
+              },
+              {
+                "dimensions": "11' 10\" X 21' 1 7/16\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Stairs5 (6)",
+          "metadata": {
+            "height": "13'",
+            "areas": {
+              "sf_floor": "11.11"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 4\" X 12' 11 15/16\"",
+                "opens_into": "STAIRS4"
+              },
+              {
+                "dimensions": "3' 4\" X 12' 11 15/16\"",
+                "opens_into": "STAIRS6"
+              },
+              {
+                "dimensions": "3' 4\" X 12' 11 15/16\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 4\" X 12' 11 15/16\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Stairs6 (7)",
+          "metadata": {
+            "height": "13'",
+            "areas": {
+              "sf_floor": "40.96"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 4\" X 12' 11 15/16\"",
+                "opens_into": "STAIRS5"
+              },
+              {
+                "dimensions": "7' X 12' 11 15/16\"",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 4\" X 12' 11 15/16\"",
+                "opens_into": "STAIRS7"
+              },
+              {
+                "dimensions": "7' X 12' 11 15/16\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Stairs7 (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "sf_floor": "11.11"
+            },
+            "missing_walls": [
+              {
+                "dimensions": "3' 4\" X 8'",
+                "opens_into": "STAIRS6"
+              },
+              {
+                "dimensions": "3' 4\" X 8'",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 4\" X 8'",
+                "opens_into": "Exterior"
+              },
+              {
+                "dimensions": "3' 4\" X 8'",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [],
+      "section_totals": {
+        "tax": "267.06",
+        "op": null,
+        "total": "1,602.34",
+        "computed_total": "0.00",
+        "validation_delta": "1,602.34"
+      }
+    },
+    {
+      "section_name": "Main Level",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        },
+        {
+          "type": "line_item",
+          "line_number": 250,
+          "description": "Deodorize building - Hot",
+          "qty": 16901.21,
+          "unit": "CF",
+          "total": "2,230.95",
+          "notes": "251. Hydroxyl generator - 4.00DA REVISED odor counteractant - 3 optics 252. Solid odor counteractant - 2.00DA 27.76* 2.08 11.52 69.12 crystal or solid block",
+          "tax": "371.82"
+        },
+        {
+          "type": "header",
+          "text": "EXTERIOR CLEANING"
+        },
+        {
+          "type": "line_item",
+          "line_number": 278,
+          "description": "Negative air fan/Air",
+          "qty": 36.0,
+          "unit": "DA",
+          "total": "3,154.46",
+          "notes": "scrubber (24 hr period) - No monit. 279. Add for HEPA filter (for 9.00EA 217.22* 167.67 424.54 2,547.19 negative air exhaust fan)",
+          "tax": "525.74"
+        },
+        {
+          "type": "line_item",
+          "line_number": 280,
+          "description": "Hydroxyl generator -",
+          "qty": 36.0,
+          "unit": "DA",
+          "total": "7,776.00",
+          "notes": "282. Add for personal 24.00EA 24.79* 26.11 124.22 745.29 protective equipment (hazardous cleanup) 327. Clean with 2,996.50SF 0.52* 2.85 312.22 1,873.25 pressure/chemical spray * 336. Fire Remediation & 1.00EA 2,049.00*E 0.00 409.80 2,458.80 Restoration – Pacific Palisades Fire Remediation & Restoration – Windows and Sliding Glass Doors (Labor Only) Fire remediation and restoration of ten (10) large windows and nine (9) sliding glass doors at 935 Chattanooga Ave, Pacific Palisades, CA 90272, affected by smoke and soot exposure. Process includes HEPA vacuum removal of soot and ash from frames, tracks and assemblies, wet neutralization to eliminate smoke film and odor, inspection and adjustment of roller assemblies for proper alignment and closure, silicone lubrication, and final operational verification. Work performed under insurance restoration protocols and post-fire remediation standards. 1 $2,049.00 $2,049.00 Materials and any component replacements are excluded and will be quoted separately via change order if required upon inspection. End revisions by VAEMK8 on 10/3/2025",
+          "tax": "1,296.00"
+        }
+      ],
+      "section_totals": {
+        "tax": "3,847.88",
+        "op": null,
+        "total": "23,087.11",
+        "computed_total": "13,161.41",
+        "validation_delta": "9,925.70"
+      }
+    },
+    {
+      "section_name": "Master Bedroom Closet",
+      "metadata": {
+        "height": "Peaked",
+        "areas": {
+          "sf_walls": "116.80",
+          "sf_ceiling": "15.82",
+          "sf_walls_and_ceiling": "132.61",
+          "sf_floor": "15.63",
+          "lf_floor_perimeter": "12.35",
+          "lf_ceil_perimeter": "20.20"
+        },
+        "doors": [
+          {
+            "dimensions": "2' 10 1/4\" X 1' 5 13/16\"",
+            "opens_into": "MASTER_BEDRO"
+          },
+          {
+            "dimensions": "3' 10\" X 5' 8 1/8\"",
+            "opens_into": "MASTER_BEDRO"
+          },
+          {
+            "dimensions": "2' 6 11/16\" X 1' 6\"",
+            "opens_into": "MASTER_BEDRO"
+          },
+          {
+            "dimensions": "3' 9 15/16\" X 5' 8 1/8\"",
+            "opens_into": "MASTER_BEDRO"
+          },
+          {
+            "dimensions": "1' 9 1/16\" X 1' 5\"",
+            "opens_into": "MASTER_BEDRO"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "75.64",
+        "op": null,
+        "total": "453.89",
+        "computed_total": "0.00",
+        "validation_delta": "453.89"
+      }
+    },
+    {
+      "section_name": "Bedroom 2 Closet",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "129.97",
+          "sf_ceiling": "14.53",
+          "sf_walls_and_ceiling": "144.50",
+          "sf_floor": "14.37",
+          "lf_floor_perimeter": "12.51",
+          "lf_ceil_perimeter": "20.30"
+        },
+        "doors": [
+          {
+            "dimensions": "3' 9 7/8\" X 5' 8 1/2\"",
+            "opens_into": "BEDROOM_2"
+          },
+          {
+            "dimensions": "3' 9 3/8\" X 5' 8 7/8\"",
+            "opens_into": "BEDROOM_2"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "79.96",
+        "op": null,
+        "total": "479.80",
+        "computed_total": "0.00",
+        "validation_delta": "479.80"
+      }
+    },
+    {
+      "section_name": "Bedroom 1 Closet",
+      "metadata": {
+        "height": "8'",
+        "areas": {
+          "sf_walls": "100.37",
+          "sf_ceiling": "15.02",
+          "sf_walls_and_ceiling": "115.38",
+          "sf_floor": "15.02",
+          "lf_floor_perimeter": "11.78",
+          "lf_ceil_perimeter": "17.28"
+        },
+        "doors": [
+          {
+            "dimensions": "5' 5 7/8\" X 6' 10 11/16\"",
+            "opens_into": "BEDROOM_1"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "68.32",
+        "op": null,
+        "total": "410.05",
+        "computed_total": "0.00",
+        "validation_delta": "410.05"
+      }
+    },
+    {
+      "section_name": "Hallway Closet",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "142.39",
+          "sf_ceiling": "9.71",
+          "sf_walls_and_ceiling": "152.11",
+          "sf_floor": "9.65",
+          "lf_floor_perimeter": "13.61",
+          "lf_ceil_perimeter": "24.37"
+        },
+        "doors": [
+          {
+            "dimensions": "3' 7 1/4\" X 3' 5\"",
+            "opens_into": "HALLWAY2"
+          },
+          {
+            "dimensions": "3' 7\" X 2' 10 11/16\"",
+            "opens_into": "HALLWAY2"
+          },
+          {
+            "dimensions": "3' 5 9/16\" X 2' 11 1/8\"",
+            "opens_into": "HALLWAY2"
+          },
+          {
+            "dimensions": "3' 8 1/16\" X 2' 11\"",
+            "opens_into": "HALLWAY2"
+          },
+          {
+            "dimensions": "3' 8\" X 3' 5\"",
+            "opens_into": "HALLWAY2"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "81.30",
+        "op": null,
+        "total": "487.87",
+        "computed_total": "0.00",
+        "validation_delta": "487.87"
+      }
+    },
+    {
+      "section_name": "Master Bathroom",
+      "metadata": {
+        "height": "8'",
+        "areas": {
+          "sf_walls": "176.53",
+          "sf_ceiling": "47.95"
+        },
+        "doors": [
+          {
+            "dimensions": "1' 11 15/16\" X 6' 7 15/16\"",
+            "opens_into": "MASTER_ENTR2"
+          }
+        ],
+        "windows": [
+          {
+            "dimensions": "3' 9 3/4\" X 1' 9 5/8\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Master Bathroom (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "sf_walls": "59.95",
+              "sf_ceiling": "11.87",
+              "sf_walls_and_ceiling": "71.82",
+              "sf_floor": "11.87",
+              "lf_floor_perimeter": "13.55",
+              "lf_ceil_perimeter": "7.23"
+            }
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "514.02",
+        "op": null,
+        "total": "3,084.31",
+        "computed_total": "0.00",
+        "validation_delta": "3,084.31"
+      }
+    },
+    {
+      "section_name": "Hallway Bathroom",
+      "metadata": {},
+      "subrooms": [
+        {
+          "subroom_name": "Hallway Bathroom (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "sf_walls": "65.96",
+              "sf_ceiling": "10.45",
+              "sf_walls_and_ceiling": "76.41",
+              "sf_floor": "10.45",
+              "lf_floor_perimeter": "12.96",
+              "lf_ceil_perimeter": "6.48"
+            }
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "301.56",
+        "op": null,
+        "total": "1,809.51",
+        "computed_total": "0.00",
+        "validation_delta": "1,809.51"
+      }
+    },
+    {
+      "section_name": "Hallway Closet 2",
+      "metadata": {
+        "height": "8'",
+        "areas": {
+          "sf_walls": "88.25",
+          "sf_ceiling": "10.69",
+          "sf_walls_and_ceiling": "98.93",
+          "sf_floor": "10.69",
+          "lf_floor_perimeter": "10.61",
+          "lf_ceil_perimeter": "13.08"
+        },
+        "doors": [
+          {
+            "dimensions": "2' 5 3/4\" X 6' 7 1/2\"",
+            "opens_into": "HALLWAY2"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "59.74",
+        "op": null,
+        "total": "358.52",
+        "computed_total": "0.00",
+        "validation_delta": "358.52"
+      }
+    },
+    {
+      "section_name": "Hallway",
+      "metadata": {
+        "height": "7'",
+        "areas": {
+          "sf_walls": "243.09",
+          "sf_ceiling": "87.61",
+          "sf_walls_and_ceiling": "330.70",
+          "sf_floor": "87.61",
+          "lf_floor_perimeter": "34.82",
+          "lf_ceil_perimeter": "59.73"
+        },
+        "doors": [
+          {
+            "dimensions": "2' 4 11/16\" X 6' 6 3/8\"",
+            "opens_into": "MASTER_ENTR2"
+          },
+          {
+            "dimensions": "2' 1/16\" X 6' 8 5/16\"",
+            "opens_into": "HALLWAY_BATH"
+          },
+          {
+            "dimensions": "2' 6 13/16\" X 6' 8 5/16\"",
+            "opens_into": "BEDROOM_1"
+          },
+          {
+            "dimensions": "2' 5 3/4\" X 6' 7 1/2\"",
+            "opens_into": "HALLWAY_CLO1"
+          },
+          {
+            "dimensions": "2' 5 3/16\" X 6' 10 5/16\"",
+            "opens_into": "ENTRANCE"
+          },
+          {
+            "dimensions": "3' 7 1/4\" X 3' 5\"",
+            "opens_into": "HALLWAY_CLOS"
+          },
+          {
+            "dimensions": "3' 7\" X 2' 10 11/16\"",
+            "opens_into": "HALLWAY_CLOS"
+          },
+          {
+            "dimensions": "3' 5 9/16\" X 2' 11 1/8\"",
+            "opens_into": "HALLWAY_CLOS"
+          },
+          {
+            "dimensions": "3' 8 1/16\" X 2' 11\"",
+            "opens_into": "HALLWAY_CLOS"
+          },
+          {
+            "dimensions": "3' 8\" X 3' 5\"",
+            "opens_into": "HALLWAY_CLOS"
+          }
+        ],
+        "windows": [
+          {
+            "dimensions": "2' 7 1/4\" X 4' 7 1/2\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "755.72",
+        "op": null,
+        "total": "4,534.42",
+        "computed_total": "0.00",
+        "validation_delta": "4,534.42"
+      }
+    },
+    {
+      "section_name": "Entrance Closet",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "85.37",
+          "sf_ceiling": "6.30",
+          "sf_walls_and_ceiling": "91.67",
+          "sf_floor": "6.24",
+          "lf_floor_perimeter": "8.09",
+          "lf_ceil_perimeter": "10.21"
+        },
+        "doors": [
+          {
+            "dimensions": "2' 3/4\" X 6' 9 1/2\"",
+            "opens_into": "ENTRANCE"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "55.82",
+        "op": null,
+        "total": "334.88",
+        "computed_total": "0.00",
+        "validation_delta": "334.88"
+      }
+    },
+    {
+      "section_name": "Living Room",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "536.19",
+          "sf_ceiling": "401.39",
+          "sf_walls_and_ceiling": "937.58",
+          "sf_floor": "398.65",
+          "lf_floor_perimeter": "59.22",
+          "lf_ceil_perimeter": "82.67"
+        },
+        "windows": [
+          {
+            "dimensions": "5' 8 5/8\" X 4' 4 3/8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "6' 1 1/16\" X 4' 3 15/16\"",
+            "opens_into": "Exterior"
+          }
+        ],
+        "doors": [
+          {
+            "dimensions": "9' 11 1/4\" X 6' 6 3/8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "10' 1/8\" X 6' 7 1/8\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "604.48",
+        "op": null,
+        "total": "3,626.70",
+        "computed_total": "0.00",
+        "validation_delta": "3,626.70"
+      }
+    },
+    {
+      "section_name": "Bedroom 1",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "277.25",
+          "sf_ceiling": "99.28",
+          "sf_walls_and_ceiling": "376.52",
+          "sf_floor": "97.48",
+          "lf_floor_perimeter": "32.13",
+          "lf_ceil_perimeter": "40.57"
+        },
+        "doors": [
+          {
+            "dimensions": "5' 5 7/8\" X 6' 10 11/16\"",
+            "opens_into": "BEDROOM_1_CL"
+          },
+          {
+            "dimensions": "2' 6 13/16\" X 6' 8 5/16\"",
+            "opens_into": "HALLWAY2"
+          }
+        ],
+        "windows": [
+          {
+            "dimensions": "7' 11 3/4\" X 3' 7 5/16\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "240.34",
+        "op": null,
+        "total": "1,442.00",
+        "computed_total": "0.00",
+        "validation_delta": "1,442.00"
+      }
+    },
+    {
+      "section_name": "Laundry",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "231.30",
+        "op": null,
+        "total": "1,387.83",
+        "computed_total": "0.00",
+        "validation_delta": "1,387.83"
+      }
+    },
+    {
+      "section_name": "Pantry",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "75.81",
+          "sf_ceiling": "5.24"
+        },
+        "doors": [
+          {
+            "dimensions": "2' 1 1/2\" X 6' 7 15/16\"",
+            "opens_into": "KITCHEN1"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "49.82",
+        "op": null,
+        "total": "298.90",
+        "computed_total": "0.00",
+        "validation_delta": "298.90"
+      }
+    },
+    {
+      "section_name": "Master Entrance",
+      "metadata": {
+        "height": "7'",
+        "areas": {
+          "sf_walls": "85.62",
+          "sf_ceiling": "20.22",
+          "sf_walls_and_ceiling": "105.84",
+          "sf_floor": "20.22",
+          "lf_floor_perimeter": "11.97",
+          "lf_ceil_perimeter": "16.36"
+        },
+        "doors": [
+          {
+            "dimensions": "2' 4 11/16\" X 6' 6 3/8\"",
+            "opens_into": "HALLWAY2"
+          },
+          {
+            "dimensions": "1' 11 15/16\" X 6' 7 15/16\"",
+            "opens_into": "MASTER_BATHR"
+          }
+        ],
+        "missing_walls": [
+          {
+            "dimensions": "3' 1\" X 7'",
+            "opens_into": "MASTER_BEDRO"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "82.40",
+        "op": null,
+        "total": "494.37",
+        "computed_total": "0.00",
+        "validation_delta": "494.37"
+      }
+    },
+    {
+      "section_name": "Garage",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "628.58",
+          "sf_ceiling": "393.57",
+          "sf_walls_and_ceiling": "1,022.15",
+          "sf_floor": "386.59",
+          "lf_floor_perimeter": "63.35",
+          "lf_ceil_perimeter": "79.51"
+        },
+        "missing_walls": [
+          {
+            "dimensions": "2' 10 1/4\" X 8'",
+            "opens_into": "STAIRS"
+          }
+        ],
+        "doors": [
+          {
+            "dimensions": "15' 5 5/8\" X 6' 8 11/16\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "1,289.82",
+        "op": null,
+        "total": "7,738.88",
+        "computed_total": "0.00",
+        "validation_delta": "7,738.88"
+      }
+    },
+    {
+      "section_name": "Entrance",
+      "metadata": {
+        "height": "8'",
+        "areas": {
+          "sf_walls": "141.86",
+          "sf_ceiling": "43.35",
+          "sf_walls_and_ceiling": "185.21",
+          "sf_floor": "43.35",
+          "lf_floor_perimeter": "14.96",
+          "lf_ceil_perimeter": "30.98"
+        },
+        "doors": [
+          {
+            "dimensions": "2' 5 3/16\" X 6' 10 5/16\"",
+            "opens_into": "HALLWAY2"
+          },
+          {
+            "dimensions": "2' 3/4\" X 6' 9 1/2\"",
+            "opens_into": "ENTRANCE_CLO"
+          },
+          {
+            "dimensions": "2' 10 13/16\" X 6' 7 1/2\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "425.74",
+        "op": null,
+        "total": "2,554.35",
+        "computed_total": "0.00",
+        "validation_delta": "2,554.35"
+      }
+    },
+    {
+      "section_name": "Master Bedroom",
+      "metadata": {
+        "height": "Peaked \"7 \"3",
+        "areas": {
+          "sf_walls": "310.58",
+          "sf_ceiling": "182.66",
+          "sf_walls_and_ceiling": "493.24",
+          "sf_floor": "181.10",
+          "lf_floor_perimeter": "33.41",
+          "lf_ceil_perimeter": "57.14"
+        },
+        "doors": [
+          {
+            "dimensions": "2' 10 1/4\" X 1' 5 13/16\"",
+            "opens_into": "MASTER_BEDR1"
+          },
+          {
+            "dimensions": "3' 10\" X 5' 8 1/8\"",
+            "opens_into": "MASTER_BEDR1"
+          },
+          {
+            "dimensions": "2' 6 11/16\" X 1' 6\"",
+            "opens_into": "MASTER_BEDR1"
+          },
+          {
+            "dimensions": "3' 9 15/16\" X 5' 8 1/8\"",
+            "opens_into": "MASTER_BEDR1"
+          },
+          {
+            "dimensions": "1' 9 1/16\" X 1' 5\"",
+            "opens_into": "MASTER_BEDR1"
+          },
+          {
+            "dimensions": "12' 8 3/16\" X 6' 6 3/4\"",
+            "opens_into": "Exterior"
+          }
+        ],
+        "missing_walls": [
+          {
+            "dimensions": "3' 1\" X 8'",
+            "opens_into": "MASTER_ENTR2"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "328.50",
+        "op": null,
+        "total": "1,970.94",
+        "computed_total": "0.00",
+        "validation_delta": "1,970.94"
+      }
+    },
+    {
+      "section_name": "Bedroom 2",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "338.83",
+          "sf_ceiling": "138.44",
+          "sf_walls_and_ceiling": "477.27",
+          "sf_floor": "136.81",
+          "lf_floor_perimeter": "35.93",
+          "lf_ceil_perimeter": "48.28"
+        },
+        "windows": [
+          {
+            "dimensions": "5' 7 9/16\" X 3' 4 9/16\"",
+            "opens_into": "Exterior"
+          }
+        ],
+        "doors": [
+          {
+            "dimensions": "1' 11 7/8\" X 6' 7 1/8\"",
+            "opens_into": "LAUNDRY1"
+          },
+          {
+            "dimensions": "3' 9 7/8\" X 5' 8 1/2\"",
+            "opens_into": "BEDROOM_2_CL"
+          },
+          {
+            "dimensions": "3' 9 3/8\" X 5' 8 7/8\"",
+            "opens_into": "BEDROOM_2_CL"
+          }
+        ]
+      },
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        }
+      ],
+      "section_totals": {
+        "tax": "304.14",
+        "op": null,
+        "total": "1,824.64",
+        "computed_total": "0.00",
+        "validation_delta": "1,824.64"
+      }
+    },
+    {
+      "section_name": "Kitchen",
+      "metadata": {
+        "height": "Sloped",
+        "areas": {
+          "sf_walls": "263.53",
+          "sf_ceiling": "98.97",
+          "sf_walls_and_ceiling": "362.50",
+          "sf_floor": "97.55",
+          "lf_floor_perimeter": "26.84",
+          "lf_ceil_perimeter": "40.93"
+        },
+        "windows": [
+          {
+            "dimensions": "3' 7 11/16\" X 3' 2 3/16\"",
+            "opens_into": "Exterior"
+          }
+        ]
+      },
+      "subrooms": [
+        {
+          "subroom_name": "Kitchen (2)",
+          "metadata": {
+            "height": "Sloped",
+            "areas": {
+              "sf_walls": "236.47",
+              "sf_ceiling": "98.89",
+              "sf_walls_and_ceiling": "335.35",
+              "sf_floor": "97.50",
+              "lf_floor_perimeter": "20.84",
+              "lf_ceil_perimeter": "44.68"
+            },
+            "doors": [
+              {
+                "dimensions": "2' 1 1/2\" X 6' 7 15/16\"",
+                "opens_into": "PANTRY"
+              },
+              {
+                "dimensions": "5' 3 9/16\" X 6' 6 3/4\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        },
+        {
+          "subroom_name": "Kitchen (1)",
+          "metadata": {
+            "height": "8'",
+            "areas": {
+              "sf_walls": "73.18",
+              "sf_ceiling": "14.13",
+              "sf_walls_and_ceiling": "87.31",
+              "sf_floor": "14.13",
+              "lf_floor_perimeter": "11.49",
+              "lf_ceil_perimeter": "19.15"
+            },
+            "windows": [
+              {
+                "dimensions": "7' 4 3/8\" X 3' 11 1/8\"",
+                "opens_into": "Exterior"
+              }
+            ]
+          }
+        }
+      ],
+      "line_items": [
+        {
+          "type": "header",
+          "text": "CLEANING"
+        },
+        {
+          "type": "line_item",
+          "line_number": 265,
+          "description": "15-AMP Single-Pole",
+          "qty": 177.86,
+          "unit": "EA",
+          "total": "0.00",
+          "notes": "335. Clean door / window 2.00EA 21.06* 0.01 8.42 50.55 opening (per side) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.00"
+        }
+      ],
+      "section_totals": {
+        "tax": "1,239.26",
+        "op": null,
+        "total": "7,435.69",
+        "computed_total": "0.00",
+        "validation_delta": "7,435.69"
+      }
+    },
+    {
+      "section_name": "General Items",
+      "metadata": {
+        "areas": {
+          "sf_walls_and_ceiling": "0.00",
+          "sf_walls": "0.00",
+          "sf_ceiling": "0.00",
+          "sf_floor": "0.00",
+          "lf_floor_perimeter": "0.00",
+          "lf_ceil_perimeter": "0.00"
+        }
+      },
+      "subrooms": [],
+      "line_items": [],
+      "section_totals": {
+        "tax": "2,812.68",
+        "op": null,
+        "total": "16,876.12",
+        "computed_total": "0.00",
+        "validation_delta": "16,876.12"
+      }
+    },
+    {
+      "section_name": "Labor Minimums Applied",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "line_item",
+          "line_number": 32,
+          "description": "Miscellaneous concrete",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "687.11",
+          "notes": "labor minimum",
+          "tax": "114.52"
+        },
+        {
+          "type": "line_item",
+          "line_number": 267,
+          "description": "Electrical labor",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "64.18",
+          "notes": "minimum",
+          "tax": "10.70"
+        },
+        {
+          "type": "line_item",
+          "line_number": 337,
+          "description": "Plumbing labor",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "176.72",
+          "tax": "29.46"
+        }
+      ],
+      "section_totals": {
+        "tax": "154.68",
+        "op": null,
+        "total": "928.01",
+        "computed_total": "928.01",
+        "validation_delta": "0.00"
+      }
+    }
+  ],
+  "grand_total_areas": {
+    "sf_walls": "6,776.96",
+    "sf_ceiling": "1,855.61",
+    "sf_walls_and_ceiling": "8,632.57",
+    "sf_floor": "2,094.29",
+    "lf_floor_perimeter": "890.97",
+    "lf_ceil_perimeter": "762.11",
+    "floor_area": "2,094.29",
+    "total_area": "2,176.26",
+    "interior_wall_area": "4,728.03",
+    "exterior_wall_area": "4,161.66",
+    "exterior_perimeter_of_walls": "551.32",
+    "surface_area": "2,946.30",
+    "total_perimeter_length": "315.84",
+    "total_ridge_length": "91.14"
+  },
+  "coverage": {
+    "rows": [],
+    "totals": null
+  },
+  "recaps_and_summaries": {
+    "summaries_by_coverage": {
+      "Dwelling Estimated cost to repair or replace": {
+        "Line Item Total": "39,107.28",
+        "Material Sales Tax": "1,693.33",
+        "Subtotal": "40,842.82",
+        "California Lumber Assessment Fee": "42.21"
+      }
+    },
+    "recap_tax_op": {
+      "overhead": "15,165.99",
+      "profit": "15,165.99",
+      "material_sales_tax": "4,012.47",
+      "storage_rental_tax": "0.00"
+    },
+    "recap_by_room": {
+      "areas": {},
+      "subtotals": []
+    },
+    "recap_by_category": {
+      "subtotals": [
+        {
+          "label": "General Contractor O&P Items",
+          "total": "147,604.91",
+          "pct": 81.11
+        },
+        {
+          "label": "Permits and Fees",
+          "total": "42.21",
+          "pct": 0.02,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Other Structures - 33 Fire, Lightning, & Removal",
+              "pct": 100.0,
+              "amount": "42.21"
+            }
+          ]
+        },
+        {
+          "label": "Material Sales Tax",
+          "total": "4,012.47",
+          "pct": 2.2,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 18.29,
+              "amount": "733.86"
+            },
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and Landscaping",
+              "pct": 39.51,
+              "amount": "1,585.28"
+            },
+            {
+              "coverage": "Coverage A - Other Structures - 33 Fire, Lightning, & Removal",
+              "pct": 42.2,
+              "amount": "1,693.33"
+            }
+          ]
+        },
+        {
+          "label": "Total",
+          "total": "181,991.57",
+          "pct": 100.0
+        }
+      ],
+      "General Contractor O&P Items": [
+        {
+          "item": "APPLIANCES",
+          "total": "1,031.61",
+          "pct": 0.57,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "1,031.61"
+            }
+          ]
+        },
+        {
+          "item": "CLEANING",
+          "total": "18,464.75",
+          "pct": 10.15,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 98.99,
+              "amount": "18,278.55"
+            },
+            {
+              "coverage": "Coverage A - Other Structures - 33 Fire, Lightning, & Removal",
+              "pct": 1.01,
+              "amount": "186.20"
+            }
+          ]
+        },
+        {
+          "item": "CONCRETE & ASPHALT",
+          "total": "936.02",
+          "pct": 0.51,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Other Structures - 33 Fire, Lightning, & Removal",
+              "pct": 100.0,
+              "amount": "936.02"
+            }
+          ]
+        },
+        {
+          "item": "GENERAL DEMOLITION",
+          "total": "1,132.57",
+          "pct": 0.62,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "1,132.57"
+            }
+          ]
+        },
+        {
+          "item": "DRYWALL",
+          "total": "3,260.62",
+          "pct": 1.79,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "3,260.62"
+            }
+          ]
+        },
+        {
+          "item": "ELECTRICAL",
+          "total": "53.48",
+          "pct": 0.03,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "53.48"
+            }
+          ]
+        },
+        {
+          "item": "HEAVY EQUIPMENT",
+          "total": "1,440.00",
+          "pct": 0.79,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Other Structures - 33 Fire, Lightning, & Removal",
+              "pct": 100.0,
+              "amount": "1,440.00"
+            }
+          ]
+        },
+        {
+          "item": "FRAMING & ROUGH CARPENTRY",
+          "total": "14,242.83",
+          "pct": 7.83,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Other Structures - 33 Fire, Lightning, & Removal",
+              "pct": 100.0,
+              "amount": "14,242.83"
+            }
+          ]
+        },
+        {
+          "item": "HAZARDOUS MATERIAL REMEDIATION",
+          "total": "27,133.36",
+          "pct": 14.91,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "27,133.36"
+            }
+          ]
+        },
+        {
+          "item": "HEAT, VENT & AIR CONDITIONING",
+          "total": "8,926.75",
+          "pct": 4.91,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "8,926.75"
+            }
+          ]
+        },
+        {
+          "item": "INSULATION",
+          "total": "1,789.20",
+          "pct": 0.98,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "1,789.20"
+            }
+          ]
+        },
+        {
+          "item": "LABOR ONLY",
+          "total": "450.00",
+          "pct": 0.25,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and Landscaping",
+              "pct": 100.0,
+              "amount": "450.00"
+            }
+          ]
+        },
+        {
+          "item": "LIGHT FIXTURES",
+          "total": "160.26",
+          "pct": 0.09,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "160.26"
+            }
+          ]
+        },
+        {
+          "item": "LANDSCAPING",
+          "total": "40,701.25",
+          "pct": 22.36,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke - Trees, Shrubs, and Landscaping",
+              "pct": 100.0,
+              "amount": "40,701.25"
+            }
+          ]
+        },
+        {
+          "item": "PLUMBING",
+          "total": "147.26",
+          "pct": 0.08,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke SCHACTER, BARBARA 75-79D9-35K",
+              "pct": 100.0,
+              "amount": "147.26"
+            }
+          ]
+        },
+        {
+          "item": "PAINTING",
+          "total": "8,588.74",
+          "pct": 4.72,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 21.9,
+              "amount": "1,881.34"
+            },
+            {
+              "coverage": "Coverage A - Other Structures - 33 Fire, Lightning, & Removal",
+              "pct": 78.1,
+              "amount": "6,707.40"
+            }
+          ]
+        },
+        {
+          "item": "TEMPORARY REPAIRS",
+          "total": "472.00",
+          "pct": 0.26,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "472.00"
+            }
+          ]
+        },
+        {
+          "item": "WINDOWS - SLIDING PATIO DOORS",
+          "total": "1,235.23",
+          "pct": 0.68,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "1,235.23"
+            }
+          ]
+        },
+        {
+          "item": "WATER EXTRACTION & REMEDIATION",
+          "total": "1,844.15",
+          "pct": 1.01,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Dwelling - 39 Smoke",
+              "pct": 100.0,
+              "amount": "1,844.15"
+            }
+          ]
+        },
+        {
+          "item": "EXTERIOR STRUCTURES",
+          "total": "15,594.83",
+          "pct": 8.57,
+          "coverage": [
+            {
+              "coverage": "Coverage A - Other Structures - 33 Fire, Lightning, & Removal",
+              "pct": 100.0,
+              "amount": "15,594.83"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "estimate_name": "Customer Copy Final Draft (3).pdf",
+  "validations": {
+    "per_section": [
+      {
+        "section": "Dwelling Roof",
+        "declared": "0.00",
+        "computed": "0.00",
+        "delta": "0.00"
+      },
+      {
+        "section": "Swing Pavillion",
+        "declared": "10,070.44",
+        "computed": "0.00",
+        "delta": "10,070.44"
+      },
+      {
+        "section": "Deck",
+        "declared": "12,655.48",
+        "computed": "64.29",
+        "delta": "12,591.19"
+      },
+      {
+        "section": "Gazebo",
+        "declared": "21,255.56",
+        "computed": "1,728.00",
+        "delta": "19,527.56"
+      },
+      {
+        "section": "Retaining Wall",
+        "declared": "924.57",
+        "computed": "0.00",
+        "delta": "924.57"
+      },
+      {
+        "section": "Trees, Shrubs and Landscaping",
+        "declared": "50,743.85",
+        "computed": "0.00",
+        "delta": "50,743.85"
+      },
+      {
+        "section": "Debris Removal",
+        "declared": "1,304.60",
+        "computed": "566.40",
+        "delta": "738.20"
+      },
+      {
+        "section": "Main Level",
+        "declared": "1,765.29",
+        "computed": "0.00",
+        "delta": "1,765.29"
+      },
+      {
+        "section": "Stairs",
+        "declared": "1,602.34",
+        "computed": "0.00",
+        "delta": "1,602.34"
+      },
+      {
+        "section": "Main Level",
+        "declared": "23,087.11",
+        "computed": "13,161.41",
+        "delta": "9,925.70"
+      },
+      {
+        "section": "Master Bedroom Closet",
+        "declared": "453.89",
+        "computed": "0.00",
+        "delta": "453.89"
+      },
+      {
+        "section": "Bedroom 2 Closet",
+        "declared": "479.80",
+        "computed": "0.00",
+        "delta": "479.80"
+      },
+      {
+        "section": "Bedroom 1 Closet",
+        "declared": "410.05",
+        "computed": "0.00",
+        "delta": "410.05"
+      },
+      {
+        "section": "Hallway Closet",
+        "declared": "487.87",
+        "computed": "0.00",
+        "delta": "487.87"
+      },
+      {
+        "section": "Master Bathroom",
+        "declared": "3,084.31",
+        "computed": "0.00",
+        "delta": "3,084.31"
+      },
+      {
+        "section": "Hallway Bathroom",
+        "declared": "1,809.51",
+        "computed": "0.00",
+        "delta": "1,809.51"
+      },
+      {
+        "section": "Hallway Closet 2",
+        "declared": "358.52",
+        "computed": "0.00",
+        "delta": "358.52"
+      },
+      {
+        "section": "Hallway",
+        "declared": "4,534.42",
+        "computed": "0.00",
+        "delta": "4,534.42"
+      },
+      {
+        "section": "Entrance Closet",
+        "declared": "334.88",
+        "computed": "0.00",
+        "delta": "334.88"
+      },
+      {
+        "section": "Living Room",
+        "declared": "3,626.70",
+        "computed": "0.00",
+        "delta": "3,626.70"
+      },
+      {
+        "section": "Bedroom 1",
+        "declared": "1,442.00",
+        "computed": "0.00",
+        "delta": "1,442.00"
+      },
+      {
+        "section": "Laundry",
+        "declared": "1,387.83",
+        "computed": "0.00",
+        "delta": "1,387.83"
+      },
+      {
+        "section": "Pantry",
+        "declared": "298.90",
+        "computed": "0.00",
+        "delta": "298.90"
+      },
+      {
+        "section": "Master Entrance",
+        "declared": "494.37",
+        "computed": "0.00",
+        "delta": "494.37"
+      },
+      {
+        "section": "Garage",
+        "declared": "7,738.88",
+        "computed": "0.00",
+        "delta": "7,738.88"
+      },
+      {
+        "section": "Entrance",
+        "declared": "2,554.35",
+        "computed": "0.00",
+        "delta": "2,554.35"
+      },
+      {
+        "section": "Master Bedroom",
+        "declared": "1,970.94",
+        "computed": "0.00",
+        "delta": "1,970.94"
+      },
+      {
+        "section": "Bedroom 2",
+        "declared": "1,824.64",
+        "computed": "0.00",
+        "delta": "1,824.64"
+      },
+      {
+        "section": "Kitchen",
+        "declared": "7,435.69",
+        "computed": "0.00",
+        "delta": "7,435.69"
+      },
+      {
+        "section": "General Items",
+        "declared": "16,876.12",
+        "computed": "0.00",
+        "delta": "16,876.12"
+      },
+      {
+        "section": "Labor Minimums Applied",
+        "declared": "928.01",
+        "computed": "928.01",
+        "delta": "0.00"
+      }
+    ],
+    "document": {
+      "sum_sections": "16,448.11",
+      "end_grand_total": "181,940.92",
+      "grand_total_vs_sections_delta": "165,492.81",
+      "sum_rcv_from_summaries": "0.00",
+      "recap_category_total": "181,991.57",
+      "recap_vs_end_grand_delta": "50.65"
+    }
+  }
+}

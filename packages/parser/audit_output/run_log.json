@@ -1,0 +1,56 @@
+{
+  "run_date": "2026-03-08T07:37:34.637576+00:00",
+  "total_files": 6,
+  "success": 6,
+  "failed": 0,
+  "results": [
+    {
+      "file": "docs/rough-drafts/1115_LACHMAN_APEX_2_ROUGH_DRAFT_CAR.pdf",
+      "type": "rough-drafts",
+      "status": "ok",
+      "sections_count": 32,
+      "line_items_total": 525,
+      "json_path": "C:\\Users\\benav.TUFFON_AMD\\Documents\\Projects\\VIP30\\packages\\parser\\audit_output\\rough-drafts\\1115_LACHMAN_APEX_2_ROUGH_DRAFT_CAR.json"
+    },
+    {
+      "file": "docs/rough-drafts/KALYVAS_JVB_V6_KALY2_ROUGH_DRAFT_CAR.pdf",
+      "type": "rough-drafts",
+      "status": "ok",
+      "sections_count": 40,
+      "line_items_total": 887,
+      "json_path": "C:\\Users\\benav.TUFFON_AMD\\Documents\\Projects\\VIP30\\packages\\parser\\audit_output\\rough-drafts\\KALYVAS_JVB_V6_KALY2_ROUGH_DRAFT_CAR.json"
+    },
+    {
+      "file": "docs/final-drafts/BSchacter-02.12.26-Est-JVB-RepairEstimate-$809,464.83.pdf",
+      "type": "final-drafts",
+      "status": "ok",
+      "sections_count": 0,
+      "line_items_total": 0,
+      "json_path": "C:\\Users\\benav.TUFFON_AMD\\Documents\\Projects\\VIP30\\packages\\parser\\audit_output\\final-drafts\\BSchacter-02.12.26-Est-JVB-RepairEstimate-$809,464.83.json"
+    },
+    {
+      "file": "docs/final-drafts/statefarm/Customer Copy Final Draft (3).pdf",
+      "type": "final-drafts/statefarm",
+      "status": "ok",
+      "sections_count": 31,
+      "line_items_total": 32,
+      "json_path": "C:\\Users\\benav.TUFFON_AMD\\Documents\\Projects\\VIP30\\packages\\parser\\audit_output\\final-drafts\\statefarm\\Customer Copy Final Draft (3).json"
+    },
+    {
+      "file": "docs/final-drafts/statefarm/Estimate SF Structural damage Lachman 4.15.2025.pdf",
+      "type": "final-drafts/statefarm",
+      "status": "ok",
+      "sections_count": 34,
+      "line_items_total": 367,
+      "json_path": "C:\\Users\\benav.TUFFON_AMD\\Documents\\Projects\\VIP30\\packages\\parser\\audit_output\\final-drafts\\statefarm\\Estimate SF Structural damage Lachman 4.15.2025.json"
+    },
+    {
+      "file": "docs/final-drafts/statefarm/Kalyvas Preliminary State Farm estimate9-25-25.pdf",
+      "type": "final-drafts/statefarm",
+      "status": "ok",
+      "sections_count": 36,
+      "line_items_total": 518,
+      "json_path": "C:\\Users\\benav.TUFFON_AMD\\Documents\\Projects\\VIP30\\packages\\parser\\audit_output\\final-drafts\\statefarm\\Kalyvas Preliminary State Farm estimate9-25-25.json"
+    }
+  ]
+}

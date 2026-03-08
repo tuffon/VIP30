@@ -1,0 +1,463 @@
+{
+  "recap_by_category": {
+    "subtotals": [
+      {
+        "label": "General Contractor O&P Items",
+        "total": "500,483.11",
+        "pct": 81.6
+      },
+      {
+        "label": "Permits and Fees",
+        "total": "308.24",
+        "pct": 0.05,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "308.24"
+          }
+        ]
+      },
+      {
+        "label": "Material Sales Tax",
+        "total": "10,348.64",
+        "pct": 1.69,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 83.22,
+            "amount": "8,611.66"
+          },
+          {
+            "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+            "pct": 16.78,
+            "amount": "1,736.98"
+          }
+        ]
+      },
+      {
+        "label": "Total",
+        "total": "613,368.79",
+        "pct": 100.0
+      }
+    ],
+    "General Contractor O&P Items": [
+      {
+        "item": "CABINETRY",
+        "total": "14,308.60",
+        "pct": 2.33,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 43.45,
+            "amount": "6,217.08"
+          },
+          {
+            "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+            "pct": 56.55,
+            "amount": "8,091.52"
+          }
+        ]
+      },
+      {
+        "item": "CLEANING",
+        "total": "30,936.13",
+        "pct": 5.04,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "30,936.13"
+          }
+        ]
+      },
+      {
+        "item": "GENERAL DEMOLITION",
+        "total": "24,606.30",
+        "pct": 4.01,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 97.28,
+            "amount": "23,936.15"
+          },
+          {
+            "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+            "pct": 2.72,
+            "amount": "670.15"
+          }
+        ]
+      },
+      {
+        "item": "DOORS",
+        "total": "1,015.08",
+        "pct": 0.17,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "1,015.08"
+          }
+        ]
+      },
+      {
+        "item": "DRYWALL",
+        "total": "9,682.26",
+        "pct": 1.58,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "9,682.26"
+          }
+        ]
+      },
+      {
+        "item": "ELECTRICAL",
+        "total": "2,869.58",
+        "pct": 0.47,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "2,869.58"
+          }
+        ]
+      },
+      {
+        "item": "FLOOR COVERING - CARPET",
+        "total": "21,679.32",
+        "pct": 3.53,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "21,679.32"
+          }
+        ]
+      },
+      {
+        "item": "FLOOR COVERING - STONE",
+        "total": "2,083.11",
+        "pct": 0.34,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "2,083.11"
+          }
+        ]
+      },
+      {
+        "item": "FLOOR COVERING - CERAMIC TILE",
+        "total": "716.95",
+        "pct": 0.12,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "716.95"
+          }
+        ]
+      },
+      {
+        "item": "FLOOR COVERING - WOOD",
+        "total": "4,799.68",
+        "pct": 0.78,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "4,799.68"
+          }
+        ]
+      },
+      {
+        "item": "FINISH CARPENTRY / TRIMWORK",
+        "total": "2,601.89",
+        "pct": 0.42,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "2,601.89"
+          }
+        ]
+      },
+      {
+        "item": "FINISH HARDWARE",
+        "total": "68.11",
+        "pct": 0.01,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "68.11"
+          }
+        ]
+      },
+      {
+        "item": "FRAMING & ROUGH CARPENTRY",
+        "total": "1,115.91",
+        "pct": 0.18,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "1,115.91"
+          }
+        ]
+      },
+      {
+        "item": "HEAT, VENT & AIR CONDITIONING",
+        "total": "8,984.34",
+        "pct": 1.46,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+            "pct": 100.0,
+            "amount": "8,984.34"
+          }
+        ]
+      },
+      {
+        "item": "INSULATION",
+        "total": "339.99",
+        "pct": 0.06,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke KALYVAS, JAMES 75-79F9-18M3",
+            "pct": 100.0,
+            "amount": "339.99"
+          }
+        ]
+      },
+      {
+        "item": "LABOR ONLY",
+        "total": "12,913.50",
+        "pct": 2.11,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "12,913.50"
+          }
+        ]
+      },
+      {
+        "item": "LIGHT FIXTURES",
+        "total": "2,756.81",
+        "pct": 0.45,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "2,756.81"
+          }
+        ]
+      },
+      {
+        "item": "MARBLE - CULTURED OR NATURAL",
+        "total": "619.20",
+        "pct": 0.1,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "619.20"
+          }
+        ]
+      },
+      {
+        "item": "ORNAMENTAL IRON",
+        "total": "3,456.46",
+        "pct": 0.56,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+            "pct": 100.0,
+            "amount": "3,456.46"
+          }
+        ]
+      },
+      {
+        "item": "PLUMBING",
+        "total": "9,312.58",
+        "pct": 1.52,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 83.08,
+            "amount": "7,736.96"
+          },
+          {
+            "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+            "pct": 16.92,
+            "amount": "1,575.62"
+          }
+        ]
+      },
+      {
+        "item": "PAINTING",
+        "total": "76,454.42",
+        "pct": 12.46,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "76,454.42"
+          }
+        ]
+      },
+      {
+        "item": "ROOFING",
+        "total": "105,609.11",
+        "pct": 17.22,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "105,609.11"
+          }
+        ]
+      },
+      {
+        "item": "SCAFFOLDING",
+        "total": "22,658.22",
+        "pct": 3.69,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "22,658.22"
+          }
+        ]
+      },
+      {
+        "item": "SOFFIT, FASCIA, & GUTTER",
+        "total": "11,191.83",
+        "pct": 1.82,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "11,191.83"
+          }
+        ]
+      },
+      {
+        "item": "SPECIALTY ITEMS",
+        "total": "8,476.12",
+        "pct": 1.38,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 2.61,
+            "amount": "221.12"
+          },
+          {
+            "coverage": "Coverage A - Dwelling Extension - 39 Smoke",
+            "pct": 97.39,
+            "amount": "8,255.00"
+          }
+        ]
+      },
+      {
+        "item": "STUCCO & EXTERIOR PLASTER",
+        "total": "82,756.52",
+        "pct": 13.49,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "82,756.52"
+          }
+        ]
+      },
+      {
+        "item": "TILE",
+        "total": "6,913.69",
+        "pct": 1.13,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "6,913.69"
+          }
+        ]
+      },
+      {
+        "item": "TEMPORARY REPAIRS",
+        "total": "1,125.00",
+        "pct": 0.18,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "1,125.00"
+          }
+        ]
+      },
+      {
+        "item": "WINDOWS - SLIDING PATIO DOORS",
+        "total": "661.78",
+        "pct": 0.11,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "661.78"
+          }
+        ]
+      },
+      {
+        "item": "WINDOW REGLAZING & REPAIR",
+        "total": "10,989.31",
+        "pct": 1.79,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "10,989.31"
+          }
+        ]
+      },
+      {
+        "item": "WINDOWS - SKYLIGHTS",
+        "total": "1,210.59",
+        "pct": 0.2,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke KALYVAS, JAMES 75-79F9-18M3",
+            "pct": 100.0,
+            "amount": "1,210.59"
+          }
+        ]
+      },
+      {
+        "item": "WINDOW TREATMENT",
+        "total": "1,899.58",
+        "pct": 0.31,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "1,899.58"
+          }
+        ]
+      },
+      {
+        "item": "WALLPAPER",
+        "total": "15,671.14",
+        "pct": 2.55,
+        "coverage": [
+          {
+            "coverage": "Coverage A - Dwelling - 39 Smoke",
+            "pct": 100.0,
+            "amount": "15,671.14"
+          }
+        ]
+      }
+    ]
+  }
+}
