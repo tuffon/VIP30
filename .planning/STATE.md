@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.4
 milestone_name: parser-coverage
 status: in_progress
-last_updated: "2026-03-07T00:00:00Z"
+last_updated: "2026-03-08T00:00:00Z"
 progress:
   total_phases: 25
   completed_phases: 23
   total_plans: 6
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # Project State
@@ -23,11 +23,11 @@ See: .planning/PROJECT.md (updated 2026-03-07)
 ## Current Position
 
 Phase: 24 of 25 (golden-masters)
-Plan: Not started — ready to plan
-Status: Ready to plan — run /gsd:plan-phase 24
-Last activity: 2026-03-07 — Phase 23 complete (parser audit + AUDIT-REPORT.md)
+Plan: 01 of 1 complete
+Status: In progress — 24-01 complete, ready for Phase 25
+Last activity: 2026-03-08 — Completed 24-01-PLAN.md (golden master JSON files for lachman and kalyvas)
 
-Progress: ████░░░░░░ 33%
+Progress: █████░░░░░ 50%
 
 ## Completed Milestones
 
@@ -54,6 +54,7 @@ Progress: ████░░░░░░ 33%
 - Phase 22-02 completed: XLSX cleanup — Notes column removed from Analysis sheet category table (5-column layout); scope_observations synthetic append stripped from _build_overall_summary (LLM prose is now the direct output, no post-processing). 25/25 tests pass.
 - Phase 23-01 completed: audit runner created; all 6 PDFs parsed successfully; rough drafts yield 32/40 sections with 525/887 items; BSchacter contractor final yields 0 sections (gap finding); 3 StateFarm finals parsed; run_log.json documents all results.
 - Phase 23-02 completed: AUDIT-REPORT.md (255 lines) written with per-field coverage tables for all 3 doc types; 10-item gap priority table for v2.5; root causes confirmed — contractor-final column schema mismatch (RESET/REMOVE/REPLACE layout), StateFarm Customer Copy item under-extraction (grouped rows), all StateFarm metadata null.
+- Phase 24-01 completed: golden master directory structure created; lachman.golden.json (32 sections, 525 items) and kalyvas.golden.json (40 sections, 887 items) produced from Phase 23 zero-delta audit output; README.md (114 lines) documents purpose, naming, schema, update process.
 
 ### Decisions
 
@@ -67,16 +68,18 @@ Progress: ████░░░░░░ 33%
 - [23-02] BSchacter root cause: column schema mismatch — contractor finals use RESET/REMOVE/REPLACE/TAX/O&P columns; parser regex tuned for rough-draft unit-cost layout. Metadata and recap tables parse correctly; only section/line-item extraction fails.
 - [23-02] StateFarm Customer Copy root cause: summary/grouped row layout — sections detect correctly but items per section = 1 (last matched row), not all items. Declared section totals confirm many items exist that are not extracted.
 - [23-02] Rough-draft parser is production-quality baseline — zero validation delta across all 72 sections; use as v2.5 regression baseline.
+- [24-01] Rough-draft golden masters copied verbatim from Phase 23 audit output — zero validation delta confirmed; parser output IS the ground truth; no transformation or normalization applied.
+- [24-01] final-drafts directories created now, golden masters populated in v2.5 — BSchacter (0 sections) and StateFarm (known extraction gaps) are not production-quality yet; structure in place, content deferred.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
-- Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
+- Phase 25 coverage harness can diff against lachman and kalyvas golden masters immediately; final-draft golden masters are v2.5 scope (BSchacter and StateFarm parser gaps not yet resolved).
 
 ## Session Continuity
 
-Last session: 2026-03-07
-Stopped at: 23-02 SUMMARY.md created and committed — Phase 23 complete, ready for Phase 24
+Last session: 2026-03-08
+Stopped at: 24-01 SUMMARY.md created and committed — 24-01 complete, ready for Phase 25
 Resume file: None
