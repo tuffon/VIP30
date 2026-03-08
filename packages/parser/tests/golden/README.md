@@ -29,7 +29,7 @@ as production-quality ground truth.
 | `rough-drafts/lachman.golden.json` | Lachman APEX 2 rough draft |
 | `rough-drafts/kalyvas.golden.json` | Kalyvas JVB V6 rough draft |
 | `final-drafts/bschacter.golden.json` | BSchacter contractor final |
-| `final-drafts/statefarm/customer_copy.golden.json` | StateFarm Customer Copy |
+| `final-drafts/statefarm/SF_BSchacter.golden.json` | StateFarm BSchacter Customer Copy |
 | `final-drafts/statefarm/lachman_sf.golden.json` | StateFarm Lachman structural |
 | `final-drafts/statefarm/kalyvas_sf.golden.json` | StateFarm Kalyvas preliminary |
 
@@ -107,7 +107,7 @@ Source PDFs are stored in the project `docs/` directory:
 | `rough-drafts/lachman.golden.json` | `docs/rough-drafts/1115_LACHMAN_APEX_2_ROUGH_DRAFT_CAR.pdf` |
 | `rough-drafts/kalyvas.golden.json` | `docs/rough-drafts/KALYVAS_JVB_V6_KALY2_ROUGH_DRAFT_CAR.pdf` |
 | `final-drafts/bschacter.golden.json` | `docs/final-drafts/BSchacter-02.12.26-Est-JVB-RepairEstimate-$809,464.83.pdf` |
-| `final-drafts/statefarm/customer_copy.golden.json` | `docs/final-drafts/statefarm/Customer Copy Final Draft (3).pdf` |
+| `final-drafts/statefarm/SF_BSchacter.golden.json` | `docs/final-drafts/statefarm/Customer Copy Final Draft (3).pdf` |
 | `final-drafts/statefarm/lachman_sf.golden.json` | `docs/final-drafts/statefarm/Estimate SF Structural damage Lachman 4.15.2025.pdf` |
 | `final-drafts/statefarm/kalyvas_sf.golden.json` | `docs/final-drafts/statefarm/Kalyvas Preliminary State Farm estimate9-25-25.pdf` |
 

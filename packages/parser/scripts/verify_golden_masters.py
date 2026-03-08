@@ -81,7 +81,7 @@ FILES = [
         "property_address": "935 Chattanooga Ave., Pacific Palisades, CA 90272",
     },
     {
-        "rel": "final-drafts/statefarm/customer_copy.golden.json",
+        "rel": "final-drafts/statefarm/SF_BSchacter.golden.json",
         "pdf": "docs/final-drafts/statefarm/Customer Copy Final Draft (3).pdf",
         "insured_name": "Barbara Schacter",
         "claim_number": "75-79D9-35K",
@@ -108,7 +108,7 @@ FILES = [
 
 # Sections that legitimately have 0 items because they are excluded in the PDF
 KNOWN_ZERO_ITEM_SECTIONS = {
-    "final-drafts/statefarm/customer_copy.golden.json": {"Dwelling Roof"},
+    "final-drafts/statefarm/SF_BSchacter.golden.json": {"Dwelling Roof"},
     "final-drafts/statefarm/kalyvas_sf.golden.json": {
         "Mitigation & Cleaning", "HVAC", "Landscaping", "Code Upgrades"
     },
