@@ -1,0 +1,4876 @@
+{
+  "estimate_name": "SCHACTER_RECON_5",
+  "case_metadata": {
+    "claim_number": "75-79D9-35K",
+    "policy_number": "71-GF-E601-0",
+    "loss_type": "WildFire",
+    "coverage": null,
+    "property_address": "935 Chattanooga Ave. Pacific Palisades, CA 90272 Claim Rep.: Jared Boergadine Business: (818) 720-9345",
+    "date_of_loss": null,
+    "date_received": null,
+    "date_inspected": null,
+    "date_entered": "2025-07-28T08:25:00",
+    "price_list": null,
+    "depreciate_material": null,
+    "depreciate_op": null,
+    "depreciate_non_material": null,
+    "depreciate_taxes": null,
+    "estimate_name": "BSchacter-02.12.26-Est-JVB-RepairEstimate-$809,464.83.pdf",
+    "depreciate_removal": null,
+    "region": null,
+    "building_type": null,
+    "line_item_totals": {
+      "estimate": "SCHACTER_RECON_5",
+      "material_sales_tax": "10,686.51",
+      "overhead_profit": "98,050.84",
+      "grand_total": "809,462.41"
+    },
+    "labor_minimums": {
+      "labor": "0.00",
+      "op_profit": "109.68",
+      "total": "658.05"
+    },
+    "additional_charges": {
+      "items": [
+        {
+          "label": "California Lumber Assessment Fee",
+          "amount": "0.93"
+        },
+        {
+          "label": "California Carpet Stewardship Assessment Fee",
+          "amount": "1.09"
+        }
+      ],
+      "total": "2.02"
+    }
+  },
+  "sections": [
+    {
+      "section_name": "Demo/Mitigtation",
+      "section_totals": {
+        "tax": 0.0,
+        "op": 20000.0,
+        "total": 120000.0,
+        "computed_total": 120000.0,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 1,
+          "description": "General Demolition (Bid Item) 1.00 EA 100,000.00 0.00",
+          "tax": 0.0,
+          "op": 20000.0,
+          "total": 120000.0
+        }
+      ]
+    },
+    {
+      "section_name": "General Items",
+      "section_totals": {
+        "tax": 49.95,
+        "op": 10335.66,
+        "total": 62013.93,
+        "computed_total": 62013.93,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 2,
+          "description": "Limited Contamination Assessment 1.00 EA 0.00 4,420.00",
+          "tax": 0.0,
+          "op": 884.0,
+          "total": 5304.0
+        },
+        {
+          "item_number": 3,
+          "description": "Temporary toilet (per month) 6.00 MO 0.00 225.00",
+          "tax": 0.0,
+          "op": 270.0,
+          "total": 1620.0
+        },
+        {
+          "item_number": 4,
+          "description": "Temporary hand washing station 6.00 MO 0.00 247.00",
+          "tax": 0.0,
+          "op": 296.4,
+          "total": 1778.4
+        },
+        {
+          "item_number": 5,
+          "description": "Dumpster load - Approx. 20 yards, 4 3.00 EA 783.00 0.00",
+          "tax": 0.0,
+          "op": 469.8,
+          "total": 2818.8
+        },
+        {
+          "item_number": 6,
+          "description": "Daily Job Site Clean Up Laborer & 65.00 HR 0.00 65.19",
+          "tax": 0.0,
+          "op": 847.48,
+          "total": 5084.83
+        },
+        {
+          "item_number": 7,
+          "description": "Residential Supervision / Project 390.00 HR 0.00 86.09",
+          "tax": 0.0,
+          "op": 6715.02,
+          "total": 40290.12
+        },
+        {
+          "item_number": 8,
+          "description": "Floor protection - heavy paper and 1,000.00 SF 0.00 0.71",
+          "tax": 6.83,
+          "op": 143.36,
+          "total": 860.19
+        },
+        {
+          "item_number": 9,
+          "description": "Labor to tape drop cloths 1,100.00 SF 0.00 0.28",
+          "tax": 1.07,
+          "op": 61.82,
+          "total": 370.89
+        },
+        {
+          "item_number": 10,
+          "description": "Floor protection - cloth - skid 1,100.00 SF 0.00 1.11",
+          "tax": 41.83,
+          "op": 252.56,
+          "total": 1515.39
+        },
+        {
+          "item_number": 11,
+          "description": "Final cleaning - construction - 1,897.79 SF 0.00 0.42",
+          "tax": 0.0,
+          "op": 159.42,
+          "total": 956.49
+        },
+        {
+          "item_number": 12,
+          "description": "Clean door / window opening (per 56.00 EA 0.00 21.05",
+          "tax": 0.22,
+          "op": 235.8,
+          "total": 1414.82
+        }
+      ]
+    },
+    {
+      "section_name": "Insulation",
+      "section_totals": {
+        "tax": 176.86,
+        "op": 812.12,
+        "total": 4872.63,
+        "computed_total": 4872.63,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 13,
+          "description": "R&R Batt insulation - 4\" - R13 - 2,325.54 SF 0.37 1.30",
+          "tax": 176.86,
+          "op": 812.12,
+          "total": 4872.63
+        }
+      ]
+    },
+    {
+      "section_name": "HVAC",
+      "section_totals": {
+        "tax": 0.0,
+        "op": 0.0,
+        "total": 0.0,
+        "computed_total": 0.0,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 14,
+          "description": "Ductwork system - hot or cold air -",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 15,
+          "description": "R&R Central air conditioning",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 16,
+          "description": "R&R Thermostat - Deluxe grade",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 17,
+          "description": "R&R Furnace - forced air - high",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        }
+      ]
+    },
+    {
+      "section_name": "Electrical",
+      "section_totals": {
+        "tax": 642.55,
+        "op": 4731.98,
+        "total": 28391.81,
+        "computed_total": 28391.81,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 18,
+          "description": "Rewire\\wire - avg. residence - 1,897.79 SF 0.00 5.28",
+          "tax": 125.82,
+          "op": 2029.22,
+          "total": 12175.37
+        },
+        {
+          "item_number": 19,
+          "description": "R&R Breaker panel - 150 amp 1.00 EA 235.87 2,335.54",
+          "tax": 120.21,
+          "op": 538.32,
+          "total": 3229.94
+        },
+        {
+          "item_number": 20,
+          "description": "R&R Junction box 2.00 EA 23.61 165.70",
+          "tax": 2.21,
+          "op": 76.16,
+          "total": 456.99
+        },
+        {
+          "item_number": 21,
+          "description": "R&R Smoke detector - High grade 9.00 EA 16.80 121.12",
+          "tax": 63.41,
+          "op": 260.94,
+          "total": 1565.63
+        },
+        {
+          "item_number": 22,
+          "description": "R&R Carbon monoxide detector - 1.00 EA 16.80 122.34",
+          "tax": 6.05,
+          "op": 29.04,
+          "total": 174.23
+        },
+        {
+          "item_number": 23,
+          "description": "R&R Door bell/chime 1.00 EA 7.62 187.59",
+          "tax": 3.9,
+          "op": 39.82,
+          "total": 238.93
+        },
+        {
+          "item_number": 24,
+          "description": "R&R Security system - key pad - 1.00 EA 10.36 279.28",
+          "tax": 12.18,
+          "op": 60.38,
+          "total": 362.2
+        },
+        {
+          "item_number": 25,
+          "description": "R&R Outlet 28.00 EA 7.65 22.20",
+          "tax": 6.47,
+          "op": 168.46,
+          "total": 1010.73
+        },
+        {
+          "item_number": 26,
+          "description": "R&R Switch 28.00 EA 7.65 22.90",
+          "tax": 8.38,
+          "op": 172.76,
+          "total": 1036.54
+        },
+        {
+          "item_number": 27,
+          "description": "R&R Ground fault interrupter (GFI) 8.00 EA 7.65 41.93",
+          "tax": 15.51,
+          "op": 82.42,
+          "total": 494.57
+        },
+        {
+          "item_number": 28,
+          "description": "R&R Surveillance camera - color 3.00 EA 76.01 683.25",
+          "tax": 117.0,
+          "op": 478.96,
+          "total": 2873.74
+        },
+        {
+          "item_number": 29,
+          "description": "R&R Spot light fixture - double 3.00 EA 21.17 124.10",
+          "tax": 9.3,
+          "op": 89.02,
+          "total": 534.13
+        },
+        {
+          "item_number": 30,
+          "description": "R&R Exterior light fixture - 6.00 EA 19.05 208.50",
+          "tax": 64.35,
+          "op": 285.94,
+          "total": 1715.59
+        },
+        {
+          "item_number": 31,
+          "description": "R&R Exterior light fixture - High 12.00 EA 19.05 148.86",
+          "tax": 87.76,
+          "op": 420.54,
+          "total": 2523.22
+        }
+      ]
+    },
+    {
+      "section_name": "Plumbing",
+      "section_totals": {
+        "tax": 0.0,
+        "op": 144.7,
+        "total": 868.16,
+        "computed_total": 868.16,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 32,
+          "description": "Plumbing/gas line air pressure test 1.00 EA 0.00 214.36",
+          "tax": 0.0,
+          "op": 42.88,
+          "total": 257.24
+        },
+        {
+          "item_number": 33,
+          "description": "Plumbing/drain line water pressure 1.00 EA 0.00 509.10",
+          "tax": 0.0,
+          "op": 101.82,
+          "total": 610.92
+        }
+      ]
+    },
+    {
+      "section_name": "Appliances",
+      "section_totals": {
+        "tax": 1786.03,
+        "op": 4239.92,
+        "total": 25439.62,
+        "computed_total": 25439.62,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 34,
+          "description": "R&R Refrigerator - side by side - 1.00 EA 57.01 3,256.52",
+          "tax": 312.0,
+          "op": 725.1,
+          "total": 4350.63
+        },
+        {
+          "item_number": 35,
+          "description": "R&R Dishwasher - Premium grade 1.00 EA 40.72 1,270.32",
+          "tax": 108.03,
+          "op": 283.8,
+          "total": 1702.87
+        },
+        {
+          "item_number": 36,
+          "description": "R&R Range - freestanding - dual - 1.00 EA 30.60 8,938.19",
+          "tax": 853.13,
+          "op": 1964.38,
+          "total": 11786.3
+        },
+        {
+          "item_number": 37,
+          "description": "R&R Range hood - stainless steel - 1.00 EA 38.01 2,918.79",
+          "tax": 269.12,
+          "op": 645.18,
+          "total": 3871.1
+        },
+        {
+          "item_number": 38,
+          "description": "R&R Washer/Washing Machine - 1.00 EA 40.72 1,429.86",
+          "tax": 126.75,
+          "op": 319.48,
+          "total": 1916.81
+        },
+        {
+          "item_number": 39,
+          "description": "R&R Dryer - Gas - High grade 1.00 EA 30.61 1,362.32",
+          "tax": 117.0,
+          "op": 301.98,
+          "total": 1811.91
+        }
+      ]
+    },
+    {
+      "section_name": "Window and Patio Doors Replacement",
+      "section_totals": {
+        "tax": 1834.91,
+        "op": 5624.04,
+        "total": 33744.01,
+        "computed_total": 33744.01,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 40,
+          "description": "R&R 5-0 8-0 vinyl sliding patio 1.00 EA 68.28 2,055.75",
+          "tax": 156.27,
+          "op": 456.08,
+          "total": 2736.38
+        },
+        {
+          "item_number": 41,
+          "description": "R&R Vinyl window, horizontal 3.00 EA 34.34 617.41",
+          "tax": 145.47,
+          "op": 420.14,
+          "total": 2520.86
+        },
+        {
+          "item_number": 42,
+          "description": "R&R Vinyl window, horizontal 1.00 EA 53.79 1,337.54",
+          "tax": 116.83,
+          "op": 301.62,
+          "total": 1809.78
+        },
+        {
+          "item_number": 43,
+          "description": "R&R Vinyl window, horizontal 1.00 EA 34.34 919.56",
+          "tax": 77.95,
+          "op": 206.38,
+          "total": 1238.23
+        },
+        {
+          "item_number": 44,
+          "description": "R&R Vinyl window, horizontal 1.00 EA 34.34 509.98",
+          "tax": 39.55,
+          "op": 116.78,
+          "total": 700.65
+        },
+        {
+          "item_number": 45,
+          "description": "R&R Vinyl window, horizontal 1.00 EA 34.34 617.41",
+          "tax": 48.49,
+          "op": 140.04,
+          "total": 840.28
+        },
+        {
+          "item_number": 46,
+          "description": "R&R Vinyl window, horizontal 1.00 EA 34.34 509.98",
+          "tax": 39.55,
+          "op": 116.78,
+          "total": 700.65
+        },
+        {
+          "item_number": 47,
+          "description": "R&R Vinyl window, horizontal 1.00 EA 34.34 509.98",
+          "tax": 39.55,
+          "op": 116.78,
+          "total": 700.65
+        },
+        {
+          "item_number": 48,
+          "description": "R&R 5-0 8-0 vinyl sliding patio 2.00 EA 68.28 2,055.75",
+          "tax": 312.53,
+          "op": 912.12,
+          "total": 5472.71
+        },
+        {
+          "item_number": 49,
+          "description": "R&R 5-0 8-0 vinyl sliding patio 4.00 EA 68.28 2,055.75",
+          "tax": 625.06,
+          "op": 1824.24,
+          "total": 10945.42
+        },
+        {
+          "item_number": 50,
+          "description": "R&R Vinyl window, horizontal 2.00 EA 53.79 1,337.54",
+          "tax": 233.66,
+          "op": 603.28,
+          "total": 3619.6
+        },
+        {
+          "item_number": 51,
+          "description": "Window Reglazing & Repair (Bid 1.00 EA 0.00 2,049.00",
+          "tax": 0.0,
+          "op": 409.8,
+          "total": 2458.8
+        }
+      ]
+    },
+    {
+      "section_name": "Main Level",
+      "section_totals": {
+        "tax": 0.0,
+        "op": 369.54,
+        "total": 2217.22,
+        "computed_total": 2217.22,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 52,
+          "description": "Deodorize building - Hot thermal 16,797. CF 0.00 0.11",
+          "tax": 0.0,
+          "op": 369.54,
+          "total": 2217.22
+        }
+      ]
+    },
+    {
+      "section_name": "Entry",
+      "section_totals": {
+        "tax": 111.65,
+        "op": 1201.02,
+        "total": 7205.94,
+        "computed_total": 7205.94,
+        "validation_delta": -0.0
+      },
+      "line_items": [
+        {
+          "item_number": 53,
+          "description": "Batt insulation - 12\" - R38 - paper / 52.93 SF 0.00 2.64",
+          "tax": 8.93,
+          "op": 29.72,
+          "total": 178.39
+        },
+        {
+          "item_number": 54,
+          "description": "5/8\" drywall - hung, taped, ready 52.93 SF 0.00 3.98",
+          "tax": 4.03,
+          "op": 42.94,
+          "total": 257.63
+        },
+        {
+          "item_number": 55,
+          "description": "Texture drywall - light hand 52.93 SF 0.00 1.82",
+          "tax": 0.46,
+          "op": 19.36,
+          "total": 116.15
+        },
+        {
+          "item_number": 56,
+          "description": "Painting - Faux (special effects) - 2 52.93 SF 0.00 3.94",
+          "tax": 1.29,
+          "op": 41.96,
+          "total": 251.79
+        },
+        {
+          "item_number": 57,
+          "description": "Seal the ceiling w/latex based stain 52.93 SF 0.00 1.00",
+          "tax": 0.52,
+          "op": 10.68,
+          "total": 64.13
+        },
+        {
+          "item_number": 58,
+          "description": "Mask and prep for paint - tape only 78.12 LF 0.00 1.02",
+          "tax": 0.38,
+          "op": 16.02,
+          "total": 96.08
+        },
+        {
+          "item_number": 59,
+          "description": "5/8\" drywall - hung, taped, ready 256.96 SF 0.00 3.98",
+          "tax": 19.54,
+          "op": 208.44,
+          "total": 1250.68
+        },
+        {
+          "item_number": 60,
+          "description": "Texture drywall - light hand 256.96 SF 0.00 1.82",
+          "tax": 2.26,
+          "op": 94.0,
+          "total": 563.93
+        },
+        {
+          "item_number": 61,
+          "description": "Mask and prep for paint - plastic, 78.12 LF 0.00 2.20",
+          "tax": 2.06,
+          "op": 34.8,
+          "total": 208.72
+        },
+        {
+          "item_number": 62,
+          "description": "Seal the walls w/latex based stain 256.96 SF 0.00 1.00",
+          "tax": 2.51,
+          "op": 51.9,
+          "total": 311.37
+        },
+        {
+          "item_number": 63,
+          "description": "Painting - Faux (special effects) - 2 256.96 SF 0.00 3.94",
+          "tax": 6.26,
+          "op": 203.74,
+          "total": 1222.42
+        },
+        {
+          "item_number": 64,
+          "description": "Baseboard - 4 1/4\" 33.98 LF 0.00 5.73",
+          "tax": 9.31,
+          "op": 40.8,
+          "total": 244.82
+        },
+        {
+          "item_number": 65,
+          "description": "Paint baseboard - distressed/faux 33.98 LF 0.00 7.22",
+          "tax": 0.6,
+          "op": 49.18,
+          "total": 295.12
+        },
+        {
+          "item_number": 66,
+          "description": "Chair rail - 2 1/2\" 13.67 LF 0.00 4.26",
+          "tax": 2.47,
+          "op": 12.14,
+          "total": 72.84
+        },
+        {
+          "item_number": 67,
+          "description": "Paint chair rail - distressed/faux 13.67 LF 0.00 4.83",
+          "tax": 0.17,
+          "op": 13.24,
+          "total": 79.44
+        },
+        {
+          "item_number": 68,
+          "description": "Stone floor covering - High grade",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 69,
+          "description": "Additional labor to remove stone",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 70,
+          "description": "Vacuuming - (PER SF) - Heavy 52.93 SF 0.00 0.29",
+          "tax": 0.0,
+          "op": 3.08,
+          "total": 18.43
+        },
+        {
+          "item_number": 71,
+          "description": "Floor leveling cement - Heavy",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 72,
+          "description": "Add-on for diagonal tile",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 73,
+          "description": "Tile/stone sealer 52.93 SF 0.00 1.53",
+          "tax": 1.91,
+          "op": 16.58,
+          "total": 99.47
+        },
+        {
+          "item_number": 74,
+          "description": "Floor protection - heavy paper and 52.93 SF 0.45 0.00",
+          "tax": 0.36,
+          "op": 4.84,
+          "total": 29.02
+        },
+        {
+          "item_number": 75,
+          "description": "Light fixture 1.00 EA 0.00 87.21",
+          "tax": 3.22,
+          "op": 18.08,
+          "total": 108.51
+        },
+        {
+          "item_number": 76,
+          "description": "Door lockset & deadbolt - exterior - 1.00 EA 0.00 148.23",
+          "tax": 10.53,
+          "op": 31.74,
+          "total": 190.5
+        },
+        {
+          "item_number": 77,
+          "description": "Prime & paint door slab only - 1.00 EA 0.00 71.37",
+          "tax": 1.72,
+          "op": 14.62,
+          "total": 87.71
+        },
+        {
+          "item_number": 78,
+          "description": "Detach & Reset Exterior door - 1.00 EA 201.99 0.00 0.00",
+          "tax": 0.71,
+          "op": 40.54,
+          "total": 243.24
+        },
+        {
+          "item_number": 79,
+          "description": "Interior door unit 1.00 EA 0.00 343.85",
+          "tax": 25.36,
+          "op": 73.86,
+          "total": 443.07
+        },
+        {
+          "item_number": 80,
+          "description": "Paint door or window opening - 1.00 EA 0.00 60.96",
+          "tax": 0.73,
+          "op": 12.34,
+          "total": 74.03
+        },
+        {
+          "item_number": 81,
+          "description": "Paint door slab only - 2 coats (per 2.00 EA 0.00 61.04",
+          "tax": 2.06,
+          "op": 24.84,
+          "total": 148.98
+        },
+        {
+          "item_number": 82,
+          "description": "Paint door/window trim & jamb - 2 4.00 EA 0.00 51.82",
+          "tax": 2.47,
+          "op": 41.96,
+          "total": 251.71
+        },
+        {
+          "item_number": 83,
+          "description": "Security system - contact w/wire 1.00 EA 0.00 116.14",
+          "tax": 1.22,
+          "op": 23.46,
+          "total": 140.82
+        },
+        {
+          "item_number": 84,
+          "description": "Seal & paint closet shelving - 1.00 EA 0.00 86.88",
+          "tax": 0.57,
+          "op": 17.5,
+          "total": 104.95
+        },
+        {
+          "item_number": 85,
+          "description": "Detach & Reset Closet shelf and 2.83 LF 15.31 0.00 0.00",
+          "tax": 0.0,
+          "op": 8.66,
+          "total": 51.99
+        }
+      ]
+    },
+    {
+      "section_name": "Kitchen",
+      "section_totals": {
+        "tax": 480.17,
+        "op": 3784.18,
+        "total": 22704.73,
+        "computed_total": 22704.73,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 86,
+          "description": "Paint paneling - distressed/faux 197.93 SF 0.00 4.02",
+          "tax": 3.28,
+          "op": 159.8,
+          "total": 958.76
+        },
+        {
+          "item_number": 87,
+          "description": "Paint wood beam - distressed/faux 52.71 SF 0.00 12.90",
+          "tax": 3.13,
+          "op": 136.62,
+          "total": 819.71
+        },
+        {
+          "item_number": 88,
+          "description": "Soda blasting - Heavy 250.64 SF 0.00 3.81",
+          "tax": 30.3,
+          "op": 197.04,
+          "total": 1182.28
+        },
+        {
+          "item_number": 89,
+          "description": "Quarter round - 3/4\" - stain grade 123.42 LF 0.00 2.70",
+          "tax": 17.57,
+          "op": 70.16,
+          "total": 420.96
+        },
+        {
+          "item_number": 90,
+          "description": "Stain & finish base shoe or quarter 123.42 LF 0.00 2.10",
+          "tax": 3.25,
+          "op": 52.5,
+          "total": 314.93
+        },
+        {
+          "item_number": 91,
+          "description": "Mask and prep for paint - tape only 477.94 LF 0.00 1.02",
+          "tax": 2.33,
+          "op": 97.96,
+          "total": 587.79
+        },
+        {
+          "item_number": 92,
+          "description": "5/8\" drywall - hung, taped, ready 740.55 SF 0.00 3.98",
+          "tax": 56.32,
+          "op": 600.74,
+          "total": 3604.45
+        },
+        {
+          "item_number": 93,
+          "description": "Texture drywall - light hand 740.55 SF 0.00 1.82",
+          "tax": 6.5,
+          "op": 270.86,
+          "total": 1625.16
+        },
+        {
+          "item_number": 94,
+          "description": "Drywall window return - up to 6\" 56.92 LF 0.00 15.99",
+          "tax": 7.22,
+          "op": 183.48,
+          "total": 1100.85
+        },
+        {
+          "item_number": 95,
+          "description": "Seal/prime (1 coat) then paint (2 740.55 SF 0.00 2.10",
+          "tax": 26.72,
+          "op": 316.38,
+          "total": 1898.26
+        },
+        {
+          "item_number": 96,
+          "description": "Baseboard - 4 1/4\" 82.58 LF 0.00 5.73",
+          "tax": 22.62,
+          "op": 99.16,
+          "total": 594.96
+        },
+        {
+          "item_number": 97,
+          "description": "Seal (1 coat) & paint (2 coats) 82.58 LF 0.00 3.60",
+          "tax": 1.77,
+          "op": 59.82,
+          "total": 358.88
+        },
+        {
+          "item_number": 98,
+          "description": "Mask and prep for paint - plastic, 238.97 LF 0.00 2.20",
+          "tax": 6.29,
+          "op": 106.4,
+          "total": 638.42
+        },
+        {
+          "item_number": 99,
+          "description": "Snaplock Laminate - simulated 232.02 SF 0.00 7.92",
+          "tax": 78.27,
+          "op": 383.18,
+          "total": 2299.05
+        },
+        {
+          "item_number": 100,
+          "description": "Vapor barrier - visqueen - 6mil 232.02 SF 0.00 0.48",
+          "tax": 1.58,
+          "op": 22.6,
+          "total": 135.55
+        },
+        {
+          "item_number": 101,
+          "description": "T- molding - for wood flooring - 5.17 LF 0.00 9.89",
+          "tax": 4.38,
+          "op": 11.1,
+          "total": 66.61
+        },
+        {
+          "item_number": 102,
+          "description": "Floor protection - heavy paper 232.02 SF 0.00 0.71",
+          "tax": 1.58,
+          "op": 33.26,
+          "total": 199.57
+        },
+        {
+          "item_number": 103,
+          "description": "Window trim set (casing & stop) 56.92 LF 0.00 7.36",
+          "tax": 17.81,
+          "op": 87.34,
+          "total": 524.08
+        },
+        {
+          "item_number": 104,
+          "description": "Paint door/window trim & jamb - 1.00 EA 0.00 51.56",
+          "tax": 0.6,
+          "op": 10.44,
+          "total": 62.6
+        },
+        {
+          "item_number": 105,
+          "description": "Paint door/window trim & jamb - 2.00 EA 0.00 60.61",
+          "tax": 1.4,
+          "op": 24.52,
+          "total": 147.14
+        },
+        {
+          "item_number": 106,
+          "description": "Window blind - fabric/woven - 20. 1.00 EA 0.00 351.77",
+          "tax": 25.93,
+          "op": 75.54,
+          "total": 453.24
+        },
+        {
+          "item_number": 107,
+          "description": "Window blind - fabric woven - 7. 1.00 EA 0.00 213.95",
+          "tax": 14.67,
+          "op": 45.74,
+          "total": 274.36
+        },
+        {
+          "item_number": 108,
+          "description": "Window blind - fabric/woven - 1.00 EA 0.00 675.00",
+          "tax": 28.78,
+          "op": 140.76,
+          "total": 844.54
+        },
+        {
+          "item_number": 109,
+          "description": "Security system - contact w/wire 1.00 EA 0.00 116.14",
+          "tax": 1.22,
+          "op": 23.46,
+          "total": 140.82
+        },
+        {
+          "item_number": 110,
+          "description": "Sink faucet - Kitchen - High 2.00 EA 0.00 418.91",
+          "tax": 62.69,
+          "op": 180.1,
+          "total": 1080.61
+        },
+        {
+          "item_number": 111,
+          "description": "Hanging light fixture - Premium 1.00 EA 0.00 177.11",
+          "tax": 10.07,
+          "op": 37.44,
+          "total": 224.62
+        },
+        {
+          "item_number": 112,
+          "description": "Recessed light fixture - High 4.00 EA 0.00 188.70",
+          "tax": 23.08,
+          "op": 155.58,
+          "total": 933.46
+        },
+        {
+          "item_number": 113,
+          "description": "Light fixture - High grade 1.00 EA 0.00 124.85",
+          "tax": 4.97,
+          "op": 25.98,
+          "total": 155.8
+        },
+        {
+          "item_number": 114,
+          "description": "Door bell/chime 1.00 EA 0.00 187.61",
+          "tax": 3.9,
+          "op": 38.3,
+          "total": 229.81
+        },
+        {
+          "item_number": 115,
+          "description": "Paint door slab only - 2 coats (per 2.00 EA 0.00 61.04",
+          "tax": 2.06,
+          "op": 24.84,
+          "total": 148.98
+        },
+        {
+          "item_number": 116,
+          "description": "Seal & paint closet shelving - 5.00 EA 0.00 86.88",
+          "tax": 2.83,
+          "op": 87.44,
+          "total": 524.67
+        },
+        {
+          "item_number": 117,
+          "description": "Smoke detector - High grade 1.00 EA 0.00 121.12",
+          "tax": 7.05,
+          "op": 25.64,
+          "total": 153.81
+        }
+      ]
+    },
+    {
+      "section_name": "Living Room",
+      "section_totals": {
+        "tax": 404.83,
+        "op": 5533.04,
+        "total": 33198.04,
+        "computed_total": 33198.04,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 118,
+          "description": "Mask and prep for paint - tape 338.04 LF 0.00 1.02",
+          "tax": 1.65,
+          "op": 69.3,
+          "total": 415.75
+        },
+        {
+          "item_number": 119,
+          "description": "Prime & paint cold air return 2.00 EA 0.00 27.67",
+          "tax": 1.27,
+          "op": 11.32,
+          "total": 67.93
+        },
+        {
+          "item_number": 120,
+          "description": "Paint paneling - distressed/faux 411.27 SF 0.00 4.02",
+          "tax": 6.82,
+          "op": 332.02,
+          "total": 1992.15
+        },
+        {
+          "item_number": 121,
+          "description": "Paint wood beam - 117.92 SF 0.00 12.90",
+          "tax": 7.01,
+          "op": 305.64,
+          "total": 1833.82
+        },
+        {
+          "item_number": 122,
+          "description": "Soda blasting - Heavy 529.19 SF 0.00 3.81",
+          "tax": 63.98,
+          "op": 416.04,
+          "total": 2496.23
+        },
+        {
+          "item_number": 123,
+          "description": "Quarter round - 3/4\" - stain grade 188.97 LF 0.00 2.70",
+          "tax": 26.9,
+          "op": 107.42,
+          "total": 644.54
+        },
+        {
+          "item_number": 124,
+          "description": "Seal & paint base shoe or quarter 188.97 LF 0.00 1.35",
+          "tax": 2.76,
+          "op": 51.58,
+          "total": 309.45
+        },
+        {
+          "item_number": 125,
+          "description": "Mask and prep for paint - plastic, 169.02 LF 0.00 2.20",
+          "tax": 4.45,
+          "op": 75.26,
+          "total": 451.55
+        },
+        {
+          "item_number": 126,
+          "description": "5/8\" drywall - hung, taped, ready 730.95 SF 0.00 3.98",
+          "tax": 55.59,
+          "op": 592.96,
+          "total": 3557.73
+        },
+        {
+          "item_number": 127,
+          "description": "Texture drywall - light hand 730.95 SF 0.00 1.82",
+          "tax": 6.41,
+          "op": 267.34,
+          "total": 1604.08
+        },
+        {
+          "item_number": 128,
+          "description": "Drywall window return - up to 6\" 93.00 LF 0.00 15.99",
+          "tax": 11.79,
+          "op": 299.78,
+          "total": 1798.64
+        },
+        {
+          "item_number": 129,
+          "description": "Seal the walls w/latex based stain 730.95 SF 0.00 1.00",
+          "tax": 7.13,
+          "op": 147.62,
+          "total": 885.7
+        },
+        {
+          "item_number": 130,
+          "description": "Painting - Faux (special effects) - 730.95 SF 0.00 3.94",
+          "tax": 17.82,
+          "op": 579.54,
+          "total": 3477.3
+        },
+        {
+          "item_number": 131,
+          "description": "Baseboard - 4 1/4\" 80.14 LF 0.00 5.73",
+          "tax": 21.96,
+          "op": 96.24,
+          "total": 577.4
+        },
+        {
+          "item_number": 132,
+          "description": "Paint baseboard - distressed/faux 80.14 LF 0.00 7.22",
+          "tax": 1.41,
+          "op": 116.0,
+          "total": 696.02
+        },
+        {
+          "item_number": 133,
+          "description": "Stone floor covering - High grade",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 134,
+          "description": "Additional labor to remove stone",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 135,
+          "description": "Vacuuming - (PER SF) - Heavy 404.14 SF 0.00 0.29",
+          "tax": 0.0,
+          "op": 23.44,
+          "total": 140.64
+        },
+        {
+          "item_number": 136,
+          "description": "Floor leveling cement - Heavy",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 137,
+          "description": "Tile/stone sealer 808.27 SF 0.00 1.53",
+          "tax": 29.16,
+          "op": 253.18,
+          "total": 1518.99
+        },
+        {
+          "item_number": 138,
+          "description": "Regrout stone floor 404.14 SF 0.00 6.45",
+          "tax": 3.94,
+          "op": 522.12,
+          "total": 3132.76
+        },
+        {
+          "item_number": 139,
+          "description": "Floor protection - heavy paper 404.14 SF 0.45 0.00",
+          "tax": 2.76,
+          "op": 36.94,
+          "total": 221.56
+        },
+        {
+          "item_number": 140,
+          "description": "TV Brackets - Wall or ceiling 1.00 EA 0.00 68.61",
+          "tax": 0.0,
+          "op": 13.72,
+          "total": 82.33
+        },
+        {
+          "item_number": 141,
+          "description": "Hanging light fixture - Premium 1.00 EA 0.00 177.11",
+          "tax": 10.07,
+          "op": 37.44,
+          "total": 224.62
+        },
+        {
+          "item_number": 142,
+          "description": "Security system - contact w/wire 6.00 EA 0.00 116.14",
+          "tax": 7.31,
+          "op": 140.82,
+          "total": 844.97
+        },
+        {
+          "item_number": 143,
+          "description": "Paint door/window trim & jamb - 6.00 EA 0.00 181.86",
+          "tax": 4.21,
+          "op": 219.08,
+          "total": 1314.45
+        },
+        {
+          "item_number": 144,
+          "description": "Window blind - fabric/woven - 20. 2.00 EA 0.00 351.77",
+          "tax": 51.85,
+          "op": 151.08,
+          "total": 906.47
+        },
+        {
+          "item_number": 145,
+          "description": "Window drapery - hardware 9.00 EA 0.00 121.99",
+          "tax": 51.33,
+          "op": 229.84,
+          "total": 1379.08
+        },
+        {
+          "item_number": 146,
+          "description": "Stain & finish bookcase - 3 part 45.00 SF 0.00 19.76",
+          "tax": 3.16,
+          "op": 178.48,
+          "total": 1070.84
+        },
+        {
+          "item_number": 147,
+          "description": "Stain & finish crown molding - 3 12.25 LF 0.00 9.56",
+          "tax": 0.32,
+          "op": 23.48,
+          "total": 140.91
+        },
+        {
+          "item_number": 148,
+          "description": "Paint full louvered door slab only - 3.00 EA 0.00 338.20",
+          "tax": 3.11,
+          "op": 203.54,
+          "total": 1221.25
+        },
+        {
+          "item_number": 149,
+          "description": "Stain & finish paneling - 3 part 15.00 SF 0.00 10.56",
+          "tax": 0.66,
+          "op": 31.82,
+          "total": 190.88
+        }
+      ]
+    },
+    {
+      "section_name": "Fireplace",
+      "section_totals": {
+        "tax": 17.41,
+        "op": 126.92,
+        "total": 761.5,
+        "computed_total": 761.5,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 150,
+          "description": "Soda blasting - Extra heavy 102.01 SF 0.00 4.52",
+          "tax": 13.73,
+          "op": 94.96,
+          "total": 569.78
+        },
+        {
+          "item_number": 151,
+          "description": "Tile/stone sealer 102.01 SF 0.00 1.53",
+          "tax": 3.68,
+          "op": 31.96,
+          "total": 191.72
+        }
+      ]
+    },
+    {
+      "section_name": "Office",
+      "section_totals": {
+        "tax": 148.21,
+        "op": 1432.34,
+        "total": 8593.7,
+        "computed_total": 8593.7,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 152,
+          "description": "Paint paneling - distressed/faux 141.86 SF 0.00 4.02",
+          "tax": 2.35,
+          "op": 114.54,
+          "total": 687.17
+        },
+        {
+          "item_number": 153,
+          "description": "Paint wood beam - 24.38 SF 0.00 12.90",
+          "tax": 1.45,
+          "op": 63.2,
+          "total": 379.15
+        },
+        {
+          "item_number": 154,
+          "description": "Soda blasting - Heavy 166.24 SF 0.00 3.81",
+          "tax": 20.1,
+          "op": 130.7,
+          "total": 784.17
+        },
+        {
+          "item_number": 155,
+          "description": "Quarter round - 3/4\" - stain grade 53.73 LF 0.00 2.70",
+          "tax": 7.65,
+          "op": 30.56,
+          "total": 183.28
+        },
+        {
+          "item_number": 156,
+          "description": "Seal & paint base shoe or quarter 53.73 LF 0.00 1.35",
+          "tax": 0.79,
+          "op": 14.66,
+          "total": 87.99
+        },
+        {
+          "item_number": 157,
+          "description": "Mask and prep for paint - tape 194.94 LF 0.00 1.02",
+          "tax": 0.95,
+          "op": 39.96,
+          "total": 239.75
+        },
+        {
+          "item_number": 158,
+          "description": "5/8\" drywall - hung, taped, ready 422.45 SF 0.00 3.98",
+          "tax": 32.13,
+          "op": 342.7,
+          "total": 2056.18
+        },
+        {
+          "item_number": 159,
+          "description": "Texture drywall - light hand 422.45 SF 0.00 1.82",
+          "tax": 3.71,
+          "op": 154.52,
+          "total": 927.09
+        },
+        {
+          "item_number": 160,
+          "description": "Prime & paint cold air return 2.00 EA 0.00 27.68",
+          "tax": 1.27,
+          "op": 11.34,
+          "total": 67.97
+        },
+        {
+          "item_number": 161,
+          "description": "Seal/prime (1 coat) then paint (2 422.45 SF 0.00 2.10",
+          "tax": 15.24,
+          "op": 180.48,
+          "total": 1082.87
+        },
+        {
+          "item_number": 162,
+          "description": "Baseboard - 4 1/4\" 48.17 LF 0.00 5.73",
+          "tax": 13.2,
+          "op": 57.84,
+          "total": 347.05
+        },
+        {
+          "item_number": 163,
+          "description": "Seal (1 coat) & paint (2 coats) 48.17 LF 0.00 3.60",
+          "tax": 1.03,
+          "op": 34.88,
+          "total": 209.32
+        },
+        {
+          "item_number": 164,
+          "description": "Mask and prep for paint - plastic, 97.47 LF 0.00 2.20",
+          "tax": 2.57,
+          "op": 43.4,
+          "total": 260.4
+        },
+        {
+          "item_number": 165,
+          "description": "Paint door/window trim & jamb - 2.00 EA 0.00 60.61",
+          "tax": 1.4,
+          "op": 24.52,
+          "total": 147.14
+        },
+        {
+          "item_number": 166,
+          "description": "Window blind - PVC - 3.5\" - 20.1 1.00 EA 0.00 284.86",
+          "tax": 19.4,
+          "op": 60.86,
+          "total": 365.12
+        },
+        {
+          "item_number": 167,
+          "description": "Paint full lvrd single bifold door - 4.00 EA 0.00 83.05",
+          "tax": 4.01,
+          "op": 67.24,
+          "total": 403.45
+        },
+        {
+          "item_number": 168,
+          "description": "Interior window shutters (set) 1.00 EA 0.00 283.70",
+          "tax": 20.96,
+          "op": 60.94,
+          "total": 365.6
+        }
+      ]
+    },
+    {
+      "section_name": "Office Closet",
+      "section_totals": {
+        "tax": 81.83,
+        "op": 842.9,
+        "total": 5057.3,
+        "computed_total": 5057.3,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 169,
+          "description": "Paint paneling - distressed/faux 17.34 SF 0.00 4.02",
+          "tax": 0.29,
+          "op": 14.0,
+          "total": 84.0
+        },
+        {
+          "item_number": 170,
+          "description": "Paint wood beam - 24.38 SF 0.00 12.90",
+          "tax": 1.45,
+          "op": 63.2,
+          "total": 379.15
+        },
+        {
+          "item_number": 171,
+          "description": "Soda blasting - Heavy 41.72 SF 0.00 3.81",
+          "tax": 5.04,
+          "op": 32.8,
+          "total": 196.79
+        },
+        {
+          "item_number": 172,
+          "description": "Batt insulation - 12\" - R38 - paper 17.34 SF 0.00 2.64",
+          "tax": 2.93,
+          "op": 9.74,
+          "total": 58.45
+        },
+        {
+          "item_number": 173,
+          "description": "Mask and prep for paint - tape 85.38 LF 0.00 1.02",
+          "tax": 0.42,
+          "op": 17.5,
+          "total": 105.01
+        },
+        {
+          "item_number": 174,
+          "description": "Seal/prime (1 coat) then paint (2 17.34 SF 0.00 2.10",
+          "tax": 0.63,
+          "op": 7.4,
+          "total": 44.44
+        },
+        {
+          "item_number": 175,
+          "description": "5/8\" drywall - hung, taped, ready 158.31 SF 0.00 3.98",
+          "tax": 12.04,
+          "op": 128.42,
+          "total": 770.53
+        },
+        {
+          "item_number": 176,
+          "description": "Texture drywall - light hand 158.31 SF 0.00 1.82",
+          "tax": 1.39,
+          "op": 57.9,
+          "total": 347.41
+        },
+        {
+          "item_number": 177,
+          "description": "Seal/prime (1 coat) then paint (2 158.31 SF 0.00 2.10",
+          "tax": 5.71,
+          "op": 67.64,
+          "total": 405.8
+        },
+        {
+          "item_number": 178,
+          "description": "Baseboard - 4 1/4\" 21.34 LF 0.00 5.73",
+          "tax": 5.85,
+          "op": 25.64,
+          "total": 153.77
+        },
+        {
+          "item_number": 179,
+          "description": "Seal (1 coat) & paint (2 coats) 21.34 LF 0.00 3.60",
+          "tax": 0.46,
+          "op": 15.46,
+          "total": 92.74
+        },
+        {
+          "item_number": 180,
+          "description": "Mask and prep for paint - plastic, 42.69 LF 0.00 2.20",
+          "tax": 1.12,
+          "op": 19.0,
+          "total": 114.04
+        },
+        {
+          "item_number": 181,
+          "description": "Closet shelf and rod package 6.17 LF 0.00 29.33",
+          "tax": 3.51,
+          "op": 36.9,
+          "total": 221.38
+        },
+        {
+          "item_number": 182,
+          "description": "Seal & paint closet shelving - 1.00 EA 0.00 113.18",
+          "tax": 0.84,
+          "op": 22.8,
+          "total": 136.82
+        },
+        {
+          "item_number": 183,
+          "description": "Seal & paint cabinetry - upper - 8.67 LF 0.00 65.29",
+          "tax": 5.2,
+          "op": 114.26,
+          "total": 685.52
+        },
+        {
+          "item_number": 184,
+          "description": "Cabinet knob or pull 4.00 EA 0.00 10.73",
+          "tax": 1.38,
+          "op": 8.86,
+          "total": 53.16
+        },
+        {
+          "item_number": 185,
+          "description": "Paint bypass door set - slab only - 2.00 EA 0.00 76.84",
+          "tax": 4.01,
+          "op": 31.54,
+          "total": 189.23
+        },
+        {
+          "item_number": 186,
+          "description": "Bypass (sliding) door set - birch 1.00 EA 0.00 392.06",
+          "tax": 29.04,
+          "op": 84.22,
+          "total": 505.32
+        },
+        {
+          "item_number": 187,
+          "description": "Lube/recondition sliding bypass 2.00 EA 0.00 213.80",
+          "tax": 0.52,
+          "op": 85.62,
+          "total": 513.74
+        }
+      ]
+    },
+    {
+      "section_name": "Bedroom 1",
+      "section_totals": {
+        "tax": 154.81,
+        "op": 1618.04,
+        "total": 9708.36,
+        "computed_total": 9708.36,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 188,
+          "description": "Soda blasting - Heavy 122.73 SF 0.00 3.81",
+          "tax": 14.84,
+          "op": 96.48,
+          "total": 578.92
+        },
+        {
+          "item_number": 189,
+          "description": "Paint paneling - distressed/faux 98.35 SF 0.00 4.02",
+          "tax": 1.63,
+          "op": 79.4,
+          "total": 476.4
+        },
+        {
+          "item_number": 190,
+          "description": "Paint wood beam - 24.38 SF 0.00 12.90",
+          "tax": 1.45,
+          "op": 63.2,
+          "total": 379.15
+        },
+        {
+          "item_number": 191,
+          "description": "Quarter round - 3/4\" - stain grade 45.55 LF 0.00 2.70",
+          "tax": 6.48,
+          "op": 25.9,
+          "total": 155.37
+        },
+        {
+          "item_number": 192,
+          "description": "Seal (1 coat) & paint (1 coat) trim 45.55 LF 0.00 2.40",
+          "tax": 0.71,
+          "op": 22.0,
+          "total": 132.03
+        },
+        {
+          "item_number": 193,
+          "description": "Mask and prep for paint - tape 81.10 LF 0.00 1.02",
+          "tax": 0.4,
+          "op": 16.62,
+          "total": 99.74
+        },
+        {
+          "item_number": 194,
+          "description": "5/8\" drywall - hung, taped, ready 363.30 SF 0.00 3.98",
+          "tax": 27.63,
+          "op": 294.7,
+          "total": 1768.26
+        },
+        {
+          "item_number": 195,
+          "description": "Texture drywall - light hand 363.30 SF 0.00 1.82",
+          "tax": 3.19,
+          "op": 132.88,
+          "total": 797.28
+        },
+        {
+          "item_number": 196,
+          "description": "Mask and prep for paint - plastic, 81.10 LF 0.00 2.20",
+          "tax": 2.14,
+          "op": 36.1,
+          "total": 216.66
+        },
+        {
+          "item_number": 197,
+          "description": "Seal the walls w/latex based stain 363.30 SF 0.00 1.00",
+          "tax": 3.54,
+          "op": 73.36,
+          "total": 440.2
+        },
+        {
+          "item_number": 198,
+          "description": "Painting - Faux (special effects) - 363.30 SF 0.00 3.94",
+          "tax": 8.86,
+          "op": 288.06,
+          "total": 1728.32
+        },
+        {
+          "item_number": 199,
+          "description": "Baseboard - 4 1/4\" 40.09 LF 0.00 5.73",
+          "tax": 10.98,
+          "op": 48.14,
+          "total": 288.84
+        },
+        {
+          "item_number": 200,
+          "description": "Paint baseboard - distressed/faux 40.09 LF 0.00 7.22",
+          "tax": 0.7,
+          "op": 58.04,
+          "total": 348.19
+        },
+        {
+          "item_number": 201,
+          "description": "Prime & paint cold air return 1.00 EA 0.00 27.67",
+          "tax": 0.64,
+          "op": 5.66,
+          "total": 33.97
+        },
+        {
+          "item_number": 202,
+          "description": "Stone floor covering - High grade",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 203,
+          "description": "Additional labor to remove stone",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 204,
+          "description": "Vacuuming - (PER SF) - Heavy 96.21 SF 0.00 0.29",
+          "tax": 0.0,
+          "op": 5.58,
+          "total": 33.48
+        },
+        {
+          "item_number": 205,
+          "description": "Floor leveling cement - Heavy",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 206,
+          "description": "Tile/stone sealer 192.43 SF 0.00 1.53",
+          "tax": 6.94,
+          "op": 60.26,
+          "total": 361.62
+        },
+        {
+          "item_number": 207,
+          "description": "Floor protection - heavy paper 96.21 SF 0.45 0.00",
+          "tax": 0.66,
+          "op": 8.8,
+          "total": 52.75
+        },
+        {
+          "item_number": 208,
+          "description": "Paint door/window trim & jamb - 2.00 EA 0.00 181.86",
+          "tax": 1.4,
+          "op": 73.02,
+          "total": 438.14
+        },
+        {
+          "item_number": 209,
+          "description": "Window blind - double cell - 14.1 1.00 EA 0.00 264.42",
+          "tax": 19.25,
+          "op": 56.74,
+          "total": 340.41
+        },
+        {
+          "item_number": 210,
+          "description": "Window blind - double cell - 7.1 2.00 EA 0.00 210.00",
+          "tax": 28.57,
+          "op": 89.72,
+          "total": 538.29
+        },
+        {
+          "item_number": 211,
+          "description": "Fixture (can) for track lighting - 3.00 EA 0.00 54.08",
+          "tax": 10.61,
+          "op": 34.56,
+          "total": 207.41
+        },
+        {
+          "item_number": 212,
+          "description": "Track lighting - track only 8.00 LF 0.00 29.99",
+          "tax": 4.19,
+          "op": 48.82,
+          "total": 292.93
+        }
+      ]
+    },
+    {
+      "section_name": "Bed1 Closet",
+      "section_totals": {
+        "tax": 51.98,
+        "op": 456.02,
+        "total": 2736.2,
+        "computed_total": 2736.2,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 213,
+          "description": "Batt insulation - 12\" - R38 - paper 11.50 SF 0.00 2.64",
+          "tax": 1.94,
+          "op": 6.46,
+          "total": 38.76
+        },
+        {
+          "item_number": 214,
+          "description": "5/8\" drywall - hung, taped, ready 11.50 SF 0.00 3.98",
+          "tax": 0.87,
+          "op": 9.34,
+          "total": 55.98
+        },
+        {
+          "item_number": 215,
+          "description": "Texture drywall - light hand 11.50 SF 0.00 1.82",
+          "tax": 0.1,
+          "op": 4.2,
+          "total": 25.23
+        },
+        {
+          "item_number": 216,
+          "description": "Mask and prep for paint - tape 63.33 LF 0.00 1.02",
+          "tax": 0.31,
+          "op": 12.98,
+          "total": 77.89
+        },
+        {
+          "item_number": 217,
+          "description": "Seal/prime (1 coat) then paint (2 11.50 SF 0.00 2.10",
+          "tax": 0.42,
+          "op": 4.92,
+          "total": 29.49
+        },
+        {
+          "item_number": 218,
+          "description": "5/8\" drywall - hung, taped, ready 117.43 SF 0.00 3.98",
+          "tax": 8.93,
+          "op": 95.26,
+          "total": 571.56
+        },
+        {
+          "item_number": 219,
+          "description": "Texture drywall - light hand 117.43 SF 0.00 1.82",
+          "tax": 1.03,
+          "op": 42.94,
+          "total": 257.69
+        },
+        {
+          "item_number": 220,
+          "description": "Seal/prime (1 coat) then paint (2 117.43 SF 0.00 2.10",
+          "tax": 4.24,
+          "op": 50.16,
+          "total": 301.0
+        },
+        {
+          "item_number": 221,
+          "description": "Baseboard - 4 1/4\" 15.83 LF 0.00 5.73",
+          "tax": 4.34,
+          "op": 19.0,
+          "total": 114.05
+        },
+        {
+          "item_number": 222,
+          "description": "Seal (1 coat) & paint (2 coats) 15.83 LF 0.00 3.60",
+          "tax": 0.34,
+          "op": 11.46,
+          "total": 68.79
+        },
+        {
+          "item_number": 223,
+          "description": "Mask and prep for paint - plastic, 31.67 LF 0.00 2.20",
+          "tax": 0.83,
+          "op": 14.1,
+          "total": 84.6
+        },
+        {
+          "item_number": 224,
+          "description": "Closet shelf and rod package 6.17 LF 0.00 29.33",
+          "tax": 3.51,
+          "op": 36.9,
+          "total": 221.38
+        },
+        {
+          "item_number": 225,
+          "description": "Seal & paint closet shelving - 1.00 EA 0.00 113.18",
+          "tax": 0.84,
+          "op": 22.8,
+          "total": 136.82
+        },
+        {
+          "item_number": 226,
+          "description": "Bypass mirrored door set 1.00 EA 0.00 345.10",
+          "tax": 23.98,
+          "op": 73.82,
+          "total": 442.9
+        },
+        {
+          "item_number": 227,
+          "description": "Clean mirror 38.50 SF 0.00 1.15",
+          "tax": 0.04,
+          "op": 8.86,
+          "total": 53.18
+        },
+        {
+          "item_number": 228,
+          "description": "Lube/recondition sliding door 1.00 EA 0.00 213.80",
+          "tax": 0.26,
+          "op": 42.82,
+          "total": 256.88
+        }
+      ]
+    },
+    {
+      "section_name": "Hall Bathroom 1",
+      "section_totals": {
+        "tax": 381.32,
+        "op": 2499.7,
+        "total": 14998.18,
+        "computed_total": 14998.18,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 229,
+          "description": "Batt insulation - 12\" - R38 - paper 64.68 SF 0.00 2.64",
+          "tax": 10.91,
+          "op": 36.34,
+          "total": 218.01
+        },
+        {
+          "item_number": 230,
+          "description": "5/8\" drywall - hung, taped, ready 64.68 SF 0.00 3.98",
+          "tax": 4.92,
+          "op": 52.46,
+          "total": 314.81
+        },
+        {
+          "item_number": 231,
+          "description": "Texture drywall - light hand 64.68 SF 0.00 1.82",
+          "tax": 0.57,
+          "op": 23.66,
+          "total": 141.95
+        },
+        {
+          "item_number": 232,
+          "description": "Seal/prime (1 coat) then paint (2 64.68 SF 0.00 2.10",
+          "tax": 2.33,
+          "op": 27.62,
+          "total": 165.78
+        },
+        {
+          "item_number": 233,
+          "description": "Mask and prep for paint - tape 128.95 LF 0.00 1.02",
+          "tax": 0.63,
+          "op": 26.42,
+          "total": 158.58
+        },
+        {
+          "item_number": 234,
+          "description": "Paint crown molding - 32.24 LF 0.00 7.56",
+          "tax": 0.63,
+          "op": 48.86,
+          "total": 293.22
+        },
+        {
+          "item_number": 235,
+          "description": "Prime & paint cold air return 1.00 EA 0.00 27.67",
+          "tax": 0.64,
+          "op": 5.66,
+          "total": 33.97
+        },
+        {
+          "item_number": 236,
+          "description": "5/8\" drywall - hung, taped, ready 264.32 SF 0.00 3.98",
+          "tax": 20.1,
+          "op": 214.42,
+          "total": 1286.51
+        },
+        {
+          "item_number": 237,
+          "description": "Texture drywall - light hand 264.32 SF 0.00 1.82",
+          "tax": 2.32,
+          "op": 96.68,
+          "total": 580.06
+        },
+        {
+          "item_number": 238,
+          "description": "Mask and prep for paint - plastic, 64.48 LF 0.00 2.20",
+          "tax": 1.7,
+          "op": 28.72,
+          "total": 172.28
+        },
+        {
+          "item_number": 239,
+          "description": "Drywall window return - up to 6\" 12.00 LF 0.00 15.99",
+          "tax": 1.52,
+          "op": 38.68,
+          "total": 232.08
+        },
+        {
+          "item_number": 240,
+          "description": "Seal the surface area w/latex 100.63 SF 0.00 1.00",
+          "tax": 0.98,
+          "op": 20.32,
+          "total": 121.93
+        },
+        {
+          "item_number": 241,
+          "description": "Painting - Faux (special effects) - 100.63 SF 0.00 3.94",
+          "tax": 2.45,
+          "op": 79.8,
+          "total": 478.73
+        },
+        {
+          "item_number": 242,
+          "description": "Baseboard - 4 1/4\" 40.64 LF 0.00 5.73",
+          "tax": 11.13,
+          "op": 48.8,
+          "total": 292.8
+        },
+        {
+          "item_number": 243,
+          "description": "Paint baseboard - distressed/faux 40.64 LF 0.00 7.22",
+          "tax": 0.71,
+          "op": 58.82,
+          "total": 352.95
+        },
+        {
+          "item_number": 244,
+          "description": "Stone floor covering - High grade",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 245,
+          "description": "Additional labor to remove stone",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 246,
+          "description": "Floor leveling cement - Heavy",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 247,
+          "description": "Tile/stone sealer 129.37 SF 0.00 1.53",
+          "tax": 4.67,
+          "op": 40.52,
+          "total": 243.13
+        },
+        {
+          "item_number": 248,
+          "description": "T- molding - for wood flooring - 2.33 LF 0.00 9.89",
+          "tax": 1.97,
+          "op": 5.0,
+          "total": 30.01
+        },
+        {
+          "item_number": 249,
+          "description": "Vacuuming - (PER SF) - Heavy 64.68 SF 0.00 0.29",
+          "tax": 0.0,
+          "op": 3.76,
+          "total": 22.52
+        },
+        {
+          "item_number": 250,
+          "description": "Floor protection - heavy paper 64.68 SF 0.45 0.00",
+          "tax": 0.44,
+          "op": 5.9,
+          "total": 35.45
+        },
+        {
+          "item_number": 251,
+          "description": "Custom shower door & partition - 30.96 SF 0.00 37.00",
+          "tax": 63.81,
+          "op": 241.86,
+          "total": 1451.19
+        },
+        {
+          "item_number": 252,
+          "description": "Paint door/window trim & jamb - 2.00 EA 0.00 181.86",
+          "tax": 1.4,
+          "op": 73.02,
+          "total": 438.14
+        },
+        {
+          "item_number": 253,
+          "description": "Towel bar 2.00 EA 0.00 35.21",
+          "tax": 2.94,
+          "op": 14.66,
+          "total": 88.02
+        },
+        {
+          "item_number": 254,
+          "description": "Medicine cabinet - High grade 1.00 EA 0.00 285.20",
+          "tax": 23.24,
+          "op": 61.68,
+          "total": 370.12
+        },
+        {
+          "item_number": 255,
+          "description": "Light bar - 3 lights 1.00 EA 0.00 101.54",
+          "tax": 2.7,
+          "op": 20.84,
+          "total": 125.08
+        },
+        {
+          "item_number": 256,
+          "description": "Heat lamp fixture - adjustable 1.00 EA 0.00 73.21",
+          "tax": 1.36,
+          "op": 14.92,
+          "total": 89.49
+        },
+        {
+          "item_number": 257,
+          "description": "Toilet paper holder 1.00 EA 0.00 32.48",
+          "tax": 1.21,
+          "op": 6.74,
+          "total": 40.43
+        },
+        {
+          "item_number": 258,
+          "description": "Security system - contact w/wire 1.00 EA 0.00 116.14",
+          "tax": 1.22,
+          "op": 23.46,
+          "total": 140.82
+        },
+        {
+          "item_number": 259,
+          "description": "Regrout tile 116.83 SF 0.00 7.35",
+          "tax": 3.3,
+          "op": 172.4,
+          "total": 1034.4
+        },
+        {
+          "item_number": 260,
+          "description": "Seal grout on tile wall 116.83 SF 0.00 2.67",
+          "tax": 2.16,
+          "op": 62.82,
+          "total": 376.92
+        },
+        {
+          "item_number": 261,
+          "description": "Vanity 5.75 LF 0.00 279.20",
+          "tax": 124.85,
+          "op": 346.06,
+          "total": 2076.31
+        },
+        {
+          "item_number": 262,
+          "description": "Vanity top - one sink - cultured 5.75 LF 0.00 136.15",
+          "tax": 34.59,
+          "op": 163.5,
+          "total": 980.95
+        },
+        {
+          "item_number": 263,
+          "description": "Sink faucet - Bathroom 1.00 EA 0.00 244.92",
+          "tax": 14.38,
+          "op": 51.86,
+          "total": 311.16
+        },
+        {
+          "item_number": 264,
+          "description": "Sink drain assembly with stop 1.00 EA 0.00 55.95",
+          "tax": 1.66,
+          "op": 11.54,
+          "total": 69.15
+        },
+        {
+          "item_number": 265,
+          "description": "Refinish bathtub 1.00 EA 0.00 908.85",
+          "tax": 6.02,
+          "op": 182.98,
+          "total": 1097.85
+        },
+        {
+          "item_number": 266,
+          "description": "Toilet - Detach & reset 1.00 EA 0.00 305.16",
+          "tax": 0.89,
+          "op": 61.22,
+          "total": 367.27
+        },
+        {
+          "item_number": 267,
+          "description": "Shower faucet 1.00 EA 0.00 259.86",
+          "tax": 12.68,
+          "op": 54.52,
+          "total": 327.06
+        },
+        {
+          "item_number": 268,
+          "description": "Tub/shower faucet 1.00 EA 0.00 351.58",
+          "tax": 14.29,
+          "op": 73.18,
+          "total": 439.05
+        }
+      ]
+    },
+    {
+      "section_name": "Master bathroom",
+      "section_totals": {
+        "tax": 653.28,
+        "op": 2911.44,
+        "total": 17468.48,
+        "computed_total": 17468.48,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 269,
+          "description": "Batt insulation - 12\" - R38 - paper 57.69 SF 0.00 2.64",
+          "tax": 9.73,
+          "op": 32.4,
+          "total": 194.43
+        },
+        {
+          "item_number": 270,
+          "description": "5/8\" drywall - hung, taped, ready 57.69 SF 0.00 3.98",
+          "tax": 4.39,
+          "op": 46.8,
+          "total": 280.8
+        },
+        {
+          "item_number": 271,
+          "description": "Texture drywall - light hand 57.69 SF 0.00 1.82",
+          "tax": 0.51,
+          "op": 21.1,
+          "total": 126.61
+        },
+        {
+          "item_number": 272,
+          "description": "Seal/prime (1 coat) then paint (2 57.69 SF 0.00 2.10",
+          "tax": 2.08,
+          "op": 24.66,
+          "total": 147.89
+        },
+        {
+          "item_number": 273,
+          "description": "Seal (1 coat) & paint (2 coats) 31.33 LF 0.00 3.80",
+          "tax": 0.73,
+          "op": 23.96,
+          "total": 143.74
+        },
+        {
+          "item_number": 274,
+          "description": "Prime & paint cold air return 1.00 EA 0.00 27.67",
+          "tax": 0.64,
+          "op": 5.66,
+          "total": 33.97
+        },
+        {
+          "item_number": 275,
+          "description": "Seal/prime (1 coat) then paint (2 232.39 SF 0.00 2.10",
+          "tax": 8.38,
+          "op": 99.28,
+          "total": 595.68
+        },
+        {
+          "item_number": 276,
+          "description": "Baseboard - 4 1/4\" 31.33 LF 0.00 5.73",
+          "tax": 8.58,
+          "op": 37.62,
+          "total": 225.72
+        },
+        {
+          "item_number": 277,
+          "description": "Seal (1 coat) & paint (2 coats) 31.33 LF 0.00 3.60",
+          "tax": 0.67,
+          "op": 22.7,
+          "total": 136.16
+        },
+        {
+          "item_number": 278,
+          "description": "Mask and prep for paint - plastic, 62.67 LF 0.00 2.20",
+          "tax": 1.65,
+          "op": 27.92,
+          "total": 167.44
+        },
+        {
+          "item_number": 279,
+          "description": "Regrout tile floor 57.69 SF 0.00 7.23",
+          "tax": 2.81,
+          "op": 83.98,
+          "total": 503.89
+        },
+        {
+          "item_number": 280,
+          "description": "Grout sealer 57.69 SF 0.00 2.46",
+          "tax": 1.07,
+          "op": 28.6,
+          "total": 171.59
+        },
+        {
+          "item_number": 281,
+          "description": "Paint door/window trim & jamb - 2.00 EA 0.00 51.82",
+          "tax": 1.24,
+          "op": 20.96,
+          "total": 125.84
+        },
+        {
+          "item_number": 282,
+          "description": "Robe hook 2.00 EA 0.00 20.97",
+          "tax": 1.74,
+          "op": 8.72,
+          "total": 52.4
+        },
+        {
+          "item_number": 283,
+          "description": "Mirror - framed 7.05 SF 0.00 31.65",
+          "tax": 16.57,
+          "op": 47.94,
+          "total": 287.64
+        },
+        {
+          "item_number": 284,
+          "description": "Light bar - 4 lights 1.00 EA 0.00 111.35",
+          "tax": 3.66,
+          "op": 23.02,
+          "total": 138.03
+        },
+        {
+          "item_number": 285,
+          "description": "Recessed light fixture - High 1.00 EA 0.00 188.70",
+          "tax": 5.77,
+          "op": 38.9,
+          "total": 233.37
+        },
+        {
+          "item_number": 286,
+          "description": "Bathroom ventilation fan 1.00 EA 0.00 133.42",
+          "tax": 6.76,
+          "op": 28.04,
+          "total": 168.22
+        },
+        {
+          "item_number": 287,
+          "description": "Toilet paper holder 1.00 EA 0.00 32.48",
+          "tax": 1.21,
+          "op": 6.74,
+          "total": 40.43
+        },
+        {
+          "item_number": 288,
+          "description": "Detach & Reset Toilet 1.00 EA 305.16 0.00 0.00",
+          "tax": 0.89,
+          "op": 61.22,
+          "total": 367.27
+        },
+        {
+          "item_number": 289,
+          "description": "Security system - contact w/wire 1.00 EA 0.00 116.14",
+          "tax": 1.22,
+          "op": 23.46,
+          "total": 140.82
+        },
+        {
+          "item_number": 290,
+          "description": "Cabinetry - upper (wall) units 6.00 LF 0.00 194.09",
+          "tax": 80.48,
+          "op": 249.0,
+          "total": 1494.02
+        },
+        {
+          "item_number": 291,
+          "description": "Vanity 6.00 LF 0.00 279.20",
+          "tax": 130.27,
+          "op": 361.1,
+          "total": 2166.57
+        },
+        {
+          "item_number": 292,
+          "description": "Countertop - Granite or Marble - 12.00 SF 0.00 67.19",
+          "tax": 19.14,
+          "op": 165.08,
+          "total": 990.5
+        },
+        {
+          "item_number": 293,
+          "description": "Backsplash - solid surface - 14.00 SF 0.00 16.58",
+          "tax": 14.56,
+          "op": 49.34,
+          "total": 296.02
+        },
+        {
+          "item_number": 294,
+          "description": "Sink - single - Premium grade 1.00 EA 0.00 825.52",
+          "tax": 67.25,
+          "op": 178.56,
+          "total": 1071.33
+        },
+        {
+          "item_number": 295,
+          "description": "Cabinet knob or pull 14.00 EA 0.00 10.73",
+          "tax": 4.83,
+          "op": 31.0,
+          "total": 186.05
+        },
+        {
+          "item_number": 296,
+          "description": "Custom shower door & partition - 45.92 SF 0.00 103.00",
+          "tax": 252.56,
+          "op": 996.48,
+          "total": 5978.8
+        },
+        {
+          "item_number": 297,
+          "description": "Regrout tile 83.05 SF 0.00 7.35",
+          "tax": 2.35,
+          "op": 122.56,
+          "total": 735.33
+        },
+        {
+          "item_number": 298,
+          "description": "Seal grout on tile wall 83.05 SF 0.00 2.67",
+          "tax": 1.54,
+          "op": 44.64,
+          "total": 267.92
+        }
+      ]
+    },
+    {
+      "section_name": "Master Bedroom",
+      "section_totals": {
+        "tax": 658.75,
+        "op": 5545.62,
+        "total": 33273.3,
+        "computed_total": 33273.3,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 299,
+          "description": "Batt insulation - 12\" - R38 - paper 47.88 SF 0.00 2.64",
+          "tax": 8.08,
+          "op": 26.9,
+          "total": 161.38
+        },
+        {
+          "item_number": 300,
+          "description": "5/8\" drywall - hung, taped, ready 47.88 SF 0.00 3.98",
+          "tax": 3.64,
+          "op": 38.84,
+          "total": 233.04
+        },
+        {
+          "item_number": 301,
+          "description": "Texture drywall - light hand 47.88 SF 0.00 1.82",
+          "tax": 0.42,
+          "op": 17.5,
+          "total": 105.06
+        },
+        {
+          "item_number": 302,
+          "description": "Painting - Faux (special effects) - 47.88 SF 0.00 3.94",
+          "tax": 1.17,
+          "op": 37.98,
+          "total": 227.8
+        },
+        {
+          "item_number": 303,
+          "description": "Seal the surface area w/latex 47.88 SF 0.00 1.00",
+          "tax": 0.47,
+          "op": 9.68,
+          "total": 58.03
+        },
+        {
+          "item_number": 304,
+          "description": "Mask and prep for paint - tape 165.77 LF 0.00 1.02",
+          "tax": 0.81,
+          "op": 33.98,
+          "total": 203.88
+        },
+        {
+          "item_number": 305,
+          "description": "Prime & paint cold air return 1.00 EA 0.00 27.67",
+          "tax": 0.64,
+          "op": 5.66,
+          "total": 33.97
+        },
+        {
+          "item_number": 306,
+          "description": "Paint paneling - distressed/faux 186.33 SF 0.00 4.02",
+          "tax": 3.09,
+          "op": 150.44,
+          "total": 902.58
+        },
+        {
+          "item_number": 307,
+          "description": "Paint wood beam - 32.50 SF 0.00 12.90",
+          "tax": 1.93,
+          "op": 84.24,
+          "total": 505.42
+        },
+        {
+          "item_number": 308,
+          "description": "Soda blasting - Heavy 218.83 SF 0.00 3.81",
+          "tax": 26.46,
+          "op": 172.04,
+          "total": 1032.24
+        },
+        {
+          "item_number": 309,
+          "description": "Quarter round - 3/4\" - stain grade 59.50 LF 0.00 2.70",
+          "tax": 8.47,
+          "op": 33.84,
+          "total": 202.96
+        },
+        {
+          "item_number": 310,
+          "description": "Seal & paint base shoe or quarter 59.50 LF 0.00 1.35",
+          "tax": 0.87,
+          "op": 16.24,
+          "total": 97.44
+        },
+        {
+          "item_number": 311,
+          "description": "5/8\" drywall - hung, taped, ready 558.19 SF 0.00 3.98",
+          "tax": 42.45,
+          "op": 452.82,
+          "total": 2716.87
+        },
+        {
+          "item_number": 312,
+          "description": "Texture drywall - light hand 558.19 SF 0.00 1.82",
+          "tax": 4.9,
+          "op": 204.16,
+          "total": 1224.97
+        },
+        {
+          "item_number": 313,
+          "description": "Mask and prep for paint - plastic, 165.77 LF 0.00 2.20",
+          "tax": 4.36,
+          "op": 73.82,
+          "total": 442.87
+        },
+        {
+          "item_number": 314,
+          "description": "Seal the walls w/latex based stain 558.19 SF 0.00 1.00",
+          "tax": 5.44,
+          "op": 112.72,
+          "total": 676.35
+        },
+        {
+          "item_number": 315,
+          "description": "Painting - Faux (special effects) - 558.19 SF 0.00 3.94",
+          "tax": 13.61,
+          "op": 442.58,
+          "total": 2655.46
+        },
+        {
+          "item_number": 316,
+          "description": "Baseboard - 4 1/4\" 69.33 LF 0.00 5.73",
+          "tax": 18.99,
+          "op": 83.26,
+          "total": 499.51
+        },
+        {
+          "item_number": 317,
+          "description": "Paint baseboard - distressed/faux 69.33 LF 0.00 7.22",
+          "tax": 1.22,
+          "op": 100.36,
+          "total": 602.14
+        },
+        {
+          "item_number": 318,
+          "description": "Stone floor covering - High grade",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 319,
+          "description": "Additional labor to remove stone",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 320,
+          "description": "Vacuuming - (PER SF) - Heavy 220.75 SF 0.00 0.29",
+          "tax": 0.0,
+          "op": 12.8,
+          "total": 76.82
+        },
+        {
+          "item_number": 321,
+          "description": "Floor leveling cement - Heavy",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 322,
+          "description": "Tile/stone sealer 441.50 SF 0.00 1.53",
+          "tax": 15.93,
+          "op": 138.28,
+          "total": 829.71
+        },
+        {
+          "item_number": 323,
+          "description": "Regrout stone floor 220.75 SF 0.00 6.45",
+          "tax": 2.15,
+          "op": 285.2,
+          "total": 1711.19
+        },
+        {
+          "item_number": 324,
+          "description": "Floor protection - heavy paper 220.75 SF 0.45 0.00",
+          "tax": 1.51,
+          "op": 20.16,
+          "total": 121.01
+        },
+        {
+          "item_number": 325,
+          "description": "Recessed light fixture - High 1.00 EA 0.00 188.70",
+          "tax": 5.77,
+          "op": 38.9,
+          "total": 233.37
+        },
+        {
+          "item_number": 326,
+          "description": "TV Brackets - Wall or ceiling 1.00 EA 0.00 68.61",
+          "tax": 0.0,
+          "op": 13.72,
+          "total": 82.33
+        },
+        {
+          "item_number": 327,
+          "description": "Cabinetry - full height unit 8.58 LF 0.00 384.13",
+          "tax": 261.5,
+          "op": 711.46,
+          "total": 4268.8
+        },
+        {
+          "item_number": 328,
+          "description": "Stain & finish full height 8.58 LF 0.00 361.57",
+          "tax": 13.45,
+          "op": 623.16,
+          "total": 3738.88
+        },
+        {
+          "item_number": 329,
+          "description": "Cabinetry - lower (base) units 1.42 LF 0.00 287.89",
+          "tax": 32.03,
+          "op": 88.16,
+          "total": 528.99
+        },
+        {
+          "item_number": 330,
+          "description": "Stain & finish cabinetry - lower - 1.42 LF 0.00 207.90",
+          "tax": 1.26,
+          "op": 59.3,
+          "total": 355.78
+        },
+        {
+          "item_number": 331,
+          "description": "Cabinetry - upper (wall) units 10.17 LF 0.00 194.09",
+          "tax": 136.42,
+          "op": 422.06,
+          "total": 2532.38
+        },
+        {
+          "item_number": 332,
+          "description": "Stain & finish cabinetry - upper - 10.17 LF 0.00 233.25",
+          "tax": 8.38,
+          "op": 476.12,
+          "total": 2856.65
+        },
+        {
+          "item_number": 333,
+          "description": "Security system - contact w/wire 2.00 EA 0.00 116.14",
+          "tax": 2.44,
+          "op": 46.94,
+          "total": 281.66
+        },
+        {
+          "item_number": 334,
+          "description": "Paint door/window trim & jamb - 3.00 EA 0.00 181.86",
+          "tax": 2.11,
+          "op": 109.54,
+          "total": 657.23
+        },
+        {
+          "item_number": 335,
+          "description": "Window blind - fabric/woven - 1.00 EA 0.00 1,984.99",
+          "tax": 28.78,
+          "op": 402.76,
+          "total": 2416.53
+        }
+      ]
+    },
+    {
+      "section_name": "Main Hallway",
+      "section_totals": {
+        "tax": 420.59,
+        "op": 4374.7,
+        "total": 26248.27,
+        "computed_total": 26248.27,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 336,
+          "description": "Batt insulation - 12\" - R38 - paper 115.20 SF 0.00 2.64",
+          "tax": 19.43,
+          "op": 64.7,
+          "total": 388.26
+        },
+        {
+          "item_number": 337,
+          "description": "5/8\" drywall - hung, taped, ready 115.20 SF 0.00 3.98",
+          "tax": 8.76,
+          "op": 93.46,
+          "total": 560.72
+        },
+        {
+          "item_number": 338,
+          "description": "Texture drywall - light hand 115.20 SF 0.00 1.82",
+          "tax": 1.01,
+          "op": 42.14,
+          "total": 252.81
+        },
+        {
+          "item_number": 339,
+          "description": "Painting - Faux (special effects) - 115.20 SF 0.00 3.94",
+          "tax": 2.81,
+          "op": 91.34,
+          "total": 548.04
+        },
+        {
+          "item_number": 340,
+          "description": "Seal the ceiling w/latex based 115.20 SF 0.00 1.00",
+          "tax": 1.12,
+          "op": 23.26,
+          "total": 139.58
+        },
+        {
+          "item_number": 341,
+          "description": "Mask and prep for paint - tape 150.72 LF 0.00 1.02",
+          "tax": 0.74,
+          "op": 30.88,
+          "total": 185.35
+        },
+        {
+          "item_number": 342,
+          "description": "Prime & paint cold air return 2.00 EA 0.00 27.67",
+          "tax": 1.27,
+          "op": 11.32,
+          "total": 67.93
+        },
+        {
+          "item_number": 343,
+          "description": "5/8\" drywall - hung, taped, ready 558.91 SF 0.00 3.98",
+          "tax": 42.51,
+          "op": 453.4,
+          "total": 2720.37
+        },
+        {
+          "item_number": 344,
+          "description": "Texture drywall - light hand 558.91 SF 0.00 1.82",
+          "tax": 4.9,
+          "op": 204.42,
+          "total": 1226.54
+        },
+        {
+          "item_number": 345,
+          "description": "Mask and prep for paint - plastic, 150.72 LF 0.00 2.20",
+          "tax": 3.97,
+          "op": 67.12,
+          "total": 402.67
+        },
+        {
+          "item_number": 346,
+          "description": "Seal the walls w/latex based stain 558.91 SF 0.00 1.00",
+          "tax": 5.45,
+          "op": 112.88,
+          "total": 677.24
+        },
+        {
+          "item_number": 347,
+          "description": "Painting - Faux (special effects) - 558.91 SF 0.00 3.94",
+          "tax": 13.62,
+          "op": 443.14,
+          "total": 2658.87
+        },
+        {
+          "item_number": 348,
+          "description": "Baseboard - 4 1/4\" 75.36 LF 0.00 5.73",
+          "tax": 20.65,
+          "op": 90.5,
+          "total": 542.96
+        },
+        {
+          "item_number": 349,
+          "description": "Paint baseboard - distressed/faux 75.36 LF 0.00 7.22",
+          "tax": 1.32,
+          "op": 109.08,
+          "total": 654.5
+        },
+        {
+          "item_number": 350,
+          "description": "Stone floor covering - High grade",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 351,
+          "description": "Additional labor to remove stone",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 352,
+          "description": "Vacuuming - (PER SF) - Heavy 115.20 SF 0.00 0.29",
+          "tax": 0.0,
+          "op": 6.68,
+          "total": 40.09
+        },
+        {
+          "item_number": 353,
+          "description": "Floor leveling cement - Heavy",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 354,
+          "description": "Add-on for diagonal tile",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 355,
+          "description": "Tile/stone sealer 115.20 SF 0.00 1.53",
+          "tax": 4.16,
+          "op": 36.1,
+          "total": 216.52
+        },
+        {
+          "item_number": 356,
+          "description": "Regrout stone floor 115.20 SF 0.00 6.45",
+          "tax": 1.12,
+          "op": 148.82,
+          "total": 892.98
+        },
+        {
+          "item_number": 357,
+          "description": "Floor protection - heavy paper 115.20 SF 0.45 0.00",
+          "tax": 0.79,
+          "op": 10.52,
+          "total": 63.15
+        },
+        {
+          "item_number": 358,
+          "description": "Recessed light fixture - High 4.00 EA 0.00 186.19",
+          "tax": 22.11,
+          "op": 153.38,
+          "total": 920.25
+        },
+        {
+          "item_number": 359,
+          "description": "Closet shelf and rod package 2.50 LF 0.00 29.33",
+          "tax": 1.42,
+          "op": 14.94,
+          "total": 89.69
+        },
+        {
+          "item_number": 360,
+          "description": "Seal & paint closet shelving - 1.00 EA 0.00 86.88",
+          "tax": 0.57,
+          "op": 17.5,
+          "total": 104.95
+        },
+        {
+          "item_number": 361,
+          "description": "Stain & finish full height 7.50 LF 0.00 361.57",
+          "tax": 11.76,
+          "op": 544.72,
+          "total": 3268.26
+        },
+        {
+          "item_number": 362,
+          "description": "Stain & finish cabinetry - lower - 3.42 LF 0.00 207.90",
+          "tax": 3.04,
+          "op": 142.8,
+          "total": 856.86
+        },
+        {
+          "item_number": 363,
+          "description": "Interior door unit 6.00 EA 0.00 343.85",
+          "tax": 152.19,
+          "op": 443.06,
+          "total": 2658.35
+        },
+        {
+          "item_number": 364,
+          "description": "Bypass (sliding) door set - 2.00 EA 0.00 317.17",
+          "tax": 43.49,
+          "op": 135.56,
+          "total": 813.39
+        },
+        {
+          "item_number": 365,
+          "description": "Door knob - interior - Premium 4.00 EA 0.00 100.14",
+          "tax": 27.36,
+          "op": 85.6,
+          "total": 513.52
+        },
+        {
+          "item_number": 366,
+          "description": "Paint door slab only - 8.00 EA 0.00 183.12",
+          "tax": 8.22,
+          "op": 294.64,
+          "total": 1767.82
+        },
+        {
+          "item_number": 367,
+          "description": "Paint door/window trim & jamb - 9.00 EA 0.00 181.86",
+          "tax": 6.32,
+          "op": 328.6,
+          "total": 1971.66
+        },
+        {
+          "item_number": 368,
+          "description": "Light fixture 1.00 EA 0.00 87.21",
+          "tax": 3.22,
+          "op": 18.08,
+          "total": 108.51
+        },
+        {
+          "item_number": 369,
+          "description": "Furnace - forced air - Detach & 0.50 EA 0.00 1,018.19",
+          "tax": 0.0,
+          "op": 101.82,
+          "total": 610.92
+        },
+        {
+          "item_number": 370,
+          "description": "Gas/water line cap/plug - per cap 1.00 EA 0.00 18.17",
+          "tax": 0.12,
+          "op": 3.66,
+          "total": 21.95
+        },
+        {
+          "item_number": 371,
+          "description": "Flexible gas supply line connector 1.00 EA 0.00 35.51",
+          "tax": 2.2,
+          "op": 7.54,
+          "total": 45.25
+        },
+        {
+          "item_number": 372,
+          "description": "Fir subfloor - no finish 10.50 SF 0.00 8.97",
+          "tax": 3.72,
+          "op": 19.58,
+          "total": 117.49
+        },
+        {
+          "item_number": 373,
+          "description": "Security system - contact w/wire 1.00 EA 0.00 116.14",
+          "tax": 1.22,
+          "op": 23.46,
+          "total": 140.82
+        }
+      ]
+    },
+    {
+      "section_name": "Laundry Room",
+      "section_totals": {
+        "tax": 342.04,
+        "op": 1614.88,
+        "total": 9688.83,
+        "computed_total": 9688.83,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 374,
+          "description": "Paint paneling - distressed/faux 52.75 SF 0.00 4.02",
+          "tax": 0.87,
+          "op": 42.6,
+          "total": 255.53
+        },
+        {
+          "item_number": 375,
+          "description": "Soda blasting - Heavy 52.75 SF 0.00 3.81",
+          "tax": 6.38,
+          "op": 41.48,
+          "total": 248.84
+        },
+        {
+          "item_number": 376,
+          "description": "Quarter round - 3/4\" - stain grade 30.50 LF 0.00 2.70",
+          "tax": 4.34,
+          "op": 17.34,
+          "total": 104.03
+        },
+        {
+          "item_number": 377,
+          "description": "Seal & paint base shoe or quarter 30.50 LF 0.00 1.35",
+          "tax": 0.45,
+          "op": 8.34,
+          "total": 49.97
+        },
+        {
+          "item_number": 378,
+          "description": "Mask and prep for paint - tape 121.35 LF 0.00 1.02",
+          "tax": 0.59,
+          "op": 24.88,
+          "total": 149.25
+        },
+        {
+          "item_number": 379,
+          "description": "5/8\" drywall - hung, taped, ready 239.13 SF 0.00 3.98",
+          "tax": 18.19,
+          "op": 193.98,
+          "total": 1163.91
+        },
+        {
+          "item_number": 380,
+          "description": "Texture drywall - light hand 239.13 SF 0.00 1.82",
+          "tax": 2.1,
+          "op": 87.46,
+          "total": 524.78
+        },
+        {
+          "item_number": 381,
+          "description": "Seal/prime (1 coat) then paint (2 239.13 SF 0.00 2.10",
+          "tax": 8.63,
+          "op": 102.16,
+          "total": 612.96
+        },
+        {
+          "item_number": 382,
+          "description": "Drywall window return - up to 6\" 7.50 LF 0.00 15.99",
+          "tax": 0.95,
+          "op": 24.18,
+          "total": 145.06
+        },
+        {
+          "item_number": 383,
+          "description": "Baseboard - 4 1/4\" 30.12 LF 0.00 5.73",
+          "tax": 8.25,
+          "op": 36.18,
+          "total": 217.02
+        },
+        {
+          "item_number": 384,
+          "description": "Seal (1 coat) & paint (2 coats) 30.12 LF 0.00 3.60",
+          "tax": 0.65,
+          "op": 21.82,
+          "total": 130.9
+        },
+        {
+          "item_number": 385,
+          "description": "Mask and prep for paint - plastic, 60.67 LF 0.00 2.20",
+          "tax": 1.6,
+          "op": 27.02,
+          "total": 162.09
+        },
+        {
+          "item_number": 386,
+          "description": "Engineered wood flooring 52.08 SF 0.00 11.71",
+          "tax": 33.56,
+          "op": 128.7,
+          "total": 772.12
+        },
+        {
+          "item_number": 387,
+          "description": "Add for glued down wood 52.08 SF 0.00 1.42",
+          "tax": 5.64,
+          "op": 15.92,
+          "total": 95.51
+        },
+        {
+          "item_number": 388,
+          "description": "T- molding - for wood flooring - 2.00 LF 0.00 9.89",
+          "tax": 1.69,
+          "op": 4.3,
+          "total": 25.77
+        },
+        {
+          "item_number": 389,
+          "description": "Vacuuming - (PER SF) - Heavy 52.08 SF 0.00 0.29",
+          "tax": 0.0,
+          "op": 3.02,
+          "total": 18.12
+        },
+        {
+          "item_number": 390,
+          "description": "Floor leveling cement - Heavy 52.08 SF 0.00 4.02",
+          "tax": 9.6,
+          "op": 43.8,
+          "total": 262.76
+        },
+        {
+          "item_number": 391,
+          "description": "Floor protection - heavy paper 52.08 SF 0.45 0.00",
+          "tax": 0.36,
+          "op": 4.76,
+          "total": 28.56
+        },
+        {
+          "item_number": 392,
+          "description": "Paint door/window trim & jamb - 3.00 EA 0.00 60.61",
+          "tax": 2.11,
+          "op": 36.78,
+          "total": 220.72
+        },
+        {
+          "item_number": 393,
+          "description": "Door lockset & deadbolt - 1.00 EA 0.00 148.23",
+          "tax": 10.53,
+          "op": 31.74,
+          "total": 190.5
+        },
+        {
+          "item_number": 394,
+          "description": "Paint door slab only - 2 coats (per 2.00 EA 0.00 61.04",
+          "tax": 2.06,
+          "op": 24.84,
+          "total": 148.98
+        },
+        {
+          "item_number": 395,
+          "description": "Cabinetry - upper (wall) units - 10.33 LF 0.00 258.02",
+          "tax": 202.96,
+          "op": 573.68,
+          "total": 3441.99
+        },
+        {
+          "item_number": 396,
+          "description": "Cabinet knob or pull 12.00 EA 0.00 10.73",
+          "tax": 4.14,
+          "op": 26.58,
+          "total": 159.48
+        },
+        {
+          "item_number": 397,
+          "description": "Prime & paint pipe, 1\" to 3\" 8.00 LF 0.00 1.12",
+          "tax": 0.13,
+          "op": 1.82,
+          "total": 10.91
+        },
+        {
+          "item_number": 398,
+          "description": "Light fixture - wall sconce - High 1.00 EA 0.00 173.67",
+          "tax": 11.7,
+          "op": 37.08,
+          "total": 222.45
+        },
+        {
+          "item_number": 399,
+          "description": "Washer/Washing machine - 1.00 EA 0.00 40.10",
+          "tax": 0.0,
+          "op": 8.02,
+          "total": 48.12
+        },
+        {
+          "item_number": 400,
+          "description": "Dryer - gas - Detach 1.00 EA 0.00 47.22",
+          "tax": 0.0,
+          "op": 9.44,
+          "total": 56.66
+        },
+        {
+          "item_number": 401,
+          "description": "Gas/water line cap/plug - per cap 1.00 EA 0.00 18.17",
+          "tax": 0.12,
+          "op": 3.66,
+          "total": 21.95
+        },
+        {
+          "item_number": 402,
+          "description": "Flexible gas supply line connector 1.00 EA 0.00 35.51",
+          "tax": 2.2,
+          "op": 7.54,
+          "total": 45.25
+        },
+        {
+          "item_number": 403,
+          "description": "Ducting - flexible - 6\" round 5.00 LF 0.00 2.10",
+          "tax": 1.02,
+          "op": 2.3,
+          "total": 13.82
+        },
+        {
+          "item_number": 404,
+          "description": "Security system - contact w/wire 1.00 EA 0.00 116.14",
+          "tax": 1.22,
+          "op": 23.46,
+          "total": 140.82
+        }
+      ]
+    },
+    {
+      "section_name": "Garage",
+      "section_totals": {
+        "tax": 991.42,
+        "op": 5794.78,
+        "total": 34768.57,
+        "computed_total": 34768.57,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 405,
+          "description": "Soda blasting - Heavy 486.36 SF 0.00 3.81",
+          "tax": 58.8,
+          "op": 382.36,
+          "total": 2294.19
+        },
+        {
+          "item_number": 406,
+          "description": "Stain & finish wood beam 85.00 SF 0.00 4.30",
+          "tax": 5.06,
+          "op": 74.12,
+          "total": 444.68
+        },
+        {
+          "item_number": 407,
+          "description": "Stain & finish paneling 401.36 SF 0.00 2.64",
+          "tax": 17.61,
+          "op": 215.44,
+          "total": 1292.64
+        },
+        {
+          "item_number": 408,
+          "description": "Mask and prep for paint - tape 327.66 LF 0.00 1.02",
+          "tax": 1.6,
+          "op": 67.16,
+          "total": 402.97
+        },
+        {
+          "item_number": 409,
+          "description": "5/8\" drywall - hung, taped, ready 747.93 SF 0.00 3.98",
+          "tax": 56.88,
+          "op": 606.74,
+          "total": 3640.38
+        },
+        {
+          "item_number": 410,
+          "description": "Texture drywall - light hand 747.93 SF 0.00 1.82",
+          "tax": 6.56,
+          "op": 273.56,
+          "total": 1641.35
+        },
+        {
+          "item_number": 411,
+          "description": "Seal/prime (1 coat) then paint (2 747.93 SF 0.00 2.10",
+          "tax": 26.98,
+          "op": 319.54,
+          "total": 1917.17
+        },
+        {
+          "item_number": 412,
+          "description": "Paint door/window trim & jamb - 3.00 EA 0.00 60.61",
+          "tax": 2.11,
+          "op": 36.78,
+          "total": 220.72
+        },
+        {
+          "item_number": 413,
+          "description": "Overhead door & hardware - 16' x 1.00 EA 0.00 2,088.01",
+          "tax": 169.69,
+          "op": 451.54,
+          "total": 2709.24
+        },
+        {
+          "item_number": 414,
+          "description": "Overhead (garage) door opener - 1.00 EA 0.00 574.40",
+          "tax": 33.93,
+          "op": 121.66,
+          "total": 729.99
+        },
+        {
+          "item_number": 415,
+          "description": "Add for decorative window - 4.00 EA 0.00 68.62",
+          "tax": 26.76,
+          "op": 60.26,
+          "total": 361.5
+        },
+        {
+          "item_number": 416,
+          "description": "Overhead door weather stop 30.00 LF 0.00 4.20",
+          "tax": 4.45,
+          "op": 26.1,
+          "total": 156.55
+        },
+        {
+          "item_number": 417,
+          "description": "Cabinetry - upper (wall) units - 51.33 LF 0.00 115.58",
+          "tax": 295.63,
+          "op": 1245.66,
+          "total": 7474.01
+        },
+        {
+          "item_number": 418,
+          "description": "Stain & finish cabinetry - upper - 51.33 LF 0.00 52.81",
+          "tax": 25.37,
+          "op": 547.22,
+          "total": 3283.33
+        },
+        {
+          "item_number": 419,
+          "description": "Cabinetry - lower (base) units - 8.50 LF 0.00 141.82",
+          "tax": 70.7,
+          "op": 255.24,
+          "total": 1531.41
+        },
+        {
+          "item_number": 420,
+          "description": "Seal & paint cabinetry - lower - 10.50 LF 0.00 44.39",
+          "tax": 4.52,
+          "op": 94.12,
+          "total": 564.74
+        },
+        {
+          "item_number": 421,
+          "description": "Cabinetry - full height units - 2.50 LF 0.00 168.43",
+          "tax": 23.62,
+          "op": 88.94,
+          "total": 533.64
+        },
+        {
+          "item_number": 422,
+          "description": "Seal & paint full height cabinetry - 2.50 LF 0.00 47.68",
+          "tax": 1.22,
+          "op": 24.08,
+          "total": 144.5
+        },
+        {
+          "item_number": 423,
+          "description": "Cabinet knob or pull 22.00 EA 0.00 10.73",
+          "tax": 7.59,
+          "op": 48.74,
+          "total": 292.39
+        },
+        {
+          "item_number": 424,
+          "description": "Countertop subdeck - plywood 36.83 SF 0.00 4.50",
+          "tax": 6.5,
+          "op": 34.44,
+          "total": 206.68
+        },
+        {
+          "item_number": 425,
+          "description": "Pegboard 60.01 SF 0.00 3.39",
+          "tax": 4.86,
+          "op": 41.66,
+          "total": 249.95
+        },
+        {
+          "item_number": 426,
+          "description": "Water heater - tankless - 5-5.9 1.00 EA 0.00 2,047.16",
+          "tax": 95.65,
+          "op": 428.58,
+          "total": 2571.39
+        },
+        {
+          "item_number": 427,
+          "description": "Angle stop valve 2.00 EA 0.00 46.42",
+          "tax": 2.43,
+          "op": 19.04,
+          "total": 114.31
+        },
+        {
+          "item_number": 428,
+          "description": "Plumbing fixture supply line 2.00 EA 0.00 23.71",
+          "tax": 1.32,
+          "op": 9.74,
+          "total": 58.48
+        },
+        {
+          "item_number": 429,
+          "description": "Water line copper cap/plug - per 4.00 EA 0.00 29.74",
+          "tax": 0.64,
+          "op": 23.92,
+          "total": 143.52
+        },
+        {
+          "item_number": 430,
+          "description": "Gas/water line cap/plug - per cap 1.00 EA 0.00 18.17",
+          "tax": 0.12,
+          "op": 3.66,
+          "total": 21.95
+        },
+        {
+          "item_number": 431,
+          "description": "Flexible gas supply line connector 1.00 EA 0.00 35.51",
+          "tax": 2.2,
+          "op": 7.54,
+          "total": 45.25
+        },
+        {
+          "item_number": 432,
+          "description": "Clean with pressure/chemical 397.32 SF 0.00 0.80",
+          "tax": 0.39,
+          "op": 63.66,
+          "total": 381.91
+        },
+        {
+          "item_number": 433,
+          "description": "Concrete sealer - brush or spray 397.32 SF 0.00 1.44",
+          "tax": 29.83,
+          "op": 120.38,
+          "total": 722.35
+        },
+        {
+          "item_number": 434,
+          "description": "Add on charge for \"edge wrap\" 5.00 EA 0.00 8.02",
+          "tax": 0.0,
+          "op": 8.02,
+          "total": 48.12
+        },
+        {
+          "item_number": 435,
+          "description": "Carpet - High grade 9.38 SF 0.00 6.16",
+          "tax": 4.67,
+          "op": 12.5,
+          "total": 74.95
+        },
+        {
+          "item_number": 436,
+          "description": "Seal & paint stair stringer - one 24.00 LF 0.00 7.33",
+          "tax": 1.29,
+          "op": 35.44,
+          "total": 212.65
+        },
+        {
+          "item_number": 437,
+          "description": "Security system - contact w/wire 2.00 EA 0.00 116.14",
+          "tax": 2.44,
+          "op": 46.94,
+          "total": 281.66
+        }
+      ]
+    },
+    {
+      "section_name": "Ductwork Cavity",
+      "section_totals": {
+        "tax": 0.0,
+        "op": 9.1,
+        "total": 54.55,
+        "computed_total": 54.55,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 438,
+          "description": "Deodorize building - Hot thermal 413.21 CF 0.00 0.11",
+          "tax": 0.0,
+          "op": 9.1,
+          "total": 54.55
+        }
+      ]
+    },
+    {
+      "section_name": "Ext_Surfaces",
+      "section_totals": {
+        "tax": 980.67,
+        "op": 10418.16,
+        "total": 62508.98,
+        "computed_total": 62508.98,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 439,
+          "description": "General Laborer - per hour 16.00 HR 0.00 65.00",
+          "tax": 0.0,
+          "op": 208.0,
+          "total": 1248.0
+        },
+        {
+          "item_number": 440,
+          "description": "Remove Siding - board & batten - 2,489.48 SF 0.66 0.00",
+          "tax": 0.0,
+          "op": 328.62,
+          "total": 1971.68
+        },
+        {
+          "item_number": 441,
+          "description": "Metal lath & stucco 2,987.38 SF 0.00 9.41",
+          "tax": 422.34,
+          "op": 5706.72,
+          "total": 34240.31
+        },
+        {
+          "item_number": 442,
+          "description": "Batt insulation - 6\" - R19 - paper / 2,489.48 SF 0.00 1.84",
+          "tax": 288.84,
+          "op": 973.88,
+          "total": 5843.36
+        },
+        {
+          "item_number": 443,
+          "description": "Clean stud wall - Heavy 2,987.38 SF 0.00 1.73",
+          "tax": 8.74,
+          "op": 1035.38,
+          "total": 6212.29
+        },
+        {
+          "item_number": 444,
+          "description": "Seal stud wall for odor control 2,987.38 SF 0.00 1.67",
+          "tax": 119.42,
+          "op": 1021.66,
+          "total": 6130.0
+        },
+        {
+          "item_number": 445,
+          "description": "House wrap (air/moisture barrier) 2,489.48 SF 0.00 0.42",
+          "tax": 50.97,
+          "op": 219.32,
+          "total": 1315.87
+        },
+        {
+          "item_number": 446,
+          "description": "Soda blasting - Extra heavy 106.25 SF 0.00 4.52",
+          "tax": 14.3,
+          "op": 98.92,
+          "total": 593.47
+        },
+        {
+          "item_number": 447,
+          "description": "Tile/stone sealer 106.25 SF 0.00 1.55",
+          "tax": 3.83,
+          "op": 33.7,
+          "total": 202.22
+        },
+        {
+          "item_number": 448,
+          "description": "Seal & paint wood beam 201.00 SF 0.00 3.25",
+          "tax": 5.68,
+          "op": 131.8,
+          "total": 790.73
+        },
+        {
+          "item_number": 449,
+          "description": "Soda blasting - Extra heavy 201.00 SF 0.00 4.52",
+          "tax": 27.04,
+          "op": 187.1,
+          "total": 1122.66
+        },
+        {
+          "item_number": 450,
+          "description": "Sandblasting 39.03 SF 0.00 1.55",
+          "tax": 0.72,
+          "op": 12.24,
+          "total": 73.46
+        },
+        {
+          "item_number": 451,
+          "description": "Stucco color coat (Redash) - 39.03 SF 0.00 6.27",
+          "tax": 2.63,
+          "op": 49.46,
+          "total": 296.81
+        },
+        {
+          "item_number": 452,
+          "description": "Hanging light fixture - High 2.00 EA 0.00 132.42",
+          "tax": 11.42,
+          "op": 55.24,
+          "total": 331.5
+        },
+        {
+          "item_number": 453,
+          "description": "Stain & finish post/wood beam 6\" 44.50 LF 0.00 8.62",
+          "tax": 5.29,
+          "op": 77.78,
+          "total": 466.66
+        },
+        {
+          "item_number": 454,
+          "description": "Soda blasting - Extra heavy 89.00 SF 0.00 4.52",
+          "tax": 11.97,
+          "op": 82.86,
+          "total": 497.11
+        },
+        {
+          "item_number": 455,
+          "description": "Prime & paint exterior fascia - 273.98 LF 0.00 3.54",
+          "tax": 7.48,
+          "op": 195.48,
+          "total": 1172.85
+        }
+      ]
+    },
+    {
+      "section_name": "Hardscapes",
+      "section_totals": {
+        "tax": 221.34,
+        "op": 2135.12,
+        "total": 12810.6,
+        "computed_total": 12810.6,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 456,
+          "description": "R&R Mailbox post - wood 1.00 EA 14.26 98.64",
+          "tax": 4.87,
+          "op": 23.56,
+          "total": 141.33
+        },
+        {
+          "item_number": 457,
+          "description": "R&R Rural mailbox - High grade 1.00 EA 11.40 125.15",
+          "tax": 9.04,
+          "op": 29.12,
+          "total": 174.71
+        },
+        {
+          "item_number": 458,
+          "description": "Clean with pressure/chemical 1,807.00 SF 0.00 1.23",
+          "tax": 3.52,
+          "op": 445.22,
+          "total": 2671.35
+        },
+        {
+          "item_number": 459,
+          "description": "Concrete sealer - brush or spray 1,807.00 SF 0.00 1.44",
+          "tax": 135.66,
+          "op": 547.56,
+          "total": 3285.3
+        },
+        {
+          "item_number": 460,
+          "description": "R&R Paver flagstone - High",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 461,
+          "description": "Tile/stone sealer",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 462,
+          "description": "General Laborer - per hour 72.00 HR 0.00 65.00",
+          "tax": 0.0,
+          "op": 936.0,
+          "total": 5616.0
+        },
+        {
+          "item_number": 463,
+          "description": "Decorative rock (per CY) 5.00 CY 0.00 140.00",
+          "tax": 68.25,
+          "op": 153.66,
+          "total": 921.91
+        }
+      ]
+    },
+    {
+      "section_name": "CMU Walls",
+      "section_totals": {
+        "tax": 95.91,
+        "op": 1385.24,
+        "total": 8311.45,
+        "computed_total": 8311.45,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 464,
+          "description": "Sandblasting",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 465,
+          "description": "Two coat stucco over masonry",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 466,
+          "description": "Paint stucco",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 467,
+          "description": "Seal stucco - elastomeric sealer",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 468,
+          "description": "R&R Ceramic/porcelain tile",
+          "tax": null,
+          "op": null,
+          "total": null,
+          "_note": "Bid-priced item — amounts not in PDF"
+        },
+        {
+          "item_number": 469,
+          "description": "Prime & paint ornamental iron 206.00 LF 0.00 15.75",
+          "tax": 78.73,
+          "op": 664.64,
+          "total": 3987.87
+        },
+        {
+          "item_number": 470,
+          "description": "Prime & paint ornamental iron 835.17 SF 0.00 4.13",
+          "tax": 8.14,
+          "op": 691.48,
+          "total": 4148.87
+        },
+        {
+          "item_number": 471,
+          "description": "R&R Rural mailbox - High grade 1.00 EA 11.40 125.15",
+          "tax": 9.04,
+          "op": 29.12,
+          "total": 174.71
+        }
+      ]
+    },
+    {
+      "section_name": "Gazebos/Outside Structures",
+      "section_totals": {
+        "tax": 0.0,
+        "op": 0.0,
+        "total": 221160.0,
+        "computed_total": 221160.0,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 472,
+          "description": "Pergola repairs per BWB 1.00 EA 0.00 221,160.00",
+          "tax": 0.0,
+          "op": 0.0,
+          "total": 221160.0
+        }
+      ]
+    },
+    {
+      "section_name": "Labor Minimums Applied",
+      "section_totals": {
+        "tax": 0.0,
+        "op": 109.68,
+        "total": 658.05,
+        "computed_total": 658.05,
+        "validation_delta": 0.0
+      },
+      "line_items": [
+        {
+          "item_number": 473,
+          "description": "Carpet labor minimum 1.00 EA 0.00 241.43",
+          "tax": 0.0,
+          "op": 48.28,
+          "total": 289.71
+        },
+        {
+          "item_number": 474,
+          "description": "Specialty items labor minimum 1.00 EA 0.00 123.09",
+          "tax": 0.0,
+          "op": 24.62,
+          "total": 147.71
+        },
+        {
+          "item_number": 475,
+          "description": "Door labor minimum 1.00 EA 0.00 70.08",
+          "tax": 0.0,
+          "op": 14.02,
+          "total": 84.1
+        },
+        {
+          "item_number": 476,
+          "description": "Tile floor covering labor 1.00 EA 0.00 2.57",
+          "tax": 0.0,
+          "op": 0.52,
+          "total": 3.09
+        },
+        {
+          "item_number": 477,
+          "description": "Paneling labor minimum 1.00 EA 0.00 111.20",
+          "tax": 0.0,
+          "op": 22.24,
+          "total": 133.44
+        }
+      ]
+    }
+  ],
+  "grand_total_areas": {
+    "sf_walls": "8,271.94",
+    "sf_ceiling": "2,330.76",
+    "sf_walls_and_ceiling": "10,602.71",
+    "sf_floor": "2,311.00",
+    "sy_flooring": "256.78",
+    "lf_floor_perimeter": "1,096.69",
+    "sf_long_wall": "0.00",
+    "sf_short_wall": "0.00",
+    "lf_ceil_perimeter": "896.33",
+    "floor_area": "2,311.00",
+    "total_area": "2,538.51",
+    "interior_wall_area": "5,807.68",
+    "exterior_wall_area": "5,491.01",
+    "exterior_perimeter_of_walls": "674.01",
+    "surface_area": "2,847.26",
+    "total_perimeter_length": "273.98",
+    "total_ridge_length": "82.97",
+    "total_hip_length": "0.00"
+  },
+  "coverage": {
+    "rows": [
+      {
+        "name": "Dwelling",
+        "item_total": "504,523.67",
+        "item_pct": 62.33,
+        "acv_total": "504,526.09",
+        "acv_pct": 62.33
+      },
+      {
+        "name": "Dwelling - Debris Removal",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
+        "name": "Dwelling - Code Upgrade",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
+        "name": "Dwelling - Extened Limit",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
+        "name": "Other Structures",
+        "item_total": "304,938.74",
+        "item_pct": 37.67,
+        "acv_total": "304,938.74",
+        "acv_pct": 37.67
+      },
+      {
+        "name": "Contents",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
+        "name": "Trees, Plants & Shrubs",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
+        "name": "Total",
+        "item_total": "809,462.41",
+        "item_pct": 100.0,
+        "acv_total": "809,464.83",
+        "acv_pct": 100.0
+      }
+    ],
+    "totals": null
+  },
+  "recaps_and_summaries": {
+    "summaries_by_coverage": {
+      "Dwelling": {
+        "Line Item Total": "411,047.38",
+        "California Lumber Assessment Fee": "0.93",
+        "Material Sales Tax": "9,388.59",
+        "Subtotal": "420,437.99",
+        "Overhead": "42,044.05",
+        "Profit": "42,044.05",
+        "Replacement Cost Value": "504,526.09",
+        "Net Claim": "504,526.09"
+      },
+      "Other Structures": {
+        "Line Item Total": "289,677.68",
+        "Material Sales Tax": "1,297.92",
+        "Subtotal": "290,975.60",
+        "Overhead": "6,981.57",
+        "Profit": "6,981.57",
+        "Replacement Cost Value": "304,938.74",
+        "Net Claim": "56,177.00"
+      }
+    },
+    "recap_tax_op": null,
+    "recap_by_room": {
+      "areas": {
+        "estimate: SCHACTER_RECON_5": [
+          {
+            "item": "Demo/Mitigtation",
+            "total": "100,000.00",
+            "pct": 14.27,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "100,000.00"
+              }
+            ]
+          },
+          {
+            "item": "General Items",
+            "total": "51,628.32",
+            "pct": 7.37,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "51,628.32"
+              }
+            ]
+          },
+          {
+            "item": "Insulation",
+            "total": "3,883.65",
+            "pct": 0.55,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "3,883.65"
+              }
+            ]
+          },
+          {
+            "item": "Electrical",
+            "total": "23,017.28",
+            "pct": 3.28,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "23,017.28"
+              }
+            ]
+          },
+          {
+            "item": "Plumbing",
+            "total": "723.46",
+            "pct": 0.1,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "723.46"
+              }
+            ]
+          },
+          {
+            "item": "Appliances",
+            "total": "19,413.67",
+            "pct": 2.77,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "19,413.67"
+              }
+            ]
+          },
+          {
+            "item": "Window and Patio Doors Replacement",
+            "total": "26,285.06",
+            "pct": 3.75,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "26,285.06"
+              }
+            ]
+          }
+        ],
+        "dwelling": [],
+        "main level": [
+          {
+            "item": "Main Level",
+            "total": "1,847.68",
+            "pct": 0.26,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "1,847.68"
+              }
+            ]
+          },
+          {
+            "item": "Entry",
+            "total": "5,893.27",
+            "pct": 0.84,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "5,893.27"
+              }
+            ]
+          },
+          {
+            "item": "Kitchen",
+            "total": "18,440.38",
+            "pct": 2.63,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "18,440.38"
+              }
+            ]
+          },
+          {
+            "item": "Living Room",
+            "total": "27,260.17",
+            "pct": 3.89,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "27,260.17"
+              }
+            ]
+          },
+          {
+            "item": "Fireplace",
+            "total": "617.17",
+            "pct": 0.09,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "617.17"
+              }
+            ]
+          },
+          {
+            "item": "Office",
+            "total": "7,013.15",
+            "pct": 1.0,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "7,013.15"
+              }
+            ]
+          },
+          {
+            "item": "Office Closet",
+            "total": "4,132.57",
+            "pct": 0.59,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "4,132.57"
+              }
+            ]
+          },
+          {
+            "item": "Bedroom 1",
+            "total": "7,935.51",
+            "pct": 1.13,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "7,935.51"
+              }
+            ]
+          },
+          {
+            "item": "Bed1 Closet",
+            "total": "2,228.20",
+            "pct": 0.32,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "2,228.20"
+              }
+            ]
+          },
+          {
+            "item": "Hall Bathroom 1",
+            "total": "12,117.16",
+            "pct": 1.73,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "12,117.16"
+              }
+            ]
+          },
+          {
+            "item": "Master bathroom",
+            "total": "13,903.76",
+            "pct": 1.98,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "13,903.76"
+              }
+            ]
+          },
+          {
+            "item": "Master Bedroom",
+            "total": "27,068.93",
+            "pct": 3.86,
+            "coverage": []
+          },
+          {
+            "item": "Main Hallway",
+            "total": "21,452.98",
+            "pct": 3.06,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "21,452.98"
+              }
+            ]
+          },
+          {
+            "item": "Laundry Room",
+            "total": "7,731.91",
+            "pct": 1.1,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "7,731.91"
+              }
+            ]
+          },
+          {
+            "item": "Garage",
+            "total": "27,982.37",
+            "pct": 3.99,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "27,982.37"
+              }
+            ]
+          }
+        ],
+        "attic": [
+          {
+            "item": "Ductwork Cavity",
+            "total": "45.45",
+            "pct": 0.01,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "45.45"
+              }
+            ]
+          }
+        ],
+        "exterior": [
+          {
+            "item": "Ext_Surfaces",
+            "total": "51,110.15",
+            "pct": 7.29,
+            "coverage": [
+              {
+                "coverage": "Other Structures",
+                "pct": 100.0,
+                "amount": "51,110.15"
+              }
+            ]
+          }
+        ],
+        "other structures": [
+          {
+            "item": "Hardscapes",
+            "total": "10,454.14",
+            "pct": 1.49,
+            "coverage": [
+              {
+                "coverage": "Other Structures",
+                "pct": 100.0,
+                "amount": "10,454.14"
+              }
+            ]
+          },
+          {
+            "item": "CMU Walls",
+            "total": "6,830.30",
+            "pct": 0.97,
+            "coverage": [
+              {
+                "coverage": "Other Structures",
+                "pct": 100.0,
+                "amount": "6,830.30"
+              }
+            ]
+          },
+          {
+            "item": "Gazebos/Outside Structures",
+            "total": "221,160.00",
+            "pct": 31.56,
+            "coverage": [
+              {
+                "coverage": "Other Structures",
+                "pct": 100.0,
+                "amount": "221,160.00"
+              }
+            ]
+          },
+          {
+            "item": "Labor Minimums Applied",
+            "total": "548.37",
+            "pct": 0.08,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 77.55,
+                "amount": "425.28"
+              },
+              {
+                "coverage": "Other Structures",
+                "pct": 22.45,
+                "amount": "123.09"
+              }
+            ]
+          }
+        ]
+      },
+      "subtotals": [
+        {
+          "label": "Area Subtotal: Main Level",
+          "total": "185,625.21",
+          "pct": 26.49,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "185,625.21"
+            }
+          ]
+        },
+        {
+          "label": "Area Subtotal: Attic",
+          "total": "45.45",
+          "pct": 0.01,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "45.45"
+            }
+          ]
+        },
+        {
+          "label": "Area Subtotal: Exterior",
+          "total": "51,110.15",
+          "pct": 7.29,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "51,110.15"
+            }
+          ]
+        },
+        {
+          "label": "Area Subtotal: Dwelling",
+          "total": "236,780.81",
+          "pct": 33.79,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 78.41,
+              "amount": "185,670.66"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 21.59,
+              "amount": "51,110.15"
+            }
+          ]
+        },
+        {
+          "label": "Area Subtotal: Other Structures",
+          "total": "238,444.44",
+          "pct": 34.03,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "238,444.44"
+            }
+          ]
+        },
+        {
+          "label": "Subtotal of Areas",
+          "total": "700,725.06",
+          "pct": 100.0,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 58.66,
+              "amount": "411,047.38"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 41.34,
+              "amount": "289,677.68"
+            }
+          ]
+        },
+        {
+          "label": "Total",
+          "total": "700,725.06",
+          "pct": 100.0
+        }
+      ]
+    },
+    "recap_by_category": {
+      "subtotals": [
+        {
+          "label": "O&P Items",
+          "total": "479,565.06",
+          "pct": 59.24
+        },
+        {
+          "label": "Non-O&P Items",
+          "total": "221,160.00",
+          "pct": 27.32
+        },
+        {
+          "label": "Permits and Fees",
+          "total": "2.02",
+          "pct": 0.0,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "2.02"
+            }
+          ]
+        },
+        {
+          "label": "Material Sales Tax",
+          "total": "10,686.51",
+          "pct": 1.32,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 87.85,
+              "amount": "9,388.59"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 12.15,
+              "amount": "1,297.92"
+            }
+          ]
+        },
+        {
+          "label": "Overhead",
+          "total": "49,025.62",
+          "pct": 6.06,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 85.76,
+              "amount": "42,044.05"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 14.24,
+              "amount": "6,981.57"
+            }
+          ]
+        },
+        {
+          "label": "Profit",
+          "total": "49,025.62",
+          "pct": 6.06,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 85.76,
+              "amount": "42,044.05"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 14.24,
+              "amount": "6,981.57"
+            }
+          ]
+        },
+        {
+          "label": "Total",
+          "total": "809,464.83",
+          "pct": 100.0
+        }
+      ],
+      "O&P Items": [
+        {
+          "item": "APPLIANCES",
+          "total": "19,176.00",
+          "pct": 2.37,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "19,176.00"
+            }
+          ]
+        },
+        {
+          "item": "CABINETRY",
+          "total": "22,395.60",
+          "pct": 2.77,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "22,395.60"
+            }
+          ]
+        },
+        {
+          "item": "CLEANING",
+          "total": "21,345.12",
+          "pct": 2.64,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 56.7,
+              "amount": "12,102.79"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 43.3,
+              "amount": "9,242.33"
+            }
+          ]
+        },
+        {
+          "item": "CONCRETE & ASPHALT",
+          "total": "3,174.22",
+          "pct": 0.39,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 18.02,
+              "amount": "572.14"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 81.98,
+              "amount": "2,602.08"
+            }
+          ]
+        },
+        {
+          "item": "GENERAL DEMOLITION",
+          "total": "108,087.10",
+          "pct": 13.35,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 98.45,
+              "amount": "106,406.98"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 1.55,
+              "amount": "1,680.12"
+            }
+          ]
+        },
+        {
+          "item": "DOORS",
+          "total": "7,113.41",
+          "pct": 0.88,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "7,113.41"
+            }
+          ]
+        },
+        {
+          "item": "DRYWALL",
+          "total": "34,657.23",
+          "pct": 4.28,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "34,657.23"
+            }
+          ]
+        },
+        {
+          "item": "ELECTRICAL",
+          "total": "18,265.19",
+          "pct": 2.26,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "18,265.19"
+            }
+          ]
+        },
+        {
+          "item": "ELECTRICAL - SPECIAL SYSTEMS",
+          "total": "2,049.75",
+          "pct": 0.25,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "2,049.75"
+            }
+          ]
+        },
+        {
+          "item": "FLOOR COVERING - CARPET",
+          "total": "339.31",
+          "pct": 0.04,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "339.31"
+            }
+          ]
+        },
+        {
+          "item": "FLOOR COVERING - STONE",
+          "total": "7,756.10",
+          "pct": 0.96,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 97.88,
+              "amount": "7,591.41"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 2.12,
+              "amount": "164.69"
+            }
+          ]
+        },
+        {
+          "item": "FLOOR COVERING - CERAMIC TILE",
+          "total": "561.59",
+          "pct": 0.07,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "561.59"
+            }
+          ]
+        },
+        {
+          "item": "FLOOR COVERING - WOOD",
+          "total": "3,030.28",
+          "pct": 0.37,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "3,030.28"
+            }
+          ]
+        },
+        {
+          "item": "PERMITS AND FEES",
+          "total": "4,420.00",
+          "pct": 0.55,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "4,420.00"
+            }
+          ]
+        },
+        {
+          "item": "FINISH CARPENTRY / TRIMWORK",
+          "total": "5,570.13",
+          "pct": 0.69,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "5,570.13"
+            }
+          ]
+        },
+        {
+          "item": "FINISH HARDWARE",
+          "total": "1,011.56",
+          "pct": 0.12,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "1,011.56"
+            }
+          ]
+        },
+        {
+          "item": "HEAT, VENT & AIR CONDITIONING",
+          "total": "509.10",
+          "pct": 0.06,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "509.10"
+            }
+          ]
+        },
+        {
+          "item": "INSULATION",
+          "total": "9,618.89",
+          "pct": 1.19,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 41.51,
+              "amount": "3,992.67"
+            },
+            {
+              "coverage": "Other Structures Office of Jared V. Boergadine, Licensed Appraiser & Public Adjuster Arizona Public Adjuster License #18382965 California Public Adjuster License #2L70602 Colorado Public Adjuster License #608394 Nevada Public Adjuster License # 3443075 Texas Public Adjuster License #2207166",
+              "pct": 58.49,
+              "amount": "5,626.22"
+            }
+          ]
+        },
+        {
+          "item": "LABOR ONLY",
+          "total": "37,812.45",
+          "pct": 4.67,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "37,812.45"
+            }
+          ]
+        },
+        {
+          "item": "LIGHT FIXTURES",
+          "total": "7,066.84",
+          "pct": 0.87,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 96.25,
+              "amount": "6,802.00"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 3.75,
+              "amount": "264.84"
+            }
+          ]
+        },
+        {
+          "item": "LANDSCAPING",
+          "total": "6,420.00",
+          "pct": 0.79,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "6,420.00"
+            }
+          ]
+        },
+        {
+          "item": "MARBLE - CULTURED OR NATURAL",
+          "total": "782.86",
+          "pct": 0.1,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "782.86"
+            }
+          ]
+        },
+        {
+          "item": "MIRRORS & SHOWER DOORS",
+          "total": "6,098.41",
+          "pct": 0.75,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "6,098.41"
+            }
+          ]
+        },
+        {
+          "item": "PLUMBING",
+          "total": "6,376.85",
+          "pct": 0.79,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "6,376.85"
+            }
+          ]
+        },
+        {
+          "item": "PANELING & WOOD WALL FINISHES",
+          "total": "314.63",
+          "pct": 0.04,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "314.63"
+            }
+          ]
+        },
+        {
+          "item": "PAINTING",
+          "total": "78,338.27",
+          "pct": 9.68,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 82.53,
+              "amount": "64,648.87"
+            },
+            {
+              "coverage": "Other Structures",
+              "pct": 17.47,
+              "amount": "13,689.40"
+            }
+          ]
+        },
+        {
+          "item": "SPECIALTY ITEMS",
+          "total": "472.03",
+          "pct": 0.06,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "472.03"
+            }
+          ]
+        },
+        {
+          "item": "STUCCO & EXTERIOR PLASTER",
+          "total": "28,355.97",
+          "pct": 3.5,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
+              "pct": 100.0,
+              "amount": "28,355.97"
+            }
+          ]
+        },
+        {
+          "item": "TILE",
+          "total": "2,002.80",
+          "pct": 0.25,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "2,002.80"
+            }
+          ]
+        },
+        {
+          "item": "TEMPORARY REPAIRS",
+          "total": "2,832.00",
+          "pct": 0.35,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "2,832.00"
+            }
+          ]
+        },
+        {
+          "item": "WINDOWS - SLIDING PATIO DOORS",
+          "total": "14,390.25",
+          "pct": 1.78,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "14,390.25"
+            }
+          ]
+        },
+        {
+          "item": "WINDOW REGLAZING & REPAIR",
+          "total": "2,690.40",
+          "pct": 0.33,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "2,690.40"
+            }
+          ]
+        },
+        {
+          "item": "WINDOW TREATMENT",
+          "total": "6,280.14",
+          "pct": 0.78,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "6,280.14"
+            }
+          ]
+        },
+        {
+          "item": "WINDOWS - VINYL",
+          "total": "8,931.76",
+          "pct": 1.1,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "8,931.76"
+            }
+          ]
+        },
+        {
+          "item": "WATER EXTRACTION & REMEDIATION",
+          "total": "1,318.82",
+          "pct": 0.16,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "1,318.82"
+            }
+          ]
+        }
+      ],
+      "Non-O&P Items": [
+        {
+          "item": "SPECIALTY ITEMS",
+          "total": "221,160.00",
+          "pct": 27.32,
+          "coverage": [
+            {
+              "coverage": "Other Structures Office of Jared V. Boergadine, Licensed Appraiser & Public Adjuster Arizona Public Adjuster License #18382965 California Public Adjuster License #2L70602 Colorado Public Adjuster License #608394 Nevada Public Adjuster License # 3443075 Texas Public Adjuster License #2207166",
+              "pct": 100.0,
+              "amount": "221,160.00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "validations": {
+    "per_section": [],
+    "document": {
+      "sum_sections": "0.00",
+      "end_grand_total": "809,462.41",
+      "grand_total_vs_sections_delta": "809,462.41",
+      "sum_rcv_from_summaries": "809,464.83",
+      "recap_category_total": "809,464.83",
+      "recap_vs_end_grand_delta": "2.42"
+    }
+  },
+  "_extraction_note": "Sections and line items extracted from PDF text using pdfplumber (production parser returns 0 sections — column schema mismatch). Items with null tax/op/total use PER BID / SEE BID / ATTEMPT CLEAN pricing; amounts not present in the PDF text for these items. estimate_name corrected from filename fallback to internal PDF value 'SCHACTER_RECON_5'. All other fields (case_metadata, grand_total_areas, coverage, recaps_and_summaries) taken from production parser audit output which correctly captures these sections."
+}
