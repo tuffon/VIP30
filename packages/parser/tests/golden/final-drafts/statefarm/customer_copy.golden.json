@@ -1,16 +1,16 @@
 {
   "estimate_name": "Customer Copy Final Draft (3).pdf",
   "case_metadata": {
-    "claim_number": null,
-    "policy_number": null,
-    "loss_type": null,
+    "claim_number": "75-79D9-35K",
+    "policy_number": "71-GF-E601-0",
+    "loss_type": "Fire",
     "coverage": null,
-    "property_address": null,
-    "date_of_loss": null,
+    "property_address": "935 CHATTANOOGA AVE, PACIFIC PLSDS, CA 90272-2328",
+    "date_of_loss": "2025-01-07",
     "date_received": null,
-    "date_inspected": null,
+    "date_inspected": "2025-03-22",
     "date_entered": null,
-    "price_list": null,
+    "price_list": "CALA28_AUG25",
     "depreciate_material": null,
     "depreciate_op": null,
     "depreciate_non_material": null,
@@ -520,13 +520,64 @@
           }
         }
       ],
-      "line_items": [],
+      "line_items": [
+        {
+          "item_number": 27,
+          "description": "I-joist - 9 1/2\" deep - 1 3/4\" flange",
+          "qty": 74.0,
+          "unit": "LF",
+          "unit_price": 5.83,
+          "tax": 17.79,
+          "op": 89.84,
+          "total": 539.05
+        },
+        {
+          "item_number": 28,
+          "description": "Sheathing - OSB - 3/4\" - tongue and groove",
+          "qty": 64.0,
+          "unit": "SF",
+          "unit_price": 3.26,
+          "tax": 7.78,
+          "op": 43.28,
+          "total": 259.7
+        },
+        {
+          "item_number": 29,
+          "description": "Drilled bottom plate - 2\" x 6\" treated lumber",
+          "qty": 30.0,
+          "unit": "LF",
+          "unit_price": 5.11,
+          "tax": 4.56,
+          "op": 31.58,
+          "total": 189.44
+        },
+        {
+          "item_number": 30,
+          "description": "Seal & paint stair tread - per side - per LF",
+          "qty": 34.08,
+          "unit": "LF",
+          "unit_price": 8.89,
+          "tax": 3.82,
+          "op": 61.36,
+          "total": 368.15
+        },
+        {
+          "item_number": 31,
+          "description": "Seal & paint stair riser - per side - per LF",
+          "qty": 34.08,
+          "unit": "LF",
+          "unit_price": 5.94,
+          "tax": 2.56,
+          "op": 41.0,
+          "total": 246.0
+        }
+      ],
       "section_totals": {
         "tax": "267.06",
         "op": null,
         "total": "1,602.34",
-        "computed_total": "0.00",
-        "validation_delta": "1,602.34"
+        "computed_total": "1,602.34",
+        "validation_delta": "0.00"
       }
     },
     {

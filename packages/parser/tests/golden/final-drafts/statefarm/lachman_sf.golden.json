@@ -1,16 +1,16 @@
 {
   "estimate_name": "Estimate SF Structural damage Lachman 4.15.2025.pdf",
   "case_metadata": {
-    "claim_number": null,
-    "policy_number": null,
-    "loss_type": null,
+    "claim_number": "75-79J8-65X",
+    "policy_number": "75C9A1815",
+    "loss_type": "Smoke",
     "coverage": null,
-    "property_address": null,
-    "date_of_loss": null,
+    "property_address": "1115 LACHMAN LN, PACIFIC PLSDS, CA 90272-2227",
+    "date_of_loss": "2025-01-08",
     "date_received": null,
-    "date_inspected": null,
+    "date_inspected": "2025-02-18",
     "date_entered": null,
-    "price_list": null,
+    "price_list": "CALA28_JAN25",
     "depreciate_material": null,
     "depreciate_op": null,
     "depreciate_non_material": null,
@@ -4923,10 +4923,14 @@
       "line_items": [
         {
           "item_number": 323,
-          "description": "Cleaning (Bid Item) 1.00EA",
-          "tax": 14137.76,
+          "description": "Cleaning (Bid Item)",
+          "qty": 1.0,
+          "unit": "EA",
+          "unit_price": 14137.76,
+          "tax": 0.0,
           "op": 0.0,
-          "total": 14137.76
+          "total": 14137.76,
+          "_note": "Bid item (EN flag). No tax or O&P applied."
         }
       ],
       "section_totals": {
