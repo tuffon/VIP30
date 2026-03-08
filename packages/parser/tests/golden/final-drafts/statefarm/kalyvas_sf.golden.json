@@ -10,7 +10,7 @@
     "date_received": null,
     "date_inspected": "2025-07-15",
     "date_entered": null,
-    "price_list": "CALA28_JAN25",
+    "price_list": "CALA28_JAN25 Restoration/Service/Remodel",
     "depreciate_material": null,
     "depreciate_op": null,
     "depreciate_non_material": null,
@@ -26,7 +26,8 @@
       "grand_total": "612,998.89"
     },
     "labor_minimums": null,
-    "additional_charges": null
+    "additional_charges": null,
+    "insured_name": "James Kalyvas"
   },
   "sections": [
     {

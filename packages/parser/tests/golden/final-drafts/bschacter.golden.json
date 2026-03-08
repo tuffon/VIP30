@@ -5,12 +5,12 @@
     "policy_number": "71-GF-E601-0",
     "loss_type": "WildFire",
     "coverage": null,
-    "property_address": "935 Chattanooga Ave. Pacific Palisades, CA 90272 Claim Rep.: Jared Boergadine Business: (818) 720-9345",
+    "property_address": "935 Chattanooga Ave., Pacific Palisades, CA 90272",
     "date_of_loss": null,
     "date_received": null,
     "date_inspected": null,
     "date_entered": "2025-07-28T08:25:00",
-    "price_list": null,
+    "price_list": "CALA8X_JUL25 Restoration/Service/Remodel",
     "depreciate_material": null,
     "depreciate_op": null,
     "depreciate_non_material": null,
@@ -42,7 +42,8 @@
         }
       ],
       "total": "2.02"
-    }
+    },
+    "insured_name": "Barbara Schacter"
   },
   "sections": [
     {

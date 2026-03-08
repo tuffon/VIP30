@@ -10,7 +10,7 @@
     "date_received": null,
     "date_inspected": "2025-02-18",
     "date_entered": null,
-    "price_list": "CALA28_JAN25",
+    "price_list": "CALA28_JAN25 Restoration/Service/Remodel",
     "depreciate_material": null,
     "depreciate_op": null,
     "depreciate_non_material": null,
@@ -19,9 +19,15 @@
     "depreciate_removal": null,
     "region": null,
     "building_type": null,
-    "line_item_totals": null,
+    "line_item_totals": {
+      "estimate": "75-79J8-65X",
+      "material_sales_tax": "1,308.25",
+      "overhead_profit": "0.00",
+      "grand_total": "87,733.23"
+    },
     "labor_minimums": null,
-    "additional_charges": null
+    "additional_charges": null,
+    "insured_name": "Kenneth Chen"
   },
   "sections": [
     {
