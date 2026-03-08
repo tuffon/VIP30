@@ -6,9 +6,9 @@ status: in_progress
 last_updated: "2026-03-08T00:00:00Z"
 progress:
   total_phases: 25
-  completed_phases: 23
+  completed_phases: 24
   total_plans: 6
-  completed_plans: 3
+  completed_plans: 5
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 24 — golden-masters
+**Current focus:** Phase 25 — coverage harness
 
 ## Current Position
 
-Phase: 24 of 25 (golden-masters)
-Plan: 01 of 1 complete
-Status: In progress — 24-01 complete, ready for Phase 25
-Last activity: 2026-03-08 — Completed 24-01-PLAN.md (golden master JSON files for lachman and kalyvas)
+Phase: 24 of 25 (golden-masters) — COMPLETE
+Plan: 02 of 2 complete
+Status: Phase 24 complete — ready for Phase 25
+Last activity: 2026-03-08 — Completed 24-02-PLAN.md (4 final-draft golden masters: bschacter 477 items, customer_copy 192 items, lachman 368 items, kalyvas 520 items)
 
-Progress: █████░░░░░ 50%
+Progress: █████████░ 90%
 
 ## Completed Milestones
 
@@ -55,6 +55,7 @@ Progress: █████░░░░░ 50%
 - Phase 23-01 completed: audit runner created; all 6 PDFs parsed successfully; rough drafts yield 32/40 sections with 525/887 items; BSchacter contractor final yields 0 sections (gap finding); 3 StateFarm finals parsed; run_log.json documents all results.
 - Phase 23-02 completed: AUDIT-REPORT.md (255 lines) written with per-field coverage tables for all 3 doc types; 10-item gap priority table for v2.5; root causes confirmed — contractor-final column schema mismatch (RESET/REMOVE/REPLACE layout), StateFarm Customer Copy item under-extraction (grouped rows), all StateFarm metadata null.
 - Phase 24-01 completed: golden master directory structure created; lachman.golden.json (32 sections, 525 items) and kalyvas.golden.json (40 sections, 887 items) produced from Phase 23 zero-delta audit output; README.md (114 lines) documents purpose, naming, schema, update process.
+- Phase 24-02 completed: 4 final-draft golden masters created via pdfplumber — bschacter (29 sections, 477 items), customer_copy (31 sections, 192 items), lachman_sf (34 sections, 368 items), kalyvas_sf (36 sections, 520 items); all case_metadata populated from PDF; all recaps_and_summaries verified.
 
 ### Decisions
 
@@ -70,16 +71,20 @@ Progress: █████░░░░░ 50%
 - [23-02] Rough-draft parser is production-quality baseline — zero validation delta across all 72 sections; use as v2.5 regression baseline.
 - [24-01] Rough-draft golden masters copied verbatim from Phase 23 audit output — zero validation delta confirmed; parser output IS the ground truth; no transformation or normalization applied.
 - [24-01] final-drafts directories created now, golden masters populated in v2.5 — BSchacter (0 sections) and StateFarm (known extraction gaps) are not production-quality yet; structure in place, content deferred.
+- [24-02] BSchacter recap_tax_op=null is correct — contractor-final uses category-level O&P summary, not per-section tax/OP table. Parser limitation confirmed, not a data gap.
+- [24-02] Sections with 0 items in PDF are legitimate exclusions — customer_copy Dwelling Roof ("no loss noted"), kalyvas Mitigation/HVAC/Landscaping/Code Upgrades (all explicitly excluded in PDF). These SHOULD have 0 items in golden master.
+- [24-02] StateFarm case_metadata sourced from PDF page 3 — parser cannot extract from the two-column summary page; pdfplumber extraction works reliably. Pattern established for v2.5 parser enhancement.
+- [24-02] PRC RESTORATION INC. tax was incorrectly set to 14137.76 (total echoed into tax) — corrected to 0.0 (bid item with EN flag, no tax applied).
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
-- Phase 25 coverage harness can diff against lachman and kalyvas golden masters immediately; final-draft golden masters are v2.5 scope (BSchacter and StateFarm parser gaps not yet resolved).
+- Phase 25 coverage harness can diff against all 6 golden masters; rough-draft masters are zero-delta baselines; final-draft masters will show expected parser gaps (v2.5 fixes not yet implemented).
 
 ## Session Continuity
 
 Last session: 2026-03-08
-Stopped at: 24-01 SUMMARY.md created and committed — 24-01 complete, ready for Phase 25
+Stopped at: 24-02 SUMMARY.md created and committed — Phase 24 complete, ready for Phase 25
 Resume file: None
