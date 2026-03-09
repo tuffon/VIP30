@@ -23,6 +23,10 @@ Requirements for v2.5. Goal: fix all 3 parser gap categories identified by v2.4 
 - [ ] **META-02**: Parser extracts `price_list` from StateFarm two-column summary page (currently null)
 - [ ] **META-03**: Parser extracts `property_address` from StateFarm two-column summary page (currently null)
 
+### StateFarm Partial Gaps (lachman_sf / kalyvas_sf)
+
+- [ ] **SFPART-01**: Parser closes remaining partial-extraction gaps in lachman_sf and kalyvas_sf StateFarm documents (currently 97% — 1-2 sections partially extracted per doc, including kalyvas_sf Ext_Surfaces 5/7 items)
+
 ### Validation
 
 - [ ] **VALID-01**: Rough-draft parser baseline preserved — lachman and kalyvas `test_section_coverage` tests continue to pass after all parser changes (no regressions)
@@ -44,7 +48,7 @@ Explicitly excluded to prevent scope creep.
 | Comparison pipeline changes (bid_comp, pipeline) | v2.6 — parser must stabilize first |
 | XLSX report changes | v2.6 |
 | New document types beyond `./docs/` corpus | Not in scope — known format only |
-| lachman_sf / kalyvas_sf Ext_Surfaces partial gap (97%) | 2 missing items, totals match — dollar impact negligible; deferred |
+| lachman_sf / kalyvas_sf item-level noise below 97% | Items that cannot be matched due to structural ambiguity with no dollar impact — not in scope |
 
 ## Constraints
 
@@ -66,13 +70,14 @@ Which phases cover which requirements. Updated by create-roadmap.
 | META-01 | Phase 28 | Pending |
 | META-02 | Phase 28 | Pending |
 | META-03 | Phase 28 | Pending |
+| SFPART-01 | Phase 27 | Pending |
 | VALID-01 | Phase 28 | Pending |
 | VALID-02 | Phase 28 | Pending |
 | VALID-03 | Phase 28 | Pending |
 
 **Coverage:**
-- v1 requirements: 10 total
-- Mapped to phases: 10
+- v1 requirements: 11 total
+- Mapped to phases: 11
 - Unmapped: 0 ✓
 
 ---
