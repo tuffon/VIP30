@@ -20,12 +20,12 @@
         "policy_limit": "109,250.00"
       }
     ],
-    "property_address": "16640 Via Pacifica, Pacific Palisades, CA 90272",
+    "property_address": "16640 Via Pacifica Pacific Palisades, CA 90272",
     "date_of_loss": "2025-01-07T00:00:00",
     "date_received": "2025-01-12T00:00:00",
     "date_inspected": "2025-07-03T00:00:00",
     "date_entered": "2025-07-06T13:13:00",
-    "price_list": "CALA8X_MAR25 Restoration/Service/Remodel",
+    "price_list": "CALA8X_MAR25",
     "depreciate_material": true,
     "depreciate_op": false,
     "depreciate_non_material": false,
@@ -50,7 +50,7 @@
       ],
       "total": "63.26"
     },
-    "insured_name": "James Kalyvas"
+    "insured_name": null
   },
   "sections": [
     {

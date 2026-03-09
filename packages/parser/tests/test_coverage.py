@@ -50,16 +50,23 @@ def _section_diff(golden: dict, parsed: dict) -> tuple[str, float]:
     """
     Compare sections between golden and parser output.
     Returns (diff_text, coverage_pct).
+
+    Handles duplicate section names (e.g. two "Main Level" entries in SF PDFs)
+    by matching golden sections to parser sections positionally within each name group.
     """
     g_secs = golden.get("sections") or []
     p_secs = (parsed.get("sections") or []) if parsed else []
 
-    # Build parser section lookup by name
-    p_by_name: dict[str, dict] = {}
+    # Build parser section lookup by name — list to handle duplicates (matched positionally)
+    from collections import defaultdict
+    p_by_name: dict[str, list[dict]] = defaultdict(list)
     for sec in p_secs:
         name = section_name_of(sec)
         if name:
-            p_by_name[name] = sec
+            p_by_name[name].append(sec)
+
+    # Track how many of each name we have consumed from p_by_name
+    p_name_idx: dict[str, int] = defaultdict(int)
 
     lines = []
     lines.append(f"  Section count: parser={len(p_secs)}  golden={len(g_secs)}")
@@ -76,7 +83,11 @@ def _section_diff(golden: dict, parsed: dict) -> tuple[str, float]:
         if g_total == 0.0 and g_items == 0:
             continue  # legitimately excluded section
 
-        p_sec = p_by_name.get(g_name)
+        p_list = p_by_name.get(g_name, [])
+        idx = p_name_idx[g_name]
+        p_sec = p_list[idx] if idx < len(p_list) else None
+        p_name_idx[g_name] = idx + 1
+
         if p_sec is None:
             missing_secs.append(f"    - {g_name} (golden: {g_items} items, ${g_total:,.2f})")
         else:
