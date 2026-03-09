@@ -769,14 +769,44 @@ class XactimateRoughDraftParser:
         if len(tokens) < 2:
             return None
         num_pattern = re.compile(r'^[\d,]+(?:\.\d+)?$')
+        # Pattern for StateFarm unit price with asterisk flags: e.g. "1.20*", "14,137.76*EN"
+        price_star_pat = re.compile(r'^[\d,]+\.\d+\*[A-Za-z]*$')
         numeric_tokens: List[str] = []
         while tokens and num_pattern.match(tokens[-1]):
             numeric_tokens.append(tokens.pop())
-        required_numeric = 3 if columns.has_tax else 2
+        # After pure-numeric stripping, discard a price-with-asterisk token if present.
+        # StateFarm items embed the unit price mid-line: {qty}{unit} {price}* {tax} {op} {total}
+        # The pure-numeric stripping above already captured {tax}, {op}, {total}.
+        # Without this pop, {price}* would block qty_unit parsing.
+        has_asterisk_price = False
+        if tokens and price_star_pat.match(tokens[-1]):
+            tokens.pop()
+            has_asterisk_price = True
+        # Required numerics: normal Layout A needs price+tax+total (3 when has_tax) because price
+        # is pure-numeric. When price has asterisk it was already consumed above, so we only
+        # need tax+op+total at the end — but bid items may omit op, so allow 1 minimum.
+        if has_asterisk_price:
+            required_numeric = 1
+        else:
+            required_numeric = 3 if columns.has_tax else 2
         if len(numeric_tokens) < required_numeric:
             return None
         total_token = numeric_tokens[0]
-        tax_token = numeric_tokens[1] if columns.has_tax else None
+        # Field mapping depends on which financial columns are present.
+        # Normal Layout A (no asterisk): end numerics are [total, tax, price] from the end.
+        # StateFarm Layout A (asterisk): end numerics are [total, op, tax] from the end.
+        op_token = None
+        tax_token = None
+        if not has_asterisk_price:
+            tax_token = numeric_tokens[1] if columns.has_tax else None
+        else:
+            if columns.has_op and columns.has_tax:
+                op_token = numeric_tokens[1] if len(numeric_tokens) > 1 else None
+                tax_token = numeric_tokens[2] if len(numeric_tokens) > 2 else None
+            elif columns.has_op:
+                op_token = numeric_tokens[1] if len(numeric_tokens) > 1 else None
+            elif columns.has_tax:
+                tax_token = numeric_tokens[1] if len(numeric_tokens) > 1 else None
         qty_unit_token = tokens.pop() if tokens else ''
         qty_match = re.match(r'^([\d,]+(?:\.\d+)?)([A-Z%]+)$', qty_unit_token)
         if not qty_match and tokens:
@@ -799,8 +829,10 @@ class XactimateRoughDraftParser:
             'total_note': None,
             'notes': ''
         }
-        if columns.has_tax:
+        if tax_token is not None:
             item['tax'] = format_dollar_amount(money_to_float(tax_token))
+        if op_token is not None:
+            item['op'] = format_dollar_amount(money_to_float(op_token))
         return item
 
     def _parse_cfinal_line(self, line: str, columns: TableColumns) -> Optional[dict]:
