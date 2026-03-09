@@ -11,6 +11,24 @@ TABLE_HEADER_SECOND_LINE_FRAGMENT = r'CALC\s+QTY'
 LINE_ITEM_PATTERN = r'^(\d+)\.\s+([A-Z]{3,})\s+([A-Z0-9<>+\-/]+)\s+(\S)\s+(.*)$'
 LINE_ITEM_HEADER_PATTERN = r'^([-*=~_]{2,})\s*(.+?)\s*([-*=~_]{2,})\s*:?\s*$'
 
+# Contractor-final (family C) single-line item: "{N}. {description} {QTY} {UNIT} {amounts...}"
+# Description is non-greedy to stop at first decimal+unit combo.
+# Groups: (1)item_num (2)description (3)qty (4)unit (5)v1 (6)v2 (7)v3 (8)v4 (9)v5
+# Typically 5 amounts: RESET_unit, REMOVE_unit, REPLACE_or_TAX, O&P, TOTAL
+# Minimum 1 amount required (v5 is the last captured; trailing amounts are optional).
+CFINAL_ITEM_PATTERN = (
+    r'^(\d+)\.\s+'           # group 1: item number
+    r'(.*?)\s+'              # group 2: description (non-greedy, stops at first QTY match)
+    r'([\d,]+\.\d+)\s+'     # group 3: QTY (decimal, may have commas e.g. 1,897.79)
+    r'([A-Z]{1,6})\s+'      # group 4: UNIT (1-6 uppercase letters e.g. EA, MO, SF, HR)
+    r'([\d,]+\.\d{2})'      # group 5: val1 (required)
+    r'(?:\s+([\d,]+\.\d{2}))?'   # group 6: val2 (optional)
+    r'(?:\s+([\d,]+\.\d{2}))?'   # group 7: val3 (optional)
+    r'(?:\s+([\d,]+\.\d{2}))?'   # group 8: val4 (optional)
+    r'(?:\s+([\d,]+\.\d{2}))?'   # group 9: val5 (optional, typically TOTAL)
+    r'\s*$'
+)
+
 CALC_PREFIX_PATTERN = r'(?:([0-9*+\-./\s]+?)\s+)?'
 CALC_LINE_DETECTION_PATTERN = r'[0-9.]+\s*[A-Z]{2,}\s*(?:\[[^\]]+\]|\bSEE\b|[0-9,]+\.[0-9]+)'
 QTY_UNIT_PATTERN = r'([0-9]+(?:\.[0-9]+)?)\s*([A-Z]{2,})\s*'
@@ -100,6 +118,7 @@ __all__ = [
     'TABLE_HEADER_SECOND_LINE_FRAGMENT',
     'LINE_ITEM_PATTERN',
     'LINE_ITEM_HEADER_PATTERN',
+    'CFINAL_ITEM_PATTERN',
     'CALC_PREFIX_PATTERN',
     'CALC_LINE_DETECTION_PATTERN',
     'QTY_UNIT_PATTERN',
