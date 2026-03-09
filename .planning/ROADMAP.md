@@ -61,10 +61,10 @@ Full details: [.planning/milestones/v2.4-ROADMAP.md](milestones/v2.4-ROADMAP.md)
   2. Extracted line items map to RESET/REMOVE/REPLACE/TAX/O&P columns (not rough-draft unit-cost schema)
   3. Rough-draft baseline preserved — lachman and kalyvas `test_section_coverage` pass unchanged
 **Research**: Unlikely (known root cause — column schema mismatch; existing parser codebase)
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 26-01: TBD
+- [ ] 26-01: Fix contractor-final parser (family C header detection + single-line item extraction)
 
 #### Phase 27: StateFarm Item Extraction
 **Goal**: Fix grouped-row extraction — all items per section captured across StateFarm documents
