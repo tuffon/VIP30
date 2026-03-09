@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v2.4
 milestone_name: parser-coverage
-status: in_progress
-last_updated: "2026-03-08T01:00:00Z"
+status: complete
+last_updated: "2026-03-09T03:18:43Z"
 progress:
   total_phases: 25
-  completed_phases: 24
+  completed_phases: 25
   total_plans: 7
-  completed_plans: 5
+  completed_plans: 7
 ---
 
 # Project State
@@ -18,21 +18,22 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 25 — coverage harness
+**Current focus:** Phase 25 COMPLETE — milestone v2.4 (parser-coverage) shipped
 
 ## Current Position
 
-Phase: 25 of 25 (coverage-harness) — IN PROGRESS
-Plan: 01 of 2 complete
-Status: In progress — 25-01 complete, 25-02 pending
-Last activity: 2026-03-09 — Completed 25-01-PLAN.md (pytest fixtures + 12 parametrized coverage tests)
+Phase: 25 of 25 (coverage-harness) — COMPLETE
+Plan: 02 of 2 complete
+Status: All plans complete — Phase 25 fully shipped
+Last activity: 2026-03-09 — Completed 25-02-PLAN.md (gap report generator + GAP-REPORT.md)
 
-Progress: █████████░ 97%
+Progress: ██████████ 100%
 
 ## Completed Milestones
 
 | Version | Name | Phases | Shipped |
 |---------|------|--------|---------|
+| v2.4 | Parser Coverage Harness | 23-25 | 2026-03-09 |
 | v2.2 | Unified Output | 16-17 | 2026-02-18 |
 | v2.1 | Repository Restructure | 13-15 | 2026-02-18 |
 | v2.0 | Analytical Intelligence | 9-12 | 2026-02-17 |
@@ -56,6 +57,8 @@ Progress: █████████░ 97%
 - Phase 23-02 completed: AUDIT-REPORT.md (255 lines) written with per-field coverage tables for all 3 doc types; 10-item gap priority table for v2.5; root causes confirmed — contractor-final column schema mismatch (RESET/REMOVE/REPLACE layout), StateFarm Customer Copy item under-extraction (grouped rows), all StateFarm metadata null.
 - Phase 24-01 completed: golden master directory structure created; lachman.golden.json (32 sections, 525 items) and kalyvas.golden.json (40 sections, 887 items) produced from Phase 23 zero-delta audit output; README.md (114 lines) documents purpose, naming, schema, update process.
 - Phase 24-02 completed: 4 final-draft golden masters created via pdfplumber — bschacter (29 sections, 477 items), customer_copy (31 sections, 192 items), lachman_sf (34 sections, 368 items), kalyvas_sf (36 sections, 520 items); all case_metadata populated from PDF; all recaps_and_summaries verified.
+- Phase 25-01 completed: pytest fixtures (conftest.py) + 12 parametrized coverage tests (test_coverage.py) created; rough-draft test_section_coverage PASS confirmed; final-draft failures produce informative field-level diffs.
+- Phase 25-02 completed: generate_gap_report.py (249 lines) created; GAP-REPORT.md (172 lines) produced — rough-draft baseline PASS (lachman 100%, kalyvas 100%); final-draft gaps: bschacter 0%, sf_bschacter 3%, lachman_sf 97%, kalyvas_sf 97%.
 
 ### Decisions
 
@@ -76,16 +79,19 @@ Progress: █████████░ 97%
 - [24-02] StateFarm case_metadata sourced from PDF page 3 — parser cannot extract from the two-column summary page; pdfplumber extraction works reliably. Pattern established for v2.5 parser enhancement.
 - [24-02] PRC RESTORATION INC. tax was incorrectly set to 14137.76 (total echoed into tax) — corrected to 0.0 (bid item with EN flag, no tax applied).
 - [25-01] Rough-draft test_metadata failures are informative gap documentation, not regressions — golden master metadata values represent ideal v2.5 target output; parser currently returns raw/truncated values; test_section_coverage passes 100% confirming structural parser is production-quality.
+- [25-02] GAP-REPORT.md uses date.today() not start timestamp — report generation date reflects when the report was written, appropriate for a reproducible artifact that may be regenerated multiple times.
+- [25-02] sf_bschacter coverage 3%: only 1 of 30 non-excluded sections matched — all other sections parse 0 items due to grouped row layout; this is the highest-impact v2.5 fix target.
+- [25-02] kalyvas_sf Ext_Surfaces partial match: 5/7 items extracted, totals match — item count gap (2 missing), not a dollar discrepancy; v2.5 low-priority fix.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
-- Phase 25 coverage harness can diff against all 6 golden masters; rough-draft masters are zero-delta baselines; final-draft masters will show expected parser gaps (v2.5 fixes not yet implemented).
+- v2.5 fix priority (from GAP-REPORT.md): (1) BSchacter contractor-final RESET/REMOVE/REPLACE column schema, (2) StateFarm grouped-row item extraction, (3) metadata normalization across all doc types.
 
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 25-01-PLAN.md — coverage harness fixtures and tests
+Stopped at: Completed 25-02-PLAN.md — gap report generator and GAP-REPORT.md
 Resume file: None
