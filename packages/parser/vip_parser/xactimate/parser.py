@@ -2264,6 +2264,45 @@ class XactimateRoughDraftParser:
         else:
             md['estimate_name'] = md['depreciate_removal'] = None
 
+        md['insured_name'] = None  # default; overridden by SF augmentation below
         md['region'] = 'California' if (md.get('price_list') and str(md['price_list']).upper().startswith('CALA')) else None
         md['building_type'] = None
+
+        # If insured_name and price_list are still null, try the StateFarm two-column summary page.
+        # Condition: both null → rough-drafts (have price_list) and SF docs (lack insured_name) are distinguished.
+        # For StateFarm PDFs, read_sf_summary_page_text() returns the summary page text; for others, None.
+        if md.get('insured_name') is None and md.get('price_list') is None:
+            sf_text = self.io.read_sf_summary_page_text()
+            if sf_text:
+                self._augment_sf_metadata(md, sf_text)
+                # Re-derive region after SF price_list extraction
+                if md.get('price_list') and str(md['price_list']).upper().startswith('CALA'):
+                    md['region'] = 'California'
+
         return md
+
+    def _augment_sf_metadata(self, md: dict, text: str) -> None:
+        """
+        Extract StateFarm-specific metadata fields from the two-column summary page text.
+
+        Called when insured_name and price_list are both null after page-1 extraction,
+        and the PDF has a StateFarm-style summary page (detected by read_sf_summary_page_text).
+
+        Updates md in-place: insured_name, price_list, property_address.
+        Does not overwrite fields already populated.
+        """
+        # insured_name: "Insured: SCHACTER, BARBARA  Estimate: 75-79D9-35K"
+        m = re.search(SF_INSURED_PATTERN, text)
+        if m and not md.get('insured_name'):
+            md['insured_name'] = m.group(1).strip()
+
+        # price_list: "Price List: CALA28_AUG25" — captures only the code token
+        m = re.search(SF_PRICE_LIST_PATTERN, text)
+        if m and not md.get('price_list'):
+            md['price_list'] = m.group(1).strip()
+
+        # property_address: street on same line as "Claim Number:", city+zip on next line
+        # "Property: 935 CHATTANOOGA AVE  Claim Number: 7579D935K\nPACIFIC PLSDS...  Policy Number:"
+        m = re.search(SF_PROPERTY_PATTERN, text)
+        if m and not md.get('property_address'):
+            md['property_address'] = m.group(1).strip() + ' ' + m.group(2).strip()

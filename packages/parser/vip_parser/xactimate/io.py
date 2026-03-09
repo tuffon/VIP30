@@ -124,6 +124,11 @@ class ParserIO:
         with pdfplumber.open(self.input_file) as pdf:
             for page in list(pdf.pages)[:8]:
                 text = page.extract_text() or ''
+                # Skip the "Building Estimate Summary Guide" reference page (page 2 in SF PDFs),
+                # which contains the same field labels ('Insured:', 'Price List:', 'Estimate:')
+                # but with example placeholder values (e.g. "Smith, Joe & Jane").
+                if 'Summary Guide' in text:
+                    continue
                 if 'Insured:' in text and 'Price List:' in text and 'Estimate:' in text:
                     return text
         return None
