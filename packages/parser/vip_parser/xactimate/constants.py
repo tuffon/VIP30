@@ -81,6 +81,19 @@ PRICE_LIST_PATTERN = r'Price\s+List:\s*([^\s]+)\s+Depreciate\s+Material:\s*(Yes|
 DEPREC_LINE2_PATTERN = r'(?:.*?\s+)?Depreciate\s+Non-material:\s*(Yes|No)\s+Depreciate\s+Taxes:\s*(Yes|No)'
 ESTIMATE_LINE_PATTERN = r'Estimate:\s*([^\s]+)\s+Depreciate\s+Removal:\s*(Yes|No)'
 
+# StateFarm two-column summary page patterns (page 3 of StateFarm PDFs).
+# The summary page renders as interleaved two-column text via pdfplumber.extract_text():
+#   Insured: SCHACTER, BARBARA  Estimate: 75-79D9-35K
+#   Property: 935 CHATTANOOGA AVE  Claim Number: 7579D935K
+#   PACIFIC PLSDS, CA 90272-2328  Policy Number: 71GFE6010
+#   Cellular: 310-617-7790  Price List: CALA28_AUG25
+SF_INSURED_PATTERN = r'Insured:\s+(.+?)\s+Estimate:'
+SF_PRICE_LIST_PATTERN = r'Price\s+List:\s+(\S+)'
+SF_PROPERTY_PATTERN = (
+    r'Property:\s+(.+?)\s+Claim(?:\s+Number)?:[^\n]*\n'
+    r'(.+?)\s+(?:Policy(?:\s+Number)?:|Home:|Cellular:)'
+)
+
 REPEATED_CHAR_PATTERN = r'([A-Z])\1{2,}'
 QUOTE_PATTERN = r'[\"\']{2,}'
 
@@ -141,6 +154,9 @@ __all__ = [
     'PRICE_LIST_PATTERN',
     'DEPREC_LINE2_PATTERN',
     'ESTIMATE_LINE_PATTERN',
+    'SF_INSURED_PATTERN',
+    'SF_PRICE_LIST_PATTERN',
+    'SF_PROPERTY_PATTERN',
     'REPEATED_CHAR_PATTERN',
     'QUOTE_PATTERN',
     'LABOR_MIN_APPLIED_PATTERN',
