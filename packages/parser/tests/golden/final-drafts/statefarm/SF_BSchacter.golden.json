@@ -2696,10 +2696,6 @@
       "subrooms": [],
       "line_items": [
         {
-          "type": "header",
-          "text": "CLEANING"
-        },
-        {
           "item_number": 202,
           "description": "HEPA Vacuuming - 228.56SF 1.20*",
           "tax": 0.0,
