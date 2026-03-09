@@ -1,23 +1,23 @@
 {
-  "estimate_name": "Kalyvas Preliminary State Farm estimate9-25-25.pdf",
   "case_metadata": {
-    "claim_number": "75-79F9-18M3",
-    "policy_number": "71J8B0543",
-    "loss_type": "Smoke",
+    "claim_number": "7579F918M",
+    "policy_number": null,
+    "loss_type": null,
     "coverage": null,
-    "property_address": "16640 Via Pacifica, Pacific Plsds, CA 90272-1947",
-    "date_of_loss": "2025-01-07",
+    "property_address": "16640 Via Pacifica Pacific Plsds, CA 90272-1947",
+    "date_of_loss": null,
     "date_received": null,
-    "date_inspected": "2025-07-15",
+    "date_inspected": null,
     "date_entered": null,
-    "price_list": "CALA28_JAN25 Restoration/Service/Remodel",
+    "price_list": "CALA28_JAN25",
     "depreciate_material": null,
     "depreciate_op": null,
     "depreciate_non_material": null,
     "depreciate_taxes": null,
     "estimate_name": "Kalyvas Preliminary State Farm estimate9-25-25.pdf",
     "depreciate_removal": null,
-    "region": null,
+    "insured_name": "KALYVAS, JAMES",
+    "region": "California",
     "building_type": null,
     "line_item_totals": {
       "estimate": "75-79F9-18M3",
@@ -26,8 +26,7 @@
       "grand_total": "612,998.89"
     },
     "labor_minimums": null,
-    "additional_charges": null,
-    "insured_name": "James Kalyvas"
+    "additional_charges": null
   },
   "sections": [
     {
@@ -135,8 +134,8 @@
         }
       ],
       "section_totals": {
-        "tax": "8,301.36",
-        "op": null,
+        "tax": "0.00",
+        "op": "8,301.36",
         "total": "49,808.00",
         "computed_total": "49,808.00",
         "validation_delta": "0.00"
@@ -158,7 +157,7 @@
       "line_items": [],
       "section_totals": {
         "tax": "0.00",
-        "op": null,
+        "op": "0.00",
         "total": "0.00",
         "computed_total": "0.00",
         "validation_delta": "0.00"
@@ -181,8 +180,8 @@
         }
       ],
       "section_totals": {
-        "tax": "279.84",
-        "op": null,
+        "tax": "0.00",
+        "op": "279.84",
         "total": "1,679.03",
         "computed_total": "1,679.03",
         "validation_delta": "0.00"
@@ -495,8 +494,8 @@
         }
       ],
       "section_totals": {
-        "tax": "1,246.12",
-        "op": null,
+        "tax": "114.16",
+        "op": "1,246.12",
         "total": "7,476.60",
         "computed_total": "7,476.60",
         "validation_delta": "0.00"
@@ -714,8 +713,8 @@
         }
       ],
       "section_totals": {
-        "tax": "2,275.64",
-        "op": null,
+        "tax": "411.75",
+        "op": "2,275.64",
         "total": "13,653.61",
         "computed_total": "13,653.61",
         "validation_delta": "0.00"
@@ -826,8 +825,8 @@
         }
       ],
       "section_totals": {
-        "tax": "171.32",
-        "op": null,
+        "tax": "9.62",
+        "op": "171.32",
         "total": "1,027.81",
         "computed_total": "1,027.81",
         "validation_delta": "0.00"
@@ -989,8 +988,8 @@
         }
       ],
       "section_totals": {
-        "tax": "289.52",
-        "op": null,
+        "tax": "20.43",
+        "op": "289.52",
         "total": "1,737.04",
         "computed_total": "1,737.04",
         "validation_delta": "0.00"
@@ -1167,8 +1166,8 @@
         }
       ],
       "section_totals": {
-        "tax": "731.84",
-        "op": null,
+        "tax": "56.87",
+        "op": "731.84",
         "total": "4,390.90",
         "computed_total": "4,390.90",
         "validation_delta": "0.00"
@@ -1247,8 +1246,8 @@
         }
       ],
       "section_totals": {
-        "tax": "96.84",
-        "op": null,
+        "tax": "5.89",
+        "op": "96.84",
         "total": "580.88",
         "computed_total": "580.88",
         "validation_delta": "0.00"
@@ -1477,8 +1476,8 @@
         }
       ],
       "section_totals": {
-        "tax": "2,126.68",
-        "op": null,
+        "tax": "140.17",
+        "op": "2,126.68",
         "total": "12,759.85",
         "computed_total": "12,759.85",
         "validation_delta": "0.00"
@@ -1783,8 +1782,8 @@
         }
       ],
       "section_totals": {
-        "tax": "4,128.24",
-        "op": null,
+        "tax": "248.51",
+        "op": "4,128.24",
         "total": "24,769.24",
         "computed_total": "24,769.24",
         "validation_delta": "0.00"
@@ -2060,8 +2059,8 @@
         }
       ],
       "section_totals": {
-        "tax": "2,519.18",
-        "op": null,
+        "tax": "224.90",
+        "op": "2,519.18",
         "total": "15,115.28",
         "computed_total": "15,115.28",
         "validation_delta": "0.00"
@@ -2304,8 +2303,8 @@
         }
       ],
       "section_totals": {
-        "tax": "640.96",
-        "op": null,
+        "tax": "54.88",
+        "op": "640.96",
         "total": "3,845.61",
         "computed_total": "3,845.61",
         "validation_delta": "0.00"
@@ -2500,8 +2499,8 @@
         }
       ],
       "section_totals": {
-        "tax": "2,607.02",
-        "op": null,
+        "tax": "691.87",
+        "op": "2,607.02",
         "total": "15,642.16",
         "computed_total": "15,642.16",
         "validation_delta": "0.00"
@@ -2712,8 +2711,8 @@
         }
       ],
       "section_totals": {
-        "tax": "832.74",
-        "op": null,
+        "tax": "49.03",
+        "op": "832.74",
         "total": "4,996.46",
         "computed_total": "4,996.46",
         "validation_delta": "0.00"
@@ -2736,8 +2735,8 @@
         }
       ],
       "section_totals": {
-        "tax": "219.24",
-        "op": null,
+        "tax": "0.00",
+        "op": "219.24",
         "total": "1,315.41",
         "computed_total": "1,315.41",
         "validation_delta": "0.00"
@@ -2952,8 +2951,8 @@
         }
       ],
       "section_totals": {
-        "tax": "1,781.70",
-        "op": null,
+        "tax": "374.07",
+        "op": "1,781.70",
         "total": "10,689.97",
         "computed_total": "10,689.97",
         "validation_delta": "0.00"
@@ -3210,8 +3209,8 @@
         }
       ],
       "section_totals": {
-        "tax": "2,783.82",
-        "op": null,
+        "tax": "397.09",
+        "op": "2,783.82",
         "total": "16,702.81",
         "computed_total": "16,702.81",
         "validation_delta": "0.00"
@@ -3352,8 +3351,8 @@
         }
       ],
       "section_totals": {
-        "tax": "307.68",
-        "op": null,
+        "tax": "18.56",
+        "op": "307.68",
         "total": "1,845.98",
         "computed_total": "1,845.98",
         "validation_delta": "0.00"
@@ -3565,8 +3564,8 @@
         }
       ],
       "section_totals": {
-        "tax": "1,340.22",
-        "op": null,
+        "tax": "252.85",
+        "op": "1,340.22",
         "total": "8,041.38",
         "computed_total": "8,041.38",
         "validation_delta": "0.00"
@@ -3713,8 +3712,8 @@
         }
       ],
       "section_totals": {
-        "tax": "294.60",
-        "op": null,
+        "tax": "17.73",
+        "op": "294.60",
         "total": "1,767.37",
         "computed_total": "1,767.37",
         "validation_delta": "0.00"
@@ -3914,8 +3913,8 @@
         }
       ],
       "section_totals": {
-        "tax": "1,186.06",
-        "op": null,
+        "tax": "251.19",
+        "op": "1,186.06",
         "total": "7,116.18",
         "computed_total": "7,116.18",
         "validation_delta": "0.00"
@@ -4052,8 +4051,8 @@
         }
       ],
       "section_totals": {
-        "tax": "298.20",
-        "op": null,
+        "tax": "17.73",
+        "op": "298.20",
         "total": "1,788.97",
         "computed_total": "1,788.97",
         "validation_delta": "0.00"
@@ -4314,8 +4313,8 @@
         }
       ],
       "section_totals": {
-        "tax": "3,108.40",
-        "op": null,
+        "tax": "539.18",
+        "op": "3,108.40",
         "total": "18,650.18",
         "computed_total": "18,650.18",
         "validation_delta": "0.00"
@@ -4691,8 +4690,8 @@
         }
       ],
       "section_totals": {
-        "tax": "2,806.18",
-        "op": null,
+        "tax": "260.31",
+        "op": "2,806.18",
         "total": "16,836.80",
         "computed_total": "16,836.80",
         "validation_delta": "0.00"
@@ -4807,8 +4806,8 @@
         }
       ],
       "section_totals": {
-        "tax": "739.54",
-        "op": null,
+        "tax": "149.61",
+        "op": "739.54",
         "total": "4,437.12",
         "computed_total": "4,437.12",
         "validation_delta": "0.00"
@@ -4962,8 +4961,8 @@
         }
       ],
       "section_totals": {
-        "tax": "466.20",
-        "op": null,
+        "tax": "45.32",
+        "op": "466.20",
         "total": "2,797.04",
         "computed_total": "2,797.04",
         "validation_delta": "0.00"
@@ -5046,8 +5045,19 @@
           "qty": 81.56,
           "unit": "LF",
           "total": "245.10",
-          "notes": "coat) baseboard 436. Seal/prime (1 coat) then 713.64SF 2.09* 24.41 303.18 1,819.10 paint (2 coats) the walls",
+          "notes": "coat) baseboard",
           "tax": "40.86"
+        },
+        {
+          "type": "line_item",
+          "line_number": 436,
+          "description": "Seal/prime (1 coat) then",
+          "qty": 713.64,
+          "unit": "SF",
+          "total": "1,819.10",
+          "notes": "paint (2 coats) the walls",
+          "tax": "24.41",
+          "op": "303.18"
         },
         {
           "type": "header",
@@ -5088,32 +5098,44 @@
           "tax": "52.12"
         },
         {
-          "item_number": 441,
-          "description": "R&R Window screen, 1 - 1.00EA 51.16",
-          "tax": 3.66,
-          "op": 10.96,
-          "total": 65.78
+          "type": "line_item",
+          "line_number": 441,
+          "description": "R&R Window screen, 1 -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "65.78",
+          "notes": "9 SF",
+          "tax": "10.96"
         },
         {
-          "item_number": 442,
-          "description": "Lube/recondition 1.00EA 162.52",
-          "tax": 0.15,
-          "op": 32.54,
-          "total": 195.21
+          "type": "line_item",
+          "line_number": 442,
+          "description": "Lube/recondition",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "195.21",
+          "notes": "operable window",
+          "tax": "32.54"
         },
         {
-          "item_number": 443,
-          "description": "Prime & paint French 2.00EA 168.01",
-          "tax": 3.53,
-          "op": 67.9,
-          "total": 407.45
+          "type": "line_item",
+          "line_number": 443,
+          "description": "Prime & paint French",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "407.45",
+          "notes": "door slab only - exterior (per side)",
+          "tax": "67.90"
         },
         {
-          "item_number": 444,
-          "description": "Paint door slab only - 2 4.00EA 60.55",
-          "tax": 3.85,
-          "op": 49.22,
-          "total": 295.27
+          "type": "line_item",
+          "line_number": 444,
+          "description": "Paint door slab only - 2",
+          "qty": 4.0,
+          "unit": "EA",
+          "total": "295.27",
+          "notes": "coats (per side)",
+          "tax": "49.22"
         },
         {
           "type": "header",
@@ -5121,11 +5143,11 @@
         }
       ],
       "section_totals": {
-        "tax": "1,207.44",
-        "op": null,
+        "tax": "263.99",
+        "op": "1,207.44",
         "total": "7,244.62",
-        "computed_total": "5,425.52",
-        "validation_delta": "1,819.10"
+        "computed_total": "7,244.62",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -5264,8 +5286,8 @@
         }
       ],
       "section_totals": {
-        "tax": "260.88",
-        "op": null,
+        "tax": "15.64",
+        "op": "260.88",
         "total": "1,565.06",
         "computed_total": "1,565.06",
         "validation_delta": "0.00"
@@ -5351,111 +5373,157 @@
           "qty": 465.0,
           "unit": "LF",
           "total": "9,903.58",
-          "notes": "* 463. Roofing (Bid Item) 465.00EA 25.00* 0.00 2,325.00 13,950.00 Decorative Mortar Build up for Ridge Tile",
           "tax": "1,650.60"
         },
         {
-          "item_number": 464,
-          "description": "Drip edge 555.00LF 4.33",
-          "tax": 61.16,
-          "op": 492.88,
-          "total": 2957.19
+          "type": "line_item",
+          "line_number": 463,
+          "description": "Roofing (Bid Item)",
+          "qty": 465.0,
+          "unit": "EA",
+          "total": "13,950.00",
+          "notes": "Decorative Mortar Build up for Ridge Tile",
+          "tax": "0.00",
+          "op": "2,325.00"
         },
         {
-          "item_number": 465,
-          "description": "R&R Counterflashing - 38.00LF 19.34",
-          "tax": 7.51,
-          "op": 148.48,
-          "total": 890.91
+          "type": "line_item",
+          "line_number": 464,
+          "description": "Drip edge",
+          "qty": 555.0,
+          "unit": "LF",
+          "total": "2,957.19",
+          "tax": "492.88"
         },
         {
-          "item_number": 466,
-          "description": "Flashing - L flashing - 79.00LF 8.18",
-          "tax": 23.19,
-          "op": 133.88,
-          "total": 803.29
+          "type": "line_item",
+          "line_number": 465,
+          "description": "R&R Counterflashing -",
+          "qty": 38.0,
+          "unit": "LF",
+          "total": "890.91",
+          "notes": "Apron flashing",
+          "tax": "148.48"
         },
         {
-          "item_number": 467,
-          "description": "Valley metal - (W) 162.59LF 10.44",
-          "tax": 51.28,
-          "op": 349.74,
-          "total": 2098.46
+          "type": "line_item",
+          "line_number": 466,
+          "description": "Flashing - L flashing -",
+          "qty": 79.0,
+          "unit": "LF",
+          "total": "803.29",
+          "notes": "color finish Transition flashing for flat roof to tile roof",
+          "tax": "133.88"
         },
         {
-          "item_number": 468,
-          "description": "Step flashing 123.00LF 18.30",
-          "tax": 26.17,
-          "op": 455.42,
-          "total": 2732.49
+          "type": "line_item",
+          "line_number": 467,
+          "description": "Valley metal - (W)",
+          "qty": 162.59,
+          "unit": "LF",
+          "total": "2,098.46",
+          "notes": "profile",
+          "tax": "349.74"
         },
         {
-          "item_number": 469,
-          "description": "R&R Roof window 1.00EA 1,279.10",
-          "tax": 98.3,
-          "op": 275.48,
-          "total": 1652.88
+          "type": "line_item",
+          "line_number": 468,
+          "description": "Step flashing",
+          "qty": 123.0,
+          "unit": "LF",
+          "total": "2,732.49",
+          "tax": "455.42"
         },
         {
-          "item_number": 470,
-          "description": "R&R Chimney flashing - 4.00EA 766.40",
-          "tax": 44.72,
-          "op": 622.06,
-          "total": 3732.38
+          "type": "line_item",
+          "line_number": 469,
+          "description": "R&R Roof window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "1,652.88",
+          "notes": "(skylight), 9.1 - 10 sf",
+          "tax": "275.48"
         },
         {
-          "item_number": 471,
-          "description": "Flashing - pipe jack - 6\" 11.00EA 97.76",
-          "tax": 35.75,
-          "op": 222.24,
-          "total": 1333.35
+          "type": "line_item",
+          "line_number": 470,
+          "description": "R&R Chimney flashing -",
+          "qty": 4.0,
+          "unit": "EA",
+          "total": "3,732.38",
+          "notes": "average (32\" x 36\")",
+          "tax": "622.06"
+        },
+        {
+          "type": "line_item",
+          "line_number": 471,
+          "description": "Flashing - pipe jack - 6\"",
+          "qty": 11.0,
+          "unit": "EA",
+          "total": "1,333.35",
+          "tax": "222.24"
         },
         {
           "type": "header",
           "text": "Roof Edge"
         },
         {
-          "item_number": 472,
-          "description": "Detach & Reset Gutter 511.00LF 13.47",
-          "tax": 0.0,
-          "op": 1376.64,
-          "total": 8259.81
+          "type": "line_item",
+          "line_number": 472,
+          "description": "Detach & Reset Gutter",
+          "qty": 511.0,
+          "unit": "LF",
+          "total": "8,259.81",
+          "notes": "guard/screen - Premium grade",
+          "tax": "1,376.64"
         },
         {
-          "item_number": 473,
-          "description": "Gutter / downspout - 711.00LF 6.06",
-          "tax": 0.0,
-          "op": 861.74,
-          "total": 5170.4
+          "type": "line_item",
+          "line_number": 473,
+          "description": "Gutter / downspout -",
+          "qty": 711.0,
+          "unit": "LF",
+          "total": "5,170.40",
+          "notes": "Detach & reset",
+          "tax": "861.74"
         },
         {
-          "item_number": 474,
-          "description": "Prime & paint gutter / 711.00LF 2.69",
-          "tax": 22.29,
-          "op": 386.98,
-          "total": 2321.86
+          "type": "line_item",
+          "line_number": 474,
+          "description": "Prime & paint gutter /",
+          "qty": 711.0,
+          "unit": "LF",
+          "total": "2,321.86",
+          "notes": "downspout",
+          "tax": "386.98"
         },
         {
-          "item_number": 475,
-          "description": "Prime & paint exterior 571.00LF 3.53",
-          "tax": 14.65,
-          "op": 406.06,
-          "total": 2436.34
+          "type": "line_item",
+          "line_number": 475,
+          "description": "Prime & paint exterior",
+          "qty": 571.0,
+          "unit": "LF",
+          "total": "2,436.34",
+          "notes": "fascia - wood, 6\"- 8\" wide",
+          "tax": "406.06"
         },
         {
-          "item_number": 476,
-          "description": "Fall protection harness 10.00WK 22.00",
-          "tax": 0.0,
-          "op": 44.0,
-          "total": 264.0
+          "type": "line_item",
+          "line_number": 476,
+          "description": "Fall protection harness",
+          "qty": 10.0,
+          "unit": "WK",
+          "total": "264.00",
+          "notes": "and lanyard (per week)",
+          "tax": "44.00"
         }
       ],
       "section_totals": {
-        "tax": "27,835.32",
-        "op": null,
+        "tax": "3,048.90",
+        "op": "27,835.32",
         "total": "167,011.68",
-        "computed_total": "153,061.68",
-        "validation_delta": "13,950.00"
+        "computed_total": "167,011.68",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -5658,61 +5726,84 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 477,
-          "description": "R&R Metal lath & 100.00SF 10.51",
-          "tax": 13.78,
-          "op": 212.96,
-          "total": 1277.74
+          "type": "line_item",
+          "line_number": 477,
+          "description": "R&R Metal lath &",
+          "qty": 100.0,
+          "unit": "SF",
+          "total": "1,277.74",
+          "notes": "stucco Second level area",
+          "tax": "212.96"
         },
         {
-          "item_number": 478,
-          "description": "Stucco repair around 161.00LF 33.41",
-          "tax": 37.78,
-          "op": 1083.36,
-          "total": 6500.15
+          "type": "line_item",
+          "line_number": 478,
+          "description": "Stucco repair around",
+          "qty": 161.0,
+          "unit": "LF",
+          "total": "6,500.15",
+          "notes": "doors, windows, etc - 2nd floor",
+          "tax": "1,083.36"
         },
         {
-          "item_number": 479,
-          "description": "Sandblasting - Extra 7,097.54SF 2.56",
-          "tax": 161.82,
-          "op": 3666.3,
-          "total": 21997.82
+          "type": "line_item",
+          "line_number": 479,
+          "description": "Sandblasting - Extra",
+          "qty": 7097.54,
+          "unit": "SF",
+          "total": "21,997.82",
+          "notes": "heavy Exterior walls and overhangs",
+          "tax": "3,666.30"
         },
         {
-          "item_number": 481,
-          "description": "General Demolition - per 48.00HR 68.61",
-          "tax": 0.0,
-          "op": 658.66,
-          "total": 3951.94
+          "type": "line_item",
+          "line_number": 480,
+          "description": "Stucco color coat",
+          "qty": 7097.54,
+          "unit": "SF",
+          "total": "92,246.44",
+          "notes": "(Redash) - Synthetic Custom color and finish application",
+          "tax": "431.53",
+          "op": "15,374.40"
         },
         {
-          "item_number": 482,
-          "description": "Exterior light fixture - 23.00EA 113.23",
-          "tax": 0.0,
-          "op": 520.86,
-          "total": 3125.15
+          "type": "line_item",
+          "line_number": 481,
+          "description": "General Demolition - per",
+          "qty": 48.0,
+          "unit": "HR",
+          "total": "3,951.94",
+          "notes": "hour Remove landscape debris to access stucco",
+          "tax": "658.66"
         },
         {
-          "item_number": 480,
-          "description": "Stucco color coat 7,097.54SF 10.77*",
-          "tax": 431.53,
-          "op": 15374.4,
-          "total": 92246.44
+          "type": "line_item",
+          "line_number": 482,
+          "description": "Exterior light fixture -",
+          "qty": 23.0,
+          "unit": "EA",
+          "total": "3,125.15",
+          "notes": "Detach & reset The analysis and future performance of any fixture or appliance is excluded. Further attempts will be made to clean the masonry fixtures. If they are not successful, then it will need to be addressed separately.",
+          "tax": "520.86"
         },
         {
-          "item_number": 483,
-          "description": "Soda blasting - Extra 1,250.00SF 7.52*",
-          "tax": 163.88,
-          "op": 1912.78,
-          "total": 11476.66
+          "type": "line_item",
+          "line_number": 483,
+          "description": "Soda blasting - Extra",
+          "qty": 1250.0,
+          "unit": "SF",
+          "total": "11,476.66",
+          "notes": "heavy",
+          "tax": "163.88",
+          "op": "1,912.78"
         }
       ],
       "section_totals": {
-        "tax": "23,429.32",
-        "op": null,
+        "tax": "808.79",
+        "op": "23,429.32",
         "total": "140,575.90",
-        "computed_total": "36,852.80",
-        "validation_delta": "103,723.10"
+        "computed_total": "140,575.90",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -5731,7 +5822,7 @@
       "line_items": [],
       "section_totals": {
         "tax": "0.00",
-        "op": null,
+        "op": "0.00",
         "total": "0.00",
         "computed_total": "0.00",
         "validation_delta": "0.00"
@@ -5783,8 +5874,8 @@
         }
       ],
       "section_totals": {
-        "tax": "639.80",
-        "op": null,
+        "tax": "94.17",
+        "op": "639.80",
         "total": "3,838.75",
         "computed_total": "3,838.75",
         "validation_delta": "0.00"
@@ -5798,6 +5889,17 @@
         {
           "type": "header",
           "text": "Pool Decking Stone Floor"
+        },
+        {
+          "type": "line_item",
+          "line_number": 489,
+          "description": "R&R Radiant tube",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "11,632.13",
+          "notes": "heater - Suspended - Gas (60,000 BTU) this has been modified to reflect the pricing for this Lynx Electric heater https://www.bestbuy.com/site/lynx-professional-electric-heater-stainless-steel/5705191.p?skuId=5705191&extStoreId=107& utm_source=feed&ref=212&loc=19230189049&gad_source=4&gad_campaignid=19231438781&gbraid=0AAAAAD-ORIjjbR4Wx7 MSQoqNbvEvYUvTp&gclid=CjwKCAjwyb3DBhBlEiwAqZLe5IUEweb9WgLmVho03COOzwmwk7N922iLQ9uv1Dj5XBTaYRhk UBhVLxoCfe8QAvD_BwE&gclsrc=aw.ds 490. R&R Motorized 252.00SF EXCLUDED blackout screen",
+          "tax": "595.57",
+          "op": "1,938.68"
         },
         {
           "type": "line_item",
@@ -5826,71 +5928,106 @@
           "qty": 7.0,
           "unit": "EA",
           "total": "4,559.30",
+          "notes": "fence gate, 3' - 4' wide - 3' - 4' high 3 gates in front of property, and 2 double gates enclosing the AC units - gates were reported to have been broken by the fire dept.",
           "tax": "759.90"
         },
         {
-          "item_number": 496,
-          "description": "R&R Kitchen Sink - 1.00EA 981.68",
-          "tax": 77.66,
-          "op": 211.88,
-          "total": 1271.22
+          "type": "line_item",
+          "line_number": 495,
+          "description": "Inset BBQ grill",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "10,504.51",
+          "tax": "498.75",
+          "op": "1,750.76"
         },
         {
-          "item_number": 497,
-          "description": "Sink faucet - Kitchen - 1.00EA 537.90",
-          "tax": 41.85,
-          "op": 115.96,
-          "total": 695.71
+          "type": "line_item",
+          "line_number": 496,
+          "description": "R&R Kitchen Sink -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "1,271.22",
+          "notes": "single basin - Premium grade",
+          "tax": "211.88"
         },
         {
-          "item_number": 498,
-          "description": "Material Only Angle 2.00EA 12.48",
-          "tax": 2.37,
-          "op": 5.48,
-          "total": 32.81
+          "type": "line_item",
+          "line_number": 497,
+          "description": "Sink faucet - Kitchen -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "695.71",
+          "notes": "Premium grade 2 kitchen sink faucets, 1 reverse osmosis faucet and a high grade soap pump, all high detail solid copper construction",
+          "tax": "115.96"
         },
         {
-          "item_number": 499,
-          "description": "Water line copper 2.00EA 29.74",
-          "tax": 0.31,
-          "op": 11.96,
-          "total": 71.75
+          "type": "line_item",
+          "line_number": 498,
+          "description": "Material Only Angle",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "32.81",
+          "notes": "stop valve",
+          "tax": "5.48"
         },
         {
-          "item_number": 501,
-          "description": "R&R Countertop - 43.08SF 145.17",
-          "tax": 354.21,
-          "op": 1321.62,
-          "total": 7929.75
+          "type": "line_item",
+          "line_number": 499,
+          "description": "Water line copper",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "71.75",
+          "notes": "cap/plug - per cap 500. Precast concrete 1.00EA OPEN ITEM entablature - 36\"",
+          "tax": "11.96"
         },
         {
-          "item_number": 502,
-          "description": "Add on Granite or 22.17LF 74.07",
-          "tax": 0.0,
-          "op": 328.42,
-          "total": 1970.55
+          "type": "line_item",
+          "line_number": 501,
+          "description": "R&R Countertop -",
+          "qty": 43.08,
+          "unit": "SF",
+          "total": "7,929.75",
+          "notes": "Granite or Marble - Premium grade",
+          "tax": "1,321.62"
         },
         {
-          "item_number": 503,
-          "description": "Add on for undermount 1.00EA 231.49",
-          "tax": 0.0,
-          "op": 46.3,
-          "total": 277.79
+          "type": "line_item",
+          "line_number": 502,
+          "description": "Add on Granite or",
+          "qty": 22.17,
+          "unit": "LF",
+          "total": "1,970.55",
+          "notes": "Marble - edge treatment - Premium grade",
+          "tax": "328.42"
         },
         {
-          "item_number": 504,
-          "description": "Carpenter - Finish, Trim 3.00HR 105.17",
-          "tax": 0.0,
-          "op": 63.1,
-          "total": 378.61
+          "type": "line_item",
+          "line_number": 503,
+          "description": "Add on for undermount",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "277.79",
+          "notes": "sink cutout & polish - single basin",
+          "tax": "46.30"
+        },
+        {
+          "type": "line_item",
+          "line_number": 504,
+          "description": "Carpenter - Finish, Trim",
+          "qty": 3.0,
+          "unit": "HR",
+          "total": "378.61",
+          "notes": "/ Cabinet - per hour detach and reset steel doors",
+          "tax": "63.10"
         }
       ],
       "section_totals": {
-        "tax": "7,215.24",
-        "op": null,
+        "tax": "1,765.43",
+        "op": "7,215.24",
         "total": "43,291.20",
-        "computed_total": "21,154.56",
-        "validation_delta": "22,136.64"
+        "computed_total": "43,291.20",
+        "validation_delta": "0.00"
       },
       "errors": [
         "Section name 'Hardscapes and walkways' not found above table starting at line 2447"
@@ -5912,7 +6049,7 @@
       "line_items": [],
       "section_totals": {
         "tax": "0.00",
-        "op": null,
+        "op": "0.00",
         "total": "0.00",
         "computed_total": "0.00",
         "validation_delta": "0.00"
@@ -5934,7 +6071,7 @@
       "line_items": [],
       "section_totals": {
         "tax": "0.00",
-        "op": null,
+        "op": "0.00",
         "total": "0.00",
         "computed_total": "0.00",
         "validation_delta": "0.00"
@@ -7206,233 +7343,5 @@
       ]
     }
   },
-  "validations": {
-    "per_section": [
-      {
-        "section": "General",
-        "declared": "49,808.00",
-        "computed": "49,808.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Mitigation & Cleaning",
-        "declared": "0.00",
-        "computed": "0.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "First Floor",
-        "declared": "1,679.03",
-        "computed": "1,679.03",
-        "delta": "0.00"
-      },
-      {
-        "section": "Foyer/Staircase",
-        "declared": "7,476.60",
-        "computed": "7,476.60",
-        "delta": "0.00"
-      },
-      {
-        "section": "Den",
-        "declared": "13,653.61",
-        "computed": "13,653.61",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bathroom",
-        "declared": "1,027.81",
-        "computed": "1,027.81",
-        "delta": "0.00"
-      },
-      {
-        "section": "Garage Hall",
-        "declared": "1,737.04",
-        "computed": "1,737.04",
-        "delta": "0.00"
-      },
-      {
-        "section": "Dining Room",
-        "declared": "4,390.90",
-        "computed": "4,390.90",
-        "delta": "0.00"
-      },
-      {
-        "section": "Pantry",
-        "declared": "580.88",
-        "computed": "580.88",
-        "delta": "0.00"
-      },
-      {
-        "section": "Family Room",
-        "declared": "12,759.85",
-        "computed": "12,759.85",
-        "delta": "0.00"
-      },
-      {
-        "section": "Kitchen",
-        "declared": "24,769.24",
-        "computed": "24,769.24",
-        "delta": "0.00"
-      },
-      {
-        "section": "Office",
-        "declared": "15,115.28",
-        "computed": "15,115.28",
-        "delta": "0.00"
-      },
-      {
-        "section": "Office Bathroom",
-        "declared": "3,845.61",
-        "computed": "3,845.61",
-        "delta": "0.00"
-      },
-      {
-        "section": "Garage",
-        "declared": "15,642.16",
-        "computed": "15,642.16",
-        "delta": "0.00"
-      },
-      {
-        "section": "Laundry Room",
-        "declared": "4,996.46",
-        "computed": "4,996.46",
-        "delta": "0.00"
-      },
-      {
-        "section": "Second Floor",
-        "declared": "1,315.41",
-        "computed": "1,315.41",
-        "delta": "0.00"
-      },
-      {
-        "section": "Landing",
-        "declared": "10,689.97",
-        "computed": "10,689.97",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bedroom 1",
-        "declared": "16,702.81",
-        "computed": "16,702.81",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bed1 Bath",
-        "declared": "1,845.98",
-        "computed": "1,845.98",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bedroom 2",
-        "declared": "8,041.38",
-        "computed": "8,041.38",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bed2 Bath",
-        "declared": "1,767.37",
-        "computed": "1,767.37",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bedroom 3",
-        "declared": "7,116.18",
-        "computed": "7,116.18",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bed3 Bath",
-        "declared": "1,788.97",
-        "computed": "1,788.97",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Bedroom",
-        "declared": "18,650.18",
-        "computed": "18,650.18",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Bath",
-        "declared": "16,836.80",
-        "computed": "16,836.80",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Closet",
-        "declared": "4,437.12",
-        "computed": "4,437.12",
-        "delta": "0.00"
-      },
-      {
-        "section": "Stairwell",
-        "declared": "2,797.04",
-        "computed": "2,797.04",
-        "delta": "0.00"
-      },
-      {
-        "section": "Guest Bedroom",
-        "declared": "7,244.62",
-        "computed": "5,425.52",
-        "delta": "1,819.10"
-      },
-      {
-        "section": "Guest Bathroom",
-        "declared": "1,565.06",
-        "computed": "1,565.06",
-        "delta": "0.00"
-      },
-      {
-        "section": "ROOF1",
-        "declared": "167,011.68",
-        "computed": "153,061.68",
-        "delta": "13,950.00"
-      },
-      {
-        "section": "Ext_Surfaces",
-        "declared": "140,575.90",
-        "computed": "36,852.80",
-        "delta": "103,723.10"
-      },
-      {
-        "section": "HVAC",
-        "declared": "0.00",
-        "computed": "0.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Electrical",
-        "declared": "3,838.75",
-        "computed": "3,838.75",
-        "delta": "0.00"
-      },
-      {
-        "section": "Hardscapes and walkways",
-        "declared": "43,291.20",
-        "computed": "21,154.56",
-        "delta": "22,136.64"
-      },
-      {
-        "section": "Landscaping",
-        "declared": "0.00",
-        "computed": "0.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Code Upgrades",
-        "declared": "0.00",
-        "computed": "0.00",
-        "delta": "0.00"
-      }
-    ],
-    "document": {
-      "sum_sections": "471,370.05",
-      "end_grand_total": "612,998.89",
-      "grand_total_vs_sections_delta": "141,628.84",
-      "sum_rcv_from_summaries": "0.00",
-      "recap_category_total": "613,368.79",
-      "recap_vs_end_grand_delta": "369.90"
-    }
-  },
-  "_extraction_note": "StateFarm golden master (kalyvas_sf). Section structure from parser output. All delta sections supplemented via pdfplumber extraction."
+  "estimate_name": "Kalyvas Preliminary State Farm estimate9-25-25.pdf"
 }

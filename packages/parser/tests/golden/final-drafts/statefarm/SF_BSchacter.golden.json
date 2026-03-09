@@ -1,23 +1,23 @@
 {
-  "estimate_name": "Customer Copy Final Draft (3).pdf",
   "case_metadata": {
-    "claim_number": "75-79D9-35K",
-    "policy_number": "71-GF-E601-0",
-    "loss_type": "Fire",
+    "claim_number": "7579D935K",
+    "policy_number": null,
+    "loss_type": null,
     "coverage": null,
-    "property_address": "935 CHATTANOOGA AVE, PACIFIC PLSDS, CA 90272-2328",
-    "date_of_loss": "2025-01-07",
+    "property_address": "935 CHATTANOOGA AVE PACIFIC PLSDS, CA 90272-2328",
+    "date_of_loss": null,
     "date_received": null,
-    "date_inspected": "2025-03-22",
+    "date_inspected": null,
     "date_entered": null,
-    "price_list": "CALA28_AUG25 Restoration/Service/Remodel",
+    "price_list": "CALA28_AUG25",
     "depreciate_material": null,
     "depreciate_op": null,
     "depreciate_non_material": null,
     "depreciate_taxes": null,
-    "estimate_name": "Customer Copy Final Draft (3).pdf",
+    "estimate_name": "SF_BSchacter.pdf",
     "depreciate_removal": null,
-    "region": null,
+    "insured_name": "SCHACTER, BARBARA",
+    "region": "California",
     "building_type": null,
     "line_item_totals": {
       "estimate": "75-79D9-35K",
@@ -30,8 +30,7 @@
       "op_profit": "154.68",
       "total": "928.01"
     },
-    "additional_charges": null,
-    "insured_name": "Barbara Schacter"
+    "additional_charges": null
   },
   "sections": [
     {
@@ -41,9 +40,9 @@
       "line_items": [],
       "section_totals": {
         "tax": "0.00",
-        "op": null,
+        "op": "0.00",
         "total": "0.00",
-        "computed_total": 0.0,
+        "computed_total": "0.00",
         "validation_delta": "0.00"
       }
     },
@@ -53,32 +52,44 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 1,
-          "description": "R&R Pergola - Pre- 121.89SF 33.92*",
-          "tax": 275.82,
-          "op": 882.06,
-          "total": 5292.39
+          "type": "line_item",
+          "line_number": 1,
+          "description": "R&R Pergola - Pre-",
+          "qty": 121.89,
+          "unit": "SF",
+          "total": "5,292.39",
+          "notes": "manufactured Kit - Cedar",
+          "tax": "275.82",
+          "op": "882.06"
         },
         {
-          "item_number": 2,
-          "description": "R&R 1\" x 12\" lumber (1 420.00LF 8.57*",
-          "tax": 141.65,
-          "op": 748.22,
-          "total": 4489.27
+          "type": "line_item",
+          "line_number": 2,
+          "description": "R&R 1\" x 12\" lumber (1",
+          "qty": 420.0,
+          "unit": "LF",
+          "total": "4,489.27",
+          "notes": "BF per LF) This line item accounts for additional slats & framing on the roof of the pergola.",
+          "tax": "141.65",
+          "op": "748.22"
         },
         {
-          "item_number": 3,
-          "description": "Exterior - seal or prime 121.89SF 1.94*",
-          "tax": 4.17,
-          "op": 48.14,
-          "total": 288.78
+          "type": "line_item",
+          "line_number": 3,
+          "description": "Exterior - seal or prime",
+          "qty": 121.89,
+          "unit": "SF",
+          "total": "288.78",
+          "notes": "then paint with one finish coat paint pergola and extra framing on roof",
+          "tax": "4.17",
+          "op": "48.14"
         }
       ],
       "section_totals": {
-        "tax": "1,678.42",
-        "op": null,
+        "tax": "421.64",
+        "op": "1,678.42",
         "total": "10,070.44",
-        "computed_total": 10070.44,
+        "computed_total": "10,070.44",
         "validation_delta": "0.00"
       }
     },
@@ -93,95 +104,139 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 4,
-          "description": "2\" x 10\" x 20' #2 treated 14.00EA 59.98* pine (material only)",
-          "tax": 79.77,
-          "op": 183.9,
-          "total": 1103.39
+          "type": "line_item",
+          "line_number": 4,
+          "description": "2\" x 10\" x 20' #2 treated",
+          "qty": 14.0,
+          "unit": "EA",
+          "total": "1,103.39",
+          "notes": "pine (material only)",
+          "tax": "79.77",
+          "op": "183.90"
         },
         {
-          "item_number": 5,
-          "description": "2\" x 10\" x 14' #2 treated 8.00EA 42.24* pine (material only)",
-          "tax": 32.1,
-          "op": 74.0,
-          "total": 444.02
+          "type": "line_item",
+          "line_number": 5,
+          "description": "2\" x 10\" x 14' #2 treated",
+          "qty": 8.0,
+          "unit": "EA",
+          "total": "444.02",
+          "notes": "pine (material only)",
+          "tax": "32.10",
+          "op": "74.00"
         },
         {
-          "item_number": 6,
-          "description": "2\" x 10\" x 8' #2 treated 4.00EA 23.99* pine (material only)",
-          "tax": 9.12,
-          "op": 21.02,
-          "total": 126.1
+          "type": "line_item",
+          "line_number": 6,
+          "description": "2\" x 10\" x 8' #2 treated",
+          "qty": 4.0,
+          "unit": "EA",
+          "total": "126.10",
+          "notes": "pine (material only)",
+          "tax": "9.12",
+          "op": "21.02"
         },
         {
-          "item_number": 7,
-          "description": "R&R Labor to install joist - 296.00LF 4.80* floor or ceiling - 2x10",
-          "tax": 0.28,
-          "op": 284.22,
-          "total": 1705.3
+          "type": "line_item",
+          "line_number": 7,
+          "description": "R&R Labor to install joist -",
+          "qty": 296.0,
+          "unit": "LF",
+          "total": "1,705.30",
+          "notes": "floor or ceiling - 2x10",
+          "tax": "0.28",
+          "op": "284.22"
         },
         {
-          "item_number": 8,
-          "description": "2\" x 6\" x 14' #2 treated 43.00EA 19.75* pine (material only)",
-          "tax": 80.68,
-          "op": 186.0,
-          "total": 1115.93
+          "type": "line_item",
+          "line_number": 8,
+          "description": "2\" x 6\" x 14' #2 treated",
+          "qty": 43.0,
+          "unit": "EA",
+          "total": "1,115.93",
+          "notes": "pine (material only)",
+          "tax": "80.68",
+          "op": "186.00"
         },
         {
-          "item_number": 9,
-          "description": "R&R 6\" softwood deck 280.00SF 9.12* planking - Labor only (per SF)",
-          "tax": 5.05,
-          "op": 511.74,
-          "total": 3070.39
+          "type": "line_item",
+          "line_number": 9,
+          "description": "R&R 6\" softwood deck",
+          "qty": 280.0,
+          "unit": "SF",
+          "total": "3,070.39",
+          "notes": "planking - Labor only (per SF)",
+          "tax": "5.05",
+          "op": "511.74"
         },
         {
-          "item_number": 10,
-          "description": "Deck pier or footing 0.35CY 245.17*",
-          "tax": 6.51,
-          "op": 18.46,
-          "total": 110.78
+          "type": "line_item",
+          "line_number": 10,
+          "description": "Deck pier or footing",
+          "qty": 0.35,
+          "unit": "CY",
+          "total": "110.78",
+          "tax": "6.51",
+          "op": "18.46"
         },
         {
-          "item_number": 11,
-          "description": "Post anchor - 4\" 6.00EA 46.27*",
-          "tax": 9.52,
-          "op": 57.42,
-          "total": 344.56
+          "type": "line_item",
+          "line_number": 11,
+          "description": "Post anchor - 4\"",
+          "qty": 6.0,
+          "unit": "EA",
+          "total": "344.56",
+          "tax": "9.52",
+          "op": "57.42"
         },
         {
-          "item_number": 12,
-          "description": "4\" x 4\" x 8' - treated 2.00EA 24.46 lumber post - material only",
-          "tax": 4.65,
-          "op": 10.72,
-          "total": 64.29
+          "type": "line_item",
+          "line_number": 12,
+          "description": "4\" x 4\" x 8' - treated",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "64.29",
+          "notes": "lumber post - material only",
+          "tax": "10.72"
         },
         {
-          "item_number": 13,
-          "description": "Prime & paint deck - 1 280.00SF 2.31* coat primer, 1 coat paint",
-          "tax": 8.51,
-          "op": 131.06,
-          "total": 786.37
+          "type": "line_item",
+          "line_number": 13,
+          "description": "Prime & paint deck - 1",
+          "qty": 280.0,
+          "unit": "SF",
+          "total": "786.37",
+          "notes": "coat primer, 1 coat paint",
+          "tax": "8.51",
+          "op": "131.06"
         },
         {
-          "item_number": 14,
-          "description": "Stain/finish deck handrail 68.00LF 11.35*",
-          "tax": 12.08,
-          "op": 156.78,
-          "total": 940.66
+          "type": "line_item",
+          "line_number": 14,
+          "description": "Stain/finish deck handrail",
+          "qty": 68.0,
+          "unit": "LF",
+          "total": "940.66",
+          "tax": "12.08",
+          "op": "156.78"
         },
         {
-          "item_number": 15,
-          "description": "Deck lattice work - Vinyl 504.00SF 4.49* (per SF)",
-          "tax": 106.77,
-          "op": 473.96,
-          "total": 2843.69
+          "type": "line_item",
+          "line_number": 15,
+          "description": "Deck lattice work - Vinyl",
+          "qty": 504.0,
+          "unit": "SF",
+          "total": "2,843.69",
+          "notes": "(per SF)",
+          "tax": "106.77",
+          "op": "473.96"
         }
       ],
       "section_totals": {
-        "tax": "2,109.28",
-        "op": null,
+        "tax": "355.04",
+        "op": "2,109.28",
         "total": "12,655.48",
-        "computed_total": 12655.48,
+        "computed_total": "12,655.48",
         "validation_delta": "0.00"
       }
     },
@@ -200,32 +255,43 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 17,
-          "description": "Crane and operator - 14 8.00HR 180.00",
-          "tax": 0.0,
-          "op": 288.0,
-          "total": 1728.0
+          "type": "line_item",
+          "line_number": 16,
+          "description": "Gazebo - Pre-manuf. Kit -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "14,675.78",
+          "notes": "Octagon - Treated Pine - Large",
+          "tax": "769.50",
+          "op": "2,445.96"
         },
         {
-          "item_number": 16,
-          "description": "Gazebo - Pre-manuf. Kit - 1.00EA 11,460.32*",
-          "tax": 769.5,
-          "op": 2445.96,
-          "total": 14675.78
+          "type": "line_item",
+          "line_number": 17,
+          "description": "Crane and operator - 14",
+          "qty": 8.0,
+          "unit": "HR",
+          "total": "1,728.00",
+          "notes": "ton capacity - 65' extension boom",
+          "tax": "288.00"
         },
         {
-          "item_number": 18,
-          "description": "Exterior - seal or prime 2,048.00SF 1.94*",
-          "tax": 70.04,
-          "op": 808.62,
-          "total": 4851.78
+          "type": "line_item",
+          "line_number": 18,
+          "description": "Exterior - seal or prime",
+          "qty": 2048.0,
+          "unit": "SF",
+          "total": "4,851.78",
+          "notes": "then paint with one finish coat",
+          "tax": "70.04",
+          "op": "808.62"
         }
       ],
       "section_totals": {
-        "tax": "3,542.58",
-        "op": null,
+        "tax": "839.54",
+        "op": "3,542.58",
         "total": "21,255.56",
-        "computed_total": 21255.56,
+        "computed_total": "21,255.56",
         "validation_delta": "0.00"
       }
     },
@@ -244,25 +310,33 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 19,
-          "description": "Clean concrete the surface 380.00SF 0.49*",
-          "tax": 0.36,
-          "op": 37.32,
-          "total": 223.88
+          "type": "line_item",
+          "line_number": 19,
+          "description": "Clean concrete the surface",
+          "qty": 380.0,
+          "unit": "SF",
+          "total": "223.88",
+          "notes": "area",
+          "tax": "0.36",
+          "op": "37.32"
         },
         {
-          "item_number": 20,
-          "description": "Paint concrete the surface 380.00SF 1.51*",
-          "tax": 10.11,
-          "op": 116.78,
-          "total": 700.69
+          "type": "line_item",
+          "line_number": 20,
+          "description": "Paint concrete the surface",
+          "qty": 380.0,
+          "unit": "SF",
+          "total": "700.69",
+          "notes": "area",
+          "tax": "10.11",
+          "op": "116.78"
         }
       ],
       "section_totals": {
-        "tax": "154.10",
-        "op": null,
+        "tax": "10.47",
+        "op": "154.10",
         "total": "924.57",
-        "computed_total": 924.57,
+        "computed_total": "924.57",
         "validation_delta": "0.00"
       }
     },
@@ -281,25 +355,33 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 21,
-          "description": "Tree replacement - (Bid 30.00EA 221.45*",
-          "tax": 258.75,
-          "op": 1380.46,
-          "total": 8282.71
+          "type": "line_item",
+          "line_number": 21,
+          "description": "Tree replacement - (Bid",
+          "qty": 30.0,
+          "unit": "EA",
+          "total": "8,282.71",
+          "notes": "Remove shrub - $114.62 Replace shrub - $106.83 Total remove & replace per shrub - $221.45",
+          "tax": "258.75",
+          "op": "1,380.46"
         },
         {
-          "item_number": 22,
-          "description": "Tree replacement - (Bid 25.00EA 1,362.31*",
-          "tax": 1326.53,
-          "op": 7076.86,
-          "total": 42461.14
+          "type": "line_item",
+          "line_number": 22,
+          "description": "Tree replacement - (Bid",
+          "qty": 25.0,
+          "unit": "EA",
+          "total": "42,461.14",
+          "notes": "Item) Price for tree removal per tree - $959.95 Price for tree replacement - $402.36 Total to remove & replace tree - $1,362.31",
+          "tax": "1,326.53",
+          "op": "7,076.86"
         }
       ],
       "section_totals": {
-        "tax": "8,457.32",
-        "op": null,
+        "tax": "1,585.28",
+        "op": "8,457.32",
         "total": "50,743.85",
-        "computed_total": 50743.85,
+        "computed_total": "50,743.85",
         "validation_delta": "0.00"
       }
     },
@@ -318,32 +400,41 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 275,
-          "description": "Temporary hand 1.00MO 247.00",
-          "tax": 0.0,
-          "op": 49.4,
-          "total": 296.4
+          "type": "line_item",
+          "line_number": 23,
+          "description": "Dumpster load - Approx.",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "738.20",
+          "notes": "12 yards, 1-3 tons of debris Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.00",
+          "op": "123.04"
         },
         {
-          "item_number": 276,
-          "description": "Temporary toilet (per 1.00MO 225.00",
-          "tax": 0.0,
-          "op": 45.0,
-          "total": 270.0
+          "type": "line_item",
+          "line_number": 275,
+          "description": "Temporary hand",
+          "qty": 1.0,
+          "unit": "MO",
+          "total": "296.40",
+          "tax": "49.40"
         },
         {
-          "item_number": 23,
-          "description": "Dumpster load - Approx. 1.00EA 615.16*",
-          "tax": 0.0,
-          "op": 123.04,
-          "total": 738.2
+          "type": "line_item",
+          "line_number": 276,
+          "description": "Temporary toilet (per",
+          "qty": 1.0,
+          "unit": "MO",
+          "total": "270.00",
+          "notes": "month) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "45.00"
         }
       ],
       "section_totals": {
-        "tax": "217.44",
-        "op": null,
+        "tax": "0.00",
+        "op": "217.44",
         "total": "1,304.60",
-        "computed_total": 1304.6,
+        "computed_total": "1,304.60",
         "validation_delta": "0.00"
       }
     },
@@ -353,32 +444,44 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 24,
-          "description": "R&R I-joist - 9 1/2\" deep - 74.00LF 7.55*",
-          "tax": 17.79,
-          "op": 115.3,
-          "total": 691.79
+          "type": "line_item",
+          "line_number": 24,
+          "description": "R&R I-joist - 9 1/2\" deep -",
+          "qty": 74.0,
+          "unit": "LF",
+          "total": "691.79",
+          "notes": "1 3/4\" flange",
+          "tax": "17.79",
+          "op": "115.30"
         },
         {
-          "item_number": 25,
-          "description": "R&R Sheathing - OSB - 64.00SF 5.31*",
-          "tax": 7.78,
-          "op": 69.52,
-          "total": 417.14
+          "type": "line_item",
+          "line_number": 25,
+          "description": "R&R Sheathing - OSB -",
+          "qty": 64.0,
+          "unit": "SF",
+          "total": "417.14",
+          "notes": "3/4\" - tongue and groove",
+          "tax": "7.78",
+          "op": "69.52"
         },
         {
-          "item_number": 26,
-          "description": "R&R Drilled bottom plate 30.00LF 18.08*",
-          "tax": 4.56,
-          "op": 109.4,
-          "total": 656.36
+          "type": "line_item",
+          "line_number": 26,
+          "description": "R&R Drilled bottom plate",
+          "qty": 30.0,
+          "unit": "LF",
+          "total": "656.36",
+          "notes": "- 2\" x 6\" treated lumber",
+          "tax": "4.56",
+          "op": "109.40"
         }
       ],
       "section_totals": {
-        "tax": "294.22",
-        "op": null,
+        "tax": "30.13",
+        "op": "294.22",
         "total": "1,765.29",
-        "computed_total": 1765.29,
+        "computed_total": "1,765.29",
         "validation_delta": "0.00"
       }
     },
@@ -597,62 +700,67 @@
       ],
       "line_items": [
         {
-          "item_number": 27,
-          "description": "I-joist - 9 1/2\" deep - 1 3/4\" flange",
+          "type": "line_item",
+          "line_number": 27,
+          "description": "I-joist - 9 1/2\" deep - 1",
           "qty": 74.0,
           "unit": "LF",
-          "unit_price": 5.83,
-          "tax": 17.79,
-          "op": 89.84,
-          "total": 539.05
+          "total": "539.05",
+          "notes": "3/4\" flange",
+          "tax": "17.79",
+          "op": "89.84"
         },
         {
-          "item_number": 28,
-          "description": "Sheathing - OSB - 3/4\" - tongue and groove",
+          "type": "line_item",
+          "line_number": 28,
+          "description": "Sheathing - OSB - 3/4\" -",
           "qty": 64.0,
           "unit": "SF",
-          "unit_price": 3.26,
-          "tax": 7.78,
-          "op": 43.28,
-          "total": 259.7
+          "total": "259.70",
+          "notes": "tongue and groove",
+          "tax": "7.78",
+          "op": "43.28"
         },
         {
-          "item_number": 29,
-          "description": "Drilled bottom plate - 2\" x 6\" treated lumber",
+          "type": "line_item",
+          "line_number": 29,
+          "description": "Drilled bottom plate - 2\" x",
           "qty": 30.0,
           "unit": "LF",
-          "unit_price": 5.11,
-          "tax": 4.56,
-          "op": 31.58,
-          "total": 189.44
+          "total": "189.44",
+          "notes": "6\" treated lumber",
+          "tax": "4.56",
+          "op": "31.58"
         },
         {
-          "item_number": 30,
-          "description": "Seal & paint stair tread - per side - per LF",
+          "type": "line_item",
+          "line_number": 30,
+          "description": "Seal & paint stair tread -",
           "qty": 34.08,
           "unit": "LF",
-          "unit_price": 8.89,
-          "tax": 3.82,
-          "op": 61.36,
-          "total": 368.15
+          "total": "368.15",
+          "notes": "per side - per LF",
+          "tax": "3.82",
+          "op": "61.36"
         },
         {
-          "item_number": 31,
-          "description": "Seal & paint stair riser - per side - per LF",
+          "type": "line_item",
+          "line_number": 31,
+          "description": "Seal & paint stair riser -",
           "qty": 34.08,
           "unit": "LF",
-          "unit_price": 5.94,
-          "tax": 2.56,
-          "op": 41.0,
-          "total": 246.0
+          "total": "246.00",
+          "notes": "per side - per LF",
+          "tax": "2.56",
+          "op": "41.00"
         }
       ],
       "section_totals": {
-        "tax": "267.06",
-        "op": null,
+        "tax": "36.51",
+        "op": "267.06",
         "total": "1,602.34",
-        "computed_total": 1602.34,
-        "validation_delta": "-0.00"
+        "computed_total": "1,602.34",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -661,150 +769,156 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 250,
-          "description": "Deodorize building - Hot 16,901.21CF 0.11 thermal fog",
-          "tax": 0.0,
-          "op": 371.82,
-          "total": 2230.95
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 251,
-          "description": "Hydroxyl generator - 4.00DA odor counteractant - 3 optics",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 250,
+          "description": "Deodorize building - Hot",
+          "qty": 16901.21,
+          "unit": "CF",
+          "total": "2,230.95",
+          "notes": "251. Hydroxyl generator - 4.00DA REVISED odor counteractant - 3 optics",
+          "tax": "371.82"
         },
         {
-          "item_number": 252,
-          "description": "Solid odor counteractant - 2.00DA 27.76* crystal or solid block",
-          "tax": 2.08,
-          "op": 11.52,
-          "total": 69.12
+          "type": "line_item",
+          "line_number": 252,
+          "description": "Solid odor counteractant -",
+          "qty": 2.0,
+          "unit": "DA",
+          "total": "69.12",
+          "notes": "crystal or solid block",
+          "tax": "2.08",
+          "op": "11.52"
         },
         {
-          "item_number": 253,
-          "description": "Clean stucco 1,942.96SF",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "header",
+          "text": "EXTERIOR CLEANING"
         },
         {
-          "item_number": 254,
-          "description": "Clean exterior door (per 1.00EA side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 258,
+          "description": "Clean door bell/chime",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "19.52",
+          "tax": "0.00",
+          "op": "3.26"
         },
         {
-          "item_number": 255,
-          "description": "Clean patio door (sliding 4.00EA glass) (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 259,
+          "description": "Clean light fixture",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "20.56",
+          "tax": "0.01",
+          "op": "3.42"
         },
         {
-          "item_number": 256,
-          "description": "Clean window unit (per 4.00EA side) 3 - 9 SF",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 260,
+          "description": "Clean overhead door &",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "117.50",
+          "notes": "hardware - Large Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.04",
+          "op": "19.58"
         },
         {
-          "item_number": 257,
-          "description": "Clean window unit (per 6.00EA side) 10 - 20 SF",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 277,
+          "description": "Equipment setup, take",
+          "qty": 8.0,
+          "unit": "HR",
+          "total": "912.00",
+          "notes": "down, and monitoring (hourly charge)",
+          "tax": "0.00",
+          "op": "152.00"
         },
         {
-          "item_number": 258,
-          "description": "Clean door bell/chime 1.00EA 16.26*",
-          "tax": 0.0,
-          "op": 3.26,
-          "total": 19.52
+          "type": "line_item",
+          "line_number": 278,
+          "description": "Negative air fan/Air",
+          "qty": 36.0,
+          "unit": "DA",
+          "total": "3,154.46",
+          "notes": "scrubber (24 hr period) - No monit.",
+          "tax": "525.74"
         },
         {
-          "item_number": 259,
-          "description": "Clean light fixture 1.00EA 17.13*",
-          "tax": 0.01,
-          "op": 3.42,
-          "total": 20.56
+          "type": "line_item",
+          "line_number": 279,
+          "description": "Add for HEPA filter (for",
+          "qty": 9.0,
+          "unit": "EA",
+          "total": "2,547.19",
+          "notes": "negative air exhaust fan)",
+          "tax": "167.67",
+          "op": "424.54"
         },
         {
-          "item_number": 260,
-          "description": "Clean overhead door & 1.00EA 97.88* hardware - Large Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.04,
-          "op": 19.58,
-          "total": 117.5
+          "type": "line_item",
+          "line_number": 280,
+          "description": "Hydroxyl generator -",
+          "qty": 36.0,
+          "unit": "DA",
+          "total": "7,776.00",
+          "notes": "odor counteractant - 2 optics",
+          "tax": "1,296.00"
         },
         {
-          "item_number": 277,
-          "description": "Equipment setup, take 8.00HR 95.00* down, and monitoring (hourly charge)",
-          "tax": 0.0,
-          "op": 152.0,
-          "total": 912.0
+          "type": "line_item",
+          "line_number": 281,
+          "description": "Equipment",
+          "qty": 18.0,
+          "unit": "EA",
+          "total": "1,162.47",
+          "tax": "9.85",
+          "op": "193.76"
         },
         {
-          "item_number": 278,
-          "description": "Negative air fan/Air 36.00DA 73.02 scrubber (24 hr period) - No monit.",
-          "tax": 0.0,
-          "op": 525.74,
-          "total": 3154.46
+          "type": "line_item",
+          "line_number": 282,
+          "description": "Add for personal",
+          "qty": 24.0,
+          "unit": "EA",
+          "total": "745.29",
+          "notes": "protective equipment (hazardous cleanup)",
+          "tax": "26.11",
+          "op": "124.22"
         },
         {
-          "item_number": 279,
-          "description": "Add for HEPA filter (for 9.00EA 217.22* negative air exhaust fan)",
-          "tax": 167.67,
-          "op": 424.54,
-          "total": 2547.19
+          "type": "line_item",
+          "line_number": 327,
+          "description": "Clean with",
+          "qty": 2996.5,
+          "unit": "SF",
+          "total": "1,873.25",
+          "notes": "pressure/chemical spray",
+          "tax": "2.85",
+          "op": "312.22"
         },
         {
-          "item_number": 280,
-          "description": "Hydroxyl generator - 36.00DA 180.00 odor counteractant - 2 optics",
-          "tax": 0.0,
-          "op": 1296.0,
-          "total": 7776.0
-        },
-        {
-          "item_number": 281,
-          "description": "Equipment 18.00EA 53.27* decontamination charge - per piece of equipment",
-          "tax": 9.85,
-          "op": 193.76,
-          "total": 1162.47
-        },
-        {
-          "item_number": 282,
-          "description": "Add for personal 24.00EA 24.79* protective equipment (hazardous cleanup)",
-          "tax": 26.11,
-          "op": 124.22,
-          "total": 745.29
-        },
-        {
-          "item_number": 327,
-          "description": "Clean with 2,996.50SF 0.52* pressure/chemical spray",
-          "tax": 2.85,
-          "op": 312.22,
-          "total": 1873.25
-        },
-        {
-          "item_number": 336,
-          "description": "Fire Remediation & 1.00EA 2,049.00*E Restoration – Pacific Palisades Fire Remediation & Restoration – Windows and Sliding Glass Doors (Labor Only) Fire remediation and restoration of ten (10) large windows and nine (9) sliding glass doors at 935 Chattanooga Ave, Pacific Palisades, CA 90272, affected by smoke and soot exposure. Process includes HEPA vacuum removal of soot and ash from frames, tracks and assemblies, wet neutralization to eliminate smoke film and odor, inspection and adjustment of roller assemblies for proper alignment and closure, silicone lubrication, and final operational verification. Work performed under insurance restoration protocols and post-fire remediation standards. 1 $2,049.00 $2,049.00 Materials and any component replacements are excluded and will be quoted separately via change order if required upon inspection. End revisions by VAEMK8 on 10/3/2025",
-          "tax": 0.0,
-          "op": 409.8,
-          "total": 2458.8
+          "type": "line_item",
+          "line_number": 336,
+          "description": "Fire Remediation &",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "2,458.80",
+          "notes": "Restoration – Pacific Palisades Fire Remediation & Restoration – Windows and Sliding Glass Doors (Labor Only) Fire remediation and restoration of ten (10) large windows and nine (9) sliding glass doors at 935 Chattanooga Ave, Pacific Palisades, CA 90272, affected by smoke and soot exposure. Process includes HEPA vacuum removal of soot and ash from frames, tracks and assemblies, wet neutralization to eliminate smoke film and odor, inspection and adjustment of roller assemblies for proper alignment and closure, silicone lubrication, and final operational verification. Work performed under insurance restoration protocols and post-fire remediation standards. 1 $2,049.00 $2,049.00 Materials and any component replacements are excluded and will be quoted separately via change order if required upon inspection. End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.00",
+          "op": "409.80"
         }
       ],
       "section_totals": {
-        "tax": "3,847.88",
-        "op": null,
+        "tax": "208.61",
+        "op": "3,847.88",
         "total": "23,087.11",
-        "computed_total": 23087.11,
+        "computed_total": "23,087.11",
         "validation_delta": "0.00"
       }
     },
@@ -846,60 +960,90 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 174,
-          "description": "HEPA Vacuuming - 148.24SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 35.58,
-          "total": 213.47
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 175,
-          "description": "Clean more than the 148.24SF 0.82* walls and ceiling",
-          "tax": 0.14,
-          "op": 24.34,
-          "total": 146.04
+          "type": "line_item",
+          "line_number": 174,
+          "description": "HEPA Vacuuming -",
+          "qty": 148.24,
+          "unit": "SF",
+          "total": "213.47",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "35.58"
         },
         {
-          "item_number": 176,
-          "description": "Clean light fixture 1.00EA 17.13*",
-          "tax": 0.01,
-          "op": 3.42,
-          "total": 20.56
+          "type": "line_item",
+          "line_number": 175,
+          "description": "Clean more than the",
+          "qty": 148.24,
+          "unit": "SF",
+          "total": "146.04",
+          "notes": "walls and ceiling",
+          "tax": "0.14",
+          "op": "24.34"
         },
         {
-          "item_number": 177,
-          "description": "Clean baseboard - Heavy 12.35LF 0.81*",
-          "tax": 0.01,
-          "op": 2.0,
-          "total": 12.01
+          "type": "line_item",
+          "line_number": 176,
+          "description": "Clean light fixture",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "20.56",
+          "tax": "0.01",
+          "op": "3.42"
         },
         {
-          "item_number": 178,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 177,
+          "description": "Clean baseboard - Heavy",
+          "qty": 12.35,
+          "unit": "LF",
+          "total": "12.01",
+          "tax": "0.01",
+          "op": "2.00"
         },
         {
-          "item_number": 179,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 178,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 180,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side)",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 179,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 180,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side)",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "75.64",
-        "op": null,
+        "tax": "0.20",
+        "op": "75.64",
         "total": "453.89",
-        "computed_total": 453.89,
+        "computed_total": "453.89",
         "validation_delta": "0.00"
       }
     },
@@ -929,60 +1073,90 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 195,
-          "description": "HEPA Vacuuming - 158.86SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 38.12,
-          "total": 228.75
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 196,
-          "description": "Clean more than the 158.86SF 0.82* walls and ceiling",
-          "tax": 0.15,
-          "op": 26.1,
-          "total": 156.52
+          "type": "line_item",
+          "line_number": 195,
+          "description": "HEPA Vacuuming -",
+          "qty": 158.86,
+          "unit": "SF",
+          "total": "228.75",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "38.12"
         },
         {
-          "item_number": 197,
-          "description": "Clean light fixture 1.00EA 17.13*",
-          "tax": 0.01,
-          "op": 3.42,
-          "total": 20.56
+          "type": "line_item",
+          "line_number": 196,
+          "description": "Clean more than the",
+          "qty": 158.86,
+          "unit": "SF",
+          "total": "156.52",
+          "notes": "walls and ceiling",
+          "tax": "0.15",
+          "op": "26.10"
         },
         {
-          "item_number": 198,
-          "description": "Clean baseboard - Heavy 12.51LF 0.81*",
-          "tax": 0.01,
-          "op": 2.02,
-          "total": 12.16
+          "type": "line_item",
+          "line_number": 197,
+          "description": "Clean light fixture",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "20.56",
+          "tax": "0.01",
+          "op": "3.42"
         },
         {
-          "item_number": 199,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 198,
+          "description": "Clean baseboard - Heavy",
+          "qty": 12.51,
+          "unit": "LF",
+          "total": "12.16",
+          "tax": "0.01",
+          "op": "2.02"
         },
         {
-          "item_number": 200,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 199,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 201,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side)",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 200,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 201,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side)",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "79.96",
-        "op": null,
+        "tax": "0.21",
+        "op": "79.96",
         "total": "479.80",
-        "computed_total": 479.8,
+        "computed_total": "479.80",
         "validation_delta": "0.00"
       }
     },
@@ -1008,60 +1182,89 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 38,
-          "description": "HEPA Vacuuming - 130.40SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 31.3,
-          "total": 187.78
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 40,
-          "description": "Clean more than the walls 130.40SF 0.82* and ceiling",
-          "tax": 0.12,
-          "op": 21.4,
-          "total": 128.45
+          "type": "line_item",
+          "line_number": 38,
+          "description": "HEPA Vacuuming -",
+          "qty": 130.4,
+          "unit": "SF",
+          "total": "187.78",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "31.30"
         },
         {
-          "item_number": 41,
-          "description": "Clean light fixture 1.00EA 17.13*",
-          "tax": 0.01,
-          "op": 3.42,
-          "total": 20.56
+          "type": "line_item",
+          "line_number": 40,
+          "description": "Clean more than the walls",
+          "qty": 130.4,
+          "unit": "SF",
+          "total": "128.45",
+          "notes": "and ceiling",
+          "tax": "0.12",
+          "op": "21.40"
         },
         {
-          "item_number": 42,
-          "description": "Clean baseboard - Heavy 11.78LF 0.81*",
-          "tax": 0.01,
-          "op": 1.9,
-          "total": 11.45
+          "type": "line_item",
+          "line_number": 41,
+          "description": "Clean light fixture",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "20.56",
+          "tax": "0.01",
+          "op": "3.42"
         },
         {
-          "item_number": 43,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 42,
+          "description": "Clean baseboard - Heavy",
+          "qty": 11.78,
+          "unit": "LF",
+          "total": "11.45",
+          "tax": "0.01",
+          "op": "1.90"
         },
         {
-          "item_number": 44,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 43,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 45,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side)",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 44,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 45,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side)",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "68.32",
-        "op": null,
+        "tax": "0.18",
+        "op": "68.32",
         "total": "410.05",
-        "computed_total": 410.05,
+        "computed_total": "410.05",
         "validation_delta": "0.00"
       }
     },
@@ -1103,60 +1306,89 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 46,
-          "description": "HEPA Vacuuming - 161.75SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 38.82,
-          "total": 232.92
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 47,
-          "description": "Clean more than the walls 161.75SF 0.82* and ceiling",
-          "tax": 0.15,
-          "op": 26.56,
-          "total": 159.35
+          "type": "line_item",
+          "line_number": 46,
+          "description": "HEPA Vacuuming -",
+          "qty": 161.75,
+          "unit": "SF",
+          "total": "232.92",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "38.82"
         },
         {
-          "item_number": 48,
-          "description": "Clean light fixture 1.00EA 17.13*",
-          "tax": 0.01,
-          "op": 3.42,
-          "total": 20.56
+          "type": "line_item",
+          "line_number": 47,
+          "description": "Clean more than the walls",
+          "qty": 161.75,
+          "unit": "SF",
+          "total": "159.35",
+          "notes": "and ceiling",
+          "tax": "0.15",
+          "op": "26.56"
         },
         {
-          "item_number": 49,
-          "description": "Clean baseboard - Heavy 13.61LF 0.81*",
-          "tax": 0.01,
-          "op": 2.2,
-          "total": 13.23
+          "type": "line_item",
+          "line_number": 48,
+          "description": "Clean light fixture",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "20.56",
+          "tax": "0.01",
+          "op": "3.42"
         },
         {
-          "item_number": 50,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 49,
+          "description": "Clean baseboard - Heavy",
+          "qty": 13.61,
+          "unit": "LF",
+          "total": "13.23",
+          "tax": "0.01",
+          "op": "2.20"
         },
         {
-          "item_number": 51,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 50,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 52,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side)",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 51,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "tax": "0.02",
+          "op": "3.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 52,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side)",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "81.30",
-        "op": null,
+        "tax": "0.21",
+        "op": "81.30",
         "total": "487.87",
-        "computed_total": 487.87,
+        "computed_total": "487.87",
         "validation_delta": "0.00"
       }
     },
@@ -1199,251 +1431,356 @@
       ],
       "line_items": [
         {
-          "item_number": 149,
-          "description": "HEPA Vacuuming - 356.12SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 85.46,
-          "total": 512.8
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 150,
-          "description": "Clean more than the 356.12SF 0.82* walls and ceiling",
-          "tax": 0.34,
-          "op": 58.46,
-          "total": 350.82
+          "type": "line_item",
+          "line_number": 149,
+          "description": "HEPA Vacuuming -",
+          "qty": 356.12,
+          "unit": "SF",
+          "total": "512.80",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "85.46"
         },
         {
-          "item_number": 151,
-          "description": "Clean light fixture - 1.00EA 23.11* Heavy",
-          "tax": 0.01,
-          "op": 4.62,
-          "total": 27.74
+          "type": "line_item",
+          "line_number": 150,
+          "description": "Clean more than the",
+          "qty": 356.12,
+          "unit": "SF",
+          "total": "350.82",
+          "notes": "walls and ceiling",
+          "tax": "0.34",
+          "op": "58.46"
         },
         {
-          "item_number": 152,
-          "description": "Clean recessed light 2.00EA 17.15* fixture",
-          "tax": 0.02,
-          "op": 6.86,
-          "total": 41.18
+          "type": "line_item",
+          "line_number": 151,
+          "description": "Clean light fixture -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "27.74",
+          "tax": "0.01",
+          "op": "4.62"
         },
         {
-          "item_number": 153,
-          "description": "Clean bathroom fan 1.00EA 45.53*",
-          "tax": 0.0,
-          "op": 9.1,
-          "total": 54.63
+          "type": "line_item",
+          "line_number": 152,
+          "description": "Clean recessed light",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "41.18",
+          "notes": "fixture",
+          "tax": "0.02",
+          "op": "6.86"
         },
         {
-          "item_number": 154,
-          "description": "Clean baseboard - Heavy 42.74LF 0.81*",
-          "tax": 0.04,
-          "op": 6.92,
-          "total": 41.58
+          "type": "line_item",
+          "line_number": 153,
+          "description": "Clean bathroom fan",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "54.63",
+          "tax": "0.00",
+          "op": "9.10"
         },
         {
-          "item_number": 155,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 154,
+          "description": "Clean baseboard - Heavy",
+          "qty": 42.74,
+          "unit": "LF",
+          "total": "41.58",
+          "tax": "0.04",
+          "op": "6.92"
         },
         {
-          "item_number": 156,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 155,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 157,
-          "description": "Clean window unit (per 1.00EA side) 3 - 9 SF - Heavy",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 156,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "notes": "Heavy 157. Clean window unit (per 1.00EA PER ESTIMATE side) 3 - 9 SF - Heavy 158. Clean door / window 2.00EA REVISED opening (per side)",
+          "tax": "0.02",
+          "op": "3.00"
         },
         {
-          "item_number": 158,
-          "description": "Clean door / window 2.00EA opening (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 159,
+          "description": "Clean outlet or switch",
+          "qty": 3.0,
+          "unit": "EA",
+          "total": "20.19",
+          "tax": "0.00",
+          "op": "3.36"
         },
         {
-          "item_number": 159,
-          "description": "Clean outlet or switch 3.00EA 5.61*",
-          "tax": 0.0,
-          "op": 3.36,
-          "total": 20.19
+          "type": "line_item",
+          "line_number": 160,
+          "description": "Clean toilet paper",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.38",
+          "notes": "dispenser - Heavy",
+          "tax": "0.00",
+          "op": "3.06"
         },
         {
-          "item_number": 160,
-          "description": "Clean toilet paper 1.00EA 15.32* dispenser - Heavy",
-          "tax": 0.0,
-          "op": 3.06,
-          "total": 18.38
+          "type": "line_item",
+          "line_number": 161,
+          "description": "Clean towel bar - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.35",
+          "tax": "0.00",
+          "op": "3.06"
         },
         {
-          "item_number": 161,
-          "description": "Clean towel bar - Heavy 1.00EA 15.29*",
-          "tax": 0.0,
-          "op": 3.06,
-          "total": 18.35
+          "type": "line_item",
+          "line_number": 162,
+          "description": "Clean bath accessory -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.50",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "3.08"
         },
         {
-          "item_number": 162,
-          "description": "Clean bath accessory - 1.00EA 15.41* Heavy",
-          "tax": 0.01,
-          "op": 3.08,
-          "total": 18.5
+          "type": "line_item",
+          "line_number": 163,
+          "description": "Clean mirror - Heavy",
+          "qty": 6.0,
+          "unit": "SF",
+          "total": "11.53",
+          "tax": "0.01",
+          "op": "1.92"
         },
         {
-          "item_number": 163,
-          "description": "Clean mirror - Heavy 6.00SF 1.60*",
-          "tax": 0.01,
-          "op": 1.92,
-          "total": 11.53
+          "type": "line_item",
+          "line_number": 164,
+          "description": "Clean toilet - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "58.04",
+          "tax": "0.01",
+          "op": "9.68"
         },
         {
-          "item_number": 164,
-          "description": "Clean toilet - Heavy 1.00EA 48.35*",
-          "tax": 0.01,
-          "op": 9.68,
-          "total": 58.04
+          "type": "line_item",
+          "line_number": 165,
+          "description": "Clean toilet seat - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "12.12",
+          "tax": "0.00",
+          "op": "2.02"
         },
         {
-          "item_number": 165,
-          "description": "Clean toilet seat - Heavy 1.00EA 10.10*",
-          "tax": 0.0,
-          "op": 2.02,
-          "total": 12.12
+          "type": "line_item",
+          "line_number": 166,
+          "description": "Clean shower - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "112.18",
+          "tax": "0.01",
+          "op": "18.70"
         },
         {
-          "item_number": 166,
-          "description": "Clean shower - Heavy 1.00EA 93.47*",
-          "tax": 0.01,
-          "op": 18.7,
-          "total": 112.18
+          "type": "line_item",
+          "line_number": 167,
+          "description": "Clean shower door -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "44.98",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "7.50"
         },
         {
-          "item_number": 167,
-          "description": "Clean shower door - 1.00EA 37.47* Heavy",
-          "tax": 0.01,
-          "op": 7.5,
-          "total": 44.98
+          "type": "line_item",
+          "line_number": 168,
+          "description": "Clean tub / shower",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "37.53",
+          "notes": "faucet - Heavy",
+          "tax": "0.00",
+          "op": "6.26"
         },
         {
-          "item_number": 168,
-          "description": "Clean tub / shower 1.00EA 31.27* faucet - Heavy",
-          "tax": 0.0,
-          "op": 6.26,
-          "total": 37.53
+          "type": "line_item",
+          "line_number": 169,
+          "description": "Clean vanity - inside and",
+          "qty": 5.75,
+          "unit": "LF",
+          "total": "147.46",
+          "notes": "out",
+          "tax": "0.06",
+          "op": "24.58"
         },
         {
-          "item_number": 169,
-          "description": "Clean vanity - inside and 5.75LF 21.36* out",
-          "tax": 0.06,
-          "op": 24.58,
-          "total": 147.46
+          "type": "line_item",
+          "line_number": 170,
+          "description": "Clean countertop -",
+          "qty": 11.5,
+          "unit": "SF",
+          "total": "21.41",
+          "tax": "0.02",
+          "op": "3.56"
         },
         {
-          "item_number": 170,
-          "description": "Clean countertop - 11.50SF 1.55* Heavy",
-          "tax": 0.02,
-          "op": 3.56,
-          "total": 21.41
+          "type": "line_item",
+          "line_number": 171,
+          "description": "Clean cabinetry - upper -",
+          "qty": 3.0,
+          "unit": "LF",
+          "total": "85.85",
+          "notes": "inside and out",
+          "tax": "0.03",
+          "op": "14.30"
         },
         {
-          "item_number": 171,
-          "description": "Clean cabinetry - upper - 3.00LF 23.84* inside and out",
-          "tax": 0.03,
-          "op": 14.3,
-          "total": 85.85
+          "type": "line_item",
+          "line_number": 172,
+          "description": "Clean sink - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "34.82",
+          "tax": "0.00",
+          "op": "5.80"
         },
         {
-          "item_number": 172,
-          "description": "Clean sink - Heavy 1.00EA 29.02*",
-          "tax": 0.0,
-          "op": 5.8,
-          "total": 34.82
+          "type": "line_item",
+          "line_number": 173,
+          "description": "Clean sink faucet -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "26.53",
+          "notes": "Heavy Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.00",
+          "op": "4.42"
         },
         {
-          "item_number": 173,
-          "description": "Clean sink faucet - 1.00EA 22.11* Heavy Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.0,
-          "op": 4.42,
-          "total": 26.53
+          "type": "line_item",
+          "line_number": 299,
+          "description": "R&R 1/2\" drywall -",
+          "qty": 26.35,
+          "unit": "SF",
+          "total": "141.78",
+          "notes": "hung, taped, ready for texture",
+          "tax": "1.68",
+          "op": "23.64"
         },
         {
-          "item_number": 299,
-          "description": "R&R 1/2\" drywall - 26.35SF 4.42* hung, taped, ready for texture",
-          "tax": 1.68,
-          "op": 23.64,
-          "total": 141.78
+          "type": "line_item",
+          "line_number": 300,
+          "description": "Tape joint for new to",
+          "qty": 31.33,
+          "unit": "LF",
+          "total": "477.01",
+          "notes": "existing drywall - per LF",
+          "tax": "1.19",
+          "op": "79.50"
         },
         {
-          "item_number": 300,
-          "description": "Tape joint for new to 31.33LF 12.65* existing drywall - per LF",
-          "tax": 1.19,
-          "op": 79.5,
-          "total": 477.01
+          "type": "line_item",
+          "line_number": 301,
+          "description": "Painting - Faux (special",
+          "qty": 57.69,
+          "unit": "SF",
+          "total": "275.11",
+          "notes": "effects) - 2 part",
+          "tax": "1.37",
+          "op": "45.86"
         },
         {
-          "item_number": 301,
-          "description": "Painting - Faux (special 57.69SF 3.95* effects) - 2 part",
-          "tax": 1.37,
-          "op": 45.86,
-          "total": 275.11
+          "type": "line_item",
+          "line_number": 302,
+          "description": "Seal the surface area",
+          "qty": 57.69,
+          "unit": "SF",
+          "total": "67.55",
+          "notes": "w/PVA primer - one coat",
+          "tax": "0.33",
+          "op": "11.26"
         },
         {
-          "item_number": 302,
-          "description": "Seal the surface area 57.69SF 0.97* w/PVA primer - one coat",
-          "tax": 0.33,
-          "op": 11.26,
-          "total": 67.55
+          "type": "line_item",
+          "line_number": 303,
+          "description": "Detach & Reset",
+          "qty": 0.5,
+          "unit": "EA",
+          "total": "96.15",
+          "notes": "Recessed light fixture",
+          "tax": "0.00",
+          "op": "16.02"
         },
         {
-          "item_number": 303,
-          "description": "Detach & Reset 0.50EA 160.25* Recessed light fixture",
-          "tax": 0.0,
-          "op": 16.02,
-          "total": 96.15
+          "type": "line_item",
+          "line_number": 304,
+          "description": "Detach & Reset",
+          "qty": 1.5,
+          "unit": "EA",
+          "total": "37.79",
+          "notes": "Heat/AC register - Mechanically attached",
+          "tax": "0.00",
+          "op": "6.30"
         },
         {
-          "item_number": 304,
-          "description": "Detach & Reset 1.50EA 20.99* Heat/AC register - Mechanically attached",
-          "tax": 0.0,
-          "op": 6.3,
-          "total": 37.79
+          "type": "line_item",
+          "line_number": 305,
+          "description": "Mask or cover per",
+          "qty": 236.48,
+          "unit": "SF",
+          "total": "181.20",
+          "notes": "square foot",
+          "tax": "2.02",
+          "op": "30.20"
         },
         {
-          "item_number": 305,
-          "description": "Mask or cover per 236.48SF 0.63* square foot",
-          "tax": 2.02,
-          "op": 30.2,
-          "total": 181.2
+          "type": "line_item",
+          "line_number": 306,
+          "description": "Floor protection -",
+          "qty": 59.82,
+          "unit": "SF",
+          "total": "49.29",
+          "notes": "cardboard and tape",
+          "tax": "1.59",
+          "op": "8.22"
         },
         {
-          "item_number": 306,
-          "description": "Floor protection - 59.82SF 0.66* cardboard and tape",
-          "tax": 1.59,
-          "op": 8.22,
-          "total": 49.29
-        },
-        {
-          "item_number": 328,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side) End revisions by VAEMK8 on 10/3/2025",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 328,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "514.02",
-        "op": null,
+        "tax": "8.79",
+        "op": "514.02",
         "total": "3,084.31",
-        "computed_total": 3084.31,
+        "computed_total": "3,084.31",
         "validation_delta": "0.00"
       }
     },
@@ -1468,188 +1805,256 @@
       ],
       "line_items": [
         {
-          "item_number": 53,
-          "description": "HEPA Vacuuming - 387.94SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 93.1,
-          "total": 558.63
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 54,
-          "description": "Clean more than the walls 387.94SF 0.82* and ceiling",
-          "tax": 0.37,
-          "op": 63.7,
-          "total": 382.18
+          "type": "line_item",
+          "line_number": 53,
+          "description": "HEPA Vacuuming -",
+          "qty": 387.94,
+          "unit": "SF",
+          "total": "558.63",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "93.10"
         },
         {
-          "item_number": 55,
-          "description": "Clean light fixture - 2.00EA 23.11* Heavy",
-          "tax": 0.02,
-          "op": 9.24,
-          "total": 55.48
+          "type": "line_item",
+          "line_number": 54,
+          "description": "Clean more than the walls",
+          "qty": 387.94,
+          "unit": "SF",
+          "total": "382.18",
+          "notes": "and ceiling",
+          "tax": "0.37",
+          "op": "63.70"
         },
         {
-          "item_number": 56,
-          "description": "Clean baseboard - Heavy 43.26LF 0.81*",
-          "tax": 0.04,
-          "op": 7.0,
-          "total": 42.08
+          "type": "line_item",
+          "line_number": 55,
+          "description": "Clean light fixture -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "55.48",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "9.24"
         },
         {
-          "item_number": 57,
-          "description": "Clean bathroom fan 1.00EA 45.53*",
-          "tax": 0.0,
-          "op": 9.1,
-          "total": 54.63
+          "type": "line_item",
+          "line_number": 56,
+          "description": "Clean baseboard - Heavy",
+          "qty": 43.26,
+          "unit": "LF",
+          "total": "42.08",
+          "tax": "0.04",
+          "op": "7.00"
         },
         {
-          "item_number": 58,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 57,
+          "description": "Clean bathroom fan",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "54.63",
+          "tax": "0.00",
+          "op": "9.10"
         },
         {
-          "item_number": 59,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 58,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 60,
-          "description": "Clean window unit (per 1.00EA side) 3 - 9 SF - Heavy",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 59,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "tax": "0.02",
+          "op": "3.00"
         },
         {
-          "item_number": 61,
-          "description": "Clean door / window 2.00EA opening (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 62,
+          "description": "Clean outlet or switch",
+          "qty": 3.0,
+          "unit": "EA",
+          "total": "20.19",
+          "tax": "0.00",
+          "op": "3.36"
         },
         {
-          "item_number": 62,
-          "description": "Clean outlet or switch 3.00EA 5.61*",
-          "tax": 0.0,
-          "op": 3.36,
-          "total": 20.19
+          "type": "line_item",
+          "line_number": 63,
+          "description": "Clean toilet paper",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.38",
+          "notes": "dispenser - Heavy",
+          "tax": "0.00",
+          "op": "3.06"
         },
         {
-          "item_number": 63,
-          "description": "Clean toilet paper 1.00EA 15.32* dispenser - Heavy",
-          "tax": 0.0,
-          "op": 3.06,
-          "total": 18.38
+          "type": "line_item",
+          "line_number": 64,
+          "description": "Clean towel bar - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.35",
+          "tax": "0.00",
+          "op": "3.06"
         },
         {
-          "item_number": 64,
-          "description": "Clean towel bar - Heavy 1.00EA 15.29*",
-          "tax": 0.0,
-          "op": 3.06,
-          "total": 18.35
+          "type": "line_item",
+          "line_number": 65,
+          "description": "Clean bath accessory -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.50",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "3.08"
         },
         {
-          "item_number": 65,
-          "description": "Clean bath accessory - 1.00EA 15.41* Heavy",
-          "tax": 0.01,
-          "op": 3.08,
-          "total": 18.5
+          "type": "line_item",
+          "line_number": 66,
+          "description": "Clean mirror - Heavy",
+          "qty": 4.0,
+          "unit": "SF",
+          "total": "7.68",
+          "tax": "0.00",
+          "op": "1.28"
         },
         {
-          "item_number": 66,
-          "description": "Clean mirror - Heavy 4.00SF 1.60*",
-          "tax": 0.0,
-          "op": 1.28,
-          "total": 7.68
+          "type": "line_item",
+          "line_number": 67,
+          "description": "Clean toilet - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "58.04",
+          "tax": "0.01",
+          "op": "9.68"
         },
         {
-          "item_number": 67,
-          "description": "Clean toilet - Heavy 1.00EA 48.35*",
-          "tax": 0.01,
-          "op": 9.68,
-          "total": 58.04
+          "type": "line_item",
+          "line_number": 68,
+          "description": "Clean toilet seat - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "12.12",
+          "tax": "0.00",
+          "op": "2.02"
         },
         {
-          "item_number": 68,
-          "description": "Clean toilet seat - Heavy 1.00EA 10.10*",
-          "tax": 0.0,
-          "op": 2.02,
-          "total": 12.12
+          "type": "line_item",
+          "line_number": 69,
+          "description": "Clean tub - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "51.33",
+          "tax": "0.01",
+          "op": "8.56"
         },
         {
-          "item_number": 69,
-          "description": "Clean tub - Heavy 1.00EA 42.76*",
-          "tax": 0.01,
-          "op": 8.56,
-          "total": 51.33
+          "type": "line_item",
+          "line_number": 70,
+          "description": "Clean shower - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "112.18",
+          "tax": "0.01",
+          "op": "18.70"
         },
         {
-          "item_number": 70,
-          "description": "Clean shower - Heavy 1.00EA 93.47*",
-          "tax": 0.01,
-          "op": 18.7,
-          "total": 112.18
+          "type": "line_item",
+          "line_number": 71,
+          "description": "Clean shower door -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "44.98",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "7.50"
         },
         {
-          "item_number": 71,
-          "description": "Clean shower door - 1.00EA 37.47* Heavy",
-          "tax": 0.01,
-          "op": 7.5,
-          "total": 44.98
+          "type": "line_item",
+          "line_number": 72,
+          "description": "Clean tub / shower faucet -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "75.05",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "12.50"
         },
         {
-          "item_number": 72,
-          "description": "Clean tub / shower faucet - 2.00EA 31.27* Heavy",
-          "tax": 0.01,
-          "op": 12.5,
-          "total": 75.05
+          "type": "line_item",
+          "line_number": 73,
+          "description": "Clean vanity - inside and",
+          "qty": 5.33,
+          "unit": "LF",
+          "total": "136.71",
+          "notes": "out",
+          "tax": "0.06",
+          "op": "22.80"
         },
         {
-          "item_number": 73,
-          "description": "Clean vanity - inside and 5.33LF 21.36* out",
-          "tax": 0.06,
-          "op": 22.8,
-          "total": 136.71
+          "type": "line_item",
+          "line_number": 74,
+          "description": "Clean countertop - Heavy",
+          "qty": 10.66,
+          "unit": "SF",
+          "total": "19.84",
+          "tax": "0.02",
+          "op": "3.30"
         },
         {
-          "item_number": 74,
-          "description": "Clean countertop - Heavy 10.66SF 1.55*",
-          "tax": 0.02,
-          "op": 3.3,
-          "total": 19.84
+          "type": "line_item",
+          "line_number": 75,
+          "description": "Clean sink - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "34.82",
+          "tax": "0.00",
+          "op": "5.80"
         },
         {
-          "item_number": 75,
-          "description": "Clean sink - Heavy 1.00EA 29.02*",
-          "tax": 0.0,
-          "op": 5.8,
-          "total": 34.82
+          "type": "line_item",
+          "line_number": 76,
+          "description": "Clean sink faucet - Heavy",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "26.53",
+          "notes": "Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.00",
+          "op": "4.42"
         },
         {
-          "item_number": 76,
-          "description": "Clean sink faucet - Heavy 1.00EA 22.11* Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.0,
-          "op": 4.42,
-          "total": 26.53
-        },
-        {
-          "item_number": 329,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side) End revisions by VAEMK8 on 10/3/2025",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 329,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "301.56",
-        "op": null,
+        "tax": "0.61",
+        "op": "301.56",
         "total": "1,809.51",
-        "computed_total": 1809.51,
+        "computed_total": "1,809.51",
         "validation_delta": "0.00"
       }
     },
@@ -1675,60 +2080,90 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 77,
-          "description": "HEPA Vacuuming - 109.62SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 26.3,
-          "total": 157.84
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 78,
-          "description": "Clean more than the walls 109.62SF 0.82* and ceiling",
-          "tax": 0.1,
-          "op": 18.0,
-          "total": 107.99
+          "type": "line_item",
+          "line_number": 77,
+          "description": "HEPA Vacuuming -",
+          "qty": 109.62,
+          "unit": "SF",
+          "total": "157.84",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "26.30"
         },
         {
-          "item_number": 79,
-          "description": "Clean light fixture 1.00EA 17.13*",
-          "tax": 0.01,
-          "op": 3.42,
-          "total": 20.56
+          "type": "line_item",
+          "line_number": 78,
+          "description": "Clean more than the walls",
+          "qty": 109.62,
+          "unit": "SF",
+          "total": "107.99",
+          "notes": "and ceiling",
+          "tax": "0.10",
+          "op": "18.00"
         },
         {
-          "item_number": 80,
-          "description": "Clean baseboard - Heavy 10.61LF 0.81*",
-          "tax": 0.01,
-          "op": 1.72,
-          "total": 10.32
+          "type": "line_item",
+          "line_number": 79,
+          "description": "Clean light fixture",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "20.56",
+          "tax": "0.01",
+          "op": "3.42"
         },
         {
-          "item_number": 81,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 80,
+          "description": "Clean baseboard - Heavy",
+          "qty": 10.61,
+          "unit": "LF",
+          "total": "10.32",
+          "tax": "0.01",
+          "op": "1.72"
         },
         {
-          "item_number": 82,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 81,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 83,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side)",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 82,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 83,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side)",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "59.74",
-        "op": null,
+        "tax": "0.16",
+        "op": "59.74",
         "total": "358.52",
-        "computed_total": 358.52,
+        "computed_total": "358.52",
         "validation_delta": "0.00"
       }
     },
@@ -1796,117 +2231,180 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 84,
-          "description": "HEPA Vacuuming - 418.31SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 100.4,
-          "total": 602.37
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 85,
-          "description": "Clean more than the walls 418.31SF 0.82* and ceiling",
-          "tax": 0.4,
-          "op": 68.68,
-          "total": 412.09
+          "type": "line_item",
+          "line_number": 84,
+          "description": "HEPA Vacuuming -",
+          "qty": 418.31,
+          "unit": "SF",
+          "total": "602.37",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "100.40"
         },
         {
-          "item_number": 86,
-          "description": "Clean light fixture - 1.00EA 23.11* Heavy",
-          "tax": 0.01,
-          "op": 4.62,
-          "total": 27.74
+          "type": "line_item",
+          "line_number": 85,
+          "description": "Clean more than the walls",
+          "qty": 418.31,
+          "unit": "SF",
+          "total": "412.09",
+          "notes": "and ceiling",
+          "tax": "0.40",
+          "op": "68.68"
         },
         {
-          "item_number": 87,
-          "description": "Clean smoke/carbon 2.00EA 10.13* monoxide detector",
-          "tax": 0.0,
-          "op": 4.06,
-          "total": 24.32
+          "type": "line_item",
+          "line_number": 86,
+          "description": "Clean light fixture -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "27.74",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "4.62"
         },
         {
-          "item_number": 88,
-          "description": "Clean baseboard - Heavy 34.82LF 0.81*",
-          "tax": 0.03,
-          "op": 5.64,
-          "total": 33.87
+          "type": "line_item",
+          "line_number": 87,
+          "description": "Clean smoke/carbon",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "24.32",
+          "notes": "monoxide detector",
+          "tax": "0.00",
+          "op": "4.06"
         },
         {
-          "item_number": 89,
-          "description": "Clean door (per side) - 6.00EA 15.42* Heavy",
-          "tax": 0.14,
-          "op": 18.52,
-          "total": 111.18
+          "type": "line_item",
+          "line_number": 88,
+          "description": "Clean baseboard - Heavy",
+          "qty": 34.82,
+          "unit": "LF",
+          "total": "33.87",
+          "tax": "0.03",
+          "op": "5.64"
         },
         {
-          "item_number": 90,
-          "description": "Clean door hardware - 6.00EA 14.99* Heavy",
-          "tax": 0.14,
-          "op": 18.0,
-          "total": 108.08
+          "type": "line_item",
+          "line_number": 89,
+          "description": "Clean door (per side) -",
+          "qty": 6.0,
+          "unit": "EA",
+          "total": "111.18",
+          "notes": "Heavy",
+          "tax": "0.14",
+          "op": "18.52"
         },
         {
-          "item_number": 91,
-          "description": "Clean door / window 6.00EA 21.06* opening (per side)",
-          "tax": 0.02,
-          "op": 25.28,
-          "total": 151.66
+          "type": "line_item",
+          "line_number": 90,
+          "description": "Clean door hardware -",
+          "qty": 6.0,
+          "unit": "EA",
+          "total": "108.08",
+          "notes": "Heavy",
+          "tax": "0.14",
+          "op": "18.00"
         },
         {
-          "item_number": 92,
-          "description": "Clean outlet or switch 4.00EA 5.61* Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.0,
-          "op": 4.48,
-          "total": 26.92
+          "type": "line_item",
+          "line_number": 91,
+          "description": "Clean door / window",
+          "qty": 6.0,
+          "unit": "EA",
+          "total": "151.66",
+          "notes": "opening (per side)",
+          "tax": "0.02",
+          "op": "25.28"
         },
         {
-          "item_number": 308,
-          "description": "R&R 1/2\" drywall - 104.64SF 4.42* hung, taped, ready for texture",
-          "tax": 6.66,
-          "op": 93.84,
-          "total": 563.01
+          "type": "line_item",
+          "line_number": 92,
+          "description": "Clean outlet or switch",
+          "qty": 4.0,
+          "unit": "EA",
+          "total": "26.92",
+          "notes": "Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.00",
+          "op": "4.48"
         },
         {
-          "item_number": 309,
-          "description": "Tape joint for new to 104.64LF 12.65* existing drywall - per LF",
-          "tax": 3.98,
-          "op": 265.54,
-          "total": 1593.22
+          "type": "line_item",
+          "line_number": 308,
+          "description": "R&R 1/2\" drywall -",
+          "qty": 104.64,
+          "unit": "SF",
+          "total": "563.01",
+          "notes": "hung, taped, ready for texture",
+          "tax": "6.66",
+          "op": "93.84"
         },
         {
-          "item_number": 310,
-          "description": "Painting - Faux (special 104.64SF 3.95* effects) - 2 part",
-          "tax": 2.49,
-          "op": 83.16,
-          "total": 498.98
+          "type": "line_item",
+          "line_number": 309,
+          "description": "Tape joint for new to",
+          "qty": 104.64,
+          "unit": "LF",
+          "total": "1,593.22",
+          "notes": "existing drywall - per LF",
+          "tax": "3.98",
+          "op": "265.54"
         },
         {
-          "item_number": 311,
-          "description": "Seal the surface area 104.64SF 0.97* w/PVA primer - one coat",
-          "tax": 0.6,
-          "op": 20.42,
-          "total": 122.52
+          "type": "line_item",
+          "line_number": 310,
+          "description": "Painting - Faux (special",
+          "qty": 104.64,
+          "unit": "SF",
+          "total": "498.98",
+          "notes": "effects) - 2 part",
+          "tax": "2.49",
+          "op": "83.16"
         },
         {
-          "item_number": 314,
-          "description": "Mask or cover per 243.09SF 0.63* square foot",
-          "tax": 2.08,
-          "op": 31.06,
-          "total": 186.29
+          "type": "line_item",
+          "line_number": 311,
+          "description": "Seal the surface area",
+          "qty": 104.64,
+          "unit": "SF",
+          "total": "122.52",
+          "notes": "w/PVA primer - one coat",
+          "tax": "0.60",
+          "op": "20.42"
         },
         {
-          "item_number": 315,
-          "description": "Floor protection - 87.61SF 0.66* cardboard and tape End revisions by VAEMK8 on 10/3/2025",
-          "tax": 2.33,
-          "op": 12.02,
-          "total": 72.17
+          "type": "line_item",
+          "line_number": 314,
+          "description": "Mask or cover per",
+          "qty": 243.09,
+          "unit": "SF",
+          "total": "186.29",
+          "notes": "square foot",
+          "tax": "2.08",
+          "op": "31.06"
+        },
+        {
+          "type": "line_item",
+          "line_number": 315,
+          "description": "Floor protection -",
+          "qty": 87.61,
+          "unit": "SF",
+          "total": "72.17",
+          "notes": "cardboard and tape End revisions by VAEMK8 on 10/3/2025",
+          "tax": "2.33",
+          "op": "12.02"
         }
       ],
       "section_totals": {
-        "tax": "755.72",
-        "op": null,
+        "tax": "18.88",
+        "op": "755.72",
         "total": "4,534.42",
-        "computed_total": 4534.42,
-        "validation_delta": "-0.00"
+        "computed_total": "4,534.42",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -1931,60 +2429,90 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 93,
-          "description": "HEPA Vacuuming - 97.91SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 23.5,
-          "total": 140.99
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 94,
-          "description": "Clean more than the walls 97.91SF 0.82* and ceiling",
-          "tax": 0.09,
-          "op": 16.08,
-          "total": 96.46
+          "type": "line_item",
+          "line_number": 93,
+          "description": "HEPA Vacuuming -",
+          "qty": 97.91,
+          "unit": "SF",
+          "total": "140.99",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "23.50"
         },
         {
-          "item_number": 95,
-          "description": "Clean light fixture - 1.00EA 23.11* Heavy",
-          "tax": 0.01,
-          "op": 4.62,
-          "total": 27.74
+          "type": "line_item",
+          "line_number": 94,
+          "description": "Clean more than the walls",
+          "qty": 97.91,
+          "unit": "SF",
+          "total": "96.46",
+          "tax": "0.09",
+          "op": "16.08"
         },
         {
-          "item_number": 96,
-          "description": "Clean baseboard - Heavy 8.09LF 0.81*",
-          "tax": 0.01,
-          "op": 1.32,
-          "total": 7.88
+          "type": "line_item",
+          "line_number": 95,
+          "description": "Clean light fixture -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "27.74",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "4.62"
         },
         {
-          "item_number": 97,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 96,
+          "description": "Clean baseboard - Heavy",
+          "qty": 8.09,
+          "unit": "LF",
+          "total": "7.88",
+          "tax": "0.01",
+          "op": "1.32"
         },
         {
-          "item_number": 98,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 97,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 99,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side)",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 98,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 99,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side)",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "55.82",
-        "op": null,
+        "tax": "0.15",
+        "op": "55.82",
         "total": "334.88",
-        "computed_total": 334.88,
+        "computed_total": "334.88",
         "validation_delta": "0.00"
       }
     },
@@ -2024,99 +2552,113 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 100,
-          "description": "HEPA Vacuuming - 1,336.24SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 320.7,
-          "total": 1924.19
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 101,
-          "description": "Clean more than the 1,336.24SF 0.82* walls and ceiling",
-          "tax": 1.27,
-          "op": 219.4,
-          "total": 1316.39
+          "type": "line_item",
+          "line_number": 100,
+          "description": "HEPA Vacuuming -",
+          "qty": 1336.24,
+          "unit": "SF",
+          "total": "1,924.19",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "320.70"
         },
         {
-          "item_number": 102,
-          "description": "Clean chandelier - 1.00EA 98.96* Heavy",
-          "tax": 0.01,
-          "op": 19.8,
-          "total": 118.77
+          "type": "line_item",
+          "line_number": 101,
+          "description": "Clean more than the",
+          "qty": 1336.24,
+          "unit": "SF",
+          "total": "1,316.39",
+          "notes": "walls and ceiling",
+          "tax": "1.27",
+          "op": "219.40"
         },
         {
-          "item_number": 103,
-          "description": "Clean smoke/carbon 1.00EA 10.13* monoxide detector",
-          "tax": 0.0,
-          "op": 2.02,
-          "total": 12.15
+          "type": "line_item",
+          "line_number": 102,
+          "description": "Clean chandelier -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "118.77",
+          "tax": "0.01",
+          "op": "19.80"
         },
         {
-          "item_number": 104,
-          "description": "Clean baseboard - Heavy 59.22LF 0.81*",
-          "tax": 0.06,
-          "op": 9.62,
-          "total": 57.65
+          "type": "line_item",
+          "line_number": 103,
+          "description": "Clean smoke/carbon",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "12.15",
+          "notes": "monoxide detector",
+          "tax": "0.00",
+          "op": "2.02"
         },
         {
-          "item_number": 105,
-          "description": "Clean crown molding 82.67LF 0.71*",
-          "tax": 0.08,
-          "op": 11.76,
-          "total": 70.54
+          "type": "line_item",
+          "line_number": 104,
+          "description": "Clean baseboard - Heavy",
+          "qty": 59.22,
+          "unit": "LF",
+          "total": "57.65",
+          "tax": "0.06",
+          "op": "9.62"
         },
         {
-          "item_number": 106,
-          "description": "Clean patio door (sliding 2.00EA glass) (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 105,
+          "description": "Clean crown molding",
+          "qty": 82.67,
+          "unit": "LF",
+          "total": "70.54",
+          "notes": "106. Clean patio door (sliding 2.00EA PER ESTIMATE glass) (per side)",
+          "tax": "0.08",
+          "op": "11.76"
         },
         {
-          "item_number": 107,
-          "description": "Clean door hardware - 2.00EA 14.99* Heavy",
-          "tax": 0.05,
-          "op": 6.02,
-          "total": 36.05
+          "type": "line_item",
+          "line_number": 107,
+          "description": "Clean door hardware -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "36.05",
+          "notes": "Heavy 108. Clean window unit (per 2.00EA PER ESTIMATE side) 10 - 20 SF - Heavy 109. Clean door / window 4.00EA REVISED opening (per side)",
+          "tax": "0.05",
+          "op": "6.02"
         },
         {
-          "item_number": 108,
-          "description": "Clean window unit (per 2.00EA side) 10 - 20 SF - Heavy",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 110,
+          "description": "Clean outlet or switch",
+          "qty": 6.0,
+          "unit": "EA",
+          "total": "40.41",
+          "notes": "Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.01",
+          "op": "6.74"
         },
         {
-          "item_number": 109,
-          "description": "Clean door / window 4.00EA opening (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
-        },
-        {
-          "item_number": 110,
-          "description": "Clean outlet or switch 6.00EA 5.61* Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.01,
-          "op": 6.74,
-          "total": 40.41
-        },
-        {
-          "item_number": 331,
-          "description": "Clean door / window 2.00EA 21.06* opening (per side) End revisions by VAEMK8 on 10/3/2025",
-          "tax": 0.01,
-          "op": 8.42,
-          "total": 50.55
+          "type": "line_item",
+          "line_number": 331,
+          "description": "Clean door / window",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "50.55",
+          "notes": "opening (per side) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.01",
+          "op": "8.42"
         }
       ],
       "section_totals": {
-        "tax": "604.48",
-        "op": null,
+        "tax": "1.49",
+        "op": "604.48",
         "total": "3,626.70",
-        "computed_total": 3626.7,
-        "validation_delta": "-0.00"
+        "computed_total": "3,626.70",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -2151,97 +2693,123 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 111,
-          "description": "HEPA Vacuuming - 474.00SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 113.76,
-          "total": 682.56
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 112,
-          "description": "Clean more than the 474.00SF 0.82* walls and ceiling",
-          "tax": 0.45,
-          "op": 77.84,
-          "total": 466.97
+          "type": "line_item",
+          "line_number": 111,
+          "description": "HEPA Vacuuming -",
+          "qty": 474.0,
+          "unit": "SF",
+          "total": "682.56",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "113.76"
         },
         {
-          "item_number": 113,
-          "description": "Clean crown molding - 40.57LF 1.01* Heavy",
-          "tax": 0.04,
-          "op": 8.2,
-          "total": 49.22
+          "type": "line_item",
+          "line_number": 112,
+          "description": "Clean more than the",
+          "qty": 474.0,
+          "unit": "SF",
+          "total": "466.97",
+          "notes": "walls and ceiling",
+          "tax": "0.45",
+          "op": "77.84"
         },
         {
-          "item_number": 114,
-          "description": "Clean light bar 1.00EA 29.79*",
-          "tax": 0.01,
-          "op": 5.96,
-          "total": 35.76
+          "type": "line_item",
+          "line_number": 113,
+          "description": "Clean crown molding -",
+          "qty": 40.57,
+          "unit": "LF",
+          "total": "49.22",
+          "notes": "Heavy",
+          "tax": "0.04",
+          "op": "8.20"
         },
         {
-          "item_number": 115,
-          "description": "Clean smoke/carbon 1.00EA 10.13* monoxide detector",
-          "tax": 0.0,
-          "op": 2.02,
-          "total": 12.15
+          "type": "line_item",
+          "line_number": 114,
+          "description": "Clean light bar",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "35.76",
+          "tax": "0.01",
+          "op": "5.96"
         },
         {
-          "item_number": 116,
-          "description": "Clean baseboard - Heavy 32.13LF 0.81*",
-          "tax": 0.03,
-          "op": 5.2,
-          "total": 31.26
+          "type": "line_item",
+          "line_number": 115,
+          "description": "Clean smoke/carbon",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "12.15",
+          "notes": "monoxide detector",
+          "tax": "0.00",
+          "op": "2.02"
         },
         {
-          "item_number": 117,
-          "description": "Clean door (per side) - 2.00EA 15.42* Heavy",
-          "tax": 0.05,
-          "op": 6.18,
-          "total": 37.07
+          "type": "line_item",
+          "line_number": 116,
+          "description": "Clean baseboard - Heavy",
+          "qty": 32.13,
+          "unit": "LF",
+          "total": "31.26",
+          "tax": "0.03",
+          "op": "5.20"
         },
         {
-          "item_number": 118,
-          "description": "Clean door hardware - 2.00EA 14.99* Heavy",
-          "tax": 0.05,
-          "op": 6.02,
-          "total": 36.05
+          "type": "line_item",
+          "line_number": 117,
+          "description": "Clean door (per side) -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "37.07",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "6.18"
         },
         {
-          "item_number": 119,
-          "description": "Clean window unit (per 3.00EA side) 10 - 20 SF - Heavy",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 118,
+          "description": "Clean door hardware -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "36.05",
+          "notes": "Heavy 119. Clean window unit (per 3.00EA PER ESTIMATE side) 10 - 20 SF - Heavy 120. Clean door / window 5.00EA REVISED opening (per side)",
+          "tax": "0.05",
+          "op": "6.02"
         },
         {
-          "item_number": 120,
-          "description": "Clean door / window 5.00EA opening (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 121,
+          "description": "Clean outlet or switch",
+          "qty": 6.0,
+          "unit": "EA",
+          "total": "40.41",
+          "notes": "Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.01",
+          "op": "6.74"
         },
         {
-          "item_number": 121,
-          "description": "Clean outlet or switch 6.00EA 5.61* Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.01,
-          "op": 6.74,
-          "total": 40.41
-        },
-        {
-          "item_number": 330,
-          "description": "Clean door / window 2.00EA 21.06* opening (per side) End revisions by VAEMK8 on 10/3/2025",
-          "tax": 0.01,
-          "op": 8.42,
-          "total": 50.55
+          "type": "line_item",
+          "line_number": 330,
+          "description": "Clean door / window",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "50.55",
+          "notes": "opening (per side) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.01",
+          "op": "8.42"
         }
       ],
       "section_totals": {
-        "tax": "240.34",
-        "op": null,
+        "tax": "0.65",
+        "op": "240.34",
         "total": "1,442.00",
-        "computed_total": 1442.0,
+        "computed_total": "1,442.00",
         "validation_delta": "0.00"
       }
     },
@@ -2251,98 +2819,123 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 122,
-          "description": "HEPA Vacuuming - 317.18SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 76.12,
-          "total": 456.74
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 123,
-          "description": "Clean more than the 317.18SF 1.02* walls and ceiling - Heavy",
-          "tax": 0.3,
-          "op": 64.76,
-          "total": 388.58
+          "type": "line_item",
+          "line_number": 122,
+          "description": "HEPA Vacuuming -",
+          "qty": 317.18,
+          "unit": "SF",
+          "total": "456.74",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "76.12"
         },
         {
-          "item_number": 124,
-          "description": "Clean light fixture - 1.00EA 23.11* Heavy",
-          "tax": 0.01,
-          "op": 4.62,
-          "total": 27.74
+          "type": "line_item",
+          "line_number": 123,
+          "description": "Clean more than the",
+          "qty": 317.18,
+          "unit": "SF",
+          "total": "388.58",
+          "notes": "walls and ceiling - Heavy",
+          "tax": "0.30",
+          "op": "64.76"
         },
         {
-          "item_number": 125,
-          "description": "Clean baseboard - Heavy 24.77LF 0.81*",
-          "tax": 0.02,
-          "op": 4.02,
-          "total": 24.1
+          "type": "line_item",
+          "line_number": 124,
+          "description": "Clean light fixture -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "27.74",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "4.62"
         },
         {
-          "item_number": 126,
-          "description": "Clean crown molding 40.68LF 0.71*",
-          "tax": 0.04,
-          "op": 5.78,
-          "total": 34.7
+          "type": "line_item",
+          "line_number": 125,
+          "description": "Clean baseboard - Heavy",
+          "qty": 24.77,
+          "unit": "LF",
+          "total": "24.10",
+          "tax": "0.02",
+          "op": "4.02"
         },
         {
-          "item_number": 127,
-          "description": "Clean door (per side) - 2.00EA 15.42* Heavy",
-          "tax": 0.05,
-          "op": 6.18,
-          "total": 37.07
+          "type": "line_item",
+          "line_number": 126,
+          "description": "Clean crown molding",
+          "qty": 40.68,
+          "unit": "LF",
+          "total": "34.70",
+          "tax": "0.04",
+          "op": "5.78"
         },
         {
-          "item_number": 128,
-          "description": "Clean door hardware - 2.00EA 14.99* Heavy",
-          "tax": 0.05,
-          "op": 6.02,
-          "total": 36.05
+          "type": "line_item",
+          "line_number": 127,
+          "description": "Clean door (per side) -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "37.07",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "6.18"
         },
         {
-          "item_number": 129,
-          "description": "Clean window unit (per 1.00EA side) 10 - 20 SF - Heavy",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 128,
+          "description": "Clean door hardware -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "36.05",
+          "notes": "Heavy 129. Clean window unit (per 1.00EA PER ESTIMATE side) 10 - 20 SF - Heavy 130. Clean door / window 3.00EA REVISED opening (per side)",
+          "tax": "0.05",
+          "op": "6.02"
         },
         {
-          "item_number": 130,
-          "description": "Clean door / window 3.00EA opening (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 131,
+          "description": "Clean outlet or switch",
+          "qty": 4.0,
+          "unit": "EA",
+          "total": "26.92",
+          "tax": "0.00",
+          "op": "4.48"
         },
         {
-          "item_number": 131,
-          "description": "Clean outlet or switch 4.00EA 5.61*",
-          "tax": 0.0,
-          "op": 4.48,
-          "total": 26.92
+          "type": "line_item",
+          "line_number": 132,
+          "description": "Clean cabinetry - upper -",
+          "qty": 10.67,
+          "unit": "LF",
+          "total": "305.38",
+          "notes": "inside and out Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.11",
+          "op": "50.90"
         },
         {
-          "item_number": 132,
-          "description": "Clean cabinetry - upper - 10.67LF 23.84* inside and out Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.11,
-          "op": 50.9,
-          "total": 305.38
-        },
-        {
-          "item_number": 332,
-          "description": "Clean door / window 2.00EA 21.06* opening (per side) End revisions by VAEMK8 on 10/3/2025",
-          "tax": 0.01,
-          "op": 8.42,
-          "total": 50.55
+          "type": "line_item",
+          "line_number": 332,
+          "description": "Clean door / window",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "50.55",
+          "notes": "opening (per side) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.01",
+          "op": "8.42"
         }
       ],
       "section_totals": {
-        "tax": "231.30",
-        "op": null,
+        "tax": "0.59",
+        "op": "231.30",
         "total": "1,387.83",
-        "computed_total": 1387.83,
-        "validation_delta": "-0.00"
+        "computed_total": "1,387.83",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -2363,60 +2956,89 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 133,
-          "description": "HEPA Vacuuming - 86.18SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 20.68,
-          "total": 124.1
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 134,
-          "description": "Clean more than the 86.18SF 0.82* walls and ceiling",
-          "tax": 0.08,
-          "op": 14.16,
-          "total": 84.91
+          "type": "line_item",
+          "line_number": 133,
+          "description": "HEPA Vacuuming -",
+          "qty": 86.18,
+          "unit": "SF",
+          "total": "124.10",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "20.68"
         },
         {
-          "item_number": 135,
-          "description": "Clean light fixture 1.00EA 17.13*",
-          "tax": 0.01,
-          "op": 3.42,
-          "total": 20.56
+          "type": "line_item",
+          "line_number": 134,
+          "description": "Clean more than the",
+          "qty": 86.18,
+          "unit": "SF",
+          "total": "84.91",
+          "notes": "walls and ceiling",
+          "tax": "0.08",
+          "op": "14.16"
         },
         {
-          "item_number": 136,
-          "description": "Clean baseboard - Heavy 7.72LF 0.81*",
-          "tax": 0.01,
-          "op": 1.26,
-          "total": 7.52
+          "type": "line_item",
+          "line_number": 135,
+          "description": "Clean light fixture",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "20.56",
+          "tax": "0.01",
+          "op": "3.42"
         },
         {
-          "item_number": 137,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 136,
+          "description": "Clean baseboard - Heavy",
+          "qty": 7.72,
+          "unit": "LF",
+          "total": "7.52",
+          "tax": "0.01",
+          "op": "1.26"
         },
         {
-          "item_number": 138,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 137,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 139,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side)",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 138,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "tax": "0.02",
+          "op": "3.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 139,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side)",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "49.82",
-        "op": null,
+        "tax": "0.14",
+        "op": "49.82",
         "total": "298.90",
-        "computed_total": 298.9,
+        "computed_total": "298.90",
         "validation_delta": "0.00"
       }
     },
@@ -2452,74 +3074,111 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 140,
-          "description": "HEPA Vacuuming - 126.05SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 30.26,
-          "total": 181.52
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 141,
-          "description": "Clean more than the 126.05SF 0.82* walls and ceiling",
-          "tax": 0.12,
-          "op": 20.7,
-          "total": 124.18
+          "type": "line_item",
+          "line_number": 140,
+          "description": "HEPA Vacuuming -",
+          "qty": 126.05,
+          "unit": "SF",
+          "total": "181.52",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "30.26"
         },
         {
-          "item_number": 142,
-          "description": "Clean light fixture - 1.00EA 23.11* Heavy",
-          "tax": 0.01,
-          "op": 4.62,
-          "total": 27.74
+          "type": "line_item",
+          "line_number": 141,
+          "description": "Clean more than the",
+          "qty": 126.05,
+          "unit": "SF",
+          "total": "124.18",
+          "notes": "walls and ceiling",
+          "tax": "0.12",
+          "op": "20.70"
         },
         {
-          "item_number": 143,
-          "description": "Clean baseboard - Heavy 11.97LF 0.81*",
-          "tax": 0.01,
-          "op": 1.94,
-          "total": 11.65
+          "type": "line_item",
+          "line_number": 142,
+          "description": "Clean light fixture -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "27.74",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "4.62"
         },
         {
-          "item_number": 144,
-          "description": "Clean smoke/carbon 1.00EA 10.13* monoxide detector",
-          "tax": 0.0,
-          "op": 2.02,
-          "total": 12.15
+          "type": "line_item",
+          "line_number": 143,
+          "description": "Clean baseboard - Heavy",
+          "qty": 11.97,
+          "unit": "LF",
+          "total": "11.65",
+          "tax": "0.01",
+          "op": "1.94"
         },
         {
-          "item_number": 145,
-          "description": "Clean door (per side) - 2.00EA 15.42* Heavy",
-          "tax": 0.05,
-          "op": 6.18,
-          "total": 37.07
+          "type": "line_item",
+          "line_number": 144,
+          "description": "Clean smoke/carbon",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "12.15",
+          "notes": "monoxide detector",
+          "tax": "0.00",
+          "op": "2.02"
         },
         {
-          "item_number": 146,
-          "description": "Clean door hardware - 2.00EA 14.99* Heavy",
-          "tax": 0.05,
-          "op": 6.02,
-          "total": 36.05
+          "type": "line_item",
+          "line_number": 145,
+          "description": "Clean door (per side) -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "37.07",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "6.18"
         },
         {
-          "item_number": 147,
-          "description": "Clean door / window 2.00EA 21.06* opening (per side)",
-          "tax": 0.01,
-          "op": 8.42,
-          "total": 50.55
+          "type": "line_item",
+          "line_number": 146,
+          "description": "Clean door hardware -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "36.05",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "6.02"
         },
         {
-          "item_number": 148,
-          "description": "Clean outlet or switch 2.00EA 5.61*",
-          "tax": 0.0,
-          "op": 2.24,
-          "total": 13.46
+          "type": "line_item",
+          "line_number": 147,
+          "description": "Clean door / window",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "50.55",
+          "tax": "0.01",
+          "op": "8.42"
+        },
+        {
+          "type": "line_item",
+          "line_number": 148,
+          "description": "Clean outlet or switch",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "13.46",
+          "tax": "0.00",
+          "op": "2.24"
         }
       ],
       "section_totals": {
-        "tax": "82.40",
-        "op": null,
+        "tax": "0.25",
+        "op": "82.40",
         "total": "494.37",
-        "computed_total": 494.37,
+        "computed_total": "494.37",
         "validation_delta": "0.00"
       }
     },
@@ -2551,118 +3210,155 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 181,
-          "description": "HEPA Vacuuming 393.57SF 3.10* exposed framing w/ sheathing - Floor",
-          "tax": 0.0,
-          "op": 244.02,
-          "total": 1464.09
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 182,
-          "description": "HEPA Vacuuming 628.58SF 2.17* exposed framing w/ sheathing - Walls",
-          "tax": 0.0,
-          "op": 272.8,
-          "total": 1636.82
+          "type": "line_item",
+          "line_number": 181,
+          "description": "HEPA Vacuuming",
+          "qty": 393.57,
+          "unit": "SF",
+          "total": "1,464.09",
+          "notes": "exposed framing w/ sheathing - Floor",
+          "tax": "0.00",
+          "op": "244.02"
         },
         {
-          "item_number": 183,
-          "description": "HEPA Vacuuming - 386.59SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 92.78,
-          "total": 556.69
+          "type": "line_item",
+          "line_number": 182,
+          "description": "HEPA Vacuuming",
+          "qty": 628.58,
+          "unit": "SF",
+          "total": "1,636.82",
+          "notes": "exposed framing w/ sheathing - Walls",
+          "tax": "0.00",
+          "op": "272.80"
         },
         {
-          "item_number": 184,
-          "description": "Clean floor or roof joist 393.57SF 3.07* system - Heavy",
-          "tax": 1.12,
-          "op": 241.88,
-          "total": 1451.26
+          "type": "line_item",
+          "line_number": 183,
+          "description": "HEPA Vacuuming -",
+          "qty": 386.59,
+          "unit": "SF",
+          "total": "556.69",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "92.78"
         },
         {
-          "item_number": 185,
-          "description": "Clean stud wall - Heavy 628.58SF 2.46*",
-          "tax": 1.79,
-          "op": 309.62,
-          "total": 1857.72
+          "type": "line_item",
+          "line_number": 184,
+          "description": "Clean floor or roof joist",
+          "qty": 393.57,
+          "unit": "SF",
+          "total": "1,451.26",
+          "notes": "system - Heavy",
+          "tax": "1.12",
+          "op": "241.88"
         },
         {
-          "item_number": 186,
-          "description": "Clean the floor - Heavy 386.59SF 1.02*",
-          "tax": 0.37,
-          "op": 78.94,
-          "total": 473.63
+          "type": "line_item",
+          "line_number": 185,
+          "description": "Clean stud wall - Heavy",
+          "qty": 628.58,
+          "unit": "SF",
+          "total": "1,857.72",
+          "tax": "1.79",
+          "op": "309.62"
         },
         {
-          "item_number": 187,
-          "description": "Clean light fixture - 1.00EA 23.11* Heavy",
-          "tax": 0.01,
-          "op": 4.62,
-          "total": 27.74
+          "type": "line_item",
+          "line_number": 186,
+          "description": "Clean the floor - Heavy",
+          "qty": 386.59,
+          "unit": "SF",
+          "total": "473.63",
+          "tax": "0.37",
+          "op": "78.94"
         },
         {
-          "item_number": 188,
-          "description": "Clean overhead door & 1.00EA 97.88* hardware - Large",
-          "tax": 0.04,
-          "op": 19.58,
-          "total": 117.5
+          "type": "line_item",
+          "line_number": 187,
+          "description": "Clean light fixture -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "27.74",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "4.62"
         },
         {
-          "item_number": 189,
-          "description": "Clean overhead (garage) 1.00EA 42.67* door opener",
-          "tax": 0.0,
-          "op": 8.54,
-          "total": 51.21
+          "type": "line_item",
+          "line_number": 188,
+          "description": "Clean overhead door &",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "117.50",
+          "tax": "0.04",
+          "op": "19.58"
         },
         {
-          "item_number": 190,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 189,
+          "description": "Clean overhead (garage)",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "51.21",
+          "notes": "door opener",
+          "tax": "0.00",
+          "op": "8.54"
         },
         {
-          "item_number": 191,
-          "description": "Clean door hardware - 1.00EA 14.99* Heavy",
-          "tax": 0.02,
-          "op": 3.0,
-          "total": 18.01
+          "type": "line_item",
+          "line_number": 190,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 192,
-          "description": "Clean window unit (per 1.00EA side) 10 - 20 SF - Heavy",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 191,
+          "description": "Clean door hardware -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.01",
+          "notes": "Heavy 192. Clean window unit (per 1.00EA PER ESTIMATE side) 10 - 20 SF - Heavy 193. Clean door / window 2.00EA REVISED opening (per side)",
+          "tax": "0.02",
+          "op": "3.00"
         },
         {
-          "item_number": 193,
-          "description": "Clean door / window 2.00EA opening (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 194,
+          "description": "Clean outlet or switch",
+          "qty": 6.0,
+          "unit": "EA",
+          "total": "40.41",
+          "notes": "Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.01",
+          "op": "6.74"
         },
         {
-          "item_number": 194,
-          "description": "Clean outlet or switch 6.00EA 5.61* Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.01,
-          "op": 6.74,
-          "total": 40.41
-        },
-        {
-          "item_number": 333,
-          "description": "Clean door / window 1.00EA 21.06* opening (per side) End revisions by VAEMK8 on 10/3/2025",
-          "tax": 0.0,
-          "op": 4.22,
-          "total": 25.28
+          "type": "line_item",
+          "line_number": 333,
+          "description": "Clean door / window",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "25.28",
+          "notes": "opening (per side) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.00",
+          "op": "4.22"
         }
       ],
       "section_totals": {
-        "tax": "1,289.82",
-        "op": null,
+        "tax": "3.38",
+        "op": "1,289.82",
         "total": "7,738.88",
-        "computed_total": 7738.88,
+        "computed_total": "7,738.88",
         "validation_delta": "0.00"
       }
     },
@@ -2696,130 +3392,199 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 202,
-          "description": "HEPA Vacuuming - 228.56SF 1.20*",
-          "tax": 0.0,
-          "op": 54.86,
-          "total": 329.13
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 203,
-          "description": "Clean more than the 228.56SF 0.82*",
-          "tax": 0.22,
-          "op": 37.52,
-          "total": 225.16
+          "type": "line_item",
+          "line_number": 202,
+          "description": "HEPA Vacuuming -",
+          "qty": 228.56,
+          "unit": "SF",
+          "total": "329.13",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "54.86"
         },
         {
-          "item_number": 204,
-          "description": "Clean light fixture - 1.00EA 23.11*",
-          "tax": 0.01,
-          "op": 4.62,
-          "total": 27.74
+          "type": "line_item",
+          "line_number": 203,
+          "description": "Clean more than the",
+          "qty": 228.56,
+          "unit": "SF",
+          "total": "225.16",
+          "notes": "walls and ceiling",
+          "tax": "0.22",
+          "op": "37.52"
         },
         {
-          "item_number": 205,
-          "description": "Clean baseboard - Heavy 14.96LF 0.81*",
-          "tax": 0.01,
-          "op": 2.42,
-          "total": 14.55
+          "type": "line_item",
+          "line_number": 204,
+          "description": "Clean light fixture -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "27.74",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "4.62"
         },
         {
-          "item_number": 206,
-          "description": "Clean door (per side) - 2.00EA 15.42*",
-          "tax": 0.05,
-          "op": 6.18,
-          "total": 37.07
+          "type": "line_item",
+          "line_number": 205,
+          "description": "Clean baseboard - Heavy",
+          "qty": 14.96,
+          "unit": "LF",
+          "total": "14.55",
+          "tax": "0.01",
+          "op": "2.42"
         },
         {
-          "item_number": 207,
-          "description": "Clean door hardware - 2.00EA 14.99*",
-          "tax": 0.05,
-          "op": 6.02,
-          "total": 36.05
+          "type": "line_item",
+          "line_number": 206,
+          "description": "Clean door (per side) -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "37.07",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "6.18"
         },
         {
-          "item_number": 208,
-          "description": "Clean chair rail 14.96LF 0.58*",
-          "tax": 0.01,
-          "op": 1.74,
-          "total": 10.43
+          "type": "line_item",
+          "line_number": 207,
+          "description": "Clean door hardware -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "36.05",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "6.02"
         },
         {
-          "item_number": 209,
-          "description": "Clean door / window 2.00EA 21.06*",
-          "tax": 0.01,
-          "op": 8.42,
-          "total": 50.55
+          "type": "line_item",
+          "line_number": 208,
+          "description": "Clean chair rail",
+          "qty": 14.96,
+          "unit": "LF",
+          "total": "10.43",
+          "tax": "0.01",
+          "op": "1.74"
         },
         {
-          "item_number": 210,
-          "description": "Clean outlet or switch 4.00EA 5.61*",
-          "tax": 0.0,
-          "op": 4.48,
-          "total": 26.92
+          "type": "line_item",
+          "line_number": 209,
+          "description": "Clean door / window",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "50.55",
+          "notes": "opening (per side)",
+          "tax": "0.01",
+          "op": "8.42"
         },
         {
-          "item_number": 290,
-          "description": "R&R 1/2\" drywall - 32.45SF 4.42*",
-          "tax": 2.07,
-          "op": 29.12,
-          "total": 174.62
+          "type": "line_item",
+          "line_number": 210,
+          "description": "Clean outlet or switch",
+          "qty": 4.0,
+          "unit": "EA",
+          "total": "26.92",
+          "notes": "Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.00",
+          "op": "4.48"
         },
         {
-          "item_number": 292,
-          "description": "Tape joint for new to 64.68LF 12.65*",
-          "tax": 2.46,
-          "op": 164.14,
-          "total": 984.8
+          "type": "line_item",
+          "line_number": 290,
+          "description": "R&R 1/2\" drywall -",
+          "qty": 32.45,
+          "unit": "SF",
+          "total": "174.62",
+          "notes": "hung, taped, ready for texture",
+          "tax": "2.07",
+          "op": "29.12"
         },
         {
-          "item_number": 293,
-          "description": "Painting - Faux (special 64.68SF 3.95*",
-          "tax": 1.54,
-          "op": 51.4,
-          "total": 308.43
+          "type": "line_item",
+          "line_number": 292,
+          "description": "Tape joint for new to",
+          "qty": 64.68,
+          "unit": "LF",
+          "total": "984.80",
+          "notes": "existing drywall - per LF",
+          "tax": "2.46",
+          "op": "164.14"
         },
         {
-          "item_number": 294,
-          "description": "Seal the surface area 64.68SF 0.97*",
-          "tax": 0.37,
-          "op": 12.62,
-          "total": 75.73
+          "type": "line_item",
+          "line_number": 293,
+          "description": "Painting - Faux (special",
+          "qty": 64.68,
+          "unit": "SF",
+          "total": "308.43",
+          "notes": "effects) - 2 part",
+          "tax": "1.54",
+          "op": "51.40"
         },
         {
-          "item_number": 295,
-          "description": "Detach & Reset 0.50EA 160.25*",
-          "tax": 0.0,
-          "op": 16.02,
-          "total": 96.15
+          "type": "line_item",
+          "line_number": 294,
+          "description": "Seal the surface area",
+          "qty": 64.68,
+          "unit": "SF",
+          "total": "75.73",
+          "notes": "w/PVA primer - one coat",
+          "tax": "0.37",
+          "op": "12.62"
         },
         {
-          "item_number": 297,
-          "description": "Detach & Reset 0.50EA 20.99*",
-          "tax": 0.0,
-          "op": 2.1,
-          "total": 12.6
+          "type": "line_item",
+          "line_number": 295,
+          "description": "Detach & Reset",
+          "qty": 0.5,
+          "unit": "EA",
+          "total": "96.15",
+          "notes": "Recessed light fixture",
+          "tax": "0.00",
+          "op": "16.02"
         },
         {
-          "item_number": 296,
-          "description": "Mask or cover per 141.86SF 0.63*",
-          "tax": 1.21,
-          "op": 18.12,
-          "total": 108.7
+          "type": "line_item",
+          "line_number": 297,
+          "description": "Detach & Reset",
+          "qty": 0.5,
+          "unit": "EA",
+          "total": "12.60",
+          "notes": "Heat/AC register - Mechanically attached",
+          "tax": "0.00",
+          "op": "2.10"
         },
         {
-          "item_number": 307,
-          "description": "Floor protection - 43.35SF 0.66*",
-          "tax": 1.15,
-          "op": 5.96,
-          "total": 35.72
+          "type": "line_item",
+          "line_number": 296,
+          "description": "Mask or cover per",
+          "qty": 141.86,
+          "unit": "SF",
+          "total": "108.70",
+          "tax": "1.21",
+          "op": "18.12"
+        },
+        {
+          "type": "line_item",
+          "line_number": 307,
+          "description": "Floor protection -",
+          "qty": 43.35,
+          "unit": "SF",
+          "total": "35.72",
+          "notes": "cardboard and tape End revisions by VAEMK8 on 10/3/2025",
+          "tax": "1.15",
+          "op": "5.96"
         }
       ],
       "section_totals": {
-        "tax": "425.74",
-        "op": null,
+        "tax": "9.16",
+        "op": "425.74",
         "total": "2,554.35",
-        "computed_total": 2554.35,
+        "computed_total": "2,554.35",
         "validation_delta": "0.00"
       }
     },
@@ -2871,81 +3636,123 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 211,
-          "description": "HEPA Vacuuming - 674.33SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 161.84,
-          "total": 971.04
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 212,
-          "description": "Clean more than the 674.33SF 0.82* walls and ceiling",
-          "tax": 0.64,
-          "op": 110.72,
-          "total": 664.31
+          "type": "line_item",
+          "line_number": 211,
+          "description": "HEPA Vacuuming -",
+          "qty": 674.33,
+          "unit": "SF",
+          "total": "971.04",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "161.84"
         },
         {
-          "item_number": 213,
-          "description": "Clean crown molding - 57.14LF 1.01* Heavy",
-          "tax": 0.05,
-          "op": 11.56,
-          "total": 69.32
+          "type": "line_item",
+          "line_number": 212,
+          "description": "Clean more than the",
+          "qty": 674.33,
+          "unit": "SF",
+          "total": "664.31",
+          "notes": "walls and ceiling",
+          "tax": "0.64",
+          "op": "110.72"
         },
         {
-          "item_number": 214,
-          "description": "Clean smoke/carbon 1.00EA 10.13* monoxide detector",
-          "tax": 0.0,
-          "op": 2.02,
-          "total": 12.15
+          "type": "line_item",
+          "line_number": 213,
+          "description": "Clean crown molding -",
+          "qty": 57.14,
+          "unit": "LF",
+          "total": "69.32",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "11.56"
         },
         {
-          "item_number": 215,
-          "description": "Clean baseboard - Heavy 33.41LF 0.81*",
-          "tax": 0.03,
-          "op": 5.42,
-          "total": 32.51
+          "type": "line_item",
+          "line_number": 214,
+          "description": "Clean smoke/carbon",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "12.15",
+          "notes": "monoxide detector",
+          "tax": "0.00",
+          "op": "2.02"
         },
         {
-          "item_number": 216,
-          "description": "Clean door (per side) - 1.00EA 15.42* Heavy",
-          "tax": 0.02,
-          "op": 3.08,
-          "total": 18.52
+          "type": "line_item",
+          "line_number": 215,
+          "description": "Clean baseboard - Heavy",
+          "qty": 33.41,
+          "unit": "LF",
+          "total": "32.51",
+          "tax": "0.03",
+          "op": "5.42"
         },
         {
-          "item_number": 217,
-          "description": "Clean patio door (sliding 1.00EA 63.28* glass) (per side)",
-          "tax": 0.12,
-          "op": 12.68,
-          "total": 76.08
+          "type": "line_item",
+          "line_number": 216,
+          "description": "Clean door (per side) -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "18.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "3.08"
         },
         {
-          "item_number": 218,
-          "description": "Clean door hardware - 2.00EA 14.99* Heavy",
-          "tax": 0.05,
-          "op": 6.02,
-          "total": 36.05
+          "type": "line_item",
+          "line_number": 217,
+          "description": "Clean patio door (sliding",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "76.08",
+          "notes": "glass) (per side)",
+          "tax": "0.12",
+          "op": "12.68"
         },
         {
-          "item_number": 219,
-          "description": "Clean door / window 2.00EA 21.06* opening (per side)",
-          "tax": 0.01,
-          "op": 8.42,
-          "total": 50.55
+          "type": "line_item",
+          "line_number": 218,
+          "description": "Clean door hardware -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "36.05",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "6.02"
         },
         {
-          "item_number": 220,
-          "description": "Clean outlet or switch 6.00EA 5.61*",
-          "tax": 0.01,
-          "op": 6.74,
-          "total": 40.41
+          "type": "line_item",
+          "line_number": 219,
+          "description": "Clean door / window",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "50.55",
+          "notes": "opening (per side)",
+          "tax": "0.01",
+          "op": "8.42"
+        },
+        {
+          "type": "line_item",
+          "line_number": 220,
+          "description": "Clean outlet or switch",
+          "qty": 6.0,
+          "unit": "EA",
+          "total": "40.41",
+          "tax": "0.01",
+          "op": "6.74"
         }
       ],
       "section_totals": {
-        "tax": "328.50",
-        "op": null,
+        "tax": "0.93",
+        "op": "328.50",
         "total": "1,970.94",
-        "computed_total": 1970.94,
+        "computed_total": "1,970.94",
         "validation_delta": "0.00"
       }
     },
@@ -2985,97 +3792,123 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 221,
-          "description": "HEPA Vacuuming - 614.09SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 147.38,
-          "total": 884.29
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 222,
-          "description": "Clean more than the 614.09SF 0.82* walls and ceiling",
-          "tax": 0.58,
-          "op": 100.84,
-          "total": 604.97
+          "type": "line_item",
+          "line_number": 221,
+          "description": "HEPA Vacuuming -",
+          "qty": 614.09,
+          "unit": "SF",
+          "total": "884.29",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "147.38"
         },
         {
-          "item_number": 223,
-          "description": "Clean crown molding - 48.28LF 1.01* Heavy",
-          "tax": 0.05,
-          "op": 9.78,
-          "total": 58.59
+          "type": "line_item",
+          "line_number": 222,
+          "description": "Clean more than the",
+          "qty": 614.09,
+          "unit": "SF",
+          "total": "604.97",
+          "notes": "walls and ceiling",
+          "tax": "0.58",
+          "op": "100.84"
         },
         {
-          "item_number": 224,
-          "description": "Clean roof window or 1.00EA 54.66* skylight",
-          "tax": 0.01,
-          "op": 10.94,
-          "total": 65.61
+          "type": "line_item",
+          "line_number": 223,
+          "description": "Clean crown molding -",
+          "qty": 48.28,
+          "unit": "LF",
+          "total": "58.59",
+          "tax": "0.05",
+          "op": "9.78"
         },
         {
-          "item_number": 225,
-          "description": "Clean smoke/carbon 1.00EA 10.13* monoxide detector",
-          "tax": 0.0,
-          "op": 2.02,
-          "total": 12.15
+          "type": "line_item",
+          "line_number": 224,
+          "description": "Clean roof window or",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "65.61",
+          "notes": "skylight",
+          "tax": "0.01",
+          "op": "10.94"
         },
         {
-          "item_number": 226,
-          "description": "Clean baseboard - Heavy 35.93LF 0.81*",
-          "tax": 0.03,
-          "op": 5.82,
-          "total": 34.95
+          "type": "line_item",
+          "line_number": 225,
+          "description": "Clean smoke/carbon",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "12.15",
+          "notes": "monoxide detector",
+          "tax": "0.00",
+          "op": "2.02"
         },
         {
-          "item_number": 227,
-          "description": "Clean door (per side) - 2.00EA 15.42* Heavy",
-          "tax": 0.05,
-          "op": 6.18,
-          "total": 37.07
+          "type": "line_item",
+          "line_number": 226,
+          "description": "Clean baseboard - Heavy",
+          "qty": 35.93,
+          "unit": "LF",
+          "total": "34.95",
+          "tax": "0.03",
+          "op": "5.82"
         },
         {
-          "item_number": 228,
-          "description": "Clean door hardware - 2.00EA 14.99* Heavy",
-          "tax": 0.05,
-          "op": 6.02,
-          "total": 36.05
+          "type": "line_item",
+          "line_number": 227,
+          "description": "Clean door (per side) -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "37.07",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "6.18"
         },
         {
-          "item_number": 229,
-          "description": "Clean window unit (per 1.00EA side) 10 - 20 SF - Heavy",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 228,
+          "description": "Clean door hardware -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "36.05",
+          "notes": "Heavy 229. Clean window unit (per 1.00EA PER ESTIMATE side) 10 - 20 SF - Heavy 230. Clean door / window 3.00EA REVISED opening (per side)",
+          "tax": "0.05",
+          "op": "6.02"
         },
         {
-          "item_number": 230,
-          "description": "Clean door / window 3.00EA opening (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 231,
+          "description": "Clean outlet or switch",
+          "qty": 6.0,
+          "unit": "EA",
+          "total": "40.41",
+          "notes": "Revised by VAEMK8 on 10/3/2025",
+          "tax": "0.01",
+          "op": "6.74"
         },
         {
-          "item_number": 231,
-          "description": "Clean outlet or switch 6.00EA 5.61* Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.01,
-          "op": 6.74,
-          "total": 40.41
-        },
-        {
-          "item_number": 334,
-          "description": "Clean door / window 2.00EA 21.06* opening (per side) End revisions by VAEMK8 on 10/3/2025",
-          "tax": 0.01,
-          "op": 8.42,
-          "total": 50.55
+          "type": "line_item",
+          "line_number": 334,
+          "description": "Clean door / window",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "50.55",
+          "notes": "opening (per side) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.01",
+          "op": "8.42"
         }
       ],
       "section_totals": {
-        "tax": "304.14",
-        "op": null,
+        "tax": "0.79",
+        "op": "304.14",
         "total": "1,824.64",
-        "computed_total": 1824.64,
+        "computed_total": "1,824.64",
         "validation_delta": "0.00"
       }
     },
@@ -3146,176 +3979,230 @@
       ],
       "line_items": [
         {
-          "item_number": 232,
-          "description": "HEPA Vacuuming - 994.33SF 1.20* Detailed - (PER SF)",
-          "tax": 0.0,
-          "op": 238.64,
-          "total": 1431.84
+          "type": "header",
+          "text": "CLEANING"
         },
         {
-          "item_number": 233,
-          "description": "Clean more than the 994.33SF 1.02* walls and ceiling - Heavy",
-          "tax": 0.94,
-          "op": 203.02,
-          "total": 1218.18
+          "type": "line_item",
+          "line_number": 232,
+          "description": "HEPA Vacuuming -",
+          "qty": 994.33,
+          "unit": "SF",
+          "total": "1,431.84",
+          "notes": "Detailed - (PER SF)",
+          "tax": "0.00",
+          "op": "238.64"
         },
         {
-          "item_number": 234,
-          "description": "Clean chandelier - 2.00EA 98.96* Heavy",
-          "tax": 0.02,
-          "op": 39.58,
-          "total": 237.52
+          "type": "line_item",
+          "line_number": 233,
+          "description": "Clean more than the",
+          "qty": 994.33,
+          "unit": "SF",
+          "total": "1,218.18",
+          "notes": "walls and ceiling - Heavy",
+          "tax": "0.94",
+          "op": "203.02"
         },
         {
-          "item_number": 235,
-          "description": "Clean recessed light 2.00EA 17.15* fixture",
-          "tax": 0.02,
-          "op": 6.86,
-          "total": 41.18
+          "type": "line_item",
+          "line_number": 234,
+          "description": "Clean chandelier -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "237.52",
+          "notes": "Heavy",
+          "tax": "0.02",
+          "op": "39.58"
         },
         {
-          "item_number": 236,
-          "description": "Clean baseboard - Heavy 59.16LF 0.81*",
-          "tax": 0.06,
-          "op": 9.6,
-          "total": 57.58
+          "type": "line_item",
+          "line_number": 235,
+          "description": "Clean recessed light",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "41.18",
+          "notes": "fixture",
+          "tax": "0.02",
+          "op": "6.86"
         },
         {
-          "item_number": 237,
-          "description": "Clean door (per side) - 2.00EA 15.42* Heavy",
-          "tax": 0.05,
-          "op": 6.18,
-          "total": 37.07
+          "type": "line_item",
+          "line_number": 236,
+          "description": "Clean baseboard - Heavy",
+          "qty": 59.16,
+          "unit": "LF",
+          "total": "57.58",
+          "tax": "0.06",
+          "op": "9.60"
         },
         {
-          "item_number": 238,
-          "description": "Clean door hardware - 2.00EA 14.99* Heavy",
-          "tax": 0.05,
-          "op": 6.02,
-          "total": 36.05
+          "type": "line_item",
+          "line_number": 237,
+          "description": "Clean door (per side) -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "37.07",
+          "notes": "Heavy",
+          "tax": "0.05",
+          "op": "6.18"
         },
         {
-          "item_number": 239,
-          "description": "Clean window unit (per 1.00EA side) 10 - 20 SF - Heavy",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 238,
+          "description": "Clean door hardware -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "36.05",
+          "notes": "240. Clean window unit (per 1.00EA PER ESTIMATE side) 21 - 40 SF - Heavy 241. Clean door / window 4.00EA REVISED opening (per side)",
+          "tax": "0.05",
+          "op": "6.02"
         },
         {
-          "item_number": 240,
-          "description": "Clean window unit (per 1.00EA side) 21 - 40 SF - Heavy",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 242,
+          "description": "Clean outlet or switch",
+          "qty": 8.0,
+          "unit": "EA",
+          "total": "53.87",
+          "tax": "0.01",
+          "op": "8.98"
         },
         {
-          "item_number": 241,
-          "description": "Clean door / window 4.00EA opening (per side)",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0,
-          "note": "REVISED/PER ESTIMATE"
+          "type": "line_item",
+          "line_number": 243,
+          "description": "Clean cabinetry - upper -",
+          "qty": 9.5,
+          "unit": "LF",
+          "total": "271.90",
+          "notes": "inside and out",
+          "tax": "0.10",
+          "op": "45.32"
         },
         {
-          "item_number": 242,
-          "description": "Clean outlet or switch 8.00EA 5.61*",
-          "tax": 0.01,
-          "op": 8.98,
-          "total": 53.87
+          "type": "line_item",
+          "line_number": 244,
+          "description": "Clean cabinetry - full",
+          "qty": 4.0,
+          "unit": "LF",
+          "total": "199.99",
+          "notes": "height - inside and out",
+          "tax": "0.05",
+          "op": "33.34"
         },
         {
-          "item_number": 243,
-          "description": "Clean cabinetry - upper - 9.50LF 23.84* inside and out",
-          "tax": 0.1,
-          "op": 45.32,
-          "total": 271.9
+          "type": "line_item",
+          "line_number": 245,
+          "description": "Clean cabinetry - lower -",
+          "qty": 22.0,
+          "unit": "LF",
+          "total": "629.65",
+          "notes": "inside and out",
+          "tax": "0.23",
+          "op": "104.94"
         },
         {
-          "item_number": 244,
-          "description": "Clean cabinetry - full 4.00LF 41.65* height - inside and out",
-          "tax": 0.05,
-          "op": 33.34,
-          "total": 199.99
+          "type": "line_item",
+          "line_number": 246,
+          "description": "Clean countertop -",
+          "qty": 44.0,
+          "unit": "SF",
+          "total": "81.94",
+          "notes": "Heavy",
+          "tax": "0.08",
+          "op": "13.66"
         },
         {
-          "item_number": 245,
-          "description": "Clean cabinetry - lower - 22.00LF 23.84* inside and out",
-          "tax": 0.23,
-          "op": 104.94,
-          "total": 629.65
+          "type": "line_item",
+          "line_number": 247,
+          "description": "Clean sink - double -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "91.81",
+          "notes": "Heavy",
+          "tax": "0.01",
+          "op": "15.30"
         },
         {
-          "item_number": 246,
-          "description": "Clean countertop - 44.00SF 1.55* Heavy",
-          "tax": 0.08,
-          "op": 13.66,
-          "total": 81.94
+          "type": "line_item",
+          "line_number": 248,
+          "description": "Clean sink faucet -",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "53.06",
+          "notes": "Heavy",
+          "tax": "0.00",
+          "op": "8.84"
         },
         {
-          "item_number": 247,
-          "description": "Clean sink - double - 2.00EA 38.25* Heavy",
-          "tax": 0.01,
-          "op": 15.3,
-          "total": 91.81
+          "type": "line_item",
+          "line_number": 249,
+          "description": "Clean range hood -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "48.17",
+          "notes": "Heavy Revised by VAEMK8 on 8/13/2025",
+          "tax": "0.01",
+          "op": "8.02"
         },
         {
-          "item_number": 248,
-          "description": "Clean sink faucet - 2.00EA 22.11* Heavy",
-          "tax": 0.0,
-          "op": 8.84,
-          "total": 53.06
+          "type": "line_item",
+          "line_number": 261,
+          "description": "R&R Dishwasher",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "945.63",
+          "tax": "50.73",
+          "op": "157.60"
         },
         {
-          "item_number": 249,
-          "description": "Clean range hood - 1.00EA 40.14* Heavy Revised by VAEMK8 on 8/13/2025",
-          "tax": 0.01,
-          "op": 8.02,
-          "total": 48.17
+          "type": "line_item",
+          "line_number": 263,
+          "description": "R&R Range hood",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "370.37",
+          "tax": "14.34",
+          "op": "61.72"
         },
         {
-          "item_number": 261,
-          "description": "R&R Dishwasher 1.00EA 737.30*",
-          "tax": 50.73,
-          "op": 157.6,
-          "total": 945.63
+          "type": "line_item",
+          "line_number": 268,
+          "description": "R&R 6-0 6-8 vinyl",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "1,579.33",
+          "notes": "sliding patio door",
+          "tax": "80.88",
+          "op": "263.22"
         },
         {
-          "item_number": 263,
-          "description": "R&R Range hood 1.00EA 294.31*",
-          "tax": 14.34,
-          "op": 61.72,
-          "total": 370.37
+          "type": "line_item",
+          "line_number": 265,
+          "description": "15-AMP Single-Pole",
+          "qty": 177.86,
+          "unit": "EA",
+          "total": "0.00",
+          "tax": "0.00"
         },
         {
-          "item_number": 268,
-          "description": "R&R 6-0 6-8 vinyl 1.00EA 1,235.23* sliding patio door",
-          "tax": 80.88,
-          "op": 263.22,
-          "total": 1579.33
-        },
-        {
-          "item_number": 265,
-          "description": "15-AMP Single-Pole 177.86EA 0.00 Circuit Breaker Recommended Action based on Strike Check Report End revisions by VAEMK8 on 8/13/2025 Revised by VAEMK8 on 10/3/2025",
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 0.0
-        },
-        {
-          "item_number": 335,
-          "description": "Clean door / window 2.00EA 21.06* opening (per side) End revisions by VAEMK8 on 10/3/2025",
-          "tax": 0.01,
-          "op": 8.42,
-          "total": 50.55
+          "type": "line_item",
+          "line_number": 335,
+          "description": "Clean door / window",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "50.55",
+          "notes": "opening (per side) End revisions by VAEMK8 on 10/3/2025",
+          "tax": "0.01",
+          "op": "8.42"
         }
       ],
       "section_totals": {
-        "tax": "1,239.26",
-        "op": null,
+        "tax": "147.59",
+        "op": "1,239.26",
         "total": "7,435.69",
-        "computed_total": 7435.69,
-        "validation_delta": "-0.00"
+        "computed_total": "7,435.69",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -3333,74 +4220,109 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 274,
-          "description": "VIP Claim Service 1.00HR 450.00*E HVACi No call No show appointment HVACi had a confirmed appointment with me in 9-17-2025 at 10am-12pm 1 $450.00 $450.00 The appointment was canceled without notice at 10:30am, when I was already onsite Cancelation fee of 3 hours of labor plus gas expense : $450",
-          "tax": 0.0,
-          "op": 90.0,
-          "total": 540.0
+          "type": "line_item",
+          "line_number": 274,
+          "description": "VIP Claim Service",
+          "qty": 1.0,
+          "unit": "HR",
+          "total": "540.00",
+          "notes": "HVACi No call No show appointment HVACi had a confirmed appointment with me in 9-17-2025 at 10am-12pm 1 $450.00 $450.00 The appointment was canceled without notice at 10:30am, when I was already onsite Cancelation fee of 3 hours of labor plus gas expense : $450",
+          "tax": "0.00",
+          "op": "90.00"
         },
         {
-          "item_number": 316,
-          "description": "Furnace - heavy clean, 1.00EA 625.95* replace filters and service - w/ AC",
-          "tax": 1.48,
-          "op": 125.5,
-          "total": 752.93
+          "type": "line_item",
+          "line_number": 316,
+          "description": "Furnace - heavy clean,",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "752.93",
+          "notes": "replace filters and service - w/ AC",
+          "tax": "1.48",
+          "op": "125.50"
         },
         {
-          "item_number": 317,
-          "description": "Seal attic framing for 413.21SF 1.85* odor control - up to 5/12",
-          "tax": 9.42,
-          "op": 154.76,
-          "total": 928.62
+          "type": "line_item",
+          "line_number": 317,
+          "description": "Seal attic framing for",
+          "qty": 413.21,
+          "unit": "SF",
+          "total": "928.62",
+          "notes": "odor control - up to 5/12",
+          "tax": "9.42",
+          "op": "154.76"
         },
         {
-          "item_number": 318,
-          "description": "Tear out and bag wet 413.21SF 2.92* insulation in confined space - Cat 3",
-          "tax": 2.36,
-          "op": 241.8,
-          "total": 1450.73
+          "type": "line_item",
+          "line_number": 318,
+          "description": "Tear out and bag wet",
+          "qty": 413.21,
+          "unit": "SF",
+          "total": "1,450.73",
+          "notes": "insulation in confined space - Cat 3",
+          "tax": "2.36",
+          "op": "241.80"
         },
         {
-          "item_number": 320,
-          "description": "R&R Batt insulation - 413.21SF 1.10* Add-on for confined spaces",
-          "tax": 0.0,
-          "op": 90.9,
-          "total": 545.43
+          "type": "line_item",
+          "line_number": 320,
+          "description": "R&R Batt insulation -",
+          "qty": 413.21,
+          "unit": "SF",
+          "total": "545.43",
+          "notes": "Add-on for confined spaces",
+          "tax": "0.00",
+          "op": "90.90"
         },
         {
-          "item_number": 322,
-          "description": "R&R Batt insulation - 413.21SF 3.23*",
-          "tax": 67.13,
-          "op": 280.36,
-          "total": 1682.16
+          "type": "line_item",
+          "line_number": 322,
+          "description": "R&R Batt insulation -",
+          "qty": 413.21,
+          "unit": "SF",
+          "total": "1,682.16",
+          "tax": "67.13",
+          "op": "280.36"
         },
         {
-          "item_number": 323,
-          "description": "HEPA Vacuuming 413.21SF 1.54* exposed framing - Floor - (PER SF)",
-          "tax": 0.0,
-          "op": 127.26,
-          "total": 763.6
+          "type": "line_item",
+          "line_number": 323,
+          "description": "HEPA Vacuuming",
+          "qty": 413.21,
+          "unit": "SF",
+          "total": "763.60",
+          "notes": "exposed framing - Floor - (PER SF)",
+          "tax": "0.00",
+          "op": "127.26"
         },
         {
-          "item_number": 324,
-          "description": "Containment 1.00SF 1.24* Barrier/Airlock/Decon. Chamber",
-          "tax": 0.02,
-          "op": 0.24,
-          "total": 1.5
+          "type": "line_item",
+          "line_number": 324,
+          "description": "Containment",
+          "qty": 1.0,
+          "unit": "SF",
+          "total": "1.50",
+          "notes": "Barrier/Airlock/Decon. Chamber",
+          "tax": "0.02",
+          "op": "0.24"
         },
         {
-          "item_number": 326,
-          "description": "R&R Ductwork system - 1.00EA 8,258.81* hot or cold air - 1600 to 2199 SF home End revisions by VAEMK8 on 10/3/2025",
-          "tax": 250.48,
-          "op": 1701.86,
-          "total": 10211.15
+          "type": "line_item",
+          "line_number": 326,
+          "description": "R&R Ductwork system -",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "10,211.15",
+          "notes": "hot or cold air - 1600 to 2199 SF home End revisions by VAEMK8 on 10/3/2025",
+          "tax": "250.48",
+          "op": "1,701.86"
         }
       ],
       "section_totals": {
-        "tax": "2,812.68",
-        "op": null,
+        "tax": "330.89",
+        "op": "2,812.68",
         "total": "16,876.12",
-        "computed_total": 16876.12,
+        "computed_total": "16,876.12",
         "validation_delta": "0.00"
       }
     },
@@ -3417,8 +4339,7 @@
           "unit": "EA",
           "total": "687.11",
           "notes": "labor minimum",
-          "tax": "114.52",
-          "item_number": 32
+          "tax": "114.52"
         },
         {
           "type": "line_item",
@@ -3428,8 +4349,7 @@
           "unit": "EA",
           "total": "64.18",
           "notes": "minimum",
-          "tax": "10.70",
-          "item_number": 267
+          "tax": "10.70"
         },
         {
           "type": "line_item",
@@ -3438,15 +4358,14 @@
           "qty": 1.0,
           "unit": "EA",
           "total": "176.72",
-          "tax": "29.46",
-          "item_number": 337
+          "tax": "29.46"
         }
       ],
       "section_totals": {
-        "tax": "154.68",
-        "op": null,
+        "tax": "0.00",
+        "op": "154.68",
         "total": "928.01",
-        "computed_total": 928.01,
+        "computed_total": "928.01",
         "validation_delta": "0.00"
       }
     }
@@ -3791,203 +4710,5 @@
       ]
     }
   },
-  "validations": {
-    "per_section": [
-      {
-        "section": "Dwelling Roof",
-        "declared": "0.00",
-        "computed": "0.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Swing Pavillion",
-        "declared": "10,070.44",
-        "computed": "0.00",
-        "delta": "10,070.44"
-      },
-      {
-        "section": "Deck",
-        "declared": "12,655.48",
-        "computed": "64.29",
-        "delta": "12,591.19"
-      },
-      {
-        "section": "Gazebo",
-        "declared": "21,255.56",
-        "computed": "1,728.00",
-        "delta": "19,527.56"
-      },
-      {
-        "section": "Retaining Wall",
-        "declared": "924.57",
-        "computed": "0.00",
-        "delta": "924.57"
-      },
-      {
-        "section": "Trees, Shrubs and Landscaping",
-        "declared": "50,743.85",
-        "computed": "0.00",
-        "delta": "50,743.85"
-      },
-      {
-        "section": "Debris Removal",
-        "declared": "1,304.60",
-        "computed": "566.40",
-        "delta": "738.20"
-      },
-      {
-        "section": "Main Level",
-        "declared": "1,765.29",
-        "computed": "0.00",
-        "delta": "1,765.29"
-      },
-      {
-        "section": "Stairs",
-        "declared": "1,602.34",
-        "computed": "0.00",
-        "delta": "1,602.34"
-      },
-      {
-        "section": "Main Level",
-        "declared": "23,087.11",
-        "computed": "13,161.41",
-        "delta": "9,925.70"
-      },
-      {
-        "section": "Master Bedroom Closet",
-        "declared": "453.89",
-        "computed": "0.00",
-        "delta": "453.89"
-      },
-      {
-        "section": "Bedroom 2 Closet",
-        "declared": "479.80",
-        "computed": "0.00",
-        "delta": "479.80"
-      },
-      {
-        "section": "Bedroom 1 Closet",
-        "declared": "410.05",
-        "computed": "0.00",
-        "delta": "410.05"
-      },
-      {
-        "section": "Hallway Closet",
-        "declared": "487.87",
-        "computed": "0.00",
-        "delta": "487.87"
-      },
-      {
-        "section": "Master Bathroom",
-        "declared": "3,084.31",
-        "computed": "0.00",
-        "delta": "3,084.31"
-      },
-      {
-        "section": "Hallway Bathroom",
-        "declared": "1,809.51",
-        "computed": "0.00",
-        "delta": "1,809.51"
-      },
-      {
-        "section": "Hallway Closet 2",
-        "declared": "358.52",
-        "computed": "0.00",
-        "delta": "358.52"
-      },
-      {
-        "section": "Hallway",
-        "declared": "4,534.42",
-        "computed": "0.00",
-        "delta": "4,534.42"
-      },
-      {
-        "section": "Entrance Closet",
-        "declared": "334.88",
-        "computed": "0.00",
-        "delta": "334.88"
-      },
-      {
-        "section": "Living Room",
-        "declared": "3,626.70",
-        "computed": "0.00",
-        "delta": "3,626.70"
-      },
-      {
-        "section": "Bedroom 1",
-        "declared": "1,442.00",
-        "computed": "0.00",
-        "delta": "1,442.00"
-      },
-      {
-        "section": "Laundry",
-        "declared": "1,387.83",
-        "computed": "0.00",
-        "delta": "1,387.83"
-      },
-      {
-        "section": "Pantry",
-        "declared": "298.90",
-        "computed": "0.00",
-        "delta": "298.90"
-      },
-      {
-        "section": "Master Entrance",
-        "declared": "494.37",
-        "computed": "0.00",
-        "delta": "494.37"
-      },
-      {
-        "section": "Garage",
-        "declared": "7,738.88",
-        "computed": "0.00",
-        "delta": "7,738.88"
-      },
-      {
-        "section": "Entrance",
-        "declared": "2,554.35",
-        "computed": "0.00",
-        "delta": "2,554.35"
-      },
-      {
-        "section": "Master Bedroom",
-        "declared": "1,970.94",
-        "computed": "0.00",
-        "delta": "1,970.94"
-      },
-      {
-        "section": "Bedroom 2",
-        "declared": "1,824.64",
-        "computed": "0.00",
-        "delta": "1,824.64"
-      },
-      {
-        "section": "Kitchen",
-        "declared": "7,435.69",
-        "computed": "0.00",
-        "delta": "7,435.69"
-      },
-      {
-        "section": "General Items",
-        "declared": "16,876.12",
-        "computed": "0.00",
-        "delta": "16,876.12"
-      },
-      {
-        "section": "Labor Minimums Applied",
-        "declared": "928.01",
-        "computed": "928.01",
-        "delta": "0.00"
-      }
-    ],
-    "document": {
-      "sum_sections": "16,448.11",
-      "end_grand_total": "181,940.92",
-      "grand_total_vs_sections_delta": "165,492.81",
-      "sum_rcv_from_summaries": "0.00",
-      "recap_category_total": "181,991.57",
-      "recap_vs_end_grand_delta": "50.65"
-    }
-  },
-  "_extraction_note": "StateFarm golden master (customer_copy). Section structure from parser output. Line items supplemented via pdfplumber for delta sections where possible. Sections still requiring v2.5 parser fix: ['Deck#1', 'Stairs#1', 'Master Bedroom Closet#1', 'Bedroom 2 Closet#1', 'Hallway Closet 2#1']. Sections improved: ['Swing Pavillion#1', 'Gazebo#1', 'Retaining Wall#1', 'Trees, Shrubs and Landscaping#1', 'Debris Removal#1', 'Main Level#1', 'Main Level#2', 'Bedroom 1 Closet#1', 'Hallway Closet#1', 'Master Bathroom#1', 'Hallway Bathroom#1', 'Hallway#1', 'Entrance Closet#1', 'Living Room#1', 'Bedroom 1#1', 'Laundry#1', 'Pantry#1', 'Master Entrance#1', 'Garage#1', 'Entrance#1', 'Master Bedroom#1', 'Bedroom 2#1', 'Kitchen#1', 'General Items#1']."
+  "estimate_name": "SF_BSchacter.pdf"
 }

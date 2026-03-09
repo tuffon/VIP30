@@ -1,33 +1,27 @@
 {
-  "estimate_name": "Estimate SF Structural damage Lachman 4.15.2025.pdf",
   "case_metadata": {
-    "claim_number": "75-79J8-65X",
-    "policy_number": "75C9A1815",
-    "loss_type": "Smoke",
+    "claim_number": "7579J865X",
+    "policy_number": null,
+    "loss_type": null,
     "coverage": null,
-    "property_address": "1115 LACHMAN LN, PACIFIC PLSDS, CA 90272-2227",
-    "date_of_loss": "2025-01-08",
+    "property_address": "1115 LACHMAN LN PACIFIC PLSDS, CA 90272-2227",
+    "date_of_loss": null,
     "date_received": null,
-    "date_inspected": "2025-02-18",
+    "date_inspected": null,
     "date_entered": null,
-    "price_list": "CALA28_JAN25 Restoration/Service/Remodel",
+    "price_list": "CALA28_JAN25",
     "depreciate_material": null,
     "depreciate_op": null,
     "depreciate_non_material": null,
     "depreciate_taxes": null,
     "estimate_name": "Estimate SF Structural damage Lachman 4.15.2025.pdf",
     "depreciate_removal": null,
-    "region": null,
+    "insured_name": "CHEN, KENNETH",
+    "region": "California",
     "building_type": null,
-    "line_item_totals": {
-      "estimate": "75-79J8-65X",
-      "material_sales_tax": "1,308.25",
-      "overhead_profit": "0.00",
-      "grand_total": "87,733.23"
-    },
+    "line_item_totals": null,
     "labor_minimums": null,
-    "additional_charges": null,
-    "insured_name": "Kenneth Chen"
+    "additional_charges": null
   },
   "sections": [
     {
@@ -1085,152 +1079,192 @@
           "tax": "0.28"
         },
         {
-          "item_number": 58,
-          "description": "Clean the walls 214.49SF",
-          "tax": 0.57,
-          "op": 0.2,
-          "total": 122.46
+          "type": "line_item",
+          "line_number": 58,
+          "description": "Clean the walls",
+          "qty": 214.49,
+          "unit": "SF",
+          "total": "122.46",
+          "tax": "0.20"
         },
         {
-          "item_number": 59,
-          "description": "Clean door / window opening (per side) 2.00EA",
-          "tax": 21.03,
-          "op": 0.01,
-          "total": 42.07
+          "type": "line_item",
+          "line_number": 59,
+          "description": "Clean door / window opening (per side)",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "42.07",
+          "tax": "0.01"
         },
         {
-          "item_number": 60,
-          "description": "Clean door - French (per side) 2.00EA",
-          "tax": 36.03,
-          "op": 0.02,
-          "total": 72.08
+          "type": "line_item",
+          "line_number": 60,
+          "description": "Clean door - French (per side)",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "72.08",
+          "tax": "0.02"
         },
         {
           "type": "header",
           "text": "FIXTURES"
         },
         {
-          "item_number": 61,
-          "description": "Clean vanity - inside and out 4.75LF",
-          "tax": 21.36,
-          "op": 0.05,
-          "total": 101.51
+          "type": "line_item",
+          "line_number": 61,
+          "description": "Clean vanity - inside and out",
+          "qty": 4.75,
+          "unit": "LF",
+          "total": "101.51",
+          "tax": "0.05"
         },
         {
-          "item_number": 62,
-          "description": "Clean countertop 9.50SF",
-          "tax": 1.19,
-          "op": 0.02,
-          "total": 11.33
+          "type": "line_item",
+          "line_number": 62,
+          "description": "Clean countertop",
+          "qty": 9.5,
+          "unit": "SF",
+          "total": "11.33",
+          "tax": "0.02"
         },
         {
-          "item_number": 63,
-          "description": "Clean sink 1.00EA",
-          "tax": 21.03,
-          "op": 0.0,
-          "total": 21.03
+          "type": "line_item",
+          "line_number": 63,
+          "description": "Clean sink",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "21.03",
+          "tax": "0.00"
         },
         {
-          "item_number": 64,
-          "description": "Clean sink faucet 1.00EA",
-          "tax": 15.65,
-          "op": 0.0,
-          "total": 15.65
+          "type": "line_item",
+          "line_number": 64,
+          "description": "Clean sink faucet",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "15.65",
+          "tax": "0.00"
         },
         {
-          "item_number": 65,
-          "description": "Clean mirror 12.00SF",
-          "tax": 1.15,
-          "op": 0.01,
-          "total": 13.81
+          "type": "line_item",
+          "line_number": 65,
+          "description": "Clean mirror",
+          "qty": 12.0,
+          "unit": "SF",
+          "total": "13.81",
+          "tax": "0.01"
         },
         {
-          "item_number": 66,
-          "description": "Clean light bar 1.00EA",
-          "tax": 29.78,
-          "op": 0.01,
-          "total": 29.79
+          "type": "line_item",
+          "line_number": 66,
+          "description": "Clean light bar",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "29.79",
+          "tax": "0.01"
         },
         {
-          "item_number": 67,
-          "description": "Clean toilet 1.00EA",
-          "tax": 35.35,
-          "op": 0.0,
-          "total": 35.35
+          "type": "line_item",
+          "line_number": 67,
+          "description": "Clean toilet",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "35.35",
+          "tax": "0.00"
         },
         {
-          "item_number": 68,
-          "description": "Clean toilet seat 1.00EA",
-          "tax": 7.62,
-          "op": 0.0,
-          "total": 7.62
+          "type": "line_item",
+          "line_number": 68,
+          "description": "Clean toilet seat",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "7.62",
+          "tax": "0.00"
         },
         {
-          "item_number": 69,
-          "description": "Clean toilet paper dispenser 1.00EA",
-          "tax": 11.4,
-          "op": 0.0,
-          "total": 11.4
+          "type": "line_item",
+          "line_number": 69,
+          "description": "Clean toilet paper dispenser",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "11.40",
+          "tax": "0.00"
         },
         {
-          "item_number": 70,
-          "description": "Clean shower 1.00EA",
-          "tax": 70.11,
-          "op": 0.01,
-          "total": 70.12
+          "type": "line_item",
+          "line_number": 70,
+          "description": "Clean shower",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "70.12",
+          "tax": "0.01"
         },
         {
-          "item_number": 71,
-          "description": "Clean tub / shower faucet 1.00EA",
-          "tax": 22.77,
-          "op": 0.0,
-          "total": 22.77
+          "type": "line_item",
+          "line_number": 71,
+          "description": "Clean tub / shower faucet",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "22.77",
+          "tax": "0.00"
         },
         {
-          "item_number": 72,
-          "description": "Clean shower door 1.00EA",
-          "tax": 28.79,
-          "op": 0.01,
-          "total": 28.8
+          "type": "line_item",
+          "line_number": 72,
+          "description": "Clean shower door",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "28.80",
+          "tax": "0.01"
         },
         {
           "type": "header",
           "text": "CEILING"
         },
         {
-          "item_number": 73,
-          "description": "HEPA Vacuuming - Detailed - (PER SF) 69.58SF",
-          "tax": 0.81,
-          "op": 0.0,
-          "total": 56.36
+          "type": "line_item",
+          "line_number": 73,
+          "description": "HEPA Vacuuming - Detailed - (PER SF)",
+          "qty": 69.58,
+          "unit": "SF",
+          "total": "56.36",
+          "tax": "0.00"
         },
         {
-          "item_number": 74,
-          "description": "Clean the ceiling 69.58SF",
-          "tax": 0.57,
-          "op": 0.07,
-          "total": 39.73
+          "type": "line_item",
+          "line_number": 74,
+          "description": "Clean the ceiling",
+          "qty": 69.58,
+          "unit": "SF",
+          "total": "39.73",
+          "tax": "0.07"
         },
         {
-          "item_number": 75,
-          "description": "Clean recessed light fixture 2.00EA",
-          "tax": 17.15,
-          "op": 0.02,
-          "total": 34.32
+          "type": "line_item",
+          "line_number": 75,
+          "description": "Clean recessed light fixture",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "34.32",
+          "tax": "0.02"
         },
         {
-          "item_number": 76,
-          "description": "Clean bathroom fan 1.00EA",
-          "tax": 45.53,
-          "op": 0.0,
-          "total": 45.53
+          "type": "line_item",
+          "line_number": 76,
+          "description": "Clean bathroom fan",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "45.53",
+          "tax": "0.00"
         },
         {
-          "item_number": 77,
-          "description": "Clean register - heat / AC 1.00EA",
-          "tax": 9.13,
-          "op": 0.0,
-          "total": 9.13
+          "type": "line_item",
+          "line_number": 77,
+          "description": "Clean register - heat / AC",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "9.13",
+          "tax": "0.00"
         }
       ],
       "section_totals": {
@@ -1923,134 +1957,170 @@
       ],
       "line_items": [
         {
-          "item_number": 123,
-          "description": "Clean sink faucet 2.00EA",
-          "tax": 15.65,
-          "op": 0.0,
-          "total": 31.3
+          "type": "line_item",
+          "line_number": 123,
+          "description": "Clean sink faucet",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "31.30",
+          "tax": "0.00"
         },
         {
-          "item_number": 124,
-          "description": "Clean mirror 24.00SF",
-          "tax": 1.15,
-          "op": 0.02,
-          "total": 27.62
+          "type": "line_item",
+          "line_number": 124,
+          "description": "Clean mirror",
+          "qty": 24.0,
+          "unit": "SF",
+          "total": "27.62",
+          "tax": "0.02"
         },
         {
-          "item_number": 125,
-          "description": "Clean light bar 3.00EA",
-          "tax": 29.78,
-          "op": 0.03,
-          "total": 89.37
+          "type": "line_item",
+          "line_number": 125,
+          "description": "Clean light bar",
+          "qty": 3.0,
+          "unit": "EA",
+          "total": "89.37",
+          "tax": "0.03"
         },
         {
-          "item_number": 126,
-          "description": "Clean toilet 1.00EA",
-          "tax": 35.35,
-          "op": 0.0,
-          "total": 35.35
+          "type": "line_item",
+          "line_number": 126,
+          "description": "Clean toilet",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "35.35",
+          "tax": "0.00"
         },
         {
-          "item_number": 127,
-          "description": "Clean toilet seat 1.00EA",
-          "tax": 7.62,
-          "op": 0.0,
-          "total": 7.62
+          "type": "line_item",
+          "line_number": 127,
+          "description": "Clean toilet seat",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "7.62",
+          "tax": "0.00"
         },
         {
-          "item_number": 128,
-          "description": "Clean toilet paper dispenser 1.00EA",
-          "tax": 11.4,
-          "op": 0.0,
-          "total": 11.4
+          "type": "line_item",
+          "line_number": 128,
+          "description": "Clean toilet paper dispenser",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "11.40",
+          "tax": "0.00"
         },
         {
-          "item_number": 129,
-          "description": "Clean towel bar 1.00EA",
-          "tax": 11.38,
-          "op": 0.0,
-          "total": 11.38
+          "type": "line_item",
+          "line_number": 129,
+          "description": "Clean towel bar",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "11.38",
+          "tax": "0.00"
         },
         {
-          "item_number": 130,
-          "description": "Clean tub 1.00EA",
-          "tax": 34.18,
-          "op": 0.01,
-          "total": 34.19
+          "type": "line_item",
+          "line_number": 130,
+          "description": "Clean tub",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "34.19",
+          "tax": "0.01"
         },
         {
-          "item_number": 131,
-          "description": "Clean shower 1.00EA",
-          "tax": 70.11,
-          "op": 0.01,
-          "total": 70.12
+          "type": "line_item",
+          "line_number": 131,
+          "description": "Clean shower",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "70.12",
+          "tax": "0.01"
         },
         {
-          "item_number": 132,
-          "description": "Clean tub / shower faucet 2.00EA",
-          "tax": 22.77,
-          "op": 0.01,
-          "total": 45.55
+          "type": "line_item",
+          "line_number": 132,
+          "description": "Clean tub / shower faucet",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "45.55",
+          "tax": "0.01"
         },
         {
-          "item_number": 133,
-          "description": "Clean shower door 2.00EA",
-          "tax": 28.79,
-          "op": 0.02,
-          "total": 57.6
+          "type": "line_item",
+          "line_number": 133,
+          "description": "Clean shower door",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "57.60",
+          "tax": "0.02"
         },
         {
           "type": "header",
           "text": "CEILING"
         },
         {
-          "item_number": 134,
-          "description": "HEPA Vacuuming - Detailed - (PER SF) 163.04SF",
-          "tax": 0.81,
-          "op": 0.0,
-          "total": 132.06
+          "type": "line_item",
+          "line_number": 134,
+          "description": "HEPA Vacuuming - Detailed - (PER SF)",
+          "qty": 163.04,
+          "unit": "SF",
+          "total": "132.06",
+          "tax": "0.00"
         },
         {
-          "item_number": 135,
-          "description": "Clean the ceiling 163.04SF",
-          "tax": 0.57,
-          "op": 0.15,
-          "total": 93.08
+          "type": "line_item",
+          "line_number": 135,
+          "description": "Clean the ceiling",
+          "qty": 163.04,
+          "unit": "SF",
+          "total": "93.08",
+          "tax": "0.15"
         },
         {
-          "item_number": 136,
-          "description": "Clean recessed light fixture 4.00EA",
-          "tax": 17.15,
-          "op": 0.03,
-          "total": 68.63
+          "type": "line_item",
+          "line_number": 136,
+          "description": "Clean recessed light fixture",
+          "qty": 4.0,
+          "unit": "EA",
+          "total": "68.63",
+          "tax": "0.03"
         },
         {
-          "item_number": 137,
-          "description": "Clean bathroom fan 1.00EA",
-          "tax": 45.53,
-          "op": 0.0,
-          "total": 45.53
+          "type": "line_item",
+          "line_number": 137,
+          "description": "Clean bathroom fan",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "45.53",
+          "tax": "0.00"
         },
         {
-          "item_number": 138,
-          "description": "Clean register - heat / AC 1.00EA",
-          "tax": 9.13,
-          "op": 0.0,
-          "total": 9.13
+          "type": "line_item",
+          "line_number": 138,
+          "description": "Clean register - heat / AC",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "9.13",
+          "tax": "0.00"
         },
         {
-          "item_number": 139,
-          "description": "Clean door / window opening (per side) 1.00EA",
-          "tax": 21.03,
-          "op": 0.0,
-          "total": 21.03
+          "type": "line_item",
+          "line_number": 139,
+          "description": "Clean door / window opening (per side)",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "21.03",
+          "tax": "0.00"
         },
         {
-          "item_number": 140,
-          "description": "Clean door (per side) 1.00EA",
-          "tax": 11.59,
-          "op": 0.02,
-          "total": 11.61
+          "type": "line_item",
+          "line_number": 140,
+          "description": "Clean door (per side)",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "11.61",
+          "tax": "0.02"
         }
       ],
       "section_totals": {
@@ -2343,29 +2413,35 @@
           "tax": "0.02"
         },
         {
-          "item_number": 162,
-          "description": "Clean closet shelf and rod per lineal foot 2.45LF",
-          "tax": 1.73,
-          "op": 0.01,
-          "total": 4.25
+          "type": "line_item",
+          "line_number": 162,
+          "description": "Clean closet shelf and rod per lineal foot",
+          "qty": 2.45,
+          "unit": "LF",
+          "total": "4.25",
+          "tax": "0.01"
         },
         {
           "type": "header",
           "text": "CEILING"
         },
         {
-          "item_number": 163,
-          "description": "HEPA Vacuuming - Detailed - (PER SF) 3.67SF",
-          "tax": 0.81,
-          "op": 0.0,
-          "total": 2.97
+          "type": "line_item",
+          "line_number": 163,
+          "description": "HEPA Vacuuming - Detailed - (PER SF)",
+          "qty": 3.67,
+          "unit": "SF",
+          "total": "2.97",
+          "tax": "0.00"
         },
         {
-          "item_number": 164,
-          "description": "Clean the ceiling 3.67SF",
-          "tax": 0.57,
-          "op": 0.0,
-          "total": 2.09
+          "type": "line_item",
+          "line_number": 164,
+          "description": "Clean the ceiling",
+          "qty": 3.67,
+          "unit": "SF",
+          "total": "2.09",
+          "tax": "0.00"
         }
       ],
       "section_totals": {
@@ -4928,23 +5004,21 @@
       "subrooms": [],
       "line_items": [
         {
-          "item_number": 323,
+          "type": "line_item",
+          "line_number": 323,
           "description": "Cleaning (Bid Item)",
           "qty": 1.0,
           "unit": "EA",
-          "unit_price": 14137.76,
-          "tax": 0.0,
-          "op": 0.0,
-          "total": 14137.76,
-          "_note": "Bid item (EN flag). No tax or O&P applied."
+          "total": "14,137.76",
+          "tax": "0.00"
         }
       ],
       "section_totals": {
         "tax": "0.00",
         "op": null,
         "total": "14,137.76",
-        "computed_total": "0.00",
-        "validation_delta": "14,137.76"
+        "computed_total": "14,137.76",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -6042,217 +6116,5 @@
       ]
     }
   },
-  "validations": {
-    "per_section": [
-      {
-        "section": "Dwelling Roof",
-        "declared": "3,369.14",
-        "computed": "3,369.14",
-        "delta": "0.00"
-      },
-      {
-        "section": "Ext_Surfaces",
-        "declared": "2,398.84",
-        "computed": "2,398.84",
-        "delta": "0.00"
-      },
-      {
-        "section": "Front Elevation",
-        "declared": "210.08",
-        "computed": "210.08",
-        "delta": "0.00"
-      },
-      {
-        "section": "Right Elevation",
-        "declared": "820.43",
-        "computed": "820.43",
-        "delta": "0.00"
-      },
-      {
-        "section": "Rear Elevation",
-        "declared": "7,368.72",
-        "computed": "7,368.72",
-        "delta": "0.00"
-      },
-      {
-        "section": "Left Elevation",
-        "declared": "839.00",
-        "computed": "839.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Guest Room",
-        "declared": "2,360.75",
-        "computed": "2,360.75",
-        "delta": "0.00"
-      },
-      {
-        "section": "Guest Bathroom",
-        "declared": "1,513.82",
-        "computed": "1,513.82",
-        "delta": "0.00"
-      },
-      {
-        "section": "Office Bath",
-        "declared": "1,039.49",
-        "computed": "865.75",
-        "delta": "173.74"
-      },
-      {
-        "section": "Kitchen",
-        "declared": "4,442.18",
-        "computed": "4,442.18",
-        "delta": "0.00"
-      },
-      {
-        "section": "Hallway",
-        "declared": "2,042.51",
-        "computed": "2,042.51",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Bathroom",
-        "declared": "1,814.02",
-        "computed": "802.57",
-        "delta": "1,011.45"
-      },
-      {
-        "section": "Office",
-        "declared": "1,866.55",
-        "computed": "1,866.55",
-        "delta": "0.00"
-      },
-      {
-        "section": "Linen Closet",
-        "declared": "115.99",
-        "computed": "91.99",
-        "delta": "24.00"
-      },
-      {
-        "section": "Great Room 2",
-        "declared": "5,462.76",
-        "computed": "5,462.76",
-        "delta": "0.00"
-      },
-      {
-        "section": "Office Closet",
-        "declared": "483.67",
-        "computed": "483.67",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bedroom",
-        "declared": "2,896.56",
-        "computed": "2,896.56",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Closet",
-        "declared": "1,006.17",
-        "computed": "1,006.17",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Closet Hers",
-        "declared": "1,076.22",
-        "computed": "1,076.22",
-        "delta": "0.00"
-      },
-      {
-        "section": "Guest Bedroom",
-        "declared": "2,470.98",
-        "computed": "2,470.98",
-        "delta": "0.00"
-      },
-      {
-        "section": "Guest Bedroom Closet",
-        "declared": "415.79",
-        "computed": "415.79",
-        "delta": "0.00"
-      },
-      {
-        "section": "Foyer",
-        "declared": "1,062.85",
-        "computed": "1,062.85",
-        "delta": "0.00"
-      },
-      {
-        "section": "Utility Room",
-        "declared": "1,783.06",
-        "computed": "1,783.06",
-        "delta": "0.00"
-      },
-      {
-        "section": "General Provisions",
-        "declared": "4,028.12",
-        "computed": "4,028.12",
-        "delta": "0.00"
-      },
-      {
-        "section": "Attic",
-        "declared": "10,897.08",
-        "computed": "10,897.08",
-        "delta": "0.00"
-      },
-      {
-        "section": "HVAC",
-        "declared": "175.03",
-        "computed": "175.03",
-        "delta": "0.00"
-      },
-      {
-        "section": "Pool",
-        "declared": "2,893.13",
-        "computed": "2,893.13",
-        "delta": "0.00"
-      },
-      {
-        "section": "Garage interior",
-        "declared": "2,358.67",
-        "computed": "2,358.67",
-        "delta": "0.00"
-      },
-      {
-        "section": "Garage Roof",
-        "declared": "261.71",
-        "computed": "261.71",
-        "delta": "0.00"
-      },
-      {
-        "section": "Garage Exterior Door",
-        "declared": "1,852.89",
-        "computed": "1,852.89",
-        "delta": "0.00"
-      },
-      {
-        "section": "Landscaping",
-        "declared": "3,733.08",
-        "computed": "3,733.08",
-        "delta": "0.00"
-      },
-      {
-        "section": "Debris Removal",
-        "declared": "200.79",
-        "computed": "200.79",
-        "delta": "0.00"
-      },
-      {
-        "section": "PRC RESTORATION INC.",
-        "declared": "14,137.76",
-        "computed": "0.00",
-        "delta": "14,137.76"
-      },
-      {
-        "section": "Labor Minimums Applied",
-        "declared": "323.80",
-        "computed": "323.80",
-        "delta": "0.00"
-      }
-    ],
-    "document": {
-      "sum_sections": "72,374.69",
-      "sum_rcv_from_summaries": "11,289.54"
-    }
-  },
-  "_extraction_note": "StateFarm golden master (lachman_sf). Section structure from parser output. All delta sections supplemented via pdfplumber extraction."
+  "estimate_name": "Estimate SF Structural damage Lachman 4.15.2025.pdf"
 }
