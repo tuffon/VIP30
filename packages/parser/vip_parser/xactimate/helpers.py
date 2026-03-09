@@ -232,6 +232,24 @@ def is_table_header(line: str, next_line: Optional[str]) -> Tuple[bool, TableCol
         )
         return True, cols, True
 
+    # Family C: contractor-final single-line header (Restoration/Service/Remodel format)
+    # e.g., "DESCRIPTION QTY RESET REMOVE REPLACE TAX O&P TOTAL"
+    # Uniquely identified by DESCRIPTION + RESET + REMOVE + REPLACE on ONE line.
+    # The two-line family-B check above requires CAT/SEL/ACT, which is absent here.
+    _cfinal_required = {"DESCRIPTION", "RESET", "REMOVE", "REPLACE"}
+    _cfinal_allowed = {"DESCRIPTION", "QTY", "CALC", "RESET", "REMOVE", "REPLACE", "TAX", "O&P", "TOTAL"}
+    if (_cfinal_required.issubset(set(top_tokens))
+            and all(t in _cfinal_allowed for t in top_tokens)
+            and len(top_tokens) >= 4):
+        cols = TableColumns(
+            family='C',
+            headers_norm=top_tokens,
+            has_reset='RESET' in top_tokens,
+            has_tax='TAX' in top_tokens,
+            has_op='O&P' in top_tokens,
+        )
+        return True, cols, False  # single-line header (is_two=False)
+
     s = (line or '').strip()
     if A_RCV.match(s) or A_RCV_QTY.match(s):
         cols = TableColumns(
