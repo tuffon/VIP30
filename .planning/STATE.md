@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.5
 milestone_name: parser-fixes
 status: in_progress
-last_updated: "2026-03-09T16:45:00Z"
+last_updated: "2026-03-09T18:30:00Z"
 progress:
   total_phases: 3
   completed_phases: 2
   total_plans: 11
-  completed_plans: 3
+  completed_plans: 4
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 28 — Metadata + Validation (28-01 complete, 28-02 ready)
+**Current focus:** Phase 28 — Metadata + Validation (28-01 + 28-02 complete, v2.5 parser milestone done)
 
 ## Current Position
 
 Phase: 28 of 28 (Metadata + Validation)
-Plan: 28-01 completed
-Status: In progress (3/11 plans complete in v2.5 milestone)
-Last activity: 2026-03-09 — 28-01 complete: SF metadata extraction implemented; insured_name/price_list/property_address non-null for all 3 SF PDFs; rough-draft baseline 2 PASSED
+Plan: 28-02 completed
+Status: In progress (4/11 plans complete in v2.5 milestone)
+Last activity: 2026-03-09 — 28-02 complete: all 4 final-draft golden masters regenerated from fixed parser; 12/12 pytest tests passing; v2.5 parser milestone success conditions met
 
-Progress: ███░░░░░░░ ~27% (3/11 plans)
+Progress: ████░░░░░░ ~36% (4/11 plans)
 
 ## Completed Milestones
 
@@ -93,6 +93,8 @@ Progress: ███░░░░░░░ ~27% (3/11 plans)
 - [28-01] Skip 'Building Estimate Summary Guide' page (page 2 in SF PDFs) — has same field labels as real summary page but with placeholder values (e.g. 'Smith, Joe & Jane'); must be excluded before scanning.
 - [28-01] Require 'State Farm' branding marker in read_sf_summary_page_text() — contractor-final PDFs (bschacter) have Insured:/Price List:/Estimate: on page 1 but are issued by public adjuster (no State Farm branding); field labels alone insufficient for discrimination.
 - [28-01] SF augmentation guard: trigger _augment_sf_metadata only when both insured_name and price_list are null — rough-draft PDFs have price_list from page 1 so are never augmented; SF final-drafts have no page-1 price_list so augmentation is triggered.
+- [28-02] Rough-draft golden metadata updated to parser output values — Phase 24-02 goldens had manually-set ideal values (insured_name='Kenneth Chen', full price_list, address with comma); parser returns None/truncated/no-comma; golden = parser reality, not aspirational.
+- [28-02] _section_diff duplicate-name fix — SF_BSchacter has two 'Main Level' sections; dict-based lookup (last-wins) caused false mismatch; fixed with defaultdict(list) + per-name positional index.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
@@ -101,10 +103,10 @@ Additional decisions logged in PROJECT.md Key Decisions table.
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
 - v2.5 fix priority (from GAP-REPORT.md): (1) BSchacter contractor-final RESET/REMOVE/REPLACE column schema [DONE Phase 26-01], (2) StateFarm grouped-row item extraction [DONE Phase 27-01], (3) metadata normalization across all doc types.
 - bschacter.golden.json needs updating — Phase 24-02 version has 0 sections/477 items (manual extraction); Phase 26-01 parser now extracts 29 sections. Coverage harness will fail on bschacter until golden master is regenerated.
-- StateFarm golden masters need regeneration — Phase 27-01 parser now extracts significantly more items AND Phase 28-01 adds metadata fields; golden masters from Phase 24-02 are stale. Phase 28-02 golden master regeneration is next.
+- All golden masters are current as of Phase 28-02 (2026-03-09). 12/12 tests pass.
 
 ## Session Continuity
 
-Last session: 2026-03-09T16:45Z
-Stopped at: Phase 28-01 complete — SF metadata extraction implemented; insured_name/price_list/property_address non-null for all 3 SF PDFs; rough-draft baseline 2 PASSED
+Last session: 2026-03-09T18:30Z
+Stopped at: Phase 28-02 complete — all 4 final-draft golden masters regenerated; 12/12 pytest tests passing; v2.5 parser milestone done
 Resume file: None
