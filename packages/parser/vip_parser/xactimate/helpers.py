@@ -269,7 +269,7 @@ def is_table_header(line: str, next_line: Optional[str]) -> Tuple[bool, TableCol
             headers_norm=top_filtered,
             has_reset=False,
             has_tax='TAX' in top_filtered,
-            has_op=False,
+            has_op='O&P' in top_tokens,
         )
         return True, cols, False
 
