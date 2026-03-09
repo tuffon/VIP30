@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.5
 milestone_name: parser-fixes
 status: defining_requirements
-last_updated: "2026-03-09T14:00:00Z"
+last_updated: "2026-03-09T14:15:00Z"
 progress:
-  total_phases: 0
+  total_phases: 3
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 11
+  completed_plans: 1
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 26 — Contractor-Final Parser
+**Current focus:** Phase 26 — Contractor-Final Parser (in progress)
 
 ## Current Position
 
 Phase: 26 of 28 (Contractor-Final Parser)
-Plan: 26-01 planned (ready to execute)
-Status: Ready to execute
-Last activity: 2026-03-09 — 26-01-PLAN.md created (family C header detection + single-line item extraction)
+Plan: 26-01 completed
+Status: In progress (1/11 plans complete in v2.5 milestone)
+Last activity: 2026-03-09 — 26-01 executed: family C header detection + _parse_cfinal_line() + BSchacter 29/29 sections
 
-Progress: ░░░░░░░░░░ 0% (fresh milestone)
+Progress: █░░░░░░░░░ ~9% (1/11 plans)
 
 ## Completed Milestones
 
@@ -82,16 +82,21 @@ Progress: ░░░░░░░░░░ 0% (fresh milestone)
 - [25-02] GAP-REPORT.md uses date.today() not start timestamp — report generation date reflects when the report was written, appropriate for a reproducible artifact that may be regenerated multiple times.
 - [25-02] sf_bschacter coverage 3%: only 1 of 30 non-excluded sections matched — all other sections parse 0 items due to grouped row layout; this is the highest-impact v2.5 fix target.
 - [25-02] kalyvas_sf Ext_Surfaces partial match: 5/7 items extracted, totals match — item count gap (2 missing), not a dollar discrepancy; v2.5 low-priority fix.
+- [26-01] CFINAL_ITEM_PATTERN non-greedy description (.*?) — stops at first qty/unit combo, correctly separating description from numeric columns without explicit field widths.
+- [26-01] Family C header ordering between B and A — B requires CAT/SEL/ACT (absent in contractor-final); C requires DESCRIPTION+RESET+REMOVE+REPLACE in allowed set; A requires RCV. No ambiguity.
+- [26-01] Amount mapping rule: last=TOTAL, second-to-last=O&P, middle amounts=RESET/REMOVE/REPLACE — handles 3-amount and 5-amount items uniformly.
+- [26-01] Main Level section (0 items, $2217.22 total) — not a regression; section carries O&P rollup without explicit line items in PDF. bschacter.golden.json needs updating to reflect Phase 26 parser output.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
-- v2.5 fix priority (from GAP-REPORT.md): (1) BSchacter contractor-final RESET/REMOVE/REPLACE column schema, (2) StateFarm grouped-row item extraction, (3) metadata normalization across all doc types.
+- v2.5 fix priority (from GAP-REPORT.md): (1) BSchacter contractor-final RESET/REMOVE/REPLACE column schema [DONE Phase 26-01], (2) StateFarm grouped-row item extraction, (3) metadata normalization across all doc types.
+- bschacter.golden.json needs updating — Phase 24-02 version has 0 sections/477 items (manual extraction); Phase 26-01 parser now extracts 29 sections. Coverage harness will fail on bschacter until golden master is regenerated.
 
 ## Session Continuity
 
-Last session: 2026-03-09
-Stopped at: Roadmap created — ready to plan Phase 26
+Last session: 2026-03-09T14:15Z
+Stopped at: Completed 26-01-PLAN.md — contractor-final parser fix shipped
 Resume file: None
