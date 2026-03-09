@@ -66,10 +66,10 @@ Which phases cover which requirements. Updated by create-roadmap.
 | GOLD-02 | Phase 24: Golden Masters | Complete |
 | GOLD-03 | Phase 24: Golden Masters | Complete |
 | GOLD-04 | Phase 24: Golden Masters | Complete |
-| HARNESS-01 | Phase 25: Coverage Harness | Pending |
-| HARNESS-02 | Phase 25: Coverage Harness | Pending |
-| HARNESS-03 | Phase 25: Coverage Harness | Pending |
-| HARNESS-04 | Phase 25: Coverage Harness | Pending |
+| HARNESS-01 | Phase 25: Coverage Harness | Complete |
+| HARNESS-02 | Phase 25: Coverage Harness | Complete |
+| HARNESS-03 | Phase 25: Coverage Harness | Complete |
+| HARNESS-04 | Phase 25: Coverage Harness | Complete |
 
 **Coverage:**
 - v1 requirements: 14 total
