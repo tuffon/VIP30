@@ -2306,3 +2306,8 @@ class XactimateRoughDraftParser:
         m = re.search(SF_PROPERTY_PATTERN, text)
         if m and not md.get('property_address'):
             md['property_address'] = m.group(1).strip() + ' ' + m.group(2).strip()
+
+        # claim_number: "Claim Number: 7579D935K" on SF summary page
+        m = re.search(SF_CLAIM_NUMBER_PATTERN, text)
+        if m and not md.get('claim_number'):
+            md['claim_number'] = m.group(1).strip()

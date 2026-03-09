@@ -74,7 +74,7 @@ TOTALS_PATTERN = r'^Totals?:'
 CASE_LINE1_PATTERN = r'Claim\s+Number:\s*(\S*)\s+Policy\s+Number:\s*(\S*)\s+Type\s+of\s+Loss:\s*([^\n]*)'
 COVERAGE_SECTION_PATTERN = r'Coverage\s+Deductible\s+Policy\s+Limit\s*\n((?:.*?\$[\d,]+\.[\d]{2}.*?\n?)+)'
 COVERAGE_ROW_PATTERN = r'^\s*([A-Za-z\s,&\-]+?)\s+\$?([\d,]+\.[\d]{2})\s+\$?([\d,]+\.[\d]{2})'
-PROPERTY_ADDRESS_PATTERN = r'Property:\s*(.+?)(?=\n[A-Za-z\s]+:|\Z)'
+PROPERTY_ADDRESS_PATTERN = r'Property:\s*(.+?)(?=\n[A-Za-z][A-Za-z\s\.]*:|\Z)'
 DATE_LINE1_PATTERN = r'Date\s+of\s+Loss:\s*([^\n]*?)\s*Date\s+Received:\s*([^\n]*?)(?=\n|$)'
 DATE_LINE2_PATTERN = r'Date\s+Inspected:\s*([^\n]*?)\s*Date\s+Entered:\s*([^\n]+?)(?=\n|$)'
 PRICE_LIST_PATTERN = r'Price\s+List:\s*([^\s]+)\s+Depreciate\s+Material:\s*(Yes|No)\s+Depreciate\s+O&P:\s*(Yes|No)'
@@ -93,6 +93,7 @@ SF_PROPERTY_PATTERN = (
     r'Property:\s+(.+?)\s+Claim(?:\s+Number)?:[^\n]*\n'
     r'(.+?)\s+(?:Policy(?:\s+Number)?:|Home:|Cellular:)'
 )
+SF_CLAIM_NUMBER_PATTERN = r'Claim\s+Number:\s+(\S+)'
 
 REPEATED_CHAR_PATTERN = r'([A-Z])\1{2,}'
 QUOTE_PATTERN = r'[\"\']{2,}'
@@ -157,6 +158,7 @@ __all__ = [
     'SF_INSURED_PATTERN',
     'SF_PRICE_LIST_PATTERN',
     'SF_PROPERTY_PATTERN',
+    'SF_CLAIM_NUMBER_PATTERN',
     'REPEATED_CHAR_PATTERN',
     'QUOTE_PATTERN',
     'LABOR_MIN_APPLIED_PATTERN',
