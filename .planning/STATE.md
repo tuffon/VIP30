@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 27 — StateFarm Item Extraction (not started)
+**Current focus:** Phase 27 — StateFarm Item Extraction (plan 27-01 complete)
 
 ## Current Position
 
 Phase: 27 of 28 (StateFarm Item Extraction)
-Plan: 26-01 completed — Phase 26 done
-Status: Phase 26 complete, Phase 27 ready to plan (1/11 plans complete in v2.5 milestone)
-Last activity: 2026-03-09 — Phase 26 verified: BSchacter 29/29 sections, rough-draft baseline preserved
+Plan: 27-01 completed
+Status: Phase 27 in progress (2/11 plans complete in v2.5 milestone)
+Last activity: 2026-03-09 — Phase 27-01 verified: SF_BSchacter 30/31 sections, lachman_sf PRC 1 item, kalyvas_sf Ext_Surfaces 7 items, rough-draft baseline preserved
 
-Progress: █░░░░░░░░░ ~9% (1/11 plans)
+Progress: ██░░░░░░░░ ~18% (2/11 plans)
 
 ## Completed Milestones
 
@@ -86,17 +86,22 @@ Progress: █░░░░░░░░░ ~9% (1/11 plans)
 - [26-01] Family C header ordering between B and A — B requires CAT/SEL/ACT (absent in contractor-final); C requires DESCRIPTION+RESET+REMOVE+REPLACE in allowed set; A requires RCV. No ambiguity.
 - [26-01] Amount mapping rule: last=TOTAL, second-to-last=O&P, middle amounts=RESET/REMOVE/REPLACE — handles 3-amount and 5-amount items uniformly.
 - [26-01] Main Level section (0 items, $2217.22 total) — not a regression; section carries O&P rollup without explicit line items in PDF. bschacter.golden.json needs updating to reflect Phase 26 parser output.
+- [27-01] GCO&P added to HEADER_VARIANTS O&P set — StateFarm uses GCO&P (General Contractor O&P); normalize_header_label("GCO&P") returned None before fix, causing token to be dropped.
+- [27-01] has_op check uses pre-filter top_tokens in layout_a_candidates branch — layout_a_candidates excludes O&P intentionally; must check top_tokens (before filter) to detect optional O&P column.
+- [27-01] required_numeric=1 for asterisk-price items — price consumed by pop, end numerics are [total, op, tax]; bid items may omit op so only total is guaranteed.
+- [27-01] item dict uses 'if tax_token is not None' — replaces 'if columns.has_tax' to prevent writing None when asterisk items don't have enough trailing numerics.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
-- v2.5 fix priority (from GAP-REPORT.md): (1) BSchacter contractor-final RESET/REMOVE/REPLACE column schema [DONE Phase 26-01], (2) StateFarm grouped-row item extraction, (3) metadata normalization across all doc types.
+- v2.5 fix priority (from GAP-REPORT.md): (1) BSchacter contractor-final RESET/REMOVE/REPLACE column schema [DONE Phase 26-01], (2) StateFarm grouped-row item extraction [DONE Phase 27-01], (3) metadata normalization across all doc types.
 - bschacter.golden.json needs updating — Phase 24-02 version has 0 sections/477 items (manual extraction); Phase 26-01 parser now extracts 29 sections. Coverage harness will fail on bschacter until golden master is regenerated.
+- StateFarm golden masters need regeneration — Phase 27-01 parser now extracts significantly more items; golden masters from Phase 24-02 (lachman_sf 368, kalyvas_sf 520, SF_BSchacter ~3 items) are stale. Phase 28 golden master regeneration is next.
 
 ## Session Continuity
 
-Last session: 2026-03-09T15:00Z
-Stopped at: Phase 26 complete — contractor-final parser fix verified (29/29 sections, CFINAL-01 + CFINAL-02 satisfied)
+Last session: 2026-03-09T15:20Z
+Stopped at: Phase 27-01 complete — StateFarm item extraction fix verified (SF_BSchacter 30/31 sections, lachman_sf PRC 1/1, kalyvas_sf Ext_Surfaces 7/7, rough-draft baseline PASS)
 Resume file: None
