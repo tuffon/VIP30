@@ -8,20 +8,26 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
-## Current Milestone: v2.4 Parser Coverage
+## Current Milestone: v2.5 Parser Fixes
 
-**Goal:** Measure how much content the Xactimate parser actually captures before making any changes — audit, create golden master expected outputs per document type, and build an automated coverage harness that surfaces gaps.
+**Goal:** Fix the parser gaps identified by v2.4 — implement targeted code changes to `packages/parser/` for each confirmed gap category. Priority: contractor-final column schema, StateFarm grouped-row layout, metadata extraction for final-draft documents.
 
 **Target features:**
-- **Parser audit**: Run all examples from `./docs/` through the parser, compare JSON output against PDF content, map what's missed (sections, line items, amounts) per document type and entity profile
-- **Golden master files**: For each document type (rough draft, final draft, StateFarm, etc.), produce the perfect expected JSON output — human-verified before locking in as ground truth
-- **Coverage test harness**: Automated tests comparing parser output to golden masters, producing a structured gap report per document type
+- **Contractor-final parser**: New column schema handler for RESET/REMOVE/REPLACE/TAX/O&P layout (currently 0% coverage, all 29 sections missing)
+- **StateFarm item extraction**: Grouped-row layout detection so all items per section are captured (currently 3% on SF_BSchacter, 97% on lachman_sf and kalyvas_sf)
+- **Metadata extraction**: Parser extracts insured_name, price_list, property_address from StateFarm two-column summary page (currently null on all final-draft docs)
 
-**Explicitly out of scope:** No parser code changes this milestone — understand and measure the gaps first; fixes are v2.5.
+**v2.5 gap inventory:** `packages/parser/tests/GAP-REPORT.md` — authoritative input for this milestone.
 
 ## Current State
 
-**Version:** v2.3 shipped 2026-03-07
+**Version:** v2.4 shipped 2026-03-09
+
+**Shipped features (v2.4):**
+- Parser audit — all 6 PDFs audited via `audit_all.py`, 255-line `AUDIT-REPORT.md` with root causes per doc type
+- Rough-draft baseline confirmed: zero validation delta across 72 sections — production-quality parser
+- 6 golden master JSON files human-verified (lachman 32/525, kalyvas 40/887, bschacter 29/477, SF_BSchacter 31/309, lachman_sf 34/368, kalyvas_sf 36/520)
+- pytest coverage harness (12 tests) + `GAP-REPORT.md` (172 lines) — v2.5 parser-fix input
 
 **Shipped features (v2.3):**
 - Narrative pipeline regression fixed (NarrativeResult type mismatch → empty XLSX sections)
@@ -107,12 +113,18 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ No mode selection in UX — v2.2
 - ✓ LLM pipeline unchanged, all content flows to output — v2.2
 
-### Active (v2.4)
+### Active (v2.5)
 
-- [ ] Parser audit complete for all document types in `./docs/` (rough draft, final draft, entity profiles)
-- [ ] Golden master JSON files produced and human-verified for each document type
-- [ ] Automated coverage harness runs all PDFs against golden masters and generates gap report
-- [ ] Gap report produced showing what's missing per doc type — input for v2.5 parser fixes
+- [ ] Contractor-final parser: new column schema handler for RESET/REMOVE/REPLACE layout (0% → target 90%+ coverage)
+- [ ] StateFarm item extraction: grouped-row layout detection — all items per section captured (3% → target 90%+ on SF_BSchacter)
+- [ ] Metadata extraction: insured_name, price_list, property_address from StateFarm two-column summary page
+
+### Validated (v2.4)
+
+- ✓ Parser audit complete for all 6 document types in `./docs/` — v2.4
+- ✓ Golden master JSON files produced and human-verified for all 6 documents — v2.4
+- ✓ Automated coverage harness (12 pytest tests) runs all PDFs against golden masters — v2.4
+- ✓ GAP-REPORT.md produced with per-doc coverage% and cross-doc pattern summary — v2.4
 
 ### Validated (v2.3)
 
@@ -179,4 +191,4 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | `output_mode` DB column still exists | Low | Nullable, not written — preserves historical data |
 
 ---
-*Last updated: 2026-03-07 after v2.4 milestone started*
+*Last updated: 2026-03-09 after v2.4 milestone complete*

@@ -1,5 +1,32 @@
 # Project Milestones: VIP30
 
+## v2.4 Parser Coverage (Shipped: 2026-03-09)
+
+**Delivered:** Complete parser coverage measurement — audit runner, 6 human-verified golden master JSON files, and automated pytest harness with field-level diff tests producing the v2.5 gap inventory.
+
+**Phases completed:** 23-25 (6 plans total)
+
+**Key accomplishments:**
+
+- `audit_all.py` runner — all 6 PDFs parsed with zero crashes; structured `run_log.json` and 255-line `AUDIT-REPORT.md` identifying root causes per document type
+- Rough-draft baseline confirmed: zero validation delta across 72 sections (32 Lachman + 40 Kalyvas) — parser is production-quality for rough-draft format
+- Root causes identified: contractor-final uses RESET/REMOVE/REPLACE column schema (parser expects rough-draft unit-cost layout); StateFarm Customer Copy uses grouped-row layout (parser extracts 1 item per section instead of all)
+- 6 golden master JSON files produced and human-verified (lachman 32/525 items, kalyvas 40/887, bschacter 29/477, SF_BSchacter 31/309, lachman_sf 34/368, kalyvas_sf 36/520)
+- pytest harness with 12 parametrized tests (6 docs × test_metadata + test_section_coverage) — rough-draft tests pass, final-draft tests fail with field-level diffs
+- `GAP-REPORT.md` (172 lines) — authoritative v2.5 parser-fix input with per-doc coverage%, cross-doc pattern summary, prioritized fix list
+
+**Stats:**
+
+- 60 files created/modified, 111,695 insertions, 30 deletions
+- 3 phases, 6 plans
+- 2 days (2026-03-07 → 2026-03-09)
+
+**Git range:** `deec9fd` → `ccbd59c`
+
+**What's next:** v2.5 — parser fixes for contractor-final and StateFarm document types
+
+---
+
 ## v2.3 Report Quality (Shipped: 2026-03-07)
 
 **Delivered:** Professional XLSX report with LLM-generated executive overview — narrative pipeline fixed, prompt quality elevated, writer_pass_v2 LLM routing bug resolved, Analysis sheet cleaned to 5-column Kalyvas layout.

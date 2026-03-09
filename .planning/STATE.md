@@ -1,33 +1,33 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.4
-milestone_name: parser-coverage
-status: complete
-last_updated: "2026-03-09T03:18:43Z"
+milestone: v2.5
+milestone_name: parser-fixes
+status: planning
+last_updated: "2026-03-09T12:00:00Z"
 progress:
-  total_phases: 25
-  completed_phases: 25
-  total_plans: 7
-  completed_plans: 7
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-07)
+See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 25 COMPLETE — milestone v2.4 (parser-coverage) shipped
+**Current focus:** v2.5 Parser Fixes — planning next milestone
 
 ## Current Position
 
-Phase: 25 of 25 (coverage-harness) — COMPLETE
-Plan: 02 of 2 complete
-Status: All plans complete — Phase 25 fully shipped
-Last activity: 2026-03-09 — Completed 25-02-PLAN.md (gap report generator + GAP-REPORT.md)
+Phase: Not started
+Plan: —
+Status: Ready to plan v2.5
+Last activity: 2026-03-09 — v2.4 milestone complete and archived
 
-Progress: ██████████ 100%
+Progress: ░░░░░░░░░░ 0% (fresh milestone)
 
 ## Completed Milestones
 
