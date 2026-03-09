@@ -82,7 +82,7 @@ FILES = [
     },
     {
         "rel": "final-drafts/statefarm/SF_BSchacter.golden.json",
-        "pdf": "docs/final-drafts/statefarm/Customer Copy Final Draft (3).pdf",
+        "pdf": "docs/final-drafts/statefarm/SF_BSchacter.pdf",
         "insured_name": "Barbara Schacter",
         "claim_number": "75-79D9-35K",
         "price_list": "CALA28_AUG25 Restoration/Service/Remodel",

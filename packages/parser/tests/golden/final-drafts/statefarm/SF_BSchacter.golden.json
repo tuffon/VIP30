@@ -3421,7 +3421,8 @@
           "unit": "EA",
           "total": "687.11",
           "notes": "labor minimum",
-          "tax": "114.52"
+          "tax": "114.52",
+          "item_number": 32
         },
         {
           "type": "line_item",
@@ -3431,7 +3432,8 @@
           "unit": "EA",
           "total": "64.18",
           "notes": "minimum",
-          "tax": "10.70"
+          "tax": "10.70",
+          "item_number": 267
         },
         {
           "type": "line_item",
@@ -3440,7 +3442,8 @@
           "qty": 1.0,
           "unit": "EA",
           "total": "176.72",
-          "tax": "29.46"
+          "tax": "29.46",
+          "item_number": 337
         }
       ],
       "section_totals": {

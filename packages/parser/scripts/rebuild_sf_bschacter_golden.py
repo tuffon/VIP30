@@ -21,8 +21,8 @@ import pdfplumber
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 ROOT = Path(__file__).resolve().parents[3]
-PDF_PATH = ROOT / "docs/final-drafts/statefarm/Customer Copy Final Draft (3).pdf"
-OLD_GOLDEN = ROOT / "packages/parser/tests/golden/final-drafts/statefarm/customer_copy.golden.json"
+PDF_PATH = ROOT / "docs/final-drafts/statefarm/SF_BSchacter.pdf"
+OLD_GOLDEN = ROOT / "packages/parser/tests/golden/final-drafts/statefarm/SF_BSchacter.golden.json"
 NEW_GOLDEN = ROOT / "packages/parser/tests/golden/final-drafts/statefarm/SF_BSchacter.golden.json"
 
 # ---------------------------------------------------------------------------

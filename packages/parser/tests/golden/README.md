@@ -107,7 +107,7 @@ Source PDFs are stored in the project `docs/` directory:
 | `rough-drafts/lachman.golden.json` | `docs/rough-drafts/1115_LACHMAN_APEX_2_ROUGH_DRAFT_CAR.pdf` |
 | `rough-drafts/kalyvas.golden.json` | `docs/rough-drafts/KALYVAS_JVB_V6_KALY2_ROUGH_DRAFT_CAR.pdf` |
 | `final-drafts/bschacter.golden.json` | `docs/final-drafts/BSchacter-02.12.26-Est-JVB-RepairEstimate-$809,464.83.pdf` |
-| `final-drafts/statefarm/SF_BSchacter.golden.json` | `docs/final-drafts/statefarm/Customer Copy Final Draft (3).pdf` |
+| `final-drafts/statefarm/SF_BSchacter.golden.json` | `docs/final-drafts/statefarm/SF_BSchacter.pdf` |
 | `final-drafts/statefarm/lachman_sf.golden.json` | `docs/final-drafts/statefarm/Estimate SF Structural damage Lachman 4.15.2025.pdf` |
 | `final-drafts/statefarm/kalyvas_sf.golden.json` | `docs/final-drafts/statefarm/Kalyvas Preliminary State Farm estimate9-25-25.pdf` |
 
