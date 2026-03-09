@@ -23,11 +23,11 @@ See: .planning/PROJECT.md (updated 2026-03-07)
 ## Current Position
 
 Phase: 25 of 25 (coverage-harness) — IN PROGRESS
-Plan: 00 of 2 complete (plans written, not yet executed)
-Status: Phase 25 planned — ready to execute
-Last activity: 2026-03-08 — Wrote 25-01-PLAN.md (pytest fixtures + field-level diff tests) and 25-02-PLAN.md (gap report generator + harness run)
+Plan: 01 of 2 complete
+Status: In progress — 25-01 complete, 25-02 pending
+Last activity: 2026-03-09 — Completed 25-01-PLAN.md (pytest fixtures + 12 parametrized coverage tests)
 
-Progress: █████████░ 95%
+Progress: █████████░ 97%
 
 ## Completed Milestones
 
@@ -75,6 +75,7 @@ Progress: █████████░ 95%
 - [24-02] Sections with 0 items in PDF are legitimate exclusions — customer_copy Dwelling Roof ("no loss noted"), kalyvas Mitigation/HVAC/Landscaping/Code Upgrades (all explicitly excluded in PDF). These SHOULD have 0 items in golden master.
 - [24-02] StateFarm case_metadata sourced from PDF page 3 — parser cannot extract from the two-column summary page; pdfplumber extraction works reliably. Pattern established for v2.5 parser enhancement.
 - [24-02] PRC RESTORATION INC. tax was incorrectly set to 14137.76 (total echoed into tax) — corrected to 0.0 (bid item with EN flag, no tax applied).
+- [25-01] Rough-draft test_metadata failures are informative gap documentation, not regressions — golden master metadata values represent ideal v2.5 target output; parser currently returns raw/truncated values; test_section_coverage passes 100% confirming structural parser is production-quality.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
@@ -85,6 +86,6 @@ Additional decisions logged in PROJECT.md Key Decisions table.
 
 ## Session Continuity
 
-Last session: 2026-03-08
-Stopped at: Phase 25 plans written (25-01, 25-02) — ready for /gsd:execute-phase 25
+Last session: 2026-03-09
+Stopped at: Completed 25-01-PLAN.md — coverage harness fixtures and tests
 Resume file: None
