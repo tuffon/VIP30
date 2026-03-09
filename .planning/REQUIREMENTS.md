@@ -14,24 +14,24 @@ Requirements for v2.5. Goal: fix all 3 parser gap categories identified by v2.4 
 
 ### StateFarm Item Extraction
 
-- [ ] **SF-01**: Parser extracts all line items per section from StateFarm grouped-row layout (currently extracts only last matched row per section)
-- [ ] **SF-02**: Parser achieves ≥90% section coverage on SF_BSchacter document (currently 3% — 1 of 30 non-excluded sections)
+- [x] **SF-01**: Parser extracts all line items per section from StateFarm grouped-row layout (currently extracts only last matched row per section)
+- [x] **SF-02**: Parser achieves ≥90% section coverage on SF_BSchacter document (currently 3% — 1 of 30 non-excluded sections)
 
 ### Metadata Extraction
 
-- [ ] **META-01**: Parser extracts `insured_name` from StateFarm two-column summary page (currently null on all final-draft documents)
-- [ ] **META-02**: Parser extracts `price_list` from StateFarm two-column summary page (currently null)
-- [ ] **META-03**: Parser extracts `property_address` from StateFarm two-column summary page (currently null)
+- [x] **META-01**: Parser extracts `insured_name` from StateFarm two-column summary page (currently null on all final-draft documents)
+- [x] **META-02**: Parser extracts `price_list` from StateFarm two-column summary page (currently null)
+- [x] **META-03**: Parser extracts `property_address` from StateFarm two-column summary page (currently null)
 
 ### StateFarm Partial Gaps (lachman_sf / kalyvas_sf)
 
-- [ ] **SFPART-01**: Parser closes remaining partial-extraction gaps in lachman_sf and kalyvas_sf StateFarm documents (currently 97% — 1-2 sections partially extracted per doc, including kalyvas_sf Ext_Surfaces 5/7 items)
+- [x] **SFPART-01**: Parser closes remaining partial-extraction gaps in lachman_sf and kalyvas_sf StateFarm documents (currently 97% — 1-2 sections partially extracted per doc, including kalyvas_sf Ext_Surfaces 5/7 items)
 
 ### Validation
 
-- [ ] **VALID-01**: Rough-draft parser baseline preserved — lachman and kalyvas `test_section_coverage` tests continue to pass after all parser changes (no regressions)
-- [ ] **VALID-02**: All 4 final-draft golden master JSON files regenerated from fixed parser output and committed to version control
-- [ ] **VALID-03**: All 12 pytest tests in `test_coverage.py` pass after golden master regeneration
+- [x] **VALID-01**: Rough-draft parser baseline preserved — lachman and kalyvas `test_section_coverage` tests continue to pass after all parser changes (no regressions)
+- [x] **VALID-02**: All 4 final-draft golden master JSON files regenerated from fixed parser output and committed to version control
+- [x] **VALID-03**: All 12 pytest tests in `test_coverage.py` pass after golden master regeneration
 
 ## v2 Requirements
 
@@ -68,12 +68,12 @@ Which phases cover which requirements. Updated by create-roadmap.
 | SF-01 | Phase 27 | Complete |
 | SF-02 | Phase 27 | Complete |
 | SFPART-01 | Phase 27 | Complete |
-| META-01 | Phase 28 | Pending |
-| META-02 | Phase 28 | Pending |
-| META-03 | Phase 28 | Pending |
-| VALID-01 | Phase 28 | Pending |
-| VALID-02 | Phase 28 | Pending |
-| VALID-03 | Phase 28 | Pending |
+| META-01 | Phase 28 | Complete |
+| META-02 | Phase 28 | Complete |
+| META-03 | Phase 28 | Complete |
+| VALID-01 | Phase 28 | Complete |
+| VALID-02 | Phase 28 | Complete |
+| VALID-03 | Phase 28 | Complete |
 
 **Coverage:**
 - v1 requirements: 11 total

@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v2.5
 milestone_name: parser-fixes
-status: in_progress
-last_updated: "2026-03-09T18:30:00Z"
+status: complete
+last_updated: "2026-03-09T22:00:00Z"
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 11
-  completed_plans: 4
+  completed_plans: 11
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 28 — Metadata + Validation (28-01 + 28-02 complete, v2.5 parser milestone done)
+**Current focus:** v2.5 milestone complete — all 3 parser gap categories fixed, all 12 tests passing
 
 ## Current Position
 
-Phase: 28 of 28 (Metadata + Validation)
+Phase: 28 of 28 (Metadata + Validation) — COMPLETE
 Plan: 28-02 completed
-Status: In progress (4/11 plans complete in v2.5 milestone)
-Last activity: 2026-03-09 — 28-02 complete: all 4 final-draft golden masters regenerated from fixed parser; 12/12 pytest tests passing; v2.5 parser milestone success conditions met
+Status: Milestone complete (11/11 plans — v2.5 shipped)
+Last activity: 2026-03-09 — Phase 28 complete: SF metadata extracted (insured_name, price_list, property_address, claim_number), PROPERTY_ADDRESS_PATTERN fixed, all 4 final-draft golden masters regenerated, 12/12 pytest tests passing
 
-Progress: ████░░░░░░ ~36% (4/11 plans)
+Progress: ██████████ 100% (11/11 plans)
 
 ## Completed Milestones
 
@@ -107,6 +107,6 @@ Additional decisions logged in PROJECT.md Key Decisions table.
 
 ## Session Continuity
 
-Last session: 2026-03-09T18:30Z
-Stopped at: Phase 28-02 complete — all 4 final-draft golden masters regenerated; 12/12 pytest tests passing; v2.5 parser milestone done
+Last session: 2026-03-09T22:00Z
+Stopped at: v2.5 milestone complete — Phase 28 done, all 11 plans complete, all 12 tests passing
 Resume file: None

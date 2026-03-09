@@ -8,7 +8,7 @@ Three phases to fix the parser gaps identified by v2.4. Phase 26 targets the con
 
 - ✅ **v2.3 Report Quality** — Phases 18-22 (shipped 2026-03-07)
 - ✅ **v2.4 Parser Coverage** — Phases 23-25 (shipped 2026-03-09)
-- 🚧 **v2.5 Parser Fixes** — Phases 26-28 (in progress)
+- ✅ **v2.5 Parser Fixes** — Phases 26-28 (shipped 2026-03-09)
 
 ## Phases
 
@@ -48,7 +48,7 @@ Full details: [.planning/milestones/v2.4-ROADMAP.md](milestones/v2.4-ROADMAP.md)
 
 </details>
 
-### 🚧 v2.5 Parser Fixes (In Progress)
+### ✅ v2.5 Parser Fixes (SHIPPED 2026-03-09)
 
 **Milestone Goal:** Fix all 3 confirmed gap categories; all 12 pytest coverage tests pass.
 
@@ -108,4 +108,4 @@ Plans:
 | 25. Coverage Harness | v2.4 | 2/2 | Complete | 2026-03-09 |
 | 26. Contractor-Final Parser | v2.5 | 1/1 | Complete | 2026-03-09 |
 | 27. StateFarm Item Extraction | v2.5 | 1/1 | Complete | 2026-03-09 |
-| 28. Metadata + Validation | v2.5 | 0/? | Not started | - |
+| 28. Metadata + Validation | v2.5 | 2/2 | Complete | 2026-03-09 |
