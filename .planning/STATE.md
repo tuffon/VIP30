@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v2.5
 milestone_name: parser-fixes
-status: planning
-last_updated: "2026-03-09T12:00:00Z"
+status: defining_requirements
+last_updated: "2026-03-09T14:00:00Z"
 progress:
   total_phases: 0
   completed_phases: 0
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.5 Parser Fixes — planning next milestone
+**Current focus:** v2.5 Parser Fixes — defining requirements
 
 ## Current Position
 
-Phase: Not started
+Phase: Not started (run /gsd:create-roadmap)
 Plan: —
-Status: Ready to plan v2.5
-Last activity: 2026-03-09 — v2.4 milestone complete and archived
+Status: Defining requirements
+Last activity: 2026-03-09 — Milestone v2.5 parser-fixes started
 
 Progress: ░░░░░░░░░░ 0% (fresh milestone)
 
@@ -93,5 +93,5 @@ Additional decisions logged in PROJECT.md Key Decisions table.
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 25-02-PLAN.md — gap report generator and GAP-REPORT.md
+Stopped at: Started milestone v2.5 — ready for define-requirements
 Resume file: None
