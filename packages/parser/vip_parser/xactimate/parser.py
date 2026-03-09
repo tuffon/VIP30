@@ -724,6 +724,9 @@ class XactimateRoughDraftParser:
         if columns.family == 'A':
             item = self._parse_layout_a_line(line, columns)
             return (item, True) if item else (None, False)
+        if columns.family == 'C':
+            item = self._parse_cfinal_line(line, columns)
+            return (item, True) if item else (None, False)
         m = re.match(LINE_ITEM_PATTERN, line)
         if not m:
             return None, False
@@ -798,6 +801,57 @@ class XactimateRoughDraftParser:
         }
         if columns.has_tax:
             item['tax'] = format_dollar_amount(money_to_float(tax_token))
+        return item
+
+    def _parse_cfinal_line(self, line: str, columns: TableColumns) -> Optional[dict]:
+        """Parse a contractor-final (family C) single-line item.
+
+        Format: {num}. {description} {qty} {unit} {v1} ... {v5}
+        All financial data is on ONE line (no separate calc line like family B).
+        """
+        raw = line.strip()
+        if not raw:
+            return None
+        m = re.match(CFINAL_ITEM_PATTERN, raw)
+        if not m:
+            return None
+
+        num = int(m.group(1))
+        description = (m.group(2) or '').strip()
+        qty_str = m.group(3) or '0'
+        unit = (m.group(4) or '').upper()
+
+        # Collect all matched amount groups (groups 5-9)
+        raw_amounts = [m.group(i) for i in range(5, 10) if m.group(i) is not None]
+        amounts = [money_to_float(a) for a in raw_amounts]
+
+        if not amounts:
+            return None
+
+        # Map amounts: last=TOTAL, second-to-last=O&P, others=RESET/REMOVE/REPLACE in order
+        total = amounts[-1] if len(amounts) >= 1 else 0.0
+        op = amounts[-2] if len(amounts) >= 2 else 0.0
+        # Middle amounts (if present) map to reset, remove, replace in order
+        middle = amounts[:-2] if len(amounts) > 2 else []
+        reset_val = middle[0] if len(middle) > 0 else None
+        remove_val = middle[1] if len(middle) > 1 else None
+        replace_val = middle[2] if len(middle) > 2 else None
+
+        item = {
+            'type': 'line_item',
+            'line_number': num,
+            'description': description,
+            'qty': float(money_to_float(qty_str)),
+            'unit': unit,
+            'reset': format_dollar_amount(reset_val) if reset_val is not None else None,
+            'remove': format_dollar_amount(remove_val) if remove_val is not None else None,
+            'replace': format_dollar_amount(replace_val) if replace_val is not None else None,
+            'tax': None,
+            'op': format_dollar_amount(op),
+            'total': format_dollar_amount(total),
+            'total_note': None,
+            'notes': '',
+        }
         return item
 
     def _finalize_line_item(self, item: dict) -> dict:
