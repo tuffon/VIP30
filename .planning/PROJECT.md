@@ -8,9 +8,16 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
-## Current Milestone: Planning next milestone
+## Current Milestone: v2.6 Pipeline Rewrite
 
-**Status:** v2.5 shipped 2026-03-09 — parser fully stabilized. All 12 pytest tests passing. Ready for v2.6 planning.
+**Goal:** Replace the monolithic analysis→writer→rewrite pipeline with a stepped, cost-driver-first architecture — each major cost driver gets its own context window and LLM request, fed by a trade summary hierarchy (trade summary → recap by category → CAT/SEL synthesis).
+
+**Target features:**
+- **Trade summary parsing**: Audit PDFs, extract trade summary fields; fallback hierarchy for context construction
+- **Cost driver identification**: Top drivers by dollar delta, line items mapped and verified in JSON
+- **Per-cost-driver LLM pass**: Each driver + line items + trade context → own LLM request
+- **Final summary LLM pass**: Aggregate cost driver analyses → executive overview
+- **Rewrite system rebuilt from scratch**: Strict one-pass rewrite only on quality failure; default fallback text removed
 
 ## Current State
 
@@ -108,7 +115,11 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 
 ### Active (v2.6)
 
-*(To be defined — run `/gsd:define-requirements` for next milestone)*
+- [ ] Trade summary parsing: parser extracts trade summary from PDFs that have it; fallback hierarchy: trade summary → recap by category → synthesized from CAT/SEL codes
+- [ ] Cost driver identification: top cost drivers identified from parser JSON by dollar delta; each driver mapped to its line items with JSON verification
+- [ ] Per-cost-driver LLM pass: each cost driver + line items + trade summary context → own context window + LLM request
+- [ ] Final summary LLM pass: all cost driver analyses aggregated → executive overview via dedicated LLM request
+- [ ] Rewrite system rebuilt: one-pass quality rewrite on strict threshold failure only; default fallback text removed
 
 ### Validated (v2.5)
 
@@ -190,4 +201,4 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | `output_mode` DB column still exists | Low | Nullable, not written — preserves historical data |
 
 ---
-*Last updated: 2026-03-09 after v2.5 milestone complete*
+*Last updated: 2026-03-09 after v2.6 milestone started*

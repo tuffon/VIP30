@@ -1,9 +1,9 @@
 ---
 gsd_state_version: 1.0
 milestone: v2.6
-milestone_name: planning
-status: between_milestones
-last_updated: "2026-03-09T23:00:00Z"
+milestone_name: pipeline-rewrite
+status: defining_requirements
+last_updated: "2026-03-09T23:30:00Z"
 progress:
   total_phases: 0
   completed_phases: 0
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Between milestones — v2.5 shipped, planning v2.6
+**Current focus:** v2.6 Pipeline Rewrite — defining requirements
 
 ## Current Position
 
-Phase: Not started (run `/gsd:define-requirements` to begin v2.6)
+Phase: Not started (run `/gsd:define-requirements`)
 Plan: —
-Status: Ready to plan next milestone
-Last activity: 2026-03-09 — v2.5 milestone complete and archived; 12/12 tests passing; parser fully stabilized
+Status: Defining requirements
+Last activity: 2026-03-09 — v2.6 milestone started: trade summary parsing, cost-driver LLM pass, pipeline rewrite
 
 Progress: — (new milestone)
 
