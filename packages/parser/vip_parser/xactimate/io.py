@@ -129,7 +129,11 @@ class ParserIO:
                 # but with example placeholder values (e.g. "Smith, Joe & Jane").
                 if 'Summary Guide' in text:
                     continue
-                if 'Insured:' in text and 'Price List:' in text and 'Estimate:' in text:
+                # Require 'State Farm' as a branding marker to avoid false-positive matches on
+                # contractor-final PDFs, which also have 'Insured:', 'Price List:', 'Estimate:',
+                # and 'Claim Number:' on page 1 (but without a 'State Farm' header).
+                if ('State Farm' in text and 'Insured:' in text
+                        and 'Price List:' in text and 'Estimate:' in text):
                     return text
         return None
 
