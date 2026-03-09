@@ -67,10 +67,10 @@ Which phases cover which requirements. Updated by create-roadmap.
 | CFINAL-02 | Phase 26 | Pending |
 | SF-01 | Phase 27 | Pending |
 | SF-02 | Phase 27 | Pending |
+| SFPART-01 | Phase 27 | Pending |
 | META-01 | Phase 28 | Pending |
 | META-02 | Phase 28 | Pending |
 | META-03 | Phase 28 | Pending |
-| SFPART-01 | Phase 27 | Pending |
 | VALID-01 | Phase 28 | Pending |
 | VALID-02 | Phase 28 | Pending |
 | VALID-03 | Phase 28 | Pending |
@@ -82,4 +82,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-03-09*
-*Last updated: 2026-03-09 after initial definition*
+*Last updated: 2026-03-09 after roadmap creation (phases confirmed)*
