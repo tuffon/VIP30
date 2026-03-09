@@ -2,11 +2,11 @@
 gsd_state_version: 1.0
 milestone: v2.5
 milestone_name: parser-fixes
-status: defining_requirements
-last_updated: "2026-03-09T14:15:00Z"
+status: in_progress
+last_updated: "2026-03-09T15:00:00Z"
 progress:
   total_phases: 3
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 11
   completed_plans: 1
 ---
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 26 — Contractor-Final Parser (in progress)
+**Current focus:** Phase 27 — StateFarm Item Extraction (not started)
 
 ## Current Position
 
-Phase: 26 of 28 (Contractor-Final Parser)
-Plan: 26-01 completed
-Status: In progress (1/11 plans complete in v2.5 milestone)
-Last activity: 2026-03-09 — 26-01 executed: family C header detection + _parse_cfinal_line() + BSchacter 29/29 sections
+Phase: 27 of 28 (StateFarm Item Extraction)
+Plan: 26-01 completed — Phase 26 done
+Status: Phase 26 complete, Phase 27 ready to plan (1/11 plans complete in v2.5 milestone)
+Last activity: 2026-03-09 — Phase 26 verified: BSchacter 29/29 sections, rough-draft baseline preserved
 
 Progress: █░░░░░░░░░ ~9% (1/11 plans)
 
@@ -97,6 +97,6 @@ Additional decisions logged in PROJECT.md Key Decisions table.
 
 ## Session Continuity
 
-Last session: 2026-03-09T14:15Z
-Stopped at: Completed 26-01-PLAN.md — contractor-final parser fix shipped
+Last session: 2026-03-09T15:00Z
+Stopped at: Phase 26 complete — contractor-final parser fix verified (29/29 sections, CFINAL-01 + CFINAL-02 satisfied)
 Resume file: None

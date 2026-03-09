@@ -9,8 +9,8 @@ Requirements for v2.5. Goal: fix all 3 parser gap categories identified by v2.4 
 
 ### Contractor-Final Parser
 
-- [ ] **CFINAL-01**: Parser detects contractor-final document format and applies RESET/REMOVE/REPLACE/TAX/O&P column schema (not rough-draft unit-cost schema)
-- [ ] **CFINAL-02**: Parser achieves ≥90% section coverage on BSchacter contractor-final document (currently 0% — 0 of 29 sections)
+- [x] **CFINAL-01**: Parser detects contractor-final document format and applies RESET/REMOVE/REPLACE/TAX/O&P column schema (not rough-draft unit-cost schema)
+- [x] **CFINAL-02**: Parser achieves ≥90% section coverage on BSchacter contractor-final document (currently 0% — 0 of 29 sections)
 
 ### StateFarm Item Extraction
 
@@ -63,8 +63,8 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CFINAL-01 | Phase 26 | Pending |
-| CFINAL-02 | Phase 26 | Pending |
+| CFINAL-01 | Phase 26 | Complete |
+| CFINAL-02 | Phase 26 | Complete |
 | SF-01 | Phase 27 | Pending |
 | SF-02 | Phase 27 | Pending |
 | SFPART-01 | Phase 27 | Pending |

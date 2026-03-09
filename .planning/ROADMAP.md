@@ -64,7 +64,7 @@ Full details: [.planning/milestones/v2.4-ROADMAP.md](milestones/v2.4-ROADMAP.md)
 **Plans**: 1 plan
 
 Plans:
-- [ ] 26-01: Fix contractor-final parser (family C header detection + single-line item extraction)
+- [x] 26-01: Fix contractor-final parser (family C header detection + single-line item extraction)
 
 #### Phase 27: StateFarm Item Extraction
 **Goal**: Fix grouped-row extraction — all items per section captured across StateFarm documents
@@ -105,6 +105,6 @@ Plans:
 | 23. Parser Audit | v2.4 | 2/2 | Complete | 2026-03-07 |
 | 24. Golden Masters | v2.4 | 2/2 | Complete | 2026-03-08 |
 | 25. Coverage Harness | v2.4 | 2/2 | Complete | 2026-03-09 |
-| 26. Contractor-Final Parser | v2.5 | 0/? | Not started | - |
+| 26. Contractor-Final Parser | v2.5 | 1/1 | Complete | 2026-03-09 |
 | 27. StateFarm Item Extraction | v2.5 | 0/? | Not started | - |
 | 28. Metadata + Validation | v2.5 | 0/? | Not started | - |
