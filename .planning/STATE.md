@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.5
 milestone_name: parser-fixes
 status: in_progress
-last_updated: "2026-03-09T15:00:00Z"
+last_updated: "2026-03-09T16:00:00Z"
 progress:
   total_phases: 3
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 11
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 27 — StateFarm Item Extraction (plan 27-01 complete)
+**Current focus:** Phase 28 — Metadata + Validation (not started)
 
 ## Current Position
 
-Phase: 27 of 28 (StateFarm Item Extraction)
-Plan: 27-01 completed
-Status: Phase 27 in progress (2/11 plans complete in v2.5 milestone)
-Last activity: 2026-03-09 — Phase 27-01 verified: SF_BSchacter 30/31 sections, lachman_sf PRC 1 item, kalyvas_sf Ext_Surfaces 7 items, rough-draft baseline preserved
+Phase: 28 of 28 (Metadata + Validation)
+Plan: 27-01 completed — Phase 27 done
+Status: Phase 27 complete, Phase 28 ready to plan (2/11 plans complete in v2.5 milestone)
+Last activity: 2026-03-09 — Phase 27 verified: SF_BSchacter 30/31 sections, lachman_sf PRC 1/1, kalyvas_sf Ext_Surfaces 7/7, rough-draft baseline PASS
 
 Progress: ██░░░░░░░░ ~18% (2/11 plans)
 

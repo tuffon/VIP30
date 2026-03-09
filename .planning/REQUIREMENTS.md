@@ -65,9 +65,9 @@ Which phases cover which requirements. Updated by create-roadmap.
 |-------------|-------|--------|
 | CFINAL-01 | Phase 26 | Complete |
 | CFINAL-02 | Phase 26 | Complete |
-| SF-01 | Phase 27 | Pending |
-| SF-02 | Phase 27 | Pending |
-| SFPART-01 | Phase 27 | Pending |
+| SF-01 | Phase 27 | Complete |
+| SF-02 | Phase 27 | Complete |
+| SFPART-01 | Phase 27 | Complete |
 | META-01 | Phase 28 | Pending |
 | META-02 | Phase 28 | Pending |
 | META-03 | Phase 28 | Pending |

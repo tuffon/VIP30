@@ -106,5 +106,5 @@ Plans:
 | 24. Golden Masters | v2.4 | 2/2 | Complete | 2026-03-08 |
 | 25. Coverage Harness | v2.4 | 2/2 | Complete | 2026-03-09 |
 | 26. Contractor-Final Parser | v2.5 | 1/1 | Complete | 2026-03-09 |
-| 27. StateFarm Item Extraction | v2.5 | 0/? | Not started | - |
+| 27. StateFarm Item Extraction | v2.5 | 1/1 | Complete | 2026-03-09 |
 | 28. Metadata + Validation | v2.5 | 0/? | Not started | - |
