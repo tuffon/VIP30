@@ -94,7 +94,8 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 28-01: TBD
+- [ ] 28-01: StateFarm metadata extraction (insured_name, price_list, property_address from page 3; SF gap investigation)
+- [ ] 28-02: Golden master regeneration (diff checkpoint + user approval) + all 12 tests pass
 
 ## Progress
 
