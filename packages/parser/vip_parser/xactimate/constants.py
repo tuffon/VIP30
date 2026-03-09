@@ -54,7 +54,7 @@ HEADER_VARIANTS = {
     "RESET": {"RESET", "RST"},
     "REMOVE": {"REMOVE", "RMV", "REM"},
     "REPLACE": {"REPLACE", "RPL", "R/R", "R & R", "R&R"},
-    "O&P": {"O&P", "OP", "O & P", "O / P", "OVERHEAD/PROFIT", "O&P."},
+    "O&P": {"O&P", "OP", "O & P", "O / P", "OVERHEAD/PROFIT", "O&P.", "GCO&P"},
     "TOTAL": {"TOTAL", "TOT"},
 }
 
