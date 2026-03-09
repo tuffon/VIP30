@@ -1,14 +1,14 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.5
-milestone_name: parser-fixes
-status: complete
-last_updated: "2026-03-09T22:00:00Z"
+milestone: v2.6
+milestone_name: planning
+status: between_milestones
+last_updated: "2026-03-09T23:00:00Z"
 progress:
-  total_phases: 3
-  completed_phases: 3
-  total_plans: 11
-  completed_plans: 11
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.5 milestone complete — all 3 parser gap categories fixed, all 12 tests passing
+**Current focus:** Between milestones — v2.5 shipped, planning v2.6
 
 ## Current Position
 
-Phase: 28 of 28 (Metadata + Validation) — COMPLETE
-Plan: 28-02 completed
-Status: Milestone complete (11/11 plans — v2.5 shipped)
-Last activity: 2026-03-09 — Phase 28 complete: SF metadata extracted (insured_name, price_list, property_address, claim_number), PROPERTY_ADDRESS_PATTERN fixed, all 4 final-draft golden masters regenerated, 12/12 pytest tests passing
+Phase: Not started (run `/gsd:define-requirements` to begin v2.6)
+Plan: —
+Status: Ready to plan next milestone
+Last activity: 2026-03-09 — v2.5 milestone complete and archived; 12/12 tests passing; parser fully stabilized
 
-Progress: ██████████ 100% (11/11 plans)
+Progress: — (new milestone)
 
 ## Completed Milestones
 
@@ -101,12 +101,11 @@ Additional decisions logged in PROJECT.md Key Decisions table.
 ### Blockers/Concerns
 
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
-- v2.5 fix priority (from GAP-REPORT.md): (1) BSchacter contractor-final RESET/REMOVE/REPLACE column schema [DONE Phase 26-01], (2) StateFarm grouped-row item extraction [DONE Phase 27-01], (3) metadata normalization across all doc types.
-- bschacter.golden.json needs updating — Phase 24-02 version has 0 sections/477 items (manual extraction); Phase 26-01 parser now extracts 29 sections. Coverage harness will fail on bschacter until golden master is regenerated.
-- All golden masters are current as of Phase 28-02 (2026-03-09). 12/12 tests pass.
+- v2.5 parser gaps: all resolved. 12/12 tests passing as of 2026-03-09.
+- Remaining parser limitations (low priority, v2.6+): rough-draft insured_name not extractable; price_list suffix truncation; 3 lachman_sf sections with declared-vs-computed rounding deltas.
 
 ## Session Continuity
 
-Last session: 2026-03-09T22:00Z
-Stopped at: v2.5 milestone complete — Phase 28 done, all 11 plans complete, all 12 tests passing
+Last session: 2026-03-09T23:00Z
+Stopped at: v2.5 archived — MILESTONES.md updated, roadmap collapsed, requirements archived, PROJECT.md evolved, git tagged v2.5
 Resume file: None

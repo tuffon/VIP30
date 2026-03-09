@@ -48,54 +48,16 @@ Full details: [.planning/milestones/v2.4-ROADMAP.md](milestones/v2.4-ROADMAP.md)
 
 </details>
 
-### ✅ v2.5 Parser Fixes (SHIPPED 2026-03-09)
+<details>
+<summary>✅ v2.5 Parser Fixes (Phases 26-28) — SHIPPED 2026-03-09</summary>
 
-**Milestone Goal:** Fix all 3 confirmed gap categories; all 12 pytest coverage tests pass.
+- [x] Phase 26: Contractor-Final Parser (1/1 plans) — completed 2026-03-09
+- [x] Phase 27: StateFarm Item Extraction (1/1 plans) — completed 2026-03-09
+- [x] Phase 28: Metadata + Validation (2/2 plans) — completed 2026-03-09
 
-#### Phase 26: Contractor-Final Parser
-**Goal**: Fix contractor-final column schema — extract line items using RESET/REMOVE/REPLACE/TAX/O&P layout
-**Depends on**: Nothing (standalone parser change)
-**Requirements**: CFINAL-01, CFINAL-02
-**Success Criteria** (what must be TRUE):
-  1. `XactimateRoughDraftParser` on BSchacter contractor-final produces ≥26 of 29 sections with line items (≥90%)
-  2. Extracted line items map to RESET/REMOVE/REPLACE/TAX/O&P columns (not rough-draft unit-cost schema)
-  3. Rough-draft baseline preserved — lachman and kalyvas `test_section_coverage` pass unchanged
-**Research**: Unlikely (known root cause — column schema mismatch; existing parser codebase)
-**Plans**: 1 plan
+Full details: [.planning/milestones/v2.5-ROADMAP.md](milestones/v2.5-ROADMAP.md)
 
-Plans:
-- [x] 26-01: Fix contractor-final parser (family C header detection + single-line item extraction)
-
-#### Phase 27: StateFarm Item Extraction
-**Goal**: Fix grouped-row extraction — all items per section captured across StateFarm documents
-**Depends on**: Phase 26 (regression baseline confirmed)
-**Requirements**: SF-01, SF-02, SFPART-01
-**Success Criteria** (what must be TRUE):
-  1. SF_BSchacter produces ≥27 sections with items (≥90% of 30 non-excluded sections)
-  2. Each section contains all grouped-row items, not just last matched row
-  3. lachman_sf and kalyvas_sf partial sections (including Ext_Surfaces) fully extracted
-  4. Rough-draft baseline preserved
-**Research**: Unlikely (known root cause — grouped-row layout; existing parser codebase)
-**Plans**: TBD
-
-Plans:
-- [ ] 27-01: TBD
-
-#### Phase 28: Metadata + Validation
-**Goal**: Extract StateFarm metadata fields; regenerate golden masters; all 12 tests pass
-**Depends on**: Phase 27 (parser fixes complete)
-**Requirements**: META-01, META-02, META-03, VALID-01, VALID-02, VALID-03
-**Success Criteria** (what must be TRUE):
-  1. Parser extracts `insured_name`, `price_list`, `property_address` from StateFarm two-column summary page (all final-draft docs)
-  2. All 4 final-draft golden master JSON files regenerated from fixed parser output and committed to version control
-  3. All 12 pytest tests in `test_coverage.py` pass
-  4. Rough-draft baseline preserved — lachman and kalyvas still 100% coverage
-**Research**: Unlikely (pdfplumber pattern established in Phase 24-02; pytest harness already in place)
-**Plans**: TBD
-
-Plans:
-- [ ] 28-01: StateFarm metadata extraction (insured_name, price_list, property_address from page 3; SF gap investigation)
-- [ ] 28-02: Golden master regeneration (diff checkpoint + user approval) + all 12 tests pass
+</details>
 
 ## Progress
 

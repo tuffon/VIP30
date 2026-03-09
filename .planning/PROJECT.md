@@ -8,16 +8,9 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
-## Current Milestone: v2.5 Parser Fixes
+## Current Milestone: Planning next milestone
 
-**Goal:** Fix the parser gaps identified by v2.4 — implement targeted code changes to `packages/parser/` for each confirmed gap category. Priority: contractor-final column schema, StateFarm grouped-row layout, metadata extraction for final-draft documents.
-
-**Target features:**
-- **Contractor-final parser**: New column schema handler for RESET/REMOVE/REPLACE/TAX/O&P layout (currently 0% coverage, all 29 sections missing)
-- **StateFarm item extraction**: Grouped-row layout detection so all items per section are captured (currently 3% on SF_BSchacter, 97% on lachman_sf and kalyvas_sf)
-- **Metadata extraction**: Parser extracts insured_name, price_list, property_address from StateFarm two-column summary page (currently null on all final-draft docs)
-
-**v2.5 gap inventory:** `packages/parser/tests/GAP-REPORT.md` — authoritative input for this milestone.
+**Status:** v2.5 shipped 2026-03-09 — parser fully stabilized. All 12 pytest tests passing. Ready for v2.6 planning.
 
 ## Current State
 
@@ -113,11 +106,17 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ No mode selection in UX — v2.2
 - ✓ LLM pipeline unchanged, all content flows to output — v2.2
 
-### Active (v2.5)
+### Active (v2.6)
 
-- [ ] Contractor-final parser: new column schema handler for RESET/REMOVE/REPLACE layout (0% → target 90%+ coverage)
-- [ ] StateFarm item extraction: grouped-row layout detection — all items per section captured (3% → target 90%+ on SF_BSchacter)
-- [ ] Metadata extraction: insured_name, price_list, property_address from StateFarm two-column summary page
+*(To be defined — run `/gsd:define-requirements` for next milestone)*
+
+### Validated (v2.5)
+
+- ✓ Contractor-final parser: family C detection + RESET/REMOVE/REPLACE/TAX/O&P schema — BSchacter 0%→93% — v2.5
+- ✓ StateFarm grouped-row item extraction: GCO&P normalization + asterisk-price handling — SF_BSchacter 3%→96.8% — v2.5
+- ✓ SF metadata extraction: insured_name, price_list, property_address, claim_number from page 3 — v2.5
+- ✓ All 4 final-draft golden masters regenerated from fixed parser output — v2.5
+- ✓ All 12 pytest tests in test_coverage.py pass (6 docs × test_metadata + test_section_coverage) — v2.5
 
 ### Validated (v2.4)
 
@@ -191,4 +190,4 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | `output_mode` DB column still exists | Low | Nullable, not written — preserves historical data |
 
 ---
-*Last updated: 2026-03-09 after v2.4 milestone complete*
+*Last updated: 2026-03-09 after v2.5 milestone complete*

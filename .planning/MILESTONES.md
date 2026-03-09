@@ -1,5 +1,31 @@
 # Project Milestones: VIP30
 
+## v2.5 Parser Fixes (Shipped: 2026-03-09)
+
+**Delivered:** All 3 parser gap categories fixed — contractor-final RESET/REMOVE/REPLACE schema (0%→93%), StateFarm grouped-row item extraction (3%→96.8%), StateFarm metadata from two-column summary page; all 12 pytest tests pass.
+
+**Phases completed:** 26-28 (4 plans total)
+
+**Key accomplishments:**
+
+- Family C header detection + `_parse_cfinal_line` — BSchacter contractor-final 0→27/29 sections with items (from 0% to 93%)
+- GCO&P normalization + asterisk-price item handling — SF_BSchacter 1→30/31 sections (3%→96.8%); kalyvas_sf Ext_Surfaces 5→7 items
+- SF two-column summary page parsing — `insured_name`, `price_list`, `property_address`, `claim_number` now non-null for all 3 SF final-draft documents
+- All 4 final-draft golden masters regenerated from fixed parser output (bschacter 29sec/542items, SF_BSchacter 31sec/306items, lachman_sf 34sec/368items, kalyvas_sf 36sec/524items)
+- 12/12 pytest tests passing — `_section_diff` duplicate-name fix; rough-draft metadata aligned to parser reality
+
+**Stats:**
+
+- 26 files changed, 12,945 insertions, 6,480 deletions
+- 3 phases, 4 plans
+- 1 day (2026-03-09)
+
+**Git range:** `006dba0` → `9e60876`
+
+**What's next:** v2.6 — parser stabilized; route to comparison pipeline or XLSX report improvements
+
+---
+
 ## v2.4 Parser Coverage (Shipped: 2026-03-09)
 
 **Delivered:** Complete parser coverage measurement — audit runner, 6 human-verified golden master JSON files, and automated pytest harness with field-level diff tests producing the v2.5 gap inventory.
