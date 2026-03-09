@@ -105,6 +105,29 @@ class ParserIO:
                 )
         return lines
 
+    def read_sf_summary_page_text(self) -> Optional[str]:
+        """
+        Extract raw text from the StateFarm two-column summary page, if present.
+
+        StateFarm PDFs have a summary page (typically page 3) containing:
+          Insured: NAME    Estimate: NUMBER
+          Property: ADDR   Claim Number: ...
+          ...              Price List: CODE
+        Detected by the presence of 'Insured:', 'Price List:', and 'Estimate:' on the same page.
+
+        Uses page.extract_text() (not extract_visible_lines) because the two-column layout
+        renders more reliably as interleaved text with extract_text().
+
+        Returns the raw page text string, or None if no matching page is found.
+        Non-StateFarm documents will not have this page format, so None is returned for them.
+        """
+        with pdfplumber.open(self.input_file) as pdf:
+            for page in list(pdf.pages)[:8]:
+                text = page.extract_text() or ''
+                if 'Insured:' in text and 'Price List:' in text and 'Estimate:' in text:
+                    return text
+        return None
+
     # ---- writing -------------------------------------------------------
 
     def write_raw_lines(self, lines: Iterable[str]) -> None:
