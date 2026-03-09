@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.5
 milestone_name: parser-fixes
 status: in_progress
-last_updated: "2026-03-09T16:00:00Z"
+last_updated: "2026-03-09T16:45:00Z"
 progress:
   total_phases: 3
   completed_phases: 2
   total_plans: 11
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** Phase 28 — Metadata + Validation (not started)
+**Current focus:** Phase 28 — Metadata + Validation (28-01 complete, 28-02 ready)
 
 ## Current Position
 
 Phase: 28 of 28 (Metadata + Validation)
-Plan: 27-01 completed — Phase 27 done
-Status: Phase 27 complete, Phase 28 ready to plan (2/11 plans complete in v2.5 milestone)
-Last activity: 2026-03-09 — Phase 27 verified: SF_BSchacter 30/31 sections, lachman_sf PRC 1/1, kalyvas_sf Ext_Surfaces 7/7, rough-draft baseline PASS
+Plan: 28-01 completed
+Status: In progress (3/11 plans complete in v2.5 milestone)
+Last activity: 2026-03-09 — 28-01 complete: SF metadata extraction implemented; insured_name/price_list/property_address non-null for all 3 SF PDFs; rough-draft baseline 2 PASSED
 
-Progress: ██░░░░░░░░ ~18% (2/11 plans)
+Progress: ███░░░░░░░ ~27% (3/11 plans)
 
 ## Completed Milestones
 
@@ -90,6 +90,9 @@ Progress: ██░░░░░░░░ ~18% (2/11 plans)
 - [27-01] has_op check uses pre-filter top_tokens in layout_a_candidates branch — layout_a_candidates excludes O&P intentionally; must check top_tokens (before filter) to detect optional O&P column.
 - [27-01] required_numeric=1 for asterisk-price items — price consumed by pop, end numerics are [total, op, tax]; bid items may omit op so only total is guaranteed.
 - [27-01] item dict uses 'if tax_token is not None' — replaces 'if columns.has_tax' to prevent writing None when asterisk items don't have enough trailing numerics.
+- [28-01] Skip 'Building Estimate Summary Guide' page (page 2 in SF PDFs) — has same field labels as real summary page but with placeholder values (e.g. 'Smith, Joe & Jane'); must be excluded before scanning.
+- [28-01] Require 'State Farm' branding marker in read_sf_summary_page_text() — contractor-final PDFs (bschacter) have Insured:/Price List:/Estimate: on page 1 but are issued by public adjuster (no State Farm branding); field labels alone insufficient for discrimination.
+- [28-01] SF augmentation guard: trigger _augment_sf_metadata only when both insured_name and price_list are null — rough-draft PDFs have price_list from page 1 so are never augmented; SF final-drafts have no page-1 price_list so augmentation is triggered.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
@@ -98,10 +101,10 @@ Additional decisions logged in PROJECT.md Key Decisions table.
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
 - v2.5 fix priority (from GAP-REPORT.md): (1) BSchacter contractor-final RESET/REMOVE/REPLACE column schema [DONE Phase 26-01], (2) StateFarm grouped-row item extraction [DONE Phase 27-01], (3) metadata normalization across all doc types.
 - bschacter.golden.json needs updating — Phase 24-02 version has 0 sections/477 items (manual extraction); Phase 26-01 parser now extracts 29 sections. Coverage harness will fail on bschacter until golden master is regenerated.
-- StateFarm golden masters need regeneration — Phase 27-01 parser now extracts significantly more items; golden masters from Phase 24-02 (lachman_sf 368, kalyvas_sf 520, SF_BSchacter ~3 items) are stale. Phase 28 golden master regeneration is next.
+- StateFarm golden masters need regeneration — Phase 27-01 parser now extracts significantly more items AND Phase 28-01 adds metadata fields; golden masters from Phase 24-02 are stale. Phase 28-02 golden master regeneration is next.
 
 ## Session Continuity
 
-Last session: 2026-03-09T15:20Z
-Stopped at: Phase 27-01 complete — StateFarm item extraction fix verified (SF_BSchacter 30/31 sections, lachman_sf PRC 1/1, kalyvas_sf Ext_Surfaces 7/7, rough-draft baseline PASS)
+Last session: 2026-03-09T16:45Z
+Stopped at: Phase 28-01 complete — SF metadata extraction implemented; insured_name/price_list/property_address non-null for all 3 SF PDFs; rough-draft baseline 2 PASSED
 Resume file: None
