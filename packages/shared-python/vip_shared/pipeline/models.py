@@ -216,3 +216,50 @@ class TradeContext(BaseModel):
         default_factory=list,
         description="Raw trade_summary line_items from comparison estimate (StateFarm only)"
     )
+
+
+class CostDriver(BaseModel):
+    """
+    A single cost driver: one category with the largest absolute delta between estimates.
+
+    Identified deterministically by identify_cost_drivers() from TradeContext data.
+    Used as input to map_driver_items() and per-driver LLM passes (Phase 31).
+    """
+
+    category: str = Field(description="VERISK display category name (e.g., 'Painting')")
+    primary_total: float = Field(description="Category total in primary estimate")
+    comparison_total: float = Field(description="Category total in comparison estimate")
+    delta: float = Field(description="primary_total - comparison_total (signed)")
+
+    @computed_field
+    @property
+    def abs_delta(self) -> float:
+        """Absolute delta -- used for sorting drivers by impact."""
+        return abs(self.delta)
+
+
+class DriverWithItems(BaseModel):
+    """
+    A cost driver with all matching line items from both estimates.
+
+    Built by map_driver_items() from CostDriver + raw parser payloads.
+    Items are filtered to type=='line_item' and cat mapped via XACTIMATE_CATEGORY_CODE_MAP.
+    verification_ok signals whether item sums match category totals within tolerance.
+    """
+
+    driver: CostDriver = Field(description="The cost driver this wraps")
+    primary_items: List[Dict[str, Any]] = Field(
+        default_factory=list,
+        description="type=='line_item' items from primary estimate for this category"
+    )
+    comparison_items: List[Dict[str, Any]] = Field(
+        default_factory=list,
+        description="type=='line_item' items from comparison estimate for this category"
+    )
+    verification_ok: bool = Field(
+        description="True when item sums within 10% (or $100) of category totals"
+    )
+    verification_note: str = Field(
+        default="",
+        description="Discrepancy details when verification_ok=False"
+    )
