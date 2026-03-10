@@ -18,7 +18,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.6 Pipeline Rewrite — Phase 29: Trade Summary Parsing
+**Current focus:** v2.6 Pipeline Rewrite — Phase 30: Cost Driver Identification
 
 ## Current Position
 

@@ -138,7 +138,7 @@ Plans:
 | 26. Contractor-Final Parser | v2.5 | 1/1 | Complete | 2026-03-09 |
 | 27. StateFarm Item Extraction | v2.5 | 1/1 | Complete | 2026-03-09 |
 | 28. Metadata + Validation | v2.5 | 2/2 | Complete | 2026-03-09 |
-| 29. Trade Summary Parsing | v2.6 | 0/1 | Not started | - |
+| 29. Trade Summary Parsing | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 30. Cost Driver Identification | v2.6 | 0/1 | Not started | - |
 | 31. Per-Driver LLM Pass | v2.6 | 0/1 | Not started | - |
 | 32. Final Summary + Pipeline Integration | v2.6 | 0/2 | Not started | - |
