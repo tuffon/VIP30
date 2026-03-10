@@ -107,7 +107,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 31-01: Build DriverAnalysisResult model + run_driver_pass() + driver_analysis_v1 prompt + per-driver cache
+- [x] 31-01: Build DriverAnalysisResult model + run_driver_pass() + driver_analysis_v1 prompt + per-driver cache
 
 ### Phase 32: Final Summary + Pipeline Integration
 **Goal**: Aggregate driver analyses into executive overview; rebuild quality rewrite as single-pass; wire new `CostDriverPipeline` as drop-in replacement for `NarrativePipeline`
@@ -140,5 +140,5 @@ Plans:
 | 28. Metadata + Validation | v2.5 | 2/2 | Complete | 2026-03-09 |
 | 29. Trade Summary Parsing | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 30. Cost Driver Identification | v2.6 | 1/1 | Complete | 2026-03-10 |
-| 31. Per-Driver LLM Pass | v2.6 | 0/1 | Not started | - |
+| 31. Per-Driver LLM Pass | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 32. Final Summary + Pipeline Integration | v2.6 | 0/2 | Not started | - |

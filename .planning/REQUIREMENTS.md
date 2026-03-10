@@ -21,9 +21,9 @@ Requirements for v2.6. Goal: replace monolithic analysis→writer→rewrite pipe
 
 ### Per-Driver LLM Pass
 
-- [ ] **PASS-01**: Each top cost driver gets its own LLM request with isolated context: driver totals + line items + trade context
-- [ ] **PASS-02**: Per-driver LLM output is a `DriverAnalysisResult` Pydantic model validated via structured output — no JSON repair fallback
-- [ ] **PASS-03**: Per-driver results are cached by content-hash key (1hr TTL) — re-runs with same data skip redundant LLM calls
+- [x] **PASS-01**: Each top cost driver gets its own LLM request with isolated context: driver totals + line items + trade context
+- [x] **PASS-02**: Per-driver LLM output is a `DriverAnalysisResult` Pydantic model validated via structured output — no JSON repair fallback
+- [x] **PASS-03**: Per-driver results are cached by content-hash key (1hr TTL) — re-runs with same data skip redundant LLM calls
 
 ### Final Summary LLM Pass
 
