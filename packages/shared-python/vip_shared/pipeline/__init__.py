@@ -7,6 +7,7 @@ This module provides:
 - Quality gate checkers for deterministic narrative validation
 - Pass implementations (analysis, writer, compliance)
 - NarrativePipeline orchestrator for coordinating all passes
+- CostDriverPipeline orchestrator for the v2.6 pipeline rewrite
 - PipelineCache for Redis-based caching of pass results
 
 Usage:
@@ -18,12 +19,15 @@ Usage:
 """
 
 from .cache import PipelineCache, cache_key
+from .cost_driver_pipeline import CostDriverPipeline
 from .models import (
     AnalysisResult,
     CategoryAnalysis,
     DraftNarrative,
+    DriverAnalysisResult,
     DriverNarrative,
     FinalNarrative,
+    SummaryResult,
     QualityCheckResult,
     QualityReport,
 )
@@ -50,6 +54,7 @@ from .state import PipelineState
 __all__ = [
     # Orchestrator
     "NarrativePipeline",
+    "CostDriverPipeline",
     # Cache
     "PipelineCache",
     "cache_key",
@@ -62,12 +67,14 @@ __all__ = [
     "AnalysisInput",
     # Writer pass models
     "DraftNarrative",
+    "DriverAnalysisResult",
     "DriverNarrative",
     # Writer pass functions
     "run_writer_pass",
     "WriterInput",
     # Compliance pass models and functions
     "FinalNarrative",
+    "SummaryResult",
     "run_compliance_pass",
     "ComplianceInput",
     # Quality gate models

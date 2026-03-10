@@ -12,7 +12,7 @@ from .markdown import MarkdownBlock, parse_markdown
 from .normalize import normalize_label, normalize_money
 from ..llm.adapter import LLMAdapterBase
 from ..methodology.models import MethodologyResult
-from ..pipeline import NarrativePipeline, PipelineCache, FinalNarrative, PipelineState
+from ..pipeline import CostDriverPipeline, PipelineCache, FinalNarrative, PipelineState
 from ..rules.models import SignalBundle
 
 try:
@@ -381,12 +381,12 @@ class BidComp:
         self._current_job_id: Optional[str] = None
 
         # Set up pipeline with optional caching
-        self._pipeline: Optional[NarrativePipeline] = None
+        self._pipeline: Optional[CostDriverPipeline] = None
         self._cache: Optional[PipelineCache] = None
         if llm_adapter:
             if redis is not None:
                 self._cache = PipelineCache(redis)
-            self._pipeline = NarrativePipeline(
+            self._pipeline = CostDriverPipeline(
                 llm_adapter=llm_adapter,
                 cache=self._cache,
             )
@@ -745,7 +745,7 @@ class BidComp:
         methodology: Optional[MethodologyResult] = None,
         signals: Optional[SignalBundle] = None,
     ) -> NarrativeResult:
-        """Use NarrativePipeline for narrative generation."""
+        """Use CostDriverPipeline for narrative generation."""
         try:
             state = self._pipeline.run(
                 pair=pair,
