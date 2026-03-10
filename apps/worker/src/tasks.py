@@ -50,6 +50,7 @@ _ASYNC_LOOP_THREAD: threading.Thread | None = None
 _ASYNC_LOOP_LOCK = threading.Lock()
 _ASYNC_OP_TIMEOUT_SEC = int(os.getenv("WORKER_ASYNC_OP_TIMEOUT_SEC", "20"))
 _PARSER_FULL_TIMEOUT_SEC = int(os.getenv("PARSER_FULL_TIMEOUT_SEC", "420"))
+_PARSER_FULL_HEARTBEAT_SEC = int(os.getenv("PARSER_FULL_HEARTBEAT_SEC", "15"))
 MAX_DISPLAY_NAME_LEN = 120
 
 _FORMULA_PREFIXES = ("=", "+", "-", "@")
@@ -218,30 +219,92 @@ def _run_parser_full(input_path: str, out_dir: Path) -> Dict[str, Any]:
     env["HELPER_OUTDIR"] = str(out_dir)
 
     t0 = time.time()
+
+    stdout_lines: list[str] = []
+    stderr_lines: list[str] = []
+
+    def _drain_stream(stream, sink: list[str], *, log_output: bool) -> None:
+        try:
+            for line in iter(stream.readline, ""):
+                sink.append(line)
+                if log_output:
+                    text = line.rstrip()
+                    if text:
+                        logger.info("parser(full) child: %s", text)
+        finally:
+            try:
+                stream.close()
+            except Exception:
+                pass
+
     try:
-        proc = subprocess.run(
+        proc = subprocess.Popen(
             cmd,
             env=env,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            timeout=_PARSER_FULL_TIMEOUT_SEC,
-            check=False,
+            bufsize=1,
         )
-    except subprocess.TimeoutExpired as exc:
-        elapsed = int((time.time() - t0) * 1000)
-        raise TimeoutError(
-            f"parser(full) timed out after {_PARSER_FULL_TIMEOUT_SEC}s (elapsed_ms={elapsed})"
-        ) from exc
+        stdout_thread = threading.Thread(
+            target=_drain_stream,
+            args=(proc.stdout, stdout_lines),
+            kwargs={"log_output": False},
+            daemon=True,
+            name="parser-full-stdout",
+        )
+        stderr_thread = threading.Thread(
+            target=_drain_stream,
+            args=(proc.stderr, stderr_lines),
+            kwargs={"log_output": True},
+            daemon=True,
+            name="parser-full-stderr",
+        )
+        stdout_thread.start()
+        stderr_thread.start()
+
+        deadline = t0 + _PARSER_FULL_TIMEOUT_SEC
+        while True:
+            remaining = deadline - time.time()
+            if remaining <= 0:
+                proc.kill()
+                proc.wait(timeout=5)
+                elapsed = int((time.time() - t0) * 1000)
+                raise TimeoutError(
+                    f"parser(full) timed out after {_PARSER_FULL_TIMEOUT_SEC}s (elapsed_ms={elapsed})"
+                )
+            try:
+                proc.wait(timeout=min(_PARSER_FULL_HEARTBEAT_SEC, remaining))
+                break
+            except subprocess.TimeoutExpired:
+                elapsed = int((time.time() - t0) * 1000)
+                logger.info(
+                    "parser(full): still running input=%s elapsed_ms=%d timeout_sec=%d",
+                    input_path,
+                    elapsed,
+                    _PARSER_FULL_TIMEOUT_SEC,
+                )
+
+        stdout_thread.join(timeout=5)
+        stderr_thread.join(timeout=5)
+    except Exception:
+        if "proc" in locals() and proc.poll() is None:
+            proc.kill()
+            proc.wait(timeout=5)
+        raise
 
     elapsed = int((time.time() - t0) * 1000)
+    stdout_text = "".join(stdout_lines)
+    stderr_text = "".join(stderr_lines)
+
     if proc.returncode != 0:
-        stderr_tail = (proc.stderr or "")[-2000:]
+        stderr_tail = stderr_text[-2000:]
         raise RuntimeError(
             f"parser(full) subprocess failed rc={proc.returncode} elapsed_ms={elapsed} stderr_tail={stderr_tail}"
         )
 
     payload_line = ""
-    for line in reversed((proc.stdout or "").splitlines()):
+    for line in reversed(stdout_text.splitlines()):
         if line.strip():
             payload_line = line.strip()
             break
@@ -251,7 +314,7 @@ def _run_parser_full(input_path: str, out_dir: Path) -> Dict[str, Any]:
     try:
         payload = json.loads(payload_line)
     except Exception as exc:  # noqa: BLE001
-        stdout_tail = (proc.stdout or "")[-2000:]
+        stdout_tail = stdout_text[-2000:]
         raise RuntimeError(f"parser(full) invalid JSON output: {stdout_tail}") from exc
 
     base = Path(out_dir) / Path(input_path).stem
