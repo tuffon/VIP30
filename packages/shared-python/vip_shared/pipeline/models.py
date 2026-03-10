@@ -12,7 +12,7 @@ All models support JSON serialization for caching and logging.
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import List, Literal
+from typing import Any, Dict, List, Literal
 
 from pydantic import BaseModel, Field, computed_field
 
@@ -179,4 +179,40 @@ class FinalNarrative(DraftNarrative):
     rewrites_performed: int = Field(
         default=0,
         description="Number of compliance rewrites performed (0 if quality passed initially)"
+    )
+
+
+class TradeContext(BaseModel):
+    """
+    Normalized category-level totals for both estimates.
+
+    Built from recap_by_category in parser JSON output.
+    Primary source for cost driver identification in Phase 30.
+
+    source field:
+    - "recap_by_category": built from recaps_and_summaries.recap_by_category (all 6 doc types)
+    - "synthesized": built from section-level totals (fallback when recap absent)
+
+    *_trade_items: raw trade_summary.line_items when available (StateFarm final-drafts only).
+    These provide additional detail for trade-level analysis in per-driver LLM passes.
+    """
+
+    primary_by_category: Dict[str, float] = Field(
+        default_factory=dict,
+        description="Primary estimate category totals keyed by display name (e.g., 'Painting')"
+    )
+    comparison_by_category: Dict[str, float] = Field(
+        default_factory=dict,
+        description="Comparison estimate category totals keyed by display name"
+    )
+    source: Literal["recap_by_category", "synthesized"] = Field(
+        description="Which data source was used to build category totals"
+    )
+    primary_trade_items: List[Dict[str, Any]] = Field(
+        default_factory=list,
+        description="Raw trade_summary line_items from primary estimate (StateFarm only)"
+    )
+    comparison_trade_items: List[Dict[str, Any]] = Field(
+        default_factory=list,
+        description="Raw trade_summary line_items from comparison estimate (StateFarm only)"
     )
