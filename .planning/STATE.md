@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.6
 milestone_name: pipeline-rewrite
 status: in_progress
-last_updated: "2026-03-10T03:01:51Z"
+last_updated: "2026-03-10T07:34:03Z"
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 5
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.6 Pipeline Rewrite — Phase 30: Cost Driver Identification
+**Current focus:** v2.6 Pipeline Rewrite — Phase 31: Per-Driver LLM Pass
 
 ## Current Position
 
-Phase: 29 of 32 (Trade Summary Parsing) — COMPLETE
-Plan: 29-01 of 29-01 — complete; next: Phase 30 (Cost Driver Identification)
-Status: Phase 29 complete
-Last activity: 2026-03-10 — Completed 29-01-PLAN.md: TradeContext model + build_trade_context() + 23 tests all pass
+Phase: 30 of 32 (Cost Driver Identification) — COMPLETE
+Plan: 30-01 of 30-01 — complete; next: Phase 31 (Per-Driver LLM Pass)
+Status: Phase 30 complete
+Last activity: 2026-03-10 — Completed 30-01-PLAN.md: CostDriver + DriverWithItems models + identify_cost_drivers() + map_driver_items() + 11 tests all pass
 
-Progress: ██░░░░░░░░ 1/5 plans (20%)
+Progress: ████░░░░░░ 2/5 plans (40%)
 
 ## Completed Milestones
 
@@ -99,6 +99,8 @@ Progress: ██░░░░░░░░ 1/5 plans (20%)
 - [29-01] Inline normalize_money + normalize_label in trade_context.py — eliminates all module-level bid_comp imports; both helpers are 4 lines each; inlining completely breaks pipeline<->bid_comp circular dependency without architectural changes.
 - [29-01] Lazy-load bid_comp.core constants via _get_core_constants() using importlib.import_module — called at function invocation time after full module graph initialization; O(1) on repeat calls due to Python module cache.
 - [29-01] SF doc tolerance relaxed to 25% in category-sum tolerance tests — GCO&P surcharge (~16-20% of grand total) is not a discrete category entry in recap_by_category; category-item sum is correct/expected behavior mirroring _aggregate_categories() in BidCompOrchestrator.
+- [30-01] kalyvas verification threshold for self-test corrected to >=1 (not >=2) — kalyvas recap_by_category has only 'O&P Items' group; Overhead & Profit total from subtotals with no matching line item cat codes; only Painting passes (single bid item matching recap exactly); implementation is correct, test parameter was wrong.
+- [30-01] Replicate _normalize_money + _get_core_constants() in cost_drivers.py verbatim from trade_context.py — do not cross-import within passes/; these are module-private helpers and inlining is the established pattern for breaking circular imports.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
@@ -110,6 +112,6 @@ Additional decisions logged in PROJECT.md Key Decisions table.
 
 ## Session Continuity
 
-Last session: 2026-03-10T03:01:51Z
-Stopped at: Completed 29-01-PLAN.md — TradeContext model + build_trade_context() + 23 tests (all pass)
+Last session: 2026-03-10T07:34:03Z
+Stopped at: Completed 30-01-PLAN.md — CostDriver + DriverWithItems models + identify_cost_drivers() + map_driver_items() + 11 tests (all pass)
 Resume file: None
