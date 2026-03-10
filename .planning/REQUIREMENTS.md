@@ -67,9 +67,9 @@ Which phases cover which requirements. Updated by create-roadmap.
 | TRADE-01 | Phase 29 | Complete |
 | TRADE-02 | Phase 29 | Complete |
 | TRADE-03 | Phase 29 | Complete |
-| DRIVER-01 | Phase 30 | Pending |
-| DRIVER-02 | Phase 30 | Pending |
-| DRIVER-03 | Phase 30 | Pending |
+| DRIVER-01 | Phase 30 | Complete |
+| DRIVER-02 | Phase 30 | Complete |
+| DRIVER-03 | Phase 30 | Complete |
 | PASS-01 | Phase 31 | Pending |
 | PASS-02 | Phase 31 | Pending |
 | PASS-03 | Phase 31 | Pending |
