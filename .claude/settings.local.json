@@ -30,7 +30,21 @@
       "WebFetch(domain:disaster411.com)",
       "WebFetch(domain:www.collegesidekick.com)",
       "WebFetch(domain:www.topadjuster.com)",
-      "WebFetch(domain:topadjuster.com)"
+      "WebFetch(domain:topadjuster.com)",
+      "Bash(python:*)",
+      "Bash(cp:*)",
+      "Bash(PYTHONPATH=/c/Users/benav.TUFFON_AMD/Documents/Projects/VIP30/packages/shared-python python:*)",
+      "Bash(echo Exit: $?:*)",
+      "Bash(python3:*)",
+      "Bash(/c/Users/benav.TUFFON_AMD/Documents/Projects/VIP30/.planning/phases/22-executive-summary-narrative/22-VERIFICATION.md:*)",
+      "Bash(printf hello world\\\\n:*)",
+      "Bash(printf %s\\\\n:*)",
+      "Bash(rm:*)",
+      "Skill(gsd:audit-milestone)",
+      "Skill(gsd:plan-phase)",
+      "Bash(ls:*)",
+      "Bash(pip install:*)",
+      "Bash(pytest:*)"
     ]
   }
 }

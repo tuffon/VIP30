@@ -1,0 +1,17 @@
+pyproject.toml
+tests/test_coverage.py
+vip_parser/__init__.py
+vip_parser/bni_extract_unit_costs.py
+vip_parser/parse_dir.py
+vip_parser/xactimate_rough_draft_parse.py
+vip_parser.egg-info/PKG-INFO
+vip_parser.egg-info/SOURCES.txt
+vip_parser.egg-info/dependency_links.txt
+vip_parser.egg-info/requires.txt
+vip_parser.egg-info/top_level.txt
+vip_parser/xactimate/__init__.py
+vip_parser/xactimate/constants.py
+vip_parser/xactimate/helpers.py
+vip_parser/xactimate/io.py
+vip_parser/xactimate/parser.py
+vip_parser/xactimate/visible_text.py
