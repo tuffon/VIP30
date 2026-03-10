@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v2.6
 milestone_name: pipeline-rewrite
 status: in_progress
-last_updated: "2026-03-10T08:12:57Z"
+last_updated: "2026-03-10T21:55:00Z"
 progress:
   total_phases: 4
   completed_phases: 3
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.6 Pipeline Rewrite — Phase 32: Final Summary Pipeline Integration
+**Current focus:** v2.6 Pipeline Rewrite — Phase 32 complete; milestone implementation complete pending milestone closeout
 
 ## Current Position
 
-Phase: 31 of 32 (Per-Driver LLM Pass) — COMPLETE
-Plan: 31-01 of 31-01 — complete; next: Phase 32 (Final Summary Pipeline Integration)
-Status: Phase 31 complete
-Last activity: 2026-03-10 — Completed 31-01-PLAN.md: DriverAnalysisResult + run_driver_pass() + driver_analysis_v1 prompts; 8 tests + 42/42 shared-python + 12/12 parser all pass
+Phase: 32 of 32 (Final Summary + Pipeline Integration) — COMPLETE
+Plan: 32-02 of 32-02 — complete; next: milestone closeout / archive workflow
+Status: Phase 32 complete
+Last activity: 2026-03-10 — Completed 32-01-PLAN.md and 32-02-PLAN.md: SummaryResult + run_summary_pass() + CostDriverPipeline + BidComp integration; 56/56 shared-python tests pass, parser suite reported 1 unrelated coverage failure
 
-Progress: ██████░░░░ 3/5 plans (60%)
+Progress: ██████████ 5/5 plans (100%)
 
 ## Completed Milestones
 
@@ -103,17 +103,20 @@ Progress: ██████░░░░ 3/5 plans (60%)
 - [30-01] Replicate _normalize_money + _get_core_constants() in cost_drivers.py verbatim from trade_context.py — do not cross-import within passes/; these are module-private helpers and inlining is the established pattern for breaking circular imports.
 - [31-01] verification_context added to context dict — prompt uses {verification_context} which is either empty string or formatted note string; avoids Jinja-style conditional logic in prompt template.
 - [31-01] No JSON repair in driver_pass.py — generate_structured() exception propagates to caller; Phase 32 handles failed drivers with 'analysis unavailable' entries (REWRITE-03).
+- [32-01] Summary pass cache key includes quality_notes — rewrite requests must never reuse the initial summary cache entry.
+- [32-02] CostDriverPipeline runs only GATE-01 and GATE-02 against summary overview text — Phase 32 explicitly replaces the old broader compliance loop with a single targeted rewrite.
+- [32-02] Driver-pass failures are isolated per category — final output keeps category ordering and emits `Analysis unavailable. Delta: $X.XX` instead of dropping the driver silently.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
 ### Blockers/Concerns
 
 - Full `apps/api` test suite has 2 unrelated non-passing migration naming tests in `tests/test_migrations_constraints.py` expecting `vip30-web` service naming.
-- v2.5 parser gaps: all resolved. 12/12 tests passing as of 2026-03-09.
+- `packages/parser` suite currently has 1 unrelated non-passing coverage case in `tests/test_coverage.py` for `lachman_sf` (3 section item-count mismatches with matching totals).
 - Remaining parser limitations (low priority, v2.6+): rough-draft insured_name not extractable; price_list suffix truncation; 3 lachman_sf sections with declared-vs-computed rounding deltas.
 
 ## Session Continuity
 
-Last session: 2026-03-10T08:12:57Z
-Stopped at: Completed 31-01-PLAN.md — DriverAnalysisResult + run_driver_pass() + driver_analysis_v1 prompts + 8 tests (all pass); 42/42 shared-python + 12/12 parser
+Last session: 2026-03-10T21:55:00Z
+Stopped at: Completed 32-01-PLAN.md and 32-02-PLAN.md — SummaryResult + run_summary_pass() + CostDriverPipeline + BidComp integration; 56/56 shared-python pass; parser suite has 1 unrelated failure
 Resume file: None

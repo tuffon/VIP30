@@ -123,8 +123,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 32-01: Build SummaryResult model + run_summary_pass() + final_summary_v1 prompt + rebuilt quality rewrite
-- [ ] 32-02: Build CostDriverPipeline orchestrator + assemble_final_narrative() + fallback removal + bid_comp integration
+- [x] 32-01: Build SummaryResult model + run_summary_pass() + final_summary_v1 prompt + rebuilt quality rewrite
+- [x] 32-02: Build CostDriverPipeline orchestrator + assemble_final_narrative() + fallback removal + bid_comp integration
 
 ## Progress
 
@@ -141,4 +141,4 @@ Plans:
 | 29. Trade Summary Parsing | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 30. Cost Driver Identification | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 31. Per-Driver LLM Pass | v2.6 | 1/1 | Complete | 2026-03-10 |
-| 32. Final Summary + Pipeline Integration | v2.6 | 0/2 | Not started | - |
+| 32. Final Summary + Pipeline Integration | v2.6 | 2/2 | Complete | 2026-03-10 |

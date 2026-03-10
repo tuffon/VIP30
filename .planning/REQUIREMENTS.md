@@ -27,19 +27,19 @@ Requirements for v2.6. Goal: replace monolithic analysis→writer→rewrite pipe
 
 ### Final Summary LLM Pass
 
-- [ ] **SUMM-01**: All driver analyses are aggregated into a `SummaryResult` via a dedicated final summary LLM request with its own context window
-- [ ] **SUMM-02**: Summary output contains: executive overview (4-6 sentences), suggested followups, scope observations — validated via Pydantic structured output
+- [x] **SUMM-01**: All driver analyses are aggregated into a `SummaryResult` via a dedicated final summary LLM request with its own context window
+- [x] **SUMM-02**: Summary output contains: executive overview (4-6 sentences), suggested followups, scope observations — validated via Pydantic structured output
 
 ### Rewrite System
 
-- [ ] **REWRITE-01**: Quality rewrite triggered only when GATE-01 (hedging) or GATE-02 (judgment language) fails — single pass, no loop
-- [ ] **REWRITE-02**: Default fallback text eliminated — `_build_fallback_result()` and `_finalize_with_error()` placeholder text removed from pipeline
-- [ ] **REWRITE-03**: Failed individual driver call produces explicit "analysis unavailable" entry with raw data, not silent placeholder
+- [x] **REWRITE-01**: Quality rewrite triggered only when GATE-01 (hedging) or GATE-02 (judgment language) fails — single pass, no loop
+- [x] **REWRITE-02**: Default fallback text eliminated — `_build_fallback_result()` and `_finalize_with_error()` placeholder text removed from pipeline
+- [x] **REWRITE-03**: Failed individual driver call produces explicit "analysis unavailable" entry with raw data, not silent placeholder
 
 ### Pipeline Integration
 
-- [ ] **INTEG-01**: New `CostDriverPipeline` replaces `NarrativePipeline` in orchestrator — same interface contract so `bid_comp/core.py` requires minimal changes
-- [ ] **INTEG-02**: Pipeline output assembles into existing `FinalNarrative` model — `export_xlsx()` and XLSX report format unchanged
+- [x] **INTEG-01**: New `CostDriverPipeline` replaces `NarrativePipeline` in orchestrator — same interface contract so `bid_comp/core.py` requires minimal changes
+- [x] **INTEG-02**: Pipeline output assembles into existing `FinalNarrative` model — `export_xlsx()` and XLSX report format unchanged
 
 ## v2 Requirements
 
@@ -70,16 +70,16 @@ Which phases cover which requirements. Updated by create-roadmap.
 | DRIVER-01 | Phase 30 | Complete |
 | DRIVER-02 | Phase 30 | Complete |
 | DRIVER-03 | Phase 30 | Complete |
-| PASS-01 | Phase 31 | Pending |
-| PASS-02 | Phase 31 | Pending |
-| PASS-03 | Phase 31 | Pending |
-| SUMM-01 | Phase 32 | Pending |
-| SUMM-02 | Phase 32 | Pending |
-| REWRITE-01 | Phase 32 | Pending |
-| REWRITE-02 | Phase 32 | Pending |
-| REWRITE-03 | Phase 32 | Pending |
-| INTEG-01 | Phase 32 | Pending |
-| INTEG-02 | Phase 32 | Pending |
+| PASS-01 | Phase 31 | Complete |
+| PASS-02 | Phase 31 | Complete |
+| PASS-03 | Phase 31 | Complete |
+| SUMM-01 | Phase 32 | Complete |
+| SUMM-02 | Phase 32 | Complete |
+| REWRITE-01 | Phase 32 | Complete |
+| REWRITE-02 | Phase 32 | Complete |
+| REWRITE-03 | Phase 32 | Complete |
+| INTEG-01 | Phase 32 | Complete |
+| INTEG-02 | Phase 32 | Complete |
 
 **Coverage:**
 - v1 requirements: 16 total
