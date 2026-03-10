@@ -292,3 +292,24 @@ class DriverAnalysisResult(BaseModel):
         default_factory=list,
         description="Specific follow-up questions worth asking about this category"
     )
+
+
+class SummaryResult(BaseModel):
+    """
+    Output of the final summary LLM pass (Phase 32).
+
+    Aggregates all DriverAnalysisResult entries into one executive overview plus
+    supporting scope observations and follow-up actions.
+    """
+
+    overview: str = Field(
+        description="4-6 sentence executive overview grounded in all driver analyses"
+    )
+    scope_observations: List[str] = Field(
+        default_factory=list,
+        description="Cross-driver scope observations surfaced by the summary pass"
+    )
+    suggested_followups: List[str] = Field(
+        default_factory=list,
+        description="Cross-driver follow-up questions or validation actions"
+    )
