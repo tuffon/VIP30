@@ -64,27 +64,27 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TRADE-01 | Phase ? | Pending |
-| TRADE-02 | Phase ? | Pending |
-| TRADE-03 | Phase ? | Pending |
-| DRIVER-01 | Phase ? | Pending |
-| DRIVER-02 | Phase ? | Pending |
-| DRIVER-03 | Phase ? | Pending |
-| PASS-01 | Phase ? | Pending |
-| PASS-02 | Phase ? | Pending |
-| PASS-03 | Phase ? | Pending |
-| SUMM-01 | Phase ? | Pending |
-| SUMM-02 | Phase ? | Pending |
-| REWRITE-01 | Phase ? | Pending |
-| REWRITE-02 | Phase ? | Pending |
-| REWRITE-03 | Phase ? | Pending |
-| INTEG-01 | Phase ? | Pending |
-| INTEG-02 | Phase ? | Pending |
+| TRADE-01 | Phase 29 | Pending |
+| TRADE-02 | Phase 29 | Pending |
+| TRADE-03 | Phase 29 | Pending |
+| DRIVER-01 | Phase 30 | Pending |
+| DRIVER-02 | Phase 30 | Pending |
+| DRIVER-03 | Phase 30 | Pending |
+| PASS-01 | Phase 31 | Pending |
+| PASS-02 | Phase 31 | Pending |
+| PASS-03 | Phase 31 | Pending |
+| SUMM-01 | Phase 32 | Pending |
+| SUMM-02 | Phase 32 | Pending |
+| REWRITE-01 | Phase 32 | Pending |
+| REWRITE-02 | Phase 32 | Pending |
+| REWRITE-03 | Phase 32 | Pending |
+| INTEG-01 | Phase 32 | Pending |
+| INTEG-02 | Phase 32 | Pending |
 
 **Coverage:**
 - v1 requirements: 16 total
-- Mapped to phases: 0 (pending create-roadmap)
-- Unmapped: 16 ⚠️
+- Mapped to phases: 16
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-09*

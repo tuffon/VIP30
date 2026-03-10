@@ -2,12 +2,12 @@
 gsd_state_version: 1.0
 milestone: v2.6
 milestone_name: pipeline-rewrite
-status: defining_requirements
+status: ready_to_plan
 last_updated: "2026-03-09T23:30:00Z"
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
-  total_plans: 0
+  total_plans: 5
   completed_plans: 0
 ---
 
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.6 Pipeline Rewrite — defining requirements
+**Current focus:** v2.6 Pipeline Rewrite — Phase 29: Trade Summary Parsing
 
 ## Current Position
 
-Phase: Not started (run `/gsd:define-requirements`)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-03-09 — v2.6 milestone started: trade summary parsing, cost-driver LLM pass, pipeline rewrite
+Phase: 29 of 32 (Trade Summary Parsing)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-03-09 — v2.6 roadmap created: 4 phases (29-32), 16 requirements, 5 plans
 
-Progress: — (new milestone)
+Progress: ░░░░░░░░░░ 0/5 plans (0%)
 
 ## Completed Milestones
 
@@ -45,6 +45,7 @@ Progress: — (new milestone)
 
 ### Roadmap Evolution
 
+- Phase 29-32 added: v2.6 Pipeline Rewrite — 4 phases, 5 plans; TradeContext + CostDriver + DriverAnalysis + SummaryResult + CostDriverPipeline
 - Phase 20 added: Cost Driver Narrative Quality — key cost drivers missing narrative text, prompts need fixing
 - Phase 21 added: Report Output Quality — Notes too small, summary too vague, key observations need integration, follow-ups too generic, analysis layout should match Kalyvas template (file in project root)
 - Phase 20 completed: prompts upgraded to v2.2 approach-first guidance; Summary Top Cost Drivers now uses Notes mapped to deterministic top-driver narrative contract.
