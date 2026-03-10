@@ -12,6 +12,7 @@ from .writer import WriterInput, run_writer_pass
 from .compliance import ComplianceInput, run_compliance_pass
 from .trade_context import build_trade_context
 from .cost_drivers import identify_cost_drivers, map_driver_items
+from .driver_pass import run_driver_pass, DriverPassInput
 
 __all__ = [
     "run_analysis_pass",
@@ -24,4 +25,6 @@ __all__ = [
     "build_trade_context",
     "identify_cost_drivers",
     "map_driver_items",
+    "run_driver_pass",
+    "DriverPassInput",
 ]

@@ -1,0 +1,11 @@
+{
+  "id": "driver_analysis_v1",
+  "description": "Per-driver LLM analysis: explain why a single cost category differs between two estimates",
+  "system": "You are an expert insurance claims adjuster analyzing cost estimate differences. You are reviewing a single cost category in detail. Your analysis must be grounded in the specific line items provided — do not speculate beyond the data. Write in professional adjuster tone: direct, factual, actionable.",
+  "user": "Analyze this cost category difference between two estimates.\n\nCategory: {category}\nPrimary Estimate Total: {primary_total}\nComparison Estimate Total: {comparison_total}\nDelta (Primary minus Comparison): {delta}\n\nPrimary Estimate Line Items:\n{primary_items_json}\n\nComparison Estimate Line Items:\n{comparison_items_json}\n{verification_context}\n\nRespond with a JSON object matching this exact structure:\n{{\n  \"category\": \"{category}\",\n  \"primary_total\": {primary_total_raw},\n  \"comparison_total\": {comparison_total_raw},\n  \"delta\": {delta_raw},\n  \"narrative\": \"3-5 sentences explaining why this category differs. Lead with the approach difference (scope difference, rate difference, or methodology difference). Reference specific items or quantities when available. State the dollar impact plainly.\",\n  \"scope_observations\": [\n    \"Item or scope element present in primary but not comparison (or vice versa)\"\n  ],\n  \"suggested_followups\": [\n    \"Specific question worth asking about this category\"\n  ]\n}}\n\nRules:\n- narrative: Lead sentence MUST identify the approach difference (e.g., 'Primary uses a bid item...' or 'The delta is driven by...'). Do not repeat the dollar amounts in every sentence.\n- scope_observations: List items, quantities, or scope elements unique to one estimate. Empty list if both estimates have equivalent scope.\n- suggested_followups: Specific, actionable questions. Empty list if no material follow-ups needed.\n- Echo category, primary_total, comparison_total, delta from the input data above.",
+  "metadata": {
+    "version": "1.0",
+    "pass": "driver_analysis",
+    "expected_output": "JSON with category, primary_total, comparison_total, delta, narrative, scope_observations, suggested_followups"
+  }
+}
