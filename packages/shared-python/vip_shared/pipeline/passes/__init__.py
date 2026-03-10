@@ -10,6 +10,7 @@ This module contains the individual pass implementations:
 from .analysis import AnalysisInput, run_analysis_pass, sample_line_items
 from .writer import WriterInput, run_writer_pass
 from .compliance import ComplianceInput, run_compliance_pass
+from .trade_context import build_trade_context
 
 __all__ = [
     "run_analysis_pass",
@@ -19,4 +20,5 @@ __all__ = [
     "WriterInput",
     "run_compliance_pass",
     "ComplianceInput",
+    "build_trade_context",
 ]
