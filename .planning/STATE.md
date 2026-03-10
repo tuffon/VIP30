@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.6
 milestone_name: pipeline-rewrite
 status: in_progress
-last_updated: "2026-03-10T07:34:03Z"
+last_updated: "2026-03-10T08:12:57Z"
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 5
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.6 Pipeline Rewrite — Phase 31: Per-Driver LLM Pass
+**Current focus:** v2.6 Pipeline Rewrite — Phase 32: Final Summary Pipeline Integration
 
 ## Current Position
 
-Phase: 30 of 32 (Cost Driver Identification) — COMPLETE
-Plan: 30-01 of 30-01 — complete; next: Phase 31 (Per-Driver LLM Pass)
-Status: Phase 30 complete
-Last activity: 2026-03-10 — Completed 30-01-PLAN.md: CostDriver + DriverWithItems models + identify_cost_drivers() + map_driver_items() + 11 tests all pass
+Phase: 31 of 32 (Per-Driver LLM Pass) — COMPLETE
+Plan: 31-01 of 31-01 — complete; next: Phase 32 (Final Summary Pipeline Integration)
+Status: Phase 31 complete
+Last activity: 2026-03-10 — Completed 31-01-PLAN.md: DriverAnalysisResult + run_driver_pass() + driver_analysis_v1 prompts; 8 tests + 42/42 shared-python + 12/12 parser all pass
 
-Progress: ████░░░░░░ 2/5 plans (40%)
+Progress: ██████░░░░ 3/5 plans (60%)
 
 ## Completed Milestones
 
@@ -101,6 +101,8 @@ Progress: ████░░░░░░ 2/5 plans (40%)
 - [29-01] SF doc tolerance relaxed to 25% in category-sum tolerance tests — GCO&P surcharge (~16-20% of grand total) is not a discrete category entry in recap_by_category; category-item sum is correct/expected behavior mirroring _aggregate_categories() in BidCompOrchestrator.
 - [30-01] kalyvas verification threshold for self-test corrected to >=1 (not >=2) — kalyvas recap_by_category has only 'O&P Items' group; Overhead & Profit total from subtotals with no matching line item cat codes; only Painting passes (single bid item matching recap exactly); implementation is correct, test parameter was wrong.
 - [30-01] Replicate _normalize_money + _get_core_constants() in cost_drivers.py verbatim from trade_context.py — do not cross-import within passes/; these are module-private helpers and inlining is the established pattern for breaking circular imports.
+- [31-01] verification_context added to context dict — prompt uses {verification_context} which is either empty string or formatted note string; avoids Jinja-style conditional logic in prompt template.
+- [31-01] No JSON repair in driver_pass.py — generate_structured() exception propagates to caller; Phase 32 handles failed drivers with 'analysis unavailable' entries (REWRITE-03).
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 
@@ -112,6 +114,6 @@ Additional decisions logged in PROJECT.md Key Decisions table.
 
 ## Session Continuity
 
-Last session: 2026-03-10T07:34:03Z
-Stopped at: Completed 30-01-PLAN.md — CostDriver + DriverWithItems models + identify_cost_drivers() + map_driver_items() + 11 tests (all pass)
+Last session: 2026-03-10T08:12:57Z
+Stopped at: Completed 31-01-PLAN.md — DriverAnalysisResult + run_driver_pass() + driver_analysis_v1 prompts + 8 tests (all pass); 42/42 shared-python + 12/12 parser
 Resume file: None
