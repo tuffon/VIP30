@@ -609,8 +609,15 @@ class BidComp:
         trade_ctx = build_trade_context(pair.primary.payload, pair.comparison.payload)
         primary_totals = trade_ctx.primary_by_category
         comparison_totals = trade_ctx.comparison_by_category
+        categories = sorted(
+            set(primary_totals) | set(comparison_totals),
+            key=lambda category: (
+                -abs(round((comparison_totals.get(category, 0.0) or 0.0) - (primary_totals.get(category, 0.0) or 0.0), 2)),
+                normalize_label(category),
+            ),
+        )
         rows: List[Dict[str, Any]] = []
-        for category in VERISK_CATEGORY_ORDER:
+        for category in categories:
             a_val = primary_totals.get(category, 0.0)
             b_val = comparison_totals.get(category, 0.0)
             delta = round((b_val or 0.0) - (a_val or 0.0), 2)
@@ -627,7 +634,12 @@ class BidComp:
         return rows
 
     def _aggregate_categories(self, recap: Dict[str, Any]) -> Dict[str, float]:
-        totals: Dict[str, float] = {cat: 0.0 for cat in VERISK_CATEGORY_ORDER}
+        totals: Dict[str, float] = {}
+        group_labels = {
+            normalize_label(str(group_label))
+            for group_label, items in recap.items()
+            if group_label != "subtotals" and isinstance(items, list)
+        }
         for group_label, items in recap.items():
             if group_label == "subtotals" or not isinstance(items, list):
                 continue
@@ -637,43 +649,27 @@ class BidComp:
                 amount = normalize_money(entry.get("total") or entry.get("amount"))
                 if amount is None:
                     continue
-                raw_name = entry.get("item") or entry.get("name") or entry.get("label") or ""
-                mapped = self._map_category(raw_name or group_label)
-                totals[mapped] = round(totals.get(mapped, 0.0) + amount, 2)
+                label = str(entry.get("item") or entry.get("name") or entry.get("label") or group_label).strip()
+                if not label:
+                    continue
+                totals[label] = round(totals.get(label, 0.0) + amount, 2)
 
-        # Fees and taxes live in subtotals
+        # Keep only real subtotal categories; skip recap rollup rows like O&P Items and Total.
         subtotals = recap.get("subtotals") if isinstance(recap, dict) else None
         if isinstance(subtotals, list):
             for entry in subtotals:
                 if not isinstance(entry, dict):
                     continue
-                label = normalize_label(entry.get("label") or "")
+                label = str(entry.get("label") or "").strip()
+                normalized = normalize_label(label)
                 amount = normalize_money(entry.get("total"))
                 if amount is None:
                     continue
-                if "OVERHEAD" in label or "PROFIT" in label:
-                    totals["Overhead & Profit"] = round(totals.get("Overhead & Profit", 0.0) + amount, 2)
-                elif "MATERIAL" in label and "TAX" in label:
-                    totals["Material Sales Tax"] = round(totals.get("Material Sales Tax", 0.0) + amount, 2)
-                elif "PERMIT" in label:
-                    totals["Permit Fees"] = round(totals.get("Permit Fees", 0.0) + amount, 2)
+                if not label or normalized in group_labels or normalized in {"TOTAL", "ITEMS SUBTOTAL"}:
+                    continue
+                totals[label] = round(totals.get(label, 0.0) + amount, 2)
 
         return totals
-
-    def _map_category(self, raw_name: str) -> str:
-        normalized = normalize_label(raw_name or "")
-        if not normalized:
-            return CATEGORY_FALLBACK
-
-        # Prefer explicit Xactimate category codes when present (e.g., "FRM Framing").
-        code = normalized.split(" ", 1)[0].strip("-:")
-        if code in XACTIMATE_CATEGORY_CODE_MAP:
-            return XACTIMATE_CATEGORY_CODE_MAP[code]
-
-        for needle, mapped in CATEGORY_KEYWORDS:
-            if needle in normalized:
-                return mapped
-        return CATEGORY_FALLBACK
 
     def _extract_subtotal_amount(self, recap: Dict[str, Any], needle: str) -> Optional[float]:
         subtotals = recap.get("subtotals")

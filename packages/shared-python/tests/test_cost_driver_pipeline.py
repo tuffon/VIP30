@@ -204,11 +204,11 @@ def test_bidcomp_uses_cost_driver_pipeline():
 
 @patch("vip_shared.bid_comp.core.importlib.import_module")
 def test_build_category_table_uses_trade_context_totals(mock_import_module):
-    """Phase 34: category table uses the same trade-context totals as the pipeline path."""
+    """Phase 34: category table uses exact trade-context category totals."""
     build_trade_context = MagicMock()
     build_trade_context.return_value = MagicMock(
-        primary_by_category={"Painting": 120.0},
-        comparison_by_category={"Painting": 20.0},
+        primary_by_category={"PAINTING": 120.0, "WINDOWS - SLIDING PATIO DOORS": 75.0},
+        comparison_by_category={"PAINTING": 20.0},
     )
     mock_import_module.return_value = MagicMock(build_trade_context=build_trade_context)
 
@@ -223,9 +223,14 @@ def test_build_category_table_uses_trade_context_totals(mock_import_module):
     rows = bid_comp._build_category_table(pair)
 
     build_trade_context.assert_called_once_with(pair.primary.payload, pair.comparison.payload)
-    painting = next(row for row in rows if row["category"] == "Painting")
+    categories = [row["category"] for row in rows]
+    assert "Doors / Windows / Glass" not in categories
+    assert "Cabinetry / Millwork" not in categories
+
+    painting = next(row for row in rows if row["category"] == "PAINTING")
     assert painting["primary_total"] == 120.0
     assert painting["comparison_total"] == 20.0
+    assert categories[0] == "PAINTING"
 
 
 @patch("vip_shared.pipeline.cost_driver_pipeline.run_summary_pass")

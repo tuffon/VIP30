@@ -191,5 +191,5 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 34.1-01: Remove umbrella remapping from pipeline category identity
-- [ ] 34.1-02: Align BidComp output and driver selection to exact parsed labels
+- [x] 34.1-01: Remove umbrella remapping from pipeline category identity
+- [x] 34.1-02: Align BidComp output and driver selection to exact parsed labels

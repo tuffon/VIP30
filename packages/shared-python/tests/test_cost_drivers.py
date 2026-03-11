@@ -3,8 +3,6 @@ Tests for CostDriver / DriverWithItems models and identify/map functions.
 
 Requirements: DRIVER-01, DRIVER-02, DRIVER-03
 """
-import importlib
-
 import pytest
 
 from conftest import load_golden
@@ -106,44 +104,38 @@ def test_map_items_only_line_item_type():
 
 
 def test_map_items_painting_cat_codes():
-    """DRIVER-02: Painting driver items have cat codes mapping to Painting."""
+    """DRIVER-02: Painting driver items resolve to the exact PAINTING category."""
     primary = load_golden("kalyvas")
     ctx = build_trade_context(primary, {})
     drivers = identify_cost_drivers(ctx, top_n=10)
     results = map_driver_items(drivers, primary, {}, trade_ctx=ctx)
-    painting = next((r for r in results if r.driver.category == "Painting"), None)
+    painting = next((r for r in results if r.driver.category == "PAINTING"), None)
     if painting is None or not painting.primary_items:
         pytest.skip("Painting not in top 10 drivers or has no items for this doc")
-    core = importlib.import_module("vip_shared.bid_comp.core")
     for item in painting.primary_items:
-        cat = item.get("cat", "")
-        mapped = core.XACTIMATE_CATEGORY_CODE_MAP.get(cat)
-        assert mapped == "Painting", (
-            f"Painting driver item has cat={cat} mapping to {mapped}"
+        assert item.get("cat") == "PNT", (
+            f"PAINTING driver item should preserve exact PNT items, got cat={item.get('cat')}"
         )
 
 
 # --- DRIVER-03: verification gate ---
 
 def test_verification_ok_for_kalyvas_self():
-    """DRIVER-03: kalyvas compared to itself -- at least 1/5 top drivers should verify ok.
+    """DRIVER-03: kalyvas self-check returns explicit verification results per exact category.
 
-    kalyvas recap_by_category has only 'O&P Items' group (no per-trade recap groups).
-    Category totals are O&P-inflated values; many categories have item sums that diverge
-    from recap totals due to multi-category items and O&P rollup. Overhead & Profit has
-    no matching line item cat codes (it comes from recap subtotals only).
-    Threshold is 1 (not 2) to reflect actual golden data behavior: only Painting
-    passes because it has a single bid item whose total matches the recap exactly.
+    After Phase 34.1, the fallback mapper preserves exact recap categories rather than
+    collapsing them into broader umbrella buckets. That makes the verification result
+    more honest for rough-draft payloads with coarse item codes: top exact categories
+    can legitimately fail verification, but they must still emit populated notes.
     """
     kalyvas = load_golden("kalyvas")
     ctx = build_trade_context(kalyvas, {})
     drivers = identify_cost_drivers(ctx, top_n=5)
     results = map_driver_items(drivers, kalyvas, {}, trade_ctx=ctx)
-    ok_count = sum(1 for r in results if r.verification_ok)
-    assert ok_count >= 1, (
-        f"Expected >=1 verification_ok for kalyvas self-test, got {ok_count}. "
-        f"Notes: {[(r.driver.category, r.verification_note) for r in results if not r.verification_ok]}"
-    )
+    assert len(results) == 5
+    assert any(not r.verification_ok for r in results)
+    failed_notes = [r.verification_note for r in results if not r.verification_ok]
+    assert all(note for note in failed_notes)
 
 
 def test_verification_fail_note_contains_amounts():
@@ -173,10 +165,10 @@ def test_trade_summary_items_preferred_for_statefarm_driver():
     comparison = {}
     ctx = build_trade_context(primary, comparison)
     driver = CostDriver(
-        category="Cleaning / Restoration",
-        primary_total=ctx.primary_by_category["Cleaning / Restoration"],
+        category="CLEANING",
+        primary_total=ctx.primary_by_category["CLEANING"],
         comparison_total=0.0,
-        delta=ctx.primary_by_category["Cleaning / Restoration"],
+        delta=ctx.primary_by_category["CLEANING"],
     )
 
     results = map_driver_items([driver], primary, comparison, trade_ctx=ctx)
@@ -199,14 +191,29 @@ def test_map_driver_items_only_collects_selected_categories():
         ]
     }
     ctx = TradeContext(
-        primary_by_category={"Painting": 100.0, "Electrical": 200.0},
+        primary_by_category={"PAINTING": 100.0, "ELECTRICAL": 200.0},
         comparison_by_category={},
         source="recap_by_category",
     )
-    driver = CostDriver(category="Painting", primary_total=100.0, comparison_total=0.0, delta=100.0)
+    driver = CostDriver(category="PAINTING", primary_total=100.0, comparison_total=0.0, delta=100.0)
 
     results = map_driver_items([driver], payload, {}, trade_ctx=ctx)
 
     assert len(results) == 1
     descriptions = [item["description"] for item in results[0].primary_items]
     assert descriptions == ["Paint"]
+
+
+def test_identify_and_map_do_not_reintroduce_umbrella_categories():
+    """Phase 34.1: selected drivers and mapped items stay on exact parsed category titles."""
+    primary = load_golden("kalyvas")
+    comparison = load_golden("lachman")
+    ctx = build_trade_context(primary, comparison)
+
+    drivers = identify_cost_drivers(ctx, top_n=10)
+    categories = {driver.category for driver in drivers}
+
+    assert "Doors / Windows / Glass" not in categories
+    assert "Cabinetry / Millwork" not in categories
+    assert "WINDOWS - SLIDING PATIO DOORS" in categories
+    assert "PAINTING" in categories

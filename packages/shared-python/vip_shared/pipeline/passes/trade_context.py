@@ -1,18 +1,16 @@
 """
 Trade context extraction for the v2.6 cost-driver-first pipeline.
 
-Builds TradeContext from parser JSON output (recap_by_category).
-This is the first step of CostDriverPipeline (Phase 32).
+Builds TradeContext from parser JSON output using exact parsed category titles.
+This is the first step of CostDriverPipeline.
 
-Fallback hierarchy (TRADE-01, TRADE-02, TRADE-03):
-  1. recap_by_category (all 6 doc types -- primary source)
-  2. trade_summary enrichment when present (StateFarm final-drafts only)
+Fallback hierarchy:
+  1. trade_summary-backed evidence when present, with recap totals remaining authoritative
+  2. recap_by_category exact category rows
   3. Synthesize from section totals (last-resort for unknown doc types)
 
-Note on imports: vip_shared.bid_comp.__init__ imports BidComp from core.py, and
-bid_comp/core.py imports from ..pipeline (NarrativePipeline etc.), creating a
-circular import when this module is loaded at pipeline init time (via passes/__init__).
-All bid_comp imports are deferred to function call time to break the cycle.
+Rollup subtotal labels such as "O&P Items" and "Total" are excluded because they
+are recap section buckets, not real estimate categories.
 """
 from __future__ import annotations
 
@@ -51,29 +49,6 @@ def _normalize_label(s: str) -> str:
     s2 = s.upper().replace("\u2014", "-").replace("\u2013", "-")
     s2 = _SPACE_RE.sub(" ", s2).strip()
     return s2
-
-
-def _get_core_constants() -> Tuple[List[str], Dict[str, str], List[tuple], str]:
-    """
-    Lazy-load category constants from bid_comp.core.
-
-    bid_comp/__init__ imports BidComp from core.py, and core.py imports
-    from ..pipeline (NarrativePipeline) — circular at module load time.
-    By the time any test or caller invokes build_trade_context(), the full
-    module graph is initialized and the deferred import succeeds.
-
-    Returns: (VERISK_CATEGORY_ORDER, XACTIMATE_CATEGORY_CODE_MAP, CATEGORY_KEYWORDS, CATEGORY_FALLBACK)
-    """
-    # Import submodule directly to bypass bid_comp/__init__ side-effects.
-    # Python caches the module after first load so this is O(1) on repeat calls.
-    import importlib
-    core = importlib.import_module("vip_shared.bid_comp.core")
-    return (
-        core.VERISK_CATEGORY_ORDER,
-        core.XACTIMATE_CATEGORY_CODE_MAP,
-        core.CATEGORY_KEYWORDS,
-        core.CATEGORY_FALLBACK,
-    )
 
 
 def build_trade_context(
@@ -132,17 +107,7 @@ def _get_recap(payload: Dict[str, Any]) -> Optional[Dict[str, Any]]:
 def _build_category_view(
     payload: Dict[str, Any],
 ) -> Tuple[Dict[str, float], str, Dict[str, CategoryEvidence], List[Dict[str, Any]]]:
-    """
-    Build category totals and evidence bundles for one estimate payload.
-
-    Preference order:
-      1. trade_summary (preferred: totals plus supporting items)
-      2. recap_by_category
-      3. synthesized section totals
-
-    When trade_summary exists, recap data still supplements categories not represented
-    in the trade summary so the category surface remains complete.
-    """
+    """Build exact-label category totals and evidence bundles for one estimate payload."""
     recap = _get_recap(payload)
     trade_items = _get_trade_items(payload)
 
@@ -181,17 +146,13 @@ def _build_category_view(
 
 
 def _extract_category_totals(recap: Dict[str, Any]) -> Dict[str, float]:
-    """
-    Aggregate recap_by_category into display_category -> float totals.
-
-    Mirrors BidCompOrchestrator._aggregate_categories() logic exactly.
-    All non-"subtotals" keys are treated as category group lists.
-
-    Group entry schema: {"item": "UPPERCASE_NAME", "total": "amount_str", ...}
-    Subtotals schema: {"label": "...", "total": "amount_str"}
-    """
-    VERISK_CATEGORY_ORDER, XACTIMATE_CATEGORY_CODE_MAP, CATEGORY_KEYWORDS, CATEGORY_FALLBACK = _get_core_constants()
-    totals: Dict[str, float] = {cat: 0.0 for cat in VERISK_CATEGORY_ORDER}
+    """Aggregate recap_by_category using exact parsed labels as keys."""
+    totals: Dict[str, float] = {}
+    group_labels = {
+        _normalize_label(str(group_label))
+        for group_label, items in recap.items()
+        if group_label != "subtotals" and isinstance(items, list)
+    }
 
     for group_label, items in recap.items():
         if group_label == "subtotals" or not isinstance(items, list):
@@ -202,39 +163,38 @@ def _extract_category_totals(recap: Dict[str, Any]) -> Dict[str, float]:
             amount = _normalize_money(entry.get("total") or entry.get("amount"))
             if amount is None:
                 continue
-            raw_name = entry.get("item") or entry.get("name") or entry.get("label") or ""
-            mapped = _map_category(
-                raw_name or group_label,
-                XACTIMATE_CATEGORY_CODE_MAP,
-                CATEGORY_KEYWORDS,
-                CATEGORY_FALLBACK,
+            label = _exact_category_label(
+                entry.get("item") or entry.get("name") or entry.get("label") or group_label
             )
-            totals[mapped] = round(totals.get(mapped, 0.0) + amount, 2)
+            if not label:
+                continue
+            totals[label] = round(totals.get(label, 0.0) + amount, 2)
 
-    # Subtotals: map Overhead/Profit -> "Overhead & Profit", Tax -> "Material Sales Tax"
+    # Preserve subtotal labels exactly rather than remapping them to synthetic buckets.
     subtotals = recap.get("subtotals") if isinstance(recap, dict) else None
     if isinstance(subtotals, list):
         for entry in subtotals:
             if not isinstance(entry, dict):
                 continue
-            label = _normalize_label(entry.get("label") or "")
+            label = _exact_category_label(entry.get("label") or "")
             amount = _normalize_money(entry.get("total"))
             if amount is None:
                 continue
-            if "OVERHEAD" in label or "PROFIT" in label:
-                totals["Overhead & Profit"] = round(totals.get("Overhead & Profit", 0.0) + amount, 2)
-            elif "MATERIAL" in label and "TAX" in label:
-                totals["Material Sales Tax"] = round(totals.get("Material Sales Tax", 0.0) + amount, 2)
-            elif "PERMIT" in label:
-                totals["Permit Fees"] = round(totals.get("Permit Fees", 0.0) + amount, 2)
+            if not label or _is_rollup_subtotal_label(label, group_labels):
+                continue
+            totals[label] = round(totals.get(label, 0.0) + amount, 2)
 
     return totals
 
 
 def _extract_recap_evidence(recap: Dict[str, Any]) -> Dict[str, CategoryEvidence]:
     """Build source-aware category evidence bundles from recap_by_category."""
-    _, XACTIMATE_CATEGORY_CODE_MAP, CATEGORY_KEYWORDS, CATEGORY_FALLBACK = _get_core_constants()
     evidence: Dict[str, CategoryEvidence] = {}
+    group_labels = {
+        _normalize_label(str(group_label))
+        for group_label, items in recap.items()
+        if group_label != "subtotals" and isinstance(items, list)
+    }
 
     for group_label, items in recap.items():
         if group_label == "subtotals" or not isinstance(items, list):
@@ -245,17 +205,15 @@ def _extract_recap_evidence(recap: Dict[str, Any]) -> Dict[str, CategoryEvidence
             amount = _normalize_money(entry.get("total") or entry.get("amount"))
             if amount is None:
                 continue
-            raw_name = entry.get("item") or entry.get("name") or entry.get("label") or ""
-            mapped = _map_category(
-                raw_name or group_label,
-                XACTIMATE_CATEGORY_CODE_MAP,
-                CATEGORY_KEYWORDS,
-                CATEGORY_FALLBACK,
+            label = _exact_category_label(
+                entry.get("item") or entry.get("name") or entry.get("label") or group_label
             )
-            current = evidence.get(mapped)
+            if not label:
+                continue
+            current = evidence.get(label)
             if current is None:
-                evidence[mapped] = CategoryEvidence(
-                    category=mapped,
+                evidence[label] = CategoryEvidence(
+                    category=label,
                     total=round(amount, 2),
                     source="recap_by_category",
                     supporting_items=[],
@@ -270,23 +228,16 @@ def _extract_recap_evidence(recap: Dict[str, Any]) -> Dict[str, CategoryEvidence
         for entry in subtotals:
             if not isinstance(entry, dict):
                 continue
-            label = _normalize_label(entry.get("label") or "")
+            label = _exact_category_label(entry.get("label") or "")
             amount = _normalize_money(entry.get("total"))
             if amount is None:
                 continue
-            mapped: Optional[str] = None
-            if "OVERHEAD" in label or "PROFIT" in label:
-                mapped = "Overhead & Profit"
-            elif "MATERIAL" in label and "TAX" in label:
-                mapped = "Material Sales Tax"
-            elif "PERMIT" in label:
-                mapped = "Permit Fees"
-            if mapped is None:
+            if not label or _is_rollup_subtotal_label(label, group_labels):
                 continue
-            current = evidence.get(mapped)
+            current = evidence.get(label)
             if current is None:
-                evidence[mapped] = CategoryEvidence(
-                    category=mapped,
+                evidence[label] = CategoryEvidence(
+                    category=label,
                     total=round(amount, 2),
                     source="recap_by_category",
                     supporting_items=[],
@@ -308,15 +259,15 @@ def _extract_trade_summary_evidence(
     trade_summary is preferred because it already links category rollups to the
     items that support those rollups, avoiding separate lookup work later.
     """
-    _, xactimate_map, keywords, fallback = _get_core_constants()
     totals: Dict[str, float] = {}
     evidence: Dict[str, CategoryEvidence] = {}
 
     for trade_row in trade_items:
         if not isinstance(trade_row, dict):
             continue
-        raw_name = f"{trade_row.get('trade_code') or ''} {trade_row.get('trade') or ''}".strip()
-        mapped = _map_category(raw_name, xactimate_map, keywords, fallback)
+        mapped = _exact_category_label(trade_row.get("trade") or trade_row.get("trade_code") or "")
+        if not mapped:
+            continue
         amount = _normalize_trade_total(trade_row)
         items = _normalize_trade_items(trade_row)
 
@@ -339,32 +290,6 @@ def _extract_trade_summary_evidence(
     return totals, evidence
 
 
-def _map_category(
-    raw_name: str,
-    xactimate_map: Dict[str, str],
-    keywords: List[tuple],
-    fallback: str,
-) -> str:
-    """
-    Map a raw XACTIMATE name or code to a VERISK display category name.
-
-    Mirrors BidCompOrchestrator._map_category() exactly.
-    """
-    normalized = _normalize_label(raw_name or "")
-    if not normalized:
-        return fallback
-
-    # Prefer explicit Xactimate category codes when present (e.g., "FRM Framing")
-    code = normalized.split(" ", 1)[0].strip("-:")
-    if code in xactimate_map:
-        return xactimate_map[code]
-
-    for needle, mapped in keywords:
-        if needle in normalized:
-            return mapped
-    return fallback
-
-
 def _synthesize_from_sections(payload: Dict[str, Any]) -> Dict[str, float]:
     """
     TRADE-03: Synthesize category totals from section-level data.
@@ -372,8 +297,7 @@ def _synthesize_from_sections(payload: Dict[str, Any]) -> Dict[str, float]:
     Last-resort fallback when recap_by_category is absent.
     Less accurate than recap_by_category (section names are room names, not trade names).
     """
-    VERISK_CATEGORY_ORDER, XACTIMATE_CATEGORY_CODE_MAP, CATEGORY_KEYWORDS, CATEGORY_FALLBACK = _get_core_constants()
-    totals: Dict[str, float] = {cat: 0.0 for cat in VERISK_CATEGORY_ORDER}
+    totals: Dict[str, float] = {}
     if not isinstance(payload, dict):
         return totals
 
@@ -388,14 +312,10 @@ def _synthesize_from_sections(payload: Dict[str, Any]) -> Dict[str, float]:
         amount = _normalize_money(raw_total)
         if amount is None:
             continue
-        section_name = sec.get("section_name") or ""
-        mapped = _map_category(
-            section_name,
-            XACTIMATE_CATEGORY_CODE_MAP,
-            CATEGORY_KEYWORDS,
-            CATEGORY_FALLBACK,
-        )
-        totals[mapped] = round(totals.get(mapped, 0.0) + amount, 2)
+        label = _exact_category_label(sec.get("section_name") or "")
+        if not label:
+            continue
+        totals[label] = round(totals.get(label, 0.0) + amount, 2)
 
     return totals
 
@@ -464,3 +384,26 @@ def _normalize_trade_items(trade_row: Dict[str, Any]) -> List[Dict[str, Any]]:
             }
         )
     return normalized
+
+
+def _exact_category_label(value: object) -> str:
+    """Preserve the parsed category title 1:1 except for whitespace normalization."""
+    if value is None:
+        return ""
+    text = str(value).strip()
+    if not text:
+        return ""
+    return _SPACE_RE.sub(" ", text)
+
+
+def _is_rollup_subtotal_label(label: str, group_labels: set[str]) -> bool:
+    """Return True for recap subtotal labels that are rollups, not real categories."""
+    normalized = _normalize_label(label)
+    if not normalized:
+        return True
+    if normalized in group_labels:
+        return True
+    return normalized in {
+        "TOTAL",
+        "ITEMS SUBTOTAL",
+    }

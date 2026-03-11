@@ -238,7 +238,7 @@ class TradeContext(BaseModel):
 class CategoryEvidence(BaseModel):
     """Source-aware evidence bundle for one mapped category."""
 
-    category: str = Field(description="Mapped display category name")
+    category: str = Field(description="Exact parsed category title from recap_by_category or trade_summary")
     total: float = Field(description="Total amount for this category from the selected source")
     source: Literal["trade_summary", "recap_by_category", "synthesized"] = Field(
         description="Which source produced this category total/evidence bundle"
@@ -261,7 +261,7 @@ class CostDriver(BaseModel):
     Used as input to map_driver_items() and per-driver LLM passes (Phase 31).
     """
 
-    category: str = Field(description="VERISK display category name (e.g., 'Painting')")
+    category: str = Field(description="Exact parsed category title (for example, 'PAINTING')")
     primary_total: float = Field(description="Category total in primary estimate")
     comparison_total: float = Field(description="Category total in comparison estimate")
     delta: float = Field(description="primary_total - comparison_total (signed)")
@@ -278,7 +278,7 @@ class DriverWithItems(BaseModel):
     A cost driver with all matching line items from both estimates.
 
     Built by map_driver_items() from CostDriver + raw parser payloads.
-    Items are filtered to type=='line_item' and cat mapped via XACTIMATE_CATEGORY_CODE_MAP.
+    Items are filtered to type=='line_item' and resolved against exact category titles.
     verification_ok signals whether item sums match category totals within tolerance.
     """
 
@@ -310,7 +310,7 @@ class DriverAnalysisResult(BaseModel):
     This model is both the LLM structured output schema and the cached result type.
     """
 
-    category: str = Field(description="VERISK display category name from CostDriver")
+    category: str = Field(description="Exact parsed category title from CostDriver")
     primary_total: float = Field(description="Category total in primary estimate (echoed from driver)")
     comparison_total: float = Field(description="Category total in comparison estimate (echoed from driver)")
     delta: float = Field(description="primary_total - comparison_total (signed, echoed from driver)")

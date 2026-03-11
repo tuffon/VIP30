@@ -39,6 +39,29 @@ def test_source_is_recap_by_category(name):
     assert ctx.primary_source == expected
 
 
+@pytest.mark.parametrize("name", ["lachman", "kalyvas_sf", "lachman_sf"])
+def test_trade_context_preserves_exact_labels_and_not_umbrella_names(name):
+    """Phase 34.1: exact parsed labels are preserved; fake umbrella labels do not appear."""
+    payload = load_golden(name)
+    ctx = build_trade_context(payload, {})
+    keys = set(ctx.primary_by_category.keys())
+
+    assert "Doors / Windows / Glass" not in keys
+    assert "Cabinetry / Millwork" not in keys
+
+    if name == "lachman":
+        assert "DOORS" in keys
+        assert "CABINETRY" in keys
+        assert "GLASS, GLAZING, & STOREFRONTS" in keys
+    elif name == "kalyvas_sf":
+        assert "DOORS" in keys
+        assert "CABINETRY" in keys
+        assert "FINISH CARPENTRY / TRIMWORK" in keys
+    elif name == "lachman_sf":
+        assert "DOORS" in keys
+        assert "CLEANING" in keys
+
+
 @pytest.mark.parametrize("name,expected_min,tolerance", [
     # Rough-drafts and contractor-finals: recap_by_category sums close to grand total
     ("kalyvas",      1_500_000, 0.05),
@@ -102,7 +125,7 @@ def test_trade_summary_creates_category_evidence_bundle():
     payload = load_golden("lachman_sf")
     ctx = build_trade_context(payload, {})
 
-    cleaning = ctx.primary_category_evidence["Cleaning / Restoration"]
+    cleaning = ctx.primary_category_evidence["CLEANING"]
     assert isinstance(cleaning, CategoryEvidence)
     assert cleaning.source == "trade_summary"
     assert cleaning.total > 0
@@ -116,7 +139,7 @@ def test_recap_by_category_remains_fallback_evidence():
     payload = load_golden("lachman")
     ctx = build_trade_context(payload, {})
 
-    appliances = ctx.primary_category_evidence["Appliances / Equipment"]
+    appliances = ctx.primary_category_evidence["APPLIANCES"]
     assert appliances.source == "recap_by_category"
     assert appliances.total > 0
     assert appliances.supporting_items == []

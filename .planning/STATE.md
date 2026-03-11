@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.6
 milestone_name: Pipeline Rewrite
 status: in_progress
-last_updated: "2026-03-11T20:30:00Z"
+last_updated: "2026-03-11T21:15:00Z"
 progress:
-  total_phases: 6
-  completed_phases: 6
-  total_plans: 11
-  completed_plans: 11
+  total_phases: 7
+  completed_phases: 7
+  total_plans: 13
+  completed_plans: 13
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.6 Pipeline Rewrite — Phase 34 complete; milestone implementation complete pending milestone closeout
+**Current focus:** v2.6 Pipeline Rewrite — Phase 34.1 complete; milestone implementation complete pending milestone closeout
 
 ## Current Position
 
-Phase: 34 of 34 (pipeline improvements using the recap by summary and trade summary output from the json) — COMPLETE
-Plan: 34-03 of 34-03 — complete; next: milestone closeout / archive workflow
-Status: Phase 34 complete
-Last activity: 2026-03-11 — Completed 34-01 through 34-03: trade-summary-first category evidence foundation, deterministic driver grounding, category-first summary/orchestrator alignment; shared-python pipeline suite now passes 63/63
+Phase: 34.1 of 34.1 (exact category preservation no umbrella remapping in bid comp) — COMPLETE
+Plan: 34.1-02 of 34.1-02 — complete; next: milestone closeout / archive workflow
+Status: Phase 34.1 complete
+Last activity: 2026-03-11 — Completed 34.1-01 through 34.1-02: exact-category preservation in TradeContext, BidComp, and deterministic driver mapping; shared-python exact-category regression slice now passes 67/67
 
-Progress: ██████████ 11/11 plans (100%)
+Progress: ██████████ 13/13 plans (100%)
 
 ## Completed Milestones
 
@@ -45,6 +45,7 @@ Progress: ██████████ 11/11 plans (100%)
 
 ### Roadmap Evolution
 
+- Phase 34.1 completed: exact parsed category titles now flow 1:1 through TradeContext, BidComp category tables, and deterministic driver-item mapping; umbrella labels removed from visible shared-python pipeline output
 - Phase 34.1 planned: exact-category preservation in BidComp and pipeline output, removing synthetic umbrella remapping
 - Phase 34.1 inserted after Phase 34: exact category preservation no umbrella remapping in bid comp (URGENT)
 - Phase 34 completed: category-first pipeline improvements shipped across trade context, driver grounding, summary synthesis, and BidComp alignment
@@ -117,6 +118,8 @@ Progress: ██████████ 11/11 plans (100%)
 - [34-01] Trade summary is now the preferred category evidence source, but recap totals remain authoritative when both structures exist — this preserves the established category-diff surface while eliminating extra lookup work for supporting items.
 - [34-02] Deterministic ranking stays entirely upstream of the LLM — driver prompts now explain the already-selected category with structured evidence instead of rediscovering why it matters.
 - [34-03] BidComp category tables now use the same trade-context totals as the pipeline path — visible analysis, selected drivers, and summary synthesis now share one category truth.
+- [34.1-01] TradeContext now preserves exact parsed category titles and skips recap rollup subtotal rows — fake umbrellas and rollup labels were the two places exact category identity was being lost.
+- [34.1-02] Exact category identity now continues through BidComp tables and raw line-item fallback mapping — selected drivers stay on true parsed labels, and fallback item resolution now uses exact category codes instead of umbrella buckets.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 

@@ -2,13 +2,10 @@
 Cost driver identification for the v2.6 cost-driver-first pipeline.
 
 Identifies top cost drivers by absolute dollar delta from TradeContext,
-maps all matching line items per driver, and verifies item sums against
-category totals.
+maps supporting items using exact parsed category titles, and verifies item
+sums against category totals.
 
 Requirements: DRIVER-01, DRIVER-02, DRIVER-03
-
-Note on imports: same circular import constraint as trade_context.py applies here.
-All bid_comp imports are deferred to function call time.
 """
 from __future__ import annotations
 
@@ -38,17 +35,50 @@ def _normalize_money(value: object) -> Optional[float]:
         return None
 
 
-def _get_core_constants() -> Tuple[Dict[str, str], str]:
-    """
-    Lazy-load XACTIMATE_CATEGORY_CODE_MAP and CATEGORY_FALLBACK from bid_comp.core.
-
-    Deferred to invocation time to break bid_comp/__init__ -> core.py -> ..pipeline cycle.
-    O(1) on repeat calls (Python module cache).
-    Returns: (XACTIMATE_CATEGORY_CODE_MAP, CATEGORY_FALLBACK)
-    """
-    import importlib
-    core = importlib.import_module("vip_shared.bid_comp.core")
-    return core.XACTIMATE_CATEGORY_CODE_MAP, core.CATEGORY_FALLBACK
+_EXACT_CATEGORY_CODE_MAP: Dict[str, str] = {
+    "APP": "APPLIANCES",
+    "CAB": "CABINETRY",
+    "CLN": "CLEANING",
+    "CON": "CONTENT MANIPULATION",
+    "DMO": "GENERAL DEMOLITION",
+    "DOR": "DOORS",
+    "DRY": "DRYWALL",
+    "ELE": "ELECTRICAL",
+    "ELS": "ELECTRICAL - SPECIAL SYSTEMS",
+    "EQC": "MISC. EQUIPMENT - COMMERCIAL",
+    "FCC": "FLOOR COVERING - CARPET",
+    "FCS": "FLOOR COVERING - STONE",
+    "FCT": "FLOOR COVERING - CERAMIC TILE",
+    "FCW": "FLOOR COVERING - WOOD",
+    "FEE": "PERMITS AND FEES",
+    "FEN": "FENCING",
+    "FNC": "FINISH CARPENTRY / TRIMWORK",
+    "FNH": "FINISH HARDWARE",
+    "FRM": "FRAMING & ROUGH CARPENTRY",
+    "HMR": "HAZARDOUS MATERIAL REMEDIATION",
+    "HVC": "HEAT, VENT & AIR CONDITIONING",
+    "INS": "INSULATION",
+    "LAB": "LABOR ONLY",
+    "LIT": "LIGHT FIXTURES",
+    "LND": "LANDSCAPING",
+    "MAS": "MASONRY",
+    "MBL": "MARBLE - CULTURED OR NATURAL",
+    "MSD": "MIRRORS & SHOWER DOORS",
+    "ORI": "ORNAMENTAL IRON",
+    "PLM": "PLUMBING",
+    "PNT": "PAINTING",
+    "POL": "SWIMMING POOLS & SPAS",
+    "RFG": "ROOFING",
+    "SCF": "SCAFFOLDING",
+    "SPE": "SPECIALTY ITEMS",
+    "STU": "STUCCO & EXTERIOR PLASTER",
+    "TIL": "TILE",
+    "TMP": "TEMPORARY REPAIRS",
+    "WDP": "WINDOWS - SLIDING PATIO DOORS",
+    "WDR": "WINDOW REGLAZING & REPAIR",
+    "WDS": "WINDOWS - SKYLIGHTS",
+    "WDT": "WINDOW TREATMENT",
+}
 
 
 # ---------- Public API ----------
@@ -101,7 +131,7 @@ def map_driver_items(
     DRIVER-02: Map all line items for each cost driver category.
 
     Iterates all sections in both payloads, collecting type=='line_item' entries
-    whose cat code resolves to driver.category via XACTIMATE_CATEGORY_CODE_MAP.
+    whose cat code resolves to driver.category via the exact category code map.
 
     DRIVER-03: Verifies that item sums approximate category totals.
     Tolerance: abs(item_sum - category_total) <= max(category_total * 0.10, 100.0)
@@ -114,20 +144,15 @@ def map_driver_items(
     Returns:
         List[DriverWithItems] in same order as cost_drivers input.
     """
-    xactimate_map, fallback = _get_core_constants()
     selected_categories = [driver.category for driver in cost_drivers]
 
     primary_items_by_cat = _collect_items_for_categories(
         primary_payload,
         selected_categories,
-        xactimate_map,
-        fallback,
     )
     comparison_items_by_cat = _collect_items_for_categories(
         comparison_payload,
         selected_categories,
-        xactimate_map,
-        fallback,
     )
 
     results: List[DriverWithItems] = []
@@ -164,14 +189,12 @@ def map_driver_items(
 def _collect_items_for_categories(
     payload: Dict[str, Any],
     selected_categories: List[str],
-    xactimate_map: Dict[str, str],
-    fallback: str,
 ) -> Dict[str, List[Dict[str, Any]]]:
     """
-    One-pass extraction: iterate all sections -> all line_items -> group by mapped category.
+    One-pass extraction: iterate all sections -> all line_items -> group by exact category.
 
     Only type=='line_item' entries collected. 'header' type entries are skipped.
-    cat code mapped via XACTIMATE_CATEGORY_CODE_MAP; unmapped codes -> fallback.
+    cat codes resolve to exact parsed category titles; unknown codes are left unmatched.
     """
     allowed = set(selected_categories)
     result: Dict[str, List[Dict[str, Any]]] = {category: [] for category in allowed}
@@ -194,8 +217,7 @@ def _collect_items_for_categories(
                 continue
             if item.get("type") != "line_item":
                 continue  # skip 'header' type entries
-            cat_code = item.get("cat") or ""
-            category = xactimate_map.get(cat_code.upper(), fallback)
+            category = _resolve_item_category(item)
             if category not in allowed:
                 continue
             result[category].append(item)
@@ -219,6 +241,17 @@ def _resolve_driver_items(
         if supporting_items:
             return list(supporting_items)
     return payload_items
+
+
+def _resolve_item_category(item: Dict[str, Any]) -> Optional[str]:
+    """Resolve a raw payload item to an exact category title without umbrella remapping."""
+    trade = str(item.get("trade") or "").strip()
+    if trade:
+        return trade
+    cat_code = str(item.get("cat") or item.get("category_code") or "").strip().upper()
+    if not cat_code:
+        return None
+    return _EXACT_CATEGORY_CODE_MAP.get(cat_code)
 
 
 def _verify_item_sums(
