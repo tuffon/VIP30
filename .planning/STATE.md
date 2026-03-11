@@ -1,14 +1,14 @@
 ---
 gsd_state_version: 1.0
 milestone: v2.6
-milestone_name: pipeline-rewrite
-status: in_progress
-last_updated: "2026-03-11T01:30:00Z"
+milestone_name: Pipeline Rewrite
+status: unknown
+last_updated: "2026-03-11T19:27:27.507Z"
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 8
-  completed_plans: 8
+  total_phases: 44
+  completed_phases: 33
+  total_plans: 50
+  completed_plans: 50
 ---
 
 # Project State
@@ -22,7 +22,7 @@ See: .planning/PROJECT.md (updated 2026-03-09)
 
 ## Current Position
 
-Phase: 33 of 33 (Parser recap + trade summary completeness) — COMPLETE
+Phase: 33 of 32 (Parser recap + trade summary completeness) — COMPLETE
 Plan: 33-03 of 33-03 — complete; next: milestone closeout / archive workflow
 Status: Phase 33 complete
 Last activity: 2026-03-11 — Completed 33-01 through 33-03: parser recap/trade-summary contract, State Farm wrapped-line fix, refreshed parser goldens, new Schacter final-draft corpus coverage, and regenerated gap report; parser suite now passes 36/36
@@ -45,6 +45,7 @@ Progress: ██████████ 8/8 plans (100%)
 
 ### Roadmap Evolution
 
+- Phase 33.1 inserted after Phase 33: recap by category and trade summary is not showing up in the json output at all (URGENT)
 - Phase 34 added: pipeline improvements using the recap by summary and trade summary output from the json
 - Phase 33 completed: parser recap + trade summary completeness, wrapped-line fix, refreshed goldens, seven-document parser regression suite passing
 - Phase 33 repurposed: parser recap + trade summary completeness, golden updates, and regression validation
