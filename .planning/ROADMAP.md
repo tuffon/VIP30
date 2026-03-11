@@ -142,3 +142,13 @@ Plans:
 | 30. Cost Driver Identification | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 31. Per-Driver LLM Pass | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 32. Final Summary + Pipeline Integration | v2.6 | 2/2 | Complete | 2026-03-10 |
+
+### Phase 33: Parser recap + trade summary completeness
+
+**Goal:** Ensure `recap_by_category` and `trade_summary` are parsed into final JSON output wherever present, update golden JSON fixtures to match verified parser reality, and prevent regressions with validation coverage.
+**Requirements**: TBD
+**Depends on:** Phase 32
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 33 to break down)

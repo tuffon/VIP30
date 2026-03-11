@@ -45,6 +45,8 @@ Progress: ██████████ 5/5 plans (100%)
 
 ### Roadmap Evolution
 
+- Phase 33 repurposed: parser recap + trade summary completeness, golden updates, and regression validation
+- Phase 33 added: pipeline optimizations and refactors
 - Phase 29-32 added: v2.6 Pipeline Rewrite — 4 phases, 5 plans; TradeContext + CostDriver + DriverAnalysis + SummaryResult + CostDriverPipeline
 - Phase 20 added: Cost Driver Narrative Quality — key cost drivers missing narrative text, prompts need fixing
 - Phase 21 added: Report Output Quality — Notes too small, summary too vague, key observations need integration, follow-ups too generic, analysis layout should match Kalyvas template (file in project root)
