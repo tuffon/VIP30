@@ -83,7 +83,12 @@ class CostDriverPipeline:
         state.mark_pass_executed("identify_cost_drivers")
 
         map_start = _now_ms()
-        drivers_with_items = map_driver_items(drivers, pair.primary.payload, pair.comparison.payload)
+        drivers_with_items = map_driver_items(
+            drivers,
+            pair.primary.payload,
+            pair.comparison.payload,
+            trade_ctx=trade_context,
+        )
         state.add_timing("map_driver_items", _now_ms() - map_start)
         state.mark_pass_executed("map_driver_items")
 
@@ -94,7 +99,13 @@ class CostDriverPipeline:
             pass_name = _timing_key("driver_pass", category)
             start_ms = _now_ms()
             try:
-                analysis = run_driver_pass(driver_with_items, self.llm_adapter, cache=self.cache)
+                analysis = run_driver_pass(
+                    driver_with_items,
+                    self.llm_adapter,
+                    primary_name=primary_name,
+                    comparison_name=comparison_name,
+                    cache=self.cache,
+                )
                 driver_analyses.append(analysis)
                 key_drivers.append(
                     DriverNarrative(

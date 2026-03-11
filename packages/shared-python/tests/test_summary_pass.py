@@ -71,6 +71,7 @@ def test_run_summary_pass_context_has_driver_summaries_not_raw_items():
     assert context["comparison_name"] == "Contractor"
     assert context["driver_count"] == 1
     assert "driver_summaries_json" in context
+    assert json.loads(context["driver_categories_json"]) == ["Painting"]
 
     summaries = json.loads(context["driver_summaries_json"])
     assert isinstance(summaries, list)
@@ -80,6 +81,17 @@ def test_run_summary_pass_context_has_driver_summaries_not_raw_items():
     assert "primary_items" not in context
     assert "comparison_items" not in context
     assert "primary_items_json" not in context
+
+
+def test_run_summary_pass_preserves_selected_driver_order():
+    """Phase 34: summary context preserves deterministic driver ordering."""
+    adapter = _make_adapter(_make_summary())
+    drivers = [_make_driver("Painting"), _make_driver("Roofing", delta=45000.0)]
+
+    run_summary_pass(drivers, adapter)
+
+    context = adapter.generate_structured.call_args[0][1]
+    assert json.loads(context["driver_categories_json"]) == ["Painting", "Roofing"]
 
 
 def test_run_summary_pass_quality_notes_included_when_nonempty():

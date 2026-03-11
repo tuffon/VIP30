@@ -104,6 +104,10 @@ def test_pipeline_run_returns_pipeline_state_with_final(
     assert state.final.overview == mock_summary.return_value.overview
     assert state.quality_report is not None
     assert state.final.quality_report is state.quality_report
+    mock_map.assert_called_once()
+    assert mock_map.call_args.kwargs["trade_ctx"] is mock_trade.return_value
+    assert mock_driver.call_args.kwargs["primary_name"] == "Primary"
+    assert mock_driver.call_args.kwargs["comparison_name"] == "Comparison"
 
 
 @patch("vip_shared.pipeline.cost_driver_pipeline.build_trade_context")
@@ -196,6 +200,32 @@ def test_bidcomp_uses_cost_driver_pipeline():
     """INTEG-01: BidComp initializes CostDriverPipeline when LLM is configured."""
     bid_comp = BidComp(llm_adapter=MagicMock())
     assert isinstance(bid_comp._pipeline, CostDriverPipeline)
+
+
+@patch("vip_shared.bid_comp.core.importlib.import_module")
+def test_build_category_table_uses_trade_context_totals(mock_import_module):
+    """Phase 34: category table uses the same trade-context totals as the pipeline path."""
+    build_trade_context = MagicMock()
+    build_trade_context.return_value = MagicMock(
+        primary_by_category={"Painting": 120.0},
+        comparison_by_category={"Painting": 20.0},
+    )
+    mock_import_module.return_value = MagicMock(build_trade_context=build_trade_context)
+
+    bid_comp = BidComp(llm_adapter=MagicMock())
+    pair = _make_pair(
+        primary_payload={"recaps_and_summaries": {"recap_by_category": {"subtotals": []}}, "sections": []},
+        comparison_payload={"recaps_and_summaries": {"recap_by_category": {"subtotals": []}}, "sections": []},
+    )
+    pair.primary.recap = {}
+    pair.comparison.recap = {}
+
+    rows = bid_comp._build_category_table(pair)
+
+    build_trade_context.assert_called_once_with(pair.primary.payload, pair.comparison.payload)
+    painting = next(row for row in rows if row["category"] == "Painting")
+    assert painting["primary_total"] == 120.0
+    assert painting["comparison_total"] == 20.0
 
 
 @patch("vip_shared.pipeline.cost_driver_pipeline.run_summary_pass")

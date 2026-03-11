@@ -77,6 +77,7 @@ def run_summary_pass(
         "primary_name": primary_name,
         "comparison_name": comparison_name,
         "driver_count": len(driver_analyses),
+        "driver_categories_json": json.dumps([driver.category for driver in driver_analyses]),
         "driver_summaries_json": json.dumps(driver_summaries, indent=2),
         "quality_notes": quality_notes,
     }

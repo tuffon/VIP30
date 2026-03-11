@@ -9,7 +9,7 @@ Four phases to replace the monolithic analysis→writer→rewrite pipeline with 
 - ✅ **v2.3 Report Quality** — Phases 18-22 (shipped 2026-03-07)
 - ✅ **v2.4 Parser Coverage** — Phases 23-25 (shipped 2026-03-09)
 - ✅ **v2.5 Parser Fixes** — Phases 26-28 (shipped 2026-03-09)
-- 🚧 **v2.6 Pipeline Rewrite** — Phases 29-33 (implementation complete)
+- 🚧 **v2.6 Pipeline Rewrite** — Phases 29-34 (implementation complete)
 
 ## Phases
 
@@ -176,4 +176,4 @@ Plans:
 Plans:
 - [x] 34-01: Build trade-summary-first category evidence foundation with recap fallback
 - [x] 34-02: Rework deterministic top-driver grounding and driver-pass prompt context
-- [ ] 34-03: Align summary/orchestrator flow and verify category-first end-to-end behavior
+- [x] 34-03: Align summary/orchestrator flow and verify category-first end-to-end behavior

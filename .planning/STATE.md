@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v2.6
 milestone_name: Pipeline Rewrite
-status: unknown
-last_updated: "2026-03-11T19:27:27.507Z"
+status: in_progress
+last_updated: "2026-03-11T20:30:00Z"
 progress:
-  total_phases: 44
-  completed_phases: 33
-  total_plans: 50
-  completed_plans: 50
+  total_phases: 6
+  completed_phases: 6
+  total_plans: 11
+  completed_plans: 11
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.6 Pipeline Rewrite — Phase 33 complete; milestone implementation complete pending milestone closeout
+**Current focus:** v2.6 Pipeline Rewrite — Phase 34 complete; milestone implementation complete pending milestone closeout
 
 ## Current Position
 
-Phase: 33 of 32 (Parser recap + trade summary completeness) — COMPLETE
-Plan: 33-03 of 33-03 — complete; next: milestone closeout / archive workflow
-Status: Phase 33 complete
-Last activity: 2026-03-11 — Completed 33-01 through 33-03: parser recap/trade-summary contract, State Farm wrapped-line fix, refreshed parser goldens, new Schacter final-draft corpus coverage, and regenerated gap report; parser suite now passes 36/36
+Phase: 34 of 34 (pipeline improvements using the recap by summary and trade summary output from the json) — COMPLETE
+Plan: 34-03 of 34-03 — complete; next: milestone closeout / archive workflow
+Status: Phase 34 complete
+Last activity: 2026-03-11 — Completed 34-01 through 34-03: trade-summary-first category evidence foundation, deterministic driver grounding, category-first summary/orchestrator alignment; shared-python pipeline suite now passes 63/63
 
-Progress: ██████████ 8/8 plans (100%)
+Progress: ██████████ 11/11 plans (100%)
 
 ## Completed Milestones
 
@@ -45,6 +45,7 @@ Progress: ██████████ 8/8 plans (100%)
 
 ### Roadmap Evolution
 
+- Phase 34 completed: category-first pipeline improvements shipped across trade context, driver grounding, summary synthesis, and BidComp alignment
 - Phase 34 planned: category-first pipeline improvements using `trade_summary` / `recap_by_category` as the core bid-comp inputs
 - Phase 34 added: pipeline improvements using the recap by summary and trade summary output from the json
 - Phase 33 completed: parser recap + trade summary completeness, wrapped-line fix, refreshed goldens, seven-document parser regression suite passing
@@ -111,6 +112,9 @@ Progress: ██████████ 8/8 plans (100%)
 - [32-01] Summary pass cache key includes quality_notes — rewrite requests must never reuse the initial summary cache entry.
 - [32-02] CostDriverPipeline runs only GATE-01 and GATE-02 against summary overview text — Phase 32 explicitly replaces the old broader compliance loop with a single targeted rewrite.
 - [32-02] Driver-pass failures are isolated per category — final output keeps category ordering and emits `Analysis unavailable. Delta: $X.XX` instead of dropping the driver silently.
+- [34-01] Trade summary is now the preferred category evidence source, but recap totals remain authoritative when both structures exist — this preserves the established category-diff surface while eliminating extra lookup work for supporting items.
+- [34-02] Deterministic ranking stays entirely upstream of the LLM — driver prompts now explain the already-selected category with structured evidence instead of rediscovering why it matters.
+- [34-03] BidComp category tables now use the same trade-context totals as the pipeline path — visible analysis, selected drivers, and summary synthesis now share one category truth.
 
 Additional decisions logged in PROJECT.md Key Decisions table.
 

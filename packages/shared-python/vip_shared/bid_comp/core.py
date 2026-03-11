@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import importlib
 import json
 import logging
 from dataclasses import dataclass, field
@@ -602,8 +603,12 @@ class BidComp:
 
     # ---------- Category table ----------
     def _build_category_table(self, pair: EstimatePair) -> List[Dict[str, Any]]:
-        primary_totals = self._aggregate_categories(pair.primary.recap)
-        comparison_totals = self._aggregate_categories(pair.comparison.recap)
+        build_trade_context = importlib.import_module(
+            "vip_shared.pipeline.passes.trade_context"
+        ).build_trade_context
+        trade_ctx = build_trade_context(pair.primary.payload, pair.comparison.payload)
+        primary_totals = trade_ctx.primary_by_category
+        comparison_totals = trade_ctx.comparison_by_category
         rows: List[Dict[str, Any]] = []
         for category in VERISK_CATEGORY_ORDER:
             a_val = primary_totals.get(category, 0.0)
