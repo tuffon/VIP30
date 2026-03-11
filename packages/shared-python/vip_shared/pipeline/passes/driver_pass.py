@@ -42,12 +42,16 @@ class DriverPassInput(BaseModel):
     delta: float = Field(description="Signed delta")
     primary_items: list = Field(default_factory=list, description="Line items from primary")
     comparison_items: list = Field(default_factory=list, description="Line items from comparison")
+    primary_name: str = Field(default="", description="Display name for primary estimate")
+    comparison_name: str = Field(default="", description="Display name for comparison estimate")
     verification_note: str = Field(default="", description="Verification discrepancy note")
 
 
 def run_driver_pass(
     driver_with_items: DriverWithItems,
     llm_adapter: LLMAdapterBase,
+    primary_name: str = "",
+    comparison_name: str = "",
     cache: Optional[PipelineCache] = None,
 ) -> DriverAnalysisResult:
     """
@@ -83,6 +87,8 @@ def run_driver_pass(
             delta=driver.delta,
             primary_items=driver_with_items.primary_items,
             comparison_items=driver_with_items.comparison_items,
+            primary_name=primary_name,
+            comparison_name=comparison_name,
             verification_note=driver_with_items.verification_note,
         )
         key = cache_key("driver_pass", pass_input)
@@ -97,14 +103,26 @@ def run_driver_pass(
 
     # --- PASS-01: build isolated context (this driver only) ---
     verification_note = driver_with_items.verification_note or ""
+    delta_percent_raw = _delta_percent(driver.primary_total, driver.comparison_total)
+    delta_percent = f"{delta_percent_raw:+.1f}%"
+    primary_evidence = _build_evidence_context(driver_with_items.primary_items)
+    comparison_evidence = _build_evidence_context(driver_with_items.comparison_items)
     context: Dict[str, Any] = {
         "category": driver.category,
+        "primary_name": primary_name or "Primary estimate",
+        "comparison_name": comparison_name or "Comparison estimate",
         "primary_total": f"${driver.primary_total:,.2f}",
         "comparison_total": f"${driver.comparison_total:,.2f}",
         "delta": f"${driver.delta:+,.2f}",
+        "delta_percent": delta_percent,
         "primary_total_raw": driver.primary_total,
         "comparison_total_raw": driver.comparison_total,
         "delta_raw": driver.delta,
+        "delta_percent_raw": delta_percent_raw,
+        "primary_item_count": len(driver_with_items.primary_items),
+        "comparison_item_count": len(driver_with_items.comparison_items),
+        "primary_evidence_json": json.dumps(primary_evidence, indent=2),
+        "comparison_evidence_json": json.dumps(comparison_evidence, indent=2),
         "primary_items_json": json.dumps(driver_with_items.primary_items, indent=2),
         "comparison_items_json": json.dumps(driver_with_items.comparison_items, indent=2),
         "verification_context": (
@@ -143,3 +161,24 @@ def run_driver_pass(
         cache.set(key, result)
 
     return result
+
+
+def _delta_percent(primary_total: float, comparison_total: float) -> float:
+    """Compute signed delta percentage relative to comparison total when possible."""
+    if comparison_total:
+        return round(((primary_total - comparison_total) / abs(comparison_total)) * 100.0, 1)
+    if primary_total:
+        return 100.0
+    return 0.0
+
+
+def _build_evidence_context(items: list[dict[str, Any]]) -> Dict[str, Any]:
+    """Summarize item evidence source and preserve the underlying items."""
+    source = "section_items"
+    if items and any(item.get("source") == "trade_summary" for item in items if isinstance(item, dict)):
+        source = "trade_summary"
+    return {
+        "source": source,
+        "item_count": len(items),
+        "items": items,
+    }

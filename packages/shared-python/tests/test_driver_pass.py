@@ -95,6 +95,9 @@ def test_run_driver_pass_context_contains_only_this_driver():
     assert context["category"] == "Painting"
     assert "primary_items_json" in context, "context missing 'primary_items_json'"
     assert "comparison_items_json" in context, "context missing 'comparison_items_json'"
+    assert "delta_percent" in context, "context missing 'delta_percent'"
+    assert "primary_evidence_json" in context, "context missing 'primary_evidence_json'"
+    assert "comparison_evidence_json" in context, "context missing 'comparison_evidence_json'"
 
     # Must NOT contain cross-category data
     assert "category_analyses" not in context, "context must not have category_analyses (cross-category)"
@@ -122,6 +125,26 @@ def test_run_driver_pass_items_json_in_context():
     # Items from our DriverWithItems should be present
     assert len(primary_items) == 1
     assert primary_items[0]["description"] == "Painting bid item"
+
+
+def test_run_driver_pass_evidence_context_contains_source_and_counts():
+    """Phase 34: driver-pass context carries structured evidence metadata."""
+    result = _make_result()
+    adapter = _make_adapter(result)
+    dwi = _make_dwi()
+
+    run_driver_pass(dwi, adapter, primary_name="Estimate A", comparison_name="Estimate B")
+
+    context = adapter.generate_structured.call_args[0][1]
+    primary_evidence = json.loads(context["primary_evidence_json"])
+    comparison_evidence = json.loads(context["comparison_evidence_json"])
+
+    assert context["primary_name"] == "Estimate A"
+    assert context["comparison_name"] == "Estimate B"
+    assert context["delta_percent_raw"] > 0
+    assert primary_evidence["source"] == "section_items"
+    assert primary_evidence["item_count"] == 1
+    assert comparison_evidence["item_count"] == 1
 
 
 # --- PASS-02: structured output, no fallback ---

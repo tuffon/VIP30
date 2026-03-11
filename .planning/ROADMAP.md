@@ -175,5 +175,5 @@ Plans:
 
 Plans:
 - [x] 34-01: Build trade-summary-first category evidence foundation with recap fallback
-- [ ] 34-02: Rework deterministic top-driver grounding and driver-pass prompt context
+- [x] 34-02: Rework deterministic top-driver grounding and driver-pass prompt context
 - [ ] 34-03: Align summary/orchestrator flow and verify category-first end-to-end behavior
