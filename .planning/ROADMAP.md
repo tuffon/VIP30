@@ -159,3 +159,13 @@ Plans:
 | 31. Per-Driver LLM Pass | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 32. Final Summary + Pipeline Integration | v2.6 | 2/2 | Complete | 2026-03-10 |
 | 33. Parser recap + trade summary completeness | v2.6 | 3/3 | Complete | 2026-03-11 |
+
+### Phase 34: pipeline improvements using the recap by summary and trade summary output from the json
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 33
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 34 to break down)

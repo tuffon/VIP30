@@ -45,6 +45,7 @@ Progress: ██████████ 8/8 plans (100%)
 
 ### Roadmap Evolution
 
+- Phase 34 added: pipeline improvements using the recap by summary and trade summary output from the json
 - Phase 33 completed: parser recap + trade summary completeness, wrapped-line fix, refreshed goldens, seven-document parser regression suite passing
 - Phase 33 repurposed: parser recap + trade summary completeness, golden updates, and regression validation
 - Phase 33 added: pipeline optimizations and refactors
