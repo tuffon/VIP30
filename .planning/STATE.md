@@ -45,6 +45,8 @@ Progress: ██████████ 11/11 plans (100%)
 
 ### Roadmap Evolution
 
+- Phase 34.1 planned: exact-category preservation in BidComp and pipeline output, removing synthetic umbrella remapping
+- Phase 34.1 inserted after Phase 34: exact category preservation no umbrella remapping in bid comp (URGENT)
 - Phase 34 completed: category-first pipeline improvements shipped across trade context, driver grounding, summary synthesis, and BidComp alignment
 - Phase 34 planned: category-first pipeline improvements using `trade_summary` / `recap_by_category` as the core bid-comp inputs
 - Phase 34 added: pipeline improvements using the recap by summary and trade summary output from the json

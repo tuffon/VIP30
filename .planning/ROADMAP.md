@@ -177,3 +177,19 @@ Plans:
 - [x] 34-01: Build trade-summary-first category evidence foundation with recap fallback
 - [x] 34-02: Rework deterministic top-driver grounding and driver-pass prompt context
 - [x] 34-03: Align summary/orchestrator flow and verify category-first end-to-end behavior
+
+### Phase 34.1: exact category preservation no umbrella remapping in bid comp (INSERTED)
+
+**Goal:** Remove synthetic umbrella category remapping from BidComp and the pipeline so category identity stays 1:1 with the parsed labels in `recap_by_category` and `trade_summary`.
+**Requirements**: TRADE-01, TRADE-02, DRIVER-01, DRIVER-02, INTEG-01
+**Depends on:** Phase 34
+**Success Criteria** (what must be TRUE):
+  1. Exact parsed category labels from `trade_summary` and `recap_by_category` are preserved through `TradeContext`
+  2. Synthetic umbrella labels such as `Doors / Windows / Glass` and `Cabinetry / Millwork` no longer appear in bid-comp category output
+  3. Top-driver selection and visible category tables use exact parsed labels only
+  4. Unmatched categories remain explicit instead of being collapsed into umbrella buckets
+**Plans:** 2 plans
+
+Plans:
+- [ ] 34.1-01: Remove umbrella remapping from pipeline category identity
+- [ ] 34.1-02: Align BidComp output and driver selection to exact parsed labels
