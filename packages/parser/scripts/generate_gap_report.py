@@ -1,7 +1,7 @@
 """
 generate_gap_report.py
 ----------------------
-Run all 6 golden master comparisons and write GAP-REPORT.md.
+Run the current golden master comparisons and write GAP-REPORT.md.
 
 Produces the v2.5 gap analysis: per-doc coverage%, missing sections, metadata
 gaps, and cross-document pattern summary.
@@ -41,6 +41,12 @@ DOCUMENTS = [
         "docs/final-drafts/BSchacter-02.12.26-Est-JVB-RepairEstimate-$809,464.83.pdf",
         "contractor-final",
         "bschacter",
+    ),
+    (
+        "final-drafts/SCHACTER_RECON_6B_FINAL_DRAFT_CAR.golden.json",
+        "docs/final-drafts/SCHACTER_RECON_6B_FINAL_DRAFT_CAR.pdf",
+        "contractor-final",
+        "schacter_recon_6b_final_draft_car",
     ),
     (
         "final-drafts/statefarm/SF_BSchacter.golden.json",
@@ -134,7 +140,15 @@ def section_analysis(golden: dict, parsed: dict | None) -> dict:
     g_secs = golden.get("sections") or []
     p_secs = (parsed.get("sections") or []) if parsed else []
 
-    p_by_name = {section_name_of(s): s for s in p_secs if section_name_of(s)}
+    from collections import defaultdict
+
+    p_by_name: dict[str, list[dict]] = defaultdict(list)
+    for sec in p_secs:
+        name = section_name_of(sec)
+        if name:
+            p_by_name[name].append(sec)
+
+    p_name_idx: dict[str, int] = defaultdict(int)
 
     matched = []
     missing = []
@@ -150,7 +164,10 @@ def section_analysis(golden: dict, parsed: dict | None) -> dict:
             continue  # legitimately excluded
         non_excl += 1
 
-        p_sec = p_by_name.get(g_name)
+        p_list = p_by_name.get(g_name, [])
+        idx = p_name_idx[g_name]
+        p_sec = p_list[idx] if idx < len(p_list) else None
+        p_name_idx[g_name] = idx + 1
         if p_sec is None:
             missing.append((g_name, g_items, g_total))
         else:

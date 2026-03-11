@@ -46,11 +46,11 @@
         {
           "type": "line_item",
           "line_number": 5,
-          "description": "Temporary toilet (per",
+          "description": "Temporary toilet (per month)",
           "qty": 5.0,
           "unit": "MO",
           "total": "1,350.00",
-          "notes": "month) 6. Temporary fencing - 5-8 1.00EA * EXCLUDED months (per month) 7. Temporary power usage 1.00MO AS INCURRED (per month) 8. High Density Large Inner 1.00EA OPEN ITEM City- Material staging (Bid Item)",
+          "notes": "6. Temporary fencing - 5-8 1.00EA * EXCLUDED months (per month) 7. Temporary power usage 1.00MO AS INCURRED (per month) 8. High Density Large Inner 1.00EA OPEN ITEM City- Material staging (Bid Item)",
           "tax": "225.00"
         },
         {
@@ -75,11 +75,11 @@
         {
           "type": "line_item",
           "line_number": 11,
-          "description": "Single axle dump truck -",
+          "description": "Single axle dump truck - per load - including dump fees",
           "qty": 1.0,
           "unit": "EA",
           "total": "473.36",
-          "notes": "per load - including dump fees Course of construction debris removal",
+          "notes": "Course of construction debris removal",
           "tax": "78.90"
         },
         {
@@ -105,21 +105,21 @@
         {
           "type": "line_item",
           "line_number": 14,
-          "description": "Residential Supervision /",
+          "description": "Residential Supervision / Project Management - per hour",
           "qty": 150.0,
           "unit": "HR",
           "total": "15,496.20",
-          "notes": "Project Management - per hour Complex restoration project involving high end trades, limited parking and staging, HOA regulations, and controlled access to property.",
+          "notes": "Complex restoration project involving high end trades, limited parking and staging, HOA regulations, and controlled access to property.",
           "tax": "2,582.70"
         },
         {
           "type": "line_item",
           "line_number": 15,
-          "description": "Scaffold - per section (per",
+          "description": "Scaffold - per section (per month)",
           "qty": 166.0,
           "unit": "MO",
           "total": "22,491.68",
-          "notes": "month) Exterior area scaffolding is required for stucco and roof repairs.",
+          "notes": "Exterior area scaffolding is required for stucco and roof repairs.",
           "tax": "3,748.62"
         },
         {
@@ -171,11 +171,10 @@
         {
           "type": "line_item",
           "line_number": 17,
-          "description": "Final cleaning -",
+          "description": "Final cleaning - construction - Residential",
           "qty": 3331.4,
           "unit": "SF",
           "total": "1,679.03",
-          "notes": "construction - Residential",
           "tax": "279.84"
         }
       ],
@@ -320,10 +319,11 @@
           }
         },
         {
-          "subroom_name": "Linen C 1l 0o 3s .e 8t (5 S)",
+          "subroom_name": "Linen Closet (5)",
           "metadata": {
             "height": "10'",
             "areas": {
+              "sf_walls": "103.87",
               "sf_ceiling": "5.42",
               "sf_walls_and_ceiling": "109.29",
               "sf_floor": "5.42",
@@ -456,11 +456,11 @@
         {
           "type": "line_item",
           "line_number": 36,
-          "description": "Detach & Reset Window",
+          "description": "Detach & Reset Window drapery - hardware - single rod - Large",
           "qty": 1.0,
           "unit": "EA",
           "total": "61.60",
-          "notes": "drapery - hardware - single rod - Large 37. R&R Travertine tile - 28.89SF OPEN ITEM Premium grade 38. R&R Mortar bed for tile 28.89SF OPEN ITEM 39. Tile/stone sealer 28.89SF AS PER BID",
+          "notes": "37. R&R Travertine tile - 28.89SF OPEN ITEM Premium grade 38. R&R Mortar bed for tile 28.89SF OPEN ITEM 39. Tile/stone sealer 28.89SF AS PER BID",
           "tax": "10.26"
         },
         {
@@ -504,7 +504,7 @@
     {
       "section_name": "Den",
       "metadata": {
-        "height": "10' \"0",
+        "height": "10'",
         "areas": {
           "sf_walls": "702.20",
           "sf_ceiling": "317.02",
@@ -555,11 +555,11 @@
         {
           "type": "line_item",
           "line_number": 47,
-          "description": "1/2\" drywall - hung,",
+          "description": "1/2\" drywall - hung, taped, with smooth wall finish",
           "qty": 90.54,
           "unit": "SF",
           "total": "655.65",
-          "notes": "taped, with smooth wall finish Missing stucco paper observed on exterior where drywall was removed.",
+          "notes": "Missing stucco paper observed on exterior where drywall was removed.",
           "tax": "109.28"
         },
         {
@@ -635,11 +635,10 @@
         {
           "type": "line_item",
           "line_number": 58,
-          "description": "Add for glued down wood",
+          "description": "Add for glued down wood flooring appl. over wood substrate",
           "qty": 317.02,
           "unit": "SF",
           "total": "2,311.24",
-          "notes": "flooring appl. over wood substrate",
           "tax": "385.20"
         },
         {
@@ -788,11 +787,10 @@
         {
           "type": "line_item",
           "line_number": 84,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 1.0,
           "unit": "EA",
           "total": "65.86",
-          "notes": "9 SF",
           "tax": "10.98"
         },
         {
@@ -939,11 +937,10 @@
         {
           "type": "line_item",
           "line_number": 94,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 46.47,
           "unit": "LF",
           "total": "139.65",
-          "notes": "coat) baseboard",
           "tax": "23.28"
         },
         {
@@ -998,8 +995,12 @@
     {
       "section_name": "Dining Room",
       "metadata": {
-        "height": "10' \"01 \"01 \"111",
+        "height": "10'",
         "areas": {
+          "sf_walls": "548.33",
+          "sf_ceiling": "262.56",
+          "sf_walls_and_ceiling": "810.89",
+          "sf_floor": "262.56",
           "lf_floor_perimeter": "53.21",
           "lf_ceil_perimeter": "63.96"
         },
@@ -1124,11 +1125,10 @@
         {
           "type": "line_item",
           "line_number": 114,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 4.0,
           "unit": "EA",
           "total": "263.17",
-          "notes": "9 SF",
           "tax": "43.88"
         },
         {
@@ -1176,7 +1176,6 @@
     {
       "section_name": "Pantry",
       "metadata": {
-        "height": "8'",
         "areas": {
           "sf_walls": "200.43",
           "sf_ceiling": "31.70",
@@ -1215,11 +1214,10 @@
         {
           "type": "line_item",
           "line_number": 121,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 25.05,
           "unit": "LF",
           "total": "75.29",
-          "notes": "coat) baseboard",
           "tax": "12.56"
         },
         {
@@ -1255,7 +1253,45 @@
     },
     {
       "section_name": "Family Room",
-      "metadata": {},
+      "metadata": {
+        "height": "10' 6\"",
+        "areas": {
+          "sf_walls": "661.15",
+          "sf_ceiling": "556.09",
+          "sf_walls_and_ceiling": "1,217.24",
+          "sf_floor": "556.09",
+          "lf_floor_perimeter": "50.85",
+          "lf_ceil_perimeter": "88.49"
+        },
+        "doors": [
+          {
+            "dimensions": "2' 6\" X 6' 8\"",
+            "opens_into": "OFFICE2"
+          },
+          {
+            "dimensions": "5' 8\" X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' 8\" X 6' 8\"",
+            "opens_into": "Exterior"
+          },
+          {
+            "dimensions": "5' 8\" X 6' 8\"",
+            "opens_into": "Exterior"
+          }
+        ],
+        "missing_walls": [
+          {
+            "dimensions": "10' 6 11/16\" X 10' 6\"",
+            "opens_into": "KITCHEN"
+          },
+          {
+            "dimensions": "6' 4 9/16\" X 10' 6\"",
+            "opens_into": "KITCHEN"
+          }
+        ]
+      },
       "subrooms": [
         {
           "subroom_name": "Family Room Bar (1)",
@@ -1324,11 +1360,11 @@
         {
           "type": "line_item",
           "line_number": 130,
-          "description": "Painting - Faux (special",
+          "description": "Painting - Faux (special effects) - 3 part",
           "qty": 765.59,
           "unit": "SF",
           "total": "4,734.28",
-          "notes": "effects) - 3 part 131. R&R Baseboard - 4 1/4\" 56.86LF OPEN ITEM",
+          "notes": "131. R&R Baseboard - 4 1/4\" 56.86LF OPEN ITEM",
           "tax": "789.04"
         },
         {
@@ -1361,21 +1397,19 @@
         {
           "type": "line_item",
           "line_number": 141,
-          "description": "Detach & Reset Window",
+          "description": "Detach & Reset Window drapery - hardware - single rod - Large",
           "qty": 2.0,
           "unit": "EA",
           "total": "123.22",
-          "notes": "drapery - hardware - single rod - Large",
           "tax": "20.54"
         },
         {
           "type": "line_item",
           "line_number": 142,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 2.0,
           "unit": "EA",
           "total": "131.56",
-          "notes": "9 SF",
           "tax": "21.92"
         },
         {
@@ -1486,8 +1520,10 @@
     {
       "section_name": "Kitchen",
       "metadata": {
+        "height": "10' 6\"",
         "areas": {
           "sf_walls": "751.40",
+          "sf_ceiling": "539.42",
           "sf_walls_and_ceiling": "1,290.81",
           "sf_floor": "398.08",
           "lf_floor_perimeter": "44.04",
@@ -1555,11 +1591,10 @@
         {
           "type": "line_item",
           "line_number": 156,
-          "description": "Seal (1 coat) & paint (2",
+          "description": "Seal (1 coat) & paint (2 coats)crown molding, oversized",
           "qty": 63.5,
           "unit": "LF",
           "total": "303.71",
-          "notes": "coats)crown molding, oversized",
           "tax": "50.62"
         },
         {
@@ -1609,11 +1644,10 @@
         {
           "type": "line_item",
           "line_number": 161,
-          "description": "R&R Mosaic -",
+          "description": "R&R Mosaic - ceramic/porcelain tile - Premium grade",
           "qty": 8.75,
           "unit": "SF",
           "total": "485.17",
-          "notes": "ceramic/porcelain tile - Premium grade",
           "tax": "80.86"
         },
         {
@@ -1646,11 +1680,10 @@
         {
           "type": "line_item",
           "line_number": 168,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 2.0,
           "unit": "EA",
           "total": "131.56",
-          "notes": "9 SF",
           "tax": "21.92"
         },
         {
@@ -1744,21 +1777,19 @@
         {
           "type": "line_item",
           "line_number": 178,
-          "description": "Stain & finish cabinetry -",
+          "description": "Stain & finish cabinetry - lower - inside and out",
           "qty": 42.08,
           "unit": "LF",
           "total": "5,508.38",
-          "notes": "lower - inside and out",
           "tax": "918.06"
         },
         {
           "type": "line_item",
           "line_number": 179,
-          "description": "Stain & finish cabinetry -",
+          "description": "Stain & finish cabinetry - upper - inside and out",
           "qty": 18.67,
           "unit": "LF",
           "total": "2,106.03",
-          "notes": "upper - inside and out",
           "tax": "351.00"
         },
         {
@@ -1792,7 +1823,6 @@
     {
       "section_name": "Office",
       "metadata": {
-        "height": "10'",
         "areas": {
           "lf_floor_perimeter": "69.77",
           "lf_ceil_perimeter": "80.77"
@@ -1837,7 +1867,11 @@
             "height": "8'",
             "areas": {
               "sf_walls": "154.96",
-              "sf_ceiling": "17.94"
+              "sf_ceiling": "17.94",
+              "sf_walls_and_ceiling": "172.90",
+              "sf_floor": "17.94",
+              "lf_floor_perimeter": "19.37",
+              "lf_ceil_perimeter": "19.37"
             },
             "doors": [
               {
@@ -1899,11 +1933,11 @@
         {
           "type": "line_item",
           "line_number": 186,
-          "description": "Texture drywall -",
+          "description": "Texture drywall - smooth / skim coat",
           "qty": 881.37,
           "unit": "SF",
           "total": "2,837.98",
-          "notes": "smooth / skim coat Removal of wallpaper damaged the surface of the drywall.",
+          "notes": "Removal of wallpaper damaged the surface of the drywall.",
           "tax": "473.00"
         },
         {
@@ -1937,21 +1971,19 @@
         {
           "type": "line_item",
           "line_number": 193,
-          "description": "Detach & Reset Window",
+          "description": "Detach & Reset Window drapery - hardware - single rod - Large",
           "qty": 1.0,
           "unit": "EA",
           "total": "61.60",
-          "notes": "drapery - hardware - single rod - Large",
           "tax": "10.26"
         },
         {
           "type": "line_item",
           "line_number": 194,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 2.0,
           "unit": "EA",
           "total": "131.56",
-          "notes": "9 SF",
           "tax": "21.92"
         },
         {
@@ -2050,11 +2082,10 @@
         {
           "type": "line_item",
           "line_number": 205,
-          "description": "TV Brackets - Wall or",
+          "description": "TV Brackets - Wall or ceiling mounted - Detach & reset",
           "qty": 1.0,
           "unit": "EA",
           "total": "81.73",
-          "notes": "ceiling mounted - Detach & reset",
           "tax": "13.62"
         }
       ],
@@ -2113,11 +2144,10 @@
         {
           "type": "line_item",
           "line_number": 208,
-          "description": "Texture drywall -",
+          "description": "Texture drywall - smooth / skim coat",
           "qty": 39.5,
           "unit": "SF",
           "total": "127.20",
-          "notes": "smooth / skim coat",
           "tax": "21.20"
         },
         {
@@ -2174,11 +2204,10 @@
         {
           "type": "line_item",
           "line_number": 219,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 1.0,
           "unit": "EA",
           "total": "65.86",
-          "notes": "9 SF",
           "tax": "10.98"
         },
         {
@@ -2207,21 +2236,19 @@
         {
           "type": "line_item",
           "line_number": 222,
-          "description": "Detach & Reset Sink",
+          "description": "Detach & Reset Sink faucet - Bathroom - High grade",
           "qty": 1.0,
           "unit": "EA",
           "total": "179.80",
-          "notes": "faucet - Bathroom - High grade",
           "tax": "29.96"
         },
         {
           "type": "line_item",
           "line_number": 223,
-          "description": "Gas/water line cap/plug -",
+          "description": "Gas/water line cap/plug - per cap",
           "qty": 1.0,
           "unit": "EA",
           "total": "21.95",
-          "notes": "per cap",
           "tax": "3.66"
         },
         {
@@ -2274,21 +2301,19 @@
         {
           "type": "line_item",
           "line_number": 230,
-          "description": "Stain & finish vanity -",
+          "description": "Stain & finish vanity - inside and out",
           "qty": 3.83,
           "unit": "LF",
           "total": "431.71",
-          "notes": "inside and out",
           "tax": "71.96"
         },
         {
           "type": "line_item",
           "line_number": 231,
-          "description": "Cabinet knobs or pulls -",
+          "description": "Cabinet knobs or pulls - Detach & reset",
           "qty": 6.0,
           "unit": "EA",
           "total": "25.70",
-          "notes": "Detach & reset",
           "tax": "4.28"
         },
         {
@@ -2313,6 +2338,10 @@
     {
       "section_name": "Garage",
       "metadata": {
+        "areas": {
+          "lf_floor_perimeter": "81.78",
+          "lf_ceil_perimeter": "97.78"
+        },
         "doors": [
           {
             "dimensions": "2' 7\" X 6' 8\"",
@@ -2452,11 +2481,10 @@
         {
           "type": "line_item",
           "line_number": 244,
-          "description": "Gas/water line cap/plug -",
+          "description": "Gas/water line cap/plug - per cap",
           "qty": 1.0,
           "unit": "EA",
           "total": "21.94",
-          "notes": "per cap",
           "tax": "3.66"
         },
         {
@@ -2480,21 +2508,19 @@
         {
           "type": "line_item",
           "line_number": 248,
-          "description": "R&R Garage cab. -",
+          "description": "R&R Garage cab. - upper (wall) units, 24\" - High grade",
           "qty": 3.5,
           "unit": "EA",
           "total": "1,202.24",
-          "notes": "upper (wall) units, 24\" - High grade",
           "tax": "200.36"
         },
         {
           "type": "line_item",
           "line_number": 249,
-          "description": "R&R Garage cabinetry -",
+          "description": "R&R Garage cabinetry - full height unit, 36\"x18\" - High grade",
           "qty": 4.0,
           "unit": "EA",
           "total": "3,107.05",
-          "notes": "full height unit, 36\"x18\" - High grade",
           "tax": "517.84"
         }
       ],
@@ -2588,11 +2614,10 @@
         {
           "type": "line_item",
           "line_number": 253,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 59.5,
           "unit": "LF",
           "total": "178.83",
-          "notes": "coat) baseboard",
           "tax": "29.82"
         },
         {
@@ -2615,11 +2640,10 @@
         {
           "type": "line_item",
           "line_number": 255,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 1.0,
           "unit": "EA",
           "total": "65.78",
-          "notes": "9 SF",
           "tax": "10.96"
         },
         {
@@ -2673,21 +2697,19 @@
         {
           "type": "line_item",
           "line_number": 264,
-          "description": "Seal & paint cabinetry -",
+          "description": "Seal & paint cabinetry - lower - inside and out",
           "qty": 6.5,
           "unit": "LF",
           "total": "600.36",
-          "notes": "lower - inside and out",
           "tax": "100.06"
         },
         {
           "type": "line_item",
           "line_number": 265,
-          "description": "Seal & paint cabinetry -",
+          "description": "Seal & paint cabinetry - upper - inside and out",
           "qty": 14.83,
           "unit": "LF",
           "total": "1,170.88",
-          "notes": "upper - inside and out",
           "tax": "195.16"
         },
         {
@@ -2702,11 +2724,10 @@
         {
           "type": "line_item",
           "line_number": 267,
-          "description": "Cabinet knobs or pulls -",
+          "description": "Cabinet knobs or pulls - Detach & reset",
           "qty": 21.0,
           "unit": "EA",
           "total": "89.97",
-          "notes": "Detach & reset",
           "tax": "15.00"
         }
       ],
@@ -2726,11 +2747,10 @@
         {
           "type": "line_item",
           "line_number": 268,
-          "description": "Final cleaning -",
+          "description": "Final cleaning - construction - Residential",
           "qty": 2609.92,
           "unit": "SF",
           "total": "1,315.41",
-          "notes": "construction - Residential",
           "tax": "219.24"
         }
       ],
@@ -2851,11 +2871,10 @@
         {
           "type": "line_item",
           "line_number": 270,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 108.91,
           "unit": "LF",
           "total": "327.30",
-          "notes": "coat) baseboard",
           "tax": "54.56"
         },
         {
@@ -2908,11 +2927,10 @@
         {
           "type": "line_item",
           "line_number": 275,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 2.0,
           "unit": "EA",
           "total": "131.56",
-          "notes": "9 SF",
           "tax": "21.92"
         },
         {
@@ -3035,11 +3053,10 @@
         {
           "type": "line_item",
           "line_number": 282,
-          "description": "Paint crown molding -",
+          "description": "Paint crown molding - two coats",
           "qty": 85.61,
           "unit": "LF",
           "total": "258.70",
-          "notes": "two coats",
           "tax": "43.12"
         },
         {
@@ -3049,11 +3066,10 @@
         {
           "type": "line_item",
           "line_number": 283,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 73.61,
           "unit": "LF",
           "total": "221.22",
-          "notes": "coat) baseboard",
           "tax": "36.88"
         },
         {
@@ -3078,11 +3094,10 @@
         {
           "type": "line_item",
           "line_number": 286,
-          "description": "Texture drywall -",
+          "description": "Texture drywall - smooth / skim coat",
           "qty": 669.08,
           "unit": "SF",
           "total": "2,154.40",
-          "notes": "smooth / skim coat",
           "tax": "359.06"
         },
         {
@@ -3166,11 +3181,10 @@
         {
           "type": "line_item",
           "line_number": 294,
-          "description": "Bifold door set - (4 slabs",
+          "description": "Bifold door set - (4 slabs only) - Double Detach & reset",
           "qty": 1.0,
           "unit": "EA",
           "total": "57.12",
-          "notes": "only) - Double Detach & reset",
           "tax": "9.52"
         },
         {
@@ -3190,21 +3204,20 @@
         {
           "type": "line_item",
           "line_number": 297,
-          "description": "Closet Organizer -",
+          "description": "Closet Organizer - Melamine or Wire - Detach & reset",
           "qty": 9.75,
           "unit": "LF",
           "total": "981.51",
-          "notes": "Melamine or Wire - Detach & reset Additional repairs may be required...",
+          "notes": "Additional repairs may be required...",
           "tax": "163.58"
         },
         {
           "type": "line_item",
           "line_number": 298,
-          "description": "Seal & paint cabinetry -",
+          "description": "Seal & paint cabinetry - lower - inside and out",
           "qty": 16.25,
           "unit": "LF",
           "total": "1,500.91",
-          "notes": "lower - inside and out",
           "tax": "250.16"
         }
       ],
@@ -3268,11 +3281,10 @@
         {
           "type": "line_item",
           "line_number": 301,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 28.25,
           "unit": "LF",
           "total": "84.88",
-          "notes": "coat) baseboard",
           "tax": "14.14"
         },
         {
@@ -3295,11 +3307,10 @@
         {
           "type": "line_item",
           "line_number": 303,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 1.0,
           "unit": "EA",
           "total": "65.78",
-          "notes": "9 SF",
           "tax": "10.96"
         },
         {
@@ -3444,11 +3455,10 @@
         {
           "type": "line_item",
           "line_number": 311,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 72.53,
           "unit": "LF",
           "total": "217.95",
-          "notes": "coat) baseboard",
           "tax": "36.32"
         },
         {
@@ -3555,11 +3565,10 @@
         {
           "type": "line_item",
           "line_number": 322,
-          "description": "Closet Organizer -",
+          "description": "Closet Organizer - Melamine or Wire - Detach & reset",
           "qty": 7.67,
           "unit": "LF",
           "total": "772.12",
-          "notes": "Melamine or Wire - Detach & reset",
           "tax": "128.68"
         }
       ],
@@ -3633,11 +3642,10 @@
         {
           "type": "line_item",
           "line_number": 325,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 29.16,
           "unit": "LF",
           "total": "87.63",
-          "notes": "coat) baseboard",
           "tax": "14.60"
         },
         {
@@ -3660,11 +3668,10 @@
         {
           "type": "line_item",
           "line_number": 327,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 1.0,
           "unit": "EA",
           "total": "65.78",
-          "notes": "9 SF",
           "tax": "10.96"
         },
         {
@@ -3724,6 +3731,10 @@
       "metadata": {
         "height": "8' 9\"",
         "areas": {
+          "sf_walls": "532.87",
+          "sf_ceiling": "219.21",
+          "sf_walls_and_ceiling": "752.08",
+          "sf_floor": "219.21",
           "lf_floor_perimeter": "60.90",
           "lf_ceil_perimeter": "60.90"
         },
@@ -3778,11 +3789,10 @@
         {
           "type": "line_item",
           "line_number": 334,
-          "description": "Paint crown molding -",
+          "description": "Paint crown molding - two coats",
           "qty": 82.13,
           "unit": "LF",
           "total": "248.17",
-          "notes": "two coats",
           "tax": "41.36"
         },
         {
@@ -3792,11 +3802,10 @@
         {
           "type": "line_item",
           "line_number": 335,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 82.13,
           "unit": "LF",
           "total": "246.81",
-          "notes": "coat) baseboard",
           "tax": "41.14"
         },
         {
@@ -3860,11 +3869,10 @@
         {
           "type": "line_item",
           "line_number": 341,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 1.0,
           "unit": "EA",
           "total": "65.78",
-          "notes": "9 SF",
           "tax": "10.96"
         },
         {
@@ -3968,11 +3976,10 @@
         {
           "type": "line_item",
           "line_number": 349,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 34.05,
           "unit": "LF",
           "total": "102.33",
-          "notes": "coat) baseboard",
           "tax": "17.06"
         },
         {
@@ -3995,11 +4002,10 @@
         {
           "type": "line_item",
           "line_number": 351,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 1.0,
           "unit": "EA",
           "total": "65.78",
-          "notes": "9 SF",
           "tax": "10.96"
         },
         {
@@ -4132,11 +4138,10 @@
         {
           "type": "line_item",
           "line_number": 359,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 81.46,
           "unit": "LF",
           "total": "244.80",
-          "notes": "coat) baseboard",
           "tax": "40.80"
         },
         {
@@ -4161,11 +4166,10 @@
         {
           "type": "line_item",
           "line_number": 362,
-          "description": "Texture drywall -",
+          "description": "Texture drywall - smooth / skim coat",
           "qty": 712.81,
           "unit": "SF",
           "total": "2,295.22",
-          "notes": "smooth / skim coat",
           "tax": "382.54"
         },
         {
@@ -4326,7 +4330,11 @@
         "height": "8' 9\"",
         "areas": {
           "sf_walls": "666.98",
-          "sf_ceiling": "384.51"
+          "sf_ceiling": "38.23",
+          "sf_walls_and_ceiling": "265.76",
+          "sf_floor": "38.23",
+          "lf_floor_perimeter": "26.00",
+          "lf_ceil_perimeter": "26.00"
         },
         "doors": [
           {
@@ -4336,6 +4344,10 @@
           {
             "dimensions": "3' X 6' 8\"",
             "opens_into": "MASTER_BEDR2"
+          },
+          {
+            "dimensions": "2' 8\" X 6' 8\"",
+            "opens_into": "MASTER_BATH"
           }
         ],
         "windows": [
@@ -4361,28 +4373,7 @@
           }
         ]
       },
-      "subrooms": [
-        {
-          "subroom_name": "Master WC (1)",
-          "metadata": {
-            "height": "8' 9\"",
-            "areas": {
-              "sf_walls": "227.54",
-              "sf_ceiling": "38.23",
-              "sf_walls_and_ceiling": "265.76",
-              "sf_floor": "38.23",
-              "lf_floor_perimeter": "26.00",
-              "lf_ceil_perimeter": "26.00"
-            },
-            "doors": [
-              {
-                "dimensions": "2' 8\" X 6' 8\"",
-                "opens_into": "MASTER_BATH"
-              }
-            ]
-          }
-        }
-      ],
+      "subrooms": [],
       "line_items": [
         {
           "type": "header",
@@ -4401,11 +4392,10 @@
         {
           "type": "line_item",
           "line_number": 378,
-          "description": "Seal the surface area",
+          "description": "Seal the surface area w/latex based stain blocker - one coat",
           "qty": 120.0,
           "unit": "SF",
           "total": "145.36",
-          "notes": "w/latex based stain blocker - one coat",
           "tax": "24.22"
         },
         {
@@ -4415,11 +4405,10 @@
         {
           "type": "line_item",
           "line_number": 379,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 91.15,
           "unit": "LF",
           "total": "273.92",
-          "notes": "coat) baseboard",
           "tax": "45.66"
         },
         {
@@ -4444,21 +4433,19 @@
         {
           "type": "line_item",
           "line_number": 382,
-          "description": "Texture drywall -",
+          "description": "Texture drywall - smooth / skim coat",
           "qty": 670.89,
           "unit": "SF",
           "total": "2,160.24",
-          "notes": "smooth / skim coat",
           "tax": "360.04"
         },
         {
           "type": "line_item",
           "line_number": 383,
-          "description": "Seal part of the walls",
+          "description": "Seal part of the walls w/latex based stain blocker - one coat",
           "qty": 670.89,
           "unit": "SF",
           "total": "820.77",
-          "notes": "w/latex based stain blocker - one coat",
           "tax": "136.80"
         },
         {
@@ -4568,7 +4555,7 @@
           "qty": 2.0,
           "unit": "EA",
           "total": "183.02",
-          "notes": "fixture - wall sconce - High grade These are 1950/70 Pair of Maison Baguès Daisy Sconces H 57 cm With Blue Glass Beads $7,779.55per set",
+          "notes": "fixture - wall sconce - High grade These are 1950/70 Pair of Maison Bagu\u00e8s Daisy Sconces H 57 cm With Blue Glass Beads $7,779.55per set",
           "tax": "30.50"
         },
         {
@@ -4601,11 +4588,10 @@
         {
           "type": "line_item",
           "line_number": 399,
-          "description": "Gas/water line cap/plug -",
+          "description": "Gas/water line cap/plug - per cap",
           "qty": 1.0,
           "unit": "EA",
           "total": "21.95",
-          "notes": "per cap",
           "tax": "3.66"
         },
         {
@@ -4633,31 +4619,28 @@
         {
           "type": "line_item",
           "line_number": 402,
-          "description": "Stain & finish vanity -",
+          "description": "Stain & finish vanity - inside and out",
           "qty": 5.17,
           "unit": "LF",
           "total": "582.73",
-          "notes": "inside and out",
           "tax": "97.12"
         },
         {
           "type": "line_item",
           "line_number": 403,
-          "description": "Cabinet knobs or pulls -",
+          "description": "Cabinet knobs or pulls - Detach & reset",
           "qty": 17.0,
           "unit": "EA",
           "total": "72.83",
-          "notes": "Detach & reset",
           "tax": "12.14"
         },
         {
           "type": "line_item",
           "line_number": 404,
-          "description": "R&R Ceramic tile -",
+          "description": "R&R Ceramic tile - bullnose - 3/4\" x 6\" - High grade",
           "qty": 4.33,
           "unit": "LF",
           "total": "101.35",
-          "notes": "bullnose - 3/4\" x 6\" - High grade",
           "tax": "16.90"
         },
         {
@@ -4702,6 +4685,10 @@
       "metadata": {
         "height": "8' 9\"",
         "areas": {
+          "sf_walls": "551.15",
+          "sf_ceiling": "152.15",
+          "sf_walls_and_ceiling": "703.30",
+          "sf_floor": "152.15",
           "lf_floor_perimeter": "61.70",
           "lf_ceil_perimeter": "67.12"
         },
@@ -4818,8 +4805,11 @@
       "metadata": {
         "height": "8' 9\"",
         "areas": {
-          "lf_floor_perimeter": "30.19",
-          "lf_ceil_perimeter": "30.19"
+          "lf_floor_perimeter": "22.64",
+          "lf_ceil_perimeter": "22.64",
+          "sf_ceiling": "56.09",
+          "sf_walls_and_ceiling": "254.15",
+          "sf_floor": "56.09"
         },
         "windows": [
           {
@@ -4830,35 +4820,21 @@
             "dimensions": "3' 6\" X 5' 5\"",
             "opens_into": "Exterior"
           }
+        ],
+        "doors": [
+          {
+            "dimensions": "2' 6\" X 6' 8\"",
+            "opens_into": "GUEST_BEDROO"
+          }
+        ],
+        "missing_walls": [
+          {
+            "dimensions": "6' 5 15/16\" X 8' 9\"",
+            "opens_into": "STAIRWELL"
+          }
         ]
       },
-      "subrooms": [
-        {
-          "subroom_name": "landing ( 91 8)",
-          "metadata": {
-            "height": "8' 9\"",
-            "areas": {
-              "sf_ceiling": "56.09",
-              "sf_walls_and_ceiling": "254.15",
-              "sf_floor": "56.09",
-              "lf_floor_perimeter": "22.64",
-              "lf_ceil_perimeter": "22.64"
-            },
-            "doors": [
-              {
-                "dimensions": "2' 6\" X 6' 8\"",
-                "opens_into": "GUEST_BEDROO"
-              }
-            ],
-            "missing_walls": [
-              {
-                "dimensions": "6' 5 15/16\" X 8' 9\"",
-                "opens_into": "STAIRWELL"
-              }
-            ]
-          }
-        }
-      ],
+      "subrooms": [],
       "line_items": [
         {
           "type": "header",
@@ -4896,21 +4872,19 @@
         {
           "type": "line_item",
           "line_number": 426,
-          "description": "Texture drywall -",
+          "description": "Texture drywall - smooth / skim coat",
           "qty": 132.81,
           "unit": "SF",
           "total": "427.65",
-          "notes": "smooth / skim coat",
           "tax": "71.28"
         },
         {
           "type": "line_item",
           "line_number": 427,
-          "description": "Batt insulation - 12\" -",
+          "description": "Batt insulation - 12\" - R38 - unfaced batt",
           "qty": 132.81,
           "unit": "SF",
           "total": "433.43",
-          "notes": "R38 - unfaced batt",
           "tax": "72.24"
         },
         {
@@ -4920,11 +4894,10 @@
         {
           "type": "line_item",
           "line_number": 428,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 52.83,
           "unit": "LF",
           "total": "158.78",
-          "notes": "coat) baseboard",
           "tax": "26.48"
         },
         {
@@ -4971,7 +4944,6 @@
     {
       "section_name": "Guest Bedroom",
       "metadata": {
-        "height": "8' 9\"",
         "areas": {
           "sf_walls": "527.29",
           "sf_ceiling": "221.92",
@@ -5041,11 +5013,10 @@
         {
           "type": "line_item",
           "line_number": 435,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 81.56,
           "unit": "LF",
           "total": "245.10",
-          "notes": "coat) baseboard",
           "tax": "40.86"
         },
         {
@@ -5100,11 +5071,10 @@
         {
           "type": "line_item",
           "line_number": 441,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 1.0,
           "unit": "EA",
           "total": "65.78",
-          "notes": "9 SF",
           "tax": "10.96"
         },
         {
@@ -5203,11 +5173,10 @@
         {
           "type": "line_item",
           "line_number": 448,
-          "description": "Seal (1 coat) & paint (1",
+          "description": "Seal (1 coat) & paint (1 coat) baseboard",
           "qty": 30.06,
           "unit": "LF",
           "total": "90.34",
-          "notes": "coat) baseboard",
           "tax": "15.06"
         },
         {
@@ -5240,11 +5209,10 @@
         {
           "type": "line_item",
           "line_number": 451,
-          "description": "R&R Window screen, 1 -",
+          "description": "R&R Window screen, 1 - 9 SF",
           "qty": 1.0,
           "unit": "EA",
           "total": "65.78",
-          "notes": "9 SF",
           "tax": "10.96"
         },
         {
@@ -5305,11 +5273,10 @@
         {
           "type": "line_item",
           "line_number": 456,
-          "description": "Remove Tile roofing -",
+          "description": "Remove Tile roofing - Clay - Barrel (mission) tile",
           "qty": 45.97,
           "unit": "SQ",
           "total": "15,685.33",
-          "notes": "Clay - Barrel (mission) tile",
           "tax": "2,614.22"
         },
         {
@@ -5329,11 +5296,11 @@
         {
           "type": "line_item",
           "line_number": 458,
-          "description": "Tile roofing - Clay -",
+          "description": "Tile roofing - Clay - Barrel (mission) tile",
           "qty": 58.0,
           "unit": "SQ",
           "total": "86,805.18",
-          "notes": "Barrel (mission) tile 58 Squares including waste as Recommended per Eagleview Report",
+          "notes": "58 Squares including waste as Recommended per Eagleview Report",
           "tax": "14,467.52"
         },
         {
@@ -5349,11 +5316,10 @@
         {
           "type": "line_item",
           "line_number": 460,
-          "description": "Digital satellite system -",
+          "description": "Digital satellite system - Detach & reset",
           "qty": 1.0,
           "unit": "EA",
           "total": "72.35",
-          "notes": "Detach & reset",
           "tax": "12.06"
         },
         {
@@ -5398,21 +5364,20 @@
         {
           "type": "line_item",
           "line_number": 465,
-          "description": "R&R Counterflashing -",
+          "description": "R&R Counterflashing - Apron flashing",
           "qty": 38.0,
           "unit": "LF",
           "total": "890.91",
-          "notes": "Apron flashing",
           "tax": "148.48"
         },
         {
           "type": "line_item",
           "line_number": 466,
-          "description": "Flashing - L flashing -",
+          "description": "Flashing - L flashing - color finish",
           "qty": 79.0,
           "unit": "LF",
           "total": "803.29",
-          "notes": "color finish Transition flashing for flat roof to tile roof",
+          "notes": "Transition flashing for flat roof to tile roof",
           "tax": "133.88"
         },
         {
@@ -5447,11 +5412,10 @@
         {
           "type": "line_item",
           "line_number": 470,
-          "description": "R&R Chimney flashing -",
+          "description": "R&R Chimney flashing - average (32\" x 36\")",
           "qty": 4.0,
           "unit": "EA",
           "total": "3,732.38",
-          "notes": "average (32\" x 36\")",
           "tax": "622.06"
         },
         {
@@ -5480,21 +5444,19 @@
         {
           "type": "line_item",
           "line_number": 473,
-          "description": "Gutter / downspout -",
+          "description": "Gutter / downspout - Detach & reset",
           "qty": 711.0,
           "unit": "LF",
           "total": "5,170.40",
-          "notes": "Detach & reset",
           "tax": "861.74"
         },
         {
           "type": "line_item",
           "line_number": 474,
-          "description": "Prime & paint gutter /",
+          "description": "Prime & paint gutter / downspout",
           "qty": 711.0,
           "unit": "LF",
           "total": "2,321.86",
-          "notes": "downspout",
           "tax": "386.98"
         },
         {
@@ -5738,11 +5700,10 @@
         {
           "type": "line_item",
           "line_number": 478,
-          "description": "Stucco repair around",
+          "description": "Stucco repair around doors, windows, etc - 2nd floor",
           "qty": 161.0,
           "unit": "LF",
           "total": "6,500.15",
-          "notes": "doors, windows, etc - 2nd floor",
           "tax": "1,083.36"
         },
         {
@@ -5779,11 +5740,11 @@
         {
           "type": "line_item",
           "line_number": 482,
-          "description": "Exterior light fixture -",
+          "description": "Exterior light fixture - Detach & reset",
           "qty": 23.0,
           "unit": "EA",
           "total": "3,125.15",
-          "notes": "Detach & reset The analysis and future performance of any fixture or appliance is excluded. Further attempts will be made to clean the masonry fixtures. If they are not successful, then it will need to be addressed separately.",
+          "notes": "The analysis and future performance of any fixture or appliance is excluded. Further attempts will be made to clean the masonry fixtures. If they are not successful, then it will need to be addressed separately.",
           "tax": "520.86"
         },
         {
@@ -5845,21 +5806,20 @@
         {
           "type": "line_item",
           "line_number": 484,
-          "description": "Megohmmeter check",
+          "description": "Megohmmeter check electrical circuits - average residence",
           "qty": 1.0,
           "unit": "EA",
           "total": "1,405.76",
-          "notes": "electrical circuits - average residence Any electrical system repairs are pending a specialty evaluation by an electrical contractor.",
+          "notes": "Any electrical system repairs are pending a specialty evaluation by an electrical contractor.",
           "tax": "234.30"
         },
         {
           "type": "line_item",
           "line_number": 485,
-          "description": "R&R Smoke detector -",
+          "description": "R&R Smoke detector - High grade",
           "qty": 12.0,
           "unit": "EA",
           "total": "2,084.90",
-          "notes": "High grade",
           "tax": "347.48"
         },
         {
@@ -5944,21 +5904,20 @@
         {
           "type": "line_item",
           "line_number": 496,
-          "description": "R&R Kitchen Sink -",
+          "description": "R&R Kitchen Sink - single basin - Premium grade",
           "qty": 1.0,
           "unit": "EA",
           "total": "1,271.22",
-          "notes": "single basin - Premium grade",
           "tax": "211.88"
         },
         {
           "type": "line_item",
           "line_number": 497,
-          "description": "Sink faucet - Kitchen -",
+          "description": "Sink faucet - Kitchen - Premium grade",
           "qty": 1.0,
           "unit": "EA",
           "total": "695.71",
-          "notes": "Premium grade 2 kitchen sink faucets, 1 reverse osmosis faucet and a high grade soap pump, all high detail solid copper construction",
+          "notes": "2 kitchen sink faucets, 1 reverse osmosis faucet and a high grade soap pump, all high detail solid copper construction",
           "tax": "115.96"
         },
         {
@@ -5984,11 +5943,10 @@
         {
           "type": "line_item",
           "line_number": 501,
-          "description": "R&R Countertop -",
+          "description": "R&R Countertop - Granite or Marble - Premium grade",
           "qty": 43.08,
           "unit": "SF",
           "total": "7,929.75",
-          "notes": "Granite or Marble - Premium grade",
           "tax": "1,321.62"
         },
         {
@@ -6030,7 +5988,7 @@
         "validation_delta": "0.00"
       },
       "errors": [
-        "Section name 'Hardscapes and walkways' not found above table starting at line 2447"
+        "Section name 'Hardscapes and walkways' not found above table starting at line 3099"
       ]
     },
     {

@@ -32,6 +32,7 @@
     "depreciate_taxes": true,
     "estimate_name": "KALYVAS_JVB_V6_KALY2",
     "depreciate_removal": false,
+    "insured_name": null,
     "region": "California",
     "building_type": null,
     "line_item_totals": {
@@ -49,8 +50,7 @@
         }
       ],
       "total": "63.26"
-    },
-    "insured_name": null
+    }
   },
   "sections": [
     {
@@ -287,7 +287,7 @@
           "tax": "0.00",
           "op": "4,132.32",
           "total": "24,793.92",
-          "notes": "On-Site Project Superintendent, a working supervisor will be needed on site for 3 hours per day for 4 weeks per month for 4 months totaling (3*5*16) Supervision is required by the CSLB license requirements that the Qualified licensee or a manager inspect every job site each day until complete. Supervision is not covered in Xactimate's O&P according to Xactimate's white pages. . \"Cal. Admin. Code tit. 16, § 823(a). “Direct supervision and control” “includes any one or any combination of the following activities: supervising construction, managing construction activities by making technical and administrative decisions, checking jobs for proper workmanship, or direct supervision on construction job sites. Section 7068 requires every license to have a qualifier, which may be a Sole Owner, Qualified Partner, Responsible Managing Officer (RMO), Responsible Managing Employee (RME), Responsible Managing Manager or Responsible Managing Member. The qualifier is the person who is listed in the Contractor State License Boards’ (CSLB) personnel of record, has demonstrated his/her knowledge and experience though the CSLB’s licensing process, and holds one or more license classifications. UPDATE: CSLB, CSLB to Get Tough on RMO Abuses (Summer 2014) Starting on January 1, 2014, amended Section 7068.1 of California’s Contractors State License Law, Bus. & Prof. Code §§ 7200et seq., requires licensees’ qualifiers to exercise direct supervision and control over the licensees’ operations to ensure compliance with California’s Contractors State License Law. The amended law contemplates active involvement by the qualifier, and makes a violation of Section 7068.1 grounds for disciplinary action and a misdemeanor punishable by imprisonment in a county jail and/or a fine."
+          "notes": "On-Site Project Superintendent, a working supervisor will be needed on site for 3 hours per day for 4 weeks per month for 4 months totaling (3*5*16) Supervision is required by the CSLB license requirements that the Qualified licensee or a manager inspect every job site each day until complete. Supervision is not covered in Xactimate's O&P according to Xactimate's white pages. . \"Cal. Admin. Code tit. 16, \u00a7 823(a). \u201cDirect supervision and control\u201d \u201cincludes any one or any combination of the following activities: supervising construction, managing construction activities by making technical and administrative decisions, checking jobs for proper workmanship, or direct supervision on construction job sites. Section 7068 requires every license to have a qualifier, which may be a Sole Owner, Qualified Partner, Responsible Managing Officer (RMO), Responsible Managing Employee (RME), Responsible Managing Manager or Responsible Managing Member. The qualifier is the person who is listed in the Contractor State License Boards\u2019 (CSLB) personnel of record, has demonstrated his/her knowledge and experience though the CSLB\u2019s licensing process, and holds one or more license classifications. UPDATE: CSLB, CSLB to Get Tough on RMO Abuses (Summer 2014) Starting on January 1, 2014, amended Section 7068.1 of California\u2019s Contractors State License Law, Bus. & Prof. Code \u00a7\u00a7 7200et seq., requires licensees\u2019 qualifiers to exercise direct supervision and control over the licensees\u2019 operations to ensure compliance with California\u2019s Contractors State License Law. The amended law contemplates active involvement by the qualifier, and makes a violation of Section 7068.1 grounds for disciplinary action and a misdemeanor punishable by imprisonment in a county jail and/or a fine."
         },
         {
           "type": "line_item",
@@ -1139,7 +1139,7 @@
           "tax": "0.00",
           "op": "28,800.00",
           "total": "172,800.00",
-          "notes": "The line items applies to the stucco repairs per McDermott Construction Scope of work: - Includes removal of all ivy on entire house - Includes removal and mapping of gutters prior to stucco work - Includes pressure washing of all walls to remove soot and fire damage and ivy removal debris - Includes covering all doors and windows with 2 mil plastic and duct tape - Includes covering all floors with 4 mil plastic, jumbo tex, and duct tape - Includes sandblasting of existing stucco surfaces as needed - Includes new lath around all new doors and windows - Includes application of scratch coat around all new doors and windows - Includes application of brown coat around all new doors and windows - Includes new fiberglass netting installed to entire building - Includes stucco entire building to a smooth “cat face” finish with new color coat and embedded color (painting not required) - Includes final site protection and cleanup"
+          "notes": "The line items applies to the stucco repairs per McDermott Construction Scope of work: - Includes removal of all ivy on entire house - Includes removal and mapping of gutters prior to stucco work - Includes pressure washing of all walls to remove soot and fire damage and ivy removal debris - Includes covering all doors and windows with 2 mil plastic and duct tape - Includes covering all floors with 4 mil plastic, jumbo tex, and duct tape - Includes sandblasting of existing stucco surfaces as needed - Includes new lath around all new doors and windows - Includes application of scratch coat around all new doors and windows - Includes application of brown coat around all new doors and windows - Includes new fiberglass netting installed to entire building - Includes stucco entire building to a smooth \u201ccat face\u201d finish with new color coat and embedded color (painting not required) - Includes final site protection and cleanup"
         },
         {
           "type": "line_item",
@@ -1181,7 +1181,7 @@
           "tax": "0.00",
           "op": "4,000.00",
           "total": "24,000.00",
-          "notes": "The line item applies to the stucco repairs to the retaining wall, fences and gate. Scope of work: - Includes sandblasting of retaining wall, fences, and gate surfaces to remove soot, fire damage, and loose stucco - Includes application of new stucco system over masonry, consisting of scratch coat, brown coat, and finish coat - Includes installation of fiberglass mesh reinforcement for durability - Includes smooth “cat face” finish to match existing property stucco - Includes site protection, masking, and cleanup of all surrounding areas"
+          "notes": "The line item applies to the stucco repairs to the retaining wall, fences and gate. Scope of work: - Includes sandblasting of retaining wall, fences, and gate surfaces to remove soot, fire damage, and loose stucco - Includes application of new stucco system over masonry, consisting of scratch coat, brown coat, and finish coat - Includes installation of fiberglass mesh reinforcement for durability - Includes smooth \u201ccat face\u201d finish to match existing property stucco - Includes site protection, masking, and cleanup of all surrounding areas"
         },
         {
           "type": "header",
@@ -1326,10 +1326,11 @@
           }
         },
         {
-          "subroom_name": "Line 1n C 3.l 8o 7se St F(5 W)",
+          "subroom_name": "Linen Closet (5)",
           "metadata": {
             "height": "10'",
             "areas": {
+              "sf_walls": "103.87",
               "sf_ceiling": "5.42",
               "sf_walls_and_ceiling": "109.29",
               "sf_floor": "5.42",
@@ -1755,7 +1756,7 @@
     {
       "section_name": "Den",
       "metadata": {
-        "height": "10' 0",
+        "height": "10'",
         "areas": {
           "sf_walls": "702.20",
           "sf_ceiling": "317.02",
@@ -2891,8 +2892,12 @@
     {
       "section_name": "Dining Room",
       "metadata": {
-        "height": "10' \"01 \"01 \"111",
+        "height": "10'",
         "areas": {
+          "sf_walls": "569.00",
+          "sf_ceiling": "262.56",
+          "sf_walls_and_ceiling": "831.56",
+          "sf_floor": "262.56",
           "sy_flooring": "29.17",
           "lf_floor_perimeter": "53.21",
           "lf_ceil_perimeter": "63.96"
@@ -3266,7 +3271,6 @@
     {
       "section_name": "Pantry",
       "metadata": {
-        "height": "8'",
         "areas": {
           "sf_walls": "200.43",
           "sf_ceiling": "31.70",
@@ -3491,7 +3495,28 @@
     },
     {
       "section_name": "Family Room",
-      "metadata": {},
+      "metadata": {
+        "height": "10' 6\"",
+        "areas": {
+          "sf_walls": "774.48",
+          "sf_ceiling": "556.09",
+          "sf_walls_and_ceiling": "1,330.57",
+          "sf_floor": "556.09",
+          "sy_flooring": "61.79",
+          "lf_floor_perimeter": "67.85",
+          "lf_ceil_perimeter": "88.49"
+        },
+        "missing_walls": [
+          {
+            "dimensions": "10' 6 11/16\" X 10' 6\"",
+            "opens_into": "KITCHEN2"
+          },
+          {
+            "dimensions": "6' 4 9/16\" X 10' 6\"",
+            "opens_into": "KITCHEN2"
+          }
+        ]
+      },
       "subrooms": [
         {
           "subroom_name": "Family Room Bar (1)",
@@ -3856,7 +3881,7 @@
           "tax": "121.13",
           "op": "287.94",
           "total": "1,727.63",
-          "notes": "The existing retractable screen door was damaged as a result of the loss event and is no longer functional. This unit is a Pella-branded retractable screen system designed for a standard 36\" exterior door. Replacement requires a complete retractable screen assembly, including housing, track system, latch, and screen. Pricing is based on Pella’s current market pricing for a 36\" retractable screen door kit. Total assumed material cost for replacement: $425.00."
+          "notes": "The existing retractable screen door was damaged as a result of the loss event and is no longer functional. This unit is a Pella-branded retractable screen system designed for a standard 36\" exterior door. Replacement requires a complete retractable screen assembly, including housing, track system, latch, and screen. Pricing is based on Pella\u2019s current market pricing for a 36\" retractable screen door kit. Total assumed material cost for replacement: $425.00."
         },
         {
           "type": "header",
@@ -4017,7 +4042,7 @@
           "tax": "1,121.24",
           "op": "2,991.12",
           "total": "17,946.68",
-          "notes": "Replacement of approximately 24 linear feet of full-height family room cabinetry is required due to pervasive smoke and ash contamination resulting from a nearby fire event. While the cabinet surfaces may appear superficially intact, the cabinetry includes substantial voids, cavities, and dead air space behind and within each unit — including between the cabinet backs and wall framing, as well as inside upper cabinets and lower base structures. Smoke particulates and odor-causing compounds are known to penetrate these enclosed areas, especially through seams, toe kicks, and the rear of cabinet boxes. These areas are typically inaccessible for effective cleaning, and the absorptive materials (e.g., wood, adhesives, and backings) trap odors long-term, even when sealed finishes are present on the exposed surfaces. Due to the long-term risk of residual odor, off-gassing, and potential occupant health sensitivity, remediation is not a viable solution. Full removal and replacement of the cabinetry is necessary to restore the room to pre-loss condition and ensure no residual odor remains. This scope includes demolition, disposal, and installation of new cabinetry to match existing layout and finish."
+          "notes": "Replacement of approximately 24 linear feet of full-height family room cabinetry is required due to pervasive smoke and ash contamination resulting from a nearby fire event. While the cabinet surfaces may appear superficially intact, the cabinetry includes substantial voids, cavities, and dead air space behind and within each unit \u2014 including between the cabinet backs and wall framing, as well as inside upper cabinets and lower base structures. Smoke particulates and odor-causing compounds are known to penetrate these enclosed areas, especially through seams, toe kicks, and the rear of cabinet boxes. These areas are typically inaccessible for effective cleaning, and the absorptive materials (e.g., wood, adhesives, and backings) trap odors long-term, even when sealed finishes are present on the exposed surfaces. Due to the long-term risk of residual odor, off-gassing, and potential occupant health sensitivity, remediation is not a viable solution. Full removal and replacement of the cabinetry is necessary to restore the room to pre-loss condition and ensure no residual odor remains. This scope includes demolition, disposal, and installation of new cabinetry to match existing layout and finish."
         },
         {
           "type": "line_item",
@@ -4747,6 +4772,10 @@
             "areas": {
               "sf_walls": "137.74",
               "sf_ceiling": "17.94",
+              "sf_walls_and_ceiling": "155.68",
+              "sf_floor": "17.94",
+              "sy_flooring": "1.99",
+              "lf_floor_perimeter": "16.79",
               "lf_ceil_perimeter": "19.37"
             },
             "doors": [
@@ -5562,6 +5591,9 @@
     {
       "section_name": "Garage",
       "metadata": {
+        "areas": {
+          "lf_floor_perimeter": "95.20"
+        },
         "doors": [
           {
             "dimensions": "2' 7\" X 6' 8\"",
@@ -5976,7 +6008,9 @@
           "sf_ceiling": "73.87",
           "sf_walls_and_ceiling": "351.74",
           "sf_floor": "53.74",
-          "lf_floor_perimeter": "22.32"
+          "sy_flooring": "5.97",
+          "lf_floor_perimeter": "22.32",
+          "lf_ceil_perimeter": "37.69"
         }
       },
       "subrooms": [
@@ -7775,6 +7809,10 @@
       "metadata": {
         "height": "8' 9\"",
         "areas": {
+          "sf_walls": "479.54",
+          "sf_ceiling": "219.21",
+          "sf_walls_and_ceiling": "698.74",
+          "sf_floor": "219.21",
           "sy_flooring": "24.36",
           "lf_floor_perimeter": "52.90",
           "lf_ceil_perimeter": "60.90"
@@ -7800,7 +7838,9 @@
               "sf_ceiling": "28.13",
               "sf_walls_and_ceiling": "196.12",
               "sf_floor": "28.13",
-              "lf_floor_perimeter": "18.56"
+              "sy_flooring": "3.13",
+              "lf_floor_perimeter": "18.56",
+              "lf_ceil_perimeter": "21.23"
             },
             "doors": [
               {
@@ -8625,8 +8665,12 @@
         "height": "8' 9\"",
         "areas": {
           "sf_walls": "575.87",
-          "sf_ceiling": "384.51",
-          "lf_ceil_perimeter": "96.96"
+          "sf_ceiling": "38.23",
+          "sf_walls_and_ceiling": "247.98",
+          "sf_floor": "38.23",
+          "sy_flooring": "4.25",
+          "lf_floor_perimeter": "23.34",
+          "lf_ceil_perimeter": "26.00"
         },
         "doors": [
           {
@@ -8636,6 +8680,10 @@
           {
             "dimensions": "3' X 6' 8\"",
             "opens_into": "MASTER_BEDR2"
+          },
+          {
+            "dimensions": "2' 8\" X 6' 8\"",
+            "opens_into": "MASTER_BATH"
           }
         ],
         "windows": [
@@ -8661,29 +8709,7 @@
           }
         ]
       },
-      "subrooms": [
-        {
-          "subroom_name": "Master WC (1)",
-          "metadata": {
-            "height": "8' 9\"",
-            "areas": {
-              "sf_walls": "209.76",
-              "sf_ceiling": "38.23",
-              "sf_walls_and_ceiling": "247.98",
-              "sf_floor": "38.23",
-              "sy_flooring": "4.25",
-              "lf_floor_perimeter": "23.34",
-              "lf_ceil_perimeter": "26.00"
-            },
-            "doors": [
-              {
-                "dimensions": "2' 8\" X 6' 8\"",
-                "opens_into": "MASTER_BATH"
-              }
-            ]
-          }
-        }
-      ],
+      "subrooms": [],
       "line_items": [
         {
           "type": "header",
@@ -9291,6 +9317,10 @@
       "metadata": {
         "height": "8' 9\"",
         "areas": {
+          "sf_walls": "551.15",
+          "sf_ceiling": "152.15",
+          "sf_walls_and_ceiling": "703.30",
+          "sf_floor": "152.15",
           "sy_flooring": "16.91",
           "lf_floor_perimeter": "61.70",
           "lf_ceil_perimeter": "67.12"
@@ -9538,9 +9568,12 @@
       "metadata": {
         "height": "8' 9\"",
         "areas": {
-          "sy_flooring": "8.52",
-          "lf_floor_perimeter": "30.19",
-          "lf_ceil_perimeter": "30.19"
+          "sy_flooring": "6.23",
+          "lf_floor_perimeter": "20.14",
+          "lf_ceil_perimeter": "22.64",
+          "sf_ceiling": "56.09",
+          "sf_walls_and_ceiling": "237.49",
+          "sf_floor": "56.09"
         },
         "windows": [
           {
@@ -9551,36 +9584,21 @@
             "dimensions": "3' 6\" X 5' 5\"",
             "opens_into": "Exterior"
           }
+        ],
+        "doors": [
+          {
+            "dimensions": "2' 6\" X 6' 8\"",
+            "opens_into": "GUEST_BEDROO"
+          }
+        ],
+        "missing_walls": [
+          {
+            "dimensions": "6' 5 15/16\" X 8' 9\"",
+            "opens_into": "STAIRWELL"
+          }
         ]
       },
-      "subrooms": [
-        {
-          "subroom_name": "land 1in 8g .( 41 0)",
-          "metadata": {
-            "height": "8' 9\"",
-            "areas": {
-              "sf_ceiling": "56.09",
-              "sf_walls_and_ceiling": "237.49",
-              "sf_floor": "56.09",
-              "sy_flooring": "6.23",
-              "lf_floor_perimeter": "20.14",
-              "lf_ceil_perimeter": "22.64"
-            },
-            "doors": [
-              {
-                "dimensions": "2' 6\" X 6' 8\"",
-                "opens_into": "GUEST_BEDROO"
-              }
-            ],
-            "missing_walls": [
-              {
-                "dimensions": "6' 5 15/16\" X 8' 9\"",
-                "opens_into": "STAIRWELL"
-              }
-            ]
-          }
-        }
-      ],
+      "subrooms": [],
       "line_items": [
         {
           "type": "header",
@@ -9799,7 +9817,6 @@
     {
       "section_name": "Guest Bedroom",
       "metadata": {
-        "height": "8' 9\"",
         "areas": {
           "sf_walls": "468.54",
           "sf_ceiling": "221.92",
@@ -11658,7 +11675,7 @@
         "validation_delta": "0.00"
       },
       "errors": [
-        "Section name 'Hardscapes and walkways' not found above table starting at line 3477"
+        "Section name 'Hardscapes and walkways' not found above table starting at line 4288"
       ]
     },
     {
@@ -13217,259 +13234,8 @@
           ]
         }
       ]
-    }
+    },
+    "trade_summary": null
   },
-  "estimate_name": "KALYVAS_JVB_V6_KALY2",
-  "validations": {
-    "per_section": [
-      {
-        "section": "Mitigation & Cleaning",
-        "declared": "0.00",
-        "computed": "0.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bid Items",
-        "declared": "239,796.92",
-        "computed": "239,796.92",
-        "delta": "0.00"
-      },
-      {
-        "section": "General",
-        "declared": "40,011.93",
-        "computed": "40,011.93",
-        "delta": "0.00"
-      },
-      {
-        "section": "Electrical",
-        "declared": "65,865.52",
-        "computed": "65,865.52",
-        "delta": "0.00"
-      },
-      {
-        "section": "Plumbing",
-        "declared": "8,294.52",
-        "computed": "8,294.52",
-        "delta": "0.00"
-      },
-      {
-        "section": "HVAC",
-        "declared": "115,922.19",
-        "computed": "115,922.19",
-        "delta": "0.00"
-      },
-      {
-        "section": "Kitchen Appliances",
-        "declared": "78,490.04",
-        "computed": "78,490.04",
-        "delta": "0.00"
-      },
-      {
-        "section": "Pool Area",
-        "declared": "1,632.26",
-        "computed": "1,632.26",
-        "delta": "0.00"
-      },
-      {
-        "section": "Window Treatments",
-        "declared": "36,791.26",
-        "computed": "36,791.26",
-        "delta": "0.00"
-      },
-      {
-        "section": "Stucco",
-        "declared": "238,115.72",
-        "computed": "238,115.72",
-        "delta": "0.00"
-      },
-      {
-        "section": "Foyer/Staircase",
-        "declared": "27,562.59",
-        "computed": "27,562.59",
-        "delta": "0.00"
-      },
-      {
-        "section": "Den",
-        "declared": "18,486.88",
-        "computed": "18,486.88",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bathroom",
-        "declared": "5,797.31",
-        "computed": "5,797.31",
-        "delta": "0.00"
-      },
-      {
-        "section": "Garage Hall",
-        "declared": "4,837.41",
-        "computed": "4,837.41",
-        "delta": "0.00"
-      },
-      {
-        "section": "Dining Room",
-        "declared": "36,118.19",
-        "computed": "36,118.19",
-        "delta": "0.00"
-      },
-      {
-        "section": "Pantry",
-        "declared": "3,479.04",
-        "computed": "3,479.04",
-        "delta": "0.00"
-      },
-      {
-        "section": "Family Room",
-        "declared": "55,828.99",
-        "computed": "55,828.99",
-        "delta": "0.00"
-      },
-      {
-        "section": "Kitchen",
-        "declared": "33,336.07",
-        "computed": "33,336.07",
-        "delta": "0.00"
-      },
-      {
-        "section": "Office",
-        "declared": "25,825.43",
-        "computed": "25,825.43",
-        "delta": "0.00"
-      },
-      {
-        "section": "Office Bathroom",
-        "declared": "8,252.61",
-        "computed": "8,252.61",
-        "delta": "0.00"
-      },
-      {
-        "section": "Garage",
-        "declared": "20,663.10",
-        "computed": "20,663.10",
-        "delta": "0.00"
-      },
-      {
-        "section": "Laundry Room",
-        "declared": "8,897.52",
-        "computed": "8,897.52",
-        "delta": "0.00"
-      },
-      {
-        "section": "Landing",
-        "declared": "3,456.92",
-        "computed": "3,456.92",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bedroom 1",
-        "declared": "4,276.27",
-        "computed": "4,276.27",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bed1 Bath",
-        "declared": "2,381.36",
-        "computed": "2,381.36",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bedroom 2",
-        "declared": "3,657.22",
-        "computed": "3,657.22",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bed2 Bath",
-        "declared": "2,267.06",
-        "computed": "2,267.06",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bedroom 3",
-        "declared": "2,196.92",
-        "computed": "2,196.92",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bed3 Bath",
-        "declared": "1,626.39",
-        "computed": "1,626.39",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Bedroom",
-        "declared": "8,544.13",
-        "computed": "8,544.13",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Bath",
-        "declared": "34,816.41",
-        "computed": "34,816.41",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Closet",
-        "declared": "15,966.99",
-        "computed": "15,966.99",
-        "delta": "0.00"
-      },
-      {
-        "section": "Stairwell",
-        "declared": "6,124.05",
-        "computed": "6,124.05",
-        "delta": "0.00"
-      },
-      {
-        "section": "Guest Bedroom",
-        "declared": "2,436.13",
-        "computed": "2,436.13",
-        "delta": "0.00"
-      },
-      {
-        "section": "Guest Bathroom",
-        "declared": "4,099.10",
-        "computed": "4,099.10",
-        "delta": "0.00"
-      },
-      {
-        "section": "ROOF1",
-        "declared": "173,263.72",
-        "computed": "173,263.72",
-        "delta": "0.00"
-      },
-      {
-        "section": "Exterior",
-        "declared": "0.00",
-        "computed": "0.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Ext_Surfaces",
-        "declared": "40,442.95",
-        "computed": "40,442.95",
-        "delta": "0.00"
-      },
-      {
-        "section": "Hardscapes and walkways",
-        "declared": "146,916.83",
-        "computed": "146,916.83",
-        "delta": "0.00"
-      },
-      {
-        "section": "Plants, Trees, And Shrubs",
-        "declared": "104,999.49",
-        "computed": "104,999.49",
-        "delta": "0.00"
-      }
-    ],
-    "document": {
-      "sum_sections": "1,631,477.44",
-      "end_grand_total": "1,631,477.44",
-      "grand_total_vs_sections_delta": "0.00",
-      "sum_rcv_from_summaries": "1,631,553.36",
-      "recap_category_total": "1,631,553.36",
-      "recap_vs_end_grand_delta": "75.92"
-    }
-  }
+  "estimate_name": "KALYVAS_JVB_V6_KALY2"
 }

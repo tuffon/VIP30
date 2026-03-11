@@ -279,21 +279,20 @@
         {
           "type": "line_item",
           "line_number": 6,
-          "description": "Clean with pressure/chemical spray -",
+          "description": "Clean with pressure/chemical spray - Concrete wall",
           "qty": 405.24,
           "unit": "SF",
           "total": "207.05",
-          "notes": "Concrete wall Both sides",
+          "notes": "Both sides",
           "tax": "0.38"
         },
         {
           "type": "line_item",
           "line_number": 7,
-          "description": "Clean with pressure/chemical spray-",
+          "description": "Clean with pressure/chemical spray- Driveway",
           "qty": 1144.0,
           "unit": "SF",
           "total": "584.53",
-          "notes": "Driveway",
           "tax": "1.09"
         }
       ],
@@ -393,11 +392,11 @@
         {
           "type": "line_item",
           "line_number": 13,
-          "description": "Tile / Cultured Marble - General Laborer -",
+          "description": "Tile / Cultured Marble - General Laborer - per hour",
           "qty": 3.0,
           "unit": "HR",
           "total": "185.31",
-          "notes": "per hour Labor to fix the tile on the outdoor fireplace",
+          "notes": "Labor to fix the tile on the outdoor fireplace",
           "tax": "0.00"
         },
         {
@@ -894,7 +893,6 @@
           "qty": 1.0,
           "unit": "EA",
           "total": "28.80",
-          "notes": "BB",
           "tax": "0.01"
         },
         {
@@ -983,6 +981,10 @@
               {
                 "dimensions": "3' 4 3/16\" X 8'",
                 "opens_into": "OFFICE_BATH2"
+              },
+              {
+                "dimensions": "3 9/16\" X 8'",
+                "opens_into": "OFFICE_BATH1"
               }
             ]
           }
@@ -1014,12 +1016,20 @@
           "metadata": {
             "height": "Tray",
             "areas": {
-              "sf_walls": "1.33",
+              "sf_walls": "21.33",
               "sf_ceiling": "12.17",
               "sf_walls_and_ceiling": "33.50",
               "lf_ceil_perimeter": "2.67"
             },
             "missing_walls": [
+              {
+                "dimensions": "2' 8\" X 8'",
+                "opens_into": "OFFICE_BATH1"
+              },
+              {
+                "dimensions": "3' 4 3/16\" X 8'",
+                "opens_into": "OFFICE_BATH3"
+              },
               {
                 "dimensions": "3' 4 3/16\" X 8'",
                 "opens_into": "OFFICE_BATH4"
@@ -1066,7 +1076,6 @@
           "qty": 42.39,
           "unit": "SF",
           "total": "34.34",
-          "notes": "GGuueesstt BBeeddrroooomm CCllooss OOffffiiccee",
           "tax": "0.00"
         },
         {
@@ -1077,6 +1086,19 @@
           "unit": "SF",
           "total": "40.55",
           "tax": "0.28"
+        },
+        {
+          "type": "header",
+          "text": "WALLS"
+        },
+        {
+          "type": "line_item",
+          "line_number": 57,
+          "description": "HEPA Vacuuming - Detailed - (PER SF)",
+          "qty": 214.49,
+          "unit": "SF",
+          "total": "173.74",
+          "tax": "0.00"
         },
         {
           "type": "line_item",
@@ -1271,8 +1293,8 @@
         "tax": "0.71",
         "op": null,
         "total": "1,039.49",
-        "computed_total": "865.75",
-        "validation_delta": "173.74"
+        "computed_total": "1,039.49",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -1957,6 +1979,108 @@
       ],
       "line_items": [
         {
+          "type": "header",
+          "text": "FLOORING"
+        },
+        {
+          "type": "line_item",
+          "line_number": 113,
+          "description": "HEPA Vacuuming - Detailed - (PER SF)",
+          "qty": 90.54,
+          "unit": "SF",
+          "total": "73.34",
+          "tax": "0.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 114,
+          "description": "Clean floor - tile",
+          "qty": 90.54,
+          "unit": "SF",
+          "total": "86.61",
+          "tax": "0.60"
+        },
+        {
+          "type": "header",
+          "text": "WALLS"
+        },
+        {
+          "type": "line_item",
+          "line_number": 115,
+          "description": "HEPA Vacuuming - Detailed - (PER SF)",
+          "qty": 343.13,
+          "unit": "SF",
+          "total": "277.94",
+          "tax": "0.00"
+        },
+        {
+          "type": "line_item",
+          "line_number": 116,
+          "description": "Clean the walls",
+          "qty": 343.13,
+          "unit": "SF",
+          "total": "195.91",
+          "tax": "0.33"
+        },
+        {
+          "type": "line_item",
+          "line_number": 117,
+          "description": "Clean door / window opening (per side)",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "42.07",
+          "tax": "0.01"
+        },
+        {
+          "type": "line_item",
+          "line_number": 118,
+          "description": "Clean door - French (per side)",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "36.04",
+          "tax": "0.01"
+        },
+        {
+          "type": "line_item",
+          "line_number": 119,
+          "description": "Clean window unit (per side) 10 - 20 SF",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "24.40",
+          "tax": "0.00"
+        },
+        {
+          "type": "header",
+          "text": "FIXTURES"
+        },
+        {
+          "type": "line_item",
+          "line_number": 120,
+          "description": "Clean vanity - inside and out",
+          "qty": 10.33,
+          "unit": "LF",
+          "total": "220.76",
+          "tax": "0.11"
+        },
+        {
+          "type": "line_item",
+          "line_number": 121,
+          "description": "Clean countertop",
+          "qty": 10.33,
+          "unit": "SF",
+          "total": "12.31",
+          "tax": "0.02"
+        },
+        {
+          "type": "line_item",
+          "line_number": 122,
+          "description": "Clean sink",
+          "qty": 2.0,
+          "unit": "EA",
+          "total": "42.07",
+          "tax": "0.01"
+        },
+        {
           "type": "line_item",
           "line_number": 123,
           "description": "Clean sink faucet",
@@ -2127,8 +2251,8 @@
         "tax": "1.39",
         "op": null,
         "total": "1,814.02",
-        "computed_total": "802.57",
-        "validation_delta": "1,011.45"
+        "computed_total": "1,814.02",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -2372,6 +2496,15 @@
         },
         {
           "type": "line_item",
+          "line_number": 156,
+          "description": "HEPA Vacuuming - Detailed - (PER SF)",
+          "qty": 3.67,
+          "unit": "SF",
+          "total": "2.97",
+          "tax": "0.00"
+        },
+        {
+          "type": "line_item",
           "line_number": 157,
           "description": "Clean floor",
           "qty": 3.67,
@@ -2390,7 +2523,6 @@
           "qty": 49.63,
           "unit": "SF",
           "total": "40.20",
-          "notes": "UUttiilliittyy RRoooomm",
           "tax": "0.00"
         },
         {
@@ -2400,8 +2532,16 @@
           "qty": 49.63,
           "unit": "SF",
           "total": "28.34",
-          "notes": "160. Clean door /FF wuuillnlld HHowee iioggphhettn22in ((gBB (66pe))r sidLLeoo)wweerr CCaabbii1nn.0220 ((EBBA22)) 21.03 0.00 21.03 UUppppeerr CCaabbiinn22 ((BB11))",
           "tax": "0.05"
+        },
+        {
+          "type": "line_item",
+          "line_number": 160,
+          "description": "Clean door / window opening (per side)",
+          "qty": 1.0,
+          "unit": "EA",
+          "total": "21.03",
+          "tax": "0.00"
         },
         {
           "type": "line_item",
@@ -2448,8 +2588,8 @@
         "tax": "0.08",
         "op": null,
         "total": "115.99",
-        "computed_total": "91.99",
-        "validation_delta": "24.00"
+        "computed_total": "115.99",
+        "validation_delta": "0.00"
       }
     },
     {
@@ -2756,11 +2896,10 @@
         {
           "type": "line_item",
           "line_number": 171,
-          "description": "Clean door - French double door set (per",
+          "description": "Clean door - French double door set (per side)",
           "qty": 1.0,
           "unit": "EA",
           "total": "72.03",
-          "notes": "side)",
           "tax": "0.02"
         },
         {
@@ -4496,21 +4635,19 @@
         {
           "type": "line_item",
           "line_number": 295,
-          "description": "Negative air fan/Air scrubber (24 hr",
+          "description": "Negative air fan/Air scrubber (24 hr period) - No monit.",
           "qty": 35.0,
           "unit": "DA",
           "total": "2,555.70",
-          "notes": "period) - No monit.",
           "tax": "0.00"
         },
         {
           "type": "line_item",
           "line_number": 296,
-          "description": "Add for HEPA filter (for negative air",
+          "description": "Add for HEPA filter (for negative air exhaust fan)",
           "qty": 1.75,
           "unit": "EA",
           "total": "412.74",
-          "notes": "exhaust fan)",
           "tax": "32.60"
         },
         {
@@ -4601,11 +4738,10 @@
         {
           "type": "line_item",
           "line_number": 301,
-          "description": "Clean ductwork - Interior (PER",
+          "description": "Clean ductwork - Interior (PER REGISTER)",
           "qty": 1.0,
           "unit": "EA",
           "total": "40.75",
-          "notes": "REGISTER)",
           "tax": "0.01"
         }
       ],
@@ -4973,11 +5109,10 @@
         {
           "type": "line_item",
           "line_number": 322,
-          "description": "Haul debris - per pickup truck load -",
+          "description": "Haul debris - per pickup truck load - including dump fees",
           "qty": 1.0,
           "unit": "EA",
           "total": "200.79",
-          "notes": "including dump fees",
           "tax": "0.00"
         }
       ],

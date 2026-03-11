@@ -14,21 +14,21 @@
     "depreciate_op": null,
     "depreciate_non_material": null,
     "depreciate_taxes": null,
-    "estimate_name": "BSchacter-02.12.26-Est-JVB-RepairEstimate-$809,464.83.pdf",
+    "estimate_name": "SCHACTER_RECON_6B_FINAL_DRAFT_CAR.pdf",
     "depreciate_removal": null,
     "insured_name": null,
     "region": null,
     "building_type": null,
     "line_item_totals": {
-      "estimate": "SCHACTER_RECON_5",
-      "material_sales_tax": "10,686.51",
-      "overhead_profit": "98,050.84",
-      "grand_total": "809,462.41"
+      "estimate": "SCHACTER_RECON_6B",
+      "material_sales_tax": "11,571.58",
+      "overhead_profit": "90,571.70",
+      "grand_total": "933,800.37"
     },
     "labor_minimums": {
       "labor": "0.00",
-      "op_profit": "109.68",
-      "total": "658.05"
+      "op_profit": "109.16",
+      "total": "654.96"
     },
     "additional_charges": {
       "items": [
@@ -53,21 +53,35 @@
         {
           "type": "line_item",
           "line_number": 1,
-          "description": "General Demolition (Bid Item)",
+          "description": "Cleaning (Bid Item) Per Initial",
           "qty": 1.0,
           "unit": "EA",
-          "reset": "100,000.00",
-          "remove": "0.00",
+          "reset": "0.00",
+          "remove": "24,369.00",
           "replace": "0.00",
-          "op": "20,000.00",
-          "total": "120,000.00"
+          "op": "0.00",
+          "total": "24,369.00",
+          "notes": "SERVPRO Mitigation"
+        },
+        {
+          "type": "line_item",
+          "line_number": 2,
+          "description": "Hazardous Material Remediation",
+          "qty": 1.0,
+          "unit": "EA",
+          "reset": "0.00",
+          "remove": "144,844.03",
+          "replace": "0.00",
+          "op": "0.00",
+          "total": "144,844.03",
+          "notes": "(Bid Item) per Tri Tech Restoration"
         }
       ],
       "section_totals": {
         "tax": "0.00",
-        "op": "20,000.00",
-        "total": "120,000.00",
-        "computed_total": "120,000.00",
+        "op": "0.00",
+        "total": "169,213.03",
+        "computed_total": "169,213.03",
         "validation_delta": "0.00"
       }
     },
@@ -82,7 +96,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 2,
+          "line_number": 3,
           "description": "Limited Contamination Assessment",
           "qty": 1.0,
           "unit": "EA",
@@ -99,7 +113,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 3,
+          "line_number": 4,
           "description": "Temporary toilet (per month)",
           "qty": 6.0,
           "unit": "MO",
@@ -111,7 +125,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 4,
+          "line_number": 5,
           "description": "Temporary hand washing station",
           "qty": 6.0,
           "unit": "MO",
@@ -124,7 +138,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 5,
+          "line_number": 6,
           "description": "Dumpster load - Approx. 20 yards, 4",
           "qty": 3.0,
           "unit": "EA",
@@ -137,7 +151,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 6,
+          "line_number": 7,
           "description": "Daily Job Site Clean Up Laborer &",
           "qty": 65.0,
           "unit": "HR",
@@ -150,7 +164,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 7,
+          "line_number": 8,
           "description": "Residential Supervision / Project",
           "qty": 390.0,
           "unit": "HR",
@@ -159,7 +173,7 @@
           "replace": "0.00",
           "op": "6,715.02",
           "total": "40,290.12",
-          "notes": "Management - per hour On-Site Project Superintendent, a working supervisor will be needed on site for 3 hours per day for 4 weeks per month for 6 months totaling (3*5*26) Supervision is required by the CSLB license requirements that the Qualified licensee or a manager inspect every job site each day until complete. Supervision is not covered in Xactimate's O&P according to Xactimate's white pages. . \"Cal. Admin. Code tit. 16, \u00a7 823(a). \u201cDirect supervision and control\u201d \u201cincludes any one or any combination of the following activities: supervising construction, managing construction activities by making technical and administrative decisions, checking jobs for proper workmanship, or direct supervision on construction job sites. Section 7068 requires every license to have a qualifier, which may be a Sole Owner, Qualified Partner, Responsible Managing Officer (RMO), Responsible Managing Employee (RME), Responsible Managing Manager or Responsible Managing Member. The qualifier is the person who is listed in the Contractor State License Boards\u2019 (CSLB) personnel of record, has demonstrated his/her knowledge and experience though the CSLB\u2019s licensing process, and holds one or more license classifications. UPDATE: CSLB, CSLB to Get Tough on RMO Abuses (Summer 2014) Starting on January 1, 2014, amended Section 7068.1 of California\u2019s Contractors State License Law, Bus. & Prof. Code \u00a7\u00a7 7200et seq., requires licensees\u2019 qualifiers to exercise direct supervision and control over the licensees\u2019 operations to ensure compliance with California\u2019s Contractors State License Law. The amended law contemplates active involvement by the qualifier, and makes a violation of Section 7068.1 grounds for disciplinary action and a misdemeanor punishable by imprisonment in a county jail and/or a fine."
+          "notes": "Supervision is required by the CSLB license requirements that the Qualified licensee or a manager inspect every job site each day until complete. Supervision is not covered in Xactimate's O&P according to Xactimate's white pages. . \"Cal. Admin. Code tit. 16, \u00a7 823(a). \u201cDirect supervision and control\u201d \u201cincludes any one or any combination of the following activities: supervising construction, managing construction activities by making technical and administrative decisions, checking jobs for proper workmanship, or direct supervision on construction job sites. Section 7068 requires every license to have a qualifier, which may be a Sole Owner, Qualified Partner, Responsible Managing Officer (RMO), Responsible Managing Employee (RME), Responsible Managing Manager or Responsible Managing Member. The qualifier is the person who is listed in the Contractor State License Boards\u2019 (CSLB) personnel of record, has demonstrated his/her knowledge and experience though the CSLB\u2019s licensing process, and holds one or more license classifications. UPDATE: CSLB, CSLB to Get Tough on RMO Abuses (Summer 2014) Starting on January 1, 2014, amended Section 7068.1 of California\u2019s Contractors State License Law, Bus. & Prof. Code \u00a7\u00a7 7200et seq., requires licensees\u2019 qualifiers to exercise direct supervision and control over the licensees\u2019 operations to ensure compliance with California\u2019s Contractors State License Law. The amended law contemplates active involvement by the qualifier, and makes a violation of Section 7068.1 grounds for disciplinary action and a misdemeanor punishable by imprisonment in a county jail and/or a fine."
         },
         {
           "type": "header",
@@ -167,7 +181,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 8,
+          "line_number": 9,
           "description": "Floor protection - heavy paper and",
           "qty": 1000.0,
           "unit": "SF",
@@ -180,7 +194,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 9,
+          "line_number": 10,
           "description": "Labor to tape drop cloths",
           "qty": 1100.0,
           "unit": "SF",
@@ -193,7 +207,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 10,
+          "line_number": 11,
           "description": "Floor protection - cloth - skid",
           "qty": 1100.0,
           "unit": "SF",
@@ -210,7 +224,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 11,
+          "line_number": 12,
           "description": "Final cleaning - construction - Residential",
           "qty": 1897.79,
           "unit": "SF",
@@ -222,7 +236,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 12,
+          "line_number": 13,
           "description": "Clean door / window opening (per side)",
           "qty": 56.0,
           "unit": "EA",
@@ -248,7 +262,7 @@
       "line_items": [
         {
           "type": "line_item",
-          "line_number": 13,
+          "line_number": 14,
           "description": "R&R Batt insulation - 4\" - R13 - unfaced batt",
           "qty": 2325.54,
           "unit": "SF",
@@ -271,12 +285,26 @@
       "section_name": "HVAC",
       "metadata": {},
       "subrooms": [],
-      "line_items": [],
+      "line_items": [
+        {
+          "type": "line_item",
+          "line_number": 15,
+          "description": "Heat, Vent, & Air Conditioning",
+          "qty": 1.0,
+          "unit": "EA",
+          "reset": "0.00",
+          "remove": "31,188.00",
+          "replace": "0.00",
+          "op": "6,237.60",
+          "total": "37,425.60",
+          "notes": "(Bid Item) - Per ADC Corp The line item applies to the HVAC repairs. Scope of work: Removal/Demolition \u2022 Remove all existing flexible ductwork (supply & return). \u2022 Temporary containment and protection as needed New Duct System \u2022 Install new R-8 flexible duct system (entire home). \u2022 New metal plenums where existing cannot be restored. \u2022 New register boots, collars, supports, straps, mastic, and foil tape. \u2022 New return duct assembly. \u2022 All work to meet or exceed Los Angeles County Mechanical Code. System Start-Up & Verification \u2022 Adjust and verify static pressure. \u2022 Verify airflow and sealing quality. \u2022 Final inspection, quality control, and before/after documentation. Equipment Package: \u2022 Goodman 5 Ton Condensing Unit (R-410A/A2L compliant) \u2022 Goodman Matching 5 Ton Evaporator Coil with TXV \u2022 Goodman 80% AFUE Gas Furnace with ECM blower Includes: \u2022 Removal & disposal of existing condenser, coil, and furnace \u2022 New refrigerant lines and fittings (flush or replace) \u2022 New condensate drain tie-in \u2022 New equipment pad & disconnect (if required) \u2022 Startup, evacuation, charge, commissioning, airflow verification"
+        }
+      ],
       "section_totals": {
         "tax": "0.00",
-        "op": "0.00",
-        "total": "0.00",
-        "computed_total": "0.00",
+        "op": "6,237.60",
+        "total": "37,425.60",
+        "computed_total": "37,425.60",
         "validation_delta": "0.00"
       }
     },
@@ -287,7 +315,7 @@
       "line_items": [
         {
           "type": "line_item",
-          "line_number": 18,
+          "line_number": 16,
           "description": "Rewire\\wire - avg. residence - boxes & wiring",
           "qty": 1897.79,
           "unit": "SF",
@@ -299,7 +327,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 19,
+          "line_number": 17,
           "description": "R&R Breaker panel - 150 amp",
           "qty": 1.0,
           "unit": "EA",
@@ -312,7 +340,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 20,
+          "line_number": 18,
           "description": "R&R Junction box",
           "qty": 2.0,
           "unit": "EA",
@@ -324,7 +352,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 21,
+          "line_number": 19,
           "description": "R&R Smoke detector - High grade",
           "qty": 9.0,
           "unit": "EA",
@@ -337,8 +365,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 22,
-          "description": "R&R Carbon monoxide detector - High grade",
+          "line_number": 20,
+          "description": "R&R Carbon monoxide detector -",
           "qty": 1.0,
           "unit": "EA",
           "reset": "16.80",
@@ -350,7 +378,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 23,
+          "line_number": 21,
           "description": "R&R Door bell/chime",
           "qty": 1.0,
           "unit": "EA",
@@ -362,7 +390,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 24,
+          "line_number": 22,
           "description": "R&R Security system - key pad - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -375,7 +403,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 25,
+          "line_number": 23,
           "description": "R&R Outlet",
           "qty": 28.0,
           "unit": "EA",
@@ -387,7 +415,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 26,
+          "line_number": 24,
           "description": "R&R Switch",
           "qty": 28.0,
           "unit": "EA",
@@ -399,7 +427,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 27,
+          "line_number": 25,
           "description": "R&R Ground fault interrupter (GFI)",
           "qty": 8.0,
           "unit": "EA",
@@ -416,7 +444,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 28,
+          "line_number": 26,
           "description": "R&R Surveillance camera - color",
           "qty": 3.0,
           "unit": "EA",
@@ -428,7 +456,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 29,
+          "line_number": 27,
           "description": "R&R Spot light fixture - double",
           "qty": 3.0,
           "unit": "EA",
@@ -440,7 +468,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 30,
+          "line_number": 28,
           "description": "R&R Exterior light fixture - Premium grade",
           "qty": 6.0,
           "unit": "EA",
@@ -453,8 +481,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 31,
-          "description": "R&R Exterior light fixture - High",
+          "line_number": 29,
+          "description": "R&R Exterior light fixture - High grade garden light fixtures.",
           "qty": 12.0,
           "unit": "EA",
           "reset": "19.05",
@@ -479,7 +507,7 @@
       "line_items": [
         {
           "type": "line_item",
-          "line_number": 32,
+          "line_number": 30,
           "description": "Plumbing/gas line air pressure test",
           "qty": 1.0,
           "unit": "EA",
@@ -491,7 +519,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 33,
+          "line_number": 31,
           "description": "Plumbing/drain line water pressure",
           "qty": 1.0,
           "unit": "EA",
@@ -522,7 +550,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 34,
+          "line_number": 32,
           "description": "R&R Refrigerator - side by side - 25 to 30 cf - Premium grade",
           "qty": 1.0,
           "unit": "EA",
@@ -534,7 +562,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 35,
+          "line_number": 33,
           "description": "R&R Dishwasher - Premium grade",
           "qty": 1.0,
           "unit": "EA",
@@ -546,7 +574,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 36,
+          "line_number": 34,
           "description": "R&R Range - freestanding - dual - 36\" - Premium grade",
           "qty": 1.0,
           "unit": "EA",
@@ -558,7 +586,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 37,
+          "line_number": 35,
           "description": "R&R Range hood - stainless steel - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -574,7 +602,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 38,
+          "line_number": 36,
           "description": "R&R Washer/Washing Machine - Front-loading - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -586,7 +614,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 39,
+          "line_number": 37,
           "description": "R&R Dryer - Gas - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -616,7 +644,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 40,
+          "line_number": 38,
           "description": "R&R 5-0 8-0 vinyl sliding patio",
           "qty": 1.0,
           "unit": "EA",
@@ -629,7 +657,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 41,
+          "line_number": 39,
           "description": "R&R Vinyl window, horizontal",
           "qty": 3.0,
           "unit": "EA",
@@ -646,7 +674,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 42,
+          "line_number": 40,
           "description": "R&R Vinyl window, horizontal",
           "qty": 1.0,
           "unit": "EA",
@@ -663,7 +691,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 43,
+          "line_number": 41,
           "description": "R&R Vinyl window, horizontal",
           "qty": 1.0,
           "unit": "EA",
@@ -680,7 +708,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 44,
+          "line_number": 42,
           "description": "R&R Vinyl window, horizontal",
           "qty": 1.0,
           "unit": "EA",
@@ -697,7 +725,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 45,
+          "line_number": 43,
           "description": "R&R Vinyl window, horizontal",
           "qty": 1.0,
           "unit": "EA",
@@ -714,7 +742,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 46,
+          "line_number": 44,
           "description": "R&R Vinyl window, horizontal",
           "qty": 1.0,
           "unit": "EA",
@@ -731,7 +759,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 47,
+          "line_number": 45,
           "description": "R&R Vinyl window, horizontal",
           "qty": 1.0,
           "unit": "EA",
@@ -748,7 +776,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 48,
+          "line_number": 46,
           "description": "R&R 5-0 8-0 vinyl sliding patio",
           "qty": 2.0,
           "unit": "EA",
@@ -765,7 +793,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 49,
+          "line_number": 47,
           "description": "R&R 5-0 8-0 vinyl sliding patio",
           "qty": 4.0,
           "unit": "EA",
@@ -778,7 +806,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 50,
+          "line_number": 48,
           "description": "R&R Vinyl window, horizontal",
           "qty": 2.0,
           "unit": "EA",
@@ -791,8 +819,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 51,
-          "description": "Window Reglazing & Repair (Bid",
+          "line_number": 49,
+          "description": "Window Reglazing & Repair (Bid Item) - per C-FIX - Invoice #577",
           "qty": 1.0,
           "unit": "EA",
           "reset": "0.00",
@@ -809,19 +837,6 @@
         "total": "33,744.01",
         "computed_total": "33,744.01",
         "validation_delta": "0.00"
-      }
-    },
-    {
-      "section_name": "Main Level",
-      "metadata": {},
-      "subrooms": [],
-      "line_items": [],
-      "section_totals": {
-        "tax": "0.00",
-        "op": "369.54",
-        "total": "2,217.22",
-        "computed_total": "0.00",
-        "validation_delta": "2,217.22"
       }
     },
     {
@@ -868,7 +883,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 53,
+          "line_number": 50,
           "description": "Batt insulation - 12\" - R38 - paper / foil faced",
           "qty": 52.93,
           "unit": "SF",
@@ -880,7 +895,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 54,
+          "line_number": 51,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 52.93,
           "unit": "SF",
@@ -893,7 +908,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 55,
+          "line_number": 52,
           "description": "Texture drywall - light hand",
           "qty": 52.93,
           "unit": "SF",
@@ -906,7 +921,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 56,
+          "line_number": 53,
           "description": "Painting - Faux (special effects) - 2",
           "qty": 52.93,
           "unit": "SF",
@@ -919,7 +934,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 57,
+          "line_number": 54,
           "description": "Seal the ceiling w/latex based stain",
           "qty": 52.93,
           "unit": "SF",
@@ -932,7 +947,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 58,
+          "line_number": 55,
           "description": "Mask and prep for paint - tape only",
           "qty": 78.12,
           "unit": "LF",
@@ -949,7 +964,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 59,
+          "line_number": 56,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 256.96,
           "unit": "SF",
@@ -962,7 +977,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 60,
+          "line_number": 57,
           "description": "Texture drywall - light hand",
           "qty": 256.96,
           "unit": "SF",
@@ -975,7 +990,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 61,
+          "line_number": 58,
           "description": "Mask and prep for paint - plastic,",
           "qty": 78.12,
           "unit": "LF",
@@ -988,7 +1003,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 62,
+          "line_number": 59,
           "description": "Seal the walls w/latex based stain",
           "qty": 256.96,
           "unit": "SF",
@@ -996,12 +1011,11 @@
           "remove": "1.00",
           "replace": "2.51",
           "op": "51.90",
-          "total": "311.37",
-          "notes": "blocker - one coat"
+          "total": "311.37"
         },
         {
           "type": "line_item",
-          "line_number": 63,
+          "line_number": 60,
           "description": "Painting - Faux (special effects) - 2",
           "qty": 256.96,
           "unit": "SF",
@@ -1014,7 +1028,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 64,
+          "line_number": 61,
           "description": "Baseboard - 4 1/4\"",
           "qty": 33.98,
           "unit": "LF",
@@ -1026,7 +1040,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 65,
+          "line_number": 62,
           "description": "Paint baseboard - distressed/faux",
           "qty": 33.98,
           "unit": "LF",
@@ -1039,7 +1053,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 66,
+          "line_number": 63,
           "description": "Chair rail - 2 1/2\"",
           "qty": 13.67,
           "unit": "LF",
@@ -1051,7 +1065,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 67,
+          "line_number": 64,
           "description": "Paint chair rail - distressed/faux",
           "qty": 13.67,
           "unit": "LF",
@@ -1068,20 +1082,58 @@
         },
         {
           "type": "line_item",
-          "line_number": 70,
-          "description": "Vacuuming - (PER SF) - Heavy",
+          "line_number": 65,
+          "description": "Stone floor covering - High",
           "qty": 52.93,
           "unit": "SF",
           "reset": "0.00",
-          "remove": "0.29",
-          "replace": "0.00",
-          "op": "3.08",
-          "total": "18.43",
-          "notes": "71. Floor leveling cement - Heavy 52.93 SF ATTEMPT CLEAN 72. Add-on for diagonal tile 104.60 SF ATTEMPT CLEAN installation"
+          "remove": "32.97",
+          "replace": "52.74",
+          "op": "359.56",
+          "total": "2,157.40",
+          "notes": "grade"
         },
         {
           "type": "line_item",
-          "line_number": 73,
+          "line_number": 66,
+          "description": "Additional labor to remove stone",
+          "qty": 52.93,
+          "unit": "SF",
+          "reset": "3.06",
+          "remove": "0.00",
+          "replace": "0.00",
+          "op": "32.40",
+          "total": "194.37",
+          "notes": "from concrete slab"
+        },
+        {
+          "type": "line_item",
+          "line_number": 67,
+          "description": "Floor leveling cement - Heavy",
+          "qty": 52.93,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "5.17",
+          "replace": "9.75",
+          "op": "56.70",
+          "total": "340.10"
+        },
+        {
+          "type": "line_item",
+          "line_number": 68,
+          "description": "Add-on for diagonal tile",
+          "qty": 104.6,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "2.84",
+          "replace": "0.00",
+          "op": "59.42",
+          "total": "356.48",
+          "notes": "installation"
+        },
+        {
+          "type": "line_item",
+          "line_number": 69,
           "description": "Tile/stone sealer",
           "qty": 52.93,
           "unit": "SF",
@@ -1093,7 +1145,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 74,
+          "line_number": 70,
           "description": "Floor protection - heavy paper and",
           "qty": 52.93,
           "unit": "SF",
@@ -1110,7 +1162,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 75,
+          "line_number": 71,
           "description": "Light fixture",
           "qty": 1.0,
           "unit": "EA",
@@ -1126,7 +1178,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 76,
+          "line_number": 72,
           "description": "Door lockset & deadbolt - exterior - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -1138,7 +1190,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 77,
+          "line_number": 73,
           "description": "Prime & paint door slab only - exterior (per side)",
           "qty": 1.0,
           "unit": "EA",
@@ -1147,11 +1199,11 @@
           "replace": "1.72",
           "op": "14.62",
           "total": "87.71",
-          "notes": "78. Detach & Reset Exterior door - 1.00 EA 201.99 0.00 0.00 0.71 40.54 243.24 metal - insulated / wood - High grade"
+          "notes": "74. Detach & Reset Exterior door - 1.00 EA 201.99 0.00 0.00 0.71 40.54 243.24 metal - insulated / wood - High grade"
         },
         {
           "type": "line_item",
-          "line_number": 79,
+          "line_number": 75,
           "description": "Interior door unit",
           "qty": 1.0,
           "unit": "EA",
@@ -1163,7 +1215,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 80,
+          "line_number": 76,
           "description": "Paint door or window opening - Large - 2 coats (per side)",
           "qty": 1.0,
           "unit": "EA",
@@ -1175,7 +1227,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 81,
+          "line_number": 77,
           "description": "Paint door slab only - 2 coats (per side)",
           "qty": 2.0,
           "unit": "EA",
@@ -1187,7 +1239,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 82,
+          "line_number": 78,
           "description": "Paint door/window trim & jamb - 2",
           "qty": 4.0,
           "unit": "EA",
@@ -1195,12 +1247,11 @@
           "remove": "51.82",
           "replace": "2.47",
           "op": "41.96",
-          "total": "251.71",
-          "notes": "coats (per side)"
+          "total": "251.71"
         },
         {
           "type": "line_item",
-          "line_number": 83,
+          "line_number": 79,
           "description": "Security system - contact w/wire",
           "qty": 1.0,
           "unit": "EA",
@@ -1217,7 +1268,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 84,
+          "line_number": 80,
           "description": "Seal & paint closet shelving - single shelf",
           "qty": 1.0,
           "unit": "EA",
@@ -1226,14 +1277,14 @@
           "replace": "0.57",
           "op": "17.50",
           "total": "104.95",
-          "notes": "85. Detach & Reset Closet shelf and 2.83 LF 15.31 0.00 0.00 0.00 8.66 51.99 rod package"
+          "notes": "81. Detach & Reset Closet shelf and 2.83 LF 15.31 0.00 0.00 0.00 8.66 51.99 rod package"
         }
       ],
       "section_totals": {
-        "tax": "111.65",
-        "op": "1,201.02",
-        "total": "7,205.94",
-        "computed_total": "6,910.71",
+        "tax": "174.14",
+        "op": "1,706.02",
+        "total": "10,235.86",
+        "computed_total": "9,940.63",
         "validation_delta": "295.23"
       }
     },
@@ -1248,7 +1299,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 86,
+          "line_number": 82,
           "description": "Paint paneling - distressed/faux",
           "qty": 197.93,
           "unit": "SF",
@@ -1256,11 +1307,12 @@
           "remove": "4.02",
           "replace": "3.28",
           "op": "159.80",
-          "total": "958.76"
+          "total": "958.76",
+          "notes": "paint this line item has been modified to account for the labor involved in creating the faux paint finished with distressed marks on this item. labor and materials have been assumed at 3x what a standard single coat of paint would be."
         },
         {
           "type": "line_item",
-          "line_number": 87,
+          "line_number": 83,
           "description": "Paint wood beam - distressed/faux",
           "qty": 52.71,
           "unit": "SF",
@@ -1273,19 +1325,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 88,
-          "description": "Soda blasting - Heavy",
-          "qty": 250.64,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "3.81",
-          "replace": "30.30",
-          "op": "197.04",
-          "total": "1,182.28"
-        },
-        {
-          "type": "line_item",
-          "line_number": 89,
+          "line_number": 84,
           "description": "Quarter round - 3/4\" - stain grade",
           "qty": 123.42,
           "unit": "LF",
@@ -1298,7 +1338,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 90,
+          "line_number": 85,
           "description": "Stain & finish base shoe or quarter",
           "qty": 123.42,
           "unit": "LF",
@@ -1311,7 +1351,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 91,
+          "line_number": 86,
           "description": "Mask and prep for paint - tape only",
           "qty": 477.94,
           "unit": "LF",
@@ -1328,7 +1368,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 92,
+          "line_number": 87,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 740.55,
           "unit": "SF",
@@ -1341,7 +1381,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 93,
+          "line_number": 88,
           "description": "Texture drywall - light hand",
           "qty": 740.55,
           "unit": "SF",
@@ -1354,7 +1394,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 94,
+          "line_number": 89,
           "description": "Drywall window return - up to 6\"",
           "qty": 56.92,
           "unit": "LF",
@@ -1366,7 +1406,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 95,
+          "line_number": 90,
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
           "qty": 740.55,
           "unit": "SF",
@@ -1378,7 +1418,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 96,
+          "line_number": 91,
           "description": "Baseboard - 4 1/4\"",
           "qty": 82.58,
           "unit": "LF",
@@ -1390,7 +1430,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 97,
+          "line_number": 92,
           "description": "Seal (1 coat) & paint (2 coats)",
           "qty": 82.58,
           "unit": "LF",
@@ -1403,7 +1443,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 98,
+          "line_number": 93,
           "description": "Mask and prep for paint - plastic,",
           "qty": 238.97,
           "unit": "LF",
@@ -1420,7 +1460,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 99,
+          "line_number": 94,
           "description": "Snaplock Laminate - simulated",
           "qty": 232.02,
           "unit": "SF",
@@ -1433,7 +1473,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 100,
+          "line_number": 95,
           "description": "Vapor barrier - visqueen - 6mil",
           "qty": 232.02,
           "unit": "SF",
@@ -1445,7 +1485,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 101,
+          "line_number": 96,
           "description": "T- molding - for wood flooring - High grade",
           "qty": 5.17,
           "unit": "LF",
@@ -1457,8 +1497,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 102,
-          "description": "Floor protection - heavy paper",
+          "line_number": 97,
+          "description": "Floor protection - heavy paper and",
           "qty": 232.02,
           "unit": "SF",
           "reset": "0.00",
@@ -1466,7 +1506,7 @@
           "replace": "1.58",
           "op": "33.26",
           "total": "199.57",
-          "notes": "and tape"
+          "notes": "tape"
         },
         {
           "type": "header",
@@ -1478,7 +1518,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 103,
+          "line_number": 98,
           "description": "Window trim set (casing & stop)",
           "qty": 56.92,
           "unit": "LF",
@@ -1490,19 +1530,20 @@
         },
         {
           "type": "line_item",
-          "line_number": 104,
-          "description": "Paint door/window trim & jamb -",
+          "line_number": 99,
+          "description": "Paint door/window trim & jamb - 2",
           "qty": 1.0,
           "unit": "EA",
           "reset": "0.00",
           "remove": "51.56",
           "replace": "0.60",
           "op": "10.44",
-          "total": "62.60"
+          "total": "62.60",
+          "notes": "coats (per side)"
         },
         {
           "type": "line_item",
-          "line_number": 105,
+          "line_number": 100,
           "description": "Paint door/window trim & jamb - Large - 2 coats (per side)",
           "qty": 2.0,
           "unit": "EA",
@@ -1514,7 +1555,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 106,
+          "line_number": 101,
           "description": "Window blind - fabric/woven - 20.",
           "qty": 1.0,
           "unit": "EA",
@@ -1527,7 +1568,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 107,
+          "line_number": 102,
           "description": "Window blind - fabric woven - 7.",
           "qty": 1.0,
           "unit": "EA",
@@ -1540,7 +1581,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 108,
+          "line_number": 103,
           "description": "Window blind - fabric/woven - 64\" x 80\" vertical blinds",
           "qty": 1.0,
           "unit": "EA",
@@ -1552,7 +1593,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 109,
+          "line_number": 104,
           "description": "Security system - contact w/wire",
           "qty": 1.0,
           "unit": "EA",
@@ -1569,7 +1610,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 110,
+          "line_number": 105,
           "description": "Sink faucet - Kitchen - High",
           "qty": 2.0,
           "unit": "EA",
@@ -1586,7 +1627,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 111,
+          "line_number": 106,
           "description": "Hanging light fixture - Premium",
           "qty": 1.0,
           "unit": "EA",
@@ -1599,7 +1640,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 112,
+          "line_number": 107,
           "description": "Recessed light fixture - High",
           "qty": 4.0,
           "unit": "EA",
@@ -1612,7 +1653,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 113,
+          "line_number": 108,
           "description": "Light fixture - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -1624,7 +1665,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 114,
+          "line_number": 109,
           "description": "Door bell/chime",
           "qty": 1.0,
           "unit": "EA",
@@ -1636,7 +1677,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 115,
+          "line_number": 110,
           "description": "Paint door slab only - 2 coats (per side)",
           "qty": 2.0,
           "unit": "EA",
@@ -1648,7 +1689,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 116,
+          "line_number": 111,
           "description": "Seal & paint closet shelving - single shelf",
           "qty": 5.0,
           "unit": "EA",
@@ -1660,7 +1701,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 117,
+          "line_number": 112,
           "description": "Smoke detector - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -1672,10 +1713,10 @@
         }
       ],
       "section_totals": {
-        "tax": "480.17",
-        "op": "3,784.18",
-        "total": "22,704.73",
-        "computed_total": "22,704.73",
+        "tax": "449.87",
+        "op": "3,587.14",
+        "total": "21,522.45",
+        "computed_total": "21,522.45",
         "validation_delta": "0.00"
       }
     },
@@ -1707,7 +1748,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 118,
+          "line_number": 113,
           "description": "Mask and prep for paint - tape",
           "qty": 338.04,
           "unit": "LF",
@@ -1720,7 +1761,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 119,
+          "line_number": 114,
           "description": "Prime & paint cold air return",
           "qty": 2.0,
           "unit": "EA",
@@ -1733,7 +1774,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 120,
+          "line_number": 115,
           "description": "Paint paneling - distressed/faux",
           "qty": 411.27,
           "unit": "SF",
@@ -1746,7 +1787,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 121,
+          "line_number": 116,
           "description": "Paint wood beam - distressed/faux paint",
           "qty": 117.92,
           "unit": "SF",
@@ -1759,19 +1800,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 122,
-          "description": "Soda blasting - Heavy",
-          "qty": 529.19,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "3.81",
-          "replace": "63.98",
-          "op": "416.04",
-          "total": "2,496.23"
-        },
-        {
-          "type": "line_item",
-          "line_number": 123,
+          "line_number": 117,
           "description": "Quarter round - 3/4\" - stain grade",
           "qty": 188.97,
           "unit": "LF",
@@ -1784,7 +1813,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 124,
+          "line_number": 118,
           "description": "Seal & paint base shoe or quarter",
           "qty": 188.97,
           "unit": "LF",
@@ -1801,7 +1830,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 125,
+          "line_number": 119,
           "description": "Mask and prep for paint - plastic,",
           "qty": 169.02,
           "unit": "LF",
@@ -1814,7 +1843,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 126,
+          "line_number": 120,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 730.95,
           "unit": "SF",
@@ -1827,7 +1856,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 127,
+          "line_number": 121,
           "description": "Texture drywall - light hand",
           "qty": 730.95,
           "unit": "SF",
@@ -1840,7 +1869,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 128,
+          "line_number": 122,
           "description": "Drywall window return - up to 6\"",
           "qty": 93.0,
           "unit": "LF",
@@ -1852,7 +1881,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 129,
+          "line_number": 123,
           "description": "Seal the walls w/latex based stain",
           "qty": 730.95,
           "unit": "SF",
@@ -1865,7 +1894,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 130,
+          "line_number": 124,
           "description": "Painting - Faux (special effects) - 2 part",
           "qty": 730.95,
           "unit": "SF",
@@ -1877,7 +1906,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 131,
+          "line_number": 125,
           "description": "Baseboard - 4 1/4\"",
           "qty": 80.14,
           "unit": "LF",
@@ -1889,7 +1918,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 132,
+          "line_number": 126,
           "description": "Paint baseboard - distressed/faux",
           "qty": 80.14,
           "unit": "LF",
@@ -1906,20 +1935,45 @@
         },
         {
           "type": "line_item",
-          "line_number": 135,
-          "description": "Vacuuming - (PER SF) - Heavy",
+          "line_number": 127,
+          "description": "Stone floor covering - High",
           "qty": 404.14,
           "unit": "SF",
           "reset": "0.00",
-          "remove": "0.29",
-          "replace": "0.00",
-          "op": "23.44",
-          "total": "140.64",
-          "notes": "136. Floor leveling cement - Heavy 404.14 SF ATTEMPT CLEAN"
+          "remove": "32.97",
+          "replace": "402.71",
+          "op": "2,745.44",
+          "total": "16,472.65",
+          "notes": "grade"
         },
         {
           "type": "line_item",
-          "line_number": 137,
+          "line_number": 128,
+          "description": "Additional labor to remove",
+          "qty": 404.14,
+          "unit": "SF",
+          "reset": "3.06",
+          "remove": "0.00",
+          "replace": "0.00",
+          "op": "247.34",
+          "total": "1,484.01",
+          "notes": "stone from concrete slab"
+        },
+        {
+          "type": "line_item",
+          "line_number": 129,
+          "description": "Floor leveling cement - Heavy",
+          "qty": 404.14,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "5.17",
+          "replace": "74.47",
+          "op": "432.78",
+          "total": "2,596.65"
+        },
+        {
+          "type": "line_item",
+          "line_number": 130,
           "description": "Tile/stone sealer",
           "qty": 808.27,
           "unit": "SF",
@@ -1931,7 +1985,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 138,
+          "line_number": 131,
           "description": "Regrout stone floor",
           "qty": 404.14,
           "unit": "SF",
@@ -1943,7 +1997,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 139,
+          "line_number": 132,
           "description": "Floor protection - heavy paper",
           "qty": 404.14,
           "unit": "SF",
@@ -1960,7 +2014,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 140,
+          "line_number": 133,
           "description": "TV Brackets - Wall or ceiling",
           "qty": 1.0,
           "unit": "EA",
@@ -1973,7 +2027,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 141,
+          "line_number": 134,
           "description": "Hanging light fixture - Premium",
           "qty": 1.0,
           "unit": "EA",
@@ -1986,7 +2040,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 142,
+          "line_number": 135,
           "description": "Security system - contact w/wire",
           "qty": 6.0,
           "unit": "EA",
@@ -2003,7 +2057,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 143,
+          "line_number": 136,
           "description": "Paint door/window trim & jamb - distressed/faux paint",
           "qty": 6.0,
           "unit": "EA",
@@ -2016,7 +2070,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 144,
+          "line_number": 137,
           "description": "Window blind - fabric/woven - 20.",
           "qty": 2.0,
           "unit": "EA",
@@ -2029,7 +2083,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 145,
+          "line_number": 138,
           "description": "Window drapery - hardware",
           "qty": 9.0,
           "unit": "EA",
@@ -2045,7 +2099,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 146,
+          "line_number": 139,
           "description": "Stain & finish bookcase - 3 part",
           "qty": 45.0,
           "unit": "SF",
@@ -2058,7 +2112,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 147,
+          "line_number": 140,
           "description": "Stain & finish crown molding - 3",
           "qty": 12.25,
           "unit": "LF",
@@ -2071,8 +2125,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 148,
-          "description": "Paint full louvered door slab only - 3 part faux/ distressed look",
+          "line_number": 141,
+          "description": "Paint full louvered door slab only -",
           "qty": 3.0,
           "unit": "EA",
           "reset": "0.00",
@@ -2084,7 +2138,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 149,
+          "line_number": 142,
           "description": "Stain & finish paneling - 3 part",
           "qty": 15.0,
           "unit": "SF",
@@ -2097,10 +2151,10 @@
         }
       ],
       "section_totals": {
-        "tax": "404.83",
-        "op": "5,533.04",
-        "total": "33,198.04",
-        "computed_total": "33,198.04",
+        "tax": "818.03",
+        "op": "8,519.12",
+        "total": "51,114.48",
+        "computed_total": "51,114.48",
         "validation_delta": "0.00"
       }
     },
@@ -2126,7 +2180,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 150,
+          "line_number": 143,
           "description": "Soda blasting - Extra heavy",
           "qty": 102.01,
           "unit": "SF",
@@ -2138,7 +2192,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 151,
+          "line_number": 144,
           "description": "Tile/stone sealer",
           "qty": 102.01,
           "unit": "SF",
@@ -2179,7 +2233,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 152,
+          "line_number": 145,
           "description": "Paint paneling - distressed/faux",
           "qty": 141.86,
           "unit": "SF",
@@ -2187,12 +2241,11 @@
           "remove": "4.02",
           "replace": "2.35",
           "op": "114.54",
-          "total": "687.17",
-          "notes": "paint this line item has been modified to account for the labor involved in creating the faux paint finished with distressed marks on this item. labor and materials have been assumed at 3x what a standard single coat of paint would be."
+          "total": "687.17"
         },
         {
           "type": "line_item",
-          "line_number": 153,
+          "line_number": 146,
           "description": "Paint wood beam - distressed/faux paint",
           "qty": 24.38,
           "unit": "SF",
@@ -2205,19 +2258,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 154,
-          "description": "Soda blasting - Heavy",
-          "qty": 166.24,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "3.81",
-          "replace": "20.10",
-          "op": "130.70",
-          "total": "784.17"
-        },
-        {
-          "type": "line_item",
-          "line_number": 155,
+          "line_number": 147,
           "description": "Quarter round - 3/4\" - stain grade",
           "qty": 53.73,
           "unit": "LF",
@@ -2230,7 +2271,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 156,
+          "line_number": 148,
           "description": "Seal & paint base shoe or quarter",
           "qty": 53.73,
           "unit": "LF",
@@ -2243,7 +2284,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 157,
+          "line_number": 149,
           "description": "Mask and prep for paint - tape",
           "qty": 194.94,
           "unit": "LF",
@@ -2251,7 +2292,8 @@
           "remove": "1.02",
           "replace": "0.95",
           "op": "39.96",
-          "total": "239.75"
+          "total": "239.75",
+          "notes": "only (per LF) Masking off crown moulding to paint the walls top and bottom, once to paint walls, once to stain the crown moulding"
         },
         {
           "type": "header",
@@ -2259,7 +2301,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 158,
+          "line_number": 150,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 422.45,
           "unit": "SF",
@@ -2272,7 +2314,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 159,
+          "line_number": 151,
           "description": "Texture drywall - light hand",
           "qty": 422.45,
           "unit": "SF",
@@ -2285,7 +2327,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 160,
+          "line_number": 152,
           "description": "Prime & paint cold air return",
           "qty": 2.0,
           "unit": "EA",
@@ -2298,7 +2340,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 161,
+          "line_number": 153,
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
           "qty": 422.45,
           "unit": "SF",
@@ -2310,7 +2352,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 162,
+          "line_number": 154,
           "description": "Baseboard - 4 1/4\"",
           "qty": 48.17,
           "unit": "LF",
@@ -2322,7 +2364,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 163,
+          "line_number": 155,
           "description": "Seal (1 coat) & paint (2 coats)",
           "qty": 48.17,
           "unit": "LF",
@@ -2335,7 +2377,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 164,
+          "line_number": 156,
           "description": "Mask and prep for paint - plastic,",
           "qty": 97.47,
           "unit": "LF",
@@ -2356,7 +2398,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 165,
+          "line_number": 157,
           "description": "Paint door/window trim & jamb - Large - 2 coats (per side)",
           "qty": 2.0,
           "unit": "EA",
@@ -2368,7 +2410,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 166,
+          "line_number": 158,
           "description": "Window blind - PVC - 3.5\" - 20.1",
           "qty": 1.0,
           "unit": "EA",
@@ -2381,7 +2423,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 167,
+          "line_number": 159,
           "description": "Paint full lvrd single bifold door - slab -2 coats -1 side",
           "qty": 4.0,
           "unit": "EA",
@@ -2394,7 +2436,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 168,
+          "line_number": 160,
           "description": "Interior window shutters (set)",
           "qty": 1.0,
           "unit": "EA",
@@ -2403,17 +2445,13 @@
           "replace": "20.96",
           "op": "60.94",
           "total": "365.60"
-        },
-        {
-          "type": "header",
-          "text": "Cabinetry"
         }
       ],
       "section_totals": {
-        "tax": "148.21",
-        "op": "1,432.34",
-        "total": "8,593.70",
-        "computed_total": "8,593.70",
+        "tax": "128.11",
+        "op": "1,301.64",
+        "total": "7,809.53",
+        "computed_total": "7,809.53",
         "validation_delta": "0.00"
       }
     },
@@ -2439,7 +2477,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 169,
+          "line_number": 161,
           "description": "Paint paneling - distressed/faux",
           "qty": 17.34,
           "unit": "SF",
@@ -2452,7 +2490,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 170,
+          "line_number": 162,
           "description": "Paint wood beam - distressed/faux paint",
           "qty": 24.38,
           "unit": "SF",
@@ -2465,19 +2503,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 171,
-          "description": "Soda blasting - Heavy",
-          "qty": 41.72,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "3.81",
-          "replace": "5.04",
-          "op": "32.80",
-          "total": "196.79"
-        },
-        {
-          "type": "line_item",
-          "line_number": 172,
+          "line_number": 163,
           "description": "Batt insulation - 12\" - R38 - paper",
           "qty": 17.34,
           "unit": "SF",
@@ -2490,7 +2516,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 173,
+          "line_number": 164,
           "description": "Mask and prep for paint - tape",
           "qty": 85.38,
           "unit": "LF",
@@ -2503,7 +2529,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 174,
+          "line_number": 165,
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
           "qty": 17.34,
           "unit": "SF",
@@ -2519,7 +2545,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 175,
+          "line_number": 166,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 158.31,
           "unit": "SF",
@@ -2532,7 +2558,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 176,
+          "line_number": 167,
           "description": "Texture drywall - light hand",
           "qty": 158.31,
           "unit": "SF",
@@ -2545,7 +2571,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 177,
+          "line_number": 168,
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
           "qty": 158.31,
           "unit": "SF",
@@ -2557,7 +2583,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 178,
+          "line_number": 169,
           "description": "Baseboard - 4 1/4\"",
           "qty": 21.34,
           "unit": "LF",
@@ -2569,7 +2595,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 179,
+          "line_number": 170,
           "description": "Seal (1 coat) & paint (2 coats)",
           "qty": 21.34,
           "unit": "LF",
@@ -2582,7 +2608,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 180,
+          "line_number": 171,
           "description": "Mask and prep for paint - plastic,",
           "qty": 42.69,
           "unit": "LF",
@@ -2603,7 +2629,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 181,
+          "line_number": 172,
           "description": "Closet shelf and rod package",
           "qty": 6.17,
           "unit": "LF",
@@ -2611,12 +2637,11 @@
           "remove": "29.33",
           "replace": "3.51",
           "op": "36.90",
-          "total": "221.38",
-          "notes": "in hallway coat closet"
+          "total": "221.38"
         },
         {
           "type": "line_item",
-          "line_number": 182,
+          "line_number": 173,
           "description": "Seal & paint closet shelving - single shelf - Large closet",
           "qty": 1.0,
           "unit": "EA",
@@ -2628,7 +2653,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 183,
+          "line_number": 174,
           "description": "Seal & paint cabinetry - upper - inside and out",
           "qty": 8.67,
           "unit": "LF",
@@ -2640,7 +2665,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 184,
+          "line_number": 175,
           "description": "Cabinet knob or pull",
           "qty": 4.0,
           "unit": "EA",
@@ -2656,7 +2681,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 185,
+          "line_number": 176,
           "description": "Paint bypass door set - slab only - 2 coats (per side)",
           "qty": 2.0,
           "unit": "EA",
@@ -2668,7 +2693,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 186,
+          "line_number": 177,
           "description": "Bypass (sliding) door set - birch",
           "qty": 1.0,
           "unit": "EA",
@@ -2680,7 +2705,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 187,
+          "line_number": 178,
           "description": "Lube/recondition sliding bypass",
           "qty": 2.0,
           "unit": "EA",
@@ -2693,10 +2718,10 @@
         }
       ],
       "section_totals": {
-        "tax": "81.83",
-        "op": "842.90",
-        "total": "5,057.30",
-        "computed_total": "5,057.30",
+        "tax": "76.79",
+        "op": "810.10",
+        "total": "4,860.51",
+        "computed_total": "4,860.51",
         "validation_delta": "0.00"
       }
     },
@@ -2722,19 +2747,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 188,
-          "description": "Soda blasting - Heavy",
-          "qty": 122.73,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "3.81",
-          "replace": "14.84",
-          "op": "96.48",
-          "total": "578.92"
-        },
-        {
-          "type": "line_item",
-          "line_number": 189,
+          "line_number": 179,
           "description": "Paint paneling - distressed/faux",
           "qty": 98.35,
           "unit": "SF",
@@ -2747,7 +2760,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 190,
+          "line_number": 180,
           "description": "Paint wood beam - distressed/faux paint",
           "qty": 24.38,
           "unit": "SF",
@@ -2760,7 +2773,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 191,
+          "line_number": 181,
           "description": "Quarter round - 3/4\" - stain grade",
           "qty": 45.55,
           "unit": "LF",
@@ -2773,7 +2786,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 192,
+          "line_number": 182,
           "description": "Seal (1 coat) & paint (1 coat) trim",
           "qty": 45.55,
           "unit": "LF",
@@ -2785,7 +2798,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 193,
+          "line_number": 183,
           "description": "Mask and prep for paint - tape",
           "qty": 81.1,
           "unit": "LF",
@@ -2802,7 +2815,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 194,
+          "line_number": 184,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 363.3,
           "unit": "SF",
@@ -2815,7 +2828,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 195,
+          "line_number": 185,
           "description": "Texture drywall - light hand",
           "qty": 363.3,
           "unit": "SF",
@@ -2823,11 +2836,12 @@
           "remove": "1.82",
           "replace": "3.19",
           "op": "132.88",
-          "total": "797.28"
+          "total": "797.28",
+          "notes": "texture"
         },
         {
           "type": "line_item",
-          "line_number": 196,
+          "line_number": 186,
           "description": "Mask and prep for paint - plastic,",
           "qty": 81.1,
           "unit": "LF",
@@ -2840,7 +2854,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 197,
+          "line_number": 187,
           "description": "Seal the walls w/latex based stain",
           "qty": 363.3,
           "unit": "SF",
@@ -2853,7 +2867,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 198,
+          "line_number": 188,
           "description": "Painting - Faux (special effects) - 2 part",
           "qty": 363.3,
           "unit": "SF",
@@ -2865,7 +2879,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 199,
+          "line_number": 189,
           "description": "Baseboard - 4 1/4\"",
           "qty": 40.09,
           "unit": "LF",
@@ -2877,7 +2891,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 200,
+          "line_number": 190,
           "description": "Paint baseboard - distressed/faux",
           "qty": 40.09,
           "unit": "LF",
@@ -2890,7 +2904,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 201,
+          "line_number": 191,
           "description": "Prime & paint cold air return",
           "qty": 1.0,
           "unit": "EA",
@@ -2907,20 +2921,45 @@
         },
         {
           "type": "line_item",
-          "line_number": 204,
-          "description": "Vacuuming - (PER SF) - Heavy",
+          "line_number": 192,
+          "description": "Stone floor covering - High",
           "qty": 96.21,
           "unit": "SF",
           "reset": "0.00",
-          "remove": "0.29",
-          "replace": "0.00",
-          "op": "5.58",
-          "total": "33.48",
-          "notes": "205. Floor leveling cement - Heavy 96.21 SF ATTEMPT CLEAN"
+          "remove": "32.97",
+          "replace": "95.87",
+          "op": "653.58",
+          "total": "3,921.49",
+          "notes": "grade"
         },
         {
           "type": "line_item",
-          "line_number": 206,
+          "line_number": 193,
+          "description": "Additional labor to remove",
+          "qty": 96.21,
+          "unit": "SF",
+          "reset": "3.06",
+          "remove": "0.00",
+          "replace": "0.00",
+          "op": "58.88",
+          "total": "353.28",
+          "notes": "stone from concrete slab"
+        },
+        {
+          "type": "line_item",
+          "line_number": 194,
+          "description": "Floor leveling cement - Heavy",
+          "qty": 96.21,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "5.17",
+          "replace": "17.73",
+          "op": "103.02",
+          "total": "618.16"
+        },
+        {
+          "type": "line_item",
+          "line_number": 195,
           "description": "Tile/stone sealer",
           "qty": 192.43,
           "unit": "SF",
@@ -2932,7 +2971,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 207,
+          "line_number": 196,
           "description": "Floor protection - heavy paper",
           "qty": 96.21,
           "unit": "SF",
@@ -2949,7 +2988,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 208,
+          "line_number": 197,
           "description": "Paint door/window trim & jamb - distressed/faux paint",
           "qty": 2.0,
           "unit": "EA",
@@ -2962,7 +3001,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 209,
+          "line_number": 198,
           "description": "Window blind - double cell - 14.1",
           "qty": 1.0,
           "unit": "EA",
@@ -2975,7 +3014,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 210,
+          "line_number": 199,
           "description": "Window blind - double cell - 7.1",
           "qty": 2.0,
           "unit": "EA",
@@ -2992,7 +3031,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 211,
+          "line_number": 200,
           "description": "Fixture (can) for track lighting - High grade",
           "qty": 3.0,
           "unit": "EA",
@@ -3004,7 +3043,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 212,
+          "line_number": 201,
           "description": "Track lighting - track only",
           "qty": 8.0,
           "unit": "LF",
@@ -3016,10 +3055,10 @@
         }
       ],
       "section_totals": {
-        "tax": "154.81",
-        "op": "1,618.04",
-        "total": "9,708.36",
-        "computed_total": "9,708.36",
+        "tax": "253.57",
+        "op": "2,331.46",
+        "total": "13,988.89",
+        "computed_total": "13,988.89",
         "validation_delta": "0.00"
       }
     },
@@ -3045,7 +3084,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 213,
+          "line_number": 202,
           "description": "Batt insulation - 12\" - R38 - paper",
           "qty": 11.5,
           "unit": "SF",
@@ -3058,7 +3097,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 214,
+          "line_number": 203,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 11.5,
           "unit": "SF",
@@ -3071,7 +3110,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 215,
+          "line_number": 204,
           "description": "Texture drywall - light hand",
           "qty": 11.5,
           "unit": "SF",
@@ -3084,7 +3123,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 216,
+          "line_number": 205,
           "description": "Mask and prep for paint - tape",
           "qty": 63.33,
           "unit": "LF",
@@ -3097,7 +3136,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 217,
+          "line_number": 206,
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
           "qty": 11.5,
           "unit": "SF",
@@ -3113,7 +3152,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 218,
+          "line_number": 207,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 117.43,
           "unit": "SF",
@@ -3126,7 +3165,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 219,
+          "line_number": 208,
           "description": "Texture drywall - light hand",
           "qty": 117.43,
           "unit": "SF",
@@ -3139,7 +3178,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 220,
+          "line_number": 209,
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
           "qty": 117.43,
           "unit": "SF",
@@ -3151,7 +3190,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 221,
+          "line_number": 210,
           "description": "Baseboard - 4 1/4\"",
           "qty": 15.83,
           "unit": "LF",
@@ -3163,7 +3202,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 222,
+          "line_number": 211,
           "description": "Seal (1 coat) & paint (2 coats)",
           "qty": 15.83,
           "unit": "LF",
@@ -3176,7 +3215,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 223,
+          "line_number": 212,
           "description": "Mask and prep for paint - plastic,",
           "qty": 31.67,
           "unit": "LF",
@@ -3192,12 +3231,74 @@
           "text": "Floor"
         },
         {
+          "type": "line_item",
+          "line_number": 213,
+          "description": "Stone floor covering - High",
+          "qty": 11.5,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "32.97",
+          "replace": "11.46",
+          "op": "78.14",
+          "total": "468.76"
+        },
+        {
+          "type": "line_item",
+          "line_number": 214,
+          "description": "Additional labor to remove",
+          "qty": 11.5,
+          "unit": "SF",
+          "reset": "3.06",
+          "remove": "0.00",
+          "replace": "0.00",
+          "op": "7.04",
+          "total": "42.23",
+          "notes": "stone from concrete slab"
+        },
+        {
+          "type": "line_item",
+          "line_number": 215,
+          "description": "Floor leveling cement - Heavy",
+          "qty": 11.5,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "5.17",
+          "replace": "2.12",
+          "op": "12.32",
+          "total": "73.90"
+        },
+        {
+          "type": "line_item",
+          "line_number": 216,
+          "description": "Tile/stone sealer",
+          "qty": 23.0,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "1.53",
+          "replace": "0.83",
+          "op": "7.20",
+          "total": "43.22"
+        },
+        {
+          "type": "line_item",
+          "line_number": 217,
+          "description": "Floor protection - heavy paper",
+          "qty": 11.5,
+          "unit": "SF",
+          "reset": "0.45",
+          "remove": "0.00",
+          "replace": "0.08",
+          "op": "1.06",
+          "total": "6.32",
+          "notes": "and tape Floor paper to protect floor after new flooring installation"
+        },
+        {
           "type": "header",
           "text": "Fixtures"
         },
         {
           "type": "line_item",
-          "line_number": 224,
+          "line_number": 218,
           "description": "Closet shelf and rod package",
           "qty": 6.17,
           "unit": "LF",
@@ -3210,7 +3311,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 225,
+          "line_number": 219,
           "description": "Seal & paint closet shelving - single shelf - Large closet",
           "qty": 1.0,
           "unit": "EA",
@@ -3226,7 +3327,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 226,
+          "line_number": 220,
           "description": "Bypass mirrored door set",
           "qty": 1.0,
           "unit": "EA",
@@ -3238,7 +3339,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 227,
+          "line_number": 221,
           "description": "Clean mirror",
           "qty": 38.5,
           "unit": "SF",
@@ -3250,7 +3351,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 228,
+          "line_number": 222,
           "description": "Lube/recondition sliding door",
           "qty": 1.0,
           "unit": "EA",
@@ -3262,10 +3363,10 @@
         }
       ],
       "section_totals": {
-        "tax": "51.98",
-        "op": "456.02",
-        "total": "2,736.20",
-        "computed_total": "2,736.20",
+        "tax": "66.47",
+        "op": "561.78",
+        "total": "3,370.63",
+        "computed_total": "3,370.63",
         "validation_delta": "0.00"
       }
     },
@@ -3291,7 +3392,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 229,
+          "line_number": 223,
           "description": "Batt insulation - 12\" - R38 - paper",
           "qty": 64.68,
           "unit": "SF",
@@ -3304,7 +3405,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 230,
+          "line_number": 224,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 64.68,
           "unit": "SF",
@@ -3317,7 +3418,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 231,
+          "line_number": 225,
           "description": "Texture drywall - light hand",
           "qty": 64.68,
           "unit": "SF",
@@ -3325,12 +3426,11 @@
           "remove": "1.82",
           "replace": "0.57",
           "op": "23.66",
-          "total": "141.95",
-          "notes": "texture"
+          "total": "141.95"
         },
         {
           "type": "line_item",
-          "line_number": 232,
+          "line_number": 226,
           "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
           "qty": 64.68,
           "unit": "SF",
@@ -3342,7 +3442,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 233,
+          "line_number": 227,
           "description": "Mask and prep for paint - tape",
           "qty": 128.95,
           "unit": "LF",
@@ -3355,7 +3455,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 234,
+          "line_number": 228,
           "description": "Paint crown molding - distressed/faux paint",
           "qty": 32.24,
           "unit": "LF",
@@ -3368,7 +3468,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 235,
+          "line_number": 229,
           "description": "Prime & paint cold air return",
           "qty": 1.0,
           "unit": "EA",
@@ -3385,7 +3485,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 236,
+          "line_number": 230,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 264.32,
           "unit": "SF",
@@ -3398,7 +3498,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 237,
+          "line_number": 231,
           "description": "Texture drywall - light hand",
           "qty": 264.32,
           "unit": "SF",
@@ -3406,11 +3506,12 @@
           "remove": "1.82",
           "replace": "2.32",
           "op": "96.68",
-          "total": "580.06"
+          "total": "580.06",
+          "notes": "texture"
         },
         {
           "type": "line_item",
-          "line_number": 238,
+          "line_number": 232,
           "description": "Mask and prep for paint - plastic,",
           "qty": 64.48,
           "unit": "LF",
@@ -3423,7 +3524,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 239,
+          "line_number": 233,
           "description": "Drywall window return - up to 6\"",
           "qty": 12.0,
           "unit": "LF",
@@ -3435,7 +3536,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 240,
+          "line_number": 234,
           "description": "Seal the surface area w/latex",
           "qty": 100.63,
           "unit": "SF",
@@ -3448,7 +3549,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 241,
+          "line_number": 235,
           "description": "Painting - Faux (special effects) - 2 part",
           "qty": 100.63,
           "unit": "SF",
@@ -3460,7 +3561,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 242,
+          "line_number": 236,
           "description": "Baseboard - 4 1/4\"",
           "qty": 40.64,
           "unit": "LF",
@@ -3472,7 +3573,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 243,
+          "line_number": 237,
           "description": "Paint baseboard - distressed/faux",
           "qty": 40.64,
           "unit": "LF",
@@ -3489,7 +3590,45 @@
         },
         {
           "type": "line_item",
-          "line_number": 247,
+          "line_number": 238,
+          "description": "Stone floor covering - High",
+          "qty": 64.68,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "32.97",
+          "replace": "64.45",
+          "op": "439.40",
+          "total": "2,636.35",
+          "notes": "grade"
+        },
+        {
+          "type": "line_item",
+          "line_number": 239,
+          "description": "Additional labor to remove",
+          "qty": 64.68,
+          "unit": "SF",
+          "reset": "3.06",
+          "remove": "0.00",
+          "replace": "0.00",
+          "op": "39.58",
+          "total": "237.50",
+          "notes": "stone from concrete slab"
+        },
+        {
+          "type": "line_item",
+          "line_number": 240,
+          "description": "Floor leveling cement - Heavy",
+          "qty": 64.68,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "5.17",
+          "replace": "11.92",
+          "op": "69.26",
+          "total": "415.58"
+        },
+        {
+          "type": "line_item",
+          "line_number": 241,
           "description": "Tile/stone sealer",
           "qty": 129.37,
           "unit": "SF",
@@ -3501,7 +3640,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 248,
+          "line_number": 242,
           "description": "T- molding - for wood flooring - High grade",
           "qty": 2.33,
           "unit": "LF",
@@ -3513,19 +3652,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 249,
-          "description": "Vacuuming - (PER SF) - Heavy",
-          "qty": 64.68,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "0.29",
-          "replace": "0.00",
-          "op": "3.76",
-          "total": "22.52"
-        },
-        {
-          "type": "line_item",
-          "line_number": 250,
+          "line_number": 243,
           "description": "Floor protection - heavy paper",
           "qty": 64.68,
           "unit": "SF",
@@ -3533,8 +3660,7 @@
           "remove": "0.00",
           "replace": "0.44",
           "op": "5.90",
-          "total": "35.45",
-          "notes": "and tape Floor paper to protect floor after new flooring installation"
+          "total": "35.45"
         },
         {
           "type": "header",
@@ -3542,7 +3668,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 251,
+          "line_number": 244,
           "description": "Custom shower door & partition - 1/4\" glass w/frame",
           "qty": 30.96,
           "unit": "SF",
@@ -3554,7 +3680,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 252,
+          "line_number": 245,
           "description": "Paint door/window trim & jamb - distressed/faux paint",
           "qty": 2.0,
           "unit": "EA",
@@ -3571,7 +3697,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 253,
+          "line_number": 246,
           "description": "Towel bar",
           "qty": 2.0,
           "unit": "EA",
@@ -3583,7 +3709,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 254,
+          "line_number": 247,
           "description": "Medicine cabinet - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -3595,7 +3721,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 255,
+          "line_number": 248,
           "description": "Light bar - 3 lights",
           "qty": 1.0,
           "unit": "EA",
@@ -3607,7 +3733,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 256,
+          "line_number": 249,
           "description": "Heat lamp fixture - adjustable",
           "qty": 1.0,
           "unit": "EA",
@@ -3620,7 +3746,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 257,
+          "line_number": 250,
           "description": "Toilet paper holder",
           "qty": 1.0,
           "unit": "EA",
@@ -3632,7 +3758,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 258,
+          "line_number": 251,
           "description": "Security system - contact w/wire",
           "qty": 1.0,
           "unit": "EA",
@@ -3649,7 +3775,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 259,
+          "line_number": 252,
           "description": "Regrout tile",
           "qty": 116.83,
           "unit": "SF",
@@ -3662,7 +3788,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 260,
+          "line_number": 253,
           "description": "Seal grout on tile wall",
           "qty": 116.83,
           "unit": "SF",
@@ -3674,7 +3800,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 261,
+          "line_number": 254,
           "description": "Vanity",
           "qty": 5.75,
           "unit": "LF",
@@ -3686,7 +3812,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 262,
+          "line_number": 255,
           "description": "Vanity top - one sink - cultured",
           "qty": 5.75,
           "unit": "LF",
@@ -3703,7 +3829,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 263,
+          "line_number": 256,
           "description": "Sink faucet - Bathroom",
           "qty": 1.0,
           "unit": "EA",
@@ -3715,7 +3841,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 264,
+          "line_number": 257,
           "description": "Sink drain assembly with stop",
           "qty": 1.0,
           "unit": "EA",
@@ -3727,7 +3853,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 265,
+          "line_number": 258,
           "description": "Refinish bathtub",
           "qty": 1.0,
           "unit": "EA",
@@ -3739,7 +3865,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 266,
+          "line_number": 259,
           "description": "Toilet - Detach & reset",
           "qty": 1.0,
           "unit": "EA",
@@ -3751,7 +3877,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 267,
+          "line_number": 260,
           "description": "Shower faucet",
           "qty": 1.0,
           "unit": "EA",
@@ -3763,7 +3889,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 268,
+          "line_number": 261,
           "description": "Tub/shower faucet",
           "qty": 1.0,
           "unit": "EA",
@@ -3775,10 +3901,10 @@
         }
       ],
       "section_totals": {
-        "tax": "381.32",
-        "op": "2,499.70",
-        "total": "14,998.18",
-        "computed_total": "14,998.18",
+        "tax": "457.69",
+        "op": "3,044.18",
+        "total": "18,265.09",
+        "computed_total": "18,265.09",
         "validation_delta": "0.00"
       }
     },
@@ -3804,7 +3930,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 269,
+          "line_number": 262,
           "description": "Batt insulation - 12\" - R38 - paper",
           "qty": 57.69,
           "unit": "SF",
@@ -3817,7 +3943,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 270,
+          "line_number": 263,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 57.69,
           "unit": "SF",
@@ -3830,7 +3956,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 271,
+          "line_number": 264,
           "description": "Texture drywall - light hand",
           "qty": 57.69,
           "unit": "SF",
@@ -3843,8 +3969,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 272,
-          "description": "Seal/prime (1 coat) then paint (2",
+          "line_number": 265,
+          "description": "Seal/prime (1 coat) then paint (2 coats) the ceiling",
           "qty": 57.69,
           "unit": "SF",
           "reset": "0.00",
@@ -3855,7 +3981,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 273,
+          "line_number": 266,
           "description": "Seal (1 coat) & paint (2 coats)",
           "qty": 31.33,
           "unit": "LF",
@@ -3868,7 +3994,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 274,
+          "line_number": 267,
           "description": "Prime & paint cold air return",
           "qty": 1.0,
           "unit": "EA",
@@ -3885,7 +4011,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 275,
+          "line_number": 268,
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
           "qty": 232.39,
           "unit": "SF",
@@ -3897,7 +4023,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 276,
+          "line_number": 269,
           "description": "Baseboard - 4 1/4\"",
           "qty": 31.33,
           "unit": "LF",
@@ -3909,7 +4035,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 277,
+          "line_number": 270,
           "description": "Seal (1 coat) & paint (2 coats)",
           "qty": 31.33,
           "unit": "LF",
@@ -3922,7 +4048,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 278,
+          "line_number": 271,
           "description": "Mask and prep for paint - plastic,",
           "qty": 62.67,
           "unit": "LF",
@@ -3939,7 +4065,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 279,
+          "line_number": 272,
           "description": "Regrout tile floor",
           "qty": 57.69,
           "unit": "SF",
@@ -3951,7 +4077,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 280,
+          "line_number": 273,
           "description": "Grout sealer",
           "qty": 57.69,
           "unit": "SF",
@@ -3967,7 +4093,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 281,
+          "line_number": 274,
           "description": "Paint door/window trim & jamb - 2 coats (per side)",
           "qty": 2.0,
           "unit": "EA",
@@ -3984,7 +4110,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 282,
+          "line_number": 275,
           "description": "Robe hook",
           "qty": 2.0,
           "unit": "EA",
@@ -3996,7 +4122,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 283,
+          "line_number": 276,
           "description": "Mirror - framed",
           "qty": 7.05,
           "unit": "SF",
@@ -4008,7 +4134,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 284,
+          "line_number": 277,
           "description": "Light bar - 4 lights",
           "qty": 1.0,
           "unit": "EA",
@@ -4020,7 +4146,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 285,
+          "line_number": 278,
           "description": "Recessed light fixture - High",
           "qty": 1.0,
           "unit": "EA",
@@ -4033,7 +4159,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 286,
+          "line_number": 279,
           "description": "Bathroom ventilation fan",
           "qty": 1.0,
           "unit": "EA",
@@ -4045,7 +4171,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 287,
+          "line_number": 280,
           "description": "Toilet paper holder",
           "qty": 1.0,
           "unit": "EA",
@@ -4054,11 +4180,11 @@
           "replace": "1.21",
           "op": "6.74",
           "total": "40.43",
-          "notes": "288. Detach & Reset Toilet 1.00 EA 305.16 0.00 0.00 0.89 61.22 367.27"
+          "notes": "281. Detach & Reset Toilet 1.00 EA 305.16 0.00 0.00 0.89 61.22 367.27"
         },
         {
           "type": "line_item",
-          "line_number": 289,
+          "line_number": 282,
           "description": "Security system - contact w/wire",
           "qty": 1.0,
           "unit": "EA",
@@ -4075,7 +4201,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 290,
+          "line_number": 283,
           "description": "Cabinetry - upper (wall) units",
           "qty": 6.0,
           "unit": "LF",
@@ -4087,7 +4213,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 291,
+          "line_number": 284,
           "description": "Vanity",
           "qty": 6.0,
           "unit": "LF",
@@ -4099,8 +4225,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 292,
-          "description": "Countertop - Granite or Marble -",
+          "line_number": 285,
+          "description": "Countertop - Granite or Marble - Standard grade",
           "qty": 12.0,
           "unit": "SF",
           "reset": "0.00",
@@ -4111,7 +4237,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 293,
+          "line_number": 286,
           "description": "Backsplash - solid surface - Unattached",
           "qty": 14.0,
           "unit": "SF",
@@ -4123,7 +4249,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 294,
+          "line_number": 287,
           "description": "Sink - single - Premium grade",
           "qty": 1.0,
           "unit": "EA",
@@ -4135,7 +4261,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 295,
+          "line_number": 288,
           "description": "Cabinet knob or pull",
           "qty": 14.0,
           "unit": "EA",
@@ -4151,7 +4277,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 296,
+          "line_number": 289,
           "description": "Custom shower door & partition - 1/2\" glass - frameless",
           "qty": 45.92,
           "unit": "SF",
@@ -4163,7 +4289,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 297,
+          "line_number": 290,
           "description": "Regrout tile",
           "qty": 83.05,
           "unit": "SF",
@@ -4175,7 +4301,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 298,
+          "line_number": 291,
           "description": "Seal grout on tile wall",
           "qty": 83.05,
           "unit": "SF",
@@ -4238,7 +4364,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 299,
+          "line_number": 292,
           "description": "Batt insulation - 12\" - R38 - paper",
           "qty": 47.88,
           "unit": "SF",
@@ -4251,7 +4377,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 300,
+          "line_number": 293,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 47.88,
           "unit": "SF",
@@ -4264,7 +4390,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 301,
+          "line_number": 294,
           "description": "Texture drywall - light hand",
           "qty": 47.88,
           "unit": "SF",
@@ -4277,8 +4403,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 302,
-          "description": "Painting - Faux (special effects) -",
+          "line_number": 295,
+          "description": "Painting - Faux (special effects) - 2 part",
           "qty": 47.88,
           "unit": "SF",
           "reset": "0.00",
@@ -4289,7 +4415,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 303,
+          "line_number": 296,
           "description": "Seal the surface area w/latex",
           "qty": 47.88,
           "unit": "SF",
@@ -4302,7 +4428,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 304,
+          "line_number": 297,
           "description": "Mask and prep for paint - tape",
           "qty": 165.77,
           "unit": "LF",
@@ -4315,7 +4441,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 305,
+          "line_number": 298,
           "description": "Prime & paint cold air return",
           "qty": 1.0,
           "unit": "EA",
@@ -4328,7 +4454,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 306,
+          "line_number": 299,
           "description": "Paint paneling - distressed/faux",
           "qty": 186.33,
           "unit": "SF",
@@ -4341,7 +4467,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 307,
+          "line_number": 300,
           "description": "Paint wood beam - distressed/faux paint",
           "qty": 32.5,
           "unit": "SF",
@@ -4354,19 +4480,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 308,
-          "description": "Soda blasting - Heavy",
-          "qty": 218.83,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "3.81",
-          "replace": "26.46",
-          "op": "172.04",
-          "total": "1,032.24"
-        },
-        {
-          "type": "line_item",
-          "line_number": 309,
+          "line_number": 301,
           "description": "Quarter round - 3/4\" - stain grade",
           "qty": 59.5,
           "unit": "LF",
@@ -4379,7 +4493,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 310,
+          "line_number": 302,
           "description": "Seal & paint base shoe or quarter",
           "qty": 59.5,
           "unit": "LF",
@@ -4396,7 +4510,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 311,
+          "line_number": 303,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 558.19,
           "unit": "SF",
@@ -4404,12 +4518,11 @@
           "remove": "3.98",
           "replace": "42.45",
           "op": "452.82",
-          "total": "2,716.87",
-          "notes": "for texture"
+          "total": "2,716.87"
         },
         {
           "type": "line_item",
-          "line_number": 312,
+          "line_number": 304,
           "description": "Texture drywall - light hand",
           "qty": 558.19,
           "unit": "SF",
@@ -4422,7 +4535,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 313,
+          "line_number": 305,
           "description": "Mask and prep for paint - plastic,",
           "qty": 165.77,
           "unit": "LF",
@@ -4435,7 +4548,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 314,
+          "line_number": 306,
           "description": "Seal the walls w/latex based stain",
           "qty": 558.19,
           "unit": "SF",
@@ -4448,7 +4561,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 315,
+          "line_number": 307,
           "description": "Painting - Faux (special effects) - 2 part",
           "qty": 558.19,
           "unit": "SF",
@@ -4460,7 +4573,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 316,
+          "line_number": 308,
           "description": "Baseboard - 4 1/4\"",
           "qty": 69.33,
           "unit": "LF",
@@ -4472,7 +4585,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 317,
+          "line_number": 309,
           "description": "Paint baseboard - distressed/faux",
           "qty": 69.33,
           "unit": "LF",
@@ -4489,20 +4602,45 @@
         },
         {
           "type": "line_item",
-          "line_number": 320,
-          "description": "Vacuuming - (PER SF) - Heavy",
+          "line_number": 310,
+          "description": "Stone floor covering - High",
           "qty": 220.75,
           "unit": "SF",
           "reset": "0.00",
-          "remove": "0.29",
-          "replace": "0.00",
-          "op": "12.80",
-          "total": "76.82",
-          "notes": "321. Floor leveling cement - Heavy 220.75 SF ATTEMPT CLEAN"
+          "remove": "32.97",
+          "replace": "219.97",
+          "op": "1,499.62",
+          "total": "8,997.72",
+          "notes": "grade"
         },
         {
           "type": "line_item",
-          "line_number": 322,
+          "line_number": 311,
+          "description": "Additional labor to remove",
+          "qty": 220.75,
+          "unit": "SF",
+          "reset": "3.06",
+          "remove": "0.00",
+          "replace": "0.00",
+          "op": "135.10",
+          "total": "810.60",
+          "notes": "stone from concrete slab"
+        },
+        {
+          "type": "line_item",
+          "line_number": 312,
+          "description": "Floor leveling cement - Heavy",
+          "qty": 220.75,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "5.17",
+          "replace": "40.68",
+          "op": "236.40",
+          "total": "1,418.36"
+        },
+        {
+          "type": "line_item",
+          "line_number": 313,
           "description": "Tile/stone sealer",
           "qty": 441.5,
           "unit": "SF",
@@ -4514,7 +4652,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 323,
+          "line_number": 314,
           "description": "Regrout stone floor",
           "qty": 220.75,
           "unit": "SF",
@@ -4526,7 +4664,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 324,
+          "line_number": 315,
           "description": "Floor protection - heavy paper",
           "qty": 220.75,
           "unit": "SF",
@@ -4543,7 +4681,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 325,
+          "line_number": 316,
           "description": "Recessed light fixture - High",
           "qty": 1.0,
           "unit": "EA",
@@ -4556,7 +4694,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 326,
+          "line_number": 317,
           "description": "TV Brackets - Wall or ceiling",
           "qty": 1.0,
           "unit": "EA",
@@ -4569,7 +4707,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 327,
+          "line_number": 318,
           "description": "Cabinetry - full height unit",
           "qty": 8.58,
           "unit": "LF",
@@ -4581,7 +4719,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 328,
+          "line_number": 319,
           "description": "Stain & finish full height",
           "qty": 8.58,
           "unit": "LF",
@@ -4594,7 +4732,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 329,
+          "line_number": 320,
           "description": "Cabinetry - lower (base) units",
           "qty": 1.42,
           "unit": "LF",
@@ -4606,7 +4744,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 330,
+          "line_number": 321,
           "description": "Stain & finish cabinetry - lower - distressed/faux paint",
           "qty": 1.42,
           "unit": "LF",
@@ -4619,7 +4757,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 331,
+          "line_number": 322,
           "description": "Cabinetry - upper (wall) units",
           "qty": 10.17,
           "unit": "LF",
@@ -4631,7 +4769,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 332,
+          "line_number": 323,
           "description": "Stain & finish cabinetry - upper - distressed/faux paint",
           "qty": 10.17,
           "unit": "LF",
@@ -4644,7 +4782,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 333,
+          "line_number": 324,
           "description": "Security system - contact w/wire",
           "qty": 2.0,
           "unit": "EA",
@@ -4661,7 +4799,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 334,
+          "line_number": 325,
           "description": "Paint door/window trim & jamb - distressed/faux paint",
           "qty": 3.0,
           "unit": "EA",
@@ -4674,7 +4812,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 335,
+          "line_number": 326,
           "description": "Window blind - fabric/woven - 168\" x 80\" vertical blinds",
           "qty": 1.0,
           "unit": "EA",
@@ -4686,10 +4824,10 @@
         }
       ],
       "section_totals": {
-        "tax": "658.75",
-        "op": "5,545.62",
-        "total": "33,273.30",
-        "computed_total": "33,273.30",
+        "tax": "892.94",
+        "op": "7,231.90",
+        "total": "43,390.92",
+        "computed_total": "43,390.92",
         "validation_delta": "0.00"
       }
     },
@@ -4731,7 +4869,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 336,
+          "line_number": 327,
           "description": "Batt insulation - 12\" - R38 - paper",
           "qty": 115.2,
           "unit": "SF",
@@ -4744,7 +4882,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 337,
+          "line_number": 328,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 115.2,
           "unit": "SF",
@@ -4757,7 +4895,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 338,
+          "line_number": 329,
           "description": "Texture drywall - light hand",
           "qty": 115.2,
           "unit": "SF",
@@ -4765,12 +4903,11 @@
           "remove": "1.82",
           "replace": "1.01",
           "op": "42.14",
-          "total": "252.81",
-          "notes": "texture"
+          "total": "252.81"
         },
         {
           "type": "line_item",
-          "line_number": 339,
+          "line_number": 330,
           "description": "Painting - Faux (special effects) - 2 part",
           "qty": 115.2,
           "unit": "SF",
@@ -4782,7 +4919,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 340,
+          "line_number": 331,
           "description": "Seal the ceiling w/latex based",
           "qty": 115.2,
           "unit": "SF",
@@ -4795,7 +4932,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 341,
+          "line_number": 332,
           "description": "Mask and prep for paint - tape",
           "qty": 150.72,
           "unit": "LF",
@@ -4808,7 +4945,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 342,
+          "line_number": 333,
           "description": "Prime & paint cold air return",
           "qty": 2.0,
           "unit": "EA",
@@ -4825,7 +4962,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 343,
+          "line_number": 334,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 558.91,
           "unit": "SF",
@@ -4838,7 +4975,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 344,
+          "line_number": 335,
           "description": "Texture drywall - light hand",
           "qty": 558.91,
           "unit": "SF",
@@ -4851,7 +4988,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 345,
+          "line_number": 336,
           "description": "Mask and prep for paint - plastic,",
           "qty": 150.72,
           "unit": "LF",
@@ -4864,7 +5001,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 346,
+          "line_number": 337,
           "description": "Seal the walls w/latex based stain",
           "qty": 558.91,
           "unit": "SF",
@@ -4872,11 +5009,12 @@
           "remove": "1.00",
           "replace": "5.45",
           "op": "112.88",
-          "total": "677.24"
+          "total": "677.24",
+          "notes": "blocker - one coat"
         },
         {
           "type": "line_item",
-          "line_number": 347,
+          "line_number": 338,
           "description": "Painting - Faux (special effects) - 2 part",
           "qty": 558.91,
           "unit": "SF",
@@ -4888,7 +5026,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 348,
+          "line_number": 339,
           "description": "Baseboard - 4 1/4\"",
           "qty": 75.36,
           "unit": "LF",
@@ -4900,7 +5038,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 349,
+          "line_number": 340,
           "description": "Paint baseboard - distressed/faux",
           "qty": 75.36,
           "unit": "LF",
@@ -4917,20 +5055,58 @@
         },
         {
           "type": "line_item",
-          "line_number": 352,
-          "description": "Vacuuming - (PER SF) - Heavy",
+          "line_number": 341,
+          "description": "Stone floor covering - High",
           "qty": 115.2,
           "unit": "SF",
           "reset": "0.00",
-          "remove": "0.29",
-          "replace": "0.00",
-          "op": "6.68",
-          "total": "40.09",
-          "notes": "353. Floor leveling cement - Heavy 115.20 SF ATTEMPT CLEAN 354. Add-on for diagonal tile 104.60 SF ATTEMPT CLEAN installation"
+          "remove": "32.97",
+          "replace": "114.79",
+          "op": "782.58",
+          "total": "4,695.51",
+          "notes": "grade"
         },
         {
           "type": "line_item",
-          "line_number": 355,
+          "line_number": 342,
+          "description": "Additional labor to remove",
+          "qty": 115.2,
+          "unit": "SF",
+          "reset": "3.06",
+          "remove": "0.00",
+          "replace": "0.00",
+          "op": "70.50",
+          "total": "423.01",
+          "notes": "stone from concrete slab"
+        },
+        {
+          "type": "line_item",
+          "line_number": 343,
+          "description": "Floor leveling cement - Heavy",
+          "qty": 115.2,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "5.17",
+          "replace": "21.23",
+          "op": "123.36",
+          "total": "740.17"
+        },
+        {
+          "type": "line_item",
+          "line_number": 344,
+          "description": "Add-on for diagonal tile",
+          "qty": 104.6,
+          "unit": "SF",
+          "reset": "0.00",
+          "remove": "2.84",
+          "replace": "0.00",
+          "op": "59.42",
+          "total": "356.48",
+          "notes": "installation"
+        },
+        {
+          "type": "line_item",
+          "line_number": 345,
           "description": "Tile/stone sealer",
           "qty": 115.2,
           "unit": "SF",
@@ -4942,7 +5118,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 356,
+          "line_number": 346,
           "description": "Regrout stone floor",
           "qty": 115.2,
           "unit": "SF",
@@ -4954,7 +5130,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 357,
+          "line_number": 347,
           "description": "Floor protection - heavy paper",
           "qty": 115.2,
           "unit": "SF",
@@ -4971,7 +5147,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 358,
+          "line_number": 348,
           "description": "Recessed light fixture - High",
           "qty": 4.0,
           "unit": "EA",
@@ -4984,7 +5160,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 359,
+          "line_number": 349,
           "description": "Closet shelf and rod package",
           "qty": 2.5,
           "unit": "LF",
@@ -4997,7 +5173,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 360,
+          "line_number": 350,
           "description": "Seal & paint closet shelving - single shelf",
           "qty": 1.0,
           "unit": "EA",
@@ -5009,7 +5185,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 361,
+          "line_number": 351,
           "description": "Stain & finish full height",
           "qty": 7.5,
           "unit": "LF",
@@ -5022,7 +5198,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 362,
+          "line_number": 352,
           "description": "Stain & finish cabinetry - lower - distressed/faux paint",
           "qty": 3.42,
           "unit": "LF",
@@ -5039,7 +5215,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 363,
+          "line_number": 353,
           "description": "Interior door unit",
           "qty": 6.0,
           "unit": "EA",
@@ -5051,8 +5227,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 364,
-          "description": "Bypass (sliding) door set -",
+          "line_number": 354,
+          "description": "Bypass (sliding) door set - Colonist",
           "qty": 2.0,
           "unit": "EA",
           "reset": "0.00",
@@ -5063,7 +5239,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 365,
+          "line_number": 355,
           "description": "Door knob - interior - Premium",
           "qty": 4.0,
           "unit": "EA",
@@ -5076,7 +5252,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 366,
+          "line_number": 356,
           "description": "Paint door slab only - distressed/faux paint",
           "qty": 8.0,
           "unit": "EA",
@@ -5089,7 +5265,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 367,
+          "line_number": 357,
           "description": "Paint door/window trim & jamb - distressed/faux paint",
           "qty": 9.0,
           "unit": "EA",
@@ -5106,7 +5282,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 368,
+          "line_number": 358,
           "description": "Light fixture",
           "qty": 1.0,
           "unit": "EA",
@@ -5118,7 +5294,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 369,
+          "line_number": 359,
           "description": "Furnace - forced air - Detach &",
           "qty": 0.5,
           "unit": "EA",
@@ -5131,7 +5307,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 370,
+          "line_number": 360,
           "description": "Gas/water line cap/plug - per cap",
           "qty": 1.0,
           "unit": "EA",
@@ -5143,7 +5319,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 371,
+          "line_number": 361,
           "description": "Flexible gas supply line connector",
           "qty": 1.0,
           "unit": "EA",
@@ -5156,7 +5332,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 372,
+          "line_number": 362,
           "description": "Fir subfloor - no finish",
           "qty": 10.5,
           "unit": "SF",
@@ -5169,7 +5345,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 373,
+          "line_number": 363,
           "description": "Security system - contact w/wire",
           "qty": 1.0,
           "unit": "EA",
@@ -5177,15 +5353,14 @@
           "remove": "116.14",
           "replace": "1.22",
           "op": "23.46",
-          "total": "140.82",
-          "notes": "(per opening)"
+          "total": "140.82"
         }
       ],
       "section_totals": {
-        "tax": "420.59",
-        "op": "4,374.70",
-        "total": "26,248.27",
-        "computed_total": "26,248.27",
+        "tax": "556.61",
+        "op": "5,403.88",
+        "total": "32,423.35",
+        "computed_total": "32,423.35",
         "validation_delta": "0.00"
       }
     },
@@ -5211,7 +5386,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 374,
+          "line_number": 364,
           "description": "Paint paneling - distressed/faux",
           "qty": 52.75,
           "unit": "SF",
@@ -5224,19 +5399,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 375,
-          "description": "Soda blasting - Heavy",
-          "qty": 52.75,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "3.81",
-          "replace": "6.38",
-          "op": "41.48",
-          "total": "248.84"
-        },
-        {
-          "type": "line_item",
-          "line_number": 376,
+          "line_number": 365,
           "description": "Quarter round - 3/4\" - stain grade",
           "qty": 30.5,
           "unit": "LF",
@@ -5249,7 +5412,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 377,
+          "line_number": 366,
           "description": "Seal & paint base shoe or quarter",
           "qty": 30.5,
           "unit": "LF",
@@ -5262,7 +5425,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 378,
+          "line_number": 367,
           "description": "Mask and prep for paint - tape",
           "qty": 121.35,
           "unit": "LF",
@@ -5279,7 +5442,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 379,
+          "line_number": 368,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 239.13,
           "unit": "SF",
@@ -5292,7 +5455,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 380,
+          "line_number": 369,
           "description": "Texture drywall - light hand",
           "qty": 239.13,
           "unit": "SF",
@@ -5305,7 +5468,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 381,
+          "line_number": 370,
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
           "qty": 239.13,
           "unit": "SF",
@@ -5317,7 +5480,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 382,
+          "line_number": 371,
           "description": "Drywall window return - up to 6\"",
           "qty": 7.5,
           "unit": "LF",
@@ -5329,7 +5492,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 383,
+          "line_number": 372,
           "description": "Baseboard - 4 1/4\"",
           "qty": 30.12,
           "unit": "LF",
@@ -5341,7 +5504,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 384,
+          "line_number": 373,
           "description": "Seal (1 coat) & paint (2 coats)",
           "qty": 30.12,
           "unit": "LF",
@@ -5354,7 +5517,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 385,
+          "line_number": 374,
           "description": "Mask and prep for paint - plastic,",
           "qty": 60.67,
           "unit": "LF",
@@ -5371,7 +5534,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 386,
+          "line_number": 375,
           "description": "Engineered wood flooring",
           "qty": 52.08,
           "unit": "SF",
@@ -5383,7 +5546,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 387,
+          "line_number": 376,
           "description": "Add for glued down wood",
           "qty": 52.08,
           "unit": "SF",
@@ -5396,7 +5559,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 388,
+          "line_number": 377,
           "description": "T- molding - for wood flooring - High grade",
           "qty": 2.0,
           "unit": "LF",
@@ -5408,19 +5571,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 389,
-          "description": "Vacuuming - (PER SF) - Heavy",
-          "qty": 52.08,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "0.29",
-          "replace": "0.00",
-          "op": "3.02",
-          "total": "18.12"
-        },
-        {
-          "type": "line_item",
-          "line_number": 390,
+          "line_number": 378,
           "description": "Floor leveling cement - Heavy",
           "qty": 52.08,
           "unit": "SF",
@@ -5432,7 +5583,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 391,
+          "line_number": 379,
           "description": "Floor protection - heavy paper",
           "qty": 52.08,
           "unit": "SF",
@@ -5449,7 +5600,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 392,
+          "line_number": 380,
           "description": "Paint door/window trim & jamb - Large - 2 coats (per side)",
           "qty": 3.0,
           "unit": "EA",
@@ -5461,7 +5612,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 393,
+          "line_number": 381,
           "description": "Door lockset & deadbolt - exterior - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -5473,7 +5624,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 394,
+          "line_number": 382,
           "description": "Paint door slab only - 2 coats (per side)",
           "qty": 2.0,
           "unit": "EA",
@@ -5489,7 +5640,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 395,
+          "line_number": 383,
           "description": "Cabinetry - upper (wall) units - High grade",
           "qty": 10.33,
           "unit": "LF",
@@ -5501,7 +5652,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 396,
+          "line_number": 384,
           "description": "Cabinet knob or pull",
           "qty": 12.0,
           "unit": "EA",
@@ -5517,7 +5668,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 397,
+          "line_number": 385,
           "description": "Prime & paint pipe, 1\" to 3\"",
           "qty": 8.0,
           "unit": "LF",
@@ -5530,7 +5681,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 398,
+          "line_number": 386,
           "description": "Light fixture - wall sconce - High",
           "qty": 1.0,
           "unit": "EA",
@@ -5543,7 +5694,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 399,
+          "line_number": 387,
           "description": "Washer/Washing machine - Detach",
           "qty": 1.0,
           "unit": "EA",
@@ -5555,7 +5706,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 400,
+          "line_number": 388,
           "description": "Dryer - gas - Detach",
           "qty": 1.0,
           "unit": "EA",
@@ -5567,7 +5718,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 401,
+          "line_number": 389,
           "description": "Gas/water line cap/plug - per cap",
           "qty": 1.0,
           "unit": "EA",
@@ -5579,7 +5730,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 402,
+          "line_number": 390,
           "description": "Flexible gas supply line connector",
           "qty": 1.0,
           "unit": "EA",
@@ -5592,7 +5743,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 403,
+          "line_number": 391,
           "description": "Ducting - flexible - 6\" round",
           "qty": 5.0,
           "unit": "LF",
@@ -5604,7 +5755,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 404,
+          "line_number": 392,
           "description": "Security system - contact w/wire",
           "qty": 1.0,
           "unit": "EA",
@@ -5617,10 +5768,10 @@
         }
       ],
       "section_totals": {
-        "tax": "342.04",
-        "op": "1,614.88",
-        "total": "9,688.83",
-        "computed_total": "9,688.83",
+        "tax": "335.66",
+        "op": "1,570.38",
+        "total": "9,421.87",
+        "computed_total": "9,421.87",
         "validation_delta": "0.00"
       }
     },
@@ -5646,19 +5797,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 405,
-          "description": "Soda blasting - Heavy",
-          "qty": 486.36,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "3.81",
-          "replace": "58.80",
-          "op": "382.36",
-          "total": "2,294.19"
-        },
-        {
-          "type": "line_item",
-          "line_number": 406,
+          "line_number": 393,
           "description": "Stain & finish wood beam",
           "qty": 85.0,
           "unit": "SF",
@@ -5670,7 +5809,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 407,
+          "line_number": 394,
           "description": "Stain & finish paneling",
           "qty": 401.36,
           "unit": "SF",
@@ -5682,7 +5821,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 408,
+          "line_number": 395,
           "description": "Mask and prep for paint - tape",
           "qty": 327.66,
           "unit": "LF",
@@ -5699,7 +5838,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 409,
+          "line_number": 396,
           "description": "5/8\" drywall - hung, taped, ready",
           "qty": 747.93,
           "unit": "SF",
@@ -5707,11 +5846,12 @@
           "remove": "3.98",
           "replace": "56.88",
           "op": "606.74",
-          "total": "3,640.38"
+          "total": "3,640.38",
+          "notes": "for texture"
         },
         {
           "type": "line_item",
-          "line_number": 410,
+          "line_number": 397,
           "description": "Texture drywall - light hand",
           "qty": 747.93,
           "unit": "SF",
@@ -5724,7 +5864,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 411,
+          "line_number": 398,
           "description": "Seal/prime (1 coat) then paint (2 coats) the walls",
           "qty": 747.93,
           "unit": "SF",
@@ -5736,15 +5876,11 @@
         },
         {
           "type": "header",
-          "text": "Floor"
-        },
-        {
-          "type": "header",
           "text": "Door/Windows"
         },
         {
           "type": "line_item",
-          "line_number": 412,
+          "line_number": 399,
           "description": "Paint door/window trim & jamb - Large - 2 coats (per side)",
           "qty": 3.0,
           "unit": "EA",
@@ -5756,7 +5892,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 413,
+          "line_number": 400,
           "description": "Overhead door & hardware - 16' x",
           "qty": 1.0,
           "unit": "EA",
@@ -5769,7 +5905,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 414,
+          "line_number": 401,
           "description": "Overhead (garage) door opener - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -5781,7 +5917,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 415,
+          "line_number": 402,
           "description": "Add for decorative window - overhead door - per window",
           "qty": 4.0,
           "unit": "EA",
@@ -5793,7 +5929,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 416,
+          "line_number": 403,
           "description": "Overhead door weather stop",
           "qty": 30.0,
           "unit": "LF",
@@ -5809,7 +5945,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 417,
+          "line_number": 404,
           "description": "Cabinetry - upper (wall) units - utility (unfinished)",
           "qty": 51.33,
           "unit": "LF",
@@ -5821,7 +5957,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 418,
+          "line_number": 405,
           "description": "Stain & finish cabinetry - upper - faces only",
           "qty": 51.33,
           "unit": "LF",
@@ -5833,7 +5969,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 419,
+          "line_number": 406,
           "description": "Cabinetry - lower (base) units - utility (unfinished)",
           "qty": 8.5,
           "unit": "LF",
@@ -5845,7 +5981,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 420,
+          "line_number": 407,
           "description": "Seal & paint cabinetry - lower - faces only",
           "qty": 10.5,
           "unit": "LF",
@@ -5857,8 +5993,8 @@
         },
         {
           "type": "line_item",
-          "line_number": 421,
-          "description": "Cabinetry - full height units - utility (unfinished)",
+          "line_number": 408,
+          "description": "Cabinetry - full height units -",
           "qty": 2.5,
           "unit": "LF",
           "reset": "0.00",
@@ -5869,7 +6005,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 422,
+          "line_number": 409,
           "description": "Seal & paint full height cabinetry - faces only",
           "qty": 2.5,
           "unit": "LF",
@@ -5881,7 +6017,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 423,
+          "line_number": 410,
           "description": "Cabinet knob or pull",
           "qty": 22.0,
           "unit": "EA",
@@ -5893,7 +6029,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 424,
+          "line_number": 411,
           "description": "Countertop subdeck - plywood",
           "qty": 36.83,
           "unit": "SF",
@@ -5905,7 +6041,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 425,
+          "line_number": 412,
           "description": "Pegboard",
           "qty": 60.01,
           "unit": "SF",
@@ -5921,7 +6057,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 426,
+          "line_number": 413,
           "description": "Water heater - tankless - 5-5.9",
           "qty": 1.0,
           "unit": "EA",
@@ -5934,7 +6070,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 427,
+          "line_number": 414,
           "description": "Angle stop valve",
           "qty": 2.0,
           "unit": "EA",
@@ -5947,7 +6083,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 428,
+          "line_number": 415,
           "description": "Plumbing fixture supply line",
           "qty": 2.0,
           "unit": "EA",
@@ -5960,7 +6096,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 429,
+          "line_number": 416,
           "description": "Water line copper cap/plug - per",
           "qty": 4.0,
           "unit": "EA",
@@ -5973,7 +6109,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 430,
+          "line_number": 417,
           "description": "Gas/water line cap/plug - per cap",
           "qty": 1.0,
           "unit": "EA",
@@ -5985,7 +6121,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 431,
+          "line_number": 418,
           "description": "Flexible gas supply line connector",
           "qty": 1.0,
           "unit": "EA",
@@ -6002,7 +6138,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 432,
+          "line_number": 419,
           "description": "Clean with pressure/chemical",
           "qty": 397.32,
           "unit": "SF",
@@ -6015,20 +6151,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 433,
-          "description": "Concrete sealer - brush or spray",
-          "qty": 397.32,
-          "unit": "SF",
-          "reset": "0.00",
-          "remove": "1.44",
-          "replace": "29.83",
-          "op": "120.38",
-          "total": "722.35",
-          "notes": "applied"
-        },
-        {
-          "type": "line_item",
-          "line_number": 434,
+          "line_number": 420,
           "description": "Add on charge for \"edge wrap\"",
           "qty": 5.0,
           "unit": "EA",
@@ -6041,7 +6164,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 435,
+          "line_number": 421,
           "description": "Carpet - High grade",
           "qty": 9.38,
           "unit": "SF",
@@ -6053,7 +6176,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 436,
+          "line_number": 422,
           "description": "Seal & paint stair stringer - one",
           "qty": 24.0,
           "unit": "LF",
@@ -6066,7 +6189,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 437,
+          "line_number": 423,
           "description": "Security system - contact w/wire",
           "qty": 2.0,
           "unit": "EA",
@@ -6079,48 +6202,10 @@
         }
       ],
       "section_totals": {
-        "tax": "991.42",
-        "op": "5,794.78",
-        "total": "34,768.57",
-        "computed_total": "34,768.57",
-        "validation_delta": "0.00"
-      }
-    },
-    {
-      "section_name": "Ductwork Cavity",
-      "metadata": {
-        "height": "1'",
-        "areas": {
-          "sf_walls": "164.33",
-          "sf_ceiling": "413.21",
-          "sf_walls_and_ceiling": "577.54",
-          "sf_floor": "413.21",
-          "sy_flooring": "45.91",
-          "lf_floor_perimeter": "164.33",
-          "lf_ceil_perimeter": "164.33"
-        }
-      },
-      "subrooms": [],
-      "line_items": [
-        {
-          "type": "line_item",
-          "line_number": 438,
-          "description": "Deodorize building - Hot thermal",
-          "qty": 413.21,
-          "unit": "CF",
-          "reset": "0.00",
-          "remove": "0.11",
-          "replace": "0.00",
-          "op": "9.10",
-          "total": "54.55",
-          "notes": "fog"
-        }
-      ],
-      "section_totals": {
-        "tax": "0.00",
-        "op": "9.10",
-        "total": "54.55",
-        "computed_total": "54.55",
+        "tax": "902.79",
+        "op": "5,292.04",
+        "total": "31,752.03",
+        "computed_total": "31,752.03",
         "validation_delta": "0.00"
       }
     },
@@ -6141,7 +6226,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 439,
+          "line_number": 424,
           "description": "General Laborer - per hour",
           "qty": 16.0,
           "unit": "HR",
@@ -6154,7 +6239,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 440,
+          "line_number": 425,
           "description": "Remove Siding - board & batten - cedar",
           "qty": 2489.48,
           "unit": "SF",
@@ -6166,7 +6251,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 441,
+          "line_number": 426,
           "description": "Metal lath & stucco",
           "qty": 2987.38,
           "unit": "SF",
@@ -6179,7 +6264,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 442,
+          "line_number": 427,
           "description": "Batt insulation - 6\" - R19 - paper / foil faced",
           "qty": 2489.48,
           "unit": "SF",
@@ -6191,7 +6276,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 443,
+          "line_number": 428,
           "description": "Clean stud wall - Heavy",
           "qty": 2987.38,
           "unit": "SF",
@@ -6204,7 +6289,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 444,
+          "line_number": 429,
           "description": "Seal stud wall for odor control",
           "qty": 2987.38,
           "unit": "SF",
@@ -6217,7 +6302,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 445,
+          "line_number": 430,
           "description": "House wrap (air/moisture barrier)",
           "qty": 2489.48,
           "unit": "SF",
@@ -6229,7 +6314,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 446,
+          "line_number": 431,
           "description": "Soda blasting - Extra heavy",
           "qty": 106.25,
           "unit": "SF",
@@ -6242,7 +6327,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 447,
+          "line_number": 432,
           "description": "Tile/stone sealer",
           "qty": 106.25,
           "unit": "SF",
@@ -6259,7 +6344,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 448,
+          "line_number": 433,
           "description": "Seal & paint wood beam",
           "qty": 201.0,
           "unit": "SF",
@@ -6272,7 +6357,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 449,
+          "line_number": 434,
           "description": "Soda blasting - Extra heavy",
           "qty": 201.0,
           "unit": "SF",
@@ -6285,7 +6370,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 450,
+          "line_number": 435,
           "description": "Sandblasting",
           "qty": 39.03,
           "unit": "SF",
@@ -6293,24 +6378,24 @@
           "remove": "1.55",
           "replace": "0.72",
           "op": "12.24",
-          "total": "73.46"
+          "total": "73.46",
+          "notes": "sandblast patio cover columns"
         },
         {
           "type": "line_item",
-          "line_number": 451,
-          "description": "Stucco color coat (Redash) - coarse texture",
+          "line_number": 436,
+          "description": "Stucco color coat (Redash) -",
           "qty": 39.03,
           "unit": "SF",
           "reset": "0.00",
           "remove": "6.27",
           "replace": "2.63",
           "op": "49.46",
-          "total": "296.81",
-          "notes": "re-stucco the patio cover columns"
+          "total": "296.81"
         },
         {
           "type": "line_item",
-          "line_number": 452,
+          "line_number": 437,
           "description": "Hanging light fixture - High",
           "qty": 2.0,
           "unit": "EA",
@@ -6327,7 +6412,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 453,
+          "line_number": 438,
           "description": "Stain & finish post/wood beam 6\" x 6\"",
           "qty": 44.5,
           "unit": "LF",
@@ -6340,7 +6425,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 454,
+          "line_number": 439,
           "description": "Soda blasting - Extra heavy",
           "qty": 89.0,
           "unit": "SF",
@@ -6353,7 +6438,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 455,
+          "line_number": 440,
           "description": "Prime & paint exterior fascia - wood, 6\"- 8\" wide",
           "qty": 273.98,
           "unit": "LF",
@@ -6383,7 +6468,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 456,
+          "line_number": 441,
           "description": "R&R Mailbox post - wood",
           "qty": 1.0,
           "unit": "EA",
@@ -6395,7 +6480,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 457,
+          "line_number": 442,
           "description": "R&R Rural mailbox - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -6407,7 +6492,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 458,
+          "line_number": 443,
           "description": "Clean with pressure/chemical",
           "qty": 1807.0,
           "unit": "SF",
@@ -6420,7 +6505,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 459,
+          "line_number": 444,
           "description": "Concrete sealer - brush or spray",
           "qty": 1807.0,
           "unit": "SF",
@@ -6441,7 +6526,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 462,
+          "line_number": 447,
           "description": "General Laborer - per hour",
           "qty": 72.0,
           "unit": "HR",
@@ -6454,7 +6539,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 463,
+          "line_number": 448,
           "description": "Decorative rock (per CY)",
           "qty": 5.0,
           "unit": "CY",
@@ -6462,8 +6547,7 @@
           "remove": "140.00",
           "replace": "68.25",
           "op": "153.66",
-          "total": "921.91",
-          "notes": "decomposed granite and river rock for the backyard landscaping"
+          "total": "921.91"
         }
       ],
       "section_totals": {
@@ -6474,7 +6558,7 @@
         "validation_delta": "0.00"
       },
       "errors": [
-        "Section name 'Hardscapes' not found above table starting at line 1730"
+        "Section name 'Hardscapes' not found above table starting at line 1710"
       ]
     },
     {
@@ -6484,7 +6568,7 @@
       "line_items": [
         {
           "type": "line_item",
-          "line_number": 469,
+          "line_number": 454,
           "description": "Prime & paint ornamental iron",
           "qty": 206.0,
           "unit": "LF",
@@ -6497,7 +6581,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 470,
+          "line_number": 455,
           "description": "Prime & paint ornamental iron",
           "qty": 835.17,
           "unit": "SF",
@@ -6510,7 +6594,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 471,
+          "line_number": 456,
           "description": "R&R Rural mailbox - High grade",
           "qty": 1.0,
           "unit": "EA",
@@ -6529,7 +6613,7 @@
         "validation_delta": "0.00"
       },
       "errors": [
-        "Section name 'CMU Walls' not found above table starting at line 1759"
+        "Section name 'CMU Walls' not found above table starting at line 1739"
       ]
     },
     {
@@ -6539,7 +6623,7 @@
       "line_items": [
         {
           "type": "line_item",
-          "line_number": 472,
+          "line_number": 457,
           "description": "Pergola repairs per BWB",
           "qty": 1.0,
           "unit": "EA",
@@ -6560,13 +6644,53 @@
       }
     },
     {
+      "section_name": "Extended Limit Coverage",
+      "metadata": {},
+      "subrooms": [],
+      "line_items": [
+        {
+          "type": "line_item",
+          "line_number": 459,
+          "description": "Amount applied to Dwelling",
+          "qty": 1.0,
+          "unit": "EA",
+          "reset": "0.00",
+          "remove": "42,726.05",
+          "replace": "0.00",
+          "op": "0.00",
+          "total": "42,726.05",
+          "notes": "Extended Limits 460. Amount over Other Structures 1.00 EA 0.00 -2,805.85 0.00 0.00 -2,805.85 Limit"
+        },
+        {
+          "type": "line_item",
+          "line_number": 461,
+          "description": "Amount over Other Structures",
+          "qty": 1.0,
+          "unit": "EA",
+          "reset": "0.00",
+          "remove": "2,805.85",
+          "replace": "0.00",
+          "op": "0.00",
+          "total": "2,805.85",
+          "notes": "Extended Limits"
+        }
+      ],
+      "section_totals": {
+        "tax": "0.00",
+        "op": "0.00",
+        "total": "0.00",
+        "computed_total": "45,531.90",
+        "validation_delta": "-45,531.90"
+      }
+    },
+    {
       "section_name": "Labor Minimums Applied",
       "metadata": {},
       "subrooms": [],
       "line_items": [
         {
           "type": "line_item",
-          "line_number": 473,
+          "line_number": 462,
           "description": "Carpet labor minimum",
           "qty": 1.0,
           "unit": "EA",
@@ -6578,7 +6702,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 474,
+          "line_number": 463,
           "description": "Specialty items labor minimum",
           "qty": 1.0,
           "unit": "EA",
@@ -6590,7 +6714,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 475,
+          "line_number": 464,
           "description": "Door labor minimum",
           "qty": 1.0,
           "unit": "EA",
@@ -6602,20 +6726,7 @@
         },
         {
           "type": "line_item",
-          "line_number": 476,
-          "description": "Tile floor covering labor",
-          "qty": 1.0,
-          "unit": "EA",
-          "reset": "0.00",
-          "remove": "2.57",
-          "replace": "0.00",
-          "op": "0.52",
-          "total": "3.09",
-          "notes": "minimum"
-        },
-        {
-          "type": "line_item",
-          "line_number": 477,
+          "line_number": 465,
           "description": "Paneling labor minimum",
           "qty": 1.0,
           "unit": "EA",
@@ -6628,9 +6739,9 @@
       ],
       "section_totals": {
         "tax": "0.00",
-        "op": "109.68",
-        "total": "658.05",
-        "computed_total": "658.05",
+        "op": "109.16",
+        "total": "654.96",
+        "computed_total": "654.96",
         "validation_delta": "0.00"
       }
     }
@@ -6659,17 +6770,17 @@
     "rows": [
       {
         "name": "Dwelling",
-        "item_total": "504,523.67",
-        "item_pct": 62.33,
-        "acv_total": "504,526.09",
-        "acv_pct": 62.33
+        "item_total": "561,766.58",
+        "item_pct": 60.16,
+        "acv_total": "561,769.00",
+        "acv_pct": 60.16
       },
       {
         "name": "Dwelling - Debris Removal",
-        "item_total": "0.00",
-        "item_pct": 0.0,
-        "acv_total": "0.00",
-        "acv_pct": 0.0
+        "item_total": "24,369.00",
+        "item_pct": 2.61,
+        "acv_total": "24,369.00",
+        "acv_pct": 2.61
       },
       {
         "name": "Dwelling - Code Upgrade",
@@ -6679,18 +6790,25 @@
         "acv_pct": 0.0
       },
       {
-        "name": "Dwelling - Extened Limit",
-        "item_total": "0.00",
-        "item_pct": 0.0,
-        "acv_total": "0.00",
-        "acv_pct": 0.0
+        "name": "Dwelling - Extended Limit",
+        "item_total": "42,726.05",
+        "item_pct": 4.58,
+        "acv_total": "42,726.05",
+        "acv_pct": 4.58
       },
       {
         "name": "Other Structures",
-        "item_total": "304,938.74",
-        "item_pct": 37.67,
-        "acv_total": "304,938.74",
-        "acv_pct": 37.67
+        "item_total": "302,132.89",
+        "item_pct": 32.36,
+        "acv_total": "302,132.89",
+        "acv_pct": 32.36
+      },
+      {
+        "name": "Other Structures - Debris Removal - OS",
+        "item_total": "2,805.85",
+        "item_pct": 0.3,
+        "acv_total": "2,805.85",
+        "acv_pct": 0.3
       },
       {
         "name": "Contents",
@@ -6707,10 +6825,17 @@
         "acv_pct": 0.0
       },
       {
+        "name": "Contents - Debris Removal",
+        "item_total": "0.00",
+        "item_pct": 0.0,
+        "acv_total": "0.00",
+        "acv_pct": 0.0
+      },
+      {
         "name": "Total",
-        "item_total": "809,462.41",
+        "item_total": "933,800.37",
         "item_pct": 100.0,
-        "acv_total": "809,464.83",
+        "acv_total": "933,802.79",
         "acv_pct": 100.0
       }
     ],
@@ -6719,45 +6844,65 @@
   "recaps_and_summaries": {
     "summaries_by_coverage": {
       "Dwelling": {
-        "Line Item Total": "411,047.38",
+        "Line Item Total": "474,884.36",
         "California Lumber Assessment Fee": "0.93",
-        "Material Sales Tax": "9,388.59",
-        "Subtotal": "420,437.99",
-        "Overhead": "42,044.05",
-        "Profit": "42,044.05",
-        "Replacement Cost Value": "504,526.09",
-        "Net Claim": "504,526.09"
+        "Material Sales Tax": "10,273.66",
+        "Subtotal": "485,160.04",
+        "Overhead": "38,304.48",
+        "Profit": "38,304.48",
+        "Replacement Cost Value": "561,769.00",
+        "Net Claim": "561,769.00"
+      },
+      "Dwelling - Debris Removal": {
+        "Line Item Total": "24,369.00",
+        "Replacement Cost Value": "24,369.00",
+        "Net Claim": "24,369.00"
+      },
+      "Dwelling - Extended Limit": {
+        "Line Item Total": "42,726.05",
+        "Replacement Cost Value": "42,726.05",
+        "Net Claim": "42,726.05"
       },
       "Other Structures": {
-        "Line Item Total": "289,677.68",
+        "Line Item Total": "286,871.83",
         "Material Sales Tax": "1,297.92",
-        "Subtotal": "290,975.60",
+        "Subtotal": "288,169.75",
         "Overhead": "6,981.57",
         "Profit": "6,981.57",
-        "Replacement Cost Value": "304,938.74",
+        "Replacement Cost Value": "302,132.89",
         "Net Claim": "56,177.00"
+      },
+      "Other Structures - Debris Removal - OS": {
+        "Line Item Total": "2,805.85",
+        "Replacement Cost Value": "2,805.85",
+        "Net Claim": "2,805.85"
       }
     },
     "recap_tax_op": null,
     "recap_by_room": {
       "areas": {
-        "estimate: SCHACTER_RECON_5": [
+        "estimate: SCHACTER_RECON_6B": [
           {
             "item": "Demo/Mitigtation",
-            "total": "100,000.00",
-            "pct": 14.27,
+            "total": "169,213.03",
+            "pct": 20.35,
             "coverage": [
               {
                 "coverage": "Dwelling",
-                "pct": 100.0,
-                "amount": "100,000.00"
+                "pct": 85.6,
+                "amount": "144,844.03"
+              },
+              {
+                "coverage": "Dwelling - Debris Removal",
+                "pct": 14.4,
+                "amount": "24,369.00"
               }
             ]
           },
           {
             "item": "General Items",
             "total": "51,628.32",
-            "pct": 7.37,
+            "pct": 6.21,
             "coverage": [
               {
                 "coverage": "Dwelling",
@@ -6769,7 +6914,7 @@
           {
             "item": "Insulation",
             "total": "3,883.65",
-            "pct": 0.55,
+            "pct": 0.47,
             "coverage": [
               {
                 "coverage": "Dwelling",
@@ -6779,9 +6924,21 @@
             ]
           },
           {
+            "item": "HVAC",
+            "total": "31,188.00",
+            "pct": 3.75,
+            "coverage": [
+              {
+                "coverage": "Dwelling",
+                "pct": 100.0,
+                "amount": "31,188.00"
+              }
+            ]
+          },
+          {
             "item": "Electrical",
             "total": "23,017.28",
-            "pct": 3.28,
+            "pct": 2.77,
             "coverage": [
               {
                 "coverage": "Dwelling",
@@ -6793,7 +6950,7 @@
           {
             "item": "Plumbing",
             "total": "723.46",
-            "pct": 0.1,
+            "pct": 0.09,
             "coverage": [
               {
                 "coverage": "Dwelling",
@@ -6805,7 +6962,7 @@
           {
             "item": "Appliances",
             "total": "19,413.67",
-            "pct": 2.77,
+            "pct": 2.33,
             "coverage": [
               {
                 "coverage": "Dwelling",
@@ -6817,7 +6974,7 @@
           {
             "item": "Window and Patio Doors Replacement",
             "total": "26,285.06",
-            "pct": 3.75,
+            "pct": 3.16,
             "coverage": [
               {
                 "coverage": "Dwelling",
@@ -6830,57 +6987,45 @@
         "dwelling": [],
         "main level": [
           {
-            "item": "Main Level",
-            "total": "1,847.68",
-            "pct": 0.26,
-            "coverage": [
-              {
-                "coverage": "Dwelling",
-                "pct": 100.0,
-                "amount": "1,847.68"
-              }
-            ]
-          },
-          {
             "item": "Entry",
-            "total": "5,893.27",
-            "pct": 0.84,
+            "total": "8,355.70",
+            "pct": 1.0,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "5,893.27"
+                "amount": "8,355.70"
               }
             ]
           },
           {
             "item": "Kitchen",
-            "total": "18,440.38",
-            "pct": 2.63,
+            "total": "17,485.44",
+            "pct": 2.1,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "18,440.38"
+                "amount": "17,485.44"
               }
             ]
           },
           {
             "item": "Living Room",
-            "total": "27,260.17",
-            "pct": 3.89,
+            "total": "41,777.33",
+            "pct": 5.02,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "27,260.17"
+                "amount": "41,777.33"
               }
             ]
           },
           {
             "item": "Fireplace",
             "total": "617.17",
-            "pct": 0.09,
+            "pct": 0.07,
             "coverage": [
               {
                 "coverage": "Dwelling",
@@ -6891,129 +7036,115 @@
           },
           {
             "item": "Office",
-            "total": "7,013.15",
-            "pct": 1.0,
+            "total": "6,379.78",
+            "pct": 0.77,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "7,013.15"
+                "amount": "6,379.78"
               }
             ]
           },
           {
             "item": "Office Closet",
-            "total": "4,132.57",
-            "pct": 0.59,
+            "total": "3,973.62",
+            "pct": 0.48,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "4,132.57"
+                "amount": "3,973.62"
               }
             ]
           },
           {
             "item": "Bedroom 1",
-            "total": "7,935.51",
-            "pct": 1.13,
+            "total": "11,403.86",
+            "pct": 1.37,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "7,935.51"
+                "amount": "11,403.86"
               }
             ]
           },
           {
             "item": "Bed1 Closet",
-            "total": "2,228.20",
-            "pct": 0.32,
+            "total": "2,742.38",
+            "pct": 0.33,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "2,228.20"
+                "amount": "2,742.38"
               }
             ]
           },
           {
             "item": "Hall Bathroom 1",
-            "total": "12,117.16",
-            "pct": 1.73,
+            "total": "14,763.22",
+            "pct": 1.78,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "12,117.16"
+                "amount": "14,763.22"
               }
             ]
           },
           {
             "item": "Master bathroom",
             "total": "13,903.76",
-            "pct": 1.98,
+            "pct": 1.67,
+            "coverage": []
+          },
+          {
+            "item": "Master Bedroom",
+            "total": "35,266.08",
+            "pct": 4.24,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "13,903.76"
+                "amount": "35,266.08"
               }
             ]
           },
           {
-            "item": "Master Bedroom",
-            "total": "27,068.93",
-            "pct": 3.86,
-            "coverage": []
-          },
-          {
             "item": "Main Hallway",
-            "total": "21,452.98",
-            "pct": 3.06,
+            "total": "26,462.86",
+            "pct": 3.18,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "21,452.98"
+                "amount": "26,462.86"
               }
             ]
           },
           {
             "item": "Laundry Room",
-            "total": "7,731.91",
-            "pct": 1.1,
+            "total": "7,515.83",
+            "pct": 0.9,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "7,731.91"
+                "amount": "7,515.83"
               }
             ]
           },
           {
             "item": "Garage",
-            "total": "27,982.37",
-            "pct": 3.99,
+            "total": "25,557.20",
+            "pct": 3.07,
             "coverage": [
               {
                 "coverage": "Dwelling",
                 "pct": 100.0,
-                "amount": "27,982.37"
-              }
-            ]
-          }
-        ],
-        "attic": [
-          {
-            "item": "Ductwork Cavity",
-            "total": "45.45",
-            "pct": 0.01,
-            "coverage": [
-              {
-                "coverage": "Dwelling",
-                "pct": 100.0,
-                "amount": "45.45"
+                "amount": "25,557.20"
               }
             ]
           }
@@ -7022,7 +7153,7 @@
           {
             "item": "Ext_Surfaces",
             "total": "51,110.15",
-            "pct": 7.29,
+            "pct": 6.15,
             "coverage": [
               {
                 "coverage": "Other Structures",
@@ -7036,7 +7167,7 @@
           {
             "item": "Hardscapes",
             "total": "10,454.14",
-            "pct": 1.49,
+            "pct": 1.26,
             "coverage": [
               {
                 "coverage": "Other Structures",
@@ -7048,7 +7179,7 @@
           {
             "item": "CMU Walls",
             "total": "6,830.30",
-            "pct": 0.97,
+            "pct": 0.82,
             "coverage": [
               {
                 "coverage": "Other Structures",
@@ -7060,7 +7191,7 @@
           {
             "item": "Gazebos/Outside Structures",
             "total": "221,160.00",
-            "pct": 31.56,
+            "pct": 26.59,
             "coverage": [
               {
                 "coverage": "Other Structures",
@@ -7071,17 +7202,17 @@
           },
           {
             "item": "Labor Minimums Applied",
-            "total": "548.37",
-            "pct": 0.08,
+            "total": "545.80",
+            "pct": 0.07,
             "coverage": [
               {
                 "coverage": "Dwelling",
-                "pct": 77.55,
-                "amount": "425.28"
+                "pct": 77.45,
+                "amount": "422.71"
               },
               {
                 "coverage": "Other Structures",
-                "pct": 22.45,
+                "pct": 22.55,
                 "amount": "123.09"
               }
             ]
@@ -7091,32 +7222,20 @@
       "subtotals": [
         {
           "label": "Area Subtotal: Main Level",
-          "total": "185,625.21",
-          "pct": 26.49,
+          "total": "216,204.23",
+          "pct": 26.0,
           "coverage": [
             {
               "coverage": "Dwelling",
               "pct": 100.0,
-              "amount": "185,625.21"
-            }
-          ]
-        },
-        {
-          "label": "Area Subtotal: Attic",
-          "total": "45.45",
-          "pct": 0.01,
-          "coverage": [
-            {
-              "coverage": "Dwelling",
-              "pct": 100.0,
-              "amount": "45.45"
+              "amount": "216,204.23"
             }
           ]
         },
         {
           "label": "Area Subtotal: Exterior",
           "total": "51,110.15",
-          "pct": 7.29,
+          "pct": 6.15,
           "coverage": [
             {
               "coverage": "Other Structures",
@@ -7127,17 +7246,17 @@
         },
         {
           "label": "Area Subtotal: Dwelling",
-          "total": "236,780.81",
-          "pct": 33.79,
+          "total": "267,314.38",
+          "pct": 32.14,
           "coverage": [
             {
               "coverage": "Dwelling",
-              "pct": 78.41,
-              "amount": "185,670.66"
+              "pct": 80.88,
+              "amount": "216,204.23"
             },
             {
               "coverage": "Other Structures",
-              "pct": 21.59,
+              "pct": 19.12,
               "amount": "51,110.15"
             }
           ]
@@ -7145,7 +7264,7 @@
         {
           "label": "Area Subtotal: Other Structures",
           "total": "238,444.44",
-          "pct": 34.03,
+          "pct": 28.67,
           "coverage": [
             {
               "coverage": "Other Structures",
@@ -7156,24 +7275,12 @@
         },
         {
           "label": "Subtotal of Areas",
-          "total": "700,725.06",
-          "pct": 100.0,
-          "coverage": [
-            {
-              "coverage": "Dwelling",
-              "pct": 58.66,
-              "amount": "411,047.38"
-            },
-            {
-              "coverage": "Other Structures",
-              "pct": 41.34,
-              "amount": "289,677.68"
-            }
-          ]
+          "total": "831,657.09",
+          "pct": 100.0
         },
         {
           "label": "Total",
-          "total": "700,725.06",
+          "total": "831,657.09",
           "pct": 100.0
         }
       ]
@@ -7182,13 +7289,13 @@
       "subtotals": [
         {
           "label": "O&P Items",
-          "total": "479,565.06",
-          "pct": 59.24
+          "total": "441,284.06",
+          "pct": 47.26
         },
         {
           "label": "Non-O&P Items",
-          "total": "221,160.00",
-          "pct": 27.32
+          "total": "390,373.03",
+          "pct": 41.8
         },
         {
           "label": "Permits and Fees",
@@ -7204,58 +7311,58 @@
         },
         {
           "label": "Material Sales Tax",
-          "total": "10,686.51",
-          "pct": 1.32,
+          "total": "11,571.58",
+          "pct": 1.24,
           "coverage": [
             {
               "coverage": "Dwelling",
-              "pct": 87.85,
-              "amount": "9,388.59"
+              "pct": 88.78,
+              "amount": "10,273.66"
             },
             {
               "coverage": "Other Structures",
-              "pct": 12.15,
+              "pct": 11.22,
               "amount": "1,297.92"
             }
           ]
         },
         {
           "label": "Overhead",
-          "total": "49,025.62",
-          "pct": 6.06,
+          "total": "45,286.05",
+          "pct": 4.85,
           "coverage": [
             {
               "coverage": "Dwelling",
-              "pct": 85.76,
-              "amount": "42,044.05"
+              "pct": 84.58,
+              "amount": "38,304.48"
             },
             {
               "coverage": "Other Structures",
-              "pct": 14.24,
+              "pct": 15.42,
               "amount": "6,981.57"
             }
           ]
         },
         {
           "label": "Profit",
-          "total": "49,025.62",
-          "pct": 6.06,
+          "total": "45,286.05",
+          "pct": 4.85,
           "coverage": [
             {
               "coverage": "Dwelling",
-              "pct": 85.76,
-              "amount": "42,044.05"
+              "pct": 84.58,
+              "amount": "38,304.48"
             },
             {
               "coverage": "Other Structures",
-              "pct": 14.24,
+              "pct": 15.42,
               "amount": "6,981.57"
             }
           ]
         },
         {
           "label": "Total",
-          "total": "809,464.83",
+          "total": "933,802.79",
           "pct": 100.0
         }
       ],
@@ -7263,7 +7370,7 @@
         {
           "item": "APPLIANCES",
           "total": "19,176.00",
-          "pct": 2.37,
+          "pct": 2.05,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7275,7 +7382,7 @@
         {
           "item": "CABINETRY",
           "total": "22,395.60",
-          "pct": 2.77,
+          "pct": 2.4,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7286,51 +7393,46 @@
         },
         {
           "item": "CLEANING",
-          "total": "21,345.12",
-          "pct": 2.64,
+          "total": "12,041.43",
+          "pct": 1.29,
           "coverage": [
             {
               "coverage": "Dwelling",
-              "pct": 56.7,
-              "amount": "12,102.79"
+              "pct": 23.25,
+              "amount": "2,799.10"
             },
             {
               "coverage": "Other Structures",
-              "pct": 43.3,
+              "pct": 76.75,
               "amount": "9,242.33"
             }
           ]
         },
         {
           "item": "CONCRETE & ASPHALT",
-          "total": "3,174.22",
-          "pct": 0.39,
+          "total": "2,602.08",
+          "pct": 0.28,
           "coverage": [
             {
-              "coverage": "Dwelling",
-              "pct": 18.02,
-              "amount": "572.14"
-            },
-            {
               "coverage": "Other Structures",
-              "pct": 81.98,
+              "pct": 100.0,
               "amount": "2,602.08"
             }
           ]
         },
         {
           "item": "GENERAL DEMOLITION",
-          "total": "108,087.10",
-          "pct": 13.35,
+          "total": "11,046.44",
+          "pct": 1.18,
           "coverage": [
             {
               "coverage": "Dwelling",
-              "pct": 98.45,
-              "amount": "106,406.98"
+              "pct": 84.79,
+              "amount": "9,366.32"
             },
             {
               "coverage": "Other Structures",
-              "pct": 1.55,
+              "pct": 15.21,
               "amount": "1,680.12"
             }
           ]
@@ -7338,7 +7440,7 @@
         {
           "item": "DOORS",
           "total": "7,113.41",
-          "pct": 0.88,
+          "pct": 0.76,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7350,7 +7452,7 @@
         {
           "item": "DRYWALL",
           "total": "34,657.23",
-          "pct": 4.28,
+          "pct": 3.71,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7362,7 +7464,7 @@
         {
           "item": "ELECTRICAL",
           "total": "18,265.19",
-          "pct": 2.26,
+          "pct": 1.96,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7374,7 +7476,7 @@
         {
           "item": "ELECTRICAL - SPECIAL SYSTEMS",
           "total": "2,049.75",
-          "pct": 0.25,
+          "pct": 0.22,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7397,37 +7499,37 @@
         },
         {
           "item": "FLOOR COVERING - STONE",
-          "total": "7,756.10",
-          "pct": 0.96,
+          "total": "39,620.86",
+          "pct": 4.24,
           "coverage": [
             {
               "coverage": "Dwelling",
-              "pct": 97.88,
-              "amount": "7,591.41"
+              "pct": 99.58,
+              "amount": "39,456.17"
             },
             {
               "coverage": "Other Structures",
-              "pct": 2.12,
+              "pct": 0.42,
               "amount": "164.69"
             }
           ]
         },
         {
           "item": "FLOOR COVERING - CERAMIC TILE",
-          "total": "561.59",
-          "pct": 0.07,
+          "total": "5,550.20",
+          "pct": 0.59,
           "coverage": [
             {
               "coverage": "Dwelling",
               "pct": 100.0,
-              "amount": "561.59"
+              "amount": "5,550.20"
             }
           ]
         },
         {
           "item": "FLOOR COVERING - WOOD",
           "total": "3,030.28",
-          "pct": 0.37,
+          "pct": 0.32,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7439,7 +7541,7 @@
         {
           "item": "PERMITS AND FEES",
           "total": "4,420.00",
-          "pct": 0.55,
+          "pct": 0.47,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7451,7 +7553,7 @@
         {
           "item": "FINISH CARPENTRY / TRIMWORK",
           "total": "5,570.13",
-          "pct": 0.69,
+          "pct": 0.6,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7463,7 +7565,7 @@
         {
           "item": "FINISH HARDWARE",
           "total": "1,011.56",
-          "pct": 0.12,
+          "pct": 0.11,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7474,20 +7576,20 @@
         },
         {
           "item": "HEAT, VENT & AIR CONDITIONING",
-          "total": "509.10",
-          "pct": 0.06,
+          "total": "31,697.10",
+          "pct": 3.39,
           "coverage": [
             {
               "coverage": "Dwelling",
               "pct": 100.0,
-              "amount": "509.10"
+              "amount": "31,697.10"
             }
           ]
         },
         {
           "item": "INSULATION",
           "total": "9,618.89",
-          "pct": 1.19,
+          "pct": 1.03,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7504,7 +7606,7 @@
         {
           "item": "LABOR ONLY",
           "total": "37,812.45",
-          "pct": 4.67,
+          "pct": 4.05,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7516,7 +7618,7 @@
         {
           "item": "LIGHT FIXTURES",
           "total": "7,066.84",
-          "pct": 0.87,
+          "pct": 0.76,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7533,7 +7635,7 @@
         {
           "item": "LANDSCAPING",
           "total": "6,420.00",
-          "pct": 0.79,
+          "pct": 0.69,
           "coverage": [
             {
               "coverage": "Other Structures",
@@ -7545,7 +7647,7 @@
         {
           "item": "MARBLE - CULTURED OR NATURAL",
           "total": "782.86",
-          "pct": 0.1,
+          "pct": 0.08,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7557,7 +7659,7 @@
         {
           "item": "MIRRORS & SHOWER DOORS",
           "total": "6,098.41",
-          "pct": 0.75,
+          "pct": 0.65,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7569,7 +7671,7 @@
         {
           "item": "PLUMBING",
           "total": "6,376.85",
-          "pct": 0.79,
+          "pct": 0.68,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7581,7 +7683,7 @@
         {
           "item": "PANELING & WOOD WALL FINISHES",
           "total": "314.63",
-          "pct": 0.04,
+          "pct": 0.03,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7593,7 +7695,7 @@
         {
           "item": "PAINTING",
           "total": "78,338.27",
-          "pct": 9.68,
+          "pct": 8.39,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7610,7 +7712,7 @@
         {
           "item": "SPECIALTY ITEMS",
           "total": "472.03",
-          "pct": 0.06,
+          "pct": 0.05,
           "coverage": [
             {
               "coverage": "Other Structures",
@@ -7622,7 +7724,7 @@
         {
           "item": "STUCCO & EXTERIOR PLASTER",
           "total": "28,355.97",
-          "pct": 3.5,
+          "pct": 3.04,
           "coverage": [
             {
               "coverage": "Other Structures",
@@ -7633,20 +7735,20 @@
         },
         {
           "item": "TILE",
-          "total": "2,002.80",
-          "pct": 0.25,
+          "total": "2,596.92",
+          "pct": 0.28,
           "coverage": [
             {
               "coverage": "Dwelling",
               "pct": 100.0,
-              "amount": "2,002.80"
+              "amount": "2,596.92"
             }
           ]
         },
         {
           "item": "TEMPORARY REPAIRS",
           "total": "2,832.00",
-          "pct": 0.35,
+          "pct": 0.3,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7658,7 +7760,7 @@
         {
           "item": "WINDOWS - SLIDING PATIO DOORS",
           "total": "14,390.25",
-          "pct": 1.78,
+          "pct": 1.54,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7670,7 +7772,7 @@
         {
           "item": "WINDOW REGLAZING & REPAIR",
           "total": "2,690.40",
-          "pct": 0.33,
+          "pct": 0.29,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7682,7 +7784,7 @@
         {
           "item": "WINDOW TREATMENT",
           "total": "6,280.14",
-          "pct": 0.78,
+          "pct": 0.67,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7694,7 +7796,7 @@
         {
           "item": "WINDOWS - VINYL",
           "total": "8,931.76",
-          "pct": 1.1,
+          "pct": 0.96,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7706,7 +7808,7 @@
         {
           "item": "WATER EXTRACTION & REMEDIATION",
           "total": "1,318.82",
-          "pct": 0.16,
+          "pct": 0.14,
           "coverage": [
             {
               "coverage": "Dwelling",
@@ -7718,12 +7820,36 @@
       ],
       "Non-O&P Items": [
         {
-          "item": "SPECIALTY ITEMS",
-          "total": "221,160.00",
-          "pct": 27.32,
+          "item": "CLEANING",
+          "total": "24,369.00",
+          "pct": 2.61,
           "coverage": [
             {
-              "coverage": "Other Structures Office of Jared V. Boergadine, Licensed Appraiser & Public Adjuster Arizona Public Adjuster License #18382965 California Public Adjuster License #2L70602 Colorado Public Adjuster License #608394 Nevada Public Adjuster License # 3443075 Texas Public Adjuster License #2207166",
+              "coverage": "Dwelling - Debris Removal Office of Jared V. Boergadine, Licensed Appraiser & Public Adjuster Arizona Public Adjuster License #18382965 California Public Adjuster License #2L70602 Colorado Public Adjuster License #608394 Nevada Public Adjuster License # 3443075 Texas Public Adjuster License #2207166",
+              "pct": 100.0,
+              "amount": "24,369.00"
+            }
+          ]
+        },
+        {
+          "item": "HAZARDOUS MATERIAL REMEDIATION",
+          "total": "144,844.03",
+          "pct": 15.51,
+          "coverage": [
+            {
+              "coverage": "Dwelling",
+              "pct": 100.0,
+              "amount": "144,844.03"
+            }
+          ]
+        },
+        {
+          "item": "SPECIALTY ITEMS",
+          "total": "221,160.00",
+          "pct": 23.68,
+          "coverage": [
+            {
+              "coverage": "Other Structures",
               "pct": 100.0,
               "amount": "221,160.00"
             }
@@ -7733,5 +7859,5 @@
     },
     "trade_summary": null
   },
-  "estimate_name": "BSchacter-02.12.26-Est-JVB-RepairEstimate-$809,464.83.pdf"
+  "estimate_name": "SCHACTER_RECON_6B_FINAL_DRAFT_CAR.pdf"
 }

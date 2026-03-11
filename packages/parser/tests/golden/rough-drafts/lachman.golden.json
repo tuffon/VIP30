@@ -52,6 +52,7 @@
     "depreciate_taxes": true,
     "estimate_name": "1115_LACHMAN_APEX_2",
     "depreciate_removal": false,
+    "insured_name": null,
     "region": "California",
     "building_type": null,
     "line_item_totals": {
@@ -73,8 +74,7 @@
         }
       ],
       "total": "67.55"
-    },
-    "insured_name": null
+    }
   },
   "sections": [
     {
@@ -287,7 +287,7 @@
           "tax": "0.00",
           "op": "5,165.40",
           "total": "30,992.40",
-          "notes": "On Site Project Superintendent, 15 hours per week for 4 weeks per month for 4 months Supervision is required by the CSLB license requirements that the Qualified licensee or a manager inspect every job site each day until complete. Supervision is not covered in Xactimate's O&P according to Xactimate's white pages. . \"Cal. Admin. Code tit. 16, § 823(a). “Direct supervision and control” “includes any one or any combination of the following activities: supervising construction, managing construction activities by making technical and administrative decisions, checking jobs for proper workmanship, or direct supervision on construction job sites. Section 7068 requires every license to have a qualifier, which may be a Sole Owner, Qualified Partner, Responsible Managing Officer (RMO), Responsible Managing Employee (RME), Responsible Managing Manager or Responsible Managing Member. The qualifier is the person who is listed in the Contractor State License Boards’ (CSLB) personnel of record, has demonstrated his/her knowledge and experience though the CSLB’s licensing process, and holds one or more license classifications. UPDATE: CSLB, CSLB to Get Tough on RMO Abuses (Summer 2014) Starting on January 1, 2014, amended Section 7068.1 of California’s Contractors State License Law, Bus. & Prof. Code §§ 7200et seq., requires licensees’ qualifiers to exercise direct supervision and control over the licensees’ operations to ensure compliance with California’s Contractors State License Law. The amended law contemplates active involvement by the qualifier, and makes a violation of Section 7068.1 grounds for disciplinary action and a misdemeanor punishable by imprisonment in a county jail and/or a fine."
+          "notes": "On Site Project Superintendent, 15 hours per week for 4 weeks per month for 4 months Supervision is required by the CSLB license requirements that the Qualified licensee or a manager inspect every job site each day until complete. Supervision is not covered in Xactimate's O&P according to Xactimate's white pages. . \"Cal. Admin. Code tit. 16, \u00a7 823(a). \u201cDirect supervision and control\u201d \u201cincludes any one or any combination of the following activities: supervising construction, managing construction activities by making technical and administrative decisions, checking jobs for proper workmanship, or direct supervision on construction job sites. Section 7068 requires every license to have a qualifier, which may be a Sole Owner, Qualified Partner, Responsible Managing Officer (RMO), Responsible Managing Employee (RME), Responsible Managing Manager or Responsible Managing Member. The qualifier is the person who is listed in the Contractor State License Boards\u2019 (CSLB) personnel of record, has demonstrated his/her knowledge and experience though the CSLB\u2019s licensing process, and holds one or more license classifications. UPDATE: CSLB, CSLB to Get Tough on RMO Abuses (Summer 2014) Starting on January 1, 2014, amended Section 7068.1 of California\u2019s Contractors State License Law, Bus. & Prof. Code \u00a7\u00a7 7200et seq., requires licensees\u2019 qualifiers to exercise direct supervision and control over the licensees\u2019 operations to ensure compliance with California\u2019s Contractors State License Law. The amended law contemplates active involvement by the qualifier, and makes a violation of Section 7068.1 grounds for disciplinary action and a misdemeanor punishable by imprisonment in a county jail and/or a fine."
         },
         {
           "type": "header",
@@ -8189,7 +8189,7 @@
         "validation_delta": "0.00"
       },
       "errors": [
-        "Section name 'Other Structures' not found above table starting at line 1683"
+        "Section name 'Other Structures' not found above table starting at line 1815"
       ]
     },
     {
@@ -9691,211 +9691,8 @@
           ]
         }
       ]
-    }
+    },
+    "trade_summary": null
   },
-  "estimate_name": "1115_LACHMAN_APEX_2",
-  "validations": {
-    "per_section": [
-      {
-        "section": "Abatement",
-        "declared": "0.00",
-        "computed": "0.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Contents",
-        "declared": "0.00",
-        "computed": "0.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "General",
-        "declared": "49,746.72",
-        "computed": "49,746.72",
-        "delta": "0.00"
-      },
-      {
-        "section": "Electrical",
-        "declared": "75,198.56",
-        "computed": "75,198.56",
-        "delta": "0.00"
-      },
-      {
-        "section": "Plumbing",
-        "declared": "8,104.11",
-        "computed": "8,104.11",
-        "delta": "0.00"
-      },
-      {
-        "section": "HVAC",
-        "declared": "43,750.12",
-        "computed": "43,750.12",
-        "delta": "0.00"
-      },
-      {
-        "section": "Doors/Windows",
-        "declared": "224,561.55",
-        "computed": "224,561.55",
-        "delta": "0.00"
-      },
-      {
-        "section": "Appliances",
-        "declared": "51,322.79",
-        "computed": "51,322.79",
-        "delta": "0.00"
-      },
-      {
-        "section": "Main Level",
-        "declared": "19,000.00",
-        "computed": "19,000.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Entry/Foyer",
-        "declared": "9,352.01",
-        "computed": "9,352.01",
-        "delta": "0.00"
-      },
-      {
-        "section": "Office",
-        "declared": "9,219.35",
-        "computed": "9,219.35",
-        "delta": "0.00"
-      },
-      {
-        "section": "Guest Bath",
-        "declared": "3,469.77",
-        "computed": "3,469.77",
-        "delta": "0.00"
-      },
-      {
-        "section": "Living Room/Dining Room",
-        "declared": "66,166.37",
-        "computed": "66,166.37",
-        "delta": "0.00"
-      },
-      {
-        "section": "Kitchen",
-        "declared": "60,695.16",
-        "computed": "60,695.16",
-        "delta": "0.00"
-      },
-      {
-        "section": "Hallway",
-        "declared": "37,637.68",
-        "computed": "37,637.68",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Bedroom",
-        "declared": "10,176.00",
-        "computed": "10,176.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "M. Closet Hers",
-        "declared": "10,256.89",
-        "computed": "10,256.89",
-        "delta": "0.00"
-      },
-      {
-        "section": "M. Closet His",
-        "declared": "9,690.73",
-        "computed": "9,690.73",
-        "delta": "0.00"
-      },
-      {
-        "section": "Server Closet",
-        "declared": "786.37",
-        "computed": "786.37",
-        "delta": "0.00"
-      },
-      {
-        "section": "Master Bath",
-        "declared": "8,241.54",
-        "computed": "8,241.54",
-        "delta": "0.00"
-      },
-      {
-        "section": "Laundry Room",
-        "declared": "21,536.03",
-        "computed": "21,536.03",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bathroom 1",
-        "declared": "3,146.97",
-        "computed": "3,146.97",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bedroom 1",
-        "declared": "11,093.70",
-        "computed": "11,093.70",
-        "delta": "0.00"
-      },
-      {
-        "section": "Bedroom 2",
-        "declared": "9,543.60",
-        "computed": "9,543.60",
-        "delta": "0.00"
-      },
-      {
-        "section": "Garage",
-        "declared": "17,300.23",
-        "computed": "17,300.23",
-        "delta": "0.00"
-      },
-      {
-        "section": "Attic Space",
-        "declared": "4,143.56",
-        "computed": "4,143.56",
-        "delta": "0.00"
-      },
-      {
-        "section": "Exterior - Main Structure",
-        "declared": "42,231.79",
-        "computed": "42,231.79",
-        "delta": "0.00"
-      },
-      {
-        "section": "Roof",
-        "declared": "88,800.00",
-        "computed": "88,800.00",
-        "delta": "0.00"
-      },
-      {
-        "section": "Ext_Surfaces",
-        "declared": "105,949.73",
-        "computed": "105,949.73",
-        "delta": "0.00"
-      },
-      {
-        "section": "Other Structures",
-        "declared": "281,377.01",
-        "computed": "281,377.01",
-        "delta": "0.00"
-      },
-      {
-        "section": "Landscaping",
-        "declared": "95,562.80",
-        "computed": "95,562.80",
-        "delta": "0.00"
-      },
-      {
-        "section": "Labor Minimums Applied",
-        "declared": "51.84",
-        "computed": "51.84",
-        "delta": "0.00"
-      }
-    ],
-    "document": {
-      "sum_sections": "1,378,112.98",
-      "end_grand_total": "1,378,112.98",
-      "grand_total_vs_sections_delta": "0.00",
-      "sum_rcv_from_summaries": "1,378,194.03",
-      "recap_category_total": "1,378,194.03",
-      "recap_vs_end_grand_delta": "81.05"
-    }
-  }
+  "estimate_name": "1115_LACHMAN_APEX_2"
 }

@@ -29,11 +29,12 @@ as production-quality ground truth.
 | `rough-drafts/lachman.golden.json` | Lachman APEX 2 rough draft |
 | `rough-drafts/kalyvas.golden.json` | Kalyvas JVB V6 rough draft |
 | `final-drafts/bschacter.golden.json` | BSchacter contractor final |
+| `final-drafts/SCHACTER_RECON_6B_FINAL_DRAFT_CAR.golden.json` | Schacter Recon 6B contractor final |
 | `final-drafts/statefarm/SF_BSchacter.golden.json` | StateFarm BSchacter Customer Copy |
 | `final-drafts/statefarm/lachman_sf.golden.json` | StateFarm Lachman structural |
 | `final-drafts/statefarm/kalyvas_sf.golden.json` | StateFarm Kalyvas preliminary |
 
-All 6 golden master files exist. Final-draft files were constructed via PDF extraction
+All 7 golden master files exist. Final-draft files were constructed via PDF extraction
 since the parser has known gaps for those document types (see Phase 23 audit). They
 represent the ideal expected output — what v2.5 should produce when gaps are fixed.
 
@@ -107,6 +108,7 @@ Source PDFs are stored in the project `docs/` directory:
 | `rough-drafts/lachman.golden.json` | `docs/rough-drafts/1115_LACHMAN_APEX_2_ROUGH_DRAFT_CAR.pdf` |
 | `rough-drafts/kalyvas.golden.json` | `docs/rough-drafts/KALYVAS_JVB_V6_KALY2_ROUGH_DRAFT_CAR.pdf` |
 | `final-drafts/bschacter.golden.json` | `docs/final-drafts/BSchacter-02.12.26-Est-JVB-RepairEstimate-$809,464.83.pdf` |
+| `final-drafts/SCHACTER_RECON_6B_FINAL_DRAFT_CAR.golden.json` | `docs/final-drafts/SCHACTER_RECON_6B_FINAL_DRAFT_CAR.pdf` |
 | `final-drafts/statefarm/SF_BSchacter.golden.json` | `docs/final-drafts/statefarm/SF_BSchacter.pdf` |
 | `final-drafts/statefarm/lachman_sf.golden.json` | `docs/final-drafts/statefarm/Estimate SF Structural damage Lachman 4.15.2025.pdf` |
 | `final-drafts/statefarm/kalyvas_sf.golden.json` | `docs/final-drafts/statefarm/Kalyvas Preliminary State Farm estimate9-25-25.pdf` |
