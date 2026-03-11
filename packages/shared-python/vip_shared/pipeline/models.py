@@ -189,12 +189,13 @@ class TradeContext(BaseModel):
     Built from recap_by_category in parser JSON output.
     Primary source for cost driver identification in Phase 30.
 
-    source field:
-    - "recap_by_category": built from recaps_and_summaries.recap_by_category (all 6 doc types)
+    source field reflects the primary estimate's dominant category source:
+    - "trade_summary": built primarily from recaps_and_summaries.trade_summary
+    - "recap_by_category": built from recaps_and_summaries.recap_by_category
     - "synthesized": built from section-level totals (fallback when recap absent)
 
-    *_trade_items: raw trade_summary.line_items when available (StateFarm final-drafts only).
-    These provide additional detail for trade-level analysis in per-driver LLM passes.
+    *_category_evidence carries source-aware evidence bundles for each mapped category.
+    *_trade_items preserves the raw trade_summary.line_items payload when available.
     """
 
     primary_by_category: Dict[str, float] = Field(
@@ -205,8 +206,24 @@ class TradeContext(BaseModel):
         default_factory=dict,
         description="Comparison estimate category totals keyed by display name"
     )
-    source: Literal["recap_by_category", "synthesized"] = Field(
-        description="Which data source was used to build category totals"
+    source: Literal["trade_summary", "recap_by_category", "synthesized"] = Field(
+        description="Which dominant data source was used to build primary category totals"
+    )
+    primary_source: Literal["trade_summary", "recap_by_category", "synthesized"] = Field(
+        default="recap_by_category",
+        description="Dominant source used for the primary estimate"
+    )
+    comparison_source: Literal["trade_summary", "recap_by_category", "synthesized"] = Field(
+        default="recap_by_category",
+        description="Dominant source used for the comparison estimate"
+    )
+    primary_category_evidence: Dict[str, CategoryEvidence] = Field(
+        default_factory=dict,
+        description="Source-aware evidence bundles for each primary category"
+    )
+    comparison_category_evidence: Dict[str, CategoryEvidence] = Field(
+        default_factory=dict,
+        description="Source-aware evidence bundles for each comparison category"
     )
     primary_trade_items: List[Dict[str, Any]] = Field(
         default_factory=list,
@@ -215,6 +232,24 @@ class TradeContext(BaseModel):
     comparison_trade_items: List[Dict[str, Any]] = Field(
         default_factory=list,
         description="Raw trade_summary line_items from comparison estimate (StateFarm only)"
+    )
+
+
+class CategoryEvidence(BaseModel):
+    """Source-aware evidence bundle for one mapped category."""
+
+    category: str = Field(description="Mapped display category name")
+    total: float = Field(description="Total amount for this category from the selected source")
+    source: Literal["trade_summary", "recap_by_category", "synthesized"] = Field(
+        description="Which source produced this category total/evidence bundle"
+    )
+    supporting_items: List[Dict[str, Any]] = Field(
+        default_factory=list,
+        description="Normalized supporting line-item-like evidence for the category"
+    )
+    supporting_groups: List[Dict[str, Any]] = Field(
+        default_factory=list,
+        description="Raw grouped recap/trade rows that support this category total"
     )
 
 

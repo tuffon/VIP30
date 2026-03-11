@@ -19,7 +19,7 @@ from __future__ import annotations
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
-from vip_shared.pipeline.models import TradeContext
+from vip_shared.pipeline.models import CategoryEvidence, TradeContext
 
 # --- Inline normalize helpers (avoid bid_comp import cycle at module load time) ---
 # These replicate bid_comp.normalize exactly so we don't need a module-level import.
@@ -88,35 +88,24 @@ def build_trade_context(
         comparison_payload: Parser JSON dict for the comparison (insurance) estimate.
 
     Returns:
-        TradeContext with normalized category totals for both estimates.
-        source == "recap_by_category" when recap data is present.
-        source == "synthesized" when recap absent (falls back to section totals).
+        TradeContext with normalized category totals for both estimates plus
+        source-aware category evidence bundles.
 
-    Note: source reflects the primary estimate's source. If primary uses recap but
-    comparison uses synthesized, source is still "recap_by_category".
+    Note: `source` reflects the primary estimate's dominant source. Phase 34 makes
+    trade_summary the preferred source when present because it already combines
+    category totals with linked supporting items.
     """
-    primary_recap = _get_recap(primary_payload)
-    comparison_recap = _get_recap(comparison_payload)
-
-    if primary_recap:
-        primary_cats = _extract_category_totals(primary_recap)
-        source = "recap_by_category"
-    else:
-        primary_cats = _synthesize_from_sections(primary_payload)
-        source = "synthesized"
-
-    if comparison_recap:
-        comparison_cats = _extract_category_totals(comparison_recap)
-    else:
-        comparison_cats = _synthesize_from_sections(comparison_payload)
-
-    primary_trade_items = _get_trade_items(primary_payload)
-    comparison_trade_items = _get_trade_items(comparison_payload)
+    primary_cats, primary_source, primary_evidence, primary_trade_items = _build_category_view(primary_payload)
+    comparison_cats, comparison_source, comparison_evidence, comparison_trade_items = _build_category_view(comparison_payload)
 
     return TradeContext(
         primary_by_category=primary_cats,
         comparison_by_category=comparison_cats,
-        source=source,
+        source=primary_source,
+        primary_source=primary_source,
+        comparison_source=comparison_source,
+        primary_category_evidence=primary_evidence,
+        comparison_category_evidence=comparison_evidence,
         primary_trade_items=primary_trade_items,
         comparison_trade_items=comparison_trade_items,
     )
@@ -138,6 +127,57 @@ def _get_recap(payload: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     if isinstance(rb, dict) and rb:
         return rb
     return None
+
+
+def _build_category_view(
+    payload: Dict[str, Any],
+) -> Tuple[Dict[str, float], str, Dict[str, CategoryEvidence], List[Dict[str, Any]]]:
+    """
+    Build category totals and evidence bundles for one estimate payload.
+
+    Preference order:
+      1. trade_summary (preferred: totals plus supporting items)
+      2. recap_by_category
+      3. synthesized section totals
+
+    When trade_summary exists, recap data still supplements categories not represented
+    in the trade summary so the category surface remains complete.
+    """
+    recap = _get_recap(payload)
+    trade_items = _get_trade_items(payload)
+
+    recap_totals = _extract_category_totals(recap) if recap else {}
+    recap_evidence = _extract_recap_evidence(recap) if recap else {}
+    trade_totals, trade_evidence = _extract_trade_summary_evidence(trade_items)
+
+    if trade_evidence:
+        totals = dict(recap_totals)
+        evidence = dict(recap_evidence)
+        for category, trade_bundle in trade_evidence.items():
+            if category in recap_totals:
+                trade_bundle.total = recap_totals[category]
+                totals[category] = recap_totals[category]
+            else:
+                totals[category] = trade_totals.get(category, trade_bundle.total)
+            evidence[category] = trade_bundle
+        return totals, "trade_summary", evidence, trade_items
+
+    if recap:
+        return recap_totals, "recap_by_category", recap_evidence, trade_items
+
+    synth_totals = _synthesize_from_sections(payload)
+    synth_evidence = {
+        category: CategoryEvidence(
+            category=category,
+            total=amount,
+            source="synthesized",
+            supporting_items=[],
+            supporting_groups=[],
+        )
+        for category, amount in synth_totals.items()
+        if amount
+    }
+    return synth_totals, "synthesized", synth_evidence, trade_items
 
 
 def _extract_category_totals(recap: Dict[str, Any]) -> Dict[str, float]:
@@ -189,6 +229,114 @@ def _extract_category_totals(recap: Dict[str, Any]) -> Dict[str, float]:
                 totals["Permit Fees"] = round(totals.get("Permit Fees", 0.0) + amount, 2)
 
     return totals
+
+
+def _extract_recap_evidence(recap: Dict[str, Any]) -> Dict[str, CategoryEvidence]:
+    """Build source-aware category evidence bundles from recap_by_category."""
+    _, XACTIMATE_CATEGORY_CODE_MAP, CATEGORY_KEYWORDS, CATEGORY_FALLBACK = _get_core_constants()
+    evidence: Dict[str, CategoryEvidence] = {}
+
+    for group_label, items in recap.items():
+        if group_label == "subtotals" or not isinstance(items, list):
+            continue
+        for entry in items:
+            if not isinstance(entry, dict):
+                continue
+            amount = _normalize_money(entry.get("total") or entry.get("amount"))
+            if amount is None:
+                continue
+            raw_name = entry.get("item") or entry.get("name") or entry.get("label") or ""
+            mapped = _map_category(
+                raw_name or group_label,
+                XACTIMATE_CATEGORY_CODE_MAP,
+                CATEGORY_KEYWORDS,
+                CATEGORY_FALLBACK,
+            )
+            current = evidence.get(mapped)
+            if current is None:
+                evidence[mapped] = CategoryEvidence(
+                    category=mapped,
+                    total=round(amount, 2),
+                    source="recap_by_category",
+                    supporting_items=[],
+                    supporting_groups=[entry],
+                )
+            else:
+                current.total = round(current.total + amount, 2)
+                current.supporting_groups.append(entry)
+
+    subtotals = recap.get("subtotals") if isinstance(recap, dict) else None
+    if isinstance(subtotals, list):
+        for entry in subtotals:
+            if not isinstance(entry, dict):
+                continue
+            label = _normalize_label(entry.get("label") or "")
+            amount = _normalize_money(entry.get("total"))
+            if amount is None:
+                continue
+            mapped: Optional[str] = None
+            if "OVERHEAD" in label or "PROFIT" in label:
+                mapped = "Overhead & Profit"
+            elif "MATERIAL" in label and "TAX" in label:
+                mapped = "Material Sales Tax"
+            elif "PERMIT" in label:
+                mapped = "Permit Fees"
+            if mapped is None:
+                continue
+            current = evidence.get(mapped)
+            if current is None:
+                evidence[mapped] = CategoryEvidence(
+                    category=mapped,
+                    total=round(amount, 2),
+                    source="recap_by_category",
+                    supporting_items=[],
+                    supporting_groups=[entry],
+                )
+            else:
+                current.total = round(current.total + amount, 2)
+                current.supporting_groups.append(entry)
+
+    return evidence
+
+
+def _extract_trade_summary_evidence(
+    trade_items: List[Dict[str, Any]],
+) -> Tuple[Dict[str, float], Dict[str, CategoryEvidence]]:
+    """
+    Build category totals/evidence from trade_summary rows.
+
+    trade_summary is preferred because it already links category rollups to the
+    items that support those rollups, avoiding separate lookup work later.
+    """
+    _, xactimate_map, keywords, fallback = _get_core_constants()
+    totals: Dict[str, float] = {}
+    evidence: Dict[str, CategoryEvidence] = {}
+
+    for trade_row in trade_items:
+        if not isinstance(trade_row, dict):
+            continue
+        raw_name = f"{trade_row.get('trade_code') or ''} {trade_row.get('trade') or ''}".strip()
+        mapped = _map_category(raw_name, xactimate_map, keywords, fallback)
+        amount = _normalize_trade_total(trade_row)
+        items = _normalize_trade_items(trade_row)
+
+        current = evidence.get(mapped)
+        if current is None:
+            current = CategoryEvidence(
+                category=mapped,
+                total=0.0,
+                source="trade_summary",
+                supporting_items=[],
+                supporting_groups=[],
+            )
+            evidence[mapped] = current
+
+        current.total = round(current.total + amount, 2)
+        current.supporting_items.extend(items)
+        current.supporting_groups.append(trade_row)
+        totals[mapped] = round(totals.get(mapped, 0.0) + amount, 2)
+
+    return totals, evidence
 
 
 def _map_category(
@@ -271,3 +419,48 @@ def _get_trade_items(payload: Dict[str, Any]) -> List[Dict[str, Any]]:
     if not isinstance(items, list):
         return []
     return items
+
+
+def _normalize_trade_total(trade_row: Dict[str, Any]) -> float:
+    """Best-effort replacement-cost total extraction for a trade_summary row."""
+    total = trade_row.get("total")
+    if isinstance(total, dict):
+        amount = _normalize_money(total.get("repl_cost_total"))
+        if amount is not None:
+            return amount
+    if isinstance(total, (int, float, str)):
+        amount = _normalize_money(total)
+        if amount is not None:
+            return amount
+
+    row_sum = 0.0
+    for item in trade_row.get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        amount = _normalize_money(item.get("repl_cost_total") or item.get("total"))
+        if amount is not None:
+            row_sum += amount
+    return round(row_sum, 2)
+
+
+def _normalize_trade_items(trade_row: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Normalize trade_summary nested items into line-item-like dicts."""
+    normalized: List[Dict[str, Any]] = []
+    trade_code = (trade_row.get("trade_code") or "").strip().upper()
+    trade = trade_row.get("trade") or ""
+    for item in trade_row.get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        normalized.append(
+            {
+                "type": "line_item",
+                "cat": trade_code,
+                "trade": trade,
+                "description": item.get("description") or "",
+                "qty": item.get("line_item_qty") or "",
+                "unit": "",
+                "total": item.get("repl_cost_total") or item.get("total") or "0.00",
+                "source": "trade_summary",
+            }
+        )
+    return normalized

@@ -95,6 +95,7 @@ def map_driver_items(
     cost_drivers: List[CostDriver],
     primary_payload: Dict[str, Any],
     comparison_payload: Dict[str, Any],
+    trade_ctx: Optional[TradeContext] = None,
 ) -> List[DriverWithItems]:
     """
     DRIVER-02: Map all line items for each cost driver category.
@@ -114,15 +115,33 @@ def map_driver_items(
         List[DriverWithItems] in same order as cost_drivers input.
     """
     xactimate_map, fallback = _get_core_constants()
+    selected_categories = [driver.category for driver in cost_drivers]
 
-    # Pre-extract all line items from each payload (one pass per payload)
-    primary_items_by_cat = _collect_items_by_category(primary_payload, xactimate_map, fallback)
-    comparison_items_by_cat = _collect_items_by_category(comparison_payload, xactimate_map, fallback)
+    primary_items_by_cat = _collect_items_for_categories(
+        primary_payload,
+        selected_categories,
+        xactimate_map,
+        fallback,
+    )
+    comparison_items_by_cat = _collect_items_for_categories(
+        comparison_payload,
+        selected_categories,
+        xactimate_map,
+        fallback,
+    )
 
     results: List[DriverWithItems] = []
     for driver in cost_drivers:
-        p_items = primary_items_by_cat.get(driver.category, [])
-        c_items = comparison_items_by_cat.get(driver.category, [])
+        p_items = _resolve_driver_items(
+            driver.category,
+            payload_items=primary_items_by_cat.get(driver.category, []),
+            evidence_map=(trade_ctx.primary_category_evidence if trade_ctx else None),
+        )
+        c_items = _resolve_driver_items(
+            driver.category,
+            payload_items=comparison_items_by_cat.get(driver.category, []),
+            evidence_map=(trade_ctx.comparison_category_evidence if trade_ctx else None),
+        )
 
         verification_ok, verification_note = _verify_item_sums(
             p_items, driver.primary_total,
@@ -142,8 +161,9 @@ def map_driver_items(
 
 # ---------- Private helpers ----------
 
-def _collect_items_by_category(
+def _collect_items_for_categories(
     payload: Dict[str, Any],
+    selected_categories: List[str],
     xactimate_map: Dict[str, str],
     fallback: str,
 ) -> Dict[str, List[Dict[str, Any]]]:
@@ -153,7 +173,8 @@ def _collect_items_by_category(
     Only type=='line_item' entries collected. 'header' type entries are skipped.
     cat code mapped via XACTIMATE_CATEGORY_CODE_MAP; unmapped codes -> fallback.
     """
-    result: Dict[str, List[Dict[str, Any]]] = {}
+    allowed = set(selected_categories)
+    result: Dict[str, List[Dict[str, Any]]] = {category: [] for category in allowed}
 
     if not isinstance(payload, dict):
         return result
@@ -175,11 +196,29 @@ def _collect_items_by_category(
                 continue  # skip 'header' type entries
             cat_code = item.get("cat") or ""
             category = xactimate_map.get(cat_code.upper(), fallback)
-            if category not in result:
-                result[category] = []
+            if category not in allowed:
+                continue
             result[category].append(item)
 
     return result
+
+
+def _resolve_driver_items(
+    category: str,
+    payload_items: List[Dict[str, Any]],
+    evidence_map: Optional[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """
+    Prefer trade-summary-derived evidence when available for the selected category.
+
+    Otherwise fall back to section item mapping for the selected category only.
+    """
+    if evidence_map:
+        evidence = evidence_map.get(category)
+        supporting_items = getattr(evidence, "supporting_items", None)
+        if supporting_items:
+            return list(supporting_items)
+    return payload_items
 
 
 def _verify_item_sums(

@@ -74,7 +74,7 @@ def test_map_items_length_matches_input():
     comparison = load_golden("lachman")
     ctx = build_trade_context(primary, comparison)
     drivers = identify_cost_drivers(ctx, top_n=5)
-    results = map_driver_items(drivers, primary, comparison)
+    results = map_driver_items(drivers, primary, comparison, trade_ctx=ctx)
     assert len(results) == 5
     assert all(isinstance(r, DriverWithItems) for r in results)
 
@@ -84,7 +84,7 @@ def test_map_items_populated_for_kalyvas():
     primary = load_golden("kalyvas")
     ctx = build_trade_context(primary, {})
     drivers = identify_cost_drivers(ctx, top_n=5)
-    results = map_driver_items(drivers, primary, {})
+    results = map_driver_items(drivers, primary, {}, trade_ctx=ctx)
     populated = [r for r in results if len(r.primary_items) > 0]
     assert len(populated) >= 3, (
         f"Expected >=3 drivers with primary_items in kalyvas (887 items), "
@@ -97,7 +97,7 @@ def test_map_items_only_line_item_type():
     primary = load_golden("kalyvas")
     ctx = build_trade_context(primary, {})
     drivers = identify_cost_drivers(ctx, top_n=5)
-    results = map_driver_items(drivers, primary, {})
+    results = map_driver_items(drivers, primary, {}, trade_ctx=ctx)
     for r in results:
         for item in r.primary_items + r.comparison_items:
             assert item.get("type") == "line_item", (
@@ -110,7 +110,7 @@ def test_map_items_painting_cat_codes():
     primary = load_golden("kalyvas")
     ctx = build_trade_context(primary, {})
     drivers = identify_cost_drivers(ctx, top_n=10)
-    results = map_driver_items(drivers, primary, {})
+    results = map_driver_items(drivers, primary, {}, trade_ctx=ctx)
     painting = next((r for r in results if r.driver.category == "Painting"), None)
     if painting is None or not painting.primary_items:
         pytest.skip("Painting not in top 10 drivers or has no items for this doc")
@@ -138,7 +138,7 @@ def test_verification_ok_for_kalyvas_self():
     kalyvas = load_golden("kalyvas")
     ctx = build_trade_context(kalyvas, {})
     drivers = identify_cost_drivers(ctx, top_n=5)
-    results = map_driver_items(drivers, kalyvas, {})
+    results = map_driver_items(drivers, kalyvas, {}, trade_ctx=ctx)
     ok_count = sum(1 for r in results if r.verification_ok)
     assert ok_count >= 1, (
         f"Expected >=1 verification_ok for kalyvas self-test, got {ok_count}. "
@@ -165,3 +165,48 @@ def test_verification_fail_note_contains_amounts():
     assert any(c.isdigit() for c in r.verification_note), (
         f"verification_note should contain numbers: {r.verification_note}"
     )
+
+
+def test_trade_summary_items_preferred_for_statefarm_driver():
+    """Phase 34: use trade_summary supporting items when available for a selected category."""
+    primary = load_golden("lachman_sf")
+    comparison = {}
+    ctx = build_trade_context(primary, comparison)
+    driver = CostDriver(
+        category="Cleaning / Restoration",
+        primary_total=ctx.primary_by_category["Cleaning / Restoration"],
+        comparison_total=0.0,
+        delta=ctx.primary_by_category["Cleaning / Restoration"],
+    )
+
+    results = map_driver_items([driver], primary, comparison, trade_ctx=ctx)
+
+    assert len(results) == 1
+    assert len(results[0].primary_items) > 0
+    assert results[0].primary_items[0]["source"] == "trade_summary"
+
+
+def test_map_driver_items_only_collects_selected_categories():
+    """Phase 34: fallback payload mapping is scoped to the selected driver categories."""
+    payload = {
+        "sections": [
+            {
+                "line_items": [
+                    {"type": "line_item", "cat": "PNT", "description": "Paint", "total": "100.00"},
+                    {"type": "line_item", "cat": "ELE", "description": "Wire", "total": "200.00"},
+                ]
+            }
+        ]
+    }
+    ctx = TradeContext(
+        primary_by_category={"Painting": 100.0, "Electrical": 200.0},
+        comparison_by_category={},
+        source="recap_by_category",
+    )
+    driver = CostDriver(category="Painting", primary_total=100.0, comparison_total=0.0, delta=100.0)
+
+    results = map_driver_items([driver], payload, {}, trade_ctx=ctx)
+
+    assert len(results) == 1
+    descriptions = [item["description"] for item in results[0].primary_items]
+    assert descriptions == ["Paint"]

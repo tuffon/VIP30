@@ -7,7 +7,7 @@ import pytest
 from conftest import load_golden, get_grand_total
 
 # These imports will fail until models.py and trade_context.py are written:
-from vip_shared.pipeline.models import TradeContext
+from vip_shared.pipeline.models import CategoryEvidence, TradeContext
 from vip_shared.pipeline.passes.trade_context import build_trade_context
 
 
@@ -31,10 +31,12 @@ def test_primary_by_category_populated(name):
     "kalyvas", "lachman", "bschacter", "SF_BSchacter", "kalyvas_sf", "lachman_sf"
 ])
 def test_source_is_recap_by_category(name):
-    """TRADE-01: source field reflects which fallback level was used."""
+    """TRADE-01/02: source field reflects the dominant category source used."""
     payload = load_golden(name)
     ctx = build_trade_context(payload, {})
-    assert ctx.source == "recap_by_category"
+    expected = "trade_summary" if name in {"kalyvas_sf", "lachman_sf"} else "recap_by_category"
+    assert ctx.source == expected
+    assert ctx.primary_source == expected
 
 
 @pytest.mark.parametrize("name,expected_min,tolerance", [
@@ -93,6 +95,32 @@ def test_trade_summary_enrichment_lachman_sf():
     assert len(ctx.primary_trade_items) >= 13, (
         f"lachman_sf should have 13 trade_summary line_items, got {len(ctx.primary_trade_items)}"
     )
+
+
+def test_trade_summary_creates_category_evidence_bundle():
+    """TRADE-02: trade_summary builds source-aware category evidence when present."""
+    payload = load_golden("lachman_sf")
+    ctx = build_trade_context(payload, {})
+
+    cleaning = ctx.primary_category_evidence["Cleaning / Restoration"]
+    assert isinstance(cleaning, CategoryEvidence)
+    assert cleaning.source == "trade_summary"
+    assert cleaning.total > 0
+    assert len(cleaning.supporting_items) > 0
+    assert len(cleaning.supporting_groups) > 0
+    assert cleaning.supporting_items[0]["source"] == "trade_summary"
+
+
+def test_recap_by_category_remains_fallback_evidence():
+    """TRADE-01: recap-only docs still build recap-backed category evidence."""
+    payload = load_golden("lachman")
+    ctx = build_trade_context(payload, {})
+
+    appliances = ctx.primary_category_evidence["Appliances / Equipment"]
+    assert appliances.source == "recap_by_category"
+    assert appliances.total > 0
+    assert appliances.supporting_items == []
+    assert len(appliances.supporting_groups) > 0
 
 
 def test_no_trade_summary_for_rough_drafts():
