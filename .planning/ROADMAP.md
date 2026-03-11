@@ -9,7 +9,7 @@ Four phases to replace the monolithic analysis→writer→rewrite pipeline with 
 - ✅ **v2.3 Report Quality** — Phases 18-22 (shipped 2026-03-07)
 - ✅ **v2.4 Parser Coverage** — Phases 23-25 (shipped 2026-03-09)
 - ✅ **v2.5 Parser Fixes** — Phases 26-28 (shipped 2026-03-09)
-- 🚧 **v2.6 Pipeline Rewrite** — Phases 29-32 (in progress)
+- 🚧 **v2.6 Pipeline Rewrite** — Phases 29-33 (implementation complete)
 
 ## Phases
 
@@ -126,6 +126,22 @@ Plans:
 - [x] 32-01: Build SummaryResult model + run_summary_pass() + final_summary_v1 prompt + rebuilt quality rewrite
 - [x] 32-02: Build CostDriverPipeline orchestrator + assemble_final_narrative() + fallback removal + bid_comp integration
 
+### Phase 33: Parser recap + trade summary completeness
+**Goal**: Ensure `recap_by_category` and `trade_summary` are parsed into final JSON output wherever present, update golden JSON fixtures to match verified parser reality, and prevent regressions with validation coverage.
+**Depends on**: Phase 32
+**Requirements**: parser output contract + regression baseline completeness
+**Success Criteria** (what must be TRUE):
+  1. `recaps_and_summaries.recap_by_category` exists for all tracked parser corpus documents
+  2. `trade_summary` is parsed when present and emitted as `null` when absent
+  3. Known wrapped description cases in `SF_BSchacter.pdf` no longer land in `notes`
+  4. Goldens and gap report are refreshed against the verified parser baseline
+**Plans**: 3 plans
+
+Plans:
+- [x] 33-01: Lock recap/trade-summary parser contract and add contract tests
+- [x] 33-02: Fix State Farm wrapped-description vs notes handling
+- [x] 33-03: Refresh parser goldens, add new Schacter final-draft corpus entry, rerun regression suite and gap report
+
 ## Progress
 
 **Execution Order:** 29 → 30 → 31 → 32
@@ -142,13 +158,4 @@ Plans:
 | 30. Cost Driver Identification | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 31. Per-Driver LLM Pass | v2.6 | 1/1 | Complete | 2026-03-10 |
 | 32. Final Summary + Pipeline Integration | v2.6 | 2/2 | Complete | 2026-03-10 |
-
-### Phase 33: Parser recap + trade summary completeness
-
-**Goal:** Ensure `recap_by_category` and `trade_summary` are parsed into final JSON output wherever present, update golden JSON fixtures to match verified parser reality, and prevent regressions with validation coverage.
-**Requirements**: TBD
-**Depends on:** Phase 32
-**Plans:** 0 plans
-
-Plans:
-- [ ] TBD (run /gsd:plan-phase 33 to break down)
+| 33. Parser recap + trade summary completeness | v2.6 | 3/3 | Complete | 2026-03-11 |

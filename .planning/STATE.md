@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v2.6
 milestone_name: pipeline-rewrite
 status: in_progress
-last_updated: "2026-03-10T21:55:00Z"
+last_updated: "2026-03-11T01:30:00Z"
 progress:
-  total_phases: 4
-  completed_phases: 3
-  total_plans: 5
-  completed_plans: 3
+  total_phases: 5
+  completed_phases: 5
+  total_plans: 8
+  completed_plans: 8
 ---
 
 # Project State
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Reliable end-to-end bid comparison that produces actionable output
-**Current focus:** v2.6 Pipeline Rewrite — Phase 32 complete; milestone implementation complete pending milestone closeout
+**Current focus:** v2.6 Pipeline Rewrite — Phase 33 complete; milestone implementation complete pending milestone closeout
 
 ## Current Position
 
-Phase: 32 of 32 (Final Summary + Pipeline Integration) — COMPLETE
-Plan: 32-02 of 32-02 — complete; next: milestone closeout / archive workflow
-Status: Phase 32 complete
-Last activity: 2026-03-10 — Completed 32-01-PLAN.md and 32-02-PLAN.md: SummaryResult + run_summary_pass() + CostDriverPipeline + BidComp integration; 56/56 shared-python tests pass, parser suite reported 1 unrelated coverage failure
+Phase: 33 of 33 (Parser recap + trade summary completeness) — COMPLETE
+Plan: 33-03 of 33-03 — complete; next: milestone closeout / archive workflow
+Status: Phase 33 complete
+Last activity: 2026-03-11 — Completed 33-01 through 33-03: parser recap/trade-summary contract, State Farm wrapped-line fix, refreshed parser goldens, new Schacter final-draft corpus coverage, and regenerated gap report; parser suite now passes 36/36
 
-Progress: ██████████ 5/5 plans (100%)
+Progress: ██████████ 8/8 plans (100%)
 
 ## Completed Milestones
 
@@ -45,6 +45,7 @@ Progress: ██████████ 5/5 plans (100%)
 
 ### Roadmap Evolution
 
+- Phase 33 completed: parser recap + trade summary completeness, wrapped-line fix, refreshed goldens, seven-document parser regression suite passing
 - Phase 33 repurposed: parser recap + trade summary completeness, golden updates, and regression validation
 - Phase 33 added: pipeline optimizations and refactors
 - Phase 29-32 added: v2.6 Pipeline Rewrite — 4 phases, 5 plans; TradeContext + CostDriver + DriverAnalysis + SummaryResult + CostDriverPipeline
