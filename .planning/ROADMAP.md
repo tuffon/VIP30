@@ -162,10 +162,18 @@ Plans:
 
 ### Phase 34: pipeline improvements using the recap by summary and trade summary output from the json
 
-**Goal:** [To be planned]
-**Requirements**: TBD
+**Goal:** Recenter BidComp on parser category structures so `trade_summary` and `recap_by_category` drive category diffs, deterministic top cost driver selection, and evidence-grounded narrative synthesis.
+**Requirements**: TRADE-01, TRADE-02, DRIVER-01, DRIVER-02, PASS-01, SUMM-01, SUMM-02, INTEG-01, INTEG-02
 **Depends on:** Phase 33
-**Plans:** 0 plans
+**Success Criteria** (what must be TRUE):
+  1. When `trade_summary` exists, the pipeline uses it as the preferred category evidence source because it already combines recap totals with associated line items
+  2. When `trade_summary` is absent, `recap_by_category` still drives category diffs and only selected top-driver categories require deeper fallback line-item association
+  3. Top cost drivers are selected deterministically from category deltas before any LLM step
+  4. Per-driver prompt context is grounded in structured category evidence, line items, delta facts, and estimate metadata rather than thin raw item blobs alone
+  5. Final summary synthesis and visible top-driver output remain aligned to the same category-diff truth without changing external report format compatibility
+**Plans:** 3 plans
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 34 to break down)
+- [ ] 34-01: Build trade-summary-first category evidence foundation with recap fallback
+- [ ] 34-02: Rework deterministic top-driver grounding and driver-pass prompt context
+- [ ] 34-03: Align summary/orchestrator flow and verify category-first end-to-end behavior

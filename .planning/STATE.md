@@ -45,7 +45,7 @@ Progress: ██████████ 8/8 plans (100%)
 
 ### Roadmap Evolution
 
-- Phase 33.1 inserted after Phase 33: recap by category and trade summary is not showing up in the json output at all (URGENT)
+- Phase 34 planned: category-first pipeline improvements using `trade_summary` / `recap_by_category` as the core bid-comp inputs
 - Phase 34 added: pipeline improvements using the recap by summary and trade summary output from the json
 - Phase 33 completed: parser recap + trade summary completeness, wrapped-line fix, refreshed goldens, seven-document parser regression suite passing
 - Phase 33 repurposed: parser recap + trade summary completeness, golden updates, and regression validation
