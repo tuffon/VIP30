@@ -5,6 +5,7 @@ import io
 import json
 import sys
 import tempfile
+from functools import lru_cache
 import pytest
 from pathlib import Path
 
@@ -34,6 +35,11 @@ DOCUMENTS = [
         "contractor-final",
     ),
     (
+        "final-drafts/SCHACTER_RECON_6B_FINAL_DRAFT_CAR.golden.json",
+        "docs/final-drafts/SCHACTER_RECON_6B_FINAL_DRAFT_CAR.pdf",
+        "contractor-final",
+    ),
+    (
         "final-drafts/statefarm/SF_BSchacter.golden.json",
         "docs/final-drafts/statefarm/SF_BSchacter.pdf",
         "statefarm",
@@ -58,6 +64,7 @@ def load_golden(rel_path: str) -> dict:
         return json.load(f)
 
 
+@lru_cache(maxsize=None)
 def run_parser(pdf_rel: str) -> dict | None:
     """
     Invoke XactimateRoughDraftParser on the given PDF (relative to ROOT).

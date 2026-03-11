@@ -124,7 +124,7 @@ def _section_diff(golden: dict, parsed: dict) -> tuple[str, float]:
 
 
 # ---------------------------------------------------------------------------
-# Tests — parametrized over all 6 documents
+# Tests — parametrized over the full current parser corpus
 # ---------------------------------------------------------------------------
 
 @pytest.mark.parametrize("golden_rel,pdf_rel,doc_type", DOCUMENTS)
@@ -157,5 +157,43 @@ class TestCoverage:
         if coverage_pct < threshold or (doc_type != "rough-draft" and coverage_pct < 100.0):
             pytest.fail(
                 f"\n[{golden_rel}] SECTION COVERAGE:\n{diff_text}\n"
+                f"(doc_type={doc_type})"
+            )
+
+    def test_recap_trade_summary_contract(self, golden_rel, pdf_rel, doc_type):
+        """Parser emits recap_by_category always and trade_summary with explicit null semantics."""
+        golden = load_golden(golden_rel)
+        parsed = run_parser(pdf_rel)
+
+        if parsed is None:
+            pytest.fail(f"\n[{golden_rel}] PARSE FAILED:\nparser returned no output\n(doc_type={doc_type})")
+
+        recaps = parsed.get("recaps_and_summaries") or {}
+        if not recaps.get("recap_by_category"):
+            pytest.fail(
+                f"\n[{golden_rel}] RECAP CONTRACT:\n"
+                "recaps_and_summaries.recap_by_category missing or empty\n"
+                f"(doc_type={doc_type})"
+            )
+
+        expected_trade_present = ((golden.get("recaps_and_summaries") or {}).get("trade_summary")) is not None
+        if "trade_summary" not in recaps:
+            pytest.fail(
+                f"\n[{golden_rel}] TRADE SUMMARY CONTRACT:\n"
+                "recaps_and_summaries.trade_summary key missing\n"
+                f"(doc_type={doc_type})"
+            )
+
+        if expected_trade_present and recaps["trade_summary"] is None:
+            pytest.fail(
+                f"\n[{golden_rel}] TRADE SUMMARY CONTRACT:\n"
+                "trade_summary expected from source/golden but parser emitted null\n"
+                f"(doc_type={doc_type})"
+            )
+
+        if not expected_trade_present and recaps["trade_summary"] is not None:
+            pytest.fail(
+                f"\n[{golden_rel}] TRADE SUMMARY CONTRACT:\n"
+                "trade_summary should be null when section is absent\n"
                 f"(doc_type={doc_type})"
             )

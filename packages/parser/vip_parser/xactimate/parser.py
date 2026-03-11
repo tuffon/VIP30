@@ -141,9 +141,8 @@ class XactimateRoughDraftParser:
             "recap_tax_op": end.get("recap_tax_op"),
             "recap_by_room": end.get("recap_by_room"),
             "recap_by_category": end.get("recap_by_category") or recap_cat or {"subtotals": []},
+            "trade_summary": end.get("trade_summary"),
         }
-        if end.get("trade_summary"):
-            recaps["trade_summary"] = end["trade_summary"]
         # -------------------------------------------------------------------------------------------
 
         payload = {
@@ -713,12 +712,70 @@ class XactimateRoughDraftParser:
     def _attach_pending_notes(self, current_line_item: Optional[dict], pending: List[str]) -> None:
         if current_line_item is None or not pending:
             return
-        note_text = ' '.join(pending).strip()
+        captured_pending = list(pending)
         pending.clear()
-        if not note_text:
-            return
-        existing = current_line_item.get('notes') or ''
-        current_line_item['notes'] = f"{existing} {note_text}".strip() if existing else note_text
+        description_lines, note_lines = self._split_pending_description_and_notes(current_line_item, captured_pending)
+        if description_lines:
+            description = (current_line_item.get('description') or '').strip()
+            current_line_item['description'] = ' '.join([description, *description_lines]).strip()
+        note_text = ' '.join(note_lines).strip()
+        if note_text:
+            existing = current_line_item.get('notes') or ''
+            current_line_item['notes'] = f"{existing} {note_text}".strip() if existing else note_text
+
+    def _split_pending_description_and_notes(
+        self,
+        current_line_item: dict,
+        pending: List[str],
+    ) -> Tuple[List[str], List[str]]:
+        description = (current_line_item.get('description') or '').strip()
+        description_lines: List[str] = []
+        note_lines = list(pending)
+
+        while note_lines:
+            candidate = (note_lines[0] or '').strip()
+            next_candidate = (note_lines[1] or '').strip() if len(note_lines) > 1 else ''
+            if not self._looks_like_wrapped_description(description, candidate, next_candidate, description_lines):
+                break
+            description_lines.append(candidate)
+            description = f"{description} {candidate}".strip()
+            note_lines.pop(0)
+
+        return description_lines, note_lines
+
+    def _looks_like_wrapped_description(
+        self,
+        current_description: str,
+        candidate: str,
+        next_candidate: str,
+        promoted_lines: List[str],
+    ) -> bool:
+        candidate = (candidate or '').strip()
+        next_candidate = (next_candidate or '').strip()
+        if not candidate:
+            return False
+
+        lowered = candidate.lower()
+        if re.match(r'^(?:note:|this\b|includes?\b|revised\b|end\s+revisions\b)', lowered):
+            return False
+
+        word_count = len(candidate.split())
+        current_open_parens = current_description.count('(') - current_description.count(')')
+        if current_open_parens > 0 and word_count <= 8:
+            return True
+
+        if current_description.rstrip().endswith(('-', '/', ':', '(')) and word_count <= 8:
+            return True
+
+        starts_lower = candidate[:1].islower()
+        next_starts_lower = next_candidate[:1].islower()
+        if starts_lower and word_count <= 5 and next_candidate and next_starts_lower and len(next_candidate.split()) <= 5:
+            return True
+
+        if promoted_lines and starts_lower and word_count <= 3:
+            return True
+
+        return False
 
     def _try_start_line_item(self, line: str, columns: TableColumns) -> Tuple[Optional[dict], bool]:
         if columns.family == 'A':
