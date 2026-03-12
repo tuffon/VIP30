@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, EmailStr
 from sqlmodel.ext.asyncio.session import AsyncSession
+from src.api.logging_config import get_logger
 
 from vip_shared.db.models import User, Workspace
 from src.dependencies.auth import get_current_user
@@ -11,6 +12,7 @@ from vip_shared.services.otp import OTPService
 
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
+logger = get_logger("vip-parse.auth")
 
 
 class OTPSendRequest(BaseModel):
@@ -59,14 +61,17 @@ async def send_otp(request: OTPSendRequest, db: AsyncSession = Depends(get_db)):
             },
         )
 
+    logger.info("otp_send_requested", extra={"email": request.email})
     code = await OTPService.create_code(db, request.email)
     sent = await OTPService.send_otp_email(request.email, code)
     if not sent:
+        logger.error("otp_send_failed", extra={"email": request.email})
         raise HTTPException(
             status_code=500,
             detail={"error": "email_failed", "message": "Failed to send verification email"},
         )
 
+    logger.info("otp_send_succeeded", extra={"email": request.email})
     return OTPSendResponse(success=True, message="Verification code sent to your email")
 
 

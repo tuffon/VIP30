@@ -1,5 +1,13 @@
 "use client";
 
+function formatStableDateTime(value: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "UTC",
+  }).format(new Date(value));
+}
+
 type CreditTransaction = {
   id: string;
   type: "grant" | "consumption";
@@ -62,7 +70,7 @@ export function CreditHistoryList({
                         : "Credit consumption"}
                   </p>
                 </div>
-                <p className="text-xs text-slate-500">{new Date(tx.created_at).toLocaleString()}</p>
+                <p className="text-xs text-slate-500">{formatStableDateTime(tx.created_at)} UTC</p>
               </li>
             );
           })}

@@ -2,6 +2,14 @@
 
 import Link from "next/link";
 
+function formatStableDateTime(value: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "UTC",
+  }).format(new Date(value));
+}
+
 type JobHistoryItem = {
   id: string;
   state: "queued" | "parsing" | "analyzing" | "writing" | "completed" | "failed";
@@ -72,7 +80,7 @@ export function JobHistoryList({
                   </span>
                 </div>
                 <p className="text-xs text-slate-500">
-                  Created {new Date(job.created_at).toLocaleString()} · Credit cost: 1
+                  Created {formatStableDateTime(job.created_at)} UTC · Credit cost: 1
                 </p>
                 {job.current_step ? <p className="text-xs text-slate-500">{job.current_step}</p> : null}
                 {job.state === "failed" && job.error_message ? (

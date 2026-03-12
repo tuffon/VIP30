@@ -21,11 +21,7 @@ export function NavAuth() {
   const router = useRouter();
   const apiBase = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000", []);
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState<string | null>(() => {
-    const persisted = getPersistedSession();
-    if (!persisted) return null;
-    return isSessionValid(persisted) ? persisted.email : null;
-  });
+  const [email, setEmail] = useState<string | null>(null);
   const [role, setRole] = useState<string>("member");
 
   const loadUser = useCallback(async () => {
@@ -62,6 +58,10 @@ export function NavAuth() {
     async function loadOnMount() {
       try {
         if (!isMounted) return;
+        const persisted = getPersistedSession();
+        if (persisted && isSessionValid(persisted)) {
+          setEmail(persisted.email);
+        }
         await loadUser();
       } catch {
         // no-op: loadUser handles state updates

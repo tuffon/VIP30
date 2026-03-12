@@ -53,7 +53,8 @@ export function JobProgress({
   const [requestError, setRequestError] = useState<string | null>(null);
   const [lastPollAt, setLastPollAt] = useState<number | null>(null);
   const [lastProgressAt, setLastProgressAt] = useState<number | null>(null);
-  const [startedAt, setStartedAt] = useState<number>(Date.now());
+  const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [now, setNow] = useState<number | null>(null);
   const callbackSent = useRef(false);
   const previousProgress = useRef<number | null>(null);
 
@@ -63,7 +64,9 @@ export function JobProgress({
     setStatus(null);
     setRequestError(null);
     setLoading(true);
-    setStartedAt(Date.now());
+    const started = Date.now();
+    setStartedAt(started);
+    setNow(started);
     setLastPollAt(null);
     setLastProgressAt(null);
 
@@ -124,12 +127,20 @@ export function JobProgress({
     };
   }, [apiBase, jobId, onComplete, onError]);
 
+  useEffect(() => {
+    const tick = () => setNow(Date.now());
+    tick();
+    const intervalId = setInterval(tick, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
   const progress = status?.progress_percent ?? 0;
   const tone = stateTone[status?.state || "queued"];
   const isTerminal = status?.state === "completed" || status?.state === "failed";
-  const elapsedSec = Math.max(0, Math.floor((Date.now() - startedAt) / 1000));
-  const sinceLastPollSec = lastPollAt ? Math.floor((Date.now() - lastPollAt) / 1000) : null;
-  const sinceLastProgressSec = lastProgressAt ? Math.floor((Date.now() - lastProgressAt) / 1000) : null;
+  const currentNow = now ?? startedAt ?? 0;
+  const elapsedSec = startedAt ? Math.max(0, Math.floor((currentNow - startedAt) / 1000)) : 0;
+  const sinceLastPollSec = lastPollAt ? Math.floor((currentNow - lastPollAt) / 1000) : null;
+  const sinceLastProgressSec = lastProgressAt ? Math.floor((currentNow - lastProgressAt) / 1000) : null;
   const pollingHealthy = typeof sinceLastPollSec === "number" ? sinceLastPollSec * 1000 <= HEALTHY_POLL_WINDOW_MS : false;
   const milestoneProgress = status?.state === "completed" ? 100 : progress;
 
