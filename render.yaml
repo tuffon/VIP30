@@ -60,8 +60,6 @@ projects:
               - fromGroup: "Production Secrets"
               - key: NODE_VERSION
                 value: "20"
-              - key: NEXT_PUBLIC_API_BASE_URL
-                value: "https://vip30-api.onrender.com"
               - key: PORT
                 value: "3000"
 
