@@ -13,6 +13,8 @@ from vip_shared.services.otp import OTPService
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 logger = get_logger("vip-parse.auth")
+VIPCLAIMS_LOGIN_BONUS_DOMAIN = "@vipclaimservice.com"
+VIPCLAIMS_LOGIN_BONUS_AMOUNT = 5
 
 
 class OTPSendRequest(BaseModel):
@@ -103,6 +105,16 @@ async def verify_otp(
 
     if is_new_user:
         await CreditService.grant_signup_bonus(db, workspace.id)
+
+    if user.email.lower().endswith(VIPCLAIMS_LOGIN_BONUS_DOMAIN):
+        await CreditService.grant_manual(
+            db,
+            workspace_id=workspace.id,
+            amount=VIPCLAIMS_LOGIN_BONUS_AMOUNT,
+            source="vipclaimservice_login_bonus",
+            notes="Temporary login bonus for vipclaimservice.com testing",
+            granted_by=user.id,
+        )
 
     credit_balance = await CreditService.get_balance(db, workspace.id)
 
