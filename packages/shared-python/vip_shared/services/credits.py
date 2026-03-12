@@ -8,7 +8,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from vip_shared.db.models import CreditConsumption, CreditGrant
 
 
-DEFAULT_CREDITS_SIGNUP = int(os.environ.get("DEFAULT_CREDITS_SIGNUP", "5"))
+DEFAULT_CREDITS_SIGNUP = int(os.environ.get("DEFAULT_CREDITS_SIGNUP", "50"))
 
 
 class CreditAlreadyConsumedError(Exception):
