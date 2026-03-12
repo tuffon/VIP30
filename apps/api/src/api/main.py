@@ -34,7 +34,8 @@ async def startup_event():
 _cors_origins = [
     origin.strip()
     for origin in os.getenv(
-        "CORS_ORIGINS", "http://localhost:3000,https://vip30-frontend.onrender.com"
+        "CORS_ORIGINS",
+        "http://localhost:3000,https://vip30-frontend.onrender.com,https://www.scopevista.net",
     ).split(",")
     if origin.strip()
 ]
