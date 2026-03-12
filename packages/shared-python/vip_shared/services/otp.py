@@ -1,5 +1,6 @@
 import os
 import secrets
+import logging
 from datetime import datetime, timedelta
 from typing import Optional, Tuple
 
@@ -8,6 +9,7 @@ from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
 from vip_shared.db.models import OTPCode
+from vip_shared.integrations.sendgrid_client import SendGridClient
 
 
 OTP_EXPIRE_MINUTES = int(os.environ.get("OTP_EXPIRE_MINUTES", "10"))
@@ -15,6 +17,7 @@ OTP_MAX_REQUESTS_PER_HOUR = 5
 OTP_MAX_ATTEMPTS_PER_CODE = 5
 
 hasher = PasswordHash.recommended()
+logger = logging.getLogger("vip-parse.otp")
 
 
 class OTPService:
@@ -68,38 +71,97 @@ class OTPService:
         resend_from_email = os.environ.get("RESEND_FROM_EMAIL", "").strip()
         allow_console_fallback = os.environ.get("OTP_DEV_CONSOLE_FALLBACK", "false").lower() == "true"
 
-        if not resend_api_key:
-            if allow_console_fallback:
-                print(f"[DEV] OTP for {email}: {code}")
-                return True
-            print("Failed to send OTP email: RESEND_API_KEY is not configured")
-            return False
+        if resend_api_key and resend_from_email:
+            return OTPService._send_via_resend(email, code, resend_api_key, resend_from_email)
 
-        if not resend_from_email:
-            print("Failed to send OTP email: RESEND_FROM_EMAIL is not configured")
-            return False
+        sendgrid_client = SendGridClient()
+        if sendgrid_client.enabled:
+            return OTPService._send_via_sendgrid(sendgrid_client, email, code)
 
+        if allow_console_fallback:
+            print(f"[DEV] OTP for {email}: {code}")
+            return True
+
+        logger.error(
+            "Failed to send OTP email: no provider configured; expected RESEND_* or SENDGRID_* env vars"
+        )
+        return False
+
+    @staticmethod
+    def _send_via_resend(email: str, code: str, api_key: str, from_email: str) -> bool:
         import resend
 
-        resend.api_key = resend_api_key
+        resend.api_key = api_key
         try:
             resend.Emails.send(
                 {
-                    "from": resend_from_email,
+                    "from": from_email,
                     "to": email,
                     "subject": "Your verification code",
-                    "html": (
-                        "<h2>Your verification code</h2>"
-                        f"<p style='font-size: 32px; font-weight: bold; letter-spacing: 8px;'>{code}</p>"
-                        f"<p>This code expires in {OTP_EXPIRE_MINUTES} minutes.</p>"
-                        "<p>If you didn't request this code, you can safely ignore this email.</p>"
-                    ),
+                    "html": OTPService._render_otp_html(code),
                 }
             )
             return True
         except Exception as exc:  # noqa: BLE001
-            print(f"Failed to send OTP email: {exc}")
+            logger.warning("Resend OTP email failed: %s", exc)
             return False
+
+    @staticmethod
+    def _send_via_sendgrid(client: SendGridClient, email: str, code: str) -> bool:
+        if not client.enabled:
+            return False
+
+        subject = "Your verification code"
+        html = OTPService._render_otp_html(code)
+        text = (
+            "Your verification code\n\n"
+            f"{code}\n\n"
+            f"This code expires in {OTP_EXPIRE_MINUTES} minutes.\n"
+            "If you didn't request this code, you can safely ignore this email."
+        )
+
+        try:
+            import json
+            import httpx
+
+            data = {
+                "personalizations": [
+                    {
+                        "to": [{"email": email}],
+                        "subject": subject,
+                    }
+                ],
+                "from": {"email": client.from_email, "name": client.from_name},
+                "reply_to": {"email": client.from_email, "name": client.from_name},
+                "content": [
+                    {"type": "text/plain", "value": text},
+                    {"type": "text/html", "value": html},
+                ],
+            }
+
+            with httpx.Client(timeout=30) as http_client:
+                response = http_client.post(
+                    "https://api.sendgrid.com/v3/mail/send",
+                    headers={
+                        "Authorization": f"Bearer {client.api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    content=json.dumps(data),
+                )
+                response.raise_for_status()
+            return True
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("SendGrid OTP email failed: %s", exc)
+            return False
+
+    @staticmethod
+    def _render_otp_html(code: str) -> str:
+        return (
+            "<h2>Your verification code</h2>"
+            f"<p style='font-size: 32px; font-weight: bold; letter-spacing: 8px;'>{code}</p>"
+            f"<p>This code expires in {OTP_EXPIRE_MINUTES} minutes.</p>"
+            "<p>If you didn't request this code, you can safely ignore this email.</p>"
+        )
 
     @staticmethod
     async def verify_code(
