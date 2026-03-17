@@ -1,5 +1,32 @@
 # Project Milestones: VIP30
 
+## v2.6 Pipeline Rewrite (Shipped: 2026-03-11)
+
+**Delivered:** Monolithic LLM pipeline replaced with cost-driver-first stepped architecture — each top cost driver gets its own isolated context window and LLM request, fed by exact parsed category titles flowing 1:1 from parser through TradeContext, BidComp, and driver selection.
+
+**Phases completed:** 29–34, 34.1 (13 plans total)
+
+**Key accomplishments:**
+
+- `TradeContext` model + `build_trade_context()` — category totals from `recap_by_category` with `trade_summary` enrichment for StateFarm docs; all 6 doc types verified against golden masters; lazy-import pattern resolves pipeline↔bid_comp circular dependency
+- `CostDriver` + `DriverWithItems` + `identify_cost_drivers()` + `map_driver_items()` — deterministic top-driver ranking by absolute dollar delta; line-item mapping with verification gate; 887-item kalyvas golden master validated
+- `run_driver_pass()` — each driver gets isolated context (7 keys, no cross-category data), `generate_structured()` only with no JSON repair fallback, content-hash PipelineCache integration
+- `CostDriverPipeline` replaces `NarrativePipeline` — `run_summary_pass()` aggregates driver analyses into `SummaryResult`; single-pass rewrite on GATE-01/GATE-02 only; explicit `Analysis unavailable` fallback per failed driver; all placeholder finalization text removed
+- Parser recap/trade-summary contract locked — `recap_by_category` and `trade_summary` contract coverage confirmed across 7-doc corpus; StateFarm wrapped-description bug fixed; goldens refreshed
+- Exact category preservation end-to-end — umbrella remapping removed from `TradeContext`, `BidComp` category tables, and raw line-item fallback mapping; 67/67 regression tests pass
+
+**Stats:**
+
+- 93 files changed, 18,129 insertions, 1,504 deletions
+- 7 phases (including 1 inserted decimal phase 34.1), 13 plans
+- 2 days (2026-03-09 → 2026-03-11)
+
+**Git range:** `f964fea` → `270f06d`
+
+**What's next:** TBD — discuss next milestone goals
+
+---
+
 ## v2.5 Parser Fixes (Shipped: 2026-03-09)
 
 **Delivered:** All 3 parser gap categories fixed — contractor-final RESET/REMOVE/REPLACE schema (0%→93%), StateFarm grouped-row item extraction (3%→96.8%), StateFarm metadata from two-column summary page; all 12 pytest tests pass.

@@ -9,7 +9,7 @@ Four phases to replace the monolithic analysis→writer→rewrite pipeline with 
 - ✅ **v2.3 Report Quality** — Phases 18-22 (shipped 2026-03-07)
 - ✅ **v2.4 Parser Coverage** — Phases 23-25 (shipped 2026-03-09)
 - ✅ **v2.5 Parser Fixes** — Phases 26-28 (shipped 2026-03-09)
-- 🚧 **v2.6 Pipeline Rewrite** — Phases 29-34 (implementation complete)
+- ✅ **v2.6 Pipeline Rewrite** — Phases 29-34, 34.1 (shipped 2026-03-11)
 
 ## Phases
 
@@ -60,136 +60,17 @@ Full details: [.planning/milestones/v2.5-ROADMAP.md](milestones/v2.5-ROADMAP.md)
 
 </details>
 
-### 🚧 v2.6 Pipeline Rewrite (In Progress)
+<details>
+<summary>✅ v2.6 Pipeline Rewrite (Phases 29-34, 34.1) — SHIPPED 2026-03-11</summary>
 
-**Milestone Goal:** Replace monolithic LLM pipeline with cost-driver-first architecture — each major cost driver gets its own context window and LLM request.
+- [x] Phase 29: Trade Summary Parsing (1/1 plans) — completed 2026-03-10
+- [x] Phase 30: Cost Driver Identification (1/1 plans) — completed 2026-03-10
+- [x] Phase 31: Per-Driver LLM Pass (1/1 plans) — completed 2026-03-10
+- [x] Phase 32: Final Summary + Pipeline Integration (2/2 plans) — completed 2026-03-10
+- [x] Phase 33: Parser recap + trade summary completeness (3/3 plans) — completed 2026-03-11
+- [x] Phase 34: Pipeline improvements (category-first) (3/3 plans) — completed 2026-03-11
+- [x] Phase 34.1: Exact category preservation — no umbrella remapping (2/2 plans) — completed 2026-03-11
 
-### Phase 29: Trade Summary Parsing
-**Goal**: Build `TradeContext` from parser JSON recap data with fallback hierarchy — reliable category totals for all doc types
-**Depends on**: Nothing (first phase of v2.6)
-**Requirements**: TRADE-01, TRADE-02, TRADE-03
-**Success Criteria** (what must be TRUE):
-  1. `build_trade_context()` returns `TradeContext` with `primary_by_category` and `comparison_by_category` dicts populated from `recap_by_category`
-  2. `TradeContext.source` reflects which fallback level was used ("recap_by_category", "trade_summary", or "synthesized")
-  3. Tested against all 6 golden master JSONs — category totals match parser output values
-  4. When StateFarm `trade_summary` field is present, it enriches the context
-**Research**: Unlikely (recap_by_category schema confirmed in all 6 golden masters; ARCHITECTURE.md documents approach)
-**Plans**: 1 plan
+Full details: [.planning/milestones/v2.6-ROADMAP.md](milestones/v2.6-ROADMAP.md)
 
-Plans:
-- [ ] 29-01: Build TradeContext model + extractor + tests against golden masters
-
-### Phase 30: Cost Driver Identification
-**Goal**: Identify top cost drivers by absolute dollar delta; map all line items per driver; verify sums match category totals
-**Depends on**: Phase 29
-**Requirements**: DRIVER-01, DRIVER-02, DRIVER-03
-**Success Criteria** (what must be TRUE):
-  1. `identify_cost_drivers()` returns `List[CostDriver]` ordered by `abs(delta)` descending from `TradeContext`
-  2. `map_driver_items()` returns `List[DriverWithItems]` with all line items from both estimates for each driver category
-  3. `DriverWithItems.verification_ok` is True when line items sum within tolerance of category total; False with `verification_note` otherwise
-  4. Tested against Kalyvas (887 items, 40 sections) — item mapping handles large categories correctly
-**Research**: Unlikely (deterministic sort; `XACTIMATE_CATEGORY_CODE_MAP` already in bid_comp/core.py)
-**Plans**: 1 plan
-
-Plans:
-- [ ] 30-01: Build CostDriver + DriverWithItems models + identify/map functions + verification gate + tests
-
-### Phase 31: Per-Driver LLM Pass
-**Goal**: Each top cost driver gets its own LLM request with isolated context, structured Pydantic output, and per-driver Redis cache
-**Depends on**: Phase 30
-**Requirements**: PASS-01, PASS-02, PASS-03
-**Success Criteria** (what must be TRUE):
-  1. `run_driver_pass()` calls LLM once per driver with context scoped to that driver only — no other category data in context
-  2. LLM output is `DriverAnalysisResult` Pydantic model returned from `generate_structured()` — no JSON repair fallback
-  3. Per-driver results cached by content-hash key; second run with same inputs skips LLM call (verified via logs)
-  4. `driver_analysis_v1` prompt template produces coherent narratives for test estimates
-**Research**: Unlikely (generate_structured() pattern established in analysis_pass_v1; existing LLMAdapterBase sufficient)
-**Plans**: 1 plan
-
-Plans:
-- [x] 31-01: Build DriverAnalysisResult model + run_driver_pass() + driver_analysis_v1 prompt + per-driver cache
-
-### Phase 32: Final Summary + Pipeline Integration
-**Goal**: Aggregate driver analyses into executive overview; rebuild quality rewrite as single-pass; wire new `CostDriverPipeline` as drop-in replacement for `NarrativePipeline`
-**Depends on**: Phase 31
-**Requirements**: SUMM-01, SUMM-02, REWRITE-01, REWRITE-02, REWRITE-03, INTEG-01, INTEG-02
-**Success Criteria** (what must be TRUE):
-  1. `run_summary_pass()` produces `SummaryResult` with coherent executive overview grounded in all driver analysis outputs
-  2. Quality rewrite triggers only on GATE-01/GATE-02 failure; max 1 rewrite attempt; no loop
-  3. No `_build_fallback_result()` or `_finalize_with_error()` placeholder text anywhere in the codebase
-  4. `run_bid_comp()` calls `CostDriverPipeline` without errors for Kalyvas/Lachman test estimates
-  5. Existing `export_xlsx()` produces valid XLSX from `FinalNarrative` output — report format unchanged
-**Research**: Unlikely (established patterns; prompt design builds on writer_pass_v2 conventions)
-**Plans**: 2 plans
-
-Plans:
-- [x] 32-01: Build SummaryResult model + run_summary_pass() + final_summary_v1 prompt + rebuilt quality rewrite
-- [x] 32-02: Build CostDriverPipeline orchestrator + assemble_final_narrative() + fallback removal + bid_comp integration
-
-### Phase 33: Parser recap + trade summary completeness
-**Goal**: Ensure `recap_by_category` and `trade_summary` are parsed into final JSON output wherever present, update golden JSON fixtures to match verified parser reality, and prevent regressions with validation coverage.
-**Depends on**: Phase 32
-**Requirements**: parser output contract + regression baseline completeness
-**Success Criteria** (what must be TRUE):
-  1. `recaps_and_summaries.recap_by_category` exists for all tracked parser corpus documents
-  2. `trade_summary` is parsed when present and emitted as `null` when absent
-  3. Known wrapped description cases in `SF_BSchacter.pdf` no longer land in `notes`
-  4. Goldens and gap report are refreshed against the verified parser baseline
-**Plans**: 3 plans
-
-Plans:
-- [x] 33-01: Lock recap/trade-summary parser contract and add contract tests
-- [x] 33-02: Fix State Farm wrapped-description vs notes handling
-- [x] 33-03: Refresh parser goldens, add new Schacter final-draft corpus entry, rerun regression suite and gap report
-
-## Progress
-
-**Execution Order:** 29 → 30 → 31 → 32
-
-| Phase | Milestone | Plans Complete | Status | Completed |
-|-------|-----------|----------------|--------|-----------|
-| 23. Parser Audit | v2.4 | 2/2 | Complete | 2026-03-07 |
-| 24. Golden Masters | v2.4 | 2/2 | Complete | 2026-03-08 |
-| 25. Coverage Harness | v2.4 | 2/2 | Complete | 2026-03-09 |
-| 26. Contractor-Final Parser | v2.5 | 1/1 | Complete | 2026-03-09 |
-| 27. StateFarm Item Extraction | v2.5 | 1/1 | Complete | 2026-03-09 |
-| 28. Metadata + Validation | v2.5 | 2/2 | Complete | 2026-03-09 |
-| 29. Trade Summary Parsing | v2.6 | 1/1 | Complete | 2026-03-10 |
-| 30. Cost Driver Identification | v2.6 | 1/1 | Complete | 2026-03-10 |
-| 31. Per-Driver LLM Pass | v2.6 | 1/1 | Complete | 2026-03-10 |
-| 32. Final Summary + Pipeline Integration | v2.6 | 2/2 | Complete | 2026-03-10 |
-| 33. Parser recap + trade summary completeness | v2.6 | 3/3 | Complete | 2026-03-11 |
-
-### Phase 34: pipeline improvements using the recap by summary and trade summary output from the json
-
-**Goal:** Recenter BidComp on parser category structures so `trade_summary` and `recap_by_category` drive category diffs, deterministic top cost driver selection, and evidence-grounded narrative synthesis.
-**Requirements**: TRADE-01, TRADE-02, DRIVER-01, DRIVER-02, PASS-01, SUMM-01, SUMM-02, INTEG-01, INTEG-02
-**Depends on:** Phase 33
-**Success Criteria** (what must be TRUE):
-  1. When `trade_summary` exists, the pipeline uses it as the preferred category evidence source because it already combines recap totals with associated line items
-  2. When `trade_summary` is absent, `recap_by_category` still drives category diffs and only selected top-driver categories require deeper fallback line-item association
-  3. Top cost drivers are selected deterministically from category deltas before any LLM step
-  4. Per-driver prompt context is grounded in structured category evidence, line items, delta facts, and estimate metadata rather than thin raw item blobs alone
-  5. Final summary synthesis and visible top-driver output remain aligned to the same category-diff truth without changing external report format compatibility
-**Plans:** 3 plans
-
-Plans:
-- [x] 34-01: Build trade-summary-first category evidence foundation with recap fallback
-- [x] 34-02: Rework deterministic top-driver grounding and driver-pass prompt context
-- [x] 34-03: Align summary/orchestrator flow and verify category-first end-to-end behavior
-
-### Phase 34.1: exact category preservation no umbrella remapping in bid comp (INSERTED)
-
-**Goal:** Remove synthetic umbrella category remapping from BidComp and the pipeline so category identity stays 1:1 with the parsed labels in `recap_by_category` and `trade_summary`.
-**Requirements**: TRADE-01, TRADE-02, DRIVER-01, DRIVER-02, INTEG-01
-**Depends on:** Phase 34
-**Success Criteria** (what must be TRUE):
-  1. Exact parsed category labels from `trade_summary` and `recap_by_category` are preserved through `TradeContext`
-  2. Synthetic umbrella labels such as `Doors / Windows / Glass` and `Cabinetry / Millwork` no longer appear in bid-comp category output
-  3. Top-driver selection and visible category tables use exact parsed labels only
-  4. Unmatched categories remain explicit instead of being collapsed into umbrella buckets
-**Plans:** 2 plans
-
-Plans:
-- [x] 34.1-01: Remove umbrella remapping from pipeline category identity
-- [x] 34.1-02: Align BidComp output and driver selection to exact parsed labels
+</details>

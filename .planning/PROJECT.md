@@ -8,20 +8,13 @@ A SaaS application for insurance adjusters to compare Xactimate bid estimates. U
 
 Reliable end-to-end bid comparison that produces actionable output — users upload PDFs and get a useful comparison report with professional-quality narratives.
 
-## Current Milestone: v2.6 Pipeline Rewrite
+## Current Milestone: Planning Next
 
-**Goal:** Replace the monolithic analysis→writer→rewrite pipeline with a stepped, cost-driver-first architecture — each major cost driver gets its own context window and LLM request, fed by a trade summary hierarchy (trade summary → recap by category → CAT/SEL synthesis).
-
-**Target features:**
-- **Trade summary parsing**: Audit PDFs, extract trade summary fields; fallback hierarchy for context construction
-- **Cost driver identification**: Top drivers by dollar delta, line items mapped and verified in JSON
-- **Per-cost-driver LLM pass**: Each driver + line items + trade context → own LLM request
-- **Final summary LLM pass**: Aggregate cost driver analyses → executive overview
-- **Rewrite system rebuilt from scratch**: Strict one-pass rewrite only on quality failure; default fallback text removed
+**Status:** v2.6 Pipeline Rewrite shipped 2026-03-11. Discuss next milestone goals with `/gsd:discuss-milestone`.
 
 ## Current State
 
-**Version:** v2.4 shipped 2026-03-09
+**Version:** v2.6 shipped 2026-03-11
 
 **Shipped features (v2.4):**
 - Parser audit — all 6 PDFs audited via `audit_all.py`, 255-line `AUDIT-REPORT.md` with root causes per doc type
@@ -113,13 +106,18 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 - ✓ No mode selection in UX — v2.2
 - ✓ LLM pipeline unchanged, all content flows to output — v2.2
 
-### Active (v2.6)
+### Active
 
-- [ ] Trade summary parsing: parser extracts trade summary from PDFs that have it; fallback hierarchy: trade summary → recap by category → synthesized from CAT/SEL codes
-- [ ] Cost driver identification: top cost drivers identified from parser JSON by dollar delta; each driver mapped to its line items with JSON verification
-- [ ] Per-cost-driver LLM pass: each cost driver + line items + trade summary context → own context window + LLM request
-- [ ] Final summary LLM pass: all cost driver analyses aggregated → executive overview via dedicated LLM request
-- [ ] Rewrite system rebuilt: one-pass quality rewrite on strict threshold failure only; default fallback text removed
+*(No active requirements — planning next milestone)*
+
+### Validated (v2.6)
+
+- ✓ Trade summary parsing: `build_trade_context()` with fallback hierarchy (trade summary → recap by category → synthesized) — all 6 doc types — v2.6
+- ✓ Cost driver identification: deterministic top-driver ranking by absolute dollar delta; `map_driver_items()` with line-item verification gate — v2.6
+- ✓ Per-cost-driver LLM pass: isolated context per driver, `generate_structured()` only, content-hash cache — v2.6
+- ✓ Final summary LLM pass: `run_summary_pass()` aggregates all driver analyses into `SummaryResult` — v2.6
+- ✓ Rewrite system rebuilt: single-pass rewrite on GATE-01/GATE-02 only; `_build_fallback_result()` and placeholder text removed — v2.6
+- ✓ Exact category preservation: parsed category labels flow 1:1 through TradeContext, BidComp, and driver selection; no umbrella remapping — v2.6
 
 ### Validated (v2.5)
 
@@ -190,6 +188,12 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | Remove raw field lines from writer prompt | Overall Direction/Confidence fields caused LLM to echo enum values verbatim — removal cleaner than rephrasing | ✓ Good |
 | APPROACH PAIR REQUIREMENT as hard constraint in system prompt | Approach-pair table was present but framed as optional — mandatory block after table enforces behavior | ✓ Good |
 | writer_pass_v2 brace fix over prompt consolidation | Quick targeted fix; prompt files serve different audiences (v1=adjuster, v2=litigation) | ✓ Good |
+| Inline normalize helpers per passes/ module (no cross-import) | Inlining 8 lines breaks pipeline↔bid_comp circular dependency; module-private helpers intentionally not shared | ✓ Good |
+| Lazy-load bid_comp.core constants via importlib inside helper function | Deferred import after full module graph init; O(1) repeat calls via Python module cache | ✓ Good |
+| No JSON repair in driver_pass.py — exception propagates | Caller (CostDriverPipeline) handles failures with explicit fallback narrative per category | ✓ Good |
+| Single-pass rewrite on GATE-01/GATE-02 only, max one attempt | Eliminated compliance loop; strict gates prevent unbounded rewrite chains | ✓ Good |
+| Trade summary as preferred evidence source, recap as fallback | trade_summary already combines recap totals with associated line items; recap remains authoritative when both present | ✓ Good |
+| Exact parsed category labels preserved end-to-end | Umbrella remapping introduced synthetic labels that obscured real cost-driver identity in output | ✓ Good |
 
 ## Tech Debt
 
@@ -201,4 +205,4 @@ Reliable end-to-end bid comparison that produces actionable output — users upl
 | `output_mode` DB column still exists | Low | Nullable, not written — preserves historical data |
 
 ---
-*Last updated: 2026-03-09 after v2.6 milestone started*
+*Last updated: 2026-03-16 after v2.6 milestone completion*
